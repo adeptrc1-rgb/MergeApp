@@ -64,9 +64,9 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-200 via-orange-300 via-pink-400 via-purple-500 to-indigo-900 flex flex-col relative overflow-hidden">
-      {/* Sunset overlay for richer colors */}
-      <div className="absolute inset-0 bg-gradient-to-b from-yellow-100/30 via-orange-200/20 via-red-300/15 via-purple-400/10 to-transparent"></div>
+    <div className="min-h-screen bg-gradient-to-b from-yellow-100 via-orange-400 via-red-500 via-pink-500 to-purple-900 flex flex-col relative overflow-hidden">
+      {/* Enhanced sunset overlay for authentic colors */}
+      <div className="absolute inset-0 bg-gradient-to-b from-amber-100/40 via-orange-300/30 via-red-400/20 via-pink-400/15 to-transparent"></div>
       
       {/* Status bar simulation */}
       <div className="w-full h-6 bg-transparent relative z-10"></div>
