@@ -92,9 +92,9 @@ function LandingPage() {
       
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
-        {/* Custom CSS Logo */}
+        {/* Custom CSS Logo with breathing animation */}
         <div className="mb-16 text-center">
-          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative" style={{
+          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
             fontFamily: "'Dancing Script', cursive",
             textShadow: '0 4px 8px rgba(0,0,0,0.6), 0 2px 4px rgba(255,140,0,0.4)',
             filter: 'drop-shadow(0 0 20px rgba(255,165,0,0.5))'
