@@ -404,7 +404,10 @@ function Onboarding() {
         hometown: formData.hometown,
         current_location: formData.current_location,
         bio: formData.bio,
-        interests: formData.interests ? formData.interests.split(',').map(i => i.trim()).filter(i => i) : []
+        interests: formData.interests ? formData.interests.split(',').map(i => i.trim()).filter(i => i) : [],
+        age_range_min: formData.age_range_min,
+        age_range_max: formData.age_range_max,
+        max_distance_km: formData.max_distance_km
       };
 
       // Use hometown as birth location if selected and birth location not specified
