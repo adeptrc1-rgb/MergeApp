@@ -64,9 +64,18 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-100 via-orange-400 via-red-500 via-pink-500 to-purple-900 flex flex-col relative overflow-hidden">
-      {/* Enhanced sunset overlay for authentic colors */}
-      <div className="absolute inset-0 bg-gradient-to-b from-amber-100/40 via-orange-300/30 via-red-400/20 via-pink-400/15 to-transparent"></div>
+    <div className="min-h-screen relative flex flex-col overflow-hidden">
+      {/* Sunset wallpaper background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913')`,
+          filter: 'brightness(0.8)'
+        }}
+      ></div>
+      
+      {/* Gradient overlay to enhance colors */}
+      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/20 via-orange-300/10 via-red-400/10 via-pink-400/10 to-purple-900/20"></div>
       
       {/* Status bar simulation */}
       <div className="w-full h-6 bg-transparent relative z-10"></div>
