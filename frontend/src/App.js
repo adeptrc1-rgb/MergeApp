@@ -426,7 +426,7 @@ function Onboarding() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl text-gray-800">Create Your Cosmic Profile</CardTitle>
-          <CardDescription>Step {step} of 4 - Build your astrology profile</CardDescription>
+          <CardDescription>Step {step} of 5 - Build your astrology profile</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           
