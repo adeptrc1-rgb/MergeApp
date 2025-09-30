@@ -75,12 +75,14 @@ function LandingPage() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
         {/* Logo */}
         <div className="mb-16 text-center">
-          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-lg" style={{
-            fontFamily: "'Dancing Script', cursive",
-            textShadow: '0 2px 4px rgba(0,0,0,0.3)'
-          }}>
-            A Sign
-          </h1>
+          <img 
+            src="https://customer-assets.emergentagent.com/job_zodiac-love-2/artifacts/t3gbundu_Unknown.png" 
+            alt="A Sign" 
+            className="w-48 h-auto mx-auto drop-shadow-2xl"
+            style={{
+              filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))'
+            }}
+          />
         </div>
         
         {/* Login Form */}
