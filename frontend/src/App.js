@@ -64,12 +64,23 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-300 via-purple-400 to-indigo-900 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-orange-300 via-pink-400 via-purple-500 to-indigo-900 flex flex-col relative overflow-hidden">
+      {/* Sunset sky overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/30 via-orange-400/20 via-red-400/15 via-purple-600/10 to-transparent"></div>
+      
+      {/* Sun element */}
+      <div className="absolute top-20 right-8 w-24 h-24 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full opacity-80 shadow-2xl shadow-orange-300/50"></div>
+      
+      {/* Clouds */}
+      <div className="absolute top-32 left-4 w-20 h-8 bg-white/20 rounded-full blur-sm"></div>
+      <div className="absolute top-28 left-16 w-16 h-6 bg-white/15 rounded-full blur-sm"></div>
+      <div className="absolute top-40 right-20 w-24 h-10 bg-white/25 rounded-full blur-sm"></div>
+      
       {/* Status bar simulation */}
-      <div className="w-full h-6 bg-transparent"></div>
+      <div className="w-full h-6 bg-transparent relative z-10"></div>
       
       {/* Main content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
         {/* Logo */}
         <div className="mb-16 text-center">
           <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-lg" style={{
