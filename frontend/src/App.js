@@ -145,8 +145,8 @@ function LandingPage() {
           {step === 'phone' && (
             <>
               <div className="text-center mb-6">
-                <h2 className="text-2xl font-medium text-white mb-2">Get Started</h2>
-                <p className="text-white/80 text-sm">Everything led you here</p>
+                <h2 className="text-2xl font-medium text-white mb-2">Everything led you here</h2>
+                <p className="text-white/80 text-sm">Get Started</p>
               </div>
 
               {/* Phone Input */}
