@@ -463,7 +463,7 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
 
 @api_router.get("/users/potential-matches")
 async def get_potential_matches(user: User = Depends(get_current_user)):
-    """Get potential matches with geographic and astrology filtering"""
+    """Get potential matches with age and distance filtering"""
     if not user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
@@ -476,25 +476,55 @@ async def get_potential_matches(user: User = Depends(get_current_user)):
         "is_active": True,
         "needs_onboarding": {"$ne": True},
         "response_score": {"$gte": 50}  # Only show users with decent response scores
-    }).limit(20).to_list(length=None)
+    }).limit(50).to_list(length=None)  # Get more initially for filtering
     
-    # Enhance with distance if location available
-    if user.current_location:
-        for match in potential_matches:
-            if match.get("current_location"):
-                distance = calculate_distance(
-                    user.current_location["latitude"],
-                    user.current_location["longitude"],
-                    match["current_location"]["latitude"],
-                    match["current_location"]["longitude"]
-                )
-                match["distance_km"] = distance
-                match["geographic_score"] = calculate_geographic_score(distance)
+    filtered_matches = []
+    user_age = calculate_age(user.birth_date) if user.birth_date else 25
+    
+    for match in potential_matches:
+        # Age filtering
+        if match.get("birth_date"):
+            match_age = calculate_age(datetime.fromisoformat(match["birth_date"]).date())
+            if match_age < user.age_range_min or match_age > user.age_range_max:
+                continue
+        
+        # Distance filtering
+        if user.current_location and match.get("current_location"):
+            distance = calculate_distance(
+                user.current_location.latitude,
+                user.current_location.longitude,
+                match["current_location"]["latitude"],
+                match["current_location"]["longitude"]
+            )
+            
+            # Filter by user's distance preference
+            if distance > user.max_distance_km:
+                continue
+                
+            match["distance_km"] = distance
+            match["geographic_score"] = calculate_geographic_score(distance)
+        
+        # Also check if match wants to see user (mutual age filtering)
+        match_age_min = match.get("age_range_min", 18)
+        match_age_max = match.get("age_range_max", 50)
+        if user_age < match_age_min or user_age > match_age_max:
+            continue
+        
+        # Also check match's distance preference
+        if match.get("current_location") and user.current_location:
+            match_max_distance = match.get("max_distance_km", 50)
+            if match.get("distance_km", 0) > match_max_distance:
+                continue
+        
+        filtered_matches.append(match)
     
     # Sort by response score and geographic proximity
-    potential_matches.sort(key=lambda x: (x.get("geographic_score", 0) + x["response_score"]), reverse=True)
+    filtered_matches.sort(
+        key=lambda x: (x.get("geographic_score", 0) + x["response_score"]), 
+        reverse=True
+    )
     
-    return potential_matches[:10]
+    return filtered_matches[:10]
 
 @api_router.post("/users/swipe")
 async def swipe_user(swipe_data: dict, user: User = Depends(get_current_user)):
