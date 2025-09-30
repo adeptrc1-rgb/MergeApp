@@ -730,10 +730,18 @@ function Dashboard() {
     return `${Math.round(km)}km away`;
   };
 
-  const getResponseScoreColor = (score) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
-    return 'text-red-600';
+  const calculateAge = (birthDate) => {
+    if (!birthDate) return null;
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    
+    return age;
   };
 
   if (loading) {
@@ -749,23 +757,16 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100">
-      {/* Enhanced Header */}
+      {/* Clean Header */}
       <div className="bg-white/60 backdrop-blur-sm border-b border-rose-200">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-3xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-600">
             A Sign
           </h1>
           <div className="flex items-center gap-4">
-            <div className="text-right">
-              <Badge variant="outline" className="border-rose-300 text-rose-700 mb-1">
-                {getZodiacEmoji(user?.zodiac_sign)} {user?.zodiac_sign?.toUpperCase()}
-              </Badge>
-              {user?.response_score && (
-                <div className={`text-xs ${getResponseScoreColor(user.response_score)}`}>
-                  Response Score: {Math.round(user.response_score)}/100
-                </div>
-              )}
-            </div>
+            <Badge variant="outline" className="border-rose-300 text-rose-700">
+              {getZodiacEmoji(user?.zodiac_sign)} {user?.zodiac_sign?.toUpperCase()}
+            </Badge>
             <Button 
               onClick={logout} 
               variant="ghost"
@@ -781,7 +782,7 @@ function Dashboard() {
       <div className="container mx-auto px-4 py-8 flex justify-center">
         {currentUser ? (
           <div className="w-full max-w-md">
-            {/* Enhanced Profile Card */}
+            {/* Clean Profile Card */}
             <Card className="bg-white shadow-2xl rounded-2xl overflow-hidden border-none">
               {currentUser.picture && (
                 <div className="h-96 bg-gradient-to-b from-rose-200 to-pink-200 flex items-center justify-center relative">
@@ -794,57 +795,58 @@ function Dashboard() {
                   
                   {/* Distance Badge */}
                   {currentUser.distance_km && (
-                    <div className="absolute top-4 right-4 bg-black/70 text-white px-2 py-1 rounded-full text-xs">
+                    <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm">
                       {formatDistance(currentUser.distance_km)}
                     </div>
                   )}
-                  
-                  {/* Response Score Indicator */}
-                  <div className="absolute top-4 left-4 bg-white/90 px-2 py-1 rounded-full text-xs">
-                    <span className={getResponseScoreColor(currentUser.response_score || 100)}>
-                      ⭐ {Math.round(currentUser.response_score || 100)}
-                    </span>
-                  </div>
                 </div>
               )}
               
               <CardContent className="p-6">
                 <div className="text-center mb-4">
+                  {/* Name and Age */}
                   <h2 className="text-2xl font-semibold text-gray-800 mb-2" data-testid="user-name">
-                    {currentUser.name}
+                    {currentUser.name} {calculateAge(currentUser.birth_date) && (
+                      <span className="text-xl text-gray-600">{calculateAge(currentUser.birth_date)}</span>
+                    )}
                   </h2>
                   
-                  <div className="flex items-center justify-center gap-2 mb-3">
+                  {/* Zodiac Sign */}
+                  <div className="flex items-center justify-center mb-3">
                     <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg px-4 py-1">
                       {getZodiacEmoji(currentUser.zodiac_sign)} {currentUser.zodiac_sign?.toUpperCase()}
                     </Badge>
-                    {currentUser.geographic_score && (
-                      <Badge variant="outline" className="border-blue-300 text-blue-700">
-                        📍 {currentUser.geographic_score}% match
-                      </Badge>
-                    )}
                   </div>
 
-                  {/* Birth Location & Hometown */}
-                  {(currentUser.birth_location || currentUser.hometown) && (
+                  {/* Hometown */}
+                  {currentUser.hometown && (
                     <div className="text-sm text-gray-600 mb-3">
-                      {currentUser.birth_location && (
-                        <div>🌟 Born in {currentUser.birth_location.city}, {currentUser.birth_location.country}</div>
-                      )}
-                      {currentUser.hometown && currentUser.hometown !== currentUser.birth_location && (
-                        <div>🏡 From {currentUser.hometown.city}, {currentUser.hometown.country}</div>
-                      )}
+                      🏡 From {currentUser.hometown.city}, {currentUser.hometown.country}
+                    </div>
+                  )}
+
+                  {/* Interests (if available) */}
+                  {currentUser.interests && currentUser.interests.length > 0 && (
+                    <div className="mb-4">
+                      <div className="flex flex-wrap justify-center gap-2">
+                        {currentUser.interests.slice(0, 6).map((interest, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs border-gray-300 text-gray-600">
+                            {interest}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
                 
+                {/* Bio */}
                 {currentUser.bio && (
-                  <p className="text-gray-600 text-center mb-4 leading-relaxed">
+                  <p className="text-gray-600 text-center mb-6 leading-relaxed">
                     {currentUser.bio}
                   </p>
                 )}
                 
-                {/* Enhanced Action Buttons */}
+                {/* Action Buttons */}
                 <div className="flex justify-center gap-8 mt-6">
                   <Button
                     onClick={() => handleSwipe(false)}
@@ -878,7 +880,7 @@ function Dashboard() {
                   No More Matches
                 </h3>
                 <p className="text-gray-600">
-                  Check back later for new cosmic connections! Higher response scores get better matches.
+                  Check back later for new cosmic connections!
                 </p>
               </div>
               <Button 
@@ -892,7 +894,7 @@ function Dashboard() {
         )}
       </div>
 
-      {/* Enhanced Match Modal */}
+      {/* Clean Match Modal */}
       {showMatch && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <Card className="w-full max-w-md bg-white">
@@ -908,17 +910,10 @@ function Dashboard() {
                   You and {showMatch.partner.name} liked each other
                 </p>
                 
-                {/* Compatibility Scores */}
-                <div className="flex gap-2 justify-center mb-4">
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2">
-                    🌟 {Math.round(showMatch.compatibility.score)}% Astrology
-                  </Badge>
-                  {showMatch.geographic_score && (
-                    <Badge className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-4 py-2">
-                      📍 {Math.round(showMatch.geographic_score)}% Location
-                    </Badge>
-                  )}
-                </div>
+                {/* Compatibility Score */}
+                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg px-4 py-2 mb-4">
+                  🌟 {Math.round(showMatch.compatibility.score)}% Compatible
+                </Badge>
 
                 {showMatch.distance_km && (
                   <p className="text-sm text-gray-600 mb-4">
@@ -934,7 +929,7 @@ function Dashboard() {
               </div>
 
               <div className="bg-yellow-50 p-3 rounded-lg mb-6 text-xs text-yellow-800">
-                ⏰ You have 72 hours to start chatting before this match expires. Quick responses keep your score high!
+                ⏰ You have 72 hours to start chatting before this match expires!
               </div>
               
               <Button 
