@@ -179,7 +179,7 @@ def calculate_age(birth_date: date) -> int:
     
     return R * c
 
-def calculate_geographic_score(distance_km: float) -> float:
+def calculate_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     """Calculate geographic compatibility score based on distance"""
     if distance_km <= 10:
         return 100
