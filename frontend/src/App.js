@@ -92,31 +92,17 @@ function LandingPage() {
       
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
-        {/* Cosmic CSS Logo with breathing animation */}
+        {/* Pure White Logo with breathing animation */}
         <div className="mb-16 text-center">
           <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
             fontFamily: "'Dancing Script', cursive",
-            textShadow: '0 4px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(88, 28, 135, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)',
-            filter: 'drop-shadow(0 0 30px rgba(88, 28, 135, 0.8)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.6))'
+            textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(255,255,255,0.3)',
+            filter: 'drop-shadow(0 0 25px rgba(255,255,255,0.6))',
+            color: 'white'
           }}>
-            <span className="bg-gradient-to-r from-purple-900 via-blue-950 via-indigo-800 to-yellow-400 bg-clip-text text-transparent relative animate-gradient" style={{
-              backgroundSize: '400% 400%',
-              animation: 'cosmic-flow 6s ease-in-out infinite'
-            }}>
-              A Sign
-            </span>
-            {/* Multi-layered cosmic glow effect */}
-            <div className="absolute inset-0 text-purple-400/40 blur-sm -z-10" style={{
-              fontFamily: "'Dancing Script', cursive"
-            }}>
-              A Sign
-            </div>
-            <div className="absolute inset-0 text-blue-400/30 blur-md -z-20" style={{
-              fontFamily: "'Dancing Script', cursive"
-            }}>
-              A Sign
-            </div>
-            <div className="absolute inset-0 text-yellow-300/20 blur-lg -z-30" style={{
+            A Sign
+            {/* Subtle white glow effect */}
+            <div className="absolute inset-0 text-white/30 blur-sm -z-10" style={{
               fontFamily: "'Dancing Script', cursive"
             }}>
               A Sign
