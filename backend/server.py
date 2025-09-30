@@ -65,6 +65,10 @@ class User(BaseModel):
     zodiac_sign: str
     bio: Optional[str] = None
     interests: Optional[List[str]] = []
+    # Preferences
+    age_range_min: int = 18
+    age_range_max: int = 50
+    max_distance_km: int = 50  # Default 50km radius
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     is_active: bool = True
     last_active: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
