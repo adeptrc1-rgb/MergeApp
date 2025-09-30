@@ -1208,6 +1208,14 @@ function App() {
             <Route path="/session" element={<SessionHandler />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route 
+              path="/settings" 
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path="/dashboard" 
               element={
                 <ProtectedRoute>
