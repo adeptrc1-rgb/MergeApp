@@ -99,7 +99,7 @@ function LandingPage() {
             textShadow: '0 4px 8px rgba(0,0,0,0.6), 0 2px 4px rgba(255,140,0,0.4)',
             filter: 'drop-shadow(0 0 20px rgba(255,165,0,0.5))'
           }}>
-            <span className="bg-gradient-to-r from-yellow-200 via-orange-300 to-red-400 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-red-400 via-orange-300 to-yellow-200 bg-clip-text text-transparent relative">
               A Sign
             </span>
             {/* Subtle glow effect matching sunset */}
