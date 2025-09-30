@@ -461,6 +461,31 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
     
     return {"success": True, "zodiac_sign": zodiac_sign}
 
+@api_router.post("/users/update-preferences")
+async def update_preferences(preferences: dict, user: User = Depends(get_current_user)):
+    """Update user's dating preferences"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    update_data = {}
+    
+    if "age_range_min" in preferences:
+        update_data["age_range_min"] = preferences["age_range_min"]
+    
+    if "age_range_max" in preferences:
+        update_data["age_range_max"] = preferences["age_range_max"]
+    
+    if "max_distance_km" in preferences:
+        update_data["max_distance_km"] = preferences["max_distance_km"]
+    
+    if update_data:
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": update_data}
+        )
+    
+    return {"success": True, "message": "Preferences updated successfully"}
+
 @api_router.get("/users/potential-matches")
 async def get_potential_matches(user: User = Depends(get_current_user)):
     """Get potential matches with age and distance filtering"""
