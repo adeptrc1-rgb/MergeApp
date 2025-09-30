@@ -86,7 +86,7 @@ function LandingPage() {
         </div>
         
         {/* Login Form */}
-        <div className="w-full max-w-sm space-y-4">
+        <div className="w-full max-w-sm space-y-6">
           {/* Username Field */}
           <div className="relative">
             <div className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10">
@@ -100,8 +100,11 @@ function LandingPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="USERNAME"
-              className="w-full bg-white/20 backdrop-blur-md border-none rounded-lg px-12 py-4 text-white placeholder-white/80 text-sm font-medium tracking-wide"
-              style={{ backdropFilter: 'blur(10px)' }}
+              className="w-full bg-transparent border-none px-12 py-4 text-white placeholder-white/90 text-sm font-medium tracking-widest focus:outline-none"
+              style={{ 
+                textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                letterSpacing: '0.1em'
+              }}
             />
           </div>
 
@@ -116,8 +119,11 @@ function LandingPage() {
             <input
               type="password"
               placeholder="••••••"
-              className="w-full bg-white/20 backdrop-blur-md border-none rounded-lg px-12 py-4 text-white placeholder-white/80 text-sm font-medium tracking-wide"
-              style={{ backdropFilter: 'blur(10px)' }}
+              className="w-full bg-transparent border-none px-12 py-4 text-white placeholder-white/90 text-sm font-medium tracking-widest focus:outline-none"
+              style={{ 
+                textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                letterSpacing: '0.15em'
+              }}
             />
           </div>
 
@@ -136,15 +142,22 @@ function LandingPage() {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="SELECT LOCATION"
-              className="w-full bg-white/20 backdrop-blur-md border-none rounded-lg px-12 py-4 text-white placeholder-white/80 text-sm font-medium tracking-wide"
-              style={{ backdropFilter: 'blur(10px)' }}
+              className="w-full bg-transparent border-none px-12 py-4 text-white placeholder-white/90 text-sm font-medium tracking-widest focus:outline-none"
+              style={{ 
+                textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                letterSpacing: '0.1em'
+              }}
             />
           </div>
 
           {/* Login Button */}
           <Button 
             onClick={handleLogin}
-            className="w-full bg-teal-400 hover:bg-teal-500 text-white font-medium py-4 rounded-lg text-base shadow-lg transition-all duration-200 mt-6"
+            className="w-full bg-gradient-to-r from-gray-400 via-gray-300 to-gray-500 hover:from-gray-500 hover:via-gray-400 hover:to-gray-600 text-black font-bold py-4 rounded-lg text-base shadow-2xl transition-all duration-300 mt-8 border border-gray-600"
+            style={{
+              background: 'linear-gradient(135deg, #e5e7eb 0%, #9ca3af 30%, #374151 70%, #111827 100%)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)'
+            }}
             data-testid="login-btn"
           >
             LOGIN
