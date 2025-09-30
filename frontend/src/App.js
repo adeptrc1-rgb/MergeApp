@@ -871,6 +871,14 @@ function Dashboard() {
             A Sign
           </h1>
           <div className="flex items-center gap-4">
+            <Button 
+              onClick={() => navigate('/settings')}
+              variant="ghost"
+              className="text-gray-600 hover:text-gray-800"
+              data-testid="settings-btn"
+            >
+              ⚙️
+            </Button>
             <Badge variant="outline" className="border-rose-300 text-rose-700">
               {getZodiacEmoji(user?.zodiac_sign)} {user?.zodiac_sign?.toUpperCase()}
             </Badge>
