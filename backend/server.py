@@ -80,6 +80,7 @@ class UserCreate(BaseModel):
     hometown: Optional[Dict[str, Any]] = None
     current_location: Optional[Dict[str, Any]] = None
     bio: Optional[str] = None
+    interests: Optional[List[str]] = []
 
 class Match(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
