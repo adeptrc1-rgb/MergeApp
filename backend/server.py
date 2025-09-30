@@ -429,6 +429,9 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
     if profile_data.bio:
         update_data["bio"] = profile_data.bio
     
+    if profile_data.interests:
+        update_data["interests"] = profile_data.interests
+    
     await db.users.update_one(
         {"id": user.id},
         {"$set": update_data}
