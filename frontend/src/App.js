@@ -341,10 +341,52 @@ function Onboarding() {
   const [formData, setFormData] = useState({
     birth_date: null,
     birth_time: '',
-    birth_location: '',
-    bio: ''
+    birth_location: null,
+    hometown: null,
+    current_location: null,
+    bio: '',
+    use_hometown_as_birth: false
   });
   const [loading, setLoading] = useState(false);
+  const [locationSearch, setLocationSearch] = useState('');
+
+  // Mock location search - in production, use Google Places API or similar
+  const searchLocations = (query) => {
+    const mockLocations = [
+      { city: "New York", country: "United States", state: "NY", latitude: 40.7128, longitude: -74.0060 },
+      { city: "Los Angeles", country: "United States", state: "CA", latitude: 34.0522, longitude: -118.2437 },
+      { city: "London", country: "United Kingdom", latitude: 51.5074, longitude: -0.1278 },
+      { city: "Paris", country: "France", latitude: 48.8566, longitude: 2.3522 },
+      { city: "Tokyo", country: "Japan", latitude: 35.6762, longitude: 139.6503 },
+      { city: "Sydney", country: "Australia", latitude: -33.8688, longitude: 151.2093 }
+    ];
+    return mockLocations.filter(loc => 
+      loc.city.toLowerCase().includes(query.toLowerCase()) ||
+      loc.country.toLowerCase().includes(query.toLowerCase())
+    );
+  };
+
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // In production, reverse geocode these coordinates
+          setFormData({
+            ...formData,
+            current_location: {
+              city: "Current Location",
+              country: "Detected",
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            }
+          });
+        },
+        (error) => {
+          console.log("Location access denied");
+        }
+      );
+    }
+  };
 
   const handleComplete = async () => {
     if (!formData.birth_date) return;
@@ -355,8 +397,15 @@ function Onboarding() {
         birth_date: format(formData.birth_date, 'yyyy-MM-dd'),
         birth_time: formData.birth_time,
         birth_location: formData.birth_location,
+        hometown: formData.hometown,
+        current_location: formData.current_location,
         bio: formData.bio
       };
+
+      // Use hometown as birth location if selected and birth location not specified
+      if (formData.use_hometown_as_birth && formData.hometown && !formData.birth_location) {
+        profileData.birth_location = formData.hometown;
+      }
       
       await axios.post(`${API}/users/complete-profile`, profileData);
       setNeedsOnboarding(false);
@@ -371,10 +420,12 @@ function Onboarding() {
     <div className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl text-gray-800">Complete Your Profile</CardTitle>
-          <CardDescription>Help us find your perfect cosmic match</CardDescription>
+          <CardTitle className="text-2xl text-gray-800">Create Your Cosmic Profile</CardTitle>
+          <CardDescription>Step {step} of 4 - Build your astrology profile</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          
+          {/* Step 1: Birth Date & Time */}
           {step === 1 && (
             <>
               <div className="space-y-2">
@@ -387,7 +438,7 @@ function Onboarding() {
                       data-testid="birth-date-picker"
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
-                      {formData.birth_date ? format(formData.birth_date, 'PPP') : "Pick your birth date"}
+                      {formData.birth_date ? format(formData.birth_date, 'PPP') : "Select your birth date"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0">
@@ -402,14 +453,14 @@ function Onboarding() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="birth_time">Birth Time (Optional)</Label>
+                <Label htmlFor="birth_time">Birth Time (Optional - enhances accuracy)</Label>
                 <Input
                   id="birth_time"
                   type="time"
                   value={formData.birth_time}
                   onChange={(e) => setFormData({...formData, birth_time: e.target.value})}
-                  placeholder="12:00"
                 />
+                <p className="text-xs text-gray-500">Birth time helps create a more detailed astrological profile</p>
               </div>
               
               <Button 
@@ -423,27 +474,49 @@ function Onboarding() {
             </>
           )}
           
+          {/* Step 2: Birth Location */}
           {step === 2 && (
             <>
-              <div className="space-y-2">
-                <Label htmlFor="birth_location">Birth Location (Optional)</Label>
+              <div className="space-y-4">
+                <div>
+                  <Label>Where were you born? (Enhances astrology accuracy)</Label>
+                  <p className="text-sm text-gray-500 mb-2">This helps calculate your precise birth chart</p>
+                </div>
+                
                 <Input
-                  id="birth_location"
-                  value={formData.birth_location}
-                  onChange={(e) => setFormData({...formData, birth_location: e.target.value})}
-                  placeholder="City, Country"
+                  placeholder="Search birth city..."
+                  value={locationSearch}
+                  onChange={(e) => setLocationSearch(e.target.value)}
+                  data-testid="birth-location-search"
                 />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="bio">Tell us about yourself</Label>
-                <Textarea
-                  id="bio"
-                  value={formData.bio}
-                  onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                  placeholder="What makes you unique..."
-                  rows={4}
-                />
+                
+                {locationSearch && (
+                  <div className="border rounded-lg max-h-40 overflow-y-auto">
+                    {searchLocations(locationSearch).map((location, idx) => (
+                      <button
+                        key={idx}
+                        className="w-full text-left p-3 hover:bg-gray-100 border-b last:border-b-0"
+                        onClick={() => {
+                          setFormData({...formData, birth_location: location});
+                          setLocationSearch(`${location.city}, ${location.country}`);
+                        }}
+                      >
+                        <div className="font-medium">{location.city}</div>
+                        <div className="text-sm text-gray-500">{location.country} {location.state && `(${location.state})`}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="use_hometown"
+                    checked={formData.use_hometown_as_birth}
+                    onChange={(e) => setFormData({...formData, use_hometown_as_birth: e.target.checked})}
+                  />
+                  <Label htmlFor="use_hometown" className="text-sm">I'll add my hometown instead (we'll use it for birth location)</Label>
+                </div>
               </div>
               
               <div className="flex gap-3">
@@ -455,12 +528,129 @@ function Onboarding() {
                   Back
                 </Button>
                 <Button 
+                  onClick={() => setStep(3)}
+                  className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700"
+                >
+                  Continue
+                </Button>
+              </div>
+            </>
+          )}
+
+          {/* Step 3: Hometown & Current Location */}
+          {step === 3 && (
+            <>
+              <div className="space-y-4">
+                <div>
+                  <Label>Hometown (Optional)</Label>
+                  <p className="text-sm text-gray-500 mb-2">Where did you grow up?</p>
+                </div>
+                
+                <Input
+                  placeholder="Search hometown..."
+                  value={locationSearch}
+                  onChange={(e) => setLocationSearch(e.target.value)}
+                />
+                
+                {locationSearch && (
+                  <div className="border rounded-lg max-h-32 overflow-y-auto">
+                    {searchLocations(locationSearch).slice(0, 3).map((location, idx) => (
+                      <button
+                        key={idx}
+                        className="w-full text-left p-2 hover:bg-gray-100 border-b last:border-b-0 text-sm"
+                        onClick={() => {
+                          setFormData({...formData, hometown: location});
+                          setLocationSearch(`${location.city}, ${location.country}`);
+                        }}
+                      >
+                        {location.city}, {location.country}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="mt-4">
+                  <Label>Current Location</Label>
+                  <p className="text-sm text-gray-500 mb-2">Helps find nearby matches</p>
+                  
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={getCurrentLocation}
+                      variant="outline"
+                      className="flex-1"
+                      data-testid="get-location-btn"
+                    >
+                      📍 Use Current Location
+                    </Button>
+                  </div>
+                  
+                  {formData.current_location && (
+                    <div className="mt-2 p-2 bg-green-50 rounded text-sm text-green-700">
+                      ✓ Location detected: {formData.current_location.city}
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              <div className="flex gap-3">
+                <Button 
+                  onClick={() => setStep(2)} 
+                  variant="outline"
+                  className="flex-1"
+                >
+                  Back
+                </Button>
+                <Button 
+                  onClick={() => setStep(4)}
+                  className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700"
+                >
+                  Continue
+                </Button>
+              </div>
+            </>
+          )}
+
+          {/* Step 4: Bio */}
+          {step === 4 && (
+            <>
+              <div className="space-y-2">
+                <Label htmlFor="bio">Tell us about yourself</Label>
+                <Textarea
+                  id="bio"
+                  value={formData.bio}
+                  onChange={(e) => setFormData({...formData, bio: e.target.value})}
+                  placeholder="Share what makes you unique, your interests, what you're looking for..."
+                  rows={4}
+                  data-testid="bio-input"
+                />
+                <p className="text-xs text-gray-500">This helps potential matches understand your personality</p>
+              </div>
+              
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h3 className="font-medium text-blue-800 mb-2">Your Cosmic Profile Summary:</h3>
+                <ul className="text-sm text-blue-700 space-y-1">
+                  <li>• Birth Date: {formData.birth_date ? format(formData.birth_date, 'PPP') : 'Not set'}</li>
+                  <li>• Birth Time: {formData.birth_time || 'Not specified'}</li>
+                  <li>• Birth Location: {formData.birth_location ? `${formData.birth_location.city}, ${formData.birth_location.country}` : 'Not specified'}</li>
+                  <li>• Current Location: {formData.current_location ? 'Detected' : 'Not set'}</li>
+                </ul>
+              </div>
+              
+              <div className="flex gap-3">
+                <Button 
+                  onClick={() => setStep(3)} 
+                  variant="outline"
+                  className="flex-1"
+                >
+                  Back
+                </Button>
+                <Button 
                   onClick={handleComplete}
                   className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700"
                   disabled={loading}
                   data-testid="complete-profile-btn"
                 >
-                  {loading ? 'Creating...' : 'Complete Profile'}
+                  {loading ? 'Creating Profile...' : 'Complete Profile'}
                 </Button>
               </div>
             </>
