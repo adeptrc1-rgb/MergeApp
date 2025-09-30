@@ -92,18 +92,31 @@ function LandingPage() {
       
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
-        {/* Custom CSS Logo with breathing animation */}
+        {/* Cosmic CSS Logo with breathing animation */}
         <div className="mb-16 text-center">
           <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
             fontFamily: "'Dancing Script', cursive",
-            textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(139, 69, 197, 0.4)',
-            filter: 'drop-shadow(0 0 25px rgba(139, 69, 197, 0.6))'
+            textShadow: '0 4px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(147, 51, 234, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)',
+            filter: 'drop-shadow(0 0 30px rgba(147, 51, 234, 0.8)) drop-shadow(0 0 15px rgba(59, 130, 246, 0.6))'
           }}>
-            <span className="bg-gradient-to-r from-purple-900 via-violet-700 to-indigo-600 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-purple-600 via-blue-500 via-cyan-400 to-pink-400 bg-clip-text text-transparent relative animate-gradient" style={{
+              backgroundSize: '400% 400%',
+              animation: 'cosmic-flow 6s ease-in-out infinite'
+            }}>
               A Sign
             </span>
-            {/* Subtle violet glow effect */}
-            <div className="absolute inset-0 text-violet-400/50 blur-sm -z-10" style={{
+            {/* Multi-layered cosmic glow effect */}
+            <div className="absolute inset-0 text-purple-400/40 blur-sm -z-10" style={{
+              fontFamily: "'Dancing Script', cursive"
+            }}>
+              A Sign
+            </div>
+            <div className="absolute inset-0 text-blue-400/30 blur-md -z-20" style={{
+              fontFamily: "'Dancing Script', cursive"
+            }}>
+              A Sign
+            </div>
+            <div className="absolute inset-0 text-cyan-300/20 blur-lg -z-30" style={{
               fontFamily: "'Dancing Script', cursive"
             }}>
               A Sign
