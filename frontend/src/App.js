@@ -615,8 +615,90 @@ function Onboarding() {
             </>
           )}
 
-          {/* Step 4: Bio & Interests */}
+          {/* Step 4: Preferences */}
           {step === 4 && (
+            <>
+              <div className="space-y-4">
+                <div>
+                  <Label>Age Range Preference</Label>
+                  <p className="text-sm text-gray-500 mb-3">Who would you like to meet?</p>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <Label htmlFor="age_min" className="text-sm">Minimum Age</Label>
+                      <select
+                        id="age_min"
+                        value={formData.age_range_min}
+                        onChange={(e) => setFormData({...formData, age_range_min: parseInt(e.target.value)})}
+                        className="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                        data-testid="age-min-select"
+                      >
+                        {Array.from({length: 32}, (_, i) => i + 18).map(age => (
+                          <option key={age} value={age}>{age}</option>
+                        ))}
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="age_max" className="text-sm">Maximum Age</Label>
+                      <select
+                        id="age_max"
+                        value={formData.age_range_max}
+                        onChange={(e) => setFormData({...formData, age_range_max: parseInt(e.target.value)})}
+                        className="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                        data-testid="age-max-select"
+                      >
+                        {Array.from({length: 32}, (_, i) => i + 18).map(age => (
+                          <option key={age} value={age}>{age}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <Label>Distance Preference</Label>
+                  <p className="text-sm text-gray-500 mb-3">How far are you willing to travel for love?</p>
+                  
+                  <select
+                    value={formData.max_distance_km}
+                    onChange={(e) => setFormData({...formData, max_distance_km: parseInt(e.target.value)})}
+                    className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                    data-testid="distance-select"
+                  >
+                    <option value={5}>Within 5 km</option>
+                    <option value={10}>Within 10 km</option>
+                    <option value={25}>Within 25 km</option>
+                    <option value={50}>Within 50 km</option>
+                    <option value={100}>Within 100 km</option>
+                    <option value={250}>Within 250 km</option>
+                    <option value={500}>Within 500 km</option>
+                    <option value={1000}>Within 1000 km</option>
+                    <option value={5000}>Anywhere</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div className="flex gap-3">
+                <Button 
+                  onClick={() => setStep(3)} 
+                  variant="outline"
+                  className="flex-1"
+                >
+                  Back
+                </Button>
+                <Button 
+                  onClick={() => setStep(5)}
+                  className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700"
+                >
+                  Continue
+                </Button>
+              </div>
+            </>
+          )}
+
+          {/* Step 5: Bio & Interests */}
+          {step === 5 && (
             <>
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -652,13 +734,15 @@ function Onboarding() {
                   <li>• Birth Time: {formData.birth_time || 'Not specified'}</li>
                   <li>• Hometown: {formData.hometown ? `${formData.hometown.city}, ${formData.hometown.country}` : 'Not specified'}</li>
                   <li>• Current Location: {formData.current_location ? 'Detected' : 'Not set'}</li>
+                  <li>• Age Range: {formData.age_range_min}-{formData.age_range_max} years old</li>
+                  <li>• Distance: Within {formData.max_distance_km === 5000 ? 'anywhere' : `${formData.max_distance_km}km`}</li>
                   <li>• Interests: {formData.interests || 'None specified'}</li>
                 </ul>
               </div>
               
               <div className="flex gap-3">
                 <Button 
-                  onClick={() => setStep(3)} 
+                  onClick={() => setStep(4)} 
                   variant="outline"
                   className="flex-1"
                 >
