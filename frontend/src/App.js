@@ -96,10 +96,10 @@ function LandingPage() {
         <div className="mb-16 text-center">
           <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
             fontFamily: "'Dancing Script', cursive",
-            textShadow: '0 4px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(147, 51, 234, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)',
-            filter: 'drop-shadow(0 0 30px rgba(147, 51, 234, 0.8)) drop-shadow(0 0 15px rgba(59, 130, 246, 0.6))'
+            textShadow: '0 4px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(88, 28, 135, 0.5), 0 0 20px rgba(255, 215, 0, 0.3)',
+            filter: 'drop-shadow(0 0 30px rgba(88, 28, 135, 0.8)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.6))'
           }}>
-            <span className="bg-gradient-to-r from-purple-600 via-blue-500 via-cyan-400 to-pink-400 bg-clip-text text-transparent relative animate-gradient" style={{
+            <span className="bg-gradient-to-r from-purple-900 via-blue-950 via-indigo-800 to-yellow-400 bg-clip-text text-transparent relative animate-gradient" style={{
               backgroundSize: '400% 400%',
               animation: 'cosmic-flow 6s ease-in-out infinite'
             }}>
@@ -116,7 +116,7 @@ function LandingPage() {
             }}>
               A Sign
             </div>
-            <div className="absolute inset-0 text-cyan-300/20 blur-lg -z-30" style={{
+            <div className="absolute inset-0 text-yellow-300/20 blur-lg -z-30" style={{
               fontFamily: "'Dancing Script', cursive"
             }}>
               A Sign
