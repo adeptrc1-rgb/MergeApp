@@ -82,16 +82,23 @@ function LandingPage() {
       
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
-        {/* Logo */}
+        {/* Custom CSS Logo */}
         <div className="mb-16 text-center">
-          <img 
-            src="https://customer-assets.emergentagent.com/job_zodiac-love-2/artifacts/t3gbundu_Unknown.png" 
-            alt="A Sign" 
-            className="w-48 h-auto mx-auto drop-shadow-2xl"
-            style={{
-              filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))'
-            }}
-          />
+          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative" style={{
+            fontFamily: "'Dancing Script', cursive",
+            textShadow: '0 4px 8px rgba(0,0,0,0.5), 0 2px 4px rgba(255,192,203,0.3)',
+            filter: 'drop-shadow(0 0 20px rgba(255,192,203,0.4))'
+          }}>
+            <span className="bg-gradient-to-r from-pink-200 via-pink-300 to-pink-400 bg-clip-text text-transparent relative">
+              A Sign
+            </span>
+            {/* Subtle glow effect */}
+            <div className="absolute inset-0 text-pink-200/30 blur-sm -z-10" style={{
+              fontFamily: "'Dancing Script', cursive"
+            }}>
+              A Sign
+            </div>
+          </h1>
         </div>
         
         {/* Login Form */}
