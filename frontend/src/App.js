@@ -100,7 +100,12 @@ function LandingPage() {
             filter: 'drop-shadow(0 0 25px rgba(255,255,255,0.6))',
             color: 'white'
           }}>
-            A Sign
+            A S<span className="relative">
+              i<span className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-yellow-300 animate-pulse" style={{
+                fontSize: '0.4em',
+                filter: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.8))'
+              }}>✦</span>
+            </span>gn
             {/* Subtle white glow effect */}
             <div className="absolute inset-0 text-white/30 blur-sm -z-10" style={{
               fontFamily: "'Dancing Script', cursive"
