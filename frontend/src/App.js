@@ -771,6 +771,7 @@ function Onboarding() {
 // Main Dashboard with Enhanced Swiping
 function Dashboard() {
   const { user, logout } = React.useContext(AuthContext);
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [potentialMatches, setPotentialMatches] = useState([]);
   const [loading, setLoading] = useState(true);
