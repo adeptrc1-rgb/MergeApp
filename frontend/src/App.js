@@ -96,14 +96,14 @@ function LandingPage() {
         <div className="mb-16 text-center">
           <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
             fontFamily: "'Dancing Script', cursive",
-            textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(255,255,255,0.3)',
-            filter: 'drop-shadow(0 0 25px rgba(255,255,255,0.6))'
+            textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(255,215,0,0.4)',
+            filter: 'drop-shadow(0 0 25px rgba(255,215,0,0.6))'
           }}>
-            <span className="bg-gradient-to-r from-white via-pink-100 to-rose-200 bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-yellow-100 via-yellow-300 to-amber-400 bg-clip-text text-transparent relative">
               A Sign
             </span>
-            {/* Subtle glow effect for elegance */}
-            <div className="absolute inset-0 text-white/50 blur-sm -z-10" style={{
+            {/* Subtle golden glow effect */}
+            <div className="absolute inset-0 text-yellow-200/50 blur-sm -z-10" style={{
               fontFamily: "'Dancing Script', cursive"
             }}>
               A Sign
