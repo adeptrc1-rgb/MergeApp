@@ -121,7 +121,7 @@ function LandingPage() {
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
         {/* Pure White Logo with breathing animation */}
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
             fontFamily: "'Dancing Script', cursive",
             textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(255,255,255,0.3)',
@@ -136,6 +136,11 @@ function LandingPage() {
               A Sign
             </div>
           </h1>
+        </div>
+
+        {/* Everything led you here - positioned in middle */}
+        <div className="text-center mb-8">
+          <p className="text-white/80 text-sm">Everything led you here</p>
         </div>
 
         {/* Login Methods */}
