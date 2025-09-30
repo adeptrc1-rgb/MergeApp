@@ -101,10 +101,11 @@ function LandingPage() {
             color: 'white'
           }}>
             A S<span className="relative">
-              i<span className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-yellow-300 animate-pulse" style={{
-                fontSize: '0.4em',
-                filter: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.8))'
-              }}>✦</span>
+              <span style={{ color: 'transparent' }}>i</span><span className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1 text-yellow-300 animate-pulse" style={{
+                fontSize: '0.3em',
+                filter: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.8))',
+                top: '-0.2em'
+              }}>✦</span><span style={{ position: 'absolute', top: '0.15em', left: '0', color: 'white', fontSize: '1em' }}>ı</span>
             </span>gn
             {/* Subtle white glow effect */}
             <div className="absolute inset-0 text-white/30 blur-sm -z-10" style={{
