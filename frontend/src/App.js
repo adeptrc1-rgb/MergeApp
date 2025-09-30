@@ -55,92 +55,110 @@ function AuthProvider({ children }) {
 
 // Landing Page
 function LandingPage() {
+  const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  
   const handleLogin = () => {
     const redirectUrl = encodeURIComponent(window.location.origin + '/dashboard');
     window.location.href = `https://auth.emergentagent.com/?redirect=${redirectUrl}`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-16">
-          {/* Logo */}
-          <div className="mb-8">
-            <h1 className="text-7xl md:text-9xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-pink-500 to-orange-400 mb-4">
-              A Sign
-            </h1>
-            <div className="flex justify-center items-center gap-2 text-rose-600">
-              <Star className="w-6 h-6 fill-current" />
-              <p className="text-xl font-light">Where the stars align for love</p>
-              <Star className="w-6 h-6 fill-current" />
+    <div className="min-h-screen bg-gradient-to-b from-pink-300 via-purple-400 to-indigo-900 flex flex-col">
+      {/* Status bar simulation */}
+      <div className="w-full h-6 bg-transparent"></div>
+      
+      {/* Main content */}
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
+        {/* Logo */}
+        <div className="mb-16 text-center">
+          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-lg" style={{
+            fontFamily: "'Dancing Script', cursive",
+            textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+          }}>
+            A Sign
+          </h1>
+        </div>
+        
+        {/* Login Form */}
+        <div className="w-full max-w-sm space-y-4">
+          {/* Username Field */}
+          <div className="relative">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" fill="white"/>
+                <path d="M12 14C7.58172 14 4 17.5817 4 22H20C20 17.5817 16.4183 14 12 14Z" fill="white"/>
+              </svg>
             </div>
-          </div>
-          
-          {/* Hero Content */}
-          <div className="max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-light text-gray-800 mb-6">
-              Find Your Cosmic Connection
-            </h2>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Discover meaningful relationships through the ancient wisdom of astrology. 
-              Our AI-powered compatibility system analyzes your zodiac signs to find your perfect match.
-            </p>
-            
-            <Button 
-              onClick={handleLogin}
-              size="lg"
-              className="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              data-testid="get-started-btn"
-            >
-              <Sparkles className="w-5 h-5 mr-2" />
-              Start Your Journey
-            </Button>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="USERNAME"
+              className="w-full bg-white/20 backdrop-blur-md border-none rounded-lg px-12 py-4 text-white placeholder-white/80 text-sm font-medium tracking-wide"
+              style={{ backdropFilter: 'blur(10px)' }}
+            />
           </div>
 
-          {/* Features */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="border-none shadow-lg bg-white/60 backdrop-blur-sm hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center">
-                  <Star className="w-8 h-8 text-white" />
-                </div>
-                <CardTitle className="text-xl text-gray-800">Zodiac Matching</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 text-center">
-                  Advanced compatibility analysis based on your birth chart and zodiac signs
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-none shadow-lg bg-white/60 backdrop-blur-sm hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center">
-                  <Sparkles className="w-8 h-8 text-white" />
-                </div>
-                <CardTitle className="text-xl text-gray-800">AI Insights</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 text-center">
-                  Get personalized relationship insights powered by advanced AI
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-none shadow-lg bg-white/60 backdrop-blur-sm hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-rose-400 to-orange-400 rounded-full flex items-center justify-center">
-                  <Heart className="w-8 h-8 text-white" />
-                </div>
-                <CardTitle className="text-xl text-gray-800">Meaningful Connections</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 text-center">
-                  Connect with people who truly complement your cosmic energy
-                </p>
-              </CardContent>
-            </Card>
+          {/* Password Field */}
+          <div className="relative">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 11H5V17C5 18.1046 5.89543 19 7 19H17C18.1046 19 19 18.1046 19 17V11Z" fill="white"/>
+                <path d="M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11" stroke="white" strokeWidth="2" fill="none"/>
+              </svg>
+            </div>
+            <input
+              type="password"
+              placeholder="••••••"
+              className="w-full bg-white/20 backdrop-blur-md border-none rounded-lg px-12 py-4 text-white placeholder-white/80 text-sm font-medium tracking-wide"
+              style={{ backdropFilter: 'blur(10px)' }}
+            />
           </div>
+
+          {/* Location Field */}
+          <div className="relative">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="white" strokeWidth="2" fill="none"/>
+                <path d="M7 7H17" stroke="white" strokeWidth="2"/>
+                <path d="M7 11H17" stroke="white" strokeWidth="2"/>
+                <path d="M7 15H12" stroke="white" strokeWidth="2"/>
+              </svg>
+            </div>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="SELECT LOCATION"
+              className="w-full bg-white/20 backdrop-blur-md border-none rounded-lg px-12 py-4 text-white placeholder-white/80 text-sm font-medium tracking-wide"
+              style={{ backdropFilter: 'blur(10px)' }}
+            />
+          </div>
+
+          {/* Login Button */}
+          <Button 
+            onClick={handleLogin}
+            className="w-full bg-teal-400 hover:bg-teal-500 text-white font-medium py-4 rounded-lg text-base shadow-lg transition-all duration-200 mt-6"
+            data-testid="login-btn"
+          >
+            LOGIN
+          </Button>
+        </div>
+
+        {/* Footer Links */}
+        <div className="flex justify-between items-center w-full max-w-sm mt-12 text-white/90 text-sm">
+          <button className="hover:text-white transition-colors">
+            Forgot Password?
+          </button>
+          <button onClick={handleLogin} className="hover:text-white transition-colors">
+            NOT A MEMBER? REGISTER
+          </button>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-8 text-white/60 text-xs text-center">
+          © 2024 A Sign. All rights reserved.
         </div>
       </div>
     </div>
