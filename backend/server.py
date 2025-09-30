@@ -64,6 +64,7 @@ class User(BaseModel):
     current_location: Optional[Location] = None
     zodiac_sign: str
     bio: Optional[str] = None
+    interests: Optional[List[str]] = []
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     is_active: bool = True
     last_active: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
