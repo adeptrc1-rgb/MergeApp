@@ -345,6 +345,7 @@ function Onboarding() {
     hometown: null,
     current_location: null,
     bio: '',
+    interests: '',
     use_hometown_as_birth: false
   });
   const [loading, setLoading] = useState(false);
