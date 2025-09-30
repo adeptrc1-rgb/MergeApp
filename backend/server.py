@@ -157,7 +157,13 @@ def get_zodiac_sign(birth_date: date) -> str:
     else:
         return "pisces"
 
-def calculate_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+def calculate_age(birth_date: date) -> int:
+    """Calculate age from birth date"""
+    today = date.today()
+    age = today.year - birth_date.year
+    if today.month < birth_date.month or (today.month == birth_date.month and today.day < birth_date.day):
+        age -= 1
+    return age
     """Calculate distance between two coordinates in kilometers"""
     R = 6371  # Earth's radius in kilometers
     
