@@ -610,20 +610,34 @@ function Onboarding() {
             </>
           )}
 
-          {/* Step 4: Bio */}
+          {/* Step 4: Bio & Interests */}
           {step === 4 && (
             <>
-              <div className="space-y-2">
-                <Label htmlFor="bio">Tell us about yourself</Label>
-                <Textarea
-                  id="bio"
-                  value={formData.bio}
-                  onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                  placeholder="Share what makes you unique, your interests, what you're looking for..."
-                  rows={4}
-                  data-testid="bio-input"
-                />
-                <p className="text-xs text-gray-500">This helps potential matches understand your personality</p>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="interests">Your Interests (Optional)</Label>
+                  <Input
+                    id="interests"
+                    value={formData.interests || ''}
+                    onChange={(e) => setFormData({...formData, interests: e.target.value})}
+                    placeholder="e.g. Travel, Music, Yoga, Books, Hiking"
+                    data-testid="interests-input"
+                  />
+                  <p className="text-xs text-gray-500">Separate interests with commas</p>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="bio">Tell us about yourself</Label>
+                  <Textarea
+                    id="bio"
+                    value={formData.bio}
+                    onChange={(e) => setFormData({...formData, bio: e.target.value})}
+                    placeholder="Share what makes you unique, your passions, what you're looking for in a cosmic connection..."
+                    rows={4}
+                    data-testid="bio-input"
+                  />
+                  <p className="text-xs text-gray-500">This helps potential matches understand your personality</p>
+                </div>
               </div>
               
               <div className="bg-blue-50 p-4 rounded-lg">
@@ -631,8 +645,9 @@ function Onboarding() {
                 <ul className="text-sm text-blue-700 space-y-1">
                   <li>• Birth Date: {formData.birth_date ? format(formData.birth_date, 'PPP') : 'Not set'}</li>
                   <li>• Birth Time: {formData.birth_time || 'Not specified'}</li>
-                  <li>• Birth Location: {formData.birth_location ? `${formData.birth_location.city}, ${formData.birth_location.country}` : 'Not specified'}</li>
+                  <li>• Hometown: {formData.hometown ? `${formData.hometown.city}, ${formData.hometown.country}` : 'Not specified'}</li>
                   <li>• Current Location: {formData.current_location ? 'Detected' : 'Not set'}</li>
+                  <li>• Interests: {formData.interests || 'None specified'}</li>
                 </ul>
               </div>
               
