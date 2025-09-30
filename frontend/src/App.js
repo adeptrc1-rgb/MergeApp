@@ -92,37 +92,9 @@ function LandingPage() {
       
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
-        {/* Pure White Logo with breathing animation and constellation */}
-        <div className="mb-16 text-center relative">
-          {/* Faint constellation outline */}
-          <div className="absolute inset-0 opacity-30 pointer-events-none">
-            <svg width="300" height="200" className="mx-auto" style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.3))' }}>
-              {/* Constellation lines */}
-              <line x1="50" y1="60" x2="80" y2="40" stroke="white" strokeWidth="1" opacity="0.4"/>
-              <line x1="80" y1="40" x2="120" y2="35" stroke="white" strokeWidth="1" opacity="0.4"/>
-              <line x1="120" y1="35" x2="150" y2="50" stroke="white" strokeWidth="1" opacity="0.4"/>
-              <line x1="150" y1="50" x2="180" y2="45" stroke="white" strokeWidth="1" opacity="0.4"/>
-              <line x1="180" y1="45" x2="220" y2="60" stroke="white" strokeWidth="1" opacity="0.4"/>
-              <line x1="220" y1="60" x2="250" y2="80" stroke="white" strokeWidth="1" opacity="0.4"/>
-              <line x1="120" y1="35" x2="140" y2="80" stroke="white" strokeWidth="1" opacity="0.3"/>
-              <line x1="140" y1="80" x2="180" y2="100" stroke="white" strokeWidth="1" opacity="0.3"/>
-              <line x1="180" y1="45" x2="190" y2="85" stroke="white" strokeWidth="1" opacity="0.3"/>
-              
-              {/* Stars at constellation points */}
-              <circle cx="50" cy="60" r="2" fill="white" opacity="0.6"/>
-              <circle cx="80" cy="40" r="1.5" fill="white" opacity="0.5"/>
-              <circle cx="120" cy="35" r="2" fill="white" opacity="0.7"/>
-              <circle cx="150" cy="50" r="1" fill="white" opacity="0.4"/>
-              <circle cx="180" cy="45" r="1.5" fill="white" opacity="0.6"/>
-              <circle cx="220" cy="60" r="2" fill="white" opacity="0.5"/>
-              <circle cx="250" cy="80" r="1" fill="white" opacity="0.4"/>
-              <circle cx="140" cy="80" r="1.5" fill="white" opacity="0.5"/>
-              <circle cx="180" cy="100" r="1" fill="white" opacity="0.3"/>
-              <circle cx="190" cy="85" r="1" fill="white" opacity="0.4"/>
-            </svg>
-          </div>
-          
-          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe z-10" style={{
+        {/* Pure White Logo with breathing animation */}
+        <div className="mb-16 text-center">
+          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
             fontFamily: "'Dancing Script', cursive",
             textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(255,255,255,0.3)',
             filter: 'drop-shadow(0 0 25px rgba(255,255,255,0.6))',
