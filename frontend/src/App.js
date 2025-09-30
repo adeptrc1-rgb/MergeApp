@@ -346,6 +346,9 @@ function Onboarding() {
     current_location: null,
     bio: '',
     interests: '',
+    age_range_min: 18,
+    age_range_max: 35,
+    max_distance_km: 50,
     use_hometown_as_birth: false
   });
   const [loading, setLoading] = useState(false);
