@@ -85,6 +85,9 @@ class UserCreate(BaseModel):
     current_location: Optional[Dict[str, Any]] = None
     bio: Optional[str] = None
     interests: Optional[List[str]] = []
+    age_range_min: Optional[int] = 18
+    age_range_max: Optional[int] = 50
+    max_distance_km: Optional[int] = 50
 
 class Match(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
