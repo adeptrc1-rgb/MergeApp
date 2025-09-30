@@ -445,6 +445,15 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
     if profile_data.interests:
         update_data["interests"] = profile_data.interests
     
+    if profile_data.age_range_min is not None:
+        update_data["age_range_min"] = profile_data.age_range_min
+    
+    if profile_data.age_range_max is not None:
+        update_data["age_range_max"] = profile_data.age_range_max
+    
+    if profile_data.max_distance_km is not None:
+        update_data["max_distance_km"] = profile_data.max_distance_km
+    
     await db.users.update_one(
         {"id": user.id},
         {"$set": update_data}
