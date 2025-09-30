@@ -661,7 +661,7 @@ function Onboarding() {
   );
 }
 
-// Main Dashboard with Swiping
+// Main Dashboard with Enhanced Swiping
 function Dashboard() {
   const { user, logout } = React.useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState(null);
@@ -698,11 +698,12 @@ function Dashboard() {
       if (response.data.match) {
         setShowMatch({
           partner: currentUser,
-          compatibility: response.data.compatibility
+          compatibility: response.data.compatibility,
+          geographic_score: response.data.geographic_score,
+          distance_km: response.data.distance_km
         });
       }
       
-      // Move to next user
       const remainingMatches = potentialMatches.slice(1);
       setPotentialMatches(remainingMatches);
       setCurrentUser(remainingMatches[0] || null);
@@ -722,6 +723,19 @@ function Dashboard() {
     return emojis[sign] || '⭐';
   };
 
+  const formatDistance = (km) => {
+    if (!km) return null;
+    if (km < 1) return `${Math.round(km * 1000)}m away`;
+    if (km < 100) return `${Math.round(km)}km away`;
+    return `${Math.round(km)}km away`;
+  };
+
+  const getResponseScoreColor = (score) => {
+    if (score >= 80) return 'text-green-600';
+    if (score >= 60) return 'text-yellow-600';
+    return 'text-red-600';
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100 flex items-center justify-center">
@@ -735,16 +749,23 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100">
-      {/* Header */}
+      {/* Enhanced Header */}
       <div className="bg-white/60 backdrop-blur-sm border-b border-rose-200">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-3xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-600">
             A Sign
           </h1>
           <div className="flex items-center gap-4">
-            <Badge variant="outline" className="border-rose-300 text-rose-700">
-              {getZodiacEmoji(user?.zodiac_sign)} {user?.zodiac_sign?.toUpperCase()}
-            </Badge>
+            <div className="text-right">
+              <Badge variant="outline" className="border-rose-300 text-rose-700 mb-1">
+                {getZodiacEmoji(user?.zodiac_sign)} {user?.zodiac_sign?.toUpperCase()}
+              </Badge>
+              {user?.response_score && (
+                <div className={`text-xs ${getResponseScoreColor(user.response_score)}`}>
+                  Response Score: {Math.round(user.response_score)}/100
+                </div>
+              )}
+            </div>
             <Button 
               onClick={logout} 
               variant="ghost"
@@ -760,16 +781,30 @@ function Dashboard() {
       <div className="container mx-auto px-4 py-8 flex justify-center">
         {currentUser ? (
           <div className="w-full max-w-md">
-            {/* Profile Card */}
+            {/* Enhanced Profile Card */}
             <Card className="bg-white shadow-2xl rounded-2xl overflow-hidden border-none">
               {currentUser.picture && (
-                <div className="h-96 bg-gradient-to-b from-rose-200 to-pink-200 flex items-center justify-center">
+                <div className="h-96 bg-gradient-to-b from-rose-200 to-pink-200 flex items-center justify-center relative">
                   <Avatar className="w-32 h-32">
                     <AvatarImage src={currentUser.picture} />
                     <AvatarFallback className="text-4xl bg-gradient-to-r from-rose-400 to-pink-500 text-white">
                       {currentUser.name?.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
+                  
+                  {/* Distance Badge */}
+                  {currentUser.distance_km && (
+                    <div className="absolute top-4 right-4 bg-black/70 text-white px-2 py-1 rounded-full text-xs">
+                      {formatDistance(currentUser.distance_km)}
+                    </div>
+                  )}
+                  
+                  {/* Response Score Indicator */}
+                  <div className="absolute top-4 left-4 bg-white/90 px-2 py-1 rounded-full text-xs">
+                    <span className={getResponseScoreColor(currentUser.response_score || 100)}>
+                      ⭐ {Math.round(currentUser.response_score || 100)}
+                    </span>
+                  </div>
                 </div>
               )}
               
@@ -778,9 +813,29 @@ function Dashboard() {
                   <h2 className="text-2xl font-semibold text-gray-800 mb-2" data-testid="user-name">
                     {currentUser.name}
                   </h2>
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg px-4 py-1">
-                    {getZodiacEmoji(currentUser.zodiac_sign)} {currentUser.zodiac_sign?.toUpperCase()}
-                  </Badge>
+                  
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg px-4 py-1">
+                      {getZodiacEmoji(currentUser.zodiac_sign)} {currentUser.zodiac_sign?.toUpperCase()}
+                    </Badge>
+                    {currentUser.geographic_score && (
+                      <Badge variant="outline" className="border-blue-300 text-blue-700">
+                        📍 {currentUser.geographic_score}% match
+                      </Badge>
+                    )}
+                  </div>
+
+                  {/* Birth Location & Hometown */}
+                  {(currentUser.birth_location || currentUser.hometown) && (
+                    <div className="text-sm text-gray-600 mb-3">
+                      {currentUser.birth_location && (
+                        <div>🌟 Born in {currentUser.birth_location.city}, {currentUser.birth_location.country}</div>
+                      )}
+                      {currentUser.hometown && currentUser.hometown !== currentUser.birth_location && (
+                        <div>🏡 From {currentUser.hometown.city}, {currentUser.hometown.country}</div>
+                      )}
+                    </div>
+                  )}
                 </div>
                 
                 {currentUser.bio && (
@@ -789,12 +844,13 @@ function Dashboard() {
                   </p>
                 )}
                 
+                {/* Enhanced Action Buttons */}
                 <div className="flex justify-center gap-8 mt-6">
                   <Button
                     onClick={() => handleSwipe(false)}
                     disabled={swiping}
                     size="lg"
-                    className="w-16 h-16 rounded-full bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-white shadow-lg"
+                    className="w-16 h-16 rounded-full bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-white shadow-lg transform hover:scale-110 transition-all duration-200"
                     data-testid="pass-btn"
                   >
                     <X className="w-8 h-8" />
@@ -804,7 +860,7 @@ function Dashboard() {
                     onClick={() => handleSwipe(true)}
                     disabled={swiping}
                     size="lg"
-                    className="w-16 h-16 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white shadow-lg"
+                    className="w-16 h-16 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white shadow-lg transform hover:scale-110 transition-all duration-200"
                     data-testid="like-btn"
                   >
                     <Heart className="w-8 h-8" />
@@ -822,7 +878,7 @@ function Dashboard() {
                   No More Matches
                 </h3>
                 <p className="text-gray-600">
-                  Check back later for new cosmic connections!
+                  Check back later for new cosmic connections! Higher response scores get better matches.
                 </p>
               </div>
               <Button 
@@ -836,7 +892,7 @@ function Dashboard() {
         )}
       </div>
 
-      {/* Match Modal */}
+      {/* Enhanced Match Modal */}
       {showMatch && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <Card className="w-full max-w-md bg-white">
@@ -846,20 +902,39 @@ function Dashboard() {
                   <Heart className="w-10 h-10 text-white fill-current" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                  It's a Match!
+                  It's a Match! ✨
                 </h2>
                 <p className="text-gray-600 mb-4">
                   You and {showMatch.partner.name} liked each other
                 </p>
-                <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg px-4 py-2">
-                  {Math.round(showMatch.compatibility.score)}% Compatible
-                </Badge>
+                
+                {/* Compatibility Scores */}
+                <div className="flex gap-2 justify-center mb-4">
+                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2">
+                    🌟 {Math.round(showMatch.compatibility.score)}% Astrology
+                  </Badge>
+                  {showMatch.geographic_score && (
+                    <Badge className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-4 py-2">
+                      📍 {Math.round(showMatch.geographic_score)}% Location
+                    </Badge>
+                  )}
+                </div>
+
+                {showMatch.distance_km && (
+                  <p className="text-sm text-gray-600 mb-4">
+                    📍 {formatDistance(showMatch.distance_km)}
+                  </p>
+                )}
               </div>
               
               <div className="bg-rose-50 p-4 rounded-lg mb-6">
                 <p className="text-sm text-gray-700">
                   {showMatch.compatibility.report}
                 </p>
+              </div>
+
+              <div className="bg-yellow-50 p-3 rounded-lg mb-6 text-xs text-yellow-800">
+                ⏰ You have 72 hours to start chatting before this match expires. Quick responses keep your score high!
               </div>
               
               <Button 
