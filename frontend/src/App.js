@@ -65,17 +65,27 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen relative flex flex-col overflow-hidden">
-      {/* Sunset wallpaper background */}
+      {/* Animated sunset wallpaper background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-pulse-slow"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913')`,
-          filter: 'brightness(0.8)'
+          filter: 'brightness(0.8)',
+          animation: 'subtle-move 20s ease-in-out infinite, color-shift 15s ease-in-out infinite'
         }}
       ></div>
       
-      {/* Gradient overlay to enhance colors */}
-      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/20 via-orange-300/10 via-red-400/10 via-pink-400/10 to-purple-900/20"></div>
+      {/* Moving gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/20 via-orange-300/10 via-red-400/10 via-pink-400/10 to-purple-900/20 animate-gradient-shift"></div>
+      
+      {/* Floating particles/stars effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="star star-1"></div>
+        <div className="star star-2"></div>
+        <div className="star star-3"></div>
+        <div className="star star-4"></div>
+        <div className="star star-5"></div>
+      </div>
       
       {/* Status bar simulation */}
       <div className="w-full h-6 bg-transparent relative z-10"></div>
