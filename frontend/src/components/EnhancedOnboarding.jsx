@@ -12,7 +12,7 @@ import { Badge } from './ui/badge';
 import { Slider } from './ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Checkbox } from './ui/checkbox';
-import { CalendarIcon, Upload, Camera, User, Heart, MapPin, Briefcase, Target } from 'lucide-react';
+import { CalendarIcon, Upload, Camera, User, Heart, MapPin, Briefcase, Target, Sparkles, ChevronRight, ChevronLeft } from 'lucide-react';
 import { format } from 'date-fns';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -25,7 +25,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'How important is staying active and healthy?',
     leftLabel: 'Relaxed approach',
     rightLabel: 'Very active lifestyle',
-    icon: '💪'
+    icon: '💪',
+    gradient: 'from-green-500 to-emerald-600'
   },
   {
     key: 'career_ambition',
@@ -33,7 +34,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'How much do you prioritize career growth?',
     leftLabel: 'Work-life balance',
     rightLabel: 'Career focused',
-    icon: '🚀'
+    icon: '🚀',
+    gradient: 'from-blue-500 to-indigo-600'
   },
   {
     key: 'social_energy',
@@ -41,7 +43,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'Do you prefer quiet nights in or nights out?',
     leftLabel: 'Quiet nights in',
     rightLabel: 'Love going out',
-    icon: '🎉'
+    icon: '🎉',
+    gradient: 'from-purple-500 to-pink-600'
   },
   {
     key: 'travel_adventure',
@@ -49,7 +52,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'How important is travel and new experiences?',
     leftLabel: 'Homebody',
     rightLabel: 'Adventure seeker',
-    icon: '✈️'
+    icon: '✈️',
+    gradient: 'from-orange-500 to-red-600'
   },
   {
     key: 'nightlife_lifestyle',
@@ -57,7 +61,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'How often do you enjoy partying or drinking?',
     leftLabel: 'Rarely drink/party',
     rightLabel: 'Love nightlife',
-    icon: '🍷'
+    icon: '🍷',
+    gradient: 'from-violet-500 to-purple-600'
   },
   {
     key: 'family_future',
@@ -65,7 +70,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'How important is family life and having kids?',
     leftLabel: 'Not a priority',
     rightLabel: 'Very important',
-    icon: '👨‍👩‍👧‍👦'
+    icon: '👨‍👩‍👧‍👦',
+    gradient: 'from-pink-500 to-rose-600'
   },
   {
     key: 'dating_approach',
@@ -73,7 +79,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'Do you prefer to take things slow or dive in fast?',
     leftLabel: 'Take it slow',
     rightLabel: 'Dive in fast',
-    icon: '💕'
+    icon: '💕',
+    gradient: 'from-red-500 to-pink-600'
   },
   {
     key: 'passions_hobbies',
@@ -81,7 +88,8 @@ const LIFESTYLE_SLIDERS = [
     description: 'How central are your hobbies to your life?',
     leftLabel: 'Casual interests',
     rightLabel: 'Life revolves around passions',
-    icon: '🎨'
+    icon: '🎨',
+    gradient: 'from-amber-500 to-orange-600'
   }
 ];
 
@@ -263,24 +271,33 @@ export default function EnhancedOnboarding() {
     switch (step) {
       case 1:
         return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <User className="w-12 h-12 mx-auto text-rose-500 mb-3" />
-              <h2 className="text-2xl font-semibold text-gray-800">Basic Information</h2>
-              <p className="text-gray-600">Let's start with the essentials</p>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <User className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                Your Cosmic Profile
+              </h2>
+              <p className="text-gray-600">Let's start with your astrological details</p>
             </div>
 
-            <div className="space-y-4">
-              <div>
-                <Label>Birth Date *</Label>
+            <div className="space-y-5">
+              <div className="group">
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Birth Date *</Label>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button variant="outline" className="w-full justify-start text-left font-normal">
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {formData.birth_date ? format(formData.birth_date, 'PPP') : "Select your birth date"}
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start text-left font-normal h-12 border-2 border-gray-200 hover:border-violet-400 transition-all rounded-xl"
+                    >
+                      <CalendarIcon className="mr-3 h-5 w-5 text-violet-500" />
+                      <span className={formData.birth_date ? "text-gray-900" : "text-gray-400"}>
+                        {formData.birth_date ? format(formData.birth_date, 'PPP') : "Select your birth date"}
+                      </span>
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
+                  <PopoverContent className="w-auto p-0 rounded-xl">
                     <Calendar
                       mode="single"
                       selected={formData.birth_date}
@@ -291,369 +308,358 @@ export default function EnhancedOnboarding() {
                 </Popover>
               </div>
 
-              <div>
-                <Label>Birth Time (Optional)</Label>
+              <div className="group">
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Birth Time (Optional)</Label>
                 <Input
                   type="time"
                   value={formData.birth_time}
                   onChange={(e) => setFormData({...formData, birth_time: e.target.value})}
+                  className="h-12 border-2 border-gray-200 focus:border-violet-400 rounded-xl transition-all"
                 />
-                <p className="text-xs text-gray-500 mt-1">Helps create a more accurate astrological profile</p>
+                <p className="text-xs text-gray-500 mt-1.5 ml-1">For accurate rising sign calculation</p>
               </div>
 
-              <div>
-                <Label>Gender Identity *</Label>
-                <Select value={formData.gender_identity} onValueChange={(value) => setFormData({...formData, gender_identity: value})}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your gender identity" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {GENDER_OPTIONS.map(option => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {formData.gender_identity === 'self_describe' && (
-                <div>
-                  <Label>Describe your gender identity</Label>
+              <div className="group">
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Birth Location</Label>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-violet-500" />
                   <Input
-                    value={formData.gender_self_describe}
-                    onChange={(e) => setFormData({...formData, gender_self_describe: e.target.value})}
-                    placeholder="How do you identify?"
+                    placeholder="City, Country"
+                    value={locationSearch}
+                    onChange={(e) => setLocationSearch(e.target.value)}
+                    className="h-12 pl-11 border-2 border-gray-200 focus:border-violet-400 rounded-xl transition-all"
                   />
                 </div>
-              )}
+                {locationSearch && (
+                  <div className="mt-2 bg-white border-2 border-gray-100 rounded-xl shadow-lg overflow-hidden">
+                    {searchLocations(locationSearch).slice(0, 4).map((loc, i) => (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          setFormData({...formData, birth_location: loc});
+                          setLocationSearch('');
+                        }}
+                        className="w-full text-left px-4 py-3 hover:bg-violet-50 transition-colors border-b border-gray-100 last:border-0"
+                      >
+                        <div className="font-medium text-gray-900">{loc.city}</div>
+                        <div className="text-sm text-gray-500">{loc.country}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {formData.birth_location && (
+                  <div className="mt-2">
+                    <Badge className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-1.5 rounded-lg">
+                      📍 {formData.birth_location.city}, {formData.birth_location.country}
+                    </Badge>
+                  </div>
+                )}
+              </div>
             </div>
-
-            <Button 
-              onClick={() => setStep(2)} 
-              className="w-full bg-gradient-to-r from-rose-500 to-pink-600"
-              disabled={!formData.birth_date || !formData.gender_identity}
-            >
-              Continue
-            </Button>
           </div>
         );
 
       case 2:
         return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <Heart className="w-12 h-12 mx-auto text-rose-500 mb-3" />
-              <h2 className="text-2xl font-semibold text-gray-800">Dating Preferences</h2>
-              <p className="text-gray-600">Who are you interested in meeting?</p>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <Heart className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
+                Identity & Dating
+              </h2>
+              <p className="text-gray-600">Help us find your perfect match</p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <Label className="text-base font-medium">I'm open to dating:</Label>
-                <div className="space-y-3 mt-3">
-                  {DATING_PREFERENCES.map(pref => (
-                    <div key={pref.value} className="flex items-center space-x-2">
+                <Label className="text-sm font-semibold text-gray-700 mb-3 block">I identify as</Label>
+                <div className="grid grid-cols-2 gap-3">
+                  {GENDER_OPTIONS.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => setFormData({...formData, gender_identity: option.value})}
+                      className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                        formData.gender_identity === option.value
+                          ? 'border-pink-500 bg-pink-50 shadow-md'
+                          : 'border-gray-200 hover:border-pink-300 hover:bg-pink-50/50'
+                      }`}
+                    >
+                      <div className="font-medium text-gray-900">{option.label}</div>
+                    </button>
+                  ))}
+                </div>
+                {formData.gender_identity === 'self_describe' && (
+                  <Input
+                    placeholder="How do you identify?"
+                    value={formData.gender_self_describe}
+                    onChange={(e) => setFormData({...formData, gender_self_describe: e.target.value})}
+                    className="mt-3 h-12 border-2 border-gray-200 focus:border-pink-400 rounded-xl"
+                  />
+                )}
+              </div>
+
+              <div>
+                <Label className="text-sm font-semibold text-gray-700 mb-3 block">Open to dating</Label>
+                <div className="space-y-3">
+                  {DATING_PREFERENCES.map((pref) => (
+                    <label 
+                      key={pref.value}
+                      className="flex items-center p-4 rounded-xl border-2 border-gray-200 hover:border-pink-300 hover:bg-pink-50/50 cursor-pointer transition-all"
+                    >
                       <Checkbox
-                        id={pref.value}
                         checked={formData.open_to_dating.includes(pref.value)}
                         onCheckedChange={(checked) => handleDatingPreferenceChange(pref.value, checked)}
+                        className="data-[state=checked]:bg-pink-500 data-[state=checked]:border-pink-500"
                       />
-                      <Label htmlFor={pref.value}>{pref.label}</Label>
-                    </div>
+                      <span className="ml-3 font-medium text-gray-900">{pref.label}</span>
+                    </label>
                   ))}
                 </div>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="orientation_visible"
-                  checked={formData.orientation_visible}
-                  onCheckedChange={(checked) => setFormData({...formData, orientation_visible: checked})}
-                />
-                <Label htmlFor="orientation_visible" className="text-sm">
-                  Show my orientation on my profile
-                </Label>
+              <div className="bg-gradient-to-br from-pink-50 to-rose-50 p-4 rounded-xl border-2 border-pink-100">
+                <label className="flex items-center cursor-pointer">
+                  <Checkbox
+                    checked={formData.orientation_visible}
+                    onCheckedChange={(checked) => setFormData({...formData, orientation_visible: checked})}
+                    className="data-[state=checked]:bg-pink-500 data-[state=checked]:border-pink-500"
+                  />
+                  <span className="ml-3 text-sm text-gray-700">Show my orientation on profile</span>
+                </label>
               </div>
-
-              <div>
-                <Label>What are you looking for?</Label>
-                <div className="grid grid-cols-2 gap-3 mt-2">
-                  {RELATIONSHIP_GOALS.map(goal => (
-                    <Button
-                      key={goal.value}
-                      variant={formData.relationship_goals === goal.value ? "default" : "outline"}
-                      className={`p-4 h-auto flex flex-col items-center space-y-2 ${
-                        formData.relationship_goals === goal.value 
-                          ? "bg-gradient-to-r from-rose-500 to-pink-600" 
-                          : ""
-                      }`}
-                      onClick={() => setFormData({...formData, relationship_goals: goal.value})}
-                    >
-                      <span className="text-2xl">{goal.icon}</span>
-                      <span className="text-sm text-center">{goal.label}</span>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <Button onClick={() => setStep(1)} variant="outline" className="flex-1">
-                Back
-              </Button>
-              <Button 
-                onClick={() => setStep(3)} 
-                className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600"
-                disabled={formData.open_to_dating.length === 0}
-              >
-                Continue
-              </Button>
             </div>
           </div>
         );
 
       case 3:
         return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <Target className="w-12 h-12 mx-auto text-rose-500 mb-3" />
-              <h2 className="text-2xl font-semibold text-gray-800">Lifestyle & Values</h2>
-              <p className="text-gray-600">Help us find your perfect match</p>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+                Your Lifestyle
+              </h2>
+              <p className="text-gray-600">Rate what matters most to you</p>
             </div>
 
             <div className="space-y-6">
-              {LIFESTYLE_SLIDERS.map(slider => (
-                <div key={slider.key} className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl">{slider.icon}</span>
-                    <div>
-                      <Label className="font-medium">{slider.label}</Label>
-                      <p className="text-sm text-gray-600">{slider.description}</p>
+              {LIFESTYLE_SLIDERS.map((slider) => (
+                <div key={slider.key} className="group">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${slider.gradient} flex items-center justify-center text-xl shadow-md`}>
+                      {slider.icon}
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-semibold text-gray-900">{slider.label}</div>
+                      <div className="text-xs text-gray-500">{slider.description}</div>
                     </div>
                   </div>
                   
-                  <div className="px-3">
+                  <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border-2 border-gray-100">
                     <Slider
                       value={[formData.lifestyle_sliders[slider.key]]}
                       onValueChange={(value) => handleSliderChange(slider.key, value)}
-                      max={5}
                       min={1}
+                      max={5}
                       step={1}
-                      className="w-full"
+                      className="mb-3"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
-                      <span>{slider.leftLabel}</span>
-                      <span>{slider.rightLabel}</span>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-gray-500">{slider.leftLabel}</span>
+                      <span className={`font-bold bg-gradient-to-r ${slider.gradient} bg-clip-text text-transparent`}>
+                        {formData.lifestyle_sliders[slider.key]}
+                      </span>
+                      <span className="text-gray-500">{slider.rightLabel}</span>
                     </div>
                   </div>
                 </div>
               ))}
-            </div>
-
-            <div className="flex gap-3">
-              <Button onClick={() => setStep(2)} variant="outline" className="flex-1">
-                Back
-              </Button>
-              <Button onClick={() => setStep(4)} className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600">
-                Continue
-              </Button>
             </div>
           </div>
         );
 
       case 4:
         return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <MapPin className="w-12 h-12 mx-auto text-rose-500 mb-3" />
-              <h2 className="text-2xl font-semibold text-gray-800">Location & Background</h2>
-              <p className="text-gray-600">Where are you from and where are you now?</p>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <Briefcase className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
+                About You
+              </h2>
+              <p className="text-gray-600">Share what makes you unique</p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <Label>Current Location</Label>
-                <div className="flex gap-2 mt-2">
-                  <Button onClick={getCurrentLocation} variant="outline" className="flex-1">
-                    📍 Use Current Location
-                  </Button>
-                </div>
-                {formData.current_location && (
-                  <div className="mt-2 p-2 bg-green-50 rounded text-sm text-green-700">
-                    ✓ Location detected: {formData.current_location.city}
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <Label>Hometown (Optional)</Label>
-                <Input
-                  placeholder="Search hometown..."
-                  value={locationSearch}
-                  onChange={(e) => setLocationSearch(e.target.value)}
-                />
-                {locationSearch && (
-                  <div className="border rounded-lg max-h-32 overflow-y-auto mt-2">
-                    {searchLocations(locationSearch).slice(0, 3).map((location, idx) => (
-                      <button
-                        key={idx}
-                        className="w-full text-left p-2 hover:bg-gray-100 border-b last:border-b-0 text-sm"
-                        onClick={() => {
-                          setFormData({...formData, hometown: location});
-                          setLocationSearch(`${location.city}, ${location.country}`);
-                        }}
-                      >
-                        {location.city}, {location.country}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <Label>Industry/Work</Label>
-                <Select value={formData.industry} onValueChange={(value) => setFormData({...formData, industry: value})}>
-                  <SelectTrigger>
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Industry</Label>
+                <Select 
+                  value={formData.industry} 
+                  onValueChange={(value) => setFormData({...formData, industry: value})}
+                >
+                  <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-amber-400 rounded-xl">
                     <SelectValue placeholder="Select your industry" />
                   </SelectTrigger>
-                  <SelectContent>
-                    {INDUSTRIES.map(industry => (
-                      <SelectItem key={industry} value={industry.toLowerCase()}>
+                  <SelectContent className="rounded-xl">
+                    {INDUSTRIES.map((industry) => (
+                      <SelectItem key={industry} value={industry} className="rounded-lg">
                         {industry}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-            </div>
 
-            <div className="flex gap-3">
-              <Button onClick={() => setStep(3)} variant="outline" className="flex-1">
-                Back
-              </Button>
-              <Button onClick={() => setStep(5)} className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600">
-                Continue
-              </Button>
+              <div>
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Relationship Goals</Label>
+                <div className="grid grid-cols-2 gap-3">
+                  {RELATIONSHIP_GOALS.map((goal) => (
+                    <button
+                      key={goal.value}
+                      onClick={() => setFormData({...formData, relationship_goals: goal.value})}
+                      className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                        formData.relationship_goals === goal.value
+                          ? 'border-amber-500 bg-amber-50 shadow-md'
+                          : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50/50'
+                      }`}
+                    >
+                      <div className="text-2xl mb-1">{goal.icon}</div>
+                      <div className="text-sm font-medium text-gray-900">{goal.label}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Bio</Label>
+                <Textarea
+                  placeholder="Tell us about yourself, your passions, what you're looking for..."
+                  value={formData.bio}
+                  onChange={(e) => setFormData({...formData, bio: e.target.value})}
+                  className="min-h-32 border-2 border-gray-200 focus:border-amber-400 rounded-xl resize-none"
+                />
+                <p className="text-xs text-gray-500 mt-1.5 ml-1">{formData.bio.length}/500 characters</p>
+              </div>
+
+              <div>
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Interests & Hobbies</Label>
+                <Input
+                  placeholder="e.g., Yoga, Photography, Cooking, Travel"
+                  value={formData.interests}
+                  onChange={(e) => setFormData({...formData, interests: e.target.value})}
+                  className="h-12 border-2 border-gray-200 focus:border-amber-400 rounded-xl"
+                />
+                <p className="text-xs text-gray-500 mt-1.5 ml-1">Separate with commas</p>
+              </div>
             </div>
           </div>
         );
 
       case 5:
         return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <Briefcase className="w-12 h-12 mx-auto text-rose-500 mb-3" />
-              <h2 className="text-2xl font-semibold text-gray-800">About You</h2>
-              <p className="text-gray-600">Tell potential matches about yourself</p>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <Target className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-2">
+                Match Preferences
+              </h2>
+              <p className="text-gray-600">Who are you looking to meet?</p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <Label>Interests & Hobbies</Label>
-                <Input
-                  value={formData.interests}
-                  onChange={(e) => setFormData({...formData, interests: e.target.value})}
-                  placeholder="e.g. Travel, Music, Yoga, Books, Hiking"
-                />
-                <p className="text-xs text-gray-500 mt-1">Separate with commas</p>
+                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Current Location</Label>
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-emerald-500" />
+                    <Input
+                      placeholder="Where do you live?"
+                      value={locationSearch}
+                      onChange={(e) => setLocationSearch(e.target.value)}
+                      className="h-12 pl-11 border-2 border-gray-200 focus:border-emerald-400 rounded-xl"
+                    />
+                  </div>
+                  <Button 
+                    onClick={getCurrentLocation}
+                    variant="outline"
+                    className="h-12 px-4 border-2 border-gray-200 hover:border-emerald-400 rounded-xl"
+                  >
+                    <MapPin className="h-5 w-5" />
+                  </Button>
+                </div>
+                {locationSearch && (
+                  <div className="mt-2 bg-white border-2 border-gray-100 rounded-xl shadow-lg overflow-hidden">
+                    {searchLocations(locationSearch).slice(0, 4).map((loc, i) => (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          setFormData({...formData, current_location: loc});
+                          setLocationSearch('');
+                        }}
+                        className="w-full text-left px-4 py-3 hover:bg-emerald-50 transition-colors border-b border-gray-100 last:border-0"
+                      >
+                        <div className="font-medium text-gray-900">{loc.city}</div>
+                        <div className="text-sm text-gray-500">{loc.country}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {formData.current_location && (
+                  <div className="mt-2">
+                    <Badge className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-3 py-1.5 rounded-lg">
+                      📍 {formData.current_location.city}, {formData.current_location.country}
+                    </Badge>
+                  </div>
+                )}
               </div>
 
               <div>
-                <Label>Bio</Label>
-                <Textarea
-                  value={formData.bio}
-                  onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                  placeholder="Share what makes you unique, your passions, what you're looking for..."
-                  rows={4}
-                />
-              </div>
-
-              <div>
-                <Label>Age Range Preference</Label>
-                <div className="grid grid-cols-2 gap-3 mt-2">
-                  <div>
-                    <Label className="text-sm">Min Age</Label>
-                    <Select 
-                      value={formData.age_range_min.toString()} 
-                      onValueChange={(value) => setFormData({...formData, age_range_min: parseInt(value)})}
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Array.from({length: 32}, (_, i) => i + 18).map(age => (
-                          <SelectItem key={age} value={age.toString()}>{age}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                <Label className="text-sm font-semibold text-gray-700 mb-3 block">Age Range</Label>
+                <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-5 rounded-xl border-2 border-emerald-100">
+                  <div className="flex items-center gap-4 mb-4">
+                    <Input
+                      type="number"
+                      value={formData.age_range_min}
+                      onChange={(e) => setFormData({...formData, age_range_min: parseInt(e.target.value)})}
+                      className="h-12 text-center font-bold text-lg border-2 border-gray-200 rounded-xl"
+                    />
+                    <span className="text-gray-400 font-medium">to</span>
+                    <Input
+                      type="number"
+                      value={formData.age_range_max}
+                      onChange={(e) => setFormData({...formData, age_range_max: parseInt(e.target.value)})}
+                      className="h-12 text-center font-bold text-lg border-2 border-gray-200 rounded-xl"
+                    />
                   </div>
-                  <div>
-                    <Label className="text-sm">Max Age</Label>
-                    <Select 
-                      value={formData.age_range_max.toString()} 
-                      onValueChange={(value) => setFormData({...formData, age_range_max: parseInt(value)})}
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Array.from({length: 32}, (_, i) => i + 18).map(age => (
-                          <SelectItem key={age} value={age.toString()}>{age}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <p className="text-sm text-gray-600 text-center">
+                    Show people aged <span className="font-bold text-emerald-600">{formData.age_range_min}</span> to <span className="font-bold text-emerald-600">{formData.age_range_max}</span>
+                  </p>
                 </div>
               </div>
 
               <div>
-                <Label>Maximum Distance</Label>
-                <Select 
-                  value={formData.max_distance_km.toString()} 
-                  onValueChange={(value) => setFormData({...formData, max_distance_km: parseInt(value)})}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="5">Within 5 km</SelectItem>
-                    <SelectItem value="10">Within 10 km</SelectItem>
-                    <SelectItem value="25">Within 25 km</SelectItem>
-                    <SelectItem value="50">Within 50 km</SelectItem>
-                    <SelectItem value="100">Within 100 km</SelectItem>
-                    <SelectItem value="250">Within 250 km</SelectItem>
-                    <SelectItem value="500">Within 500 km</SelectItem>
-                    <SelectItem value="1000">Within 1000 km</SelectItem>
-                    <SelectItem value="5000">Anywhere</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label className="text-sm font-semibold text-gray-700 mb-3 block">Maximum Distance</Label>
+                <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-5 rounded-xl border-2 border-emerald-100">
+                  <Slider
+                    value={[formData.max_distance_km]}
+                    onValueChange={(value) => setFormData({...formData, max_distance_km: value[0]})}
+                    min={5}
+                    max={200}
+                    step={5}
+                    className="mb-4"
+                  />
+                  <p className="text-sm text-gray-600 text-center">
+                    Show matches within <span className="font-bold text-emerald-600">{formData.max_distance_km} km</span>
+                  </p>
+                </div>
               </div>
-            </div>
-
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-medium text-blue-800 mb-2">Profile Summary:</h3>
-              <ul className="text-sm text-blue-700 space-y-1">
-                <li>• Birth Date: {formData.birth_date ? format(formData.birth_date, 'PPP') : 'Not set'}</li>
-                <li>• Gender: {formData.gender_identity}</li>
-                <li>• Looking for: {formData.relationship_goals}</li>
-                <li>• Industry: {formData.industry || 'Not specified'}</li>
-                <li>• Age Range: {formData.age_range_min}-{formData.age_range_max} years</li>
-                <li>• Distance: Within {formData.max_distance_km === 5000 ? 'anywhere' : `${formData.max_distance_km}km`}</li>
-              </ul>
-            </div>
-
-            <div className="flex gap-3">
-              <Button onClick={() => setStep(4)} variant="outline" className="flex-1">
-                Back
-              </Button>
-              <Button 
-                onClick={handleComplete}
-                className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600"
-                disabled={loading}
-              >
-                {loading ? 'Creating Profile...' : 'Complete Profile'}
-              </Button>
             </div>
           </div>
         );
@@ -664,25 +670,74 @@ export default function EnhancedOnboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-lg">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl text-gray-800">Create Your Profile</CardTitle>
-          <CardDescription>Step {step} of 5 - Build your complete dating profile</CardDescription>
-          
-          {/* Progress Bar */}
-          <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl">
+        {/* Progress Bar */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm font-semibold text-gray-600">Profile Setup</span>
+            <span className="text-sm font-semibold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+              {step} of 5
+            </span>
+          </div>
+          <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner">
             <div 
-              className="bg-gradient-to-r from-rose-500 to-pink-600 h-2 rounded-full transition-all duration-300"
+              className="h-full bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500 ease-out shadow-lg"
               style={{ width: `${(step / 5) * 100}%` }}
             ></div>
           </div>
-        </CardHeader>
-        
-        <CardContent>
-          {renderStep()}
-        </CardContent>
-      </Card>
+        </div>
+
+        {/* Main Card */}
+        <Card className="border-2 border-gray-100 shadow-2xl rounded-3xl overflow-hidden backdrop-blur-sm bg-white/95">
+          <CardContent className="p-8">
+            {renderStep()}
+            
+            {/* Navigation Buttons */}
+            <div className="flex gap-3 mt-8 pt-6 border-t-2 border-gray-100">
+              {step > 1 && (
+                <Button
+                  onClick={() => setStep(step - 1)}
+                  variant="outline"
+                  className="flex-1 h-12 border-2 border-gray-200 hover:border-gray-300 rounded-xl font-semibold"
+                >
+                  <ChevronLeft className="w-5 h-5 mr-1" />
+                  Back
+                </Button>
+              )}
+              
+              {step < 5 ? (
+                <Button
+                  onClick={() => setStep(step + 1)}
+                  className="flex-1 h-12 bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 rounded-xl font-semibold shadow-lg shadow-purple-500/30"
+                  disabled={step === 1 && !formData.birth_date}
+                >
+                  Continue
+                  <ChevronRight className="w-5 h-5 ml-1" />
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleComplete}
+                  className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 rounded-xl font-semibold shadow-lg shadow-emerald-500/30"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                      Creating...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5 mr-2" />
+                      Complete Profile
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
