@@ -134,6 +134,15 @@ export default function Home({ user }) {
     if (!currentMatch) return;
     setSwipeDirection('left');
     
+    // Create shooting star animation
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = rect.left + 50;
+      const y = rect.top + rect.height / 2;
+      
+      createShootingStar(x, y, 'left');
+    }
+    
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'pass', userId: currentMatch.id }]);
     
     try {
