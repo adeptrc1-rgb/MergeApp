@@ -349,7 +349,7 @@ function SessionHandler() {
             if (response.data.needs_onboarding) {
               navigate('/onboarding', { replace: true });
             } else {
-              navigate('/dashboard', { replace: true });
+              navigate('/discover', { replace: true });
             }
           } else {
             setError('Authentication failed. Please try again.');
