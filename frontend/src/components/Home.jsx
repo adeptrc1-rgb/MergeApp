@@ -37,6 +37,11 @@ export default function Home({ user }) {
   const likeButtonRef = useRef(null);
   const passButtonRef = useRef(null);
   const superLikeButtonRef = useRef(null);
+  
+  // Touch/Drag state
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     loadMatches();
