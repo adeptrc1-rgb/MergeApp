@@ -33,6 +33,10 @@ export default function Home({ user }) {
   const [loading, setLoading] = useState(true);
   const [swipeDirection, setSwipeDirection] = useState(null);
   const [swipeHistory, setSwipeHistory] = useState([]);
+  const cardRef = useRef(null);
+  const likeButtonRef = useRef(null);
+  const passButtonRef = useRef(null);
+  const superLikeButtonRef = useRef(null);
 
   useEffect(() => {
     loadMatches();
