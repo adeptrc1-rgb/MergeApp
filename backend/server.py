@@ -430,28 +430,45 @@ async def get_astrology_compatibility(sign1: str, sign2: str) -> float:
     
     return element_scores.get((elem1, elem2), element_scores.get((elem2, elem1), 65))
 
-async def apply_penalty(user_id: str, penalty_type: str, match_id: str):
-    """Apply penalty to user for poor response behavior"""
-    penalty_amounts = {
-        "no_response": 10.0,
-        "slow_response": 5.0
-    }
+async def update_responsiveness_score(user_id: str, action_type: str, match_id: str, 
+                                    compatibility_level: str, response_time_hours: Optional[float] = None):
+    """Update user's responsiveness score based on behavior"""
     
-    penalty_amount = penalty_amounts.get(penalty_type, 5.0)
+    penalty = 0
+    reward = 0
     
-    # Record penalty
-    penalty = UserPenalty(
+    if action_type == "responded_quickly" and response_time_hours and response_time_hours < 2:
+        reward = 2
+    elif action_type == "continued_conversation":
+        reward = 1
+    elif action_type == "expired_match":
+        if compatibility_level == "high":  # 80%+
+            penalty = 15
+        elif compatibility_level == "medium":  # 50-79%
+            penalty = 8
+        else:  # <50%
+            penalty = 3
+    elif action_type == "ghosted":
+        penalty = 5
+    
+    # Record behavior
+    behavior = ResponseBehavior(
         user_id=user_id,
-        penalty_type=penalty_type,
-        penalty_amount=penalty_amount,
-        match_id=match_id
+        action_type=action_type,
+        match_id=match_id,
+        response_time_hours=response_time_hours,
+        compatibility_level=compatibility_level,
+        penalty_applied=penalty,
+        reward_applied=reward
     )
-    await db.penalties.insert_one(penalty.dict())
+    
+    await db.response_behaviors.insert_one(behavior.dict())
     
     # Update user score
+    score_change = reward - penalty
     await db.users.update_one(
         {"id": user_id},
-        {"$inc": {"response_score": -penalty_amount}}
+        {"$inc": {"response_score": score_change}}
     )
 
 async def get_current_user(session_token: Optional[str] = Cookie(None), authorization: Optional[str] = Header(None)) -> Optional[User]:
