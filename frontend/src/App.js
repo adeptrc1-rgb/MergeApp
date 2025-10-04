@@ -1338,6 +1338,14 @@ function App() {
               } 
             />
             <Route 
+              path="/messages" 
+              element={
+                <ProtectedRoute>
+                  <MessagesWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path="/connections" 
               element={
                 <ProtectedRoute>
