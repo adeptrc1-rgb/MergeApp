@@ -330,8 +330,20 @@ function SessionHandler() {
     <div className="min-h-screen bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100 flex items-center justify-center">
       <Card className="w-96">
         <CardContent className="flex flex-col items-center p-8">
-          <div className="w-16 h-16 border-4 border-rose-200 border-t-rose-500 rounded-full animate-spin mb-4"></div>
-          <p className="text-lg text-gray-600">Aligning your stars...</p>
+          {error ? (
+            <>
+              <div className="w-16 h-16 flex items-center justify-center mb-4">
+                <X className="w-16 h-16 text-rose-500" />
+              </div>
+              <p className="text-lg text-gray-600 text-center">{error}</p>
+              <p className="text-sm text-gray-400 mt-2">Redirecting...</p>
+            </>
+          ) : (
+            <>
+              <div className="w-16 h-16 border-4 border-rose-200 border-t-rose-500 rounded-full animate-spin mb-4"></div>
+              <p className="text-lg text-gray-600">Aligning your stars...</p>
+            </>
+          )}
         </CardContent>
       </Card>
     </div>
