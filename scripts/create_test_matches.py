@@ -15,7 +15,7 @@ from typing import Dict, Any
 # MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(MONGO_URL)
-db = client.astrology_dating
+db = client.astrology_dating_db
 
 # Sample base64 image placeholder (small 1x1 pixel)
 PLACEHOLDER_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
