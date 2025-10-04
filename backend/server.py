@@ -143,6 +143,22 @@ class UserCreate(BaseModel):
     age_range_min: Optional[int] = 18
     age_range_max: Optional[int] = 50
     max_distance_km: Optional[int] = 50
+    
+    # Enhanced fields
+    gender_identity: Optional[GenderIdentity] = None
+    gender_self_describe: Optional[str] = None
+    open_to_dating: Optional[List[OpenToDating]] = []
+    orientation_visible: Optional[bool] = True
+    lifestyle_sliders: Optional[Dict[str, int]] = None
+    industry: Optional[str] = None
+    relationship_goals: Optional[RelationshipGoal] = None
+
+class CompatibilityScore(BaseModel):
+    user1_id: str
+    user2_id: str
+    compatibility_percentage: float
+    slider_breakdown: Dict[str, Dict[str, Any]]  # Detailed breakdown
+    calculated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class Match(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
