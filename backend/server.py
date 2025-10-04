@@ -617,7 +617,7 @@ async def test_login(request: TestLoginRequest, response: Response):
             max_age=7 * 24 * 60 * 60,
             httponly=True,
             secure=True,
-            samesite="lax",
+            samesite="none",
             path="/"
         )
         
