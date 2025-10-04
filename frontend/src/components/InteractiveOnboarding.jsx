@@ -10,6 +10,9 @@ import { format } from 'date-fns';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Configure axios to always send cookies
+axios.defaults.withCredentials = true;
+
 const LIFESTYLE_QUESTIONS = [
   {
     key: 'fitness_health',
