@@ -582,12 +582,15 @@ async def create_session(response: Response, x_session_id: str = Header(..., ali
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class TestLoginRequest(BaseModel):
+    email: str = "testuser@asign.com"
+
 @api_router.post("/auth/test-login")
-async def test_login(response: Response, email: str = "testuser@asign.com"):
+async def test_login(request: TestLoginRequest, response: Response):
     """Test login endpoint - creates session for test user"""
     try:
         # Find the test user
-        user = await db.users.find_one({"email": email})
+        user = await db.users.find_one({"email": request.email})
         if not user:
             raise HTTPException(status_code=404, detail="Test user not found")
         
