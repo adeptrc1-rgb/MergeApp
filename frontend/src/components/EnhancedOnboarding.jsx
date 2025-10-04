@@ -661,7 +661,7 @@ export default function EnhancedOnboarding() {
                 </Button>
               )}
               
-              {step < 6 ? (
+              {step < 5 ? (
                 <Button
                   onClick={() => setStep(step + 1)}
                   className="flex-1 h-12 bg-gradient-to-r from-rose-400 via-pink-500 to-orange-400 hover:from-rose-500 hover:via-pink-600 hover:to-orange-500 text-white rounded-xl font-semibold shadow-lg"
