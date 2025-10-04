@@ -1260,6 +1260,11 @@ function EnhancedDashboardWrapper() {
   return <AstroMatchDashboard user={user} logout={logout} />;
 }
 
+function AstroChatWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <AstroChat user={user} logout={logout} />;
+}
+
 // Main App Component
 function App() {
   return (
