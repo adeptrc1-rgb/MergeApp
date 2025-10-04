@@ -271,6 +271,88 @@ def calculate_geographic_score(distance_km: float) -> float:
     else:
         return 10
 
+def calculate_lifestyle_compatibility(user1_sliders: LifestyleSliders, user2_sliders: LifestyleSliders) -> Dict[str, Any]:
+    """Calculate compatibility based on lifestyle sliders"""
+    
+    slider_fields = [
+        'fitness_health', 'career_ambition', 'social_energy', 'travel_adventure',
+        'nightlife_lifestyle', 'family_future', 'dating_approach', 'passions_hobbies'
+    ]
+    
+    breakdown = {}
+    total_score = 0
+    total_weight = 0
+    
+    for field in slider_fields:
+        user1_val = getattr(user1_sliders, field)
+        user2_val = getattr(user2_sliders, field)
+        
+        difference = abs(user1_val - user2_val)
+        
+        # Scoring logic
+        if difference <= 1:  # Alignment within ±1 = +points
+            field_score = 100 - (difference * 10)
+        elif difference >= 3:  # Mismatch difference ≥3 = –points
+            # Weighted mismatch: stronger penalty for extreme differences
+            penalty = 40 + (difference - 3) * 20
+            # Don't penalize high-priority users as much
+            if max(user1_val, user2_val) == 5:
+                penalty *= 0.7
+            field_score = max(0, 100 - penalty)
+        else:  # Difference of 2
+            field_score = 70 - (difference * 5)
+        
+        # Weight important categories more
+        weight = 1.5 if field in ['family_future', 'dating_approach', 'career_ambition'] else 1.0
+        
+        breakdown[field] = {
+            'user1_value': user1_val,
+            'user2_value': user2_val,
+            'difference': difference,
+            'field_score': field_score,
+            'weight': weight
+        }
+        
+        total_score += field_score * weight
+        total_weight += weight
+    
+    overall_score = total_score / total_weight if total_weight > 0 else 0
+    
+    return {
+        'overall_percentage': min(100, max(0, overall_score)),
+        'breakdown': breakdown
+    }
+
+def check_gender_compatibility(user1: User, user2: User) -> bool:
+    """Check if two users are compatible based on gender preferences"""
+    
+    # Helper function to convert gender identity to dating preference
+    def gender_to_dating_pref(gender):
+        if gender == GenderIdentity.MAN:
+            return OpenToDating.MEN
+        elif gender == GenderIdentity.WOMAN:
+            return OpenToDating.WOMEN
+        elif gender == GenderIdentity.NON_BINARY:
+            return OpenToDating.NON_BINARY
+        return None
+    
+    user1_gender_pref = gender_to_dating_pref(user1.gender_identity)
+    user2_gender_pref = gender_to_dating_pref(user2.gender_identity)
+    
+    # Check if user1 is open to user2's gender
+    user1_compatible = (
+        OpenToDating.ALL_GENDERS in user1.open_to_dating or
+        user2_gender_pref in user1.open_to_dating
+    ) if user1.open_to_dating else False
+    
+    # Check if user2 is open to user1's gender
+    user2_compatible = (
+        OpenToDating.ALL_GENDERS in user2.open_to_dating or
+        user1_gender_pref in user2.open_to_dating
+    ) if user2.open_to_dating else False
+    
+    return user1_compatible and user2_compatible
+
 async def calculate_compatibility(user1: User, user2: User) -> Dict[str, Any]:
     """Calculate enhanced compatibility between two users with location and birth time"""
     try:
