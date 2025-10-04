@@ -1268,6 +1268,21 @@ function AstroChatWrapper() {
   return <AstroChat user={user} logout={logout} />;
 }
 
+function DiscoverWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <Discover user={user} logout={logout} />;
+}
+
+function ConnectionsWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <Connections user={user} logout={logout} />;
+}
+
+function ProfileWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <Profile user={user} logout={logout} />;
+}
+
 // Main App Component
 function App() {
   return (
