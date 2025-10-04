@@ -1087,6 +1087,75 @@ async def super_like_user(swiped_id: str, user: User = Depends(get_current_user)
         "super_likes_remaining": user_data.get("super_likes", 0) - 1
     }
 
+@api_router.post("/users/direct-message/{recipient_id}")
+async def send_direct_message(recipient_id: str, user: User = Depends(get_current_user)):
+    """Send a direct message to create instant match (bypasses mutual like)"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Check if user has direct messages available
+    user_data = await db.users.find_one({"id": user.id})
+    if not user_data or user_data.get("direct_messages", 0) <= 0:
+        raise HTTPException(status_code=400, detail="No direct messages remaining")
+    
+    # Check if match already exists
+    existing_match = await db.matches.find_one({
+        "$or": [
+            {"user1_id": user.id, "user2_id": recipient_id},
+            {"user1_id": recipient_id, "user2_id": user.id}
+        ]
+    })
+    
+    if existing_match:
+        return {
+            "success": True,
+            "match_id": existing_match["id"],
+            "message": "Match already exists"
+        }
+    
+    # Create instant match
+    match_id = str(uuid.uuid4())
+    match = {
+        "id": match_id,
+        "user1_id": user.id,
+        "user2_id": recipient_id,
+        "matched_at": datetime.now(timezone.utc),
+        "status": "matched",
+        "dm_initiated": True  # Flag to indicate DM was used
+    }
+    
+    await db.matches.insert_one(match)
+    
+    return {
+        "success": True,
+        "match_id": match_id,
+        "message": "Direct message match created"
+    }
+
+@api_router.post("/users/use-direct-message")
+async def use_direct_message(user: User = Depends(get_current_user)):
+    """Decrement user's direct message count"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    user_data = await db.users.find_one({"id": user.id})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    current_dms = user_data.get("direct_messages", 0)
+    if current_dms <= 0:
+        raise HTTPException(status_code=400, detail="No direct messages remaining")
+    
+    await db.users.update_one(
+        {"id": user.id},
+        {"$inc": {"direct_messages": -1}}
+    )
+    
+    return {
+        "success": True,
+        "remaining_dms": current_dms - 1
+    }
+
 @api_router.get("/matches")
 async def get_matches(user: User = Depends(get_current_user)):
     """Get user's matches with responsiveness tracking"""
