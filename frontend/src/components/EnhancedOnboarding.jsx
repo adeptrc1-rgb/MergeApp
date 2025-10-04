@@ -264,6 +264,30 @@ export default function EnhancedOnboarding() {
     }
   };
 
+  const handlePhotoUpload = (event, photoType) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Photo size must be less than 5MB');
+      return;
+    }
+
+    // Convert to base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData({
+        ...formData,
+        profile_photos: {
+          ...formData.profile_photos,
+          [photoType]: reader.result
+        }
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleComplete = async () => {
     if (!formData.birth_date || !formData.first_name) return;
     
