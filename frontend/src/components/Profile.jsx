@@ -1,10 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Button } from './ui/button';
-import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award } from 'lucide-react';
+import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award, Gift, Clock } from 'lucide-react';
+import CosmicWheel from './CosmicWheel';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
+
+axios.defaults.withCredentials = true;
 
 export default function Profile({ user, logout }) {
   const navigate = useNavigate();
+  const [showCosmicWheel, setShowCosmicWheel] = useState(false);
+  const [canSpin, setCanSpin] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState({});
+
+  useEffect(() => {
+    checkDailySpinStatus();
+    calculateTimeRemaining();
+    
+    // Update time remaining every minute
+    const interval = setInterval(calculateTimeRemaining, 60000);
+    return () => clearInterval(interval);
+  }, [user]);
+
+  const checkDailySpinStatus = async () => {
+    try {
+      const response = await axios.get(`${API}/rewards/daily-spin-status`);
+      setCanSpin(response.data.can_spin);
+    } catch (error) {
+      console.error('Error checking spin status:', error);
+    }
+  };
+
+  const calculateTimeRemaining = () => {
+    const now = new Date();
+    const remaining = {};
+    
+    // Calculate time remaining for each reward type
+    if (user.boosts_expiry) {
+      const expiry = new Date(user.boosts_expiry);
+      const diff = expiry - now;
+      if (diff > 0) {
+        remaining.boosts = formatTimeRemaining(diff);
+      }
+    }
+    
+    if (user.super_likes_expiry) {
+      const expiry = new Date(user.super_likes_expiry);
+      const diff = expiry - now;
+      if (diff > 0) {
+        remaining.super_likes = formatTimeRemaining(diff);
+      }
+    }
+    
+    if (user.direct_messages_expiry) {
+      const expiry = new Date(user.direct_messages_expiry);
+      const diff = expiry - now;
+      if (diff > 0) {
+        remaining.dms = formatTimeRemaining(diff);
+      }
+    }
+    
+    setTimeRemaining(remaining);
+  };
+
+  const formatTimeRemaining = (ms) => {
+    const hours = Math.floor(ms / (1000 * 60 * 60));
+    const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+    
+    if (hours > 0) {
+      return `${hours}h ${minutes}m`;
+    }
+    return `${minutes}m`;
+  };
+
+  const handleRewardClaimed = async (reward) => {
+    try {
+      await axios.post(`${API}/rewards/claim-reward?reward_type=${reward.type}&amount=${reward.amount}`);
+      // Refresh user data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error claiming reward:', error);
+    }
+  };
 
   const calculateAge = (birthDate) => {
     const today = new Date();
