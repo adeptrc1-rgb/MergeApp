@@ -487,7 +487,16 @@ async def get_current_user(session_token: Optional[str] = Cookie(None), authoriz
         return None
     
     session = await db.sessions.find_one({"session_token": token})
-    if not session or datetime.now(timezone.utc) > session["expires_at"]:
+    if not session:
+        return None
+    
+    # Handle timezone-aware datetime comparison
+    expires_at = session["expires_at"]
+    if isinstance(expires_at, datetime):
+        if expires_at.tzinfo is None:
+            expires_at = expires_at.replace(tzinfo=timezone.utc)
+    
+    if datetime.now(timezone.utc) > expires_at:
         return None
     
     user_data = await db.users.find_one({"id": session["user_id"]})
