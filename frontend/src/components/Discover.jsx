@@ -182,32 +182,50 @@ export default function Discover({ user }) {
 function BottomNav({ currentTab, navigate }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 safe-area-inset-bottom">
-      <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-around">
+      <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-around">
+        <button
+          onClick={() => navigate('/home')}
+          className={`flex flex-col items-center gap-1 transition-colors ${
+            currentTab === 'home' ? 'text-white' : 'text-white/40 hover:text-white/60'
+          }`}
+        >
+          <Home className="w-5 h-5" />
+          <span className="text-xs">Home</span>
+        </button>
         <button
           onClick={() => navigate('/discover')}
-          className={`flex flex-col items-center gap-2 transition-colors ${
+          className={`flex flex-col items-center gap-1 transition-colors ${
             currentTab === 'discover' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Sparkles className="w-6 h-6" />
+          <Sparkles className="w-5 h-5" />
           <span className="text-xs">Discover</span>
         </button>
         <button
+          onClick={() => navigate('/messages')}
+          className={`flex flex-col items-center gap-1 transition-colors ${
+            currentTab === 'messages' ? 'text-white' : 'text-white/40 hover:text-white/60'
+          }`}
+        >
+          <MessageCircle className="w-5 h-5" />
+          <span className="text-xs">Messages</span>
+        </button>
+        <button
           onClick={() => navigate('/connections')}
-          className={`flex flex-col items-center gap-2 transition-colors ${
+          className={`flex flex-col items-center gap-1 transition-colors ${
             currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Users className="w-6 h-6" />
-          <span className="text-xs">Connections</span>
+          <Users className="w-5 h-5" />
+          <span className="text-xs">Connect</span>
         </button>
         <button
           onClick={() => navigate('/profile')}
-          className={`flex flex-col items-center gap-2 transition-colors ${
+          className={`flex flex-col items-center gap-1 transition-colors ${
             currentTab === 'profile' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Home className="w-6 h-6" />
+          <Star className="w-5 h-5" />
           <span className="text-xs">Profile</span>
         </button>
       </div>
