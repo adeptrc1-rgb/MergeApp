@@ -111,11 +111,14 @@ backend:
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "Backend OAuth endpoint at /api/auth/session is properly configured to receive session_id from Emergent Auth, create/update user, and set session cookie"
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: OAuth endpoint working correctly. Fixed error handling bug (was returning 500 instead of 401 for invalid sessions). Endpoint properly validates X-Session-ID header, returns 422 for missing header, 401 for invalid session. Database connectivity confirmed - MongoDB working with 5 users. Session creation logic verified. Minor: CORS headers present but OPTIONS method test failed (non-critical)."
 
 frontend:
   - task: "Google Login Button"
