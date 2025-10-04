@@ -167,7 +167,8 @@ export default function EnhancedOnboarding() {
     // Preferences
     age_range_min: 18,
     age_range_max: 35,
-    max_distance_km: 50
+    max_distance_km: 50,
+    max_distance_miles: 30
   });
 
   const [locationSearch, setLocationSearch] = useState('');
