@@ -167,6 +167,11 @@ export default function Home({ user }) {
       return;
     }
     
+    // Create floating sign animation
+    if (likeButtonRef.current) {
+      createFloatingSign(likeButtonRef.current);
+    }
+    
     // Open chat or create match
     alert(`Opening DM with ${currentMatch.first_name}...`);
     // TODO: Implement direct message functionality
