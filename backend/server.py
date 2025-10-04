@@ -467,6 +467,44 @@ async def update_responsiveness_score(user_id: str, action_type: str, match_id: 
     
     # Record behavior
     behavior = ResponseBehavior(
+
+
+# ============================================================================
+# ANGEL NUMBER CALCULATION
+# ============================================================================
+
+def calculate_angel_number(birth_date: date) -> str:
+    """
+    Calculate angel number from birth date using numerology
+    Reduces birth date to a single digit or master number, then creates angel number
+    """
+    # Convert date to numbers: day + month + year
+    day = birth_date.day
+    month = birth_date.month
+    year = birth_date.year
+    
+    # Sum all digits
+    total = day + month + year
+    
+    # Reduce to single digit (but keep master numbers 11, 22, 33)
+    while total > 33:
+        total = sum(int(digit) for digit in str(total))
+    
+    # Keep reducing unless it's a master number
+    while total > 9 and total not in [11, 22, 33]:
+        total = sum(int(digit) for digit in str(total))
+    
+    # Create angel number (repeating digit)
+    if total == 11:
+        return "111"
+    elif total == 22:
+        return "222"
+    elif total == 33:
+        return "333"
+    else:
+        # For single digits, create triple digit angel number
+        return str(total) * 3
+
         user_id=user_id,
         action_type=action_type,
         match_id=match_id,
