@@ -73,72 +73,72 @@ export default function Profile({ user, logout }) {
           </div>
 
           {/* Free Features */}
-          <div className="bg-black/30 backdrop-blur-md rounded-3xl p-6 border border-white/10 mb-4">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <Award className="w-6 h-6 text-yellow-400" />
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
+            <h3 className="text-xl font-light text-white mb-6 flex items-center gap-2">
+              <Award className="w-5 h-5 text-purple-400" />
               Your Free Features
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gradient-to-br from-pink-500/20 to-rose-500/20 rounded-2xl p-4 border border-pink-400/30">
-                <Zap className="w-8 h-8 text-yellow-400 mb-2" />
-                <div className="text-2xl font-bold text-white mb-1">
+              <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                <Zap className="w-6 h-6 text-purple-400 mb-3" />
+                <div className="text-3xl font-light text-white mb-1">
                   {user.profile_boosts || 0}
                 </div>
-                <div className="text-sm text-white/80">Profile Boosts</div>
+                <div className="text-sm text-white/40">Profile Boosts</div>
               </div>
-              <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-4 border border-purple-400/30">
-                <Heart className="w-8 h-8 text-pink-400 mb-2 fill-pink-400" />
-                <div className="text-2xl font-bold text-white mb-1">
+              <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                <Heart className="w-6 h-6 text-purple-400 mb-3" />
+                <div className="text-3xl font-light text-white mb-1">
                   {user.super_likes || 0}
                 </div>
-                <div className="text-sm text-white/80">Super Likes</div>
+                <div className="text-sm text-white/40">Super Likes</div>
               </div>
-              <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl p-4 border border-blue-400/30 col-span-2">
-                <MessageCircle className="w-8 h-8 text-blue-400 mb-2" />
-                <div className="text-2xl font-bold text-white mb-1">
+              <div className="bg-white/5 rounded-xl p-6 border border-white/10 col-span-2">
+                <MessageCircle className="w-6 h-6 text-purple-400 mb-3" />
+                <div className="text-3xl font-light text-white mb-1">
                   {user.direct_messages || 0}
                 </div>
-                <div className="text-sm text-white/80">Direct Messages</div>
+                <div className="text-sm text-white/40">Direct Messages</div>
               </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="bg-black/30 backdrop-blur-md rounded-3xl p-6 border border-white/10 mb-4">
-            <h3 className="text-xl font-bold text-white mb-4">Your Stats</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-white/80">Total Matches</span>
-                <span className="text-white font-bold text-lg">{user.total_matches || 0}</span>
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
+            <h3 className="text-xl font-light text-white mb-6">Your Stats</h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center py-3 border-b border-white/10">
+                <span className="text-white/60">Total Matches</span>
+                <span className="text-white text-xl font-light">{user.total_matches || 0}</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-white/80">Responsiveness Score</span>
-                <span className="text-white font-bold text-lg">{user.responsiveness_score || 80}/100</span>
+              <div className="flex justify-between items-center py-3 border-b border-white/10">
+                <span className="text-white/60">Responsiveness Score</span>
+                <span className="text-white text-xl font-light">{user.responsiveness_score || 80}/100</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-white/80">Profile Completion</span>
-                <span className="text-white font-bold text-lg">100%</span>
+              <div className="flex justify-between items-center py-3">
+                <span className="text-white/60">Profile Completion</span>
+                <span className="text-white text-xl font-light">100%</span>
               </div>
             </div>
           </div>
 
           {/* About Me */}
           {user.bio && (
-            <div className="bg-black/30 backdrop-blur-md rounded-3xl p-6 border border-white/10 mb-4">
-              <h3 className="text-xl font-bold text-white mb-3">About Me</h3>
-              <p className="text-white/80">{user.bio}</p>
+            <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
+              <h3 className="text-xl font-light text-white mb-3">About Me</h3>
+              <p className="text-white/60 leading-relaxed">{user.bio}</p>
             </div>
           )}
 
           {/* Interests */}
           {user.interests && user.interests.length > 0 && (
-            <div className="bg-black/30 backdrop-blur-md rounded-3xl p-6 border border-white/10 mb-4">
-              <h3 className="text-xl font-bold text-white mb-3">Interests</h3>
+            <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
+              <h3 className="text-xl font-light text-white mb-4">Interests</h3>
               <div className="flex flex-wrap gap-2">
                 {user.interests.map((interest, idx) => (
                   <span
                     key={idx}
-                    className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full text-white text-sm border border-white/20"
+                    className="px-4 py-2 bg-white/10 rounded-full text-white/80 text-sm border border-white/10"
                   >
                     {interest}
                   </span>
@@ -148,13 +148,13 @@ export default function Profile({ user, logout }) {
           )}
 
           {/* Logout Button */}
-          <Button
+          <button
             onClick={logout}
-            className="w-full bg-red-500/20 text-red-300 hover:bg-red-500/30 border border-red-400/30 flex items-center justify-center gap-2"
+            className="w-full bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
           >
             <LogOut className="w-5 h-5" />
             <span>Logout</span>
-          </Button>
+          </button>
         </div>
       </div>
 
