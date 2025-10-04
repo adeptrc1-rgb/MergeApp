@@ -1295,7 +1295,39 @@ function App() {
               } 
             />
             <Route 
+              path="/discover" 
+              element={
+                <ProtectedRoute>
+                  <DiscoverWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/connections" 
+              element={
+                <ProtectedRoute>
+                  <ConnectionsWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <ProfileWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path="/chat" 
+              element={
+                <ProtectedRoute>
+                  <AstroChatWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/chat/:matchId" 
               element={
                 <ProtectedRoute>
                   <AstroChatWrapper />
