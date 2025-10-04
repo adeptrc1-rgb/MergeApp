@@ -58,50 +58,6 @@ export default function Discover({ user }) {
     console.log('Profile clicked:', match);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center">
-        <div className="text-center">
-          <Sparkles className="w-12 h-12 text-yellow-400 animate-spin mx-auto mb-4" />
-          <p className="text-white text-lg">Finding your cosmic matches...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!currentMatch) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex flex-col">
-        {/* Header */}
-        <div className="bg-black/30 backdrop-blur-md border-b border-white/10">
-          <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              A Sign
-            </div>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="flex-1 flex items-center justify-center p-4">
-          <div className="text-center max-w-md">
-            <div className="text-6xl mb-6">🌟</div>
-            <h2 className="text-3xl font-bold text-white mb-4">You've seen everyone!</h2>
-            <p className="text-purple-200 mb-6">Check back later for more cosmic connections</p>
-            <Button 
-              onClick={() => navigate('/connections')} 
-              className="bg-gradient-to-r from-purple-500 to-pink-600 text-white"
-            >
-              View Your Connections
-            </Button>
-          </div>
-        </div>
-
-        {/* Bottom Navigation */}
-        <BottomNav currentTab="discover" navigate={navigate} />
-      </div>
-    );
-  }
-
   const calculateAge = (birthDate) => {
     const today = new Date();
     const birth = new Date(birthDate);
@@ -113,168 +69,106 @@ export default function Discover({ user }) {
     return age;
   };
 
-  const age = calculateAge(currentMatch.birth_date);
-  const compatibility = currentMatch.compatibility_score || Math.floor(Math.random() * 30) + 70;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <Sparkles className="w-12 h-12 text-purple-400 animate-spin mx-auto mb-4" />
+          <p className="text-white/60 text-lg">Finding your cosmic matches...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       {/* Header */}
-      <div className="bg-black/30 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              A Sign
-            </div>
-            <div className="flex items-center gap-1 text-yellow-400">
-              <Star className="w-4 h-4 fill-yellow-400" />
-              <span className="text-sm font-medium">{user.zodiac_sign}</span>
-            </div>
+      <div className="border-b border-white/10 bg-black">
+        <div className="max-w-4xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-3xl font-light text-white">A Sign</h1>
+            <button className="text-white/60 hover:text-white">
+              <Sparkles className="w-6 h-6" />
+            </button>
           </div>
-          <div className="flex items-center gap-3">
-            <button 
-              onClick={handleUndo}
-              disabled={swipeHistory.length === 0}
-              className="text-white/80 hover:text-white transition-colors disabled:opacity-30"
+          <h2 className="text-4xl font-light text-white mb-6">Discover</h2>
+          
+          {/* Filter Tabs */}
+          <div className="flex gap-4">
+            <button
+              onClick={() => setActiveFilter('compatible')}
+              className={`px-6 py-2 rounded-full text-sm transition-all ${
+                activeFilter === 'compatible'
+                  ? 'bg-white text-black font-medium'
+                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
+              }`}
             >
-              <RotateCcw className="w-5 h-5" />
+              Compatible Today
+            </button>
+            <button
+              onClick={() => setActiveFilter('trending')}
+              className={`px-6 py-2 rounded-full text-sm transition-all ${
+                activeFilter === 'trending'
+                  ? 'bg-white text-black font-medium'
+                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
+              }`}
+            >
+              Trending Energies
             </button>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4 pb-24">
-        <div className="w-full max-w-md">
-          {/* Profile Card */}
-          <div 
-            className={`relative bg-white rounded-3xl shadow-2xl overflow-hidden transition-transform duration-300 ${
-              swipeDirection === 'right' ? 'translate-x-[150%] rotate-12' : 
-              swipeDirection === 'left' ? '-translate-x-[150%] -rotate-12' : ''
-            }`}
-            style={{ height: '600px' }}
-          >
-            {/* Photo */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center cursor-pointer"
-              style={{ 
-                backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})` 
-              }}
-              onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                if (x < rect.width / 2) {
-                  prevPhoto();
-                } else {
-                  nextPhoto();
-                }
-              }}
-            >
-              {/* Photo Navigation Dots */}
-              {currentMatch.photos && currentMatch.photos.length > 1 && (
-                <div className="absolute top-4 left-0 right-0 flex justify-center gap-1 px-4">
-                  {currentMatch.photos.map((_, idx) => (
-                    <div
-                      key={idx}
-                      className={`h-1 flex-1 rounded-full transition-all ${
-                        idx === currentPhotoIndex ? 'bg-white' : 'bg-white/30'
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto pb-24">
+        <div className="max-w-4xl mx-auto px-6 py-6">
+          {matches.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="text-6xl mb-6">✨</div>
+              <h3 className="text-2xl font-light text-white mb-3">No matches yet</h3>
+              <p className="text-white/40">Check back later for more cosmic connections</p>
             </div>
+          ) : (
+            <div className="space-y-6">
+              {matches.map((match) => {
+                const age = calculateAge(match.birth_date);
+                const compatibility = match.compatibility_score || Math.floor(Math.random() * 30) + 70;
+                
+                return (
+                  <div
+                    key={match.id}
+                    onClick={() => handleProfileClick(match)}
+                    className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
+                  >
+                    {/* Profile Photo */}
+                    <div
+                      className="w-24 h-24 rounded-2xl bg-cover bg-center flex-shrink-0"
+                      style={{
+                        backgroundImage: `url(${match.photos?.[0] || 'https://via.placeholder.com/200'})`
+                      }}
+                    />
 
-            {/* Info Section */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <div className="flex items-end justify-between mb-3">
-                <div>
-                  <h2 className="text-4xl font-bold mb-1">
-                    {currentMatch.first_name}, {age}
-                  </h2>
-                  <div className="flex items-center gap-2 text-white/90 mb-2">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium">{currentMatch.zodiac_sign}</span>
-                    <span className="text-white/60">•</span>
-                    <span>{ELEMENT_MAP[currentMatch.zodiac_sign]} Sign</span>
-                  </div>
-                </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowDetails(!showDetails);
-                  }}
-                  className="bg-white/20 backdrop-blur-md rounded-full p-3 hover:bg-white/30 transition-colors"
-                >
-                  <Info className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Compatibility Badge */}
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/30 to-purple-500/30 backdrop-blur-md px-4 py-2 rounded-full mb-3">
-                <Zap className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span className="font-semibold">{compatibility}% Compatible</span>
-              </div>
-
-              {/* Quick Info */}
-              {!showDetails && (
-                <div className="space-y-2">
-                  {currentMatch.current_location && (
-                    <div className="flex items-center gap-2 text-white/80">
-                      <MapPin className="w-4 h-4" />
-                      <span className="text-sm">{currentMatch.current_location.city}</span>
-                    </div>
-                  )}
-                  {currentMatch.industry && (
-                    <div className="flex items-center gap-2 text-white/80">
-                      <Briefcase className="w-4 h-4" />
-                      <span className="text-sm">{currentMatch.industry}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Detailed Info */}
-              {showDetails && (
-                <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 mt-3 space-y-3 max-h-64 overflow-y-auto">
-                  <div>
-                    <h4 className="font-semibold text-sm text-white/60 mb-1">About</h4>
-                    <p className="text-sm">{currentMatch.bio || 'No bio yet'}</p>
-                  </div>
-                  {currentMatch.interests && currentMatch.interests.length > 0 && (
-                    <div>
-                      <h4 className="font-semibold text-sm text-white/60 mb-2">Interests</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {currentMatch.interests.map((interest, idx) => (
-                          <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-xs">
-                            {interest}
-                          </span>
-                        ))}
+                    {/* Profile Info */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-2xl font-light text-white mb-1">
+                        {match.first_name} {match.last_name || 'Owens'}
+                      </h3>
+                      <div className="flex items-center gap-3 text-white/60 text-sm">
+                        <span>{compatibility}% Vibe Score</span>
                       </div>
                     </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center justify-center gap-6 mt-6">
-            <button
-              onClick={handlePass}
-              className="bg-white/10 backdrop-blur-md rounded-full p-5 hover:bg-white/20 transition-all hover:scale-110 border border-white/20"
-            >
-              <X className="w-8 h-8 text-red-400" />
-            </button>
-            <button
-              onClick={handleLike}
-              className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-6 hover:scale-110 transition-all shadow-xl"
-            >
-              <Heart className="w-10 h-10 text-white fill-white" />
-            </button>
-          </div>
+                    {/* Arrow Icon */}
+                    <div className="text-white/40 group-hover:text-white/60 transition-colors">
+                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
