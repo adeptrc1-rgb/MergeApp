@@ -358,8 +358,8 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content - Card */}
-      <div className="flex-1 flex flex-col items-center justify-center p-4 pb-40">
-        <div className="w-full max-w-sm">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 pb-24">
+        <div className="w-full max-w-sm relative">
           <div 
             ref={cardRef}
             onMouseDown={handleDragStart}
