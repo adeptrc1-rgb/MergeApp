@@ -20,25 +20,26 @@ export default function Profile({ user, logout }) {
   const age = calculateAge(user.birth_date);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       {/* Header */}
-      <div className="bg-black/30 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="text-2xl font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-            A Sign
+      <div className="border-b border-white/10 bg-black">
+        <div className="max-w-4xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-3xl font-light text-white">A Sign</h1>
+            <button
+              onClick={() => navigate('/settings')}
+              className="text-white/60 hover:text-white transition-colors"
+            >
+              <Settings className="w-6 h-6" />
+            </button>
           </div>
-          <button
-            onClick={() => navigate('/settings')}
-            className="text-white/80 hover:text-white transition-colors"
-          >
-            <Settings className="w-6 h-6" />
-          </button>
+          <h2 className="text-4xl font-light text-white">Profile</h2>
         </div>
       </div>
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto pb-24">
-        <div className="max-w-2xl mx-auto p-4">
+        <div className="max-w-4xl mx-auto px-6 py-6">
           {/* Profile Header */}
           <div className="bg-black/30 backdrop-blur-md rounded-3xl p-6 border border-white/10 mb-4">
             <div className="flex items-start gap-4">
