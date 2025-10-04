@@ -415,7 +415,7 @@ async def get_astrology_compatibility(sign1: str, sign2: str) -> float:
         numbers = re.findall(r'\d+', response)
         if numbers:
             return float(numbers[0])
-    except:
+    except Exception:
         pass
     
     # Fallback to elemental compatibility
