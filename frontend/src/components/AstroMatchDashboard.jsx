@@ -53,6 +53,7 @@ export default function AstroMatchDashboard({ user, logout }) {
   const [dragStart, setDragStart] = useState(null);
   const [dragOffset, setDragOffset] = useState(0);
   const [dailyHoroscope, setDailyHoroscope] = useState(null);
+  const [swipeHistory, setSwipeHistory] = useState([]);
 
   useEffect(() => {
     loadMatches();
