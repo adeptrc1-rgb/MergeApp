@@ -580,6 +580,52 @@ async def create_session(response: Response, x_session_id: str = Header(..., ali
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+@api_router.post("/auth/test-login")
+async def test_login(response: Response, email: str = "testuser@asign.com"):
+    """Test login endpoint - creates session for test user"""
+    try:
+        # Find the test user
+        user = await db.users.find_one({"email": email})
+        if not user:
+            raise HTTPException(status_code=404, detail="Test user not found")
+        
+        # Create session token
+        session_token = secrets.token_urlsafe(32)
+        expires_at = datetime.now(timezone.utc) + timedelta(days=7)
+        
+        # Delete old sessions for this user
+        await db.sessions.delete_many({"user_id": user["id"]})
+        
+        # Create new session
+        session = {
+            "session_token": session_token,
+            "user_id": user["id"],
+            "created_at": datetime.now(timezone.utc),
+            "expires_at": expires_at
+        }
+        await db.sessions.insert_one(session)
+        
+        # Set session cookie
+        response.set_cookie(
+            key="session_token",
+            value=session_token,
+            max_age=7 * 24 * 60 * 60,
+            httponly=True,
+            secure=True,
+            samesite="lax",
+            path="/"
+        )
+        
+        return {
+            "success": True,
+            "user_id": user["id"],
+            "needs_onboarding": user.get("needs_onboarding", False)
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @api_router.get("/auth/me")
 async def get_me(user: User = Depends(get_current_user)):
     """Get current user info"""
