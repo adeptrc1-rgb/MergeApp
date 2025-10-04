@@ -280,13 +280,52 @@ export default function EnhancedOnboarding() {
         return (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center mb-8">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-rose-400 via-pink-400 to-orange-400 rounded-full flex items-center justify-center shadow-2xl shadow-pink-500/50">
+                <Sparkles className="w-10 h-10 text-white" />
+              </div>
+              <h2 className="text-4xl font-bold text-white mb-3 drop-shadow-lg">
+                Welcome to A Sign ✨
+              </h2>
+              <p className="text-white/90 text-lg">Let's start with your name</p>
+            </div>
+
+            <div className="space-y-5">
+              <div className="group">
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">First Name *</Label>
+                <Input
+                  type="text"
+                  placeholder="Enter your first name"
+                  value={formData.first_name}
+                  onChange={(e) => setFormData({...formData, first_name: e.target.value})}
+                  className="h-14 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-xl transition-all text-lg"
+                />
+              </div>
+
+              <div className="group">
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Last Name (Optional)</Label>
+                <Input
+                  type="text"
+                  placeholder="Enter your last name"
+                  value={formData.last_name}
+                  onChange={(e) => setFormData({...formData, last_name: e.target.value})}
+                  className="h-14 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-xl transition-all text-lg"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 2:
+        return (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center mb-8">
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <User className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">
                 Your Cosmic Profile
               </h2>
-              <p className="text-gray-600">Let's start with your astrological details</p>
+              <p className="text-white/90">Let's start with your astrological details</p>
             </div>
 
             <div className="space-y-5">
