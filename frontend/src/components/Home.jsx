@@ -163,7 +163,7 @@ export default function Home({ user }) {
     
     // Check if user has direct messages available
     if ((user.direct_messages || 0) <= 0) {
-      alert('No direct messages remaining!');
+      alert('No direct messages remaining! Spin the cosmic wheel or match with someone to get more.');
       return;
     }
     
@@ -172,9 +172,21 @@ export default function Home({ user }) {
       createFloatingSign(likeButtonRef.current);
     }
     
-    // Open chat or create match
-    alert(`Opening DM with ${currentMatch.first_name}...`);
-    // TODO: Implement direct message functionality
+    try {
+      // Create a direct message match (bypasses mutual like requirement)
+      const response = await axios.post(`${API}/users/direct-message/${currentMatch.id}`);
+      
+      if (response.data.success) {
+        // Decrement DM count
+        await axios.post(`${API}/users/use-direct-message`);
+        
+        // Navigate to chat
+        navigate(`/chat/${response.data.match_id}`);
+      }
+    } catch (error) {
+      console.error('Error sending direct message:', error);
+      alert('Failed to send direct message. Please try again.');
+    }
   };
 
   const handleUndo = async () => {
