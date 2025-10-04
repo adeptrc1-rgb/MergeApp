@@ -68,6 +68,25 @@ function LandingPage() {
     window.location.href = `https://auth.emergentagent.com/?redirect=${redirectUrl}`;
   };
 
+  const handleTestLogin = async () => {
+    setLoading(true);
+    try {
+      // Login with test credentials
+      const response = await axios.post(`${API}/auth/test-login`, {
+        email: 'testuser@asign.com'
+      });
+      
+      if (response.data.success) {
+        // Reload to trigger auth check
+        window.location.href = '/dashboard';
+      }
+    } catch (error) {
+      console.error('Test login error:', error);
+      alert('Test login failed. Please try again.');
+    }
+    setLoading(false);
+  };
+
   const handlePhoneSubmit = async () => {
     if (!phoneNumber) return;
     setLoading(true);
