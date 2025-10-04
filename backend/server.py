@@ -125,6 +125,12 @@ class User(BaseModel):
     age_range_max: int = 50
     max_distance_km: int = 50
     
+    # Astrology & Premium Features
+    angel_number: Optional[str] = None  # e.g., "111", "222", "333"
+    profile_boosts_remaining: int = 4  # Free boosts on signup
+    super_likes_remaining: int = 4  # Free super likes on signup
+    direct_messages_remaining: int = 4  # Free direct messages on signup
+    
     # System fields
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     is_active: bool = True
