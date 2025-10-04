@@ -252,13 +252,13 @@ function BottomNav({ currentTab, navigate }) {
     <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 safe-area-inset-bottom">
       <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-around">
         <button
-          onClick={() => navigate('/discover')}
+          onClick={() => navigate('/home')}
           className={`flex flex-col items-center gap-2 transition-colors ${
-            currentTab === 'discover' ? 'text-white' : 'text-white/40 hover:text-white/60'
+            currentTab === 'home' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Sparkles className="w-6 h-6" />
-          <span className="text-xs">Discover</span>
+          <Home className="w-6 h-6" />
+          <span className="text-xs">Home</span>
         </button>
         <button
           onClick={() => navigate('/connections')}
@@ -275,7 +275,7 @@ function BottomNav({ currentTab, navigate }) {
             currentTab === 'profile' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Home className="w-6 h-6" />
+          <Sparkles className="w-6 h-6" />
           <span className="text-xs">Profile</span>
         </button>
       </div>
