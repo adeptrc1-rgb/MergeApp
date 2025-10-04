@@ -633,7 +633,9 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
     
     # Profile photos
     if profile_data.profile_photos:
-        update_data["profile_photos"] = profile_data.profile_photos
+        # Store as dict in MongoDB
+        photos = ProfilePhotos(**profile_data.profile_photos)
+        update_data["profile_photos"] = photos.dict()
     
     # Enhanced profile fields
     if profile_data.gender_identity:
