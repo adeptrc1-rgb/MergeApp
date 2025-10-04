@@ -846,7 +846,7 @@ async def swipe_user(swipe_data: dict, user: User = Depends(get_current_user)):
 
 @api_router.get("/matches")
 async def get_matches(user: User = Depends(get_current_user)):
-    """Get user's matches with penalty tracking"""
+    """Get user's matches with responsiveness tracking"""
     if not user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
@@ -860,13 +860,15 @@ async def get_matches(user: User = Depends(get_current_user)):
         partner = await db.users.find_one({"id": partner_id})
         match["partner"] = partner
         
-        # Check for expired matches and apply penalties
+        # Check for expired matches and apply responsiveness penalties
         if datetime.now(timezone.utc) > match["expires_at"] and match["status"] == "matched":
+            compatibility_level = "high" if match["compatibility_score"] >= 80 else "medium" if match["compatibility_score"] >= 50 else "low"
+            
             # Apply penalty to users who haven't responded
             if match["user1_id"] == user.id and not match.get("user1_response_time"):
-                await apply_penalty(user.id, "no_response", match["id"])
+                await update_responsiveness_score(user.id, "expired_match", match["id"], compatibility_level)
             elif match["user2_id"] == user.id and not match.get("user2_response_time"):
-                await apply_penalty(user.id, "no_response", match["id"])
+                await update_responsiveness_score(user.id, "expired_match", match["id"], compatibility_level)
                 
             # Update match status
             await db.matches.update_one(
