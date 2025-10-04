@@ -58,13 +58,28 @@ export default function Home({ user }) {
     if (!currentMatch) return;
     setSwipeDirection('right');
     
+    // Create starburst and sparkle trail animation
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = rect.right - 50;
+      const y = rect.top + rect.height / 2;
+      
+      createStarburstEffect(x, y);
+      createSparkleTrail(x, y);
+      createStardustTrail(x, y, 10);
+    }
+    
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'like', userId: currentMatch.id }]);
     
     try {
       await axios.post(`${API}/users/like/${currentMatch.id}`);
       const matchResponse = await axios.get(`${API}/users/check-match/${currentMatch.id}`);
       if (matchResponse.data.is_match) {
-        alert(`🎉 It's a match! You and ${currentMatch.first_name} both liked each other!`);
+        // Create match animation
+        createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
+        setTimeout(() => {
+          alert(`🎉 It's a match! You and ${currentMatch.first_name} both liked each other!`);
+        }, 500);
       }
     } catch (error) {
       console.error('Error liking:', error);
