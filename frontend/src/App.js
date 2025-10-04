@@ -1199,6 +1199,11 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
+function EnhancedDashboardWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <EnhancedDashboard user={user} logout={logout} />;
+}
+
 // Main App Component
 function App() {
   return (
