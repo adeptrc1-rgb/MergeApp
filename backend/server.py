@@ -12,6 +12,7 @@ from datetime import datetime, timezone, date, timedelta
 import requests
 import asyncio
 import math
+import secrets
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 from enum import Enum
 
