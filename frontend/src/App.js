@@ -1256,7 +1256,7 @@ function ProtectedRoute({ children }) {
 
 function EnhancedDashboardWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <ModernDashboard user={user} logout={logout} />;
+  return <AstroMatchDashboard user={user} logout={logout} />;
 }
 
 // Main App Component
