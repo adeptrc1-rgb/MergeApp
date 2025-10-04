@@ -168,11 +168,12 @@ export default function EnhancedOnboarding() {
       lifestyle_photo: null
     },
     
-    // Preferences
-    age_range_min: 18,
-    age_range_max: 35,
-    max_distance_km: 50,
-    max_distance_miles: 30
+    // Preferences (defaults - user can adjust in app settings later)
+    age_range_min: 21,
+    age_range_max: 40,
+    max_distance_km: 80,  // Default 50 miles
+    max_distance_miles: 50,
+    current_location: null  // Will be set by geolocation or user can update later
   });
 
   const [locationSearch, setLocationSearch] = useState('');
