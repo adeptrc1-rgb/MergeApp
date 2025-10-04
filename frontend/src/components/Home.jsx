@@ -233,6 +233,9 @@ export default function Home({ user }) {
   const handleDragMove = (e) => {
     if (!isDragging) return;
     
+    // Prevent page scrolling during drag
+    e.preventDefault();
+    
     const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
     const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
     
