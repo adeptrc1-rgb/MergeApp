@@ -1324,6 +1324,14 @@ function App() {
               } 
             />
             <Route 
+              path="/home" 
+              element={
+                <ProtectedRoute>
+                  <HomeWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path="/connections" 
               element={
                 <ProtectedRoute>
