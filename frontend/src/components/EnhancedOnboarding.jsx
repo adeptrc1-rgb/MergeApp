@@ -330,15 +330,15 @@ export default function EnhancedOnboarding() {
 
             <div className="space-y-5">
               <div className="group">
-                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Birth Date *</Label>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Birth Date *</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button 
                       variant="outline" 
-                      className="w-full justify-start text-left font-normal h-12 border-2 border-gray-200 hover:border-violet-400 transition-all rounded-xl"
+                      className="w-full justify-start text-left font-normal h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md hover:border-white hover:bg-white/30 transition-all rounded-xl text-white"
                     >
-                      <CalendarIcon className="mr-3 h-5 w-5 text-violet-500" />
-                      <span className={formData.birth_date ? "text-gray-900" : "text-gray-400"}>
+                      <CalendarIcon className="mr-3 h-5 w-5 text-white" />
+                      <span className={formData.birth_date ? "text-white" : "text-white/60"}>
                         {formData.birth_date ? format(formData.birth_date, 'PPP') : "Select your birth date"}
                       </span>
                     </Button>
@@ -355,25 +355,25 @@ export default function EnhancedOnboarding() {
               </div>
 
               <div className="group">
-                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Birth Time (Optional)</Label>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Birth Time (Optional)</Label>
                 <Input
                   type="time"
                   value={formData.birth_time}
                   onChange={(e) => setFormData({...formData, birth_time: e.target.value})}
-                  className="h-12 border-2 border-gray-200 focus:border-violet-400 rounded-xl transition-all"
+                  className="h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white focus:border-white focus:bg-white/30 rounded-xl transition-all"
                 />
-                <p className="text-xs text-gray-500 mt-1.5 ml-1">For accurate rising sign calculation</p>
+                <p className="text-xs text-white/80 mt-1.5 ml-1 drop-shadow">For accurate rising sign calculation</p>
               </div>
 
               <div className="group">
-                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Birth Location</Label>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Birth Location</Label>
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-violet-500" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white" />
                   <Input
                     placeholder="City, Country"
                     value={locationSearch}
                     onChange={(e) => setLocationSearch(e.target.value)}
-                    className="h-12 pl-11 border-2 border-gray-200 focus:border-violet-400 rounded-xl transition-all"
+                    className="h-12 pl-11 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-xl transition-all"
                   />
                 </div>
                 {locationSearch && (
@@ -395,7 +395,7 @@ export default function EnhancedOnboarding() {
                 )}
                 {formData.birth_location && (
                   <div className="mt-2">
-                    <Badge className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-3 py-1.5 rounded-lg">
+                    <Badge className="bg-white/30 backdrop-blur-md text-white border-2 border-white/40 px-3 py-1.5 rounded-lg">
                       📍 {formData.birth_location.city}, {formData.birth_location.country}
                     </Badge>
                   </div>
@@ -405,7 +405,7 @@ export default function EnhancedOnboarding() {
           </div>
         );
 
-      case 2:
+      case 3:
         return (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center mb-8">
