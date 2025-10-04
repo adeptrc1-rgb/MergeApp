@@ -358,16 +358,30 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content - Card */}
-      <div className="flex-1 flex items-center justify-center p-6 pb-32">
-        <div className="w-full max-w-lg">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 pb-40">
+        <div className="w-full max-w-sm">
           <div 
             ref={cardRef}
-            className={`relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 transition-transform duration-300 ${
-              swipeDirection === 'right' ? 'translate-x-[150%] rotate-12' : 
-              swipeDirection === 'left' ? '-translate-x-[150%] -rotate-12' :
-              swipeDirection === 'up' ? '-translate-y-[150%] scale-110' : ''
+            onMouseDown={handleDragStart}
+            onMouseMove={handleDragMove}
+            onMouseUp={handleDragEnd}
+            onMouseLeave={handleDragEnd}
+            onTouchStart={handleDragStart}
+            onTouchMove={handleDragMove}
+            onTouchEnd={handleDragEnd}
+            className={`relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing ${
+              swipeDirection === 'right' ? 'animate-swipe-right' : 
+              swipeDirection === 'left' ? 'animate-swipe-left' :
+              swipeDirection === 'up' ? 'animate-swipe-up' : ''
             }`}
-            style={{ height: '70vh', maxHeight: '650px' }}
+            style={{ 
+              height: '65vh',
+              maxHeight: '580px',
+              transform: isDragging 
+                ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${getRotation()}deg)` 
+                : 'translate(0, 0) rotate(0)',
+              transition: isDragging ? 'none' : 'transform 0.3s ease-out'
+            }}
           >
             {/* Photo */}
             <div 
