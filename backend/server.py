@@ -703,12 +703,18 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
         raise HTTPException(status_code=400, detail="Invalid date format. Use YYYY-MM-DD")
     
     zodiac_sign = get_zodiac_sign(birth_date)
+    angel_number = calculate_angel_number(birth_date)
     
     update_data = {
         "birth_date": birth_date.isoformat(),
         "zodiac_sign": zodiac_sign,
+        "angel_number": angel_number,
         "needs_onboarding": False,
-        "profile_completed": True
+        "profile_completed": True,
+        # Initialize free features on signup
+        "profile_boosts_remaining": 4,
+        "super_likes_remaining": 4,
+        "direct_messages_remaining": 4
     }
     
     # Name fields
