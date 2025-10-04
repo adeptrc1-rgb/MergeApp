@@ -412,10 +412,10 @@ export default function EnhancedOnboarding() {
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <Heart className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">
                 Identity & Dating
               </h2>
-              <p className="text-gray-600">Help us find your perfect match</p>
+              <p className="text-white/90">Help us find your perfect match</p>
             </div>
 
             <div className="space-y-5">
