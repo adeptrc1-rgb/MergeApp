@@ -558,6 +558,9 @@ async def create_session(response: Response, x_session_id: str = Header(..., ali
             "needs_onboarding": existing_user is None or existing_user.get("needs_onboarding", True)
         }
         
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
