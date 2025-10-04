@@ -16,6 +16,7 @@ import EnhancedOnboarding from './components/EnhancedOnboarding';
 import InteractiveOnboarding from './components/InteractiveOnboarding';
 import EnhancedDashboard from './components/EnhancedDashboard';
 import ModernDashboard from './components/ModernDashboard';
+import AstroMatchDashboard from './components/AstroMatchDashboard';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
