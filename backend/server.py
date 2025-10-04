@@ -92,6 +92,8 @@ class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     email: str
     name: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
     picture: Optional[str] = None
     birth_date: date
     birth_time: Optional[str] = None
