@@ -716,16 +716,23 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
     zodiac_sign = get_zodiac_sign(birth_date)
     angel_number = calculate_angel_number(birth_date)
     
+    # Set 24-hour expiry for initial free rewards
+    expiry_time = datetime.now(timezone.utc) + timedelta(hours=24)
+    
     update_data = {
         "birth_date": birth_date.isoformat(),
         "zodiac_sign": zodiac_sign,
         "angel_number": angel_number,
         "needs_onboarding": False,
         "profile_completed": True,
-        # Initialize free features on signup
-        "profile_boosts_remaining": 4,
-        "super_likes_remaining": 4,
-        "direct_messages_remaining": 4
+        # Initialize free features on signup with 24hr expiry
+        "profile_boosts": 4,
+        "super_likes": 4,
+        "direct_messages": 4,
+        "boosts_expiry": expiry_time,
+        "super_likes_expiry": expiry_time,
+        "direct_messages_expiry": expiry_time,
+        "daily_spin_available": True
     }
     
     # Name fields
