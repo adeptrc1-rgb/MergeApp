@@ -283,6 +283,13 @@ export default function Profile({ user, logout }) {
 
       {/* Bottom Navigation */}
       <BottomNav currentTab="profile" navigate={navigate} />
+
+      {/* Cosmic Wheel Modal */}
+      <CosmicWheel 
+        isOpen={showCosmicWheel} 
+        onClose={() => setShowCosmicWheel(false)}
+        onRewardClaimed={handleRewardClaimed}
+      />
     </div>
   );
 }
