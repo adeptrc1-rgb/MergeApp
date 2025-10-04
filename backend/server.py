@@ -467,6 +467,26 @@ async def update_responsiveness_score(user_id: str, action_type: str, match_id: 
     
     # Record behavior
     behavior = ResponseBehavior(
+        user_id=user_id,
+        action_type=action_type,
+        match_id=match_id,
+        response_time_hours=response_time_hours,
+        compatibility_level=compatibility_level,
+        penalty_applied=penalty,
+        reward_applied=reward
+    )
+    
+    await db.response_behaviors.insert_one(behavior.dict())
+    
+    # Update user's responsiveness score
+    user = await db.users.find_one({"id": user_id})
+    if user:
+        current_score = user.get("responsiveness_score", 80)
+        new_score = max(0, min(100, current_score + reward - penalty))
+        await db.users.update_one(
+            {"id": user_id},
+            {"$set": {"responsiveness_score": new_score}}
+        )
 
 
 # ============================================================================
