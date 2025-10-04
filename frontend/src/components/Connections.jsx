@@ -261,6 +261,15 @@ function BottomNav({ currentTab, navigate }) {
           <span className="text-xs">Home</span>
         </button>
         <button
+          onClick={() => navigate('/messages')}
+          className={`flex flex-col items-center gap-2 transition-colors ${
+            currentTab === 'messages' ? 'text-white' : 'text-white/40 hover:text-white/60'
+          }`}
+        >
+          <MessageCircle className="w-6 h-6" />
+          <span className="text-xs">Messages</span>
+        </button>
+        <button
           onClick={() => navigate('/connections')}
           className={`flex flex-col items-center gap-2 transition-colors ${
             currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'
