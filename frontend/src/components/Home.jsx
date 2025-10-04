@@ -305,7 +305,7 @@ export default function Home({ user }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="h-screen bg-black flex items-center justify-center overflow-hidden">
         <div className="text-center">
           <Sparkles className="w-12 h-12 text-purple-400 animate-spin mx-auto mb-4" />
           <p className="text-white/60 text-lg">Finding your cosmic matches...</p>
@@ -316,14 +316,14 @@ export default function Home({ user }) {
 
   if (!currentMatch) {
     return (
-      <div className="min-h-screen bg-black flex flex-col">
-        <div className="border-b border-white/10 bg-black">
+      <div className="h-screen bg-black flex flex-col overflow-hidden">
+        <div className="border-b border-white/10 bg-black flex-shrink-0">
           <div className="max-w-4xl mx-auto px-6 py-4">
             <h1 className="text-3xl font-light text-white">A Sign</h1>
           </div>
         </div>
 
-        <div className="flex-1 flex items-center justify-center p-4">
+        <div className="flex-1 flex items-center justify-center p-4 overflow-hidden">
           <div className="text-center max-w-md">
             <div className="text-6xl mb-6">✨</div>
             <h3 className="text-2xl font-light text-white mb-3">No more profiles</h3>
