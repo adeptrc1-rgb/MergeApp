@@ -483,7 +483,7 @@ export default function EnhancedOnboarding() {
         return (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-rose-400 via-pink-400 to-orange-400 rounded-2xl flex items-center justify-center shadow-lg">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">
@@ -496,16 +496,16 @@ export default function EnhancedOnboarding() {
               {LIFESTYLE_SLIDERS.map((slider) => (
                 <div key={slider.key} className="group">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${slider.gradient} flex items-center justify-center text-xl shadow-md`}>
+                    <div className="w-10 h-10 rounded-xl bg-white/30 backdrop-blur-md border-2 border-white/40 flex items-center justify-center text-xl shadow-md">
                       {slider.icon}
                     </div>
                     <div className="flex-1">
-                      <div className="font-semibold text-gray-900">{slider.label}</div>
-                      <div className="text-xs text-gray-500">{slider.description}</div>
+                      <div className="font-semibold text-white drop-shadow">{slider.label}</div>
+                      <div className="text-xs text-white/80 drop-shadow">{slider.description}</div>
                     </div>
                   </div>
                   
-                  <div className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border-2 border-gray-100">
+                  <div className="bg-white/20 backdrop-blur-md p-4 rounded-xl border-2 border-white/40">
                     <Slider
                       value={[formData.lifestyle_sliders[slider.key]]}
                       onValueChange={(value) => handleSliderChange(slider.key, value)}
@@ -515,11 +515,11 @@ export default function EnhancedOnboarding() {
                       className="mb-3"
                     />
                     <div className="flex justify-between text-xs">
-                      <span className="text-gray-500">{slider.leftLabel}</span>
-                      <span className={`font-bold bg-gradient-to-r ${slider.gradient} bg-clip-text text-transparent`}>
+                      <span className="text-white/80 drop-shadow">{slider.leftLabel}</span>
+                      <span className="font-bold text-white drop-shadow text-lg">
                         {formData.lifestyle_sliders[slider.key]}
                       </span>
-                      <span className="text-gray-500">{slider.rightLabel}</span>
+                      <span className="text-white/80 drop-shadow">{slider.rightLabel}</span>
                     </div>
                   </div>
                 </div>
