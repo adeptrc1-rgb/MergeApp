@@ -532,8 +532,8 @@ export default function EnhancedOnboarding() {
         return (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <Briefcase className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-rose-400 via-pink-400 to-orange-400 rounded-2xl flex items-center justify-center shadow-lg">
+                <Heart className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">
                 About You
@@ -543,13 +543,13 @@ export default function EnhancedOnboarding() {
 
             <div className="space-y-5">
               <div>
-                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Industry</Label>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Industry</Label>
                 <Select 
                   value={formData.industry} 
                   onValueChange={(value) => setFormData({...formData, industry: value})}
                 >
-                  <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-amber-400 rounded-xl">
-                    <SelectValue placeholder="Select your industry" />
+                  <SelectTrigger className="h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white focus:border-white rounded-xl">
+                    <SelectValue placeholder="Select your industry" className="text-white/60" />
                   </SelectTrigger>
                   <SelectContent className="rounded-xl">
                     {INDUSTRIES.map((industry) => (
@@ -562,7 +562,7 @@ export default function EnhancedOnboarding() {
               </div>
 
               <div>
-                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Relationship Goals</Label>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Relationship Goals</Label>
                 <div className="grid grid-cols-2 gap-3">
                   {RELATIONSHIP_GOALS.map((goal) => (
                     <button
@@ -570,37 +570,37 @@ export default function EnhancedOnboarding() {
                       onClick={() => setFormData({...formData, relationship_goals: goal.value})}
                       className={`p-4 rounded-xl border-2 transition-all duration-200 ${
                         formData.relationship_goals === goal.value
-                          ? 'border-amber-500 bg-amber-50 shadow-md'
-                          : 'border-gray-200 hover:border-amber-300 hover:bg-amber-50/50'
+                          ? 'border-white bg-white/30 backdrop-blur-md shadow-lg'
+                          : 'border-white/40 bg-white/10 backdrop-blur-md hover:border-white hover:bg-white/20'
                       }`}
                     >
                       <div className="text-2xl mb-1">{goal.icon}</div>
-                      <div className="text-sm font-medium text-gray-900">{goal.label}</div>
+                      <div className="text-sm font-medium text-white drop-shadow">{goal.label}</div>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Bio</Label>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Bio</Label>
                 <Textarea
                   placeholder="Tell us about yourself, your passions, what you're looking for..."
                   value={formData.bio}
                   onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                  className="min-h-32 border-2 border-gray-200 focus:border-amber-400 rounded-xl resize-none"
+                  className="min-h-32 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white rounded-xl resize-none"
                 />
-                <p className="text-xs text-gray-500 mt-1.5 ml-1">{formData.bio.length}/500 characters</p>
+                <p className="text-xs text-white/80 mt-1.5 ml-1 drop-shadow">{formData.bio.length}/500 characters</p>
               </div>
 
               <div>
-                <Label className="text-sm font-semibold text-gray-700 mb-2 block">Interests & Hobbies</Label>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Interests & Hobbies</Label>
                 <Input
                   placeholder="e.g., Yoga, Photography, Cooking, Travel"
                   value={formData.interests}
                   onChange={(e) => setFormData({...formData, interests: e.target.value})}
-                  className="h-12 border-2 border-gray-200 focus:border-amber-400 rounded-xl"
+                  className="h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white rounded-xl"
                 />
-                <p className="text-xs text-gray-500 mt-1.5 ml-1">Separate with commas</p>
+                <p className="text-xs text-white/80 mt-1.5 ml-1 drop-shadow">Separate with commas</p>
               </div>
             </div>
           </div>
