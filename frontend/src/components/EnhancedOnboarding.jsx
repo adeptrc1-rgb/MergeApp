@@ -126,6 +126,10 @@ export default function EnhancedOnboarding() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
+    // Name (First screen)
+    first_name: '',
+    last_name: '',
+    
     // Basic Info
     birth_date: null,
     birth_time: '',
