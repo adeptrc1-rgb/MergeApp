@@ -96,14 +96,40 @@ export default function Connections({ user }) {
               <Sparkles className="w-6 h-6" />
             </button>
           </div>
-          <h2 className="text-4xl font-light text-white">Connections</h2>
+          <h2 className="text-4xl font-light text-white mb-6">Connections</h2>
+          
+          {/* Filter Tabs */}
+          <div className="flex gap-4">
+            <button
+              onClick={() => setActiveTab('matches')}
+              className={`px-6 py-2 rounded-full text-sm transition-all ${
+                activeTab === 'matches'
+                  ? 'bg-white text-black font-medium'
+                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
+              }`}
+            >
+              Matches
+            </button>
+            <button
+              onClick={() => setActiveTab('likes')}
+              className={`px-6 py-2 rounded-full text-sm transition-all ${
+                activeTab === 'likes'
+                  ? 'bg-white text-black font-medium'
+                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
+              }`}
+            >
+              Likes You
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto pb-24">
         <div className="max-w-4xl mx-auto px-6 py-6">
-          {matches.length === 0 ? (
+          {activeTab === 'matches' ? (
+            // Matches Tab
+            matches.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-6">✨</div>
               <h3 className="text-2xl font-light text-white mb-3">No connections yet</h3>
