@@ -307,6 +307,11 @@ class AstrologyDatingAPITester:
         self.test_swipe_without_auth()
         self.test_matches_without_auth()
         self.test_complete_profile_without_auth()
+        self.test_liked_me_without_auth()
+        
+        # Test login and new endpoints
+        self.test_test_login_endpoint()
+        self.test_liked_me_with_test_auth()
         
         # Business logic tests
         self.test_zodiac_calculation_logic()
