@@ -256,6 +256,8 @@ class AstrologyDatingAPITester:
         # Authentication tests (without valid session)
         self.test_auth_me_without_token()
         self.test_create_session_without_header()
+        self.test_create_session_with_invalid_session_id()
+        self.test_create_session_with_valid_session_id()
         
         # Protected endpoint tests (should all fail without auth)
         self.test_potential_matches_without_auth()
