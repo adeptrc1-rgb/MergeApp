@@ -479,7 +479,7 @@ function Onboarding() {
       
       await axios.post(`${API}/users/complete-profile`, profileData);
       setNeedsOnboarding(false);
-      navigate('/discover');
+      navigate('/home');
     } catch (error) {
       console.error('Profile completion error:', error);
     }
