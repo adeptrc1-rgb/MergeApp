@@ -85,6 +85,9 @@ export default function AstroMatchDashboard({ user, logout }) {
     if (!currentMatch) return;
     setSwipeDirection('right');
     
+    // Save to history
+    setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'like', userId: currentMatch.id }]);
+    
     try {
       await axios.post(`${API}/users/like/${currentMatch.id}`);
       // Check for mutual match
@@ -109,6 +112,9 @@ export default function AstroMatchDashboard({ user, logout }) {
     if (!currentMatch) return;
     setSwipeDirection('left');
 
+    // Save to history
+    setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'pass', userId: currentMatch.id }]);
+
     try {
       await axios.post(`${API}/users/pass/${currentMatch.id}`);
     } catch (error) {
@@ -121,6 +127,26 @@ export default function AstroMatchDashboard({ user, logout }) {
       setShowIcebreakers(false);
       setCurrentIndex(currentIndex + 1);
     }, 300);
+  };
+
+  const handleUndo = async () => {
+    if (swipeHistory.length === 0) return;
+    
+    const lastSwipe = swipeHistory[swipeHistory.length - 1];
+    
+    try {
+      // Delete the last swipe from backend
+      await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
+      
+      // Go back to previous card
+      setCurrentIndex(lastSwipe.index);
+      setSwipeHistory(swipeHistory.slice(0, -1));
+      setCurrentPhotoIndex(0);
+      setShowIcebreakers(false);
+      setShowDetails(false);
+    } catch (error) {
+      console.error('Error undoing:', error);
+    }
   };
 
   const handleDragStart = (e) => {
