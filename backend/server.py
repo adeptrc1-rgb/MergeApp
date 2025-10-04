@@ -99,19 +99,38 @@ class User(BaseModel):
     hometown: Optional[Location] = None
     current_location: Optional[Location] = None
     zodiac_sign: str
-    bio: Optional[str] = None
+    
+    # Enhanced Profile Fields
+    gender_identity: Optional[GenderIdentity] = None
+    gender_self_describe: Optional[str] = None  # If self_describe is selected
+    open_to_dating: Optional[List[OpenToDating]] = []
+    orientation_visible: bool = True
+    
+    # Lifestyle & Values
+    lifestyle_sliders: Optional[LifestyleSliders] = None
+    
+    # Additional Profile Fields
+    industry: Optional[str] = None
     interests: Optional[List[str]] = []
+    relationship_goals: Optional[RelationshipGoal] = None
+    profile_photos: Optional[ProfilePhotos] = None
+    
+    bio: Optional[str] = None
+    
     # Preferences
     age_range_min: int = 18
     age_range_max: int = 50
-    max_distance_km: int = 50  # Default 50km radius
+    max_distance_km: int = 50
+    
+    # System fields
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     is_active: bool = True
     last_active: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    response_score: float = 100.0  # Starts at 100, decreases with penalties
+    response_score: float = 100.0  # Hidden responsiveness score
     total_matches: int = 0
     responded_matches: int = 0
-    avg_response_time: Optional[float] = None  # in hours
+    avg_response_time: Optional[float] = None
+    profile_completed: bool = False
 
 class UserCreate(BaseModel):
     birth_date: str
