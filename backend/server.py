@@ -948,7 +948,34 @@ async def swipe_user(swipe_data: dict, user: User = Depends(get_current_user)):
                         user.current_location.longitude,
                         swiped_user.current_location.latitude,
                         swiped_user.current_location.longitude
-
+                    )
+                    geographic_score = calculate_geographic_score(distance_km)
+                
+                match = Match(
+                    user1_id=user.id,
+                    user2_id=swiped_id,
+                    compatibility_score=compatibility["score"],
+                    compatibility_report=compatibility["report"],
+                    geographic_score=geographic_score,
+                    distance_km=distance_km,
+                    status="matched"
+                )
+                
+                await db.matches.insert_one(match.dict())
+                
+                # Update match counts
+                await db.users.update_one({"id": user.id}, {"$inc": {"total_matches": 1}})
+                await db.users.update_one({"id": swiped_id}, {"$inc": {"total_matches": 1}})
+                
+                return {
+                    "success": True, 
+                    "match": True, 
+                    "compatibility": compatibility,
+                    "geographic_score": geographic_score,
+                    "distance_km": distance_km
+                }
+    
+    return {"success": True, "match": False}
 
 @api_router.delete("/users/undo-swipe/{swiped_id}")
 async def undo_swipe(swiped_id: str, user: User = Depends(get_current_user)):
