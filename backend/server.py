@@ -615,7 +615,7 @@ async def test_login(request: TestLoginRequest, response: Response):
             key="session_token",
             value=session_token,
             max_age=7 * 24 * 60 * 60,
-            httponly=True,
+            httponly=False,  # Allow JavaScript access for debugging
             secure=True,
             samesite="none",
             path="/"
