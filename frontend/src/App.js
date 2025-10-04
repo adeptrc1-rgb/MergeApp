@@ -90,7 +90,7 @@ function LandingPage() {
       if (response.data.success) {
         // Small delay to ensure cookie is set, then redirect
         setTimeout(() => {
-          window.location.href = '/dashboard';
+          window.location.href = '/discover';
         }, 500);
       }
     } catch (error) {
