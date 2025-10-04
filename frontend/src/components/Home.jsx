@@ -221,6 +221,74 @@ export default function Home({ user }) {
     }
   };
 
+  // Touch/Drag handlers
+  const handleDragStart = (e) => {
+    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+    
+    setIsDragging(true);
+    setDragStart({ x: clientX, y: clientY });
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragging) return;
+    
+    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+    
+    const deltaX = clientX - dragStart.x;
+    const deltaY = clientY - dragStart.y;
+    
+    setDragOffset({ x: deltaX, y: deltaY });
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+    
+    setIsDragging(false);
+    
+    const swipeThreshold = 100;
+    const superLikeThreshold = -150; // Swipe up
+    
+    // Check for super like (swipe up)
+    if (dragOffset.y < superLikeThreshold && Math.abs(dragOffset.x) < 100) {
+      handleSuperLike();
+    }
+    // Check for like (swipe right)
+    else if (dragOffset.x > swipeThreshold) {
+      handleLike();
+    }
+    // Check for pass (swipe left)
+    else if (dragOffset.x < -swipeThreshold) {
+      handlePass();
+    }
+    
+    // Reset drag offset
+    setDragOffset({ x: 0, y: 0 });
+  };
+
+  const getRotation = () => {
+    return dragOffset.x / 20; // Convert horizontal drag to rotation
+  };
+
+  const getSwipeOpacity = () => {
+    if (Math.abs(dragOffset.x) < 50 && Math.abs(dragOffset.y) > -100) return 0;
+    return Math.min(Math.abs(dragOffset.x) / 100, 1);
+  };
+
+  const getSwipeLabel = () => {
+    if (dragOffset.y < -100 && Math.abs(dragOffset.x) < 100) {
+      return { text: 'SUPER LIKE', color: 'text-blue-500', show: true };
+    }
+    if (dragOffset.x > 50) {
+      return { text: 'LIKE', color: 'text-green-500', show: true };
+    }
+    if (dragOffset.x < -50) {
+      return { text: 'NOPE', color: 'text-red-500', show: true };
+    }
+    return { show: false };
+  };
+
   const calculateAge = (birthDate) => {
     const today = new Date();
     const birth = new Date(birthDate);
