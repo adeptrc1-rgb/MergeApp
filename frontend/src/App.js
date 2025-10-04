@@ -12,6 +12,8 @@ import { Badge } from './components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from './components/ui/avatar';
 import { CalendarIcon, Heart, X, Star, Sparkles, Moon, Sun } from 'lucide-react';
 import { format } from 'date-fns';
+import EnhancedOnboarding from './components/EnhancedOnboarding';
+import EnhancedDashboard from './components/EnhancedDashboard';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
