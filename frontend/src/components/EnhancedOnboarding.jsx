@@ -871,11 +871,15 @@ export default function EnhancedOnboarding() {
                 </Button>
               )}
               
-              {step < 5 ? (
+              {step < 6 ? (
                 <Button
                   onClick={() => setStep(step + 1)}
                   className="flex-1 h-12 bg-gradient-to-r from-rose-400 via-pink-500 to-orange-400 hover:from-rose-500 hover:via-pink-600 hover:to-orange-500 text-white rounded-xl font-semibold shadow-lg"
-                  disabled={(step === 1 && !formData.first_name) || (step === 2 && !formData.birth_date)}
+                  disabled={
+                    (step === 1 && !formData.first_name) || 
+                    (step === 2 && !formData.birth_date) ||
+                    (step === 6 && (!formData.profile_photos.face_photo || !formData.profile_photos.body_photo || !formData.profile_photos.lifestyle_photo))
+                  }
                 >
                   Continue
                   <ChevronRight className="w-5 h-5 ml-1" />
