@@ -1207,6 +1207,35 @@ async def check_mutual_match(swiped_id: str, user: User = Depends(get_current_us
         "swiped_id": swiped_id
     }
 
+@api_router.get("/users/liked-me")
+async def get_users_who_liked_me(user: User = Depends(get_current_user)):
+    """Get users who have liked the current user"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Find all users who liked me
+    likes = await db.swipes.find({
+        "swiped_id": user.id,
+        "liked": True
+    }).to_list(length=100)
+    
+    # Get user details for each like
+    liked_users = []
+    for like in likes:
+        # Check if I haven't swiped on them yet (they're still potential matches)
+        my_swipe = await db.swipes.find_one({
+            "swiper_id": user.id,
+            "swiped_id": like["swiper_id"]
+        })
+        
+        # Only show if I haven't swiped on them yet
+        if not my_swipe:
+            user_data = await db.users.find_one({"id": like["swiper_id"]})
+            if user_data:
+                liked_users.append(User(**user_data))
+    
+    return liked_users
+
 @api_router.get("/astrology/compatibility-insight")
 async def get_compatibility_insight(sign1: str, sign2: str):
     """Get compatibility insight between two zodiac signs"""
