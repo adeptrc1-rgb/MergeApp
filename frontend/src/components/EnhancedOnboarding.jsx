@@ -386,27 +386,21 @@ export default function EnhancedOnboarding() {
             <div className="space-y-5">
               <div className="group">
                 <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Birth Date *</Label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start text-left font-normal h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md hover:border-white hover:bg-white/30 transition-all rounded-xl text-white"
-                    >
-                      <CalendarIcon className="mr-3 h-5 w-5 text-white" />
-                      <span className={formData.birth_date ? "text-white" : "text-white/60"}>
-                        {formData.birth_date ? format(formData.birth_date, 'PPP') : "Select your birth date"}
-                      </span>
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 rounded-xl">
-                    <Calendar
-                      mode="single"
-                      selected={formData.birth_date}
-                      onSelect={(date) => setFormData({...formData, birth_date: date})}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
+                <Input
+                  type="date"
+                  value={formData.birth_date ? format(formData.birth_date, 'yyyy-MM-dd') : ''}
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      setFormData({...formData, birth_date: new Date(e.target.value)});
+                    }
+                  }}
+                  max={format(new Date(), 'yyyy-MM-dd')}
+                  className="h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white focus:border-white focus:bg-white/30 rounded-xl transition-all"
+                  style={{
+                    colorScheme: 'dark'
+                  }}
+                />
+                <p className="text-xs text-white/80 mt-1.5 ml-1 drop-shadow">MM/DD/YYYY</p>
               </div>
 
               <div className="group">
