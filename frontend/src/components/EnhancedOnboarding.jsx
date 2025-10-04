@@ -606,17 +606,17 @@ export default function EnhancedOnboarding() {
           </div>
         );
 
-      case 5:
+      case 6:
         return (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center mb-8">
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
                 <Target className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent mb-2">
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">
                 Match Preferences
               </h2>
-              <p className="text-gray-600">Who are you looking to meet?</p>
+              <p className="text-white/90">Who are you looking to meet?</p>
             </div>
 
             <div className="space-y-5">
