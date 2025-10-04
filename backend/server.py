@@ -678,68 +678,92 @@ async def update_preferences(preferences: dict, user: User = Depends(get_current
 
 @api_router.get("/users/potential-matches")
 async def get_potential_matches(user: User = Depends(get_current_user)):
-    """Get potential matches with age and distance filtering"""
+    """Get potential matches with enhanced filtering and ranking"""
     if not user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
     swiped_users = await db.swipes.find({"swiper_id": user.id}).to_list(length=None)
     swiped_ids = [s["swiped_id"] for s in swiped_users] + [user.id]
     
-    # Get users with good response scores
+    # Get users with good response scores and completed profiles
     potential_matches = await db.users.find({
         "id": {"$nin": swiped_ids},
         "is_active": True,
-        "needs_onboarding": {"$ne": True},
-        "response_score": {"$gte": 50}  # Only show users with decent response scores
-    }).limit(50).to_list(length=None)  # Get more initially for filtering
+        "profile_completed": True,
+        "response_score": {"$gte": 50}
+    }).limit(100).to_list(length=None)
     
     filtered_matches = []
     user_age = calculate_age(user.birth_date) if user.birth_date else 25
     
-    for match in potential_matches:
-        # Age filtering
-        if match.get("birth_date"):
-            match_age = calculate_age(datetime.fromisoformat(match["birth_date"]).date())
-            if match_age < user.age_range_min or match_age > user.age_range_max:
-                continue
-        
-        # Distance filtering
-        if user.current_location and match.get("current_location"):
-            distance = calculate_distance(
-                user.current_location.latitude,
-                user.current_location.longitude,
-                match["current_location"]["latitude"],
-                match["current_location"]["longitude"]
-            )
+    for match_data in potential_matches:
+        try:
+            match_user = User(**match_data)
             
-            # Filter by user's distance preference
-            if distance > user.max_distance_km:
+            # Gender compatibility check
+            if not check_gender_compatibility(user, match_user):
                 continue
+            
+            # Age filtering
+            if match_user.birth_date:
+                match_age = calculate_age(match_user.birth_date)
+                if match_age < user.age_range_min or match_age > user.age_range_max:
+                    continue
+                if user_age < match_user.age_range_min or user_age > match_user.age_range_max:
+                    continue
+            
+            # Distance filtering
+            distance_km = None
+            geographic_score = 50
+            if user.current_location and match_user.current_location:
+                distance_km = calculate_distance(
+                    user.current_location.latitude,
+                    user.current_location.longitude,
+                    match_user.current_location.latitude,
+                    match_user.current_location.longitude
+                )
                 
-            match["distance_km"] = distance
-            match["geographic_score"] = calculate_geographic_score(distance)
-        
-        # Also check if match wants to see user (mutual age filtering)
-        match_age_min = match.get("age_range_min", 18)
-        match_age_max = match.get("age_range_max", 50)
-        if user_age < match_age_min or user_age > match_age_max:
+                if distance_km > user.max_distance_km or distance_km > match_user.max_distance_km:
+                    continue
+                    
+                geographic_score = calculate_geographic_score(distance_km)
+            
+            # Calculate compatibility score
+            compatibility = await calculate_compatibility(user, match_user)
+            
+            # Create match profile for display
+            match_profile = {
+                "id": match_user.id,
+                "name": match_user.name,
+                "age": calculate_age(match_user.birth_date) if match_user.birth_date else None,
+                "zodiac_sign": match_user.zodiac_sign,
+                "bio": match_user.bio,
+                "interests": match_user.interests,
+                "industry": match_user.industry,
+                "relationship_goals": match_user.relationship_goals,
+                "distance_km": distance_km,
+                "compatibility_score": compatibility["score"],
+                "geographic_score": geographic_score,
+                "response_score": match_user.response_score,
+                "profile_photos": match_user.profile_photos,
+                # Calculate overall ranking score
+                "ranking_score": (
+                    compatibility["score"] * 0.5 +  # 50% compatibility
+                    geographic_score * 0.3 +        # 30% location
+                    match_user.response_score * 0.2  # 20% responsiveness
+                )
+            }
+            
+            filtered_matches.append(match_profile)
+            
+        except Exception as e:
+            print(f"Error processing match {match_data.get('id')}: {e}")
             continue
-        
-        # Also check match's distance preference
-        if match.get("current_location") and user.current_location:
-            match_max_distance = match.get("max_distance_km", 50)
-            if match.get("distance_km", 0) > match_max_distance:
-                continue
-        
-        filtered_matches.append(match)
     
-    # Sort by response score and geographic proximity
-    filtered_matches.sort(
-        key=lambda x: (x.get("geographic_score", 0) + x["response_score"]), 
-        reverse=True
-    )
+    # Sort by ranking score
+    filtered_matches.sort(key=lambda x: x["ranking_score"], reverse=True)
     
-    return filtered_matches[:10]
+    return filtered_matches[:20]
 
 @api_router.post("/users/swipe")
 async def swipe_user(swipe_data: dict, user: User = Depends(get_current_user)):
