@@ -41,11 +41,11 @@ export default function Profile({ user, logout }) {
       <div className="flex-1 overflow-y-auto pb-24">
         <div className="max-w-4xl mx-auto px-6 py-6">
           {/* Profile Header */}
-          <div className="bg-black/30 backdrop-blur-md rounded-3xl p-6 border border-white/10 mb-4">
-            <div className="flex items-start gap-4">
+          <div className="bg-white/5 rounded-2xl p-8 border border-white/10 mb-6">
+            <div className="flex items-start gap-6">
               {/* Profile Photo */}
               <div
-                className="w-24 h-24 rounded-2xl bg-cover bg-center border-2 border-pink-400/50"
+                className="w-32 h-32 rounded-2xl bg-cover bg-center flex-shrink-0"
                 style={{
                   backgroundImage: `url(${user.photos?.[0] || 'https://via.placeholder.com/200'})`
                 }}
@@ -53,19 +53,19 @@ export default function Profile({ user, logout }) {
 
               {/* User Info */}
               <div className="flex-1">
-                <h2 className="text-3xl font-bold text-white mb-2">
+                <h2 className="text-4xl font-light text-white mb-3">
                   {user.first_name}, {age}
                 </h2>
-                <div className="flex items-center gap-2 text-white/90 mb-3">
-                  <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  <span className="font-semibold text-lg">{user.zodiac_sign}</span>
+                <div className="flex items-center gap-3 text-white/60 mb-4">
+                  <Star className="w-5 h-5 text-purple-400" />
+                  <span className="text-lg">{user.zodiac_sign}</span>
                 </div>
 
                 {/* Angel Number Badge */}
                 {user.angel_number && (
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 backdrop-blur-md px-4 py-2 rounded-full">
-                    <Sparkles className="w-4 h-4 text-yellow-400" />
-                    <span className="text-white font-medium">Angel Number: {user.angel_number}</span>
+                  <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                    <Sparkles className="w-4 h-4 text-purple-400" />
+                    <span className="text-white/80 text-sm">Angel Number: {user.angel_number}</span>
                   </div>
                 )}
               </div>
