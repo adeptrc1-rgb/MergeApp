@@ -383,13 +383,29 @@ export default function Home({ user }) {
               transition: isDragging ? 'none' : 'transform 0.3s ease-out'
             }}
           >
+            {/* Swipe Overlay Labels */}
+            {isDragging && getSwipeLabel().show && (
+              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                <div 
+                  className={`text-6xl font-bold ${getSwipeLabel().color} border-4 border-current px-8 py-4 rounded-2xl rotate-12`}
+                  style={{ opacity: getSwipeOpacity() }}
+                >
+                  {getSwipeLabel().text}
+                </div>
+              </div>
+            )}
+
             {/* Photo */}
             <div 
-              className="absolute inset-0 bg-cover bg-center cursor-pointer"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ 
                 backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})` 
               }}
-              onClick={(e) => {
+              onClickCapture={(e) => {
+                if (isDragging) {
+                  e.preventDefault();
+                  return;
+                }
                 const rect = e.currentTarget.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 if (x < rect.width / 2) {
