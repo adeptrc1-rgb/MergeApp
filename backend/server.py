@@ -29,6 +29,26 @@ llm_key = os.environ.get('EMERGENT_LLM_KEY')
 app = FastAPI(title="A Sign - Astrology Dating API")
 api_router = APIRouter(prefix="/api")
 
+# Enums and constants
+class GenderIdentity(str, Enum):
+    MAN = "man"
+    WOMAN = "woman"
+    NON_BINARY = "non_binary"
+    PREFER_NOT_TO_SAY = "prefer_not_to_say"
+    SELF_DESCRIBE = "self_describe"
+
+class OpenToDating(str, Enum):
+    MEN = "men"
+    WOMEN = "women"
+    NON_BINARY = "non_binary"
+    ALL_GENDERS = "all_genders"
+
+class RelationshipGoal(str, Enum):
+    CASUAL = "casual"
+    SERIOUS = "serious"
+    FRIENDS = "friends"
+    OPEN = "open"
+
 # Zodiac sign data
 ZODIAC_SIGNS = {
     "aries": {"element": "fire", "dates": "March 21 - April 19", "traits": ["adventurous", "energetic", "confident"]},
