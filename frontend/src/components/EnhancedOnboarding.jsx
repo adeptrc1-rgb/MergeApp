@@ -240,11 +240,13 @@ export default function EnhancedOnboarding() {
   };
 
   const handleComplete = async () => {
-    if (!formData.birth_date) return;
+    if (!formData.birth_date || !formData.first_name) return;
     
     setLoading(true);
     try {
       const profileData = {
+        first_name: formData.first_name,
+        last_name: formData.last_name,
         birth_date: format(formData.birth_date, 'yyyy-MM-dd'),
         birth_time: formData.birth_time,
         birth_location: formData.birth_location,
