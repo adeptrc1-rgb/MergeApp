@@ -181,34 +181,34 @@ export default function Discover({ user }) {
 // Bottom Navigation Component
 function BottomNav({ currentTab, navigate }) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black/40 backdrop-blur-xl border-t border-white/10 safe-area-inset-bottom">
-      <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-around">
+    <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 safe-area-inset-bottom">
+      <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-around">
         <button
           onClick={() => navigate('/discover')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'discover' ? 'text-pink-400' : 'text-white/60 hover:text-white'
+          className={`flex flex-col items-center gap-2 transition-colors ${
+            currentTab === 'discover' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Sparkles className={`w-6 h-6 ${currentTab === 'discover' ? 'fill-pink-400' : ''}`} />
-          <span className="text-xs font-medium">Discover</span>
+          <Sparkles className="w-6 h-6" />
+          <span className="text-xs">Discover</span>
         </button>
         <button
           onClick={() => navigate('/connections')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'connections' ? 'text-pink-400' : 'text-white/60 hover:text-white'
+          className={`flex flex-col items-center gap-2 transition-colors ${
+            currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Users className={`w-6 h-6 ${currentTab === 'connections' ? 'fill-pink-400' : ''}`} />
-          <span className="text-xs font-medium">Connections</span>
+          <Users className="w-6 h-6" />
+          <span className="text-xs">Connections</span>
         </button>
         <button
           onClick={() => navigate('/profile')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'profile' ? 'text-pink-400' : 'text-white/60 hover:text-white'
+          className={`flex flex-col items-center gap-2 transition-colors ${
+            currentTab === 'profile' ? 'text-white' : 'text-white/40 hover:text-white/60'
           }`}
         >
-          <Home className={`w-6 h-6 ${currentTab === 'profile' ? 'fill-pink-400' : ''}`} />
-          <span className="text-xs font-medium">Profile</span>
+          <Home className="w-6 h-6" />
+          <span className="text-xs">Profile</span>
         </button>
       </div>
     </div>
