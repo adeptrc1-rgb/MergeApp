@@ -81,7 +81,12 @@ async def create_test_profile():
             "responded_matches": 0,
             "avg_response_time": None,
             "profile_completed": True,
-            "needs_onboarding": False
+            "needs_onboarding": False,
+            # Angel number and free features
+            "angel_number": "666",  # Born June 15 = 6+1+5+1+9+9+5=36 -> 3+6=9 -> 999
+            "profile_boosts_remaining": 4,
+            "super_likes_remaining": 4,
+            "direct_messages_remaining": 4
         }
         
         await db.users.insert_one(user)
