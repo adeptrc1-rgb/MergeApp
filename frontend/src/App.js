@@ -74,17 +74,21 @@ function LandingPage() {
       // Login with test credentials
       const response = await axios.post(`${API}/auth/test-login`, {
         email: 'testuser@asign.com'
+      }, {
+        withCredentials: true
       });
       
       if (response.data.success) {
-        // Reload to trigger auth check
-        window.location.href = '/dashboard';
+        // Small delay to ensure cookie is set, then redirect
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 500);
       }
     } catch (error) {
       console.error('Test login error:', error);
       alert('Test login failed. Please try again.');
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handlePhoneSubmit = async () => {
