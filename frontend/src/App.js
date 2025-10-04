@@ -279,6 +279,7 @@ function SessionHandler() {
   const location = useLocation();
   const { setUser, setNeedsOnboarding } = React.useContext(AuthContext);
   const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const handleSession = async () => {
@@ -293,29 +294,31 @@ function SessionHandler() {
           const response = await axios.post(`${API}/auth/session`, {}, {
             headers: {
               'X-Session-ID': sessionId
-            }
+            },
+            withCredentials: true
           });
           
           if (response.data.success) {
-            if (response.data.needs_onboarding) {
-              navigate('/onboarding');
-            } else {
-              navigate('/dashboard');
-            }
-            
-            // Clean URL
+            // Clean URL first
             window.history.replaceState(null, null, window.location.pathname);
             
-            // Refresh auth
-            setTimeout(() => {
-              window.location.reload();
-            }, 100);
+            if (response.data.needs_onboarding) {
+              navigate('/onboarding', { replace: true });
+            } else {
+              navigate('/dashboard', { replace: true });
+            }
+          } else {
+            setError('Authentication failed. Please try again.');
+            setTimeout(() => navigate('/'), 2000);
           }
         } catch (error) {
           console.error('Session error:', error);
-          navigate('/');
+          const errorMsg = error.response?.data?.detail || 'Authentication failed. Please try again.';
+          setError(errorMsg);
+          setTimeout(() => navigate('/'), 2000);
         }
       } else {
+        console.log('No session ID found in URL');
         navigate('/');
       }
     };
