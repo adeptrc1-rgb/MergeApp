@@ -73,6 +73,21 @@ class Location(BaseModel):
     latitude: float
     longitude: float
 
+class LifestyleSliders(BaseModel):
+    fitness_health: int = Field(ge=1, le=5, default=3)  # How important is staying active
+    career_ambition: int = Field(ge=1, le=5, default=3)  # How much do you prioritize career growth
+    social_energy: int = Field(ge=1, le=5, default=3)  # Quiet nights in vs nights out
+    travel_adventure: int = Field(ge=1, le=5, default=3)  # How important is travel
+    nightlife_lifestyle: int = Field(ge=1, le=5, default=3)  # How often enjoy partying/drinking
+    family_future: int = Field(ge=1, le=5, default=3)  # How important is family life/kids
+    dating_approach: int = Field(ge=1, le=5, default=3)  # Take things slow vs dive in fast
+    passions_hobbies: int = Field(ge=1, le=5, default=3)  # How central are hobbies
+
+class ProfilePhotos(BaseModel):
+    face_photo: Optional[str] = None  # Full face photo
+    body_photo: Optional[str] = None  # Full length body photo
+    lifestyle_photo: Optional[str] = None  # Lifestyle photo
+
 class User(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     email: str
