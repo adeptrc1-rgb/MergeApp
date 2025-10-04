@@ -152,6 +152,31 @@ export default function Profile({ user, logout }) {
             </div>
           </div>
 
+          {/* Daily Cosmic Wheel */}
+          <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl p-6 border border-purple-400/30 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h3 className="text-xl font-light text-white mb-2 flex items-center gap-2">
+                  <Gift className="w-5 h-5 text-purple-400 cosmic-pulse-icon" />
+                  Daily Cosmic Wheel
+                </h3>
+                <p className="text-white/60 text-sm">Spin for free rewards!</p>
+              </div>
+              <Sparkles className="w-8 h-8 text-purple-400 cosmic-pulse-icon" />
+            </div>
+            <button
+              onClick={() => setShowCosmicWheel(true)}
+              disabled={!canSpin}
+              className={`w-full py-3 rounded-xl font-medium transition-all ${
+                canSpin
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105'
+                  : 'bg-white/10 text-white/40 cursor-not-allowed'
+              }`}
+            >
+              {canSpin ? '✨ Spin Now' : '🕐 Come back tomorrow'}
+            </button>
+          </div>
+
           {/* Free Features */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
             <h3 className="text-xl font-light text-white mb-6 flex items-center gap-2">
@@ -159,26 +184,44 @@ export default function Profile({ user, logout }) {
               Your Free Features
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+              <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative">
                 <Zap className="w-6 h-6 text-purple-400 mb-3" />
                 <div className="text-3xl font-light text-white mb-1">
                   {user.profile_boosts || 0}
                 </div>
-                <div className="text-sm text-white/40">Profile Boosts</div>
+                <div className="text-sm text-white/40 mb-2">Profile Boosts</div>
+                {timeRemaining.boosts && (
+                  <div className="flex items-center gap-1 text-xs text-orange-400">
+                    <Clock className="w-3 h-3" />
+                    <span>{timeRemaining.boosts}</span>
+                  </div>
+                )}
               </div>
-              <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+              <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative">
                 <Heart className="w-6 h-6 text-purple-400 mb-3" />
                 <div className="text-3xl font-light text-white mb-1">
                   {user.super_likes || 0}
                 </div>
-                <div className="text-sm text-white/40">Super Likes</div>
+                <div className="text-sm text-white/40 mb-2">Super Likes</div>
+                {timeRemaining.super_likes && (
+                  <div className="flex items-center gap-1 text-xs text-orange-400">
+                    <Clock className="w-3 h-3" />
+                    <span>{timeRemaining.super_likes}</span>
+                  </div>
+                )}
               </div>
-              <div className="bg-white/5 rounded-xl p-6 border border-white/10 col-span-2">
+              <div className="bg-white/5 rounded-xl p-6 border border-white/10 col-span-2 relative">
                 <MessageCircle className="w-6 h-6 text-purple-400 mb-3" />
                 <div className="text-3xl font-light text-white mb-1">
                   {user.direct_messages || 0}
                 </div>
-                <div className="text-sm text-white/40">Direct Messages</div>
+                <div className="text-sm text-white/40 mb-2">Direct Messages</div>
+                {timeRemaining.dms && (
+                  <div className="flex items-center gap-1 text-xs text-orange-400">
+                    <Clock className="w-3 h-3" />
+                    <span>{timeRemaining.dms}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
