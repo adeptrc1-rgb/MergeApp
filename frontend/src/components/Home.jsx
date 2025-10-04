@@ -358,8 +358,8 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content - Card */}
-      <div className="flex-1 flex flex-col items-center justify-center p-4 pb-24">
-        <div className="w-full max-w-sm relative">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 pb-32">
+        <div className="w-full max-w-md relative">
           <div 
             ref={cardRef}
             onMouseDown={handleDragStart}
@@ -375,8 +375,8 @@ export default function Home({ user }) {
               swipeDirection === 'up' ? 'animate-swipe-up' : ''
             }`}
             style={{ 
-              height: '65vh',
-              maxHeight: '580px',
+              height: '75vh',
+              maxHeight: '700px',
               transform: isDragging 
                 ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${getRotation()}deg)` 
                 : 'translate(0, 0) rotate(0)',
