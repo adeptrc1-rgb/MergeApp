@@ -1280,6 +1280,11 @@ function HomeWrapper() {
   return <Home user={user} logout={logout} />;
 }
 
+function MessagesWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <Messages user={user} logout={logout} />;
+}
+
 function ConnectionsWrapper() {
   const { user, logout } = React.useContext(AuthContext);
   return <Connections user={user} logout={logout} />;
