@@ -606,6 +606,12 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
         "profile_completed": True
     }
     
+    # Name fields
+    if profile_data.first_name:
+        update_data["first_name"] = profile_data.first_name
+    if profile_data.last_name:
+        update_data["last_name"] = profile_data.last_name
+    
     # Basic fields
     if profile_data.birth_time:
         update_data["birth_time"] = profile_data.birth_time
@@ -613,6 +619,10 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
         update_data["bio"] = profile_data.bio
     if profile_data.interests:
         update_data["interests"] = profile_data.interests
+    
+    # Profile photos
+    if profile_data.profile_photos:
+        update_data["profile_photos"] = profile_data.profile_photos
     
     # Enhanced profile fields
     if profile_data.gender_identity:
