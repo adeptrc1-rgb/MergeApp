@@ -1284,8 +1284,6 @@ async def send_message(request: SendMessageRequest, user: User = Depends(get_cur
     
     return {"success": True, "message_id": message["id"]}
 
-)
-
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
