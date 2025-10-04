@@ -1357,6 +1357,172 @@ async def get_compatibility_insight(sign1: str, sign2: str):
         "insight": insight
     }
 
+# ============================================================================
+# REWARDS & GAMIFICATION
+# ============================================================================
+
+@api_router.get("/rewards/daily-spin-status")
+async def check_daily_spin_status(user: User = Depends(get_current_user)):
+    """Check if user can spin the cosmic wheel today"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    user_data = await db.users.find_one({"id": user.id})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    today = date.today()
+    last_spin = user_data.get("last_spin_date")
+    
+    # Check if user can spin (once per day)
+    can_spin = True
+    if last_spin:
+        if isinstance(last_spin, str):
+            last_spin = datetime.fromisoformat(last_spin).date()
+        elif isinstance(last_spin, datetime):
+            last_spin = last_spin.date()
+        
+        can_spin = last_spin < today
+    
+    return {
+        "can_spin": can_spin,
+        "last_spin_date": str(last_spin) if last_spin else None,
+        "next_available": str(today) if not can_spin else str(today)
+    }
+
+@api_router.post("/rewards/spin-wheel")
+async def spin_cosmic_wheel(user: User = Depends(get_current_user)):
+    """Spin the cosmic wheel for daily rewards"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    user_data = await db.users.find_one({"id": user.id})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    today = date.today()
+    last_spin = user_data.get("last_spin_date")
+    
+    # Check if user already spun today
+    if last_spin:
+        if isinstance(last_spin, str):
+            last_spin = datetime.fromisoformat(last_spin).date()
+        elif isinstance(last_spin, datetime):
+            last_spin = last_spin.date()
+        
+        if last_spin >= today:
+            raise HTTPException(status_code=400, detail="Already spun today")
+    
+    # Update last spin date
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": {"last_spin_date": today.isoformat()}}
+    )
+    
+    return {
+        "success": True,
+        "message": "Reward will be added by client"
+    }
+
+@api_router.post("/rewards/claim-reward")
+async def claim_reward(reward_type: str, amount: int, user: User = Depends(get_current_user)):
+    """Claim a reward from cosmic wheel"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    user_data = await db.users.find_one({"id": user.id})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Set 24-hour expiry for new rewards
+    expiry_time = datetime.now(timezone.utc) + timedelta(hours=24)
+    
+    update_fields = {}
+    
+    if reward_type == "boost":
+        current_boosts = user_data.get("profile_boosts", 0)
+        update_fields["profile_boosts"] = current_boosts + amount
+        update_fields["boosts_expiry"] = expiry_time
+    elif reward_type == "super_like":
+        current_super_likes = user_data.get("super_likes", 0)
+        update_fields["super_likes"] = current_super_likes + amount
+        update_fields["super_likes_expiry"] = expiry_time
+    elif reward_type == "dm":
+        current_dms = user_data.get("direct_messages", 0)
+        update_fields["direct_messages"] = current_dms + amount
+        update_fields["direct_messages_expiry"] = expiry_time
+    elif reward_type == "heart":
+        # Hearts are just regular likes, no expiry
+        pass
+    else:
+        raise HTTPException(status_code=400, detail="Invalid reward type")
+    
+    if update_fields:
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": update_fields}
+        )
+    
+    return {
+        "success": True,
+        "reward_type": reward_type,
+        "amount": amount,
+        "expiry": expiry_time.isoformat() if "expiry" in str(update_fields) else None
+    }
+
+@api_router.get("/users/check-expired-rewards")
+async def check_expired_rewards(user: User = Depends(get_current_user)):
+    """Check and clear expired rewards"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    user_data = await db.users.find_one({"id": user.id})
+    if not user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    now = datetime.now(timezone.utc)
+    update_fields = {}
+    
+    # Check boosts expiry
+    boosts_expiry = user_data.get("boosts_expiry")
+    if boosts_expiry:
+        if isinstance(boosts_expiry, str):
+            boosts_expiry = datetime.fromisoformat(boosts_expiry)
+        if boosts_expiry < now:
+            update_fields["profile_boosts"] = 0
+            update_fields["boosts_expiry"] = None
+    
+    # Check super likes expiry
+    super_likes_expiry = user_data.get("super_likes_expiry")
+    if super_likes_expiry:
+        if isinstance(super_likes_expiry, str):
+            super_likes_expiry = datetime.fromisoformat(super_likes_expiry)
+        if super_likes_expiry < now:
+            update_fields["super_likes"] = 0
+            update_fields["super_likes_expiry"] = None
+    
+    # Check DMs expiry
+    dms_expiry = user_data.get("direct_messages_expiry")
+    if dms_expiry:
+        if isinstance(dms_expiry, str):
+            dms_expiry = datetime.fromisoformat(dms_expiry)
+        if dms_expiry < now:
+            update_fields["direct_messages"] = 0
+            update_fields["direct_messages_expiry"] = None
+    
+    if update_fields:
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": update_fields}
+        )
+    
+    return {
+        "expired_items_cleared": len(update_fields) > 0,
+        "remaining_boosts": user_data.get("profile_boosts", 0) if not update_fields.get("profile_boosts") == 0 else 0,
+        "remaining_super_likes": user_data.get("super_likes", 0) if not update_fields.get("super_likes") == 0 else 0,
+        "remaining_dms": user_data.get("direct_messages", 0) if not update_fields.get("direct_messages") == 0 else 0
+    }
+
 app.include_router(api_router)
 
 # CORS middleware
