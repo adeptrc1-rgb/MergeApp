@@ -881,18 +881,20 @@ async def get_matches(user: User = Depends(get_current_user)):
 # Background task to check expired matches
 @api_router.post("/admin/check-expired-matches")
 async def check_expired_matches():
-    """Background task to check and penalize expired matches"""
+    """Background task to check and update responsiveness for expired matches"""
     expired_matches = await db.matches.find({
         "status": "matched",
         "expires_at": {"$lt": datetime.now(timezone.utc)}
     }).to_list(length=None)
     
     for match in expired_matches:
-        # Apply penalties
+        compatibility_level = "high" if match["compatibility_score"] >= 80 else "medium" if match["compatibility_score"] >= 50 else "low"
+        
+        # Apply responsiveness penalties
         if not match.get("user1_response_time"):
-            await apply_penalty(match["user1_id"], "no_response", match["id"])
+            await update_responsiveness_score(match["user1_id"], "expired_match", match["id"], compatibility_level)
         if not match.get("user2_response_time"):
-            await apply_penalty(match["user2_id"], "no_response", match["id"])
+            await update_responsiveness_score(match["user2_id"], "expired_match", match["id"], compatibility_level)
         
         # Update match status
         await db.matches.update_one(
@@ -901,6 +903,63 @@ async def check_expired_matches():
         )
     
     return {"processed": len(expired_matches)}
+
+# New endpoints for enhanced profile management
+@api_router.post("/users/update-lifestyle")
+async def update_lifestyle_sliders(sliders: Dict[str, int], user: User = Depends(get_current_user)):
+    """Update user's lifestyle sliders"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    try:
+        lifestyle_data = LifestyleSliders(**sliders)
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {"lifestyle_sliders": lifestyle_data.dict()}}
+        )
+        return {"success": True, "message": "Lifestyle preferences updated"}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid slider data: {str(e)}")
+
+@api_router.post("/users/update-photos")
+async def update_profile_photos(photos: Dict[str, str], user: User = Depends(get_current_user)):
+    """Update user's profile photos"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    try:
+        photo_data = ProfilePhotos(**photos)
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {"profile_photos": photo_data.dict()}}
+        )
+        return {"success": True, "message": "Photos updated"}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid photo data: {str(e)}")
+
+@api_router.get("/users/compatibility-preview/{user_id}")
+async def get_compatibility_preview(user_id: str, user: User = Depends(get_current_user)):
+    """Get detailed compatibility breakdown with another user"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    other_user_data = await db.users.find_one({"id": user_id})
+    if not other_user_data:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    other_user = User(**other_user_data)
+    compatibility = await calculate_compatibility(user, other_user)
+    
+    # Get detailed breakdown if lifestyle sliders exist
+    breakdown = None
+    if user.lifestyle_sliders and other_user.lifestyle_sliders:
+        breakdown = calculate_lifestyle_compatibility(user.lifestyle_sliders, other_user.lifestyle_sliders)
+    
+    return {
+        "compatibility_score": compatibility["score"],
+        "compatibility_report": compatibility["report"],
+        "lifestyle_breakdown": breakdown
+    }
 
 @api_router.get("/health")
 async def health_check():
