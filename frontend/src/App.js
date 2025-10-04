@@ -19,6 +19,7 @@ import ModernDashboard from './components/ModernDashboard';
 import AstroMatchDashboard from './components/AstroMatchDashboard';
 import AstroChat from './components/AstroChat';
 import Discover from './components/Discover';
+import Home from './components/Home';
 import Connections from './components/Connections';
 import Profile from './components/Profile';
 import './App.css';
