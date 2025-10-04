@@ -290,6 +290,10 @@ export default function EnhancedOnboarding() {
 
   const handleComplete = async () => {
     if (!formData.birth_date || !formData.first_name) return;
+    if (!formData.profile_photos.face_photo || !formData.profile_photos.body_photo || !formData.profile_photos.lifestyle_photo) {
+      alert('Please upload all 3 required photos');
+      return;
+    }
     
     setLoading(true);
     try {
@@ -312,13 +316,15 @@ export default function EnhancedOnboarding() {
         interests: formData.interests ? formData.interests.split(',').map(i => i.trim()).filter(i => i) : [],
         age_range_min: formData.age_range_min,
         age_range_max: formData.age_range_max,
-        max_distance_km: formData.max_distance_km
+        max_distance_km: formData.max_distance_km,
+        profile_photos: formData.profile_photos
       };
       
       await axios.post(`${API}/users/complete-profile`, profileData);
       navigate('/dashboard');
     } catch (error) {
       console.error('Profile completion error:', error);
+      alert('Error completing profile. Please try again.');
     }
     setLoading(false);
   };
