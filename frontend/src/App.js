@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './components/ui/avatar';
 import { CalendarIcon, Heart, X, Star, Sparkles, Moon, Sun } from 'lucide-react';
 import { format } from 'date-fns';
 import EnhancedOnboarding from './components/EnhancedOnboarding';
+import InteractiveOnboarding from './components/InteractiveOnboarding';
 import EnhancedDashboard from './components/EnhancedDashboard';
 import './App.css';
 
