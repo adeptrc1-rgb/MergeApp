@@ -354,83 +354,81 @@ def check_gender_compatibility(user1: User, user2: User) -> bool:
     return user1_compatible and user2_compatible
 
 async def calculate_compatibility(user1: User, user2: User) -> Dict[str, Any]:
-    """Calculate enhanced compatibility between two users with location and birth time"""
+    """Calculate enhanced compatibility between two users"""
+    
+    # Check gender compatibility first
+    if not check_gender_compatibility(user1, user2):
+        return {
+            "score": 0,
+            "report": "Gender preferences not compatible"
+        }
+    
     try:
-        # Build comprehensive prompt with location and time data
-        location_info = ""
-        if user1.birth_location and user2.birth_location:
-            location_info = f"\nUser 1 was born in {user1.birth_location.city}, {user1.birth_location.country}"
-            location_info += f"\nUser 2 was born in {user2.birth_location.city}, {user2.birth_location.country}"
+        compatibility_score = 0
+        factors = []
         
-        time_info = ""
-        if user1.birth_time and user2.birth_time:
-            time_info = f"\nUser 1 birth time: {user1.birth_time}"
-            time_info += f"\nUser 2 birth time: {user2.birth_time}"
-            
-        chat = LlmChat(
-            api_key=llm_key,
-            session_id=f"compatibility_{user1.zodiac_sign}_{user2.zodiac_sign}",
-            system_message="You are an expert astrologer with deep knowledge of zodiac compatibility, birth charts, and cosmic influences. Provide detailed romantic compatibility analysis."
-        ).with_model("openai", "gpt-4o-mini")
+        # Lifestyle compatibility (60% of score)
+        if user1.lifestyle_sliders and user2.lifestyle_sliders:
+            lifestyle_compat = calculate_lifestyle_compatibility(user1.lifestyle_sliders, user2.lifestyle_sliders)
+            compatibility_score += lifestyle_compat['overall_percentage'] * 0.6
+            factors.append(f"Lifestyle compatibility: {lifestyle_compat['overall_percentage']:.0f}%")
         
-        prompt = f"""Analyze the romantic compatibility between these two people:
-
-Person 1: {user1.zodiac_sign.title()} (born {user1.birth_date})
-Person 2: {user2.zodiac_sign.title()} (born {user2.birth_date})
-{location_info}
-{time_info}
-
-Provide:
-1. A compatibility score from 0-100
-2. A detailed analysis including:
-   - Elemental compatibility ({ZODIAC_SIGNS[user1.zodiac_sign]['element']} and {ZODIAC_SIGNS[user2.zodiac_sign]['element']})
-   - Personality traits alignment
-   - Potential challenges and strengths
-   - How birth location/time affects their connection (if provided)
-   - Relationship advice for this pairing
-
-Format: SCORE: [number]
-ANALYSIS: [detailed analysis]"""
+        # Astrology compatibility (25% of score)
+        astro_score = await get_astrology_compatibility(user1.zodiac_sign, user2.zodiac_sign)
+        compatibility_score += astro_score * 0.25
+        factors.append(f"Astrology compatibility: {astro_score:.0f}%")
         
-        user_message = UserMessage(text=prompt)
-        response = await chat.send_message(user_message)
+        # Shared interests (15% of score)
+        if user1.interests and user2.interests:
+            shared_interests = set(user1.interests).intersection(set(user2.interests))
+            interest_score = min(100, len(shared_interests) * 20)
+            compatibility_score += interest_score * 0.15
+            factors.append(f"Shared interests: {len(shared_interests)} ({interest_score:.0f}%)")
         
-        # Parse response
-        lines = response.strip().split('\n')
-        score = 75  # default score
-        analysis = "Compatible signs with good potential."
-        
-        for line in lines:
-            if line.startswith("SCORE:"):
-                try:
-                    score = float(line.split(":")[1].strip())
-                except:
-                    pass
-            elif line.startswith("ANALYSIS:"):
-                analysis = line.split(":", 1)[1].strip()
+        report = f"Compatibility based on: {', '.join(factors)}"
         
         return {
-            "score": score,
-            "report": analysis
+            "score": min(100, max(0, compatibility_score)),
+            "report": report
         }
+        
     except Exception as e:
         print(f"Error calculating compatibility: {e}")
-        # Enhanced fallback compatibility logic
-        element_compatibility = {
-            ("fire", "fire"): 85, ("fire", "air"): 90, ("fire", "earth"): 60, ("fire", "water"): 40,
-            ("earth", "earth"): 80, ("earth", "water"): 85, ("earth", "air"): 45, ("earth", "fire"): 60,
-            ("air", "air"): 75, ("air", "water"): 50, ("air", "fire"): 90, ("air", "earth"): 45,
-            ("water", "water"): 88, ("water", "fire"): 40, ("water", "earth"): 85, ("water", "air"): 50
-        }
-        
-        elem1 = ZODIAC_SIGNS[user1.zodiac_sign]["element"]
-        elem2 = ZODIAC_SIGNS[user2.zodiac_sign]["element"]
-        score = element_compatibility.get((elem1, elem2), 65)
-        
         return {
-            "score": score,
-            "report": f"{user1.zodiac_sign.title()} and {user2.zodiac_sign.title()} have {score}% compatibility based on their elemental match."
+            "score": 50,
+            "report": "Basic compatibility assessment"
         }
+
+async def get_astrology_compatibility(sign1: str, sign2: str) -> float:
+    """Get astrology compatibility score"""
+    try:
+        chat = LlmChat(
+            api_key=llm_key,
+            session_id=f"astro_{sign1}_{sign2}",
+            system_message="You are an expert astrologer. Provide only a compatibility score from 0-100."
+        ).with_model("openai", "gpt-4o-mini")
+        
+        response = await chat.send_message(UserMessage(text=f"Compatibility score for {sign1} and {sign2} (0-100 only):"))
+        
+        # Extract number from response
+        import re
+        numbers = re.findall(r'\d+', response)
+        if numbers:
+            return float(numbers[0])
+    except:
+        pass
+    
+    # Fallback to elemental compatibility
+    element_scores = {
+        ("fire", "fire"): 85, ("fire", "air"): 90, ("fire", "earth"): 60, ("fire", "water"): 40,
+        ("earth", "earth"): 80, ("earth", "water"): 85, ("earth", "air"): 45,
+        ("air", "air"): 75, ("air", "water"): 50, ("water", "water"): 88
+    }
+    
+    elem1 = ZODIAC_SIGNS.get(sign1, {}).get("element", "fire")
+    elem2 = ZODIAC_SIGNS.get(sign2, {}).get("element", "fire")
+    
+    return element_scores.get((elem1, elem2), element_scores.get((elem2, elem1), 65))
 
 async def apply_penalty(user_id: str, penalty_type: str, match_id: str):
     """Apply penalty to user for poor response behavior"""
