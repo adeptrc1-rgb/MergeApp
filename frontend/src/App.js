@@ -1208,7 +1208,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/session" element={<SessionHandler />} />
-            <Route path="/onboarding" element={<Onboarding />} />
+            <Route path="/onboarding" element={<EnhancedOnboarding />} />
             <Route 
               path="/settings" 
               element={
