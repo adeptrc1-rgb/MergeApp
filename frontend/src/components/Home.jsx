@@ -1,7 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, MessageCircle, Zap } from 'lucide-react';
+import { 
+  createStarburstEffect, 
+  createSparkleTrail, 
+  createShootingStar,
+  createHeartBurst,
+  createFloatingSign,
+  createMatchAnimation,
+  createStardustTrail
+} from '../utils/particleEffects';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
