@@ -276,6 +276,7 @@ export default function Home({ user }) {
       <div className="flex-1 flex items-center justify-center p-6 pb-32">
         <div className="w-full max-w-lg">
           <div 
+            ref={cardRef}
             className={`relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 transition-transform duration-300 ${
               swipeDirection === 'right' ? 'translate-x-[150%] rotate-12' : 
               swipeDirection === 'left' ? '-translate-x-[150%] -rotate-12' :
