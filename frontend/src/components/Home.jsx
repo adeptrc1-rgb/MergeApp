@@ -331,20 +331,20 @@ export default function Home({ user }) {
             </div>
 
             {/* Info Section */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-              <h2 className="text-5xl font-light mb-3">
+            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <h2 className="text-4xl font-light mb-2">
                 {currentMatch.first_name}, {age}
               </h2>
-              <div className="flex items-center gap-3 text-white/80 mb-4">
-                <Star className="w-5 h-5 text-purple-400" />
-                <span className="text-lg">{currentMatch.zodiac_sign}</span>
+              <div className="flex items-center gap-2 text-white/80 mb-3">
+                <Star className="w-4 h-4 text-purple-400" />
+                <span className="text-base">{currentMatch.zodiac_sign}</span>
                 <span className="text-white/40">•</span>
-                <span>{ELEMENT_MAP[currentMatch.zodiac_sign]} Sign</span>
+                <span className="text-sm">{ELEMENT_MAP[currentMatch.zodiac_sign]} Sign</span>
               </div>
 
               {/* Compatibility Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full">
-                <Zap className="w-4 h-4 text-purple-400" />
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full">
+                <Zap className="w-3.5 h-3.5 text-purple-400" />
                 <span className="text-sm">{compatibility}% Compatible</span>
               </div>
             </div>
