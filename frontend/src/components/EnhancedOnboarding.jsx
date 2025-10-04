@@ -631,6 +631,167 @@ export default function EnhancedOnboarding() {
           </div>
         );
 
+      case 6:
+        return (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-rose-400 via-pink-400 to-orange-400 rounded-2xl flex items-center justify-center shadow-lg">
+                <Camera className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">
+                Add Your Photos
+              </h2>
+              <p className="text-white/90">Show your best self with 3 photos</p>
+            </div>
+
+            <div className="space-y-4">
+              {/* Face Photo */}
+              <div>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">
+                  1. Face Photo *
+                </Label>
+                <p className="text-xs text-white/80 mb-2 drop-shadow">Clear photo of your face</p>
+                <label className="block cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handlePhotoUpload(e, 'face_photo')}
+                  />
+                  <div className={`relative h-48 rounded-xl border-2 border-dashed transition-all ${
+                    formData.profile_photos.face_photo 
+                      ? 'border-white bg-white/10' 
+                      : 'border-white/40 bg-white/5 hover:border-white hover:bg-white/10'
+                  }`}>
+                    {formData.profile_photos.face_photo ? (
+                      <>
+                        <img 
+                          src={formData.profile_photos.face_photo} 
+                          alt="Face" 
+                          className="w-full h-full object-cover rounded-xl"
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setFormData({
+                              ...formData,
+                              profile_photos: {...formData.profile_photos, face_photo: null}
+                            });
+                          }}
+                          className="absolute top-2 right-2 w-8 h-8 bg-rose-500 rounded-full flex items-center justify-center text-white hover:bg-rose-600 transition-colors"
+                        >
+                          ×
+                        </button>
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <Upload className="w-10 h-10 text-white/60 mb-2" />
+                        <span className="text-white/80 text-sm font-medium drop-shadow">Click to upload</span>
+                      </div>
+                    )}
+                  </div>
+                </label>
+              </div>
+
+              {/* Body Photo */}
+              <div>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">
+                  2. Full Length Photo *
+                </Label>
+                <p className="text-xs text-white/80 mb-2 drop-shadow">Full body photo</p>
+                <label className="block cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handlePhotoUpload(e, 'body_photo')}
+                  />
+                  <div className={`relative h-48 rounded-xl border-2 border-dashed transition-all ${
+                    formData.profile_photos.body_photo 
+                      ? 'border-white bg-white/10' 
+                      : 'border-white/40 bg-white/5 hover:border-white hover:bg-white/10'
+                  }`}>
+                    {formData.profile_photos.body_photo ? (
+                      <>
+                        <img 
+                          src={formData.profile_photos.body_photo} 
+                          alt="Body" 
+                          className="w-full h-full object-cover rounded-xl"
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setFormData({
+                              ...formData,
+                              profile_photos: {...formData.profile_photos, body_photo: null}
+                            });
+                          }}
+                          className="absolute top-2 right-2 w-8 h-8 bg-rose-500 rounded-full flex items-center justify-center text-white hover:bg-rose-600 transition-colors"
+                        >
+                          ×
+                        </button>
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <Upload className="w-10 h-10 text-white/60 mb-2" />
+                        <span className="text-white/80 text-sm font-medium drop-shadow">Click to upload</span>
+                      </div>
+                    )}
+                  </div>
+                </label>
+              </div>
+
+              {/* Lifestyle Photo */}
+              <div>
+                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">
+                  3. Lifestyle Photo *
+                </Label>
+                <p className="text-xs text-white/80 mb-2 drop-shadow">Photo showing your interests or activities</p>
+                <label className="block cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handlePhotoUpload(e, 'lifestyle_photo')}
+                  />
+                  <div className={`relative h-48 rounded-xl border-2 border-dashed transition-all ${
+                    formData.profile_photos.lifestyle_photo 
+                      ? 'border-white bg-white/10' 
+                      : 'border-white/40 bg-white/5 hover:border-white hover:bg-white/10'
+                  }`}>
+                    {formData.profile_photos.lifestyle_photo ? (
+                      <>
+                        <img 
+                          src={formData.profile_photos.lifestyle_photo} 
+                          alt="Lifestyle" 
+                          className="w-full h-full object-cover rounded-xl"
+                        />
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setFormData({
+                              ...formData,
+                              profile_photos: {...formData.profile_photos, lifestyle_photo: null}
+                            });
+                          }}
+                          className="absolute top-2 right-2 w-8 h-8 bg-rose-500 rounded-full flex items-center justify-center text-white hover:bg-rose-600 transition-colors"
+                        >
+                          ×
+                        </button>
+                      </>
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center">
+                        <Upload className="w-10 h-10 text-white/60 mb-2" />
+                        <span className="text-white/80 text-sm font-medium drop-shadow">Click to upload</span>
+                      </div>
+                    )}
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
