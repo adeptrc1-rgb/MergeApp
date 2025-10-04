@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "User reported that Google login doesn't work. The issue was that the OAuth redirect was pointing to /dashboard instead of /session where the SessionHandler component is set up to process the OAuth callback."
+user_problem_statement: "Test the new navigation and sections added to the app: 1) Added three new sections similar to Tinder but with unique names: 'Discover' (main swipe/explore section), 'Connections' (view matches and people who liked you), 'Profile' (user profile with stats, angel number, free features). 2) New backend endpoint: GET /api/users/liked-me (returns users who liked the current user but haven't been swiped on yet). 3) Bottom navigation bar with 3 tabs: Discover, Connections, Profile."
 
 backend:
   - task: "Google OAuth Session Handler"
@@ -110,7 +110,7 @@ backend:
     working: true
     file: "/app/backend/server.py"
     stuck_count: 0
-    priority: "high"
+    priority: "medium"
     needs_retesting: false
     status_history:
       - working: true
@@ -120,32 +120,77 @@ backend:
         agent: "testing"
         comment: "✅ TESTED: OAuth endpoint working correctly. Fixed error handling bug (was returning 500 instead of 401 for invalid sessions). Endpoint properly validates X-Session-ID header, returns 422 for missing header, 401 for invalid session. Database connectivity confirmed - MongoDB working with 5 users. Session creation logic verified. Minor: CORS headers present but OPTIONS method test failed (non-critical)."
 
-frontend:
-  - task: "Google Login Button"
+  - task: "GET /api/users/liked-me endpoint"
     implemented: true
-    working: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented GET /api/users/liked-me endpoint that returns users who have liked the current user but haven't been swiped on yet. Endpoint requires authentication and filters out users already swiped on."
+
+  - task: "Test Login Authentication"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Test login endpoint /api/auth/test-login available for testing with testuser@asign.com"
+
+frontend:
+  - task: "Navigation Sections (Discover, Connections, Profile)"
+    implemented: true
+    working: "NA"
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
-      - working: false
-        agent: "user"
-        comment: "User reported: 'when I do the google option it doesn't work'"
-      - working: true
+      - working: "NA"
         agent: "main"
-        comment: "Fixed OAuth redirect URL from '/dashboard' to '/session'. The handleGoogleLogin function now redirects to /session where SessionHandler component can properly process the OAuth callback with session_id."
+        comment: "Added three new sections: Discover (main swipe/explore), Connections (matches and likes), Profile (user profile with stats). Login flow now redirects to /discover instead of /dashboard."
+
+  - task: "Bottom Navigation Bar"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Bottom navigation bar with 3 tabs: Discover, Connections, Profile. Navigation allows switching between sections."
+
+  - task: "Connections Page (Matches and Likes You tabs)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Connections page shows two tabs: Matches tab (existing matches) and Likes You tab (users who liked the current user using /api/users/liked-me endpoint)."
 
 metadata:
   created_by: "main_agent"
-  version: "1.0"
-  test_sequence: 2
+  version: "1.1"
+  test_sequence: 3
   run_ui: false
 
 test_plan:
   current_focus:
-    - "Google Login Button"
-    - "Google OAuth Session Handler"
+    - "GET /api/users/liked-me endpoint"
+    - "Test Login Authentication"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -155,3 +200,5 @@ agent_communication:
     message: "Fixed Google OAuth flow. Changed redirect URL from /dashboard to /session so that SessionHandler can process the OAuth callback properly. Ready for backend testing to verify the OAuth flow works end-to-end."
   - agent: "testing"
     message: "✅ BACKEND TESTING COMPLETE: Google OAuth session handler is working correctly. Fixed a critical bug in error handling that was causing 500 errors instead of proper 401 responses for invalid sessions. All core OAuth functionality verified: header validation, session processing, database operations, and cookie setting. Database connectivity confirmed with 5 existing users. The OAuth endpoint is ready for production use."
+  - agent: "main"
+    message: "Implemented new navigation sections and GET /api/users/liked-me endpoint. Ready for testing of the new backend endpoint and authentication flow with test user testuser@asign.com."
