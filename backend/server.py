@@ -133,6 +133,8 @@ class User(BaseModel):
     profile_completed: bool = False
 
 class UserCreate(BaseModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
     birth_date: str
     birth_time: Optional[str] = None
     birth_location: Optional[Dict[str, Any]] = None
@@ -152,6 +154,9 @@ class UserCreate(BaseModel):
     lifestyle_sliders: Optional[Dict[str, int]] = None
     industry: Optional[str] = None
     relationship_goals: Optional[RelationshipGoal] = None
+    
+    # Photos (stored as base64 strings)
+    profile_photos: Optional[Dict[str, str]] = None
 
 class CompatibilityScore(BaseModel):
     user1_id: str
