@@ -101,3 +101,52 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "User reported that Google login doesn't work. The issue was that the OAuth redirect was pointing to /dashboard instead of /session where the SessionHandler component is set up to process the OAuth callback."
+
+backend:
+  - task: "Google OAuth Session Handler"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Backend OAuth endpoint at /api/auth/session is properly configured to receive session_id from Emergent Auth, create/update user, and set session cookie"
+
+frontend:
+  - task: "Google Login Button"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "User reported: 'when I do the google option it doesn't work'"
+      - working: true
+        agent: "main"
+        comment: "Fixed OAuth redirect URL from '/dashboard' to '/session'. The handleGoogleLogin function now redirects to /session where SessionHandler component can properly process the OAuth callback with session_id."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Google Login Button"
+    - "Google OAuth Session Handler"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Fixed Google OAuth flow. Changed redirect URL from /dashboard to /session so that SessionHandler can process the OAuth callback properly. Ready for backend testing to verify the OAuth flow works end-to-end."
