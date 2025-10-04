@@ -1221,7 +1221,7 @@ function App() {
               path="/dashboard" 
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <EnhancedDashboard />
                 </ProtectedRoute>
               } 
             />
