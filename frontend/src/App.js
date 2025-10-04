@@ -1291,6 +1291,14 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            <Route 
+              path="/chat" 
+              element={
+                <ProtectedRoute>
+                  <AstroChatWrapper />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </div>
       </BrowserRouter>
