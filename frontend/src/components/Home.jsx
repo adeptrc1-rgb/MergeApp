@@ -343,9 +343,9 @@ export default function Home({ user }) {
   const compatibility = currentMatch.compatibility_score || Math.floor(Math.random() * 30) + 70;
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="border-b border-white/10 bg-black">
+      <div className="border-b border-white/10 bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-3xl font-light text-white">A Sign</h1>
           <div className="flex items-center gap-4">
@@ -358,7 +358,7 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content - Card */}
-      <div className="flex-1 flex flex-col items-center justify-center p-4 pb-32">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 pb-32 overflow-hidden">
         <div className="w-full max-w-md relative">
           <div 
             ref={cardRef}
