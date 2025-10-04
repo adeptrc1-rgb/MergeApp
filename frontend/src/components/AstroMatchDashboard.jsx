@@ -461,13 +461,22 @@ export default function AstroMatchDashboard({ user, logout }) {
       </div>
 
       {/* Action Buttons */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/30 backdrop-blur-md border-t border-white/10">
-        <div className="max-w-2xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-center gap-6">
+      <div className="fixed bottom-0 left-0 right-0 bg-transparent">
+        <div className="max-w-2xl mx-auto px-4 py-6">
+          <div className="flex items-center justify-center gap-4">
+            {/* Undo Button */}
+            <button
+              onClick={handleUndo}
+              disabled={swipeHistory.length === 0}
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 text-white transition-all shadow-lg hover:shadow-xl hover:shadow-yellow-500/40 active:scale-95 flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <RotateCcw className="w-5 h-5" strokeWidth={2.5} />
+            </button>
+
             {/* Pass Button */}
             <button
               onClick={handlePass}
-              className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 text-white border-2 border-red-500/50 hover:border-red-500 transition-all shadow-lg hover:shadow-xl hover:shadow-red-500/20 active:scale-95 flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 text-white border-2 border-red-500/50 hover:border-red-500 transition-all shadow-lg hover:shadow-xl hover:shadow-red-500/20 active:scale-95 flex items-center justify-center"
             >
               <X className="w-8 h-8" strokeWidth={2.5} />
             </button>
@@ -491,7 +500,7 @@ export default function AstroMatchDashboard({ user, logout }) {
             {/* Info Button */}
             <button
               onClick={() => setShowDetails(!showDetails)}
-              className="w-14 h-14 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 text-white border-2 border-purple-500/50 hover:border-purple-500 transition-all shadow-lg hover:shadow-xl hover:shadow-purple-500/20 active:scale-95 flex items-center justify-center"
+              className="w-14 h-14 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 text-white border-2 border-purple-500/50 hover:border-purple-500 transition-all shadow-lg hover:shadow-xl hover:shadow-purple-500/20 active:scale-95 flex items-center justify-center"
             >
               <Info className="w-6 h-6" strokeWidth={2.5} />
             </button>
