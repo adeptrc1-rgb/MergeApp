@@ -127,9 +127,18 @@ class User(BaseModel):
     
     # Astrology & Premium Features
     angel_number: Optional[str] = None  # e.g., "111", "222", "333"
-    profile_boosts_remaining: int = 4  # Free boosts on signup
-    super_likes_remaining: int = 4  # Free super likes on signup
-    direct_messages_remaining: int = 4  # Free direct messages on signup
+    profile_boosts: int = 4  # Free boosts on signup (24hr expiry)
+    super_likes: int = 4  # Free super likes on signup (24hr expiry)
+    direct_messages: int = 4  # Free direct messages on signup (24hr expiry)
+    
+    # Timed Features (24-hour expiry)
+    boosts_expiry: Optional[datetime] = None
+    super_likes_expiry: Optional[datetime] = None
+    direct_messages_expiry: Optional[datetime] = None
+    
+    # Daily Rewards
+    last_spin_date: Optional[date] = None  # Track last cosmic wheel spin
+    daily_spin_available: bool = True
     
     # System fields
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
