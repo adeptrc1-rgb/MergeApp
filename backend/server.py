@@ -999,35 +999,6 @@ async def undo_swipe(swiped_id: str, user: User = Depends(get_current_user)):
     
     return {"success": True, "deleted_count": result.deleted_count}
 
-                    )
-                    geographic_score = calculate_geographic_score(distance_km)
-                
-                match = Match(
-                    user1_id=user.id,
-                    user2_id=swiped_id,
-                    compatibility_score=compatibility["score"],
-                    compatibility_report=compatibility["report"],
-                    geographic_score=geographic_score,
-                    distance_km=distance_km,
-                    status="matched"
-                )
-                
-                await db.matches.insert_one(match.dict())
-                
-                # Update match counts
-                await db.users.update_one({"id": user.id}, {"$inc": {"total_matches": 1}})
-                await db.users.update_one({"id": swiped_id}, {"$inc": {"total_matches": 1}})
-                
-                return {
-                    "success": True, 
-                    "match": True, 
-                    "compatibility": compatibility,
-                    "geographic_score": geographic_score,
-                    "distance_km": distance_km
-                }
-    
-    return {"success": True, "match": False}
-
 @api_router.get("/matches")
 async def get_matches(user: User = Depends(get_current_user)):
     """Get user's matches with responsiveness tracking"""
