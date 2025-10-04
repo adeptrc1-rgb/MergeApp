@@ -842,13 +842,13 @@ export default function EnhancedOnboarding() {
           <div className="flex items-center justify-between mb-3">
             <span className="text-sm font-semibold text-white drop-shadow-lg">Profile Setup</span>
             <span className="text-sm font-semibold text-white drop-shadow-lg">
-              {step} of 5
+              {step} of 6
             </span>
           </div>
           <div className="h-3 bg-white/20 backdrop-blur-sm rounded-full overflow-hidden shadow-lg border-2 border-white/30">
             <div 
               className="h-full bg-gradient-to-r from-rose-400 via-pink-400 to-orange-400 rounded-full transition-all duration-500 ease-out shadow-lg"
-              style={{ width: `${(step / 5) * 100}%` }}
+              style={{ width: `${(step / 6) * 100}%` }}
             ></div>
           </div>
         </div>
