@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from './ui/button';
-import { Heart, X, Info, MapPin, Briefcase, Sparkles, Star, Zap, RotateCcw, Home, Users } from 'lucide-react';
+import { Heart, X, Info, MapPin, Briefcase, Sparkles, Star, Zap, RotateCcw, Home, Users, MessageCircle } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
