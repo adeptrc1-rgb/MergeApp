@@ -1274,6 +1274,11 @@ function DiscoverWrapper() {
   return <Discover user={user} logout={logout} />;
 }
 
+function HomeWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <Home user={user} logout={logout} />;
+}
+
 function ConnectionsWrapper() {
   const { user, logout } = React.useContext(AuthContext);
   return <Connections user={user} logout={logout} />;
