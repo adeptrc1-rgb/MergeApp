@@ -1183,6 +1183,107 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
     expose_headers=["*"],
+
+
+# ============================================================================
+# CHAT/MESSAGING ENDPOINTS
+# ============================================================================
+
+@api_router.get("/matches/my-matches")
+async def get_my_matches(user: User = Depends(get_current_user)):
+    """Get all matches for current user"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Find all matches where user is either user1 or user2
+    matches = await db.matches.find({
+        "$or": [
+            {"user1_id": user.id},
+            {"user2_id": user.id}
+        ],
+        "status": "matched"
+    }).to_list(length=100)
+    
+    matched_users = []
+    for match in matches:
+        # Get the other user's ID
+        other_user_id = match["user2_id"] if match["user1_id"] == user.id else match["user1_id"]
+        
+        # Fetch the other user's profile
+        other_user = await db.users.find_one({"id": other_user_id})
+        if other_user:
+            matched_users.append({
+                "id": other_user["id"],
+                "match_id": match["id"],
+                "first_name": other_user.get("first_name", other_user.get("name", "Unknown")),
+                "last_name": other_user.get("last_name", ""),
+                "zodiac_sign": other_user.get("zodiac_sign", "Unknown"),
+                "birth_date": other_user["birth_date"].isoformat() if isinstance(other_user["birth_date"], date) else other_user["birth_date"],
+                "current_location": other_user.get("current_location"),
+                "profile_photos": other_user.get("profile_photos"),
+                "compatibility_score": match.get("compatibility_score", 75),
+                "matched_at": match["matched_at"].isoformat() if isinstance(match["matched_at"], datetime) else match["matched_at"]
+            })
+    
+    # Sort by match date (most recent first)
+    matched_users.sort(key=lambda x: x["matched_at"], reverse=True)
+    
+    return matched_users
+
+@api_router.get("/messages/{match_user_id}")
+async def get_messages(match_user_id: str, user: User = Depends(get_current_user)):
+    """Get all messages with a specific matched user"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Get messages between these two users
+    messages = await db.messages.find({
+        "$or": [
+            {"sender_id": user.id, "receiver_id": match_user_id},
+            {"sender_id": match_user_id, "receiver_id": user.id}
+        ]
+    }).sort("sent_at", 1).to_list(length=500)
+    
+    return messages
+
+class SendMessageRequest(BaseModel):
+    match_id: str
+    receiver_id: str
+    message: str
+
+@api_router.post("/messages/send")
+async def send_message(request: SendMessageRequest, user: User = Depends(get_current_user)):
+    """Send a message to a matched user"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Verify they are matched
+    match = await db.matches.find_one({
+        "id": request.match_id,
+        "$or": [
+            {"user1_id": user.id, "user2_id": request.receiver_id},
+            {"user1_id": request.receiver_id, "user2_id": user.id}
+        ]
+    })
+    
+    if not match:
+        raise HTTPException(status_code=403, detail="Not matched with this user")
+    
+    # Create message
+    message = {
+        "id": str(uuid.uuid4()),
+        "match_id": request.match_id,
+        "sender_id": user.id,
+        "receiver_id": request.receiver_id,
+        "message": request.message,
+        "sent_at": datetime.now(timezone.utc),
+        "read": False
+    }
+    
+    await db.messages.insert_one(message)
+    
+    return {"success": True, "message_id": message["id"]}
+
 )
 
 logging.basicConfig(
