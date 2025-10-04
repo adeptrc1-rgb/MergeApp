@@ -130,70 +130,112 @@ export default function Connections({ user }) {
           {activeTab === 'matches' ? (
             // Matches Tab
             matches.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="text-6xl mb-6">✨</div>
-              <h3 className="text-2xl font-light text-white mb-3">No connections yet</h3>
-              <p className="text-white/40 mb-8">
-                Start swiping to find your cosmic connections
-              </p>
-              <button
-                onClick={() => navigate('/discover')}
-                className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all font-medium"
-              >
-                Start Discovering
-              </button>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {matches.map((match) => {
-                const otherUser = match.user1_id === user.id ? match.user2 : match.user1;
-                const energy = getEnergyLevel(match);
-                
-                return (
-                  <div
-                    key={match.id}
-                    onClick={() => openChat(match.id)}
-                    className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
-                  >
-                    {/* Profile Photo */}
+              <div className="text-center py-20">
+                <div className="text-6xl mb-6">💫</div>
+                <h3 className="text-2xl font-light text-white mb-3">No matches yet</h3>
+                <p className="text-white/40 mb-8">
+                  Start swiping to find your cosmic connections
+                </p>
+                <button
+                  onClick={() => navigate('/home')}
+                  className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all font-medium"
+                >
+                  Start Swiping
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {matches.map((match) => {
+                  const otherUser = match.user1_id === user.id ? match.user2 : match.user1;
+                  const energy = getEnergyLevel(match);
+                  
+                  return (
                     <div
-                      className="w-20 h-20 rounded-2xl bg-cover bg-center flex-shrink-0"
-                      style={{
-                        backgroundImage: `url(${otherUser.photos?.[0] || 'https://via.placeholder.com/200'})`
-                      }}
-                    />
+                      key={match.id}
+                      onClick={() => openChat(match.id)}
+                      className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
+                    >
+                      {/* Profile Photo */}
+                      <div
+                        className="w-20 h-20 rounded-2xl bg-cover bg-center flex-shrink-0"
+                        style={{
+                          backgroundImage: `url(${otherUser.photos?.[0] || 'https://via.placeholder.com/200'})`
+                        }}
+                      />
 
-                    {/* Profile Info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-2xl font-light text-white">
+                      {/* Profile Info */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-2xl font-light text-white mb-1">
                           {otherUser.first_name} {otherUser.last_name || 'Owens'}
                         </h3>
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-16 h-1.5 bg-white/20 rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-purple-400 rounded-full"
-                              style={{ width: `${(match.compatibility_score || 70)}%` }}
-                            />
-                          </div>
-                          <span className="text-white/40 text-xs">
-                            {energy.text}
-                          </span>
+                        <p className={`text-sm ${energy.color}`}>
+                          {energy.text}
+                        </p>
+                      </div>
+
+                      {/* Arrow Icon */}
+                      <div className="text-white/40 group-hover:text-white/60 transition-colors">
+                        <MessageCircle className="w-6 h-6" />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )
+          ) : (
+            // Likes You Tab
+            likes.length === 0 ? (
+              <div className="text-center py-20">
+                <div className="text-6xl mb-6">❤️</div>
+                <h3 className="text-2xl font-light text-white mb-3">No likes yet</h3>
+                <p className="text-white/40 mb-8">
+                  Keep swiping to find people who appreciate your energy
+                </p>
+                <button
+                  onClick={() => navigate('/home')}
+                  className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all font-medium"
+                >
+                  Continue Swiping
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {likes.map((likedUser) => {
+                  const age = calculateAge(likedUser.birth_date);
+                  
+                  return (
+                    <div
+                      key={likedUser.id}
+                      className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
+                    >
+                      {/* Profile Photo */}
+                      <div
+                        className="w-20 h-20 rounded-2xl bg-cover bg-center flex-shrink-0"
+                        style={{
+                          backgroundImage: `url(${likedUser.photos?.[0] || 'https://via.placeholder.com/200'})`
+                        }}
+                      />
+
+                      {/* Profile Info */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-2xl font-light text-white mb-1">
+                          {likedUser.first_name}, {age}
+                        </h3>
+                        <div className="flex items-center gap-2 text-white/60">
+                          <Star className="w-4 h-4 text-purple-400" />
+                          <span>{likedUser.zodiac_sign}</span>
                         </div>
                       </div>
-                      <p className={`text-sm ${energy.color}`}>
-                        {energy.text}
-                      </p>
-                    </div>
 
-                    {/* Arrow Icon */}
-                    <div className="text-white/40 group-hover:text-white/60 transition-colors">
-                      <MessageCircle className="w-6 h-6" />
+                      {/* Like Badge */}
+                      <div className="bg-pink-500/20 px-4 py-2 rounded-full border border-pink-500/30">
+                        <Heart className="w-5 h-5 text-pink-400 fill-pink-400" />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )
           )}
         </div>
       </div>
