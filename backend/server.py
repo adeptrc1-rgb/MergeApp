@@ -293,14 +293,14 @@ def calculate_lifestyle_compatibility(user1_sliders: LifestyleSliders, user2_sli
         if difference <= 1:  # Alignment within ±1 = +points
             field_score = 100 - (difference * 10)
         elif difference >= 3:  # Mismatch difference ≥3 = –points
-            # Weighted mismatch: stronger penalty for extreme differences
-            penalty = 40 + (difference - 3) * 20
-            # Don't penalize high-priority users as much
+            # Stronger penalty for extreme differences
+            penalty = 60 + (difference - 3) * 30
+            # Don't penalize high-priority users as much, but still significant penalty
             if max(user1_val, user2_val) == 5:
-                penalty *= 0.7
+                penalty *= 0.8
             field_score = max(0, 100 - penalty)
         else:  # Difference of 2
-            field_score = 70 - (difference * 5)
+            field_score = 60 - (difference * 10)
         
         # Weight important categories more
         weight = 1.5 if field in ['family_future', 'dating_approach', 'career_ambition'] else 1.0
