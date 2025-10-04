@@ -896,6 +896,30 @@ async def swipe_user(swipe_data: dict, user: User = Depends(get_current_user)):
                         user.current_location.longitude,
                         swiped_user.current_location.latitude,
                         swiped_user.current_location.longitude
+
+
+@api_router.delete("/users/undo-swipe/{swiped_id}")
+async def undo_swipe(swiped_id: str, user: User = Depends(get_current_user)):
+    """Undo the last swipe on a user"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Delete the swipe record
+    result = await db.swipes.delete_one({
+        "swiper_id": user.id,
+        "swiped_id": swiped_id
+    })
+    
+    # Also delete match if it exists
+    await db.matches.delete_one({
+        "$or": [
+            {"user1_id": user.id, "user2_id": swiped_id},
+            {"user1_id": swiped_id, "user2_id": user.id}
+        ]
+    })
+    
+    return {"success": True, "deleted_count": result.deleted_count}
+
                     )
                     geographic_score = calculate_geographic_score(distance_km)
                 
