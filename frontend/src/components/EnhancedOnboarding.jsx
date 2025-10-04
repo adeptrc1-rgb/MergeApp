@@ -720,47 +720,60 @@ export default function EnhancedOnboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+      {/* Sunset Background - matching landing page */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913')`,
+          filter: 'brightness(0.8)',
+          animation: 'subtle-move 20s ease-in-out infinite'
+        }}
+      ></div>
+      
+      {/* Moving gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/20 via-orange-300/10 via-red-400/10 via-pink-400/10 to-purple-900/20"></div>
+      
+      <div className="w-full max-w-2xl relative z-10">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-gray-600">Profile Setup</span>
-            <span className="text-sm font-semibold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-              {step} of 5
+            <span className="text-sm font-semibold text-white drop-shadow-lg">Profile Setup</span>
+            <span className="text-sm font-semibold text-white drop-shadow-lg">
+              {step} of 6
             </span>
           </div>
-          <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+          <div className="h-3 bg-white/20 backdrop-blur-sm rounded-full overflow-hidden shadow-lg border-2 border-white/30">
             <div 
-              className="h-full bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500 ease-out shadow-lg"
-              style={{ width: `${(step / 5) * 100}%` }}
+              className="h-full bg-gradient-to-r from-rose-400 via-pink-400 to-orange-400 rounded-full transition-all duration-500 ease-out shadow-lg"
+              style={{ width: `${(step / 6) * 100}%` }}
             ></div>
           </div>
         </div>
 
         {/* Main Card */}
-        <Card className="border-2 border-gray-100 shadow-2xl rounded-3xl overflow-hidden backdrop-blur-sm bg-white/95">
+        <Card className="border-2 border-white/40 shadow-2xl rounded-3xl overflow-hidden backdrop-blur-md bg-white/10">
           <CardContent className="p-8">
             {renderStep()}
             
             {/* Navigation Buttons */}
-            <div className="flex gap-3 mt-8 pt-6 border-t-2 border-gray-100">
+            <div className="flex gap-3 mt-8 pt-6 border-t-2 border-white/30">
               {step > 1 && (
                 <Button
                   onClick={() => setStep(step - 1)}
                   variant="outline"
-                  className="flex-1 h-12 border-2 border-gray-200 hover:border-gray-300 rounded-xl font-semibold"
+                  className="flex-1 h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white hover:border-white hover:bg-white/30 rounded-xl font-semibold"
                 >
                   <ChevronLeft className="w-5 h-5 mr-1" />
                   Back
                 </Button>
               )}
               
-              {step < 5 ? (
+              {step < 6 ? (
                 <Button
                   onClick={() => setStep(step + 1)}
-                  className="flex-1 h-12 bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 rounded-xl font-semibold shadow-lg shadow-purple-500/30"
-                  disabled={step === 1 && !formData.birth_date}
+                  className="flex-1 h-12 bg-gradient-to-r from-rose-400 via-pink-500 to-orange-400 hover:from-rose-500 hover:via-pink-600 hover:to-orange-500 text-white rounded-xl font-semibold shadow-lg"
+                  disabled={(step === 1 && !formData.first_name) || (step === 2 && !formData.birth_date)}
                 >
                   Continue
                   <ChevronRight className="w-5 h-5 ml-1" />
@@ -768,7 +781,7 @@ export default function EnhancedOnboarding() {
               ) : (
                 <Button
                   onClick={handleComplete}
-                  className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 rounded-xl font-semibold shadow-lg shadow-emerald-500/30"
+                  className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white rounded-xl font-semibold shadow-lg"
                   disabled={loading}
                 >
                   {loading ? (
