@@ -23,6 +23,7 @@ import Home from './components/Home';
 import Messages from './components/Messages';
 import Connections from './components/Connections';
 import Profile from './components/Profile';
+import Settings from './components/Settings';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
