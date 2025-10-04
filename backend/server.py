@@ -202,14 +202,6 @@ class Session(BaseModel):
     expires_at: datetime
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
-class UserPenalty(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    user_id: str
-    penalty_type: str  # "no_response", "slow_response"
-    penalty_amount: float
-    match_id: str
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
 # Helper functions
 def get_zodiac_sign(birth_date: date) -> str:
     """Calculate zodiac sign from birth date"""
