@@ -36,14 +36,8 @@ const ELEMENT_MAP = {
 export default function Discover({ user }) {
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [swipeDirection, setSwipeDirection] = useState(null);
-  const [showDetails, setShowDetails] = useState(false);
-  const [dragStart, setDragStart] = useState(null);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [swipeHistory, setSwipeHistory] = useState([]);
+  const [activeFilter, setActiveFilter] = useState('compatible'); // 'compatible' or 'trending'
 
   useEffect(() => {
     loadMatches();
@@ -59,79 +53,9 @@ export default function Discover({ user }) {
     setLoading(false);
   };
 
-  const currentMatch = matches[currentIndex];
-
-  const handleLike = async () => {
-    if (!currentMatch) return;
-    setSwipeDirection('right');
-    
-    // Save to history
-    setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'like', userId: currentMatch.id }]);
-    
-    try {
-      await axios.post(`${API}/users/like/${currentMatch.id}`);
-      const matchResponse = await axios.get(`${API}/users/check-match/${currentMatch.id}`);
-      if (matchResponse.data.is_match) {
-        alert(`🎉 It's a match! You and ${currentMatch.first_name} both liked each other!`);
-      }
-    } catch (error) {
-      console.error('Error liking:', error);
-    }
-    
-    setTimeout(() => {
-      setCurrentIndex(currentIndex + 1);
-      setSwipeDirection(null);
-      setCurrentPhotoIndex(0);
-      setShowDetails(false);
-    }, 300);
-  };
-
-  const handlePass = async () => {
-    if (!currentMatch) return;
-    setSwipeDirection('left');
-    
-    // Save to history
-    setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'pass', userId: currentMatch.id }]);
-    
-    try {
-      await axios.post(`${API}/users/pass/${currentMatch.id}`);
-    } catch (error) {
-      console.error('Error passing:', error);
-    }
-    
-    setTimeout(() => {
-      setCurrentIndex(currentIndex + 1);
-      setSwipeDirection(null);
-      setCurrentPhotoIndex(0);
-      setShowDetails(false);
-    }, 300);
-  };
-
-  const handleUndo = async () => {
-    if (swipeHistory.length === 0) return;
-    
-    const lastSwipe = swipeHistory[swipeHistory.length - 1];
-    
-    try {
-      await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
-      setSwipeHistory(swipeHistory.slice(0, -1));
-      setCurrentIndex(Math.max(0, currentIndex - 1));
-      setCurrentPhotoIndex(0);
-    } catch (error) {
-      console.error('Error undoing swipe:', error);
-    }
-  };
-
-  const nextPhoto = () => {
-    if (currentMatch?.photos && currentPhotoIndex < currentMatch.photos.length - 1) {
-      setCurrentPhotoIndex(currentPhotoIndex + 1);
-    }
-  };
-
-  const prevPhoto = () => {
-    if (currentPhotoIndex > 0) {
-      setCurrentPhotoIndex(currentPhotoIndex - 1);
-    }
+  const handleProfileClick = (match) => {
+    // Navigate to detailed profile view or handle interaction
+    console.log('Profile clicked:', match);
   };
 
   if (loading) {
