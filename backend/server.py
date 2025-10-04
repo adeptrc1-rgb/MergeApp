@@ -999,6 +999,78 @@ async def undo_swipe(swiped_id: str, user: User = Depends(get_current_user)):
     
     return {"success": True, "deleted_count": result.deleted_count}
 
+@api_router.post("/users/super-like/{swiped_id}")
+async def super_like_user(swiped_id: str, user: User = Depends(get_current_user)):
+    """Super like a user (uses one super like from user's balance)"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Check if user has super likes available
+    user_data = await db.users.find_one({"id": user.id})
+    if not user_data or user_data.get("super_likes", 0) <= 0:
+        raise HTTPException(status_code=400, detail="No super likes remaining")
+    
+    # Check if already swiped
+    existing_swipe = await db.swipes.find_one({
+        "swiper_id": user.id,
+        "swiped_id": swiped_id
+    })
+    
+    if existing_swipe:
+        raise HTTPException(status_code=400, detail="Already swiped on this user")
+    
+    # Create swipe with super_like flag
+    swipe = Swipe(
+        swiper_id=user.id,
+        swiped_id=swiped_id,
+        liked=True
+    )
+    swipe_dict = swipe.dict()
+    swipe_dict["super_like"] = True
+    
+    await db.swipes.insert_one(swipe_dict)
+    
+    # Decrement super likes
+    await db.users.update_one(
+        {"id": user.id},
+        {"$inc": {"super_likes": -1}}
+    )
+    
+    # Check for mutual match
+    mutual_swipe = await db.swipes.find_one({
+        "swiper_id": swiped_id,
+        "swiped_id": user.id,
+        "liked": True
+    })
+    
+    is_match = mutual_swipe is not None
+    
+    if is_match:
+        # Create match if doesn't exist
+        existing_match = await db.matches.find_one({
+            "$or": [
+                {"user1_id": user.id, "user2_id": swiped_id},
+                {"user1_id": swiped_id, "user2_id": user.id}
+            ]
+        })
+        
+        if not existing_match:
+            match_id = str(uuid.uuid4())
+            match = {
+                "id": match_id,
+                "user1_id": user.id,
+                "user2_id": swiped_id,
+                "matched_at": datetime.now(timezone.utc),
+                "status": "matched"
+            }
+            await db.matches.insert_one(match)
+    
+    return {
+        "success": True,
+        "is_match": is_match,
+        "super_likes_remaining": user_data.get("super_likes", 0) - 1
+    }
+
 @api_router.get("/matches")
 async def get_matches(user: User = Depends(get_current_user)):
     """Get user's matches with responsiveness tracking"""
