@@ -452,58 +452,58 @@ export default function Home({ user }) {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Action Buttons - Positioned to overlap bottom of card */}
-          <div className="absolute -bottom-10 left-0 right-0 flex items-center justify-center gap-4 px-4 z-20">
-            {/* Reverse Button */}
-            <button
-              onClick={handleUndo}
-              disabled={swipeHistory.length === 0}
-              className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
-              title="Undo"
-            >
-              <RotateCcw className="w-5 h-5 text-yellow-400" />
-            </button>
+        {/* Action Buttons - Stationary, positioned below card */}
+        <div className="w-full max-w-md mt-8 flex items-center justify-center gap-4 px-4">
+          {/* Reverse Button */}
+          <button
+            onClick={handleUndo}
+            disabled={swipeHistory.length === 0}
+            className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
+            title="Undo"
+          >
+            <RotateCcw className="w-5 h-5 text-yellow-400" />
+          </button>
 
-            {/* Pass Button */}
-            <button
-              ref={passButtonRef}
-              onClick={handlePass}
-              className="bg-white rounded-full p-4 hover:scale-110 transition-all shadow-2xl"
-              title="Pass"
-            >
-              <X className="w-7 h-7 text-red-500" />
-            </button>
+          {/* Pass Button */}
+          <button
+            ref={passButtonRef}
+            onClick={handlePass}
+            className="bg-white rounded-full p-4 hover:scale-110 transition-all shadow-2xl"
+            title="Pass"
+          >
+            <X className="w-7 h-7 text-red-500" />
+          </button>
 
-            {/* Super Like Button */}
-            <button
-              ref={superLikeButtonRef}
-              onClick={handleSuperLike}
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3 hover:scale-110 transition-all shadow-2xl"
-              title="Super Like"
-            >
-              <Star className="w-6 h-6 text-white fill-white" />
-            </button>
+          {/* Super Like Button */}
+          <button
+            ref={superLikeButtonRef}
+            onClick={handleSuperLike}
+            className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3 hover:scale-110 transition-all shadow-2xl"
+            title="Super Like"
+          >
+            <Star className="w-6 h-6 text-white fill-white" />
+          </button>
 
-            {/* Like Button */}
-            <button
-              ref={likeButtonRef}
-              onClick={handleLike}
-              className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-5 hover:scale-110 transition-all shadow-2xl cosmic-glow"
-              title="Like"
-            >
-              <Heart className="w-8 h-8 text-white fill-white" />
-            </button>
+          {/* Like Button */}
+          <button
+            ref={likeButtonRef}
+            onClick={handleLike}
+            className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-5 hover:scale-110 transition-all shadow-2xl cosmic-glow"
+            title="Like"
+          >
+            <Heart className="w-8 h-8 text-white fill-white" />
+          </button>
 
-            {/* Direct Message Button */}
-            <button
-              onClick={handleDirectMessage}
-              className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 transition-all shadow-xl hover:scale-110 border border-white/20"
-              title="Direct Message"
-            >
-              <MessageCircle className="w-5 h-5 text-purple-400" />
-            </button>
-          </div>
+          {/* Direct Message Button */}
+          <button
+            onClick={handleDirectMessage}
+            className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 transition-all shadow-xl hover:scale-110 border border-white/20"
+            title="Direct Message"
+          >
+            <MessageCircle className="w-5 h-5 text-purple-400" />
+          </button>
         </div>
       </div>
 
