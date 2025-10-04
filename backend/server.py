@@ -580,7 +580,7 @@ async def logout(response: Response, user: User = Depends(get_current_user)):
 # Enhanced User endpoints
 @api_router.post("/users/complete-profile")
 async def complete_profile(profile_data: UserCreate, user: User = Depends(get_current_user)):
-    """Complete user profile with enhanced location data"""
+    """Complete user profile with enhanced fields"""
     if not user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
@@ -594,37 +594,53 @@ async def complete_profile(profile_data: UserCreate, user: User = Depends(get_cu
     update_data = {
         "birth_date": birth_date.isoformat(),
         "zodiac_sign": zodiac_sign,
-        "needs_onboarding": False
+        "needs_onboarding": False,
+        "profile_completed": True
     }
     
+    # Basic fields
     if profile_data.birth_time:
         update_data["birth_time"] = profile_data.birth_time
+    if profile_data.bio:
+        update_data["bio"] = profile_data.bio
+    if profile_data.interests:
+        update_data["interests"] = profile_data.interests
+    
+    # Enhanced profile fields
+    if profile_data.gender_identity:
+        update_data["gender_identity"] = profile_data.gender_identity
+    if profile_data.gender_self_describe:
+        update_data["gender_self_describe"] = profile_data.gender_self_describe
+    if profile_data.open_to_dating:
+        update_data["open_to_dating"] = profile_data.open_to_dating
+    if profile_data.orientation_visible is not None:
+        update_data["orientation_visible"] = profile_data.orientation_visible
+    if profile_data.industry:
+        update_data["industry"] = profile_data.industry
+    if profile_data.relationship_goals:
+        update_data["relationship_goals"] = profile_data.relationship_goals
+    
+    # Lifestyle sliders
+    if profile_data.lifestyle_sliders:
+        lifestyle_data = LifestyleSliders(**profile_data.lifestyle_sliders)
+        update_data["lifestyle_sliders"] = lifestyle_data.dict()
     
     # Process locations
     if profile_data.birth_location:
         update_data["birth_location"] = profile_data.birth_location
     elif profile_data.hometown:
-        # Use hometown as birth location if not specified
         update_data["birth_location"] = profile_data.hometown
     
     if profile_data.hometown:
         update_data["hometown"] = profile_data.hometown
-    
     if profile_data.current_location:
         update_data["current_location"] = profile_data.current_location
     
-    if profile_data.bio:
-        update_data["bio"] = profile_data.bio
-    
-    if profile_data.interests:
-        update_data["interests"] = profile_data.interests
-    
+    # Preferences
     if profile_data.age_range_min is not None:
         update_data["age_range_min"] = profile_data.age_range_min
-    
     if profile_data.age_range_max is not None:
         update_data["age_range_max"] = profile_data.age_range_max
-    
     if profile_data.max_distance_km is not None:
         update_data["max_distance_km"] = profile_data.max_distance_km
     
