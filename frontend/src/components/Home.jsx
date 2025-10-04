@@ -356,6 +356,7 @@ export default function Home({ user }) {
 
             {/* Pass Button */}
             <button
+              ref={passButtonRef}
               onClick={handlePass}
               className="bg-white/5 rounded-full p-5 hover:bg-white/10 transition-all border border-white/10 hover:scale-110"
               title="Pass"
@@ -365,6 +366,7 @@ export default function Home({ user }) {
 
             {/* Super Like Button */}
             <button
+              ref={superLikeButtonRef}
               onClick={handleSuperLike}
               className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-4 hover:scale-110 transition-all shadow-xl"
               title="Super Like"
@@ -374,8 +376,9 @@ export default function Home({ user }) {
 
             {/* Like Button */}
             <button
+              ref={likeButtonRef}
               onClick={handleLike}
-              className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-6 hover:scale-110 transition-all shadow-xl"
+              className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-6 hover:scale-110 transition-all shadow-xl cosmic-glow"
               title="Like"
             >
               <Heart className="w-9 h-9 text-white fill-white" />
