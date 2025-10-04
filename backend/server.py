@@ -165,6 +165,7 @@ class Match(BaseModel):
     user1_id: str
     user2_id: str
     compatibility_score: float
+    compatibility_breakdown: Optional[Dict[str, Any]] = None
     compatibility_report: str
     geographic_score: float
     distance_km: Optional[float] = None
@@ -174,7 +175,18 @@ class Match(BaseModel):
     user2_liked: Optional[bool] = None
     user1_response_time: Optional[datetime] = None
     user2_response_time: Optional[datetime] = None
-    expires_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc) + timedelta(hours=72))
+    expires_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc) + timedelta(hours=24))
+
+class ResponseBehavior(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    action_type: str  # "responded_quickly", "expired_match", "ghosted", "continued_conversation"
+    match_id: str
+    response_time_hours: Optional[float] = None
+    compatibility_level: str  # "high", "medium", "low"
+    penalty_applied: float = 0.0
+    reward_applied: float = 0.0
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class Swipe(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
