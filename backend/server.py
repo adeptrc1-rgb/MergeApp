@@ -525,24 +525,6 @@ def calculate_angel_number(birth_date: date) -> str:
         # For single digits, create triple digit angel number
         return str(total) * 3
 
-        user_id=user_id,
-        action_type=action_type,
-        match_id=match_id,
-        response_time_hours=response_time_hours,
-        compatibility_level=compatibility_level,
-        penalty_applied=penalty,
-        reward_applied=reward
-    )
-    
-    await db.response_behaviors.insert_one(behavior.dict())
-    
-    # Update user score
-    score_change = reward - penalty
-    await db.users.update_one(
-        {"id": user_id},
-        {"$inc": {"response_score": score_change}}
-    )
-
 async def get_current_user(session_token: Optional[str] = Cookie(None), authorization: Optional[str] = Header(None)) -> Optional[User]:
     """Get current user from session token"""
     token = session_token
