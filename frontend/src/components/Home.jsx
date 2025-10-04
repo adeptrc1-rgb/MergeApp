@@ -102,6 +102,18 @@ export default function Home({ user }) {
     }
     
     setSwipeDirection('up');
+    
+    // Create star burst effect from center going up
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      
+      createStarburstEffect(x, y);
+      createHeartBurst(x, y - 50);
+      createStardustTrail(x, y, 20);
+    }
+    
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'superlike', userId: currentMatch.id }]);
     
     try {
