@@ -649,15 +649,19 @@ export default function EnhancedOnboarding() {
                 <Label className="text-sm font-semibold text-gray-700 mb-3 block">Maximum Distance</Label>
                 <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-5 rounded-xl border-2 border-emerald-100">
                   <Slider
-                    value={[formData.max_distance_km]}
-                    onValueChange={(value) => setFormData({...formData, max_distance_km: value[0]})}
+                    value={[formData.max_distance_miles]}
+                    onValueChange={(value) => {
+                      const miles = value[0];
+                      const km = Math.round(miles * 1.60934);
+                      setFormData({...formData, max_distance_miles: miles, max_distance_km: km});
+                    }}
                     min={5}
-                    max={200}
+                    max={125}
                     step={5}
                     className="mb-4"
                   />
                   <p className="text-sm text-gray-600 text-center">
-                    Show matches within <span className="font-bold text-emerald-600">{formData.max_distance_km} km</span>
+                    Show matches within <span className="font-bold text-emerald-600">{formData.max_distance_miles} miles</span>
                   </p>
                 </div>
               </div>
