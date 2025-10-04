@@ -18,6 +18,9 @@ import EnhancedDashboard from './components/EnhancedDashboard';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+// Configure axios to always send cookies
+axios.defaults.withCredentials = true;
 const API = `${BACKEND_URL}/api`;
 
 // Auth Context
