@@ -178,6 +178,30 @@ export default function EnhancedOnboarding() {
 
   const [locationSearch, setLocationSearch] = useState('');
 
+  // Auto-detect current location on component mount
+  React.useEffect(() => {
+    if (navigator.geolocation && !formData.current_location) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // Set a default current location based on coordinates
+          // In a real app, you'd reverse geocode this to get city name
+          setFormData(prev => ({
+            ...prev,
+            current_location: {
+              city: "Your Location",
+              country: "Auto-detected",
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            }
+          }));
+        },
+        (error) => {
+          console.log("Geolocation not available, will use default");
+        }
+      );
+    }
+  }, []);
+
   // Mock location search
   const searchLocations = (query) => {
     const mockLocations = [
