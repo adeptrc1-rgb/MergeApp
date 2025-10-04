@@ -1050,6 +1050,129 @@ async def health_check():
 async def root():
     return {"message": "A Sign - Astrology Dating API"}
 
+
+# ============================================================================
+# ASTROLOGY FEATURES
+# ============================================================================
+
+# Daily horoscopes for each sign
+DAILY_HOROSCOPES = {
+    "Aries": ["Your energy is contagious today! Share it with someone special.", "A bold move could lead to exciting connections.", "Adventure awaits - take the first step!"],
+    "Taurus": ["Comfort and connection go hand in hand today.", "Someone appreciates your steady presence.", "Indulge in something that makes you feel good."],
+    "Gemini": ["Your words have power today - use them wisely.", "A deep conversation could spark something new.", "Curiosity leads to interesting discoveries."],
+    "Cancer": ["Your intuition is especially strong today.", "Emotional connections deepen naturally.", "Trust your feelings about new connections."],
+    "Leo": ["Your confidence is magnetic today!", "Someone notices your authentic self.", "Shine bright and let your personality lead."],
+    "Virgo": ["Attention to detail pays off in relationships.", "Small gestures make big impressions today.", "Organization brings unexpected opportunities."],
+    "Libra": ["Balance brings beautiful connections today.", "Your charm opens new doors.", "Harmony with others feels effortless."],
+    "Scorpio": ["Intensity draws the right people to you.", "Deep connections are favored today.", "Trust your passionate nature."],
+    "Sagittarius": ["Adventure and romance align perfectly!", "Your optimism is contagious.", "Someone shares your wanderlust."],
+    "Capricorn": ["Your ambition is attractive to others.", "Stability creates space for romance.", "Long-term thinking brings rewards."],
+    "Aquarius": ["Your unique perspective attracts kindred spirits.", "Innovation meets connection today.", "Be authentically you."],
+    "Pisces": ["Your empathy creates magical moments.", "Dreams and reality align beautifully.", "Creativity sparks romantic possibilities."]
+}
+
+@api_router.get("/astrology/daily-horoscope/{zodiac_sign}")
+async def get_daily_horoscope(zodiac_sign: str):
+    """Get daily horoscope for a zodiac sign"""
+    import random
+    horoscopes = DAILY_HOROSCOPES.get(zodiac_sign, ["The stars align in your favor today!"])
+    message = random.choice(horoscopes)
+    
+    return {
+        "zodiac_sign": zodiac_sign,
+        "message": message,
+        "date": datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    }
+
+@api_router.get("/users/check-match/{swiped_id}")
+async def check_mutual_match(swiped_id: str, user: User = Depends(get_current_user)):
+    """Check if there's a mutual match"""
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Check if other user has also liked this user
+    other_like = await db.swipes.find_one({
+        "swiper_id": swiped_id,
+        "swiped_id": user.id,
+        "action": "like"
+    })
+    
+    user_like = await db.swipes.find_one({
+        "swiper_id": user.id,
+        "swiped_id": swiped_id,
+        "action": "like"
+    })
+    
+    is_match = other_like is not None and user_like is not None
+    
+    if is_match:
+        # Check if match already exists
+        existing_match = await db.matches.find_one({
+            "$or": [
+                {"user1_id": user.id, "user2_id": swiped_id},
+                {"user1_id": swiped_id, "user2_id": user.id}
+            ]
+        })
+        
+        if not existing_match:
+            # Create new match
+            match_id = str(uuid.uuid4())
+            match = {
+                "id": match_id,
+                "user1_id": user.id,
+                "user2_id": swiped_id,
+                "matched_at": datetime.now(timezone.utc),
+                "status": "matched",
+                "expires_at": datetime.now(timezone.utc) + timedelta(hours=24),
+                "compatibility_score": 75  # Calculate this properly
+            }
+            await db.matches.insert_one(match)
+    
+    return {
+        "is_match": is_match,
+        "swiped_id": swiped_id
+    }
+
+@api_router.get("/astrology/compatibility-insight")
+async def get_compatibility_insight(sign1: str, sign2: str):
+    """Get compatibility insight between two zodiac signs"""
+    
+    # Element compatibility
+    element_map = {
+        'Aries': 'Fire', 'Leo': 'Fire', 'Sagittarius': 'Fire',
+        'Taurus': 'Earth', 'Virgo': 'Earth', 'Capricorn': 'Earth',
+        'Gemini': 'Air', 'Libra': 'Air', 'Aquarius': 'Air',
+        'Cancer': 'Water', 'Scorpio': 'Water', 'Pisces': 'Water'
+    }
+    
+    element1 = element_map.get(sign1, "Unknown")
+    element2 = element_map.get(sign2, "Unknown")
+    
+    # Compatibility insights
+    insights = {
+        ("Fire", "Fire"): "Dynamic and passionate! You both share high energy and enthusiasm.",
+        ("Fire", "Air"): "Exciting combination! Air fans Fire's flames, creating spark and adventure.",
+        ("Fire", "Earth"): "Challenging but rewarding. Fire's passion meets Earth's stability.",
+        ("Fire", "Water"): "Steamy but complex. Fire and Water create intense chemistry.",
+        ("Earth", "Earth"): "Grounded and stable! You both value security and loyalty.",
+        ("Earth", "Air"): "Different approaches, but complementary. Earth grounds Air's ideas.",
+        ("Earth", "Water"): "Natural harmony! Earth provides structure for Water's emotions.",
+        ("Air", "Air"): "Intellectual connection! You'll never run out of things to discuss.",
+        ("Air", "Water"): "Mysterious attraction. Air brings lightness to Water's depth.",
+        ("Water", "Water"): "Deep emotional bond! You intuitively understand each other."
+    }
+    
+    key = (element1, element2) if (element1, element2) in insights else (element2, element1)
+    insight = insights.get(key, "Unique and interesting dynamic between your signs!")
+    
+    return {
+        "sign1": sign1,
+        "sign2": sign2,
+        "element1": element1,
+        "element2": element2,
+        "insight": insight
+    }
+
 app.include_router(api_router)
 
 # CORS middleware
