@@ -280,10 +280,10 @@ export default function InteractiveOnboarding() {
         <div className="space-y-6 animate-fadeIn">
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">✨</div>
-            <h2 className="text-4xl font-bold text-white drop-shadow-lg mb-2">
+            <h2 className="text-4xl font-light text-white mb-2">
               What's your name?
             </h2>
-            <p className="text-white/90">This will appear on your profile</p>
+            <p className="text-white/60">This will appear on your profile</p>
           </div>
 
           <div className="space-y-5">
@@ -292,14 +292,14 @@ export default function InteractiveOnboarding() {
               placeholder="First name"
               value={formData.first_name}
               onChange={(e) => setFormData({...formData, first_name: e.target.value})}
-              className="h-16 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-2xl transition-all text-xl text-center"
+              className="h-16 border border-white/20 bg-white/5 backdrop-blur-md text-white placeholder:text-white/40 focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all text-xl text-center"
             />
             <Input
               type="text"
               placeholder="Last name (optional)"
               value={formData.last_name}
               onChange={(e) => setFormData({...formData, last_name: e.target.value})}
-              className="h-16 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-2xl transition-all text-xl text-center"
+              className="h-16 border border-white/20 bg-white/5 backdrop-blur-md text-white placeholder:text-white/40 focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all text-xl text-center"
             />
           </div>
         </div>
