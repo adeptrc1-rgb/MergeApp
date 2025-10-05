@@ -214,20 +214,20 @@ export default function InteractiveOnboarding() {
         <div className="space-y-8 animate-fadeIn">
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">🎂</div>
-            <h2 className="text-4xl font-bold text-white drop-shadow-lg mb-2">
+            <h2 className="text-4xl font-light text-white mb-2">
               When were you born?
             </h2>
-            <p className="text-white/90 text-lg">Select your birthday</p>
+            <p className="text-white/60 text-lg">Select your birthday</p>
           </div>
 
           <div className="flex justify-center gap-4">
             {/* Month Wheel */}
             <div className="flex flex-col items-center">
-              <label className="text-white/80 text-sm mb-2 drop-shadow">Month</label>
+              <label className="text-white/60 text-sm mb-2 font-light">Month</label>
               <select
                 value={formData.birth_month}
                 onChange={(e) => setFormData({...formData, birth_month: parseInt(e.target.value)})}
-                className="h-16 w-24 px-3 bg-white/20 backdrop-blur-md border-2 border-white/40 rounded-2xl text-white text-center text-xl font-bold focus:border-white focus:bg-white/30 transition-all cursor-pointer"
+                className="h-16 w-24 px-3 bg-white/5 backdrop-blur-md border border-white/20 rounded-2xl text-white text-center text-xl font-light focus:border-purple-500 focus:bg-white/10 transition-all cursor-pointer"
                 style={{ colorScheme: 'dark' }}
               >
                 {months.map((month, idx) => (
@@ -238,11 +238,11 @@ export default function InteractiveOnboarding() {
 
             {/* Day Wheel */}
             <div className="flex flex-col items-center">
-              <label className="text-white/80 text-sm mb-2 drop-shadow">Day</label>
+              <label className="text-white/60 text-sm mb-2 font-light">Day</label>
               <select
                 value={formData.birth_day}
                 onChange={(e) => setFormData({...formData, birth_day: parseInt(e.target.value)})}
-                className="h-16 w-20 px-3 bg-white/20 backdrop-blur-md border-2 border-white/40 rounded-2xl text-white text-center text-xl font-bold focus:border-white focus:bg-white/30 transition-all cursor-pointer"
+                className="h-16 w-20 px-3 bg-white/5 backdrop-blur-md border border-white/20 rounded-2xl text-white text-center text-xl font-light focus:border-purple-500 focus:bg-white/10 transition-all cursor-pointer"
                 style={{ colorScheme: 'dark' }}
               >
                 {days.map(day => (
@@ -253,11 +253,11 @@ export default function InteractiveOnboarding() {
 
             {/* Year Wheel */}
             <div className="flex flex-col items-center">
-              <label className="text-white/80 text-sm mb-2 drop-shadow">Year</label>
+              <label className="text-white/60 text-sm mb-2 font-light">Year</label>
               <select
                 value={formData.birth_year}
                 onChange={(e) => setFormData({...formData, birth_year: parseInt(e.target.value)})}
-                className="h-16 w-28 px-3 bg-white/20 backdrop-blur-md border-2 border-white/40 rounded-2xl text-white text-center text-xl font-bold focus:border-white focus:bg-white/30 transition-all cursor-pointer"
+                className="h-16 w-28 px-3 bg-white/5 backdrop-blur-md border border-white/20 rounded-2xl text-white text-center text-xl font-light focus:border-purple-500 focus:bg-white/10 transition-all cursor-pointer"
                 style={{ colorScheme: 'dark' }}
               >
                 {years.map(year => (
@@ -267,7 +267,7 @@ export default function InteractiveOnboarding() {
             </div>
           </div>
 
-          <div className="text-center text-white/70 text-sm drop-shadow">
+          <div className="text-center text-white/50 text-sm">
             You must be 18+ to use A Sign
           </div>
         </div>
