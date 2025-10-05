@@ -350,7 +350,7 @@ export default function Home({ user }) {
       {/* Header */}
       <div className="border-b border-white/10 bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-3xl font-light text-white">A Sign</h1>
+          <img src="/asign-logo.png" alt="A Sign" className="h-10" />
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 text-purple-400">
               <Star className="w-4 h-4" />
