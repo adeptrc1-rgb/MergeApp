@@ -619,8 +619,8 @@ async def create_session(response: Response, x_session_id: str = Header(..., ali
             value=session_token,
             max_age=7 * 24 * 60 * 60,
             httponly=False,  # Allow JavaScript access
-            secure=False,  # Set to False for local development
-            samesite="lax",
+            secure=True,  # Required for HTTPS
+            samesite="none",
             path="/"
         )
         
