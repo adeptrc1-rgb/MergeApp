@@ -250,9 +250,9 @@ function LandingPage() {
           {/* Verification Step */}
           {step === 'verify' && (
             <>
-              <div className="text-center mb-6">
-                <h2 className="text-2xl font-medium text-white mb-2">Enter Code</h2>
-                <p className="text-white/80 text-sm">We sent a code to {phoneNumber}</p>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-light text-white mb-2">Enter Code</h2>
+                <p className="text-white/60 text-sm">We sent a code to {phoneNumber}</p>
               </div>
 
               <div className="relative">
@@ -260,8 +260,8 @@ function LandingPage() {
                   type="text"
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
-                  placeholder="Enter verification code"
-                  className="w-full bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-full px-6 py-4 text-white placeholder-white/70 text-center font-medium text-2xl tracking-widest focus:outline-none focus:border-white/60 transition-all"
+                  placeholder="000000"
+                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-white/30 text-center font-light text-2xl tracking-[0.5em] focus:outline-none focus:border-purple-500 focus:bg-white/15 transition-all"
                   maxLength="6"
                   data-testid="verification-input"
                 />
@@ -270,7 +270,7 @@ function LandingPage() {
               <Button 
                 onClick={handleVerifyCode}
                 disabled={!verificationCode || loading}
-                className="w-full bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-medium py-4 rounded-full text-base shadow-xl transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-4 rounded-2xl text-base shadow-2xl shadow-purple-500/20 transition-all duration-300 disabled:opacity-50"
                 data-testid="verify-code-btn"
               >
                 {loading ? 'Verifying...' : 'Verify'}
@@ -279,7 +279,7 @@ function LandingPage() {
               <div className="text-center">
                 <button
                   onClick={() => setStep('phone')}
-                  className="text-white/70 text-sm hover:text-white transition-colors"
+                  className="text-white/60 text-sm hover:text-white transition-colors"
                 >
                   ← Back to phone number
                 </button>
