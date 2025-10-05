@@ -480,7 +480,11 @@ export default function Home({ user }) {
                 <Star className="w-4 h-4 text-purple-400" />
                 <span className="text-base">{currentMatch.zodiac_sign}</span>
                 <span className="text-white/40">•</span>
-                <span className="text-sm">{ELEMENT_MAP[currentMatch.zodiac_sign]} Sign</span>
+                <span className="text-sm">
+                  {getDistance(currentMatch) !== null 
+                    ? `${getDistance(currentMatch)} miles away` 
+                    : 'Location unavailable'}
+                </span>
               </div>
 
               {/* Compatibility Badge */}
