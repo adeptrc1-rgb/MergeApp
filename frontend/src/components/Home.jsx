@@ -457,7 +457,7 @@ export default function Home({ user }) {
           </div>
 
           {/* Action Buttons - Stationary, positioned below card with proper spacing */}
-          <div className="w-full mt-4 flex items-center justify-center gap-4 px-4">
+          <div className="w-full mt-2 flex items-center justify-center gap-4 px-4">
             {/* Reverse Button */}
             <button
               onClick={(e) => {
