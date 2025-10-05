@@ -109,9 +109,9 @@ export default function Messages({ user }) {
   }
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="border-b border-white/10 bg-black">
+      <div className="border-b border-white/10 bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-6">
             <img src="/asign-logo.png" alt="A Sign" className="h-10" />
@@ -124,7 +124,7 @@ export default function Messages({ user }) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto pb-24">
+      <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-4xl mx-auto px-6 py-6">
           {conversations.length === 0 ? (
             <div className="text-center py-20">
