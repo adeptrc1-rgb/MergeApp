@@ -602,7 +602,7 @@ export default function InteractiveOnboarding() {
                   }
                 }}
                 disabled={!canContinue() || loading}
-                className="w-full h-14 bg-gradient-to-r from-rose-400 via-pink-500 to-orange-400 hover:from-rose-500 hover:via-pink-600 hover:to-orange-500 text-white rounded-2xl font-semibold text-lg shadow-lg disabled:opacity-50"
+                className="w-full h-14 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-2xl font-medium text-lg shadow-lg disabled:opacity-50"
               >
                 {loading ? 'Creating profile...' : step === 6 ? '🎉 Complete' : 'Continue'}
                 {!loading && step !== 6 && <ChevronRight className="inline ml-2" />}
