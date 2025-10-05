@@ -305,6 +305,33 @@ export default function Home({ user }) {
     return age;
   };
 
+  // Calculate distance between two locations using Haversine formula
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 3959; // Earth's radius in miles
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return Math.round(distance); // Return distance in miles, rounded
+  };
+
+  const getDistance = (match) => {
+    if (user?.current_location && match?.current_location) {
+      const distance = calculateDistance(
+        user.current_location.latitude,
+        user.current_location.longitude,
+        match.current_location.latitude,
+        match.current_location.longitude
+      );
+      return distance;
+    }
+    return null;
+  };
+
   if (loading) {
     return (
       <div className="h-screen bg-black flex items-center justify-center overflow-hidden">
