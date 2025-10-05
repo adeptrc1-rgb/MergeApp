@@ -859,12 +859,12 @@ export default function EnhancedOnboarding() {
             {renderStep()}
             
             {/* Navigation Buttons */}
-            <div className="flex gap-3 mt-8 pt-6 border-t-2 border-white/30">
+            <div className="flex gap-3 mt-8 pt-6 border-t border-white/20">
               {step > 1 && (
                 <Button
                   onClick={() => setStep(step - 1)}
                   variant="outline"
-                  className="flex-1 h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white hover:border-white hover:bg-white/30 rounded-xl font-semibold"
+                  className="flex-1 h-12 border border-white/20 bg-white/5 backdrop-blur-md text-white hover:border-white/40 hover:bg-white/10 rounded-2xl font-medium"
                 >
                   <ChevronLeft className="w-5 h-5 mr-1" />
                   Back
@@ -874,7 +874,7 @@ export default function EnhancedOnboarding() {
               {step < 6 ? (
                 <Button
                   onClick={() => setStep(step + 1)}
-                  className="flex-1 h-12 bg-gradient-to-r from-rose-400 via-pink-500 to-orange-400 hover:from-rose-500 hover:via-pink-600 hover:to-orange-500 text-white rounded-xl font-semibold shadow-lg"
+                  className="flex-1 h-12 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-2xl font-medium shadow-lg"
                   disabled={
                     (step === 1 && !formData.first_name) || 
                     (step === 2 && !formData.birth_date) ||
@@ -887,7 +887,7 @@ export default function EnhancedOnboarding() {
               ) : (
                 <Button
                   onClick={handleComplete}
-                  className="flex-1 h-12 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white rounded-xl font-semibold shadow-lg"
+                  className="flex-1 h-12 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-2xl font-medium shadow-lg"
                   disabled={loading}
                 >
                   {loading ? (
