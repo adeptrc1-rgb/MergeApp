@@ -134,16 +134,37 @@ function LandingPage() {
       {/* Very subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black"></div>
       
-      {/* Subtle cosmic particles */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute top-[10%] left-[20%] w-0.5 h-0.5 bg-purple-400 rounded-full animate-pulse"></div>
-        <div className="absolute top-[20%] right-[15%] w-1 h-1 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-        <div className="absolute top-[40%] left-[10%] w-0.5 h-0.5 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-[60%] right-[25%] w-0.5 h-0.5 bg-purple-300 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
-        <div className="absolute top-[70%] left-[30%] w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
-        <div className="absolute top-[30%] right-[40%] w-0.5 h-0.5 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
-        <div className="absolute bottom-[20%] left-[40%] w-0.5 h-0.5 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
-        <div className="absolute bottom-[30%] right-[30%] w-0.5 h-0.5 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '0.7s'}}></div>
+      {/* Distant twinkling stars */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Brighter stars with slower twinkle */}
+        <div className="absolute top-[8%] left-[15%] w-1 h-1 bg-white rounded-full animate-pulse opacity-40" style={{animationDuration: '3s'}}></div>
+        <div className="absolute top-[25%] right-[20%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-30" style={{animationDuration: '4s', animationDelay: '0.5s'}}></div>
+        <div className="absolute top-[15%] left-[45%] w-0.5 h-0.5 bg-purple-200 rounded-full animate-pulse opacity-25" style={{animationDuration: '3.5s', animationDelay: '1s'}}></div>
+        <div className="absolute top-[35%] right-[10%] w-1 h-1 bg-blue-200 rounded-full animate-pulse opacity-35" style={{animationDuration: '4.5s', animationDelay: '0.8s'}}></div>
+        <div className="absolute top-[42%] left-[8%] w-0.5 h-0.5 bg-pink-200 rounded-full animate-pulse opacity-20" style={{animationDuration: '3.8s', animationDelay: '1.5s'}}></div>
+        <div className="absolute top-[55%] right-[35%] w-1 h-1 bg-white rounded-full animate-pulse opacity-40" style={{animationDuration: '5s', animationDelay: '2s'}}></div>
+        <div className="absolute top-[48%] left-[60%] w-0.5 h-0.5 bg-purple-300 rounded-full animate-pulse opacity-30" style={{animationDuration: '3.2s', animationDelay: '0.3s'}}></div>
+        <div className="absolute top-[65%] right-[18%] w-0.5 h-0.5 bg-blue-300 rounded-full animate-pulse opacity-25" style={{animationDuration: '4.2s', animationDelay: '1.8s'}}></div>
+        <div className="absolute top-[72%] left-[25%] w-1 h-1 bg-white rounded-full animate-pulse opacity-35" style={{animationDuration: '3.6s', animationDelay: '0.9s'}}></div>
+        <div className="absolute top-[80%] right-[45%] w-0.5 h-0.5 bg-pink-300 rounded-full animate-pulse opacity-30" style={{animationDuration: '4.8s', animationDelay: '1.2s'}}></div>
+        
+        {/* Dimmer, more distant stars */}
+        <div className="absolute top-[12%] left-[35%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-15" style={{animationDuration: '5.5s', animationDelay: '2.5s'}}></div>
+        <div className="absolute top-[28%] right-[50%] w-0.5 h-0.5 bg-purple-200 rounded-full animate-pulse opacity-20" style={{animationDuration: '4.5s', animationDelay: '1.3s'}}></div>
+        <div className="absolute top-[38%] left-[70%] w-0.5 h-0.5 bg-blue-200 rounded-full animate-pulse opacity-15" style={{animationDuration: '5.2s', animationDelay: '0.6s'}}></div>
+        <div className="absolute top-[50%] right-[65%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-20" style={{animationDuration: '4.8s', animationDelay: '2.2s'}}></div>
+        <div className="absolute top-[58%] left-[40%] w-0.5 h-0.5 bg-pink-200 rounded-full animate-pulse opacity-15" style={{animationDuration: '5s', animationDelay: '1.6s'}}></div>
+        <div className="absolute top-[68%] right-[55%] w-0.5 h-0.5 bg-purple-300 rounded-full animate-pulse opacity-20" style={{animationDuration: '3.9s', animationDelay: '0.4s'}}></div>
+        <div className="absolute top-[75%] left-[55%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-15" style={{animationDuration: '4.6s', animationDelay: '2.8s'}}></div>
+        <div className="absolute top-[85%] right-[25%] w-0.5 h-0.5 bg-blue-200 rounded-full animate-pulse opacity-20" style={{animationDuration: '5.3s', animationDelay: '1.4s'}}></div>
+        
+        {/* Very faint background stars */}
+        <div className="absolute top-[18%] left-[80%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-10" style={{animationDuration: '6s', animationDelay: '3s'}}></div>
+        <div className="absolute top-[32%] right-[75%] w-0.5 h-0.5 bg-purple-200 rounded-full animate-pulse opacity-12" style={{animationDuration: '5.8s', animationDelay: '2.3s'}}></div>
+        <div className="absolute top-[45%] left-[22%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-10" style={{animationDuration: '5.5s', animationDelay: '1.7s'}}></div>
+        <div className="absolute top-[52%] right-[8%] w-0.5 h-0.5 bg-blue-200 rounded-full animate-pulse opacity-12" style={{animationDuration: '6.2s', animationDelay: '0.9s'}}></div>
+        <div className="absolute top-[62%] left-[88%] w-0.5 h-0.5 bg-pink-200 rounded-full animate-pulse opacity-10" style={{animationDuration: '5.7s', animationDelay: '2.6s'}}></div>
+        <div className="absolute top-[78%] right-[82%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-12" style={{animationDuration: '6.5s', animationDelay: '1.1s'}}></div>
       </div>
       
       {/* Main content */}
