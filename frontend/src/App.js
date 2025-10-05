@@ -1315,7 +1315,7 @@ function App() {
               path="/settings" 
               element={
                 <ProtectedRoute>
-                  <Settings />
+                  <SettingsWrapper />
                 </ProtectedRoute>
               } 
             />
