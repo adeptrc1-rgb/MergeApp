@@ -210,14 +210,16 @@ export default function Home({ user }) {
   };
 
   const nextPhoto = () => {
-    if (currentMatch?.photos && currentPhotoIndex < currentMatch.photos.length - 1) {
-      setCurrentPhotoIndex(currentPhotoIndex + 1);
+    if (currentMatch?.photos && currentMatch.photos.length > 0) {
+      // Loop back to first photo when reaching the end
+      setCurrentPhotoIndex((currentPhotoIndex + 1) % currentMatch.photos.length);
     }
   };
 
   const prevPhoto = () => {
-    if (currentPhotoIndex > 0) {
-      setCurrentPhotoIndex(currentPhotoIndex - 1);
+    if (currentMatch?.photos && currentMatch.photos.length > 0) {
+      // Loop to last photo when going back from first
+      setCurrentPhotoIndex(currentPhotoIndex > 0 ? currentPhotoIndex - 1 : currentMatch.photos.length - 1);
     }
   };
 
