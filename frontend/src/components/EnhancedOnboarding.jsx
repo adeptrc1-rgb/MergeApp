@@ -822,39 +822,39 @@ export default function EnhancedOnboarding() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
-      {/* Sunset Background - matching landing page */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913')`,
-          filter: 'brightness(0.8)',
-          animation: 'subtle-move 20s ease-in-out infinite'
-        }}
-      ></div>
+    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden bg-black">
+      {/* Cosmic gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-black"></div>
       
-      {/* Moving gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/20 via-orange-300/10 via-red-400/10 via-pink-400/10 to-purple-900/20"></div>
+      {/* Animated cosmic particles */}
+      <div className="absolute inset-0 overflow-hidden opacity-40">
+        <div className="absolute top-[10%] left-[20%] w-1 h-1 bg-purple-400 rounded-full animate-pulse"></div>
+        <div className="absolute top-[20%] right-[15%] w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute top-[40%] left-[10%] w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-[60%] right-[25%] w-1 h-1 bg-purple-300 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-[70%] left-[30%] w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
+        <div className="absolute top-[30%] right-[40%] w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
+      </div>
       
       <div className="w-full max-w-2xl relative z-10">
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-white drop-shadow-lg">Profile Setup</span>
-            <span className="text-sm font-semibold text-white drop-shadow-lg">
+            <span className="text-sm font-light text-white/80">Profile Setup</span>
+            <span className="text-sm font-light text-white/80">
               {step} of 6
             </span>
           </div>
-          <div className="h-3 bg-white/20 backdrop-blur-sm rounded-full overflow-hidden shadow-lg border-2 border-white/30">
+          <div className="h-2 bg-white/10 backdrop-blur-sm rounded-full overflow-hidden border border-white/20">
             <div 
-              className="h-full bg-gradient-to-r from-rose-400 via-pink-400 to-orange-400 rounded-full transition-all duration-500 ease-out shadow-lg"
+              className="h-full bg-gradient-to-r from-pink-500 to-purple-600 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${(step / 6) * 100}%` }}
             ></div>
           </div>
         </div>
 
         {/* Main Card */}
-        <Card className="border-2 border-white/40 shadow-2xl rounded-3xl overflow-hidden backdrop-blur-md bg-white/10">
+        <Card className="border border-white/20 shadow-2xl rounded-3xl overflow-hidden backdrop-blur-md bg-white/5">
           <CardContent className="p-8">
             {renderStep()}
             
