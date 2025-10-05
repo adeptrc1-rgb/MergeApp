@@ -130,50 +130,28 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col overflow-hidden">
-      {/* Animated sunset wallpaper background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-pulse-slow"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913')`,
-          filter: 'brightness(0.8)',
-          animation: 'subtle-move 20s ease-in-out infinite, color-shift 15s ease-in-out infinite'
-        }}
-      ></div>
+    <div className="min-h-screen relative flex flex-col overflow-hidden bg-black">
+      {/* Cosmic gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-black"></div>
       
-      {/* Moving gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/20 via-orange-300/10 via-red-400/10 via-pink-400/10 to-purple-900/20 animate-gradient-shift"></div>
-      
-      {/* Floating particles/stars effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="star star-1"></div>
-        <div className="star star-2"></div>
-        <div className="star star-3"></div>
-        <div className="star star-4"></div>
-        <div className="star star-5"></div>
+      {/* Animated cosmic particles */}
+      <div className="absolute inset-0 overflow-hidden opacity-40">
+        <div className="absolute top-[10%] left-[20%] w-1 h-1 bg-purple-400 rounded-full animate-pulse"></div>
+        <div className="absolute top-[20%] right-[15%] w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute top-[40%] left-[10%] w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-[60%] right-[25%] w-1 h-1 bg-purple-300 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-[70%] left-[30%] w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
+        <div className="absolute top-[30%] right-[40%] w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
+        <div className="absolute bottom-[20%] left-[40%] w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
+        <div className="absolute bottom-[30%] right-[30%] w-1 h-1 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '0.7s'}}></div>
       </div>
-      
-      {/* Status bar simulation */}
-      <div className="w-full h-6 bg-transparent relative z-10"></div>
       
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative z-10">
-        {/* Pure White Logo with breathing animation */}
+        {/* Logo */}
         <div className="mb-12 text-center">
-          <h1 className="text-6xl font-serif text-white mb-2 drop-shadow-2xl relative animate-logo-breathe" style={{
-            fontFamily: "'Dancing Script', cursive",
-            textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(255,255,255,0.3)',
-            filter: 'drop-shadow(0 0 25px rgba(255,255,255,0.6))',
-            color: 'white'
-          }}>
-            A Sign
-            {/* Subtle white glow effect */}
-            <div className="absolute inset-0 text-white/30 blur-sm -z-10" style={{
-              fontFamily: "'Dancing Script', cursive"
-            }}>
-              A Sign
-            </div>
-          </h1>
+          <img src="/asign-logo.png" alt="A Sign" className="h-20 mx-auto mb-4 animate-pulse" style={{animationDuration: '3s'}} />
+          <p className="text-white/60 text-sm tracking-widest uppercase">Written in the stars</p>
         </div>
 
         {/* Login Methods */}
