@@ -461,9 +461,13 @@ export default function Home({ user }) {
         <div className="w-full max-w-md mt-8 flex items-center justify-center gap-4 px-4">
           {/* Reverse Button */}
           <button
-            onClick={handleUndo}
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+              handleUndo();
+            }}
             disabled={swipeHistory.length === 0}
-            className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
+            className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl animate-pulse-slow"
             title="Undo"
           >
             <RotateCcw className="w-5 h-5 text-yellow-400" />
@@ -472,8 +476,12 @@ export default function Home({ user }) {
           {/* Pass Button */}
           <button
             ref={passButtonRef}
-            onClick={handlePass}
-            className="bg-white rounded-full p-4 hover:scale-110 transition-all shadow-2xl"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              createShootingStar(rect.left + rect.width / 2, rect.top + rect.height / 2, 'left');
+              handlePass();
+            }}
+            className="bg-white rounded-full p-4 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-red-500/50"
             title="Pass"
           >
             <X className="w-7 h-7 text-red-500" />
@@ -482,8 +490,13 @@ export default function Home({ user }) {
           {/* Super Like Button */}
           <button
             ref={superLikeButtonRef}
-            onClick={handleSuperLike}
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3 hover:scale-110 transition-all shadow-2xl"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+              createHeartBurst(rect.left + rect.width / 2, rect.top);
+              handleSuperLike();
+            }}
+            className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-blue-500/50 animate-pulse-slow"
             title="Super Like"
           >
             <Star className="w-6 h-6 text-white fill-white" />
@@ -492,8 +505,13 @@ export default function Home({ user }) {
           {/* Like Button */}
           <button
             ref={likeButtonRef}
-            onClick={handleLike}
-            className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-5 hover:scale-110 transition-all shadow-2xl cosmic-glow"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+              createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2);
+              handleLike();
+            }}
+            className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-5 hover:scale-110 active:scale-95 transition-all shadow-2xl cosmic-glow hover:shadow-pink-500/50"
             title="Like"
           >
             <Heart className="w-8 h-8 text-white fill-white" />
@@ -501,8 +519,12 @@ export default function Home({ user }) {
 
           {/* Direct Message Button */}
           <button
-            onClick={handleDirectMessage}
-            className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 transition-all shadow-xl hover:scale-110 border border-white/20"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              createFloatingSign(e.currentTarget);
+              handleDirectMessage();
+            }}
+            className="bg-black/60 backdrop-blur-md rounded-full p-3 hover:bg-black/80 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
             title="Direct Message"
           >
             <MessageCircle className="w-5 h-5 text-purple-400" />
