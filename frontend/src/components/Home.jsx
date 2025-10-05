@@ -342,8 +342,8 @@ export default function Home({ user }) {
     );
   }
 
-  const age = calculateAge(currentMatch.birth_date);
-  const compatibility = currentMatch.compatibility_score || Math.floor(Math.random() * 30) + 70;
+  const age = currentMatch.birth_date ? calculateAge(currentMatch.birth_date) : 25;
+  const compatibility = Math.round(currentMatch.compatibility_score || Math.floor(Math.random() * 30) + 70);
 
   return (
     <div className="h-screen bg-black flex flex-col overflow-hidden">
