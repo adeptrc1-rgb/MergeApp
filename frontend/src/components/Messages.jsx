@@ -114,7 +114,7 @@ export default function Messages({ user }) {
       <div className="border-b border-white/10 bg-black">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-light text-white">A Sign</h1>
+            <img src="/asign-logo.png" alt="A Sign" className="h-10" />
             <button className="text-white/60 hover:text-white">
               <Sparkles className="w-6 h-6" />
             </button>
