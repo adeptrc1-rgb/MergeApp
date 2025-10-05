@@ -457,7 +457,7 @@ export default function Home({ user }) {
           </div>
 
           {/* Action Buttons - Overlapping card, tucked under compatibility score */}
-          <div className="w-full -mt-12 flex items-center justify-center gap-4 px-4 relative z-10">
+          <div className="w-full -mt-8 flex items-end justify-center gap-3 px-4 relative z-10">
             {/* Reverse Button */}
             <button
               onClick={(e) => {
@@ -466,10 +466,10 @@ export default function Home({ user }) {
                 handleUndo();
               }}
               disabled={swipeHistory.length === 0}
-              className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
+              className="bg-white/10 backdrop-blur-md rounded-full p-2.5 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
               title="Undo"
             >
-              <RotateCcw className="w-5 h-5 text-yellow-400" />
+              <RotateCcw className="w-4 h-4 text-yellow-400" />
             </button>
 
             {/* Pass Button */}
@@ -480,28 +480,13 @@ export default function Home({ user }) {
                 createShootingStar(rect.left + rect.width / 2, rect.top + rect.height / 2, 'left');
                 handlePass();
               }}
-              className="bg-white rounded-full p-4 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-red-500/50"
+              className="bg-white rounded-full p-3 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-red-500/50"
               title="Pass"
             >
-              <X className="w-7 h-7 text-red-500" />
+              <X className="w-6 h-6 text-red-500" />
             </button>
 
-            {/* Super Like Button */}
-            <button
-              ref={superLikeButtonRef}
-              onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
-                createHeartBurst(rect.left + rect.width / 2, rect.top);
-                handleSuperLike();
-              }}
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3.5 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-blue-500/50"
-              title="Super Like"
-            >
-              <Star className="w-6 h-6 text-white fill-white" />
-            </button>
-
-            {/* Like Button */}
+            {/* Like Button (Swapped with Super Like, now in center) */}
             <button
               ref={likeButtonRef}
               onClick={(e) => {
@@ -510,10 +495,25 @@ export default function Home({ user }) {
                 createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2);
                 handleLike();
               }}
-              className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-5 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-pink-500/50"
+              className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-4 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-pink-500/50"
               title="Like"
             >
-              <Heart className="w-8 h-8 text-white fill-white" />
+              <Heart className="w-7 h-7 text-white fill-white" />
+            </button>
+
+            {/* Super Like Button (Swapped with Like, slightly lower) */}
+            <button
+              ref={superLikeButtonRef}
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                createHeartBurst(rect.left + rect.width / 2, rect.top);
+                handleSuperLike();
+              }}
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-blue-500/50 mt-2"
+              title="Super Like"
+            >
+              <Star className="w-5 h-5 text-white fill-white" />
             </button>
 
             {/* Direct Message Button */}
@@ -523,10 +523,10 @@ export default function Home({ user }) {
                 createFloatingSign(e.currentTarget);
                 handleDirectMessage();
               }}
-              className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-2.5 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
               title="Direct Message"
             >
-              <MessageCircle className="w-5 h-5 text-purple-400" />
+              <MessageCircle className="w-4 h-4 text-purple-400" />
             </button>
           </div>
         </div>
