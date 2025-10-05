@@ -400,7 +400,7 @@ export default function Home({ user }) {
 
             {/* Photo */}
             <div 
-              className="absolute inset-0 bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center transition-all duration-300 cursor-pointer"
               style={{ 
                 backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})` 
               }}
@@ -409,22 +409,17 @@ export default function Home({ user }) {
                   e.preventDefault();
                   return;
                 }
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                if (x < rect.width / 2) {
-                  prevPhoto();
-                } else {
-                  nextPhoto();
-                }
+                // Click anywhere to cycle to next photo
+                nextPhoto();
               }}
             >
               {/* Photo Navigation Dots */}
               {currentMatch.photos && currentMatch.photos.length > 1 && (
-                <div className="absolute top-4 left-0 right-0 flex justify-center gap-1 px-4">
+                <div className="absolute top-4 left-0 right-0 flex justify-center gap-1 px-4 z-10">
                   {currentMatch.photos.map((_, idx) => (
                     <div
                       key={idx}
-                      className={`h-1 flex-1 rounded-full transition-all ${
+                      className={`h-1 flex-1 rounded-full transition-all duration-300 ${
                         idx === currentPhotoIndex ? 'bg-white' : 'bg-white/30'
                       }`}
                     />
@@ -432,8 +427,19 @@ export default function Home({ user }) {
                 </div>
               )}
 
+              {/* Tap indicator - shows briefly when tapping */}
+              {currentMatch.photos && currentMatch.photos.length > 1 && (
+                <div className="absolute top-1/2 right-4 -translate-y-1/2 pointer-events-none opacity-0 hover:opacity-100 transition-opacity">
+                  <div className="bg-black/50 backdrop-blur-sm rounded-full p-2">
+                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              )}
+
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90 pointer-events-none" />
             </div>
 
             {/* Info Section */}
