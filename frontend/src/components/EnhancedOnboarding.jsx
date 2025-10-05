@@ -335,35 +335,35 @@ export default function EnhancedOnboarding() {
         return (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center mb-8">
-              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-rose-400 via-pink-400 to-orange-400 rounded-full flex items-center justify-center shadow-2xl shadow-pink-500/50">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl shadow-purple-500/30">
                 <Sparkles className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-4xl font-bold text-white mb-3 drop-shadow-lg">
+              <h2 className="text-4xl font-light text-white mb-3">
                 Welcome to A Sign ✨
               </h2>
-              <p className="text-white/90 text-lg">Let's start with your name</p>
+              <p className="text-white/60 text-lg">Let's start with your name</p>
             </div>
 
             <div className="space-y-5">
               <div className="group">
-                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">First Name *</Label>
+                <Label className="text-sm font-light text-white/80 mb-2 block">First Name *</Label>
                 <Input
                   type="text"
                   placeholder="Enter your first name"
                   value={formData.first_name}
                   onChange={(e) => setFormData({...formData, first_name: e.target.value})}
-                  className="h-14 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-xl transition-all text-lg"
+                  className="h-14 border border-white/20 bg-white/5 backdrop-blur-md text-white placeholder:text-white/40 focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all text-lg"
                 />
               </div>
 
               <div className="group">
-                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Last Name (Optional)</Label>
+                <Label className="text-sm font-light text-white/80 mb-2 block">Last Name (Optional)</Label>
                 <Input
                   type="text"
                   placeholder="Enter your last name"
                   value={formData.last_name}
                   onChange={(e) => setFormData({...formData, last_name: e.target.value})}
-                  className="h-14 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-xl transition-all text-lg"
+                  className="h-14 border border-white/20 bg-white/5 backdrop-blur-md text-white placeholder:text-white/40 focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all text-lg"
                 />
               </div>
             </div>
