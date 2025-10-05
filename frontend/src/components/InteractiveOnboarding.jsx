@@ -560,31 +560,34 @@ export default function InteractiveOnboarding() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
-      {/* Sunset Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1495567720989-cebdbdd97913')`,
-          filter: 'brightness(0.8)'
-        }}
-      ></div>
+    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden bg-black">
+      {/* Very subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black"></div>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-yellow-200/20 via-orange-300/10 via-red-400/10 via-pink-400/10 to-purple-900/20"></div>
+      {/* Distant twinkling stars */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-[8%] left-[15%] w-1 h-1 bg-white rounded-full animate-pulse opacity-40" style={{animationDuration: '3s'}}></div>
+        <div className="absolute top-[25%] right-[20%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-30" style={{animationDuration: '4s', animationDelay: '0.5s'}}></div>
+        <div className="absolute top-[42%] left-[8%] w-0.5 h-0.5 bg-pink-200 rounded-full animate-pulse opacity-20" style={{animationDuration: '3.8s', animationDelay: '1.5s'}}></div>
+        <div className="absolute top-[55%] right-[35%] w-1 h-1 bg-white rounded-full animate-pulse opacity-40" style={{animationDuration: '5s', animationDelay: '2s'}}></div>
+        <div className="absolute top-[72%] left-[25%] w-1 h-1 bg-white rounded-full animate-pulse opacity-35" style={{animationDuration: '3.6s', animationDelay: '0.9s'}}></div>
+        <div className="absolute top-[18%] left-[80%] w-0.5 h-0.5 bg-white rounded-full animate-pulse opacity-10" style={{animationDuration: '6s', animationDelay: '3s'}}></div>
+        <div className="absolute top-[52%] right-[8%] w-0.5 h-0.5 bg-blue-200 rounded-full animate-pulse opacity-12" style={{animationDuration: '6.2s', animationDelay: '0.9s'}}></div>
+      </div>
       
       <div className="w-full max-w-xl relative z-10">
         {/* Progress */}
         <div className="mb-6">
-          <div className="h-2 bg-white/20 backdrop-blur-sm rounded-full overflow-hidden border-2 border-white/30">
+          <div className="h-2 bg-white/10 backdrop-blur-sm rounded-full overflow-hidden border border-white/20">
             <div 
-              className="h-full bg-gradient-to-r from-rose-400 via-pink-400 to-orange-400 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-pink-500 to-purple-600 transition-all duration-500"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             ></div>
           </div>
         </div>
 
         {/* Content Card */}
-        <div className="border-2 border-white/40 rounded-3xl overflow-hidden backdrop-blur-md bg-white/10 p-8 shadow-2xl">
+        <div className="border border-white/20 rounded-3xl overflow-hidden backdrop-blur-md bg-white/5 p-8 shadow-2xl">
           {renderStep()}
           
           {/* Navigation */}
