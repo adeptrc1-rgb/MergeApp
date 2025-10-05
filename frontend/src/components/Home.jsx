@@ -449,16 +449,15 @@ export default function Home({ user }) {
               </div>
 
               {/* Compatibility Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
                 <Zap className="w-3.5 h-3.5 text-purple-400" />
-                <span className="text-sm">{compatibility}% Compatible</span>
+                <span className="text-sm font-medium">{compatibility}% Compatible</span>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Action Buttons - Stationary, positioned below card */}
-        <div className="w-full max-w-md mt-8 flex items-center justify-center gap-4 px-4">
+          {/* Action Buttons - Stationary, positioned below card with proper spacing */}
+          <div className="w-full mt-6 flex items-center justify-center gap-4 px-4">
           {/* Reverse Button */}
           <button
             onClick={(e) => {
