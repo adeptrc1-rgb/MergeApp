@@ -374,18 +374,18 @@ export default function EnhancedOnboarding() {
         return (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/30">
                 <User className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">
+              <h2 className="text-3xl font-light text-white mb-2">
                 Your Cosmic Profile
               </h2>
-              <p className="text-white/90">Let's start with your astrological details</p>
+              <p className="text-white/60">Let's start with your astrological details</p>
             </div>
 
             <div className="space-y-5">
               <div className="group">
-                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Birth Date *</Label>
+                <Label className="text-sm font-light text-white/80 mb-2 block">Birth Date *</Label>
                 <Input
                   type="date"
                   value={formData.birth_date ? format(formData.birth_date, 'yyyy-MM-dd') : ''}
@@ -395,38 +395,38 @@ export default function EnhancedOnboarding() {
                     }
                   }}
                   max={format(new Date(), 'yyyy-MM-dd')}
-                  className="h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white focus:border-white focus:bg-white/30 rounded-xl transition-all"
+                  className="h-12 border border-white/20 bg-white/5 backdrop-blur-md text-white focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all"
                   style={{
                     colorScheme: 'dark'
                   }}
                 />
-                <p className="text-xs text-white/80 mt-1.5 ml-1 drop-shadow">MM/DD/YYYY</p>
+                <p className="text-xs text-white/50 mt-1.5 ml-1">MM/DD/YYYY</p>
               </div>
 
               <div className="group">
-                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Birth Time (Optional)</Label>
+                <Label className="text-sm font-light text-white/80 mb-2 block">Birth Time (Optional)</Label>
                 <Input
                   type="time"
                   value={formData.birth_time}
                   onChange={(e) => setFormData({...formData, birth_time: e.target.value})}
-                  className="h-12 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white focus:border-white focus:bg-white/30 rounded-xl transition-all"
+                  className="h-12 border border-white/20 bg-white/5 backdrop-blur-md text-white focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all"
                 />
-                <p className="text-xs text-white/80 mt-1.5 ml-1 drop-shadow">For accurate rising sign calculation</p>
+                <p className="text-xs text-white/50 mt-1.5 ml-1">For accurate rising sign calculation</p>
               </div>
 
               <div className="group">
-                <Label className="text-sm font-semibold text-white mb-2 block drop-shadow">Birth Location</Label>
+                <Label className="text-sm font-light text-white/80 mb-2 block">Birth Location</Label>
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/60" />
                   <Input
                     placeholder="City, Country"
                     value={locationSearch}
                     onChange={(e) => setLocationSearch(e.target.value)}
-                    className="h-12 pl-11 border-2 border-white/40 bg-white/20 backdrop-blur-md text-white placeholder:text-white/60 focus:border-white focus:bg-white/30 rounded-xl transition-all"
+                    className="h-12 pl-11 border border-white/20 bg-white/5 backdrop-blur-md text-white placeholder:text-white/40 focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all"
                   />
                 </div>
                 {locationSearch && (
-                  <div className="mt-2 bg-white border-2 border-gray-100 rounded-xl shadow-lg overflow-hidden">
+                  <div className="mt-2 bg-black border border-white/20 rounded-2xl shadow-lg overflow-hidden">
                     {searchLocations(locationSearch).slice(0, 4).map((loc, i) => (
                       <button
                         key={i}
@@ -434,10 +434,10 @@ export default function EnhancedOnboarding() {
                           setFormData({...formData, birth_location: loc});
                           setLocationSearch('');
                         }}
-                        className="w-full text-left px-4 py-3 hover:bg-violet-50 transition-colors border-b border-gray-100 last:border-0"
+                        className="w-full text-left px-4 py-3 hover:bg-white/10 transition-colors border-b border-white/10 last:border-0"
                       >
-                        <div className="font-medium text-gray-900">{loc.city}</div>
-                        <div className="text-sm text-gray-500">{loc.country}</div>
+                        <div className="font-medium text-white">{loc.city}</div>
+                        <div className="text-sm text-white/60">{loc.country}</div>
                       </button>
                     ))}
                   </div>
