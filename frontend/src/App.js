@@ -160,9 +160,9 @@ function LandingPage() {
           {/* Phone Number Step */}
           {step === 'phone' && (
             <>
-              <div className="text-center mb-6">
-                <h2 className="text-2xl font-medium text-white mb-2">Get Started</h2>
-                <p className="text-white/80 text-sm">Everything led you here</p>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-light text-white mb-2">Get Started</h2>
+                <p className="text-white/60 text-sm">Everything led you here</p>
               </div>
 
               {/* Phone Input */}
@@ -172,7 +172,7 @@ function LandingPage() {
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   placeholder="Enter your phone number"
-                  className="w-full bg-white/20 backdrop-blur-md border-2 border-white/30 rounded-full px-6 py-4 text-white placeholder-white/70 text-center font-medium focus:outline-none focus:border-white/60 transition-all"
+                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 text-white placeholder-white/50 text-center font-light focus:outline-none focus:border-purple-500 focus:bg-white/15 transition-all"
                   data-testid="phone-input"
                 />
               </div>
@@ -180,28 +180,28 @@ function LandingPage() {
               <Button 
                 onClick={handlePhoneSubmit}
                 disabled={!phoneNumber || loading}
-                className="w-full bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-medium py-4 rounded-full text-base shadow-xl transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-4 rounded-2xl text-base shadow-2xl shadow-purple-500/20 transition-all duration-300 disabled:opacity-50"
                 data-testid="continue-phone-btn"
               >
                 {loading ? 'Sending...' : 'Continue'}
               </Button>
 
-              <div className="text-center text-white/60 text-xs py-2">
+              <div className="text-center text-white/40 text-xs py-2">
                 <p>By continuing, you agree to our Terms of Service</p>
               </div>
 
               {/* Divider */}
               <div className="flex items-center my-6">
-                <div className="flex-1 h-px bg-white/30"></div>
-                <span className="px-4 text-white/70 text-sm font-medium">OR</span>
-                <div className="flex-1 h-px bg-white/30"></div>
+                <div className="flex-1 h-px bg-white/20"></div>
+                <span className="px-4 text-white/60 text-sm font-light">OR</span>
+                <div className="flex-1 h-px bg-white/20"></div>
               </div>
 
               {/* Social Login Options */}
               <div className="space-y-3">
                 <Button 
                   onClick={handleGoogleLogin}
-                  className="w-full bg-white/20 backdrop-blur-md border border-white/40 hover:bg-white/30 text-white font-medium py-4 rounded-full text-base transition-all duration-200"
+                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 text-white font-medium py-4 rounded-2xl text-base transition-all duration-200"
                   data-testid="google-login-btn"
                 >
                   <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
@@ -216,7 +216,7 @@ function LandingPage() {
                 <Button 
                   onClick={handleTestLogin}
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-rose-400 via-pink-500 to-orange-400 hover:from-rose-500 hover:via-pink-600 hover:to-orange-500 text-white font-bold py-4 rounded-full text-base transition-all duration-200 shadow-lg"
+                  className="w-full bg-white/5 hover:bg-white/10 border border-white/20 text-white/80 hover:text-white font-medium py-4 rounded-2xl text-base transition-all duration-200"
                   data-testid="test-login-btn"
                 >
                   {loading ? (
