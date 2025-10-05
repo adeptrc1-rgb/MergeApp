@@ -131,19 +131,19 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen relative flex flex-col overflow-hidden bg-black">
-      {/* Cosmic gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-black"></div>
+      {/* Very subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black"></div>
       
-      {/* Animated cosmic particles */}
-      <div className="absolute inset-0 overflow-hidden opacity-40">
-        <div className="absolute top-[10%] left-[20%] w-1 h-1 bg-purple-400 rounded-full animate-pulse"></div>
-        <div className="absolute top-[20%] right-[15%] w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-        <div className="absolute top-[40%] left-[10%] w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-[60%] right-[25%] w-1 h-1 bg-purple-300 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+      {/* Subtle cosmic particles */}
+      <div className="absolute inset-0 overflow-hidden opacity-20">
+        <div className="absolute top-[10%] left-[20%] w-0.5 h-0.5 bg-purple-400 rounded-full animate-pulse"></div>
+        <div className="absolute top-[20%] right-[15%] w-1 h-1 bg-pink-400 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute top-[40%] left-[10%] w-0.5 h-0.5 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-[60%] right-[25%] w-0.5 h-0.5 bg-purple-300 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
         <div className="absolute top-[70%] left-[30%] w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
-        <div className="absolute top-[30%] right-[40%] w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
-        <div className="absolute bottom-[20%] left-[40%] w-1 h-1 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
-        <div className="absolute bottom-[30%] right-[30%] w-1 h-1 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '0.7s'}}></div>
+        <div className="absolute top-[30%] right-[40%] w-0.5 h-0.5 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '1.2s'}}></div>
+        <div className="absolute bottom-[20%] left-[40%] w-0.5 h-0.5 bg-purple-400 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
+        <div className="absolute bottom-[30%] right-[30%] w-0.5 h-0.5 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '0.7s'}}></div>
       </div>
       
       {/* Main content */}
