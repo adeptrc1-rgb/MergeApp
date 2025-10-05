@@ -456,128 +456,78 @@ export default function Home({ user }) {
             </div>
           </div>
 
-          {/* Cosmic Action Buttons Container */}
-          <div className="w-full -mt-12 relative z-10">
-            {/* Cosmic Background Panel */}
-            <div className="relative mx-auto max-w-lg px-6 py-8 rounded-3xl bg-gradient-to-br from-indigo-950 via-purple-950 to-violet-950 border border-purple-500/20 shadow-2xl overflow-hidden">
-              {/* Constellation Stars Background */}
-              <div className="absolute inset-0 opacity-30">
-                <div className="absolute top-4 left-8 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-                <div className="absolute top-12 right-12 w-1 h-1 bg-purple-300 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                <div className="absolute bottom-8 left-16 w-1 h-1 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-                <div className="absolute top-20 left-24 w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
-                <div className="absolute bottom-12 right-20 w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{animationDelay: '0.8s'}}></div>
-              </div>
+          {/* Action Buttons - Overlapping card, tucked under compatibility score */}
+          <div className="w-full -mt-12 flex items-center justify-center gap-4 px-4 relative z-10">
+            {/* Reverse Button */}
+            <button
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+                handleUndo();
+              }}
+              disabled={swipeHistory.length === 0}
+              className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
+              title="Undo"
+            >
+              <RotateCcw className="w-5 h-5 text-yellow-400" />
+            </button>
 
-              {/* Typography */}
-              <div className="text-center mb-6 relative z-10">
-                <h3 className="text-white/90 text-sm font-light tracking-[0.2em] uppercase">
-                  A Sign – Built Around Astrology
-                </h3>
-              </div>
+            {/* Pass Button */}
+            <button
+              ref={passButtonRef}
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                createShootingStar(rect.left + rect.width / 2, rect.top + rect.height / 2, 'left');
+                handlePass();
+              }}
+              className="bg-white rounded-full p-4 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-red-500/50"
+              title="Pass"
+            >
+              <X className="w-7 h-7 text-red-500" />
+            </button>
 
-              {/* Action Buttons */}
-              <div className="flex items-center justify-center gap-5 relative z-10">
-                {/* Reverse Button - Crescent Moon */}
-                <button
-                  onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
-                    handleUndo();
-                  }}
-                  disabled={swipeHistory.length === 0}
-                  className="cosmic-button w-[54px] h-[54px] rounded-full bg-gradient-to-br from-yellow-600/20 to-amber-700/20 backdrop-blur-sm border border-yellow-500/30 hover:scale-110 active:scale-95 transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/40 disabled:opacity-30 disabled:cursor-not-allowed relative group"
-                  title="Undo"
-                  style={{boxShadow: '0 0 20px rgba(251, 191, 36, 0.2), inset 0 0 20px rgba(251, 191, 36, 0.1)'}}
-                >
-                  <svg className="w-6 h-6 absolute inset-0 m-auto text-yellow-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c2.5 0 4.8-0.9 6.5-2.5" strokeLinecap="round"/>
-                    <path d="M19 15l-3-3 3-3" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
+            {/* Super Like Button */}
+            <button
+              ref={superLikeButtonRef}
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                createHeartBurst(rect.left + rect.width / 2, rect.top);
+                handleSuperLike();
+              }}
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3.5 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-blue-500/50"
+              title="Super Like"
+            >
+              <Star className="w-6 h-6 text-white fill-white" />
+            </button>
 
-                {/* Pass Button - Shooting Stars X */}
-                <button
-                  ref={passButtonRef}
-                  onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    createShootingStar(rect.left + rect.width / 2, rect.top + rect.height / 2, 'left');
-                    handlePass();
-                  }}
-                  className="cosmic-button w-[60px] h-[60px] rounded-full bg-gradient-to-br from-slate-600/20 to-blue-900/20 backdrop-blur-sm border border-slate-400/30 hover:scale-110 active:scale-95 transition-all shadow-lg shadow-slate-400/20 hover:shadow-slate-400/40 relative group"
-                  title="Pass"
-                  style={{boxShadow: '0 0 20px rgba(148, 163, 184, 0.2), inset 0 0 20px rgba(148, 163, 184, 0.1)'}}
-                >
-                  <svg className="w-7 h-7 absolute inset-0 m-auto text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round"/>
-                    <circle cx="6" cy="6" r="1" fill="currentColor"/>
-                    <circle cx="18" cy="6" r="1" fill="currentColor"/>
-                    <circle cx="6" cy="18" r="1" fill="currentColor"/>
-                    <circle cx="18" cy="18" r="1" fill="currentColor"/>
-                  </svg>
-                </button>
+            {/* Like Button */}
+            <button
+              ref={likeButtonRef}
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                handleLike();
+              }}
+              className="bg-gradient-to-r from-pink-500 to-rose-600 rounded-full p-5 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-pink-500/50"
+              title="Like"
+            >
+              <Heart className="w-8 h-8 text-white fill-white" />
+            </button>
 
-                {/* Like Button - Gradient Heart (Largest) */}
-                <button
-                  ref={likeButtonRef}
-                  onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
-                    createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2);
-                    handleLike();
-                  }}
-                  className="cosmic-button w-[72px] h-[72px] rounded-full bg-gradient-to-br from-pink-500 to-purple-600 hover:scale-110 active:scale-95 transition-all shadow-2xl relative group"
-                  title="Like"
-                  style={{boxShadow: '0 0 30px rgba(236, 72, 153, 0.4), inset 0 0 30px rgba(236, 72, 153, 0.2)'}}
-                >
-                  <svg className="w-9 h-9 absolute inset-0 m-auto text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                  </svg>
-                  <div className="absolute inset-0 rounded-full bg-white/20 blur-xl"></div>
-                </button>
-
-                {/* Super Like Button - Radiant Star */}
-                <button
-                  ref={superLikeButtonRef}
-                  onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
-                    createHeartBurst(rect.left + rect.width / 2, rect.top);
-                    handleSuperLike();
-                  }}
-                  className="cosmic-button w-[60px] h-[60px] rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 hover:scale-110 active:scale-95 transition-all shadow-2xl relative group"
-                  title="Super Like"
-                  style={{boxShadow: '0 0 30px rgba(34, 211, 238, 0.4), inset 0 0 20px rgba(34, 211, 238, 0.2)'}}
-                >
-                  <svg className="w-7 h-7 absolute inset-0 m-auto text-white drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
-                  <div className="absolute inset-0 rounded-full">
-                    <div className="absolute top-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                    <div className="absolute top-1/2 right-0 w-1 h-1 bg-white rounded-full animate-ping" style={{animationDelay: '0.3s'}}></div>
-                    <div className="absolute bottom-0 left-1/2 w-1 h-1 bg-white rounded-full animate-ping" style={{animationDelay: '0.6s'}}></div>
-                  </div>
-                </button>
-
-                {/* Direct Message Button - Speech Bubble with Planet */}
-                <button
-                  onClick={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    createFloatingSign(e.currentTarget);
-                    handleDirectMessage();
-                  }}
-                  className="cosmic-button w-[54px] h-[54px] rounded-full bg-gradient-to-br from-purple-600/20 to-violet-700/20 backdrop-blur-sm border border-purple-500/30 hover:scale-110 active:scale-95 transition-all shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 relative group"
-                  title="Direct Message"
-                  style={{boxShadow: '0 0 20px rgba(168, 85, 247, 0.2), inset 0 0 20px rgba(168, 85, 247, 0.1)'}}
-                >
-                  <svg className="w-6 h-6 absolute inset-0 m-auto text-purple-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="12" cy="11" r="3" fill="none" strokeWidth="1.5"/>
-                    <ellipse cx="12" cy="11" rx="5" ry="2" fill="none" strokeWidth="0.8"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
+            {/* Direct Message Button */}
+            <button
+              onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                createFloatingSign(e.currentTarget);
+                handleDirectMessage();
+              }}
+              className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
+              title="Direct Message"
+            >
+              <MessageCircle className="w-5 h-5 text-purple-400" />
+            </button>
           </div>
         </div>
       </div>
