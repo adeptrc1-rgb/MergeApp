@@ -545,3 +545,35 @@ textarea:focus-visible {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+/* Cosmic Button Effects */
+.cosmic-button {
+  position: relative;
+  overflow: visible;
+}
+
+.cosmic-button::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.cosmic-button:hover::before {
+  opacity: 1;
+  animation: cosmic-glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cosmic-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px currentColor;
+    opacity: 0.6;
+  }
+  50% {
+    box-shadow: 0 0 25px currentColor;
+    opacity: 0.9;
+  }
+}
