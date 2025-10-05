@@ -100,9 +100,9 @@ export default function Profile({ user, logout }) {
   const age = calculateAge(user.birth_date);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="border-b border-white/10 bg-black">
+      <div className="border-b border-white/10 bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-6">
             <img src="/asign-logo.png" alt="A Sign" className="h-10" />
@@ -118,7 +118,7 @@ export default function Profile({ user, logout }) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto pb-24">
+      <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-4xl mx-auto px-6 py-6">
           {/* Profile Header */}
           <div className="bg-white/5 rounded-2xl p-8 border border-white/10 mb-6">
