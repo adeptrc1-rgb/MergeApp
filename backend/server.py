@@ -674,14 +674,14 @@ async def test_login(request: TestLoginRequest, response: Response):
         }
         await db.sessions.insert_one(session)
         
-        # Set session cookie
+        # Set session cookie (development settings)
         response.set_cookie(
             key="session_token",
             value=session_token,
             max_age=7 * 24 * 60 * 60,
             httponly=False,  # Allow JavaScript access for debugging
-            secure=True,  # Required for HTTPS
-            samesite="none",
+            secure=False,  # Set to True for HTTPS in production
+            samesite="lax",  # Changed for local development
             path="/"
         )
         
