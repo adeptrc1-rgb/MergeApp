@@ -15,22 +15,69 @@ export default function Profile({ user, logout }) {
   const [showCosmicWheel, setShowCosmicWheel] = useState(false);
   const [canSpin, setCanSpin] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState({});
+  const [wheelStatus, setWheelStatus] = useState(null);
+  const [cooldownCountdown, setCooldownCountdown] = useState('');
+  const [cooldownProgress, setCooldownProgress] = useState(0);
 
   useEffect(() => {
     checkDailySpinStatus();
     calculateTimeRemaining();
     
     // Update time remaining every minute
-    const interval = setInterval(calculateTimeRemaining, 60000);
+    const interval = setInterval(() => {
+      calculateTimeRemaining();
+      updateCooldownCountdown();
+    }, 1000); // Update every second for smooth countdown
+    
     return () => clearInterval(interval);
-  }, [user]);
+  }, [user, wheelStatus]);
 
   const checkDailySpinStatus = async () => {
     try {
-      const response = await axios.get(`${API}/rewards/daily-spin-status`);
+      const response = await axios.get(`${API}/rewards/cosmic-wheel-status`);
+      setWheelStatus(response.data);
       setCanSpin(response.data.can_spin);
+      updateCooldownCountdown(response.data);
     } catch (error) {
       console.error('Error checking spin status:', error);
+    }
+  };
+
+  const updateCooldownCountdown = (status = wheelStatus) => {
+    if (!status || !status.next_spin_time || status.can_spin) {
+      setCooldownCountdown('');
+      setCooldownProgress(100);
+      return;
+    }
+    
+    const now = new Date();
+    const nextSpin = new Date(status.next_spin_time);
+    const totalCooldown = status.is_premium ? 24 * 60 * 60 * 1000 : 48 * 60 * 60 * 1000; // 24h or 48h in ms
+    const timeLeft = nextSpin - now;
+    
+    if (timeLeft <= 0) {
+      setCooldownCountdown('');
+      setCooldownProgress(100);
+      setCanSpin(true);
+      return;
+    }
+    
+    // Calculate progress (0-100)
+    const elapsed = totalCooldown - timeLeft;
+    const progress = Math.min(100, Math.max(0, (elapsed / totalCooldown) * 100));
+    setCooldownProgress(progress);
+    
+    // Format countdown
+    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+    if (hours > 0) {
+      setCooldownCountdown(`${hours}h ${minutes}m`);
+    } else if (minutes > 0) {
+      setCooldownCountdown(`${minutes}m ${seconds}s`);
+    } else {
+      setCooldownCountdown(`${seconds}s`);
     }
   };
 
