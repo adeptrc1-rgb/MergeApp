@@ -44,40 +44,28 @@ export default function Profile({ user, logout }) {
   };
 
   const updateCooldownCountdown = (status = wheelStatus) => {
-    if (!status || !status.next_spin_time || status.can_spin) {
+    if (!status || status.can_spin || status.cooldown_hours <= 0) {
       setCooldownCountdown('');
       setCooldownProgress(100);
       return;
     }
     
-    const now = new Date();
-    const nextSpin = new Date(status.next_spin_time);
-    const totalCooldown = status.is_premium ? 24 * 60 * 60 * 1000 : 48 * 60 * 60 * 1000; // 24h or 48h in ms
-    const timeLeft = nextSpin - now;
+    // Use the actual cooldown_hours from backend API
+    const remainingHours = status.cooldown_hours;
+    const totalCooldownHours = status.is_premium ? 24 : 24; // Both premium and free users get 24h cooldown
     
-    if (timeLeft <= 0) {
-      setCooldownCountdown('');
-      setCooldownProgress(100);
-      setCanSpin(true);
-      return;
-    }
-    
-    // Calculate progress (0-100)
-    const elapsed = totalCooldown - timeLeft;
-    const progress = Math.min(100, Math.max(0, (elapsed / totalCooldown) * 100));
+    // Calculate progress based on actual cooldown
+    const progress = Math.min(100, Math.max(0, ((totalCooldownHours - remainingHours) / totalCooldownHours) * 100));
     setCooldownProgress(progress);
     
-    // Format countdown
-    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    // Format countdown from hours
+    const hours = Math.floor(remainingHours);
+    const minutes = Math.floor((remainingHours - hours) * 60);
     
     if (hours > 0) {
       setCooldownCountdown(`${hours}h ${minutes}m`);
-    } else if (minutes > 0) {
-      setCooldownCountdown(`${minutes}m ${seconds}s`);
     } else {
-      setCooldownCountdown(`${seconds}s`);
+      setCooldownCountdown(`${minutes}m`);
     }
   };
 
