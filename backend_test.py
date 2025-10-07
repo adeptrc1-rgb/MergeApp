@@ -150,14 +150,19 @@ class AstrologyDatingAPITester:
         return self.run_test("Liked Me (No Auth)", "GET", "users/liked-me", 401)
 
     def test_test_login_endpoint(self):
-        """Test the test login endpoint"""
+        """Test the test login endpoint and capture session cookies"""
         login_data = {"email": "testuser@asign.com"}
-        success, response = self.run_test("Test Login", "POST", "auth/test-login", 200, data=login_data)
+        success, response_data, response = self.run_test("Test Login", "POST", "auth/test-login", 200, data=login_data)
         
-        if success and isinstance(response, dict):
-            if response.get("success") and "user_id" in response:
-                # Store session for authenticated tests
-                print("   ℹ️  Login successful, session should be set via cookie")
+        if success and isinstance(response_data, dict):
+            if response_data.get("success") and "user_id" in response_data:
+                # Store session cookies for authenticated tests
+                if response and response.cookies:
+                    self.session_cookies = response.cookies
+                    print("   ℹ️  Login successful, session cookies captured")
+                else:
+                    print("   ⚠️  Login successful but no cookies received")
+                self.user_id = response_data.get("user_id")
                 return True
             else:
                 self.log_test("Test Login Response Format", False, "Missing success or user_id in response")
