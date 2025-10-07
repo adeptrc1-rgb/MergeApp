@@ -554,6 +554,86 @@ class AstrologyDatingAPITester:
                 return False
         return False
 
+    def run_comprehensive_regression_pass_4(self):
+        """Run Comprehensive Backend Regression Pass #4 as specified"""
+        print("🚀 Starting Comprehensive Backend Regression Pass #4")
+        print(f"📍 Testing against: {self.base_url}")
+        print("=" * 60)
+
+        # Step 1: Session setup - POST /auth/test-login
+        print("\n" + "=" * 50)
+        print("🔐 STEP 1: SESSION SETUP")
+        print("=" * 50)
+        self.test_test_login_endpoint()
+        
+        if not self.session_cookies:
+            print("❌ Cannot continue without valid session cookies")
+            return 1
+        
+        # Step 2: Auth checks
+        print("\n" + "=" * 50)
+        print("🔒 STEP 2: AUTH CHECKS")
+        print("=" * 50)
+        self.test_auth_me_with_session()  # Expect 200 with user object
+        self.test_logout()  # Expect 200
+        self.test_auth_me_after_logout()  # Expect 401
+        
+        # Log back in for remaining tests
+        print("\n🔄 Re-authenticating for remaining tests...")
+        self.test_test_login_endpoint()
+        
+        # Step 3: CORS/Preflight sampling
+        print("\n" + "=" * 50)
+        print("🌐 STEP 3: CORS/PREFLIGHT SAMPLING")
+        print("=" * 50)
+        self.test_cors_preflight_auth_test_login()
+        self.test_cors_preflight_users_liked_me()
+        
+        # Step 4: Cosmic Wheel
+        print("\n" + "=" * 50)
+        print("🎡 STEP 4: COSMIC WHEEL")
+        print("=" * 50)
+        self.test_cosmic_wheel_status()
+        self.test_cosmic_wheel_spin()
+        
+        # Step 5: Matches
+        print("\n" + "=" * 50)
+        print("💕 STEP 5: MATCHES")
+        print("=" * 50)
+        self.test_users_potential_and_swipe()
+        
+        # Step 6: Connections
+        print("\n" + "=" * 50)
+        print("🔗 STEP 6: CONNECTIONS")
+        print("=" * 50)
+        self.test_liked_me_with_auth()
+        self.test_liked_me_without_auth()  # Verify auth required (should be 401)
+        
+        # Step 7: Error handling
+        print("\n" + "=" * 50)
+        print("⚠️  STEP 7: ERROR HANDLING")
+        print("=" * 50)
+        self.test_auth_me_with_invalid_session()
+        
+        # Print summary
+        print("\n" + "=" * 60)
+        print(f"📊 Test Summary: {self.tests_passed}/{self.tests_run} tests passed")
+        
+        if self.tests_passed == self.tests_run:
+            print("🎉 All tests passed!")
+            return 0
+        else:
+            failed_tests = self.tests_run - self.tests_passed
+            print(f"⚠️  {failed_tests} tests failed")
+            
+            # Show failed tests
+            print("\n❌ Failed Tests:")
+            for result in self.test_results:
+                if not result["success"]:
+                    print(f"   - {result['test']}: {result['details']}")
+            
+            return 1
+
     def run_all_tests(self):
         """Run all backend tests"""
         print("🚀 Starting A Sign Dating App Backend API Tests")
