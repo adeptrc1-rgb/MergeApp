@@ -84,15 +84,18 @@ class AstrologyDatingAPITester:
 
     def test_health_check(self):
         """Test health endpoint"""
-        return self.run_test("Health Check", "GET", "health", 200)
+        success, response_data, response = self.run_test("Health Check", "GET", "health", 200)
+        return success
 
     def test_root_endpoint(self):
         """Test root API endpoint"""
-        return self.run_test("Root Endpoint", "GET", "", 200)
+        success, response_data, response = self.run_test("Root Endpoint", "GET", "", 200)
+        return success
 
     def test_auth_me_without_token(self):
         """Test /auth/me without authentication - should fail"""
-        return self.run_test("Auth Me (No Token)", "GET", "auth/me", 401)
+        success, response_data, response = self.run_test("Auth Me (No Token)", "GET", "auth/me", 401)
+        return success
 
     def test_create_session_without_header(self):
         """Test session creation without X-Session-ID header"""
