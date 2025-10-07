@@ -1,14 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { X, Sparkles, Heart, Zap, MessageCircle, Star } from 'lucide-react';
+import { X, Sparkles, Heart, Zap, MessageCircle, Star, Trophy, Gift, Eye, Flame } from 'lucide-react';
 import { createStarburstEffect, createHeartBurst, createStardustTrail } from '../utils/particleEffects';
+import axios from 'axios';
+
+const API = process.env.REACT_APP_BACKEND_URL || '';
+
+// Tier colors for visual feedback
+const TIER_COLORS = {
+  common: 'from-gray-400 to-gray-600',
+  rare: 'from-blue-500 to-purple-600',
+  legendary: 'from-yellow-400 to-orange-500'
+};
+
+// Icon mapping for reward types
+const REWARD_ICONS = {
+  boost: Zap,
+  super_like: Star,
+  dm: MessageCircle,
+  star_coins: Sparkles,
+  extra_spin: Gift,
+  match_preview: Eye,
+  compatibility_boost: Flame,
+  insight: Heart,
+  spotlight: Trophy,
+  hidden_match: Heart,
+  avatar_animation: Sparkles,
+  cooldown_skip: Zap,
+  highlight: Star,
+  streak_bonus: Trophy,
+  seasonal_skin: Gift
+};
 
 const rewards = [
-  { id: 1, name: '1 Boost', icon: Zap, color: 'from-yellow-500 to-orange-500', value: { type: 'boost', amount: 1 } },
-  { id: 2, name: '2 Super Likes', icon: Star, color: 'from-blue-500 to-cyan-500', value: { type: 'super_like', amount: 2 } },
-  { id: 3, name: '1 DM', icon: MessageCircle, color: 'from-purple-500 to-pink-500', value: { type: 'dm', amount: 1 } },
-  { id: 4, name: '3 Hearts', icon: Heart, color: 'from-pink-500 to-rose-600', value: { type: 'heart', amount: 3 } },
-  { id: 5, name: '2 Boosts', icon: Zap, color: 'from-yellow-500 to-orange-500', value: { type: 'boost', amount: 2 } },
-  { id: 6, name: '1 Super Like', icon: Star, color: 'from-blue-500 to-cyan-500', value: { type: 'super_like', amount: 1 } },
+  { id: 1, icon: Zap, color: 'from-yellow-500 to-orange-500' },
+  { id: 2, icon: Star, color: 'from-blue-500 to-cyan-500' },
+  { id: 3, icon: MessageCircle, color: 'from-purple-500 to-pink-500' },
+  { id: 4, icon: Heart, color: 'from-pink-500 to-rose-600' },
+  { id: 5, icon: Zap, color: 'from-yellow-500 to-orange-500' },
+  { id: 6, icon: Star, color: 'from-blue-500 to-cyan-500' },
+  { id: 7, icon: Gift, color: 'from-green-500 to-teal-500' },
+  { id: 8, icon: Trophy, color: 'from-orange-500 to-red-500' },
 ];
 
 export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
@@ -16,8 +47,33 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
   const [rotation, setRotation] = useState(0);
   const [selectedReward, setSelectedReward] = useState(null);
   const [showReward, setShowReward] = useState(false);
+  const [wheelStatus, setWheelStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const spinWheel = () => {
+  useEffect(() => {
+    if (isOpen) {
+      fetchWheelStatus();
+    }
+  }, [isOpen]);
+
+  const fetchWheelStatus = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await axios.get(`${API}/api/rewards/cosmic-wheel-status`, {
+        withCredentials: true
+      });
+      setWheelStatus(response.data);
+    } catch (err) {
+      console.error('Error fetching wheel status:', err);
+      setError(err.response?.data?.detail || 'Failed to load wheel status');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const spinWheel = async () => {
     if (spinning) return;
     
     setSpinning(true);
