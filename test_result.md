@@ -150,6 +150,18 @@ backend:
         agent: "testing"
         comment: "✅ TESTED: Test login endpoint working perfectly. POST /api/auth/test-login accepts email parameter, returns success:true with user_id, sets session cookie correctly, and enables access to protected endpoints. Session authentication verified with /api/auth/me endpoint. User ID: a60a00ea-4f50-4cc2-9004-2eaaa9ad00bd, needs_onboarding: false."
 
+
+  - task: "Comprehensive Backend Regression Pass #4"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Request deep backend testing across all protected endpoints using session cookies. Focus: cookies with SameSite/Lax over HTTPS, CORS preflight (OPTIONS) responses, Cosmic Wheel (/api/cosmic-wheel/status, /api/cosmic-wheel/spin), authentication (/api/auth/test-login, /api/auth/me, /api/auth/logout), matches (/api/users/potential, /api/swipe), connections (/api/users/liked-me). Use base URL: https://astroapp-sync.preview.emergentagent.com/api."
 frontend:
   - task: "Navigation Sections (Discover, Connections, Profile)"
     implemented: true
