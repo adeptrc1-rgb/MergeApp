@@ -74,6 +74,7 @@ function LandingPage() {
   const [verificationCode, setVerificationCode] = useState('');
   const [step, setStep] = useState('phone'); // 'phone', 'verify', 'social'
   const [loading, setLoading] = useState(false);
+  const { checkAuth } = React.useContext(AuthContext);
 
   const handleGoogleLogin = () => {
     const redirectUrl = encodeURIComponent(window.location.origin + '/session');
@@ -91,10 +92,11 @@ function LandingPage() {
       });
       
       if (response.data.success) {
-        // Small delay to ensure cookie is set, then redirect
+        // Refresh auth context and then redirect
+        await checkAuth();
         setTimeout(() => {
           window.location.href = '/home';
-        }, 500);
+        }, 100);
       }
     } catch (error) {
       console.error('Test login error:', error);
