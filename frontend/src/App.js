@@ -26,6 +26,7 @@ import Profile from './components/Profile';
 import Settings from './components/Settings';
 import TestPage from './components/TestPage';
 import LoginApp from './components/LoginApp';
+import MainDashboard from './components/MainDashboard';
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
