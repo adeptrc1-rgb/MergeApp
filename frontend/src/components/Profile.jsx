@@ -18,6 +18,8 @@ export default function Profile({ user, logout }) {
   const [wheelStatus, setWheelStatus] = useState(null);
   const [cooldownCountdown, setCooldownCountdown] = useState('');
   const [cooldownProgress, setCooldownProgress] = useState(0);
+  const location = window.location;
+
 
   useEffect(() => {
     checkDailySpinStatus();
