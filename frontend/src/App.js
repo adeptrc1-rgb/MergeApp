@@ -33,7 +33,8 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 // Set global axios defaults
 axios.defaults.withCredentials = true;
-const API = process.env.REACT_APP_BACKEND_URL || '';
+const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
+const API = `${API_BASE}/api`;
 
 // Auth Context
 const AuthContext = React.createContext();
