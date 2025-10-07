@@ -5,7 +5,7 @@ from datetime import datetime, date
 import time
 
 class AstrologyDatingAPITester:
-    def __init__(self, base_url="https://zodiac-love-3.preview.emergentagent.com"):
+    def __init__(self, base_url="https://cosmic-match-9.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_token = None
