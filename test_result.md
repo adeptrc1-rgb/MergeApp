@@ -213,6 +213,8 @@ test_plan:
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
+  - agent: "main"
+    message: "Initiating Comprehensive Backend Regression Pass #4 via testing agent. Please validate cookies over HTTPS, CORS OPTIONS behavior, and all core endpoints listed in the task entry. Base URL: https://astroapp-sync.preview.emergentagent.com/api . Test user: use /api/auth/test-login with email testuser@asign.com."
 
 agent_communication:
   - agent: "main"
