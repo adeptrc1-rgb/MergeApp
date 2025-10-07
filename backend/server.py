@@ -1528,13 +1528,21 @@ async def check_cosmic_wheel_status(user: User = Depends(get_current_user)):
         else:
             can_spin = True
     
+    # Format next_spin_time properly for response
+    next_spin_time_str = None
+    if next_spin_time and not can_spin:
+        if isinstance(next_spin_time, datetime):
+            next_spin_time_str = next_spin_time.isoformat()
+        else:
+            next_spin_time_str = next_spin_time
+    
     return {
         "can_spin": can_spin,
         "spins_remaining": max_spins - spins_today,
         "max_spins": max_spins,
         "is_premium": is_premium,
         "spin_streak": spin_streak,
-        "next_spin_time": next_spin_time.isoformat() if next_spin_time and not can_spin else None,
+        "next_spin_time": next_spin_time_str,
         "cooldown_hours": round(cooldown_hours, 1) if cooldown_hours > 0 else 0,
         "extra_spin_cost": 0.49 if is_premium else 0.99
     }
