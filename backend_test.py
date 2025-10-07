@@ -31,7 +31,7 @@ class AstrologyDatingAPITester:
             "timestamp": datetime.now().isoformat()
         })
 
-    def run_test(self, name, method, endpoint, expected_status, data=None, headers=None):
+    def run_test(self, name, method, endpoint, expected_status, data=None, headers=None, use_cookies=False):
         """Run a single API test"""
         url = f"{self.api_url}/{endpoint}"
         test_headers = {'Content-Type': 'application/json'}
@@ -47,14 +47,16 @@ class AstrologyDatingAPITester:
         print(f"   Method: {method}")
         
         try:
+            cookies = self.session_cookies if use_cookies else None
+            
             if method == 'GET':
-                response = requests.get(url, headers=test_headers, timeout=10)
+                response = requests.get(url, headers=test_headers, cookies=cookies, timeout=10)
             elif method == 'POST':
-                response = requests.post(url, json=data, headers=test_headers, timeout=10)
+                response = requests.post(url, json=data, headers=test_headers, cookies=cookies, timeout=10)
             elif method == 'PUT':
-                response = requests.put(url, json=data, headers=test_headers, timeout=10)
+                response = requests.put(url, json=data, headers=test_headers, cookies=cookies, timeout=10)
             elif method == 'DELETE':
-                response = requests.delete(url, headers=test_headers, timeout=10)
+                response = requests.delete(url, headers=test_headers, cookies=cookies, timeout=10)
 
             print(f"   Status: {response.status_code}")
             
@@ -69,16 +71,16 @@ class AstrologyDatingAPITester:
 
             if success:
                 self.log_test(name, True)
-                return True, response_data
+                return True, response_data, response
             else:
                 self.log_test(name, False, f"Expected {expected_status}, got {response.status_code}")
-                return False, response_data
+                return False, response_data, response
 
         except Exception as e:
             error_msg = str(e)
             print(f"   Error: {error_msg}")
             self.log_test(name, False, error_msg)
-            return False, {}
+            return False, {}, None
 
     def test_health_check(self):
         """Test health endpoint"""
