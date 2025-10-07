@@ -62,7 +62,7 @@ function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      await axios.post(`${API}/api/auth/logout`, {}, {
+      await axios.post(`${API}/auth/logout`, {}, {
         withCredentials: true
       });
     } catch (error) {
