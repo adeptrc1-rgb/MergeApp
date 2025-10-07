@@ -1318,6 +1318,10 @@ function App() {
               } 
             />
             <Route 
+              path="/autologin" 
+              element={<AutoTestLogin />} 
+            />
+            <Route 
               path="/chat/:matchId" 
               element={
                 <ProtectedRoute>
