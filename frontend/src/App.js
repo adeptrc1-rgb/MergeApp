@@ -143,7 +143,7 @@ function LandingPage() {
       if (success) {
         console.log('Login successful! Redirecting...');
         setTimeout(() => {
-          window.location.href = '/home';
+          window.location.href = '/profile?openWheel=1';
         }, 1000);
       } else {
         alert('Test login failed. Please try again.');
