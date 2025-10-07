@@ -88,7 +88,7 @@ function LandingPage() {
     try {
       console.log('Starting test login...');
       // Login with test credentials
-      const response = await axios.post(`${API}/auth/test-login`, {
+      const response = await axios.post(`${API}/api/auth/test-login`, {
         email: 'testuser@asign.com'
       }, {
         withCredentials: true
@@ -97,27 +97,21 @@ function LandingPage() {
       console.log('Test login response:', response.data);
       
       if (response.data.success) {
-        console.log('Login successful, checking auth status...');
+        console.log('Login successful, refreshing auth context...');
         
-        // Wait a bit for cookie to be set
-        setTimeout(async () => {
-          try {
-            const authResponse = await axios.get(`${API}/auth/me`, {
-              withCredentials: true
-            });
-            console.log('Auth check response:', authResponse.data);
-            // If auth check succeeds, redirect
-            window.location.href = '/home';
-          } catch (authError) {
-            console.error('Auth check failed:', authError.response?.status, authError.response?.data);
-            alert('Login succeeded but authentication verification failed. Check console for details.');
-            setLoading(false);
-          }
-        }, 500);
+        // Directly update auth context
+        await checkAuth();
+        
+        // Give a moment for state to update, then redirect
+        setTimeout(() => {
+          console.log('Redirecting to home...');
+          window.location.href = '/home';
+        }, 200);
       }
     } catch (error) {
       console.error('Test login error:', error);
-      alert('Test login failed. Please try again.');
+      console.error('Error details:', error.response?.data);
+      alert(`Test login failed: ${error.response?.data?.detail || error.message}`);
       setLoading(false);
     }
   };
