@@ -19,14 +19,14 @@ export default function Messages({ user }) {
   const loadConversations = async () => {
     try {
       // Load both matches and direct message conversations
-      const matchesResponse = await axios.get(`${API}/matches`);
+      const matchesResponse = await axios.get(`${API}/api/matches`);
       const matches = matchesResponse.data;
       
       // Get conversations with message counts
       const conversationsWithMessages = await Promise.all(
         matches.map(async (match) => {
           try {
-            const messagesResponse = await axios.get(`${API}/matches/${match.id}/messages`);
+            const messagesResponse = await axios.get(`${API}/api/matches/${match.id}/messages`);
             const messages = messagesResponse.data;
             const lastMessage = messages[messages.length - 1];
             

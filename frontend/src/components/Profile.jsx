@@ -113,7 +113,7 @@ export default function Profile({ user, logout }) {
 
   const handleRewardClaimed = async (reward) => {
     try {
-      await axios.post(`${API}/rewards/claim-reward?reward_type=${reward.type}&amount=${reward.amount}`);
+      await axios.post(`${API}/api/rewards/claim-reward?reward_type=${reward.type}&amount=${reward.amount}`);
       // Refresh user data
       window.location.reload();
     } catch (error) {

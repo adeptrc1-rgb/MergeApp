@@ -62,7 +62,7 @@ export default function AstroMatchDashboard({ user, logout }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/users/potential-matches`);
+      const response = await axios.get(`${API}/api/users/potential-matches`);
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
@@ -89,9 +89,9 @@ export default function AstroMatchDashboard({ user, logout }) {
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'like', userId: currentMatch.id }]);
     
     try {
-      await axios.post(`${API}/users/like/${currentMatch.id}`);
+      await axios.post(`${API}/api/users/like/${currentMatch.id}`);
       // Check for mutual match
-      const matchResponse = await axios.get(`${API}/users/check-match/${currentMatch.id}`);
+      const matchResponse = await axios.get(`${API}/api/users/check-match/${currentMatch.id}`);
       if (matchResponse.data.is_match) {
         // Show match notification
         alert(`🎉 It's a match! You and ${currentMatch.first_name} both liked each other!`);
@@ -116,7 +116,7 @@ export default function AstroMatchDashboard({ user, logout }) {
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'pass', userId: currentMatch.id }]);
 
     try {
-      await axios.post(`${API}/users/pass/${currentMatch.id}`);
+      await axios.post(`${API}/api/users/pass/${currentMatch.id}`);
     } catch (error) {
       console.error('Error passing:', error);
     }
@@ -136,7 +136,7 @@ export default function AstroMatchDashboard({ user, logout }) {
     
     try {
       // Delete the last swipe from backend
-      await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
+      await axios.delete(`${API}/api/users/undo-swipe/${lastSwipe.userId}`);
       
       // Go back to previous card
       setCurrentIndex(lastSwipe.index);

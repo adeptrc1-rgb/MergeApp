@@ -195,7 +195,7 @@ export default function InteractiveOnboarding() {
         max_distance_km: formData.max_distance_km
       };
       
-      await axios.post(`${API}/users/complete-profile`, profileData);
+      await axios.post(`${API}/api/users/complete-profile`, profileData);
       navigate('/dashboard');
     } catch (error) {
       console.error('Profile completion error:', error);

@@ -20,7 +20,7 @@ export default function Settings({ user, logout }) {
   const handleSave = async () => {
     setSaving(true);
     try {
-      await axios.post(`${API}/users/update-preferences`, preferences);
+      await axios.post(`${API}/api/users/update-preferences`, preferences);
       navigate('/profile');
     } catch (error) {
       console.error('Error updating preferences:', error);

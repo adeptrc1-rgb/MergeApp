@@ -30,7 +30,7 @@ export default function Connections({ user }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/matches`);
+      const response = await axios.get(`${API}/api/matches`);
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
@@ -41,7 +41,7 @@ export default function Connections({ user }) {
   const loadLikes = async () => {
     try {
       // This would be a new endpoint to get users who liked you
-      const response = await axios.get(`${API}/users/liked-me`);
+      const response = await axios.get(`${API}/api/users/liked-me`);
       setLikes(response.data);
     } catch (error) {
       console.error('Error loading likes:', error);

@@ -40,7 +40,7 @@ export default function EnhancedDashboard({ user, logout }) {
 
   const loadPotentialMatches = async () => {
     try {
-      const response = await axios.get(`${API}/users/potential-matches`);
+      const response = await axios.get(`${API}/api/users/potential-matches`);
       setPotentialMatches(response.data);
       setCurrentUser(response.data[0] || null);
     } catch (error) {
@@ -54,7 +54,7 @@ export default function EnhancedDashboard({ user, logout }) {
     
     setSwiping(true);
     try {
-      const response = await axios.post(`${API}/users/swipe`, {
+      const response = await axios.post(`${API}/api/users/swipe`, {
         swiped_id: currentUser.id,
         liked: liked
       });
@@ -80,7 +80,7 @@ export default function EnhancedDashboard({ user, logout }) {
 
   const showCompatibilityBreakdown = async (userId) => {
     try {
-      const response = await axios.get(`${API}/users/compatibility-preview/${userId}`);
+      const response = await axios.get(`${API}/api/users/compatibility-preview/${userId}`);
       setCompatibilityData(response.data);
       setShowCompatibility(currentUser);
     } catch (error) {
