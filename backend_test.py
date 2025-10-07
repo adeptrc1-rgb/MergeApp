@@ -99,25 +99,27 @@ class AstrologyDatingAPITester:
 
     def test_create_session_without_header(self):
         """Test session creation without X-Session-ID header"""
-        return self.run_test("Create Session (No Header)", "POST", "auth/session", 422)
+        success, response_data, response = self.run_test("Create Session (No Header)", "POST", "auth/session", 422)
+        return success
 
     def test_create_session_with_invalid_session_id(self):
         """Test session creation with invalid X-Session-ID"""
         headers = {"X-Session-ID": "invalid-session-id-12345"}
-        return self.run_test("Create Session (Invalid ID)", "POST", "auth/session", 401, headers=headers)
+        success, response_data, response = self.run_test("Create Session (Invalid ID)", "POST", "auth/session", 401, headers=headers)
+        return success
 
     def test_create_session_with_valid_session_id(self):
         """Test session creation with valid X-Session-ID (mocked)"""
         # Note: This test uses a mock session ID since we can't generate real ones in testing
         # In a real scenario, this would be a valid session ID from Emergent Auth
         headers = {"X-Session-ID": "mock-valid-session-id-for-testing"}
-        success, response = self.run_test("Create Session (Valid ID - Expected to fail in test)", "POST", "auth/session", 401, headers=headers)
+        success, response_data, response = self.run_test("Create Session (Valid ID - Expected to fail in test)", "POST", "auth/session", 401, headers=headers)
         
         # We expect this to fail in testing since we don't have real Emergent Auth integration
         # But we're testing that the endpoint properly handles the request format
-        if not success and isinstance(response, dict):
+        if not success and isinstance(response_data, dict):
             # Check if the error is related to session validation (which is expected)
-            if "Invalid session" in str(response) or response.get("detail") == "Invalid session":
+            if "Invalid session" in str(response_data) or response_data.get("detail") == "Invalid session":
                 print("   ℹ️  Expected failure - OAuth integration requires real Emergent Auth session")
                 self.log_test("OAuth Endpoint Format", True, "Endpoint correctly validates session format")
                 return True
@@ -126,16 +128,19 @@ class AstrologyDatingAPITester:
 
     def test_potential_matches_without_auth(self):
         """Test potential matches without authentication"""
-        return self.run_test("Potential Matches (No Auth)", "GET", "users/potential-matches", 401)
+        success, response_data, response = self.run_test("Potential Matches (No Auth)", "GET", "users/potential-matches", 401)
+        return success
 
     def test_swipe_without_auth(self):
         """Test swipe without authentication"""
         swipe_data = {"swiped_id": "test-id", "liked": True}
-        return self.run_test("Swipe (No Auth)", "POST", "users/swipe", 401, data=swipe_data)
+        success, response_data, response = self.run_test("Swipe (No Auth)", "POST", "users/swipe", 401, data=swipe_data)
+        return success
 
     def test_matches_without_auth(self):
         """Test matches without authentication"""
-        return self.run_test("Matches (No Auth)", "GET", "matches", 401)
+        success, response_data, response = self.run_test("Matches (No Auth)", "GET", "matches", 401)
+        return success
 
     def test_complete_profile_without_auth(self):
         """Test complete profile without authentication"""
@@ -143,11 +148,13 @@ class AstrologyDatingAPITester:
             "birth_date": "1990-01-01",
             "bio": "Test bio"
         }
-        return self.run_test("Complete Profile (No Auth)", "POST", "users/complete-profile", 401, data=profile_data)
+        success, response_data, response = self.run_test("Complete Profile (No Auth)", "POST", "users/complete-profile", 401, data=profile_data)
+        return success
 
     def test_liked_me_without_auth(self):
         """Test liked-me endpoint without authentication"""
-        return self.run_test("Liked Me (No Auth)", "GET", "users/liked-me", 401)
+        success, response_data, response = self.run_test("Liked Me (No Auth)", "GET", "users/liked-me", 401)
+        return success
 
     def test_test_login_endpoint(self):
         """Test the test login endpoint and capture session cookies"""
