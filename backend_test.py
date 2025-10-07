@@ -386,9 +386,9 @@ class AstrologyDatingAPITester:
         """Test API response format consistency"""
         print("\n🔍 Testing API Response Format...")
         
-        success, response = self.run_test("Health Response Format", "GET", "health", 200)
+        success, response_data, response = self.run_test("Health Response Format", "GET", "health", 200)
         if success:
-            if isinstance(response, dict) and 'status' in response:
+            if isinstance(response_data, dict) and 'status' in response_data:
                 self.log_test("Health Response Format", True)
                 return True
             else:
