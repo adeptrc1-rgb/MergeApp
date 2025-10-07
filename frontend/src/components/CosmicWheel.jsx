@@ -177,35 +177,48 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
               {wheelStatus.can_spin ? (
                 <p className="text-green-400 text-sm">✨ Spin available now!</p>
               ) : (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-white/60">Next spin in:</span>
-                    <span className="text-purple-300 font-medium">
-                      {wheelStatus.cooldown_hours.toFixed(1)}h
+                <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-lg p-3 mb-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse"></div>
+                      <span className="text-white/80 text-xs">Next spin</span>
+                    </div>
+                    <span className="text-purple-200 text-xs font-medium">
+                      {wheelStatus.cooldown_hours < 1 
+                        ? `${Math.round(wheelStatus.cooldown_hours * 60)}m`
+                        : `${wheelStatus.cooldown_hours.toFixed(1)}h`}
                     </span>
-                  </div>
-                  {/* Mini Progress Bar */}
-                  <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-purple-500 to-pink-600"
-                      style={{ 
-                        width: `${Math.min(100, ((wheelStatus.is_premium ? 24 : 48) - wheelStatus.cooldown_hours) / (wheelStatus.is_premium ? 24 : 48) * 100)}%` 
-                      }}
-                    ></div>
                   </div>
                 </div>
               )}
               <div className="flex gap-2 justify-center">
                 {wheelStatus.spin_streak > 0 && (
-                  <div className="bg-white/10 rounded-lg px-3 py-1.5 text-center">
-                    <span className="text-orange-400 text-xs">🔥 {wheelStatus.spin_streak} streak</span>
+                  <div className="bg-white/5 border border-orange-400/20 rounded-lg px-3 py-1.5">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-4 h-4 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">{wheelStatus.spin_streak}</span>
+                      </div>
+                      <span className="text-orange-200 text-xs font-medium">streak</span>
+                    </div>
                   </div>
                 )}
                 {wheelStatus.spins_remaining > 0 && wheelStatus.max_spins > 1 && (
-                  <div className="bg-white/10 rounded-lg px-3 py-1.5 text-center">
-                    <span className="text-blue-300 text-xs">
-                      {wheelStatus.spins_remaining}/{wheelStatus.max_spins} spins left
-                    </span>
+                  <div className="bg-white/5 border border-blue-400/20 rounded-lg px-3 py-1.5">
+                    <div className="flex items-center gap-2">
+                      <div className="flex gap-0.5">
+                        {Array.from({ length: wheelStatus.max_spins }, (_, i) => (
+                          <div
+                            key={i}
+                            className={`w-1.5 h-1.5 rounded-full ${
+                              i < wheelStatus.spins_remaining 
+                                ? 'bg-blue-400' 
+                                : 'bg-white/20'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-blue-200 text-xs font-medium">left</span>
+                    </div>
                   </div>
                 )}
               </div>
