@@ -353,6 +353,68 @@ class AstrologyDatingAPITester:
         self.log_test("Zodiac Calculation Logic", all_passed)
         return all_passed
 
+    def test_cors_preflight_auth_test_login(self):
+        """Test CORS preflight for /auth/test-login endpoint"""
+        print("\n🔍 Testing CORS Preflight for /auth/test-login...")
+        try:
+            headers = {
+                'Origin': 'https://astroapp-sync.preview.emergentagent.com',
+                'Access-Control-Request-Method': 'POST',
+                'Access-Control-Request-Headers': 'Content-Type'
+            }
+            response = requests.options(f"{self.api_url}/auth/test-login", headers=headers, timeout=10)
+            
+            # Accept both 200 and 204 as valid preflight responses
+            if response.status_code in [200, 204]:
+                cors_headers = response.headers
+                required_cors = ['Access-Control-Allow-Origin', 'Access-Control-Allow-Methods']
+                
+                missing = [h for h in required_cors if h not in cors_headers]
+                if missing:
+                    self.log_test("CORS Preflight /auth/test-login", False, f"Missing CORS headers: {missing}")
+                    return False
+                else:
+                    self.log_test("CORS Preflight /auth/test-login", True)
+                    return True
+            else:
+                self.log_test("CORS Preflight /auth/test-login", False, f"Expected 200/204, got {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("CORS Preflight /auth/test-login", False, str(e))
+            return False
+
+    def test_cors_preflight_users_liked_me(self):
+        """Test CORS preflight for /users/liked-me endpoint"""
+        print("\n🔍 Testing CORS Preflight for /users/liked-me...")
+        try:
+            headers = {
+                'Origin': 'https://astroapp-sync.preview.emergentagent.com',
+                'Access-Control-Request-Method': 'GET',
+                'Access-Control-Request-Headers': 'Content-Type,Authorization'
+            }
+            response = requests.options(f"{self.api_url}/users/liked-me", headers=headers, timeout=10)
+            
+            # Accept both 200 and 204 as valid preflight responses
+            if response.status_code in [200, 204]:
+                cors_headers = response.headers
+                required_cors = ['Access-Control-Allow-Origin', 'Access-Control-Allow-Methods']
+                
+                missing = [h for h in required_cors if h not in cors_headers]
+                if missing:
+                    self.log_test("CORS Preflight /users/liked-me", False, f"Missing CORS headers: {missing}")
+                    return False
+                else:
+                    self.log_test("CORS Preflight /users/liked-me", True)
+                    return True
+            else:
+                self.log_test("CORS Preflight /users/liked-me", False, f"Expected 200/204, got {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("CORS Preflight /users/liked-me", False, str(e))
+            return False
+
     def test_cors_headers(self):
         """Test CORS configuration"""
         print("\n🔍 Testing CORS Headers...")
