@@ -1233,7 +1233,7 @@ function ConnectionsWrapper() {
 
 function ProfileWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <MainDashboard user={user} logout={logout} />;
+  return <Profile user={user} logout={logout} />;
 }
 
 function SettingsWrapper() {
