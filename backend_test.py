@@ -421,11 +421,29 @@ class AstrologyDatingAPITester:
         self.test_complete_profile_without_auth()
         self.test_liked_me_without_auth()
         
-        # Test login and new endpoints
+        # Test login and capture session
+        print("\n" + "=" * 40)
+        print("🔐 AUTHENTICATION FLOW TESTS")
+        print("=" * 40)
         self.test_test_login_endpoint()
-        self.test_liked_me_with_test_auth()
+        
+        # Authenticated endpoint tests
+        if self.session_cookies:
+            print("\n" + "=" * 40)
+            print("🔒 AUTHENTICATED ENDPOINT TESTS")
+            print("=" * 40)
+            self.test_auth_me_with_session()
+            self.test_potential_matches_with_auth()
+            self.test_liked_me_with_auth()
+            self.test_cosmic_wheel_status()
+            self.test_cosmic_wheel_spin()
+        else:
+            print("\n⚠️  Skipping authenticated tests - no session cookies available")
         
         # Business logic tests
+        print("\n" + "=" * 40)
+        print("🧮 BUSINESS LOGIC TESTS")
+        print("=" * 40)
         self.test_zodiac_calculation_logic()
         
         # Print summary
