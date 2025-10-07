@@ -129,35 +129,27 @@ function LandingPage() {
     window.location.href = `https://auth.emergentagent.com/?redirect=${redirectUrl}`;
   };
 
+  const { login } = React.useContext(AuthContext);
+
   const handleTestLogin = async () => {
     setLoading(true);
     try {
       console.log('Starting test login...');
-      // Login with test credentials
-      const response = await axios.post(`${API}/auth/test-login`, {
-        email: 'testuser@asign.com'
-      }, {
-        withCredentials: true
-      });
       
-      console.log('Test login response:', response.data);
+      const success = await login();
       
-      if (response.data.success) {
-        console.log('Login successful, refreshing auth context...');
-        
-        // Directly update auth context
-        await checkAuth();
-        
-        // Give a moment for state to update, then redirect
+      if (success) {
+        console.log('Login successful! Redirecting...');
         setTimeout(() => {
-          console.log('Redirecting to home...');
           window.location.href = '/home';
-        }, 200);
+        }, 1000);
+      } else {
+        alert('Test login failed. Please try again.');
+        setLoading(false);
       }
     } catch (error) {
       console.error('Test login error:', error);
-      console.error('Error details:', error.response?.data);
-      alert(`Test login failed: ${error.response?.data?.detail || error.message}`);
+      alert(`Test login failed: ${error.message}`);
       setLoading(false);
     }
   };
