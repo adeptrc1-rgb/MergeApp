@@ -290,7 +290,7 @@ class AstrologyDatingAPITester:
             return False
         
         # First check if we can spin
-        status_success, status_data, _ = self.run_test("Cosmic Wheel Status Check", "GET", "cosmic-wheel/status", 200, use_cookies=True)
+        status_success, status_data, _ = self.run_test("Cosmic Wheel Status Check", "GET", "rewards/cosmic-wheel-status", 200, use_cookies=True)
         
         if not status_success:
             return False
