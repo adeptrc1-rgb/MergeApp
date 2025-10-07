@@ -270,7 +270,7 @@ class AstrologyDatingAPITester:
             print("   ⚠️  No session cookies available, skipping test")
             return False
             
-        success, response_data, response = self.run_test("Cosmic Wheel Status", "GET", "cosmic-wheel/status", 200, use_cookies=True)
+        success, response_data, response = self.run_test("Cosmic Wheel Status", "GET", "rewards/cosmic-wheel-status", 200, use_cookies=True)
         
         if success and isinstance(response_data, dict):
             required_fields = ["can_spin", "next_spin_time", "streak"]
