@@ -270,25 +270,41 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         {showReward && selectedReward && (
           <div className="text-center animate-fadeIn">
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-4">
+              {/* Tier Badge */}
+              <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
+                selectedReward.tier === 'legendary' ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black' :
+                selectedReward.tier === 'rare' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' :
+                'bg-gradient-to-r from-gray-400 to-gray-600 text-white'
+              }`}>
+                {selectedReward.tier?.toUpperCase()}
+              </div>
+              
               <div className={`inline-block p-4 bg-gradient-to-r ${selectedReward.color} rounded-full mb-4`}>
                 {React.createElement(selectedReward.icon, { className: 'w-8 h-8 text-white' })}
               </div>
               <h3 className="text-2xl font-light text-white mb-2">You Won!</h3>
-              <p className="text-lg text-purple-300">{selectedReward.name}</p>
+              <p className="text-xl text-purple-300 font-medium mb-2">{selectedReward.name}</p>
+              <p className="text-sm text-white/60">{selectedReward.description}</p>
             </div>
             <button
               onClick={handleClose}
-              className="w-full py-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all"
+              className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full hover:scale-105 transition-all shadow-xl"
             >
               Collect Reward
             </button>
           </div>
         )}
 
-        {/* Daily Spin Info */}
-        <div className="mt-6 text-center text-white/40 text-sm">
-          ✨ Come back tomorrow for another spin!
-        </div>
+        {/* Spin Info */}
+        {!loading && !showReward && (
+          <div className="mt-6 text-center text-white/40 text-sm">
+            {wheelStatus?.is_premium ? (
+              <p>✨ Premium: 3 spins per day!</p>
+            ) : (
+              <p>✨ Free: 1 spin every 48 hours</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
