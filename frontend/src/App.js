@@ -43,7 +43,7 @@ function AuthProvider({ children }) {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get(`${API}/api/auth/me`, {
+      const response = await axios.get(`${API}/auth/me`, {
         withCredentials: true
       });
       console.log('Auth check successful:', response.data);
