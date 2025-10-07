@@ -1212,7 +1212,7 @@ function AstroChatWrapper() {
 
 function DiscoverWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Discover user={user} logout={logout} />;
+  return <MainDashboard user={user} logout={logout} />;
 }
 
 function HomeWrapper() {
@@ -1222,17 +1222,17 @@ function HomeWrapper() {
 
 function MessagesWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Messages user={user} logout={logout} />;
+  return <MainDashboard user={user} logout={logout} />;
 }
 
 function ConnectionsWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Connections user={user} logout={logout} />;
+  return <MainDashboard user={user} logout={logout} />;
 }
 
 function ProfileWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Profile user={user} logout={logout} />;
+  return <MainDashboard user={user} logout={logout} />;
 }
 
 function SettingsWrapper() {
