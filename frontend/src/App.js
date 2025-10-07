@@ -1220,6 +1220,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/test" element={<TestPage />} />
+            <Route path="/login" element={<LoginApp />} />
             <Route path="/session" element={<SessionHandler />} />
             <Route path="/onboarding" element={<InteractiveOnboarding />} />
             <Route 
