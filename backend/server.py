@@ -136,9 +136,18 @@ class User(BaseModel):
     super_likes_expiry: Optional[datetime] = None
     direct_messages_expiry: Optional[datetime] = None
     
-    # Daily Rewards
-    last_spin_date: Optional[date] = None  # Track last cosmic wheel spin
+    # Daily Rewards & Cosmic Wheel
+    last_spin_date: Optional[datetime] = None
+    next_spin_time: Optional[datetime] = None  # When user can spin again
+    spin_streak: int = 0  # Consecutive spin streak for bonuses
+    spins_today: int = 0  # Number of spins used today
+    spin_reset_date: Optional[date] = None  # Last date spins were reset
     daily_spin_available: bool = True
+    star_coins: int = 0  # In-app currency from spins
+    
+    # Premium Status
+    is_premium: bool = False
+    premium_expires_at: Optional[datetime] = None
     
     # System fields
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
