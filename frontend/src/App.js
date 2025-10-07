@@ -1218,6 +1218,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/test" element={<TestPage />} />
             <Route path="/session" element={<SessionHandler />} />
             <Route path="/onboarding" element={<InteractiveOnboarding />} />
             <Route 
