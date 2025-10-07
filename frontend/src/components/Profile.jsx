@@ -200,41 +200,64 @@ export default function Profile({ user, logout }) {
               <Sparkles className="w-8 h-8 text-purple-400 cosmic-pulse-icon" />
             </div>
             
-            {/* Cooldown Timeline */}
-            {!canSpin && cooldownCountdown && (
-              <div className="mb-4">
-                <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-white/60">⏳ Next spin available in:</span>
-                  <span className="text-purple-300 font-medium">{cooldownCountdown}</span>
-                </div>
-                {/* Progress Bar */}
-                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-purple-500 to-pink-600 transition-all duration-1000 ease-linear"
-                    style={{ width: `${cooldownProgress}%` }}
-                  ></div>
-                </div>
-                <div className="text-xs text-white/40 mt-1 text-center">
-                  {Math.round(cooldownProgress)}% complete
-                </div>
-              </div>
-            )}
-            
-            {/* Spin Streak & Status */}
+            {/* Elegant Status Display */}
             {wheelStatus && (
-              <div className="flex gap-2 mb-4">
-                {wheelStatus.spin_streak > 0 && (
-                  <div className="flex-1 bg-white/10 rounded-lg px-3 py-2 text-center">
-                    <div className="text-orange-400 text-xs mb-1">🔥 Streak</div>
-                    <div className="text-white font-medium">{wheelStatus.spin_streak}</div>
+              <div className="space-y-3 mb-4">
+                {/* Next Spin Timer - Only show if on cooldown */}
+                {!canSpin && cooldownCountdown && (
+                  <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                        <span className="text-white/80 text-sm">Next spin available</span>
+                      </div>
+                      <span className="text-purple-200 font-medium">{cooldownCountdown}</span>
+                    </div>
+                    {/* Subtle progress indicator */}
+                    <div className="w-full bg-white/5 rounded-full h-1 mt-3">
+                      <div 
+                        className="bg-gradient-to-r from-purple-400 to-pink-400 h-1 rounded-full transition-all duration-500 ease-out"
+                        style={{ width: `${cooldownProgress}%` }}
+                      ></div>
+                    </div>
                   </div>
                 )}
-                {wheelStatus.spins_remaining !== undefined && wheelStatus.max_spins > 1 && (
-                  <div className="flex-1 bg-white/10 rounded-lg px-3 py-2 text-center">
-                    <div className="text-blue-300 text-xs mb-1">Spins Left</div>
-                    <div className="text-white font-medium">{wheelStatus.spins_remaining}/{wheelStatus.max_spins}</div>
-                  </div>
-                )}
+                
+                {/* Streak & Spins - Elegant minimalist design */}
+                <div className="grid grid-cols-2 gap-3">
+                  {wheelStatus.spin_streak > 0 && (
+                    <div className="bg-white/5 border border-orange-400/20 rounded-lg p-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">{wheelStatus.spin_streak}</span>
+                        </div>
+                        <span className="text-orange-200 text-sm font-medium">Day Streak</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {wheelStatus.spins_remaining !== undefined && wheelStatus.max_spins > 1 && (
+                    <div className="bg-white/5 border border-blue-400/20 rounded-lg p-3">
+                      <div className="flex items-center gap-2">
+                        <div className="flex gap-1">
+                          {Array.from({ length: wheelStatus.max_spins }, (_, i) => (
+                            <div
+                              key={i}
+                              className={`w-2 h-2 rounded-full transition-colors ${
+                                i < wheelStatus.spins_remaining 
+                                  ? 'bg-blue-400' 
+                                  : 'bg-white/20'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-blue-200 text-sm font-medium">
+                          {wheelStatus.spins_remaining} left
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
             
