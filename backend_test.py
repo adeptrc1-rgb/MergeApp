@@ -697,7 +697,7 @@ class AstrologyDatingAPITester:
 
 def main():
     tester = AstrologyDatingAPITester()
-    return tester.run_all_tests()
+    return tester.run_comprehensive_regression_pass_4()
 
 if __name__ == "__main__":
     sys.exit(main())
