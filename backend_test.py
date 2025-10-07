@@ -311,7 +311,7 @@ class AstrologyDatingAPITester:
             return success
         else:
             # Test that spinning when not allowed returns appropriate error (403 or 400)
-            success, response_data, response = self.run_test("Cosmic Wheel Spin (Not Allowed)", "POST", "cosmic-wheel/spin", 403, use_cookies=True)
+            success, response_data, response = self.run_test("Cosmic Wheel Spin (Not Allowed)", "POST", "rewards/spin-cosmic-wheel", 403, use_cookies=True)
             
             if success:
                 print("   ℹ️  Correctly prevented spin when not allowed")
