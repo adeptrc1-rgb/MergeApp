@@ -30,9 +30,9 @@ import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-// Configure axios to always send cookies
+// Set global axios defaults
 axios.defaults.withCredentials = true;
-const API = `${BACKEND_URL}/api`;
+const API = process.env.REACT_APP_BACKEND_URL || '';
 
 // Auth Context
 const AuthContext = React.createContext();
@@ -44,17 +44,52 @@ function AuthProvider({ children }) {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get(`${API}/auth/me`, {
-        withCredentials: true
+      const response = await fetch(`${API}/auth/me`, {
+        credentials: 'include'
       });
-      console.log('Auth check successful:', response.data);
-      setUser(response.data);
-      setNeedsOnboarding(response.data.needs_onboarding);
+      
+      if (response.ok) {
+        const userData = await response.json();
+        console.log('Auth check successful:', userData);
+        setUser(userData);
+        setNeedsOnboarding(userData.needs_onboarding || false);
+      } else {
+        console.log('Auth check failed:', response.status);
+        setUser(null);
+      }
     } catch (error) {
-      console.log('Auth check failed:', error.response?.status, error.response?.data);
+      console.log('Auth check error:', error);
       setUser(null);
     }
     setLoading(false);
+  };
+
+  const login = async (email = 'testuser@asign.com') => {
+    try {
+      const response = await fetch(`${API}/auth/test-login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          // Wait for cookie to be set, then check auth
+          setTimeout(async () => {
+            await checkAuth();
+          }, 500);
+          return true;
+        }
+      }
+      return false;
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
+    }
   };
 
   useEffect(() => {
@@ -63,8 +98,9 @@ function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      await axios.post(`${API}/auth/logout`, {}, {
-        withCredentials: true
+      await fetch(`${API}/auth/logout`, {
+        method: 'POST',
+        credentials: 'include'
       });
     } catch (error) {
       console.log('Logout error (non-critical):', error);
@@ -74,7 +110,7 @@ function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, needsOnboarding, setNeedsOnboarding, checkAuth, logout }}>
+    <AuthContext.Provider value={{ user, setUser, loading, needsOnboarding, setNeedsOnboarding, checkAuth, logout, login }}>
       {children}
     </AuthContext.Provider>
   );
