@@ -34,7 +34,7 @@ export default function Profile({ user, logout }) {
 
   const checkDailySpinStatus = async () => {
     try {
-      const response = await axios.get(`${API}/rewards/cosmic-wheel-status`);
+      const response = await axios.get(`${API}/api/rewards/cosmic-wheel-status`);
       setWheelStatus(response.data);
       setCanSpin(response.data.can_spin);
       updateCooldownCountdown(response.data);
