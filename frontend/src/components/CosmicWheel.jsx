@@ -237,7 +237,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
 
           {/* Wheel */}
           <div 
-            className="relative w-64 h-64 rounded-full border-4 border-purple-400/50 overflow-hidden shadow-2xl"
+            className="relative w-72 h-72 rounded-full border-4 border-purple-400/50 shadow-2xl"
             style={{
               transform: `rotate(${rotation}deg)`,
               transition: spinning ? 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none'
@@ -251,15 +251,17 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
               return (
                 <div
                   key={reward.id}
-                  className={`absolute inset-0 origin-center`}
+                  className={`absolute inset-0 origin-center overflow-hidden`}
                   style={{
                     transform: `rotate(${angle}deg)`,
                     clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.sin((Math.PI * 2) / rewards.length)}% ${50 - 50 * Math.cos((Math.PI * 2) / rewards.length)}%)`
                   }}
                 >
                   <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80`}>
-                    <div className="absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                      <Icon className="w-6 h-6 text-white" />
+                    <div className="absolute top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                      <div className="bg-white/20 rounded-full p-2 backdrop-blur-sm">
+                        <Icon className="w-7 h-7 text-white drop-shadow-lg" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -267,8 +269,8 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
             })}
 
             {/* Center Circle */}
-            <div className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 border-4 border-white shadow-lg flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-white" />
+            <div className="absolute inset-0 m-auto w-20 h-20 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 border-4 border-white shadow-lg flex items-center justify-center">
+              <Sparkles className="w-8 h-8 text-white" />
             </div>
           </div>
         </div>
