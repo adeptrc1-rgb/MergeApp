@@ -193,6 +193,51 @@ class AstrologyDatingAPITester:
                 return False
         return success
 
+    def test_logout(self):
+        """Test logout endpoint"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping test")
+            return False
+            
+        success, response_data, response = self.run_test("Logout", "POST", "auth/logout", 200, use_cookies=True)
+        
+        if success and isinstance(response_data, dict):
+            if response_data.get("success"):
+                print("   ℹ️  Logout successful")
+                return True
+            else:
+                self.log_test("Logout Response Format", False, "Missing success in response")
+                return False
+        return success
+
+    def test_auth_me_after_logout(self):
+        """Test /auth/me after logout - should return 401"""
+        success, response_data, response = self.run_test("Auth Me (After Logout)", "GET", "auth/me", 401, use_cookies=True)
+        return success
+
+    def test_auth_me_with_invalid_session(self):
+        """Test /auth/me with invalid session cookie"""
+        print("\n🔍 Testing Auth Me with Invalid Session...")
+        try:
+            # Create invalid session cookies
+            invalid_cookies = {'session_token': 'invalid-session-token-12345'}
+            
+            url = f"{self.api_url}/auth/me"
+            response = requests.get(url, cookies=invalid_cookies, timeout=10)
+            
+            print(f"   Status: {response.status_code}")
+            
+            if response.status_code == 401:
+                self.log_test("Auth Me (Invalid Session)", True)
+                return True
+            else:
+                self.log_test("Auth Me (Invalid Session)", False, f"Expected 401, got {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Auth Me (Invalid Session)", False, str(e))
+            return False
+
     def test_potential_matches_with_auth(self):
         """Test potential matches endpoint with authentication"""
         if not self.session_cookies:
