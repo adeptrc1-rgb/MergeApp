@@ -3,7 +3,8 @@ import { X, Sparkles, Heart, Zap, MessageCircle, Star, Trophy, Gift, Eye, Flame 
 import { createStarburstEffect, createHeartBurst, createStardustTrail } from '../utils/particleEffects';
 import axios from 'axios';
 
-const API = process.env.REACT_APP_BACKEND_URL || '';
+const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
+const API = `${API_BASE}`;
 
 // Tier colors for visual feedback
 const TIER_COLORS = {
