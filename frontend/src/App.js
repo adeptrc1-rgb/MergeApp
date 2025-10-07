@@ -42,12 +42,14 @@ function AuthProvider({ children }) {
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get(`${API}/auth/me`, {
+      const response = await axios.get(`${API}/api/auth/me`, {
         withCredentials: true
       });
+      console.log('Auth check successful:', response.data);
       setUser(response.data);
       setNeedsOnboarding(response.data.needs_onboarding);
     } catch (error) {
+      console.log('Auth check failed:', error.response?.status, error.response?.data);
       setUser(null);
     }
     setLoading(false);
