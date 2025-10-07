@@ -170,7 +170,45 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           </div>
           <h2 className="text-3xl font-light text-white mb-2">Cosmic Wheel</h2>
           <p className="text-white/60">Spin to reveal your mystic reward</p>
+          
+          {/* Spin Status */}
+          {wheelStatus && !loading && (
+            <div className="mt-4 space-y-2">
+              {wheelStatus.can_spin ? (
+                <p className="text-green-400 text-sm">✨ Spin available now!</p>
+              ) : (
+                <p className="text-orange-400 text-sm">
+                  ⏳ Next spin in {wheelStatus.cooldown_hours.toFixed(1)}h
+                </p>
+              )}
+              {wheelStatus.spin_streak > 0 && (
+                <p className="text-purple-300 text-sm">
+                  🔥 Streak: {wheelStatus.spin_streak} spins
+                </p>
+              )}
+              {wheelStatus.spins_remaining > 0 && wheelStatus.max_spins > 1 && (
+                <p className="text-blue-300 text-sm">
+                  {wheelStatus.spins_remaining} / {wheelStatus.max_spins} spins left today
+                </p>
+              )}
+            </div>
+          )}
         </div>
+
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-8">
+            <div className="animate-spin w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p className="text-white/60">Loading wheel...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-4 mb-6">
+            <p className="text-red-400 text-sm">{error}</p>
+          </div>
+        )}
 
         {/* Wheel Container */}
         <div className="relative mb-8 flex items-center justify-center">
