@@ -31,6 +31,20 @@ export default function Profile({ user, logout }) {
       updateCooldownCountdown();
     }, 1000); // Update every second for smooth countdown
     
+    // Auto-open Cosmic Wheel if URL param present
+    try {
+      const params = new URLSearchParams(location.search);
+      const openWheel = params.get('openWheel');
+      if (openWheel === '1') {
+        setShowCosmicWheel(true);
+        // Clean the URL so refresh doesn’t re-open
+        const newUrl = window.location.pathname;
+        window.history.replaceState(null, '', newUrl);
+      }
+    } catch (e) {
+      // no-op if URL parsing fails
+    }
+
     return () => clearInterval(interval);
   }, [user, wheelStatus]);
 
