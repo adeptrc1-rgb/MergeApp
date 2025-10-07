@@ -97,7 +97,7 @@ function LandingPage() {
     try {
       console.log('Starting test login...');
       // Login with test credentials
-      const response = await axios.post(`${API}/api/auth/test-login`, {
+      const response = await axios.post(`${API}/auth/test-login`, {
         email: 'testuser@asign.com'
       }, {
         withCredentials: true
