@@ -331,7 +331,7 @@ class AstrologyDatingAPITester:
             return False
             
         # First get potential matches
-        success, response_data, response = self.run_test("Users Potential", "GET", "users/potential", 200, use_cookies=True)
+        success, response_data, response = self.run_test("Users Potential", "GET", "users/potential-matches", 200, use_cookies=True)
         
         if not success:
             return False
