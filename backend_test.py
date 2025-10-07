@@ -298,7 +298,7 @@ class AstrologyDatingAPITester:
         can_spin = status_data.get("can_spin", False)
         
         if can_spin:
-            success, response_data, response = self.run_test("Cosmic Wheel Spin", "POST", "cosmic-wheel/spin", 200, use_cookies=True)
+            success, response_data, response = self.run_test("Cosmic Wheel Spin", "POST", "rewards/spin-cosmic-wheel", 200, use_cookies=True)
             
             if success and isinstance(response_data, dict):
                 if "reward" in response_data or "success" in response_data:
