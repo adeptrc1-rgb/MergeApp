@@ -6,7 +6,7 @@ import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircl
 import CosmicWheel from './CosmicWheel';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const API = `${BACKEND_URL}`;
 
 axios.defaults.withCredentials = true;
 
