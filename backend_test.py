@@ -318,7 +318,7 @@ class AstrologyDatingAPITester:
                 return True
             else:
                 # Try with 400 status code as alternative
-                success_alt, _, _ = self.run_test("Cosmic Wheel Spin (Not Allowed - Alt)", "POST", "cosmic-wheel/spin", 400, use_cookies=True)
+                success_alt, _, _ = self.run_test("Cosmic Wheel Spin (Not Allowed - Alt)", "POST", "rewards/spin-cosmic-wheel", 400, use_cookies=True)
                 if success_alt:
                     print("   ℹ️  Correctly prevented spin when not allowed (400)")
                     return True
