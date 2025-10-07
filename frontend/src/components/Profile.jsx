@@ -211,16 +211,55 @@ export default function Profile({ user, logout }) {
               </div>
               <Sparkles className="w-8 h-8 text-purple-400 cosmic-pulse-icon" />
             </div>
+            
+            {/* Cooldown Timeline */}
+            {!canSpin && cooldownCountdown && (
+              <div className="mb-4">
+                <div className="flex items-center justify-between text-sm mb-2">
+                  <span className="text-white/60">⏳ Next spin available in:</span>
+                  <span className="text-purple-300 font-medium">{cooldownCountdown}</span>
+                </div>
+                {/* Progress Bar */}
+                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-purple-500 to-pink-600 transition-all duration-1000 ease-linear"
+                    style={{ width: `${cooldownProgress}%` }}
+                  ></div>
+                </div>
+                <div className="text-xs text-white/40 mt-1 text-center">
+                  {Math.round(cooldownProgress)}% complete
+                </div>
+              </div>
+            )}
+            
+            {/* Spin Streak & Status */}
+            {wheelStatus && (
+              <div className="flex gap-2 mb-4">
+                {wheelStatus.spin_streak > 0 && (
+                  <div className="flex-1 bg-white/10 rounded-lg px-3 py-2 text-center">
+                    <div className="text-orange-400 text-xs mb-1">🔥 Streak</div>
+                    <div className="text-white font-medium">{wheelStatus.spin_streak}</div>
+                  </div>
+                )}
+                {wheelStatus.spins_remaining !== undefined && wheelStatus.max_spins > 1 && (
+                  <div className="flex-1 bg-white/10 rounded-lg px-3 py-2 text-center">
+                    <div className="text-blue-300 text-xs mb-1">Spins Left</div>
+                    <div className="text-white font-medium">{wheelStatus.spins_remaining}/{wheelStatus.max_spins}</div>
+                  </div>
+                )}
+              </div>
+            )}
+            
             <button
               onClick={() => setShowCosmicWheel(true)}
               disabled={!canSpin}
               className={`w-full py-3 rounded-xl font-medium transition-all ${
                 canSpin
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105 shadow-lg shadow-purple-500/30'
                   : 'bg-white/10 text-white/40 cursor-not-allowed'
               }`}
             >
-              {canSpin ? '✨ Spin Now' : '🕐 Come back tomorrow'}
+              {canSpin ? '✨ Spin Now' : `⏳ Next spin: ${cooldownCountdown || 'Soon'}`}
             </button>
           </div>
 
