@@ -173,24 +173,42 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           
           {/* Spin Status */}
           {wheelStatus && !loading && (
-            <div className="mt-4 space-y-2">
+            <div className="mt-4 space-y-3">
               {wheelStatus.can_spin ? (
                 <p className="text-green-400 text-sm">✨ Spin available now!</p>
               ) : (
-                <p className="text-orange-400 text-sm">
-                  ⏳ Next spin in {wheelStatus.cooldown_hours.toFixed(1)}h
-                </p>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-white/60">Next spin in:</span>
+                    <span className="text-purple-300 font-medium">
+                      {wheelStatus.cooldown_hours.toFixed(1)}h
+                    </span>
+                  </div>
+                  {/* Mini Progress Bar */}
+                  <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-purple-500 to-pink-600"
+                      style={{ 
+                        width: `${Math.min(100, ((wheelStatus.is_premium ? 24 : 48) - wheelStatus.cooldown_hours) / (wheelStatus.is_premium ? 24 : 48) * 100)}%` 
+                      }}
+                    ></div>
+                  </div>
+                </div>
               )}
-              {wheelStatus.spin_streak > 0 && (
-                <p className="text-purple-300 text-sm">
-                  🔥 Streak: {wheelStatus.spin_streak} spins
-                </p>
-              )}
-              {wheelStatus.spins_remaining > 0 && wheelStatus.max_spins > 1 && (
-                <p className="text-blue-300 text-sm">
-                  {wheelStatus.spins_remaining} / {wheelStatus.max_spins} spins left today
-                </p>
-              )}
+              <div className="flex gap-2 justify-center">
+                {wheelStatus.spin_streak > 0 && (
+                  <div className="bg-white/10 rounded-lg px-3 py-1.5 text-center">
+                    <span className="text-orange-400 text-xs">🔥 {wheelStatus.spin_streak} streak</span>
+                  </div>
+                )}
+                {wheelStatus.spins_remaining > 0 && wheelStatus.max_spins > 1 && (
+                  <div className="bg-white/10 rounded-lg px-3 py-1.5 text-center">
+                    <span className="text-blue-300 text-xs">
+                      {wheelStatus.spins_remaining}/{wheelStatus.max_spins} spins left
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
