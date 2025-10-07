@@ -60,7 +60,13 @@ function AuthProvider({ children }) {
   }, []);
 
   const logout = async () => {
-    await axios.post(`${API}/auth/logout`);
+    try {
+      await axios.post(`${API}/api/auth/logout`, {}, {
+        withCredentials: true
+      });
+    } catch (error) {
+      console.log('Logout error (non-critical):', error);
+    }
     setUser(null);
     setNeedsOnboarding(false);
   };
