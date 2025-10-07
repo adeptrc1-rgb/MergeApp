@@ -5,11 +5,12 @@ from datetime import datetime, date
 import time
 
 class AstrologyDatingAPITester:
-    def __init__(self, base_url="https://cosmic-match-9.preview.emergentagent.com"):
+    def __init__(self, base_url="http://localhost:8001"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_token = None
         self.user_id = None
+        self.session_cookies = None
         self.tests_run = 0
         self.tests_passed = 0
         self.test_results = []
