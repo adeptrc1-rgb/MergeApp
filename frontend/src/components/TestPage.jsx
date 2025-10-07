@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
 import CosmicWheel from './CosmicWheel';
-import Home from './Home';
 
-// Simple test page for testing features without complex auth
+const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
+const API = `${API_BASE}/api`;
+
+// Simple test page for testing features; now auto logs in test user before opening wheel
 export default function TestPage() {
   const [showCosmicWheel, setShowCosmicWheel] = useState(false);
-  const [testUser] = useState({
-    id: 'test-user-id',
-    name: 'Test User',
-    email: 'test@example.com',
-    zodiac_sign: 'Gemini',
-    age: 30
-  });
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+
+  const openWheelWithLogin = async () => {
+    setBusy(true);
+    setError('');
+    try {
+      const res = await fetch(`${API}/auth/test-login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email: 'testuser@asign.com' })
+      });
+      if (!res.ok) throw new Error(`Login failed (${res.status})`);
+      // Wait a tick for cookie to settle
+      setTimeout(() => setShowCosmicWheel(true), 400);
+    } catch (e) {
+      setError(e.message || 'Login failed');
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white">
@@ -20,30 +37,27 @@ export default function TestPage() {
         
         <div className="max-w-md mx-auto space-y-4">
           <button
-            onClick={() => setShowCosmicWheel(true)}
-            className="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-medium hover:scale-105 transition-all shadow-lg"
+            onClick={openWheelWithLogin}
+            disabled={busy}
+            className="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl font-medium hover:scale-105 transition-all shadow-lg disabled:opacity-60"
           >
-            🎰 Open Cosmic Wheel
+            {busy ? 'Preparing…' : '🎰 Open Cosmic Wheel (Auto Login)'}
           </button>
           
           <button
-            onClick={() => window.location.href = '/home'}
-            className="w-full py-3 px-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl font-medium hover:scale-105 transition-all shadow-lg"
-          >
-            🏠 Go to Home (Swiping)
-          </button>
-          
-          <button
-            onClick={() => window.location.href = '/profile'}
+            onClick={() => { window.location.href = '/profile?openWheel=1'; }}
             className="w-full py-3 px-6 bg-gradient-to-r from-green-500 to-teal-600 rounded-xl font-medium hover:scale-105 transition-all shadow-lg"
           >
-            👤 Go to Profile
+            👤 Go to Profile (open wheel)
           </button>
+
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/30 text-red-200 rounded-lg p-3 text-sm">{error}</div>
+          )}
         </div>
         
         <div className="mt-8 text-center text-white/60">
-          <p>Direct testing page - no authentication required</p>
-          <p>Use this to test Cosmic Wheel and other features</p>
+          <p>This page now auto-logs in the test user before opening the wheel.</p>
         </div>
       </div>
       
