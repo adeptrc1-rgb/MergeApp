@@ -1437,9 +1437,48 @@ async def get_compatibility_insight(sign1: str, sign2: str):
 # REWARDS & GAMIFICATION
 # ============================================================================
 
-@api_router.get("/rewards/daily-spin-status")
-async def check_daily_spin_status(user: User = Depends(get_current_user)):
-    """Check if user can spin the cosmic wheel today"""
+# Cosmic Wheel Reward System
+REWARD_POOLS = {
+    "common": [
+        {"id": "C1", "name": "Mini Boost", "type": "boost", "duration_minutes": 15, "value": 1, "description": "15-minute profile boost"},
+        {"id": "C2", "name": "Extra Spin Token", "type": "extra_spin", "duration_minutes": 0, "value": 1, "description": "Earn another spin"},
+        {"id": "C3", "name": "Lucky Match Preview", "type": "match_preview", "duration_minutes": 0, "value": 1, "description": "See one bonus profile"},
+        {"id": "C4", "name": "Compatibility Boost", "type": "compatibility_boost", "duration_minutes": 1440, "value": 1, "description": "24h match priority"},
+        {"id": "C5", "name": "Insight Token", "type": "insight", "duration_minutes": 0, "value": 1, "description": "Unlock shared interests"},
+        {"id": "C6", "name": "Star Coins", "type": "star_coins", "duration_minutes": 0, "value": 50, "description": "In-app currency"},
+    ],
+    "rare": [
+        {"id": "R1", "name": "Full Boost", "type": "boost", "duration_minutes": 60, "value": 1, "description": "60-minute top exposure"},
+        {"id": "R2", "name": "Super Like", "type": "super_like", "duration_minutes": 0, "value": 1, "description": "High-intent like"},
+        {"id": "R3", "name": "Direct Message Token", "type": "dm", "duration_minutes": 0, "value": 1, "description": "Message pre-match"},
+        {"id": "R4", "name": "Profile Highlight", "type": "highlight", "duration_minutes": 720, "value": 1, "description": "12h glowing frame"},
+        {"id": "R5", "name": "Compatibility Bonus", "type": "compatibility_boost", "duration_minutes": 2880, "value": 1, "description": "48h match boost"},
+        {"id": "R6", "name": "Streak Multiplier", "type": "streak_bonus", "duration_minutes": 0, "value": 1, "description": "Better next spin odds"},
+    ],
+    "legendary": [
+        {"id": "L1", "name": "Profile Spotlight", "type": "spotlight", "duration_minutes": 1440, "value": 1, "description": "24h top placement"},
+        {"id": "L2", "name": "Hidden Match Gem", "type": "hidden_match", "duration_minutes": 0, "value": 1, "description": "High compatibility reveal"},
+        {"id": "L3", "name": "Cosmic Avatar", "type": "avatar_animation", "duration_minutes": 0, "value": 1, "description": "Constellation effect"},
+        {"id": "L4", "name": "Cosmic Pass", "type": "cooldown_skip", "duration_minutes": 0, "value": 1, "description": "Skip next cooldown"},
+        {"id": "L5", "name": "Seasonal Skin", "type": "seasonal_skin", "duration_minutes": 0, "value": 1, "description": "Limited theme"},
+    ]
+}
+
+def get_reward_from_tier(tier: str, is_premium: bool = False) -> dict:
+    """Select a random reward from the specified tier"""
+    import random
+    reward_pool = REWARD_POOLS.get(tier, REWARD_POOLS["common"])
+    return random.choice(reward_pool)
+
+def apply_reward_to_user(user_id: str, reward: dict):
+    """Apply the reward to user's account"""
+    # This will update user's inventory based on reward type
+    # Implementation will vary by reward type
+    pass
+
+@api_router.get("/rewards/cosmic-wheel-status")
+async def check_cosmic_wheel_status(user: User = Depends(get_current_user)):
+    """Check cosmic wheel spin availability and cooldown"""
     if not user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
@@ -1447,28 +1486,53 @@ async def check_daily_spin_status(user: User = Depends(get_current_user)):
     if not user_data:
         raise HTTPException(status_code=404, detail="User not found")
     
-    today = date.today()
-    last_spin = user_data.get("last_spin_date")
+    now = datetime.now(timezone.utc)
+    next_spin_time = user_data.get("next_spin_time")
+    is_premium = user_data.get("is_premium", False)
+    spin_streak = user_data.get("spin_streak", 0)
+    spins_today = user_data.get("spins_today", 0)
+    last_reset_date = user_data.get("spin_reset_date")
     
-    # Check if user can spin (once per day)
-    can_spin = True
-    if last_spin:
-        if isinstance(last_spin, str):
-            last_spin = datetime.fromisoformat(last_spin).date()
-        elif isinstance(last_spin, datetime):
-            last_spin = last_spin.date()
-        
-        can_spin = last_spin < today
+    # Reset daily spin count if it's a new day
+    if last_reset_date:
+        if isinstance(last_reset_date, str):
+            last_reset_date = datetime.fromisoformat(last_reset_date).date()
+        if last_reset_date < date.today():
+            spins_today = 0
+            await db.users.update_one(
+                {"id": user.id},
+                {"$set": {"spins_today": 0, "spin_reset_date": date.today().isoformat()}}
+            )
+    
+    # Check spin availability
+    max_spins = 3 if is_premium else 1
+    can_spin = False
+    cooldown_hours = 0
+    
+    if spins_today < max_spins:
+        if next_spin_time:
+            if isinstance(next_spin_time, str):
+                next_spin_time = datetime.fromisoformat(next_spin_time)
+            can_spin = now >= next_spin_time
+            if not can_spin:
+                cooldown_hours = (next_spin_time - now).total_seconds() / 3600
+        else:
+            can_spin = True
     
     return {
         "can_spin": can_spin,
-        "last_spin_date": str(last_spin) if last_spin else None,
-        "next_available": str(today) if not can_spin else str(today)
+        "spins_remaining": max_spins - spins_today,
+        "max_spins": max_spins,
+        "is_premium": is_premium,
+        "spin_streak": spin_streak,
+        "next_spin_time": next_spin_time.isoformat() if next_spin_time and not can_spin else None,
+        "cooldown_hours": round(cooldown_hours, 1) if cooldown_hours > 0 else 0,
+        "extra_spin_cost": 0.49 if is_premium else 0.99
     }
 
-@api_router.post("/rewards/spin-wheel")
+@api_router.post("/rewards/spin-cosmic-wheel")
 async def spin_cosmic_wheel(user: User = Depends(get_current_user)):
-    """Spin the cosmic wheel for daily rewards"""
+    """Spin the cosmic wheel with tier-based rewards"""
     if not user:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
@@ -1476,28 +1540,108 @@ async def spin_cosmic_wheel(user: User = Depends(get_current_user)):
     if not user_data:
         raise HTTPException(status_code=404, detail="User not found")
     
-    today = date.today()
-    last_spin = user_data.get("last_spin_date")
+    now = datetime.now(timezone.utc)
+    next_spin_time = user_data.get("next_spin_time")
+    is_premium = user_data.get("is_premium", False)
+    spin_streak = user_data.get("spin_streak", 0)
+    spins_today = user_data.get("spins_today", 0)
+    last_reset_date = user_data.get("spin_reset_date")
     
-    # Check if user already spun today
-    if last_spin:
-        if isinstance(last_spin, str):
-            last_spin = datetime.fromisoformat(last_spin).date()
-        elif isinstance(last_spin, datetime):
-            last_spin = last_spin.date()
-        
-        if last_spin >= today:
-            raise HTTPException(status_code=400, detail="Already spun today")
+    # Reset daily count if new day
+    if last_reset_date:
+        if isinstance(last_reset_date, str):
+            last_reset_date = datetime.fromisoformat(last_reset_date).date()
+        if last_reset_date < date.today():
+            spins_today = 0
     
-    # Update last spin date
+    # Check if user can spin
+    max_spins = 3 if is_premium else 1
+    if spins_today >= max_spins:
+        raise HTTPException(status_code=400, detail="Daily spin limit reached")
+    
+    if next_spin_time:
+        if isinstance(next_spin_time, str):
+            next_spin_time = datetime.fromisoformat(next_spin_time)
+        if now < next_spin_time:
+            raise HTTPException(status_code=400, detail="Spin on cooldown")
+    
+    # Calculate reward probabilities with streak bonus
+    if is_premium:
+        pool_weights = {"common": 0.45, "rare": 0.40, "legendary": 0.15}
+    else:
+        pool_weights = {"common": 0.65, "rare": 0.28, "legendary": 0.07}
+    
+    # Apply streak bonus (5% boost per 3 consecutive spins)
+    streak_bonus = (spin_streak // 3) * 0.05
+    pool_weights["rare"] += streak_bonus
+    pool_weights["legendary"] += streak_bonus / 2
+    
+    # Normalize weights
+    total_weight = sum(pool_weights.values())
+    pool_weights = {k: v / total_weight for k, v in pool_weights.items()}
+    
+    # Determine reward tier
+    import random
+    reward_tier = random.choices(
+        population=list(pool_weights.keys()),
+        weights=list(pool_weights.values()),
+        k=1
+    )[0]
+    
+    # Get reward from tier
+    reward = get_reward_from_tier(reward_tier, is_premium)
+    
+    # Update cooldown (24h for premium, 48h for free)
+    cooldown = timedelta(hours=24) if is_premium else timedelta(hours=48)
+    new_next_spin_time = now + cooldown
+    
+    # Update user data
     await db.users.update_one(
         {"id": user.id},
-        {"$set": {"last_spin_date": today.isoformat()}}
+        {"$set": {
+            "next_spin_time": new_next_spin_time.isoformat(),
+            "spin_streak": spin_streak + 1,
+            "spins_today": spins_today + 1,
+            "spin_reset_date": date.today().isoformat(),
+            "last_spin_date": now.isoformat()
+        }}
     )
+    
+    # Apply reward based on type
+    reward_updates = {}
+    expiry_time = now + timedelta(minutes=reward["duration_minutes"]) if reward["duration_minutes"] > 0 else None
+    
+    if reward["type"] == "boost":
+        current = user_data.get("profile_boosts", 0)
+        reward_updates["profile_boosts"] = current + reward["value"]
+        if expiry_time:
+            reward_updates["boost_expires_at"] = expiry_time.isoformat()
+    elif reward["type"] == "super_like":
+        current = user_data.get("super_likes", 0)
+        reward_updates["super_likes"] = current + reward["value"]
+    elif reward["type"] == "dm":
+        current = user_data.get("direct_messages", 0)
+        reward_updates["direct_messages"] = current + reward["value"]
+    elif reward["type"] == "star_coins":
+        current = user_data.get("star_coins", 0)
+        reward_updates["star_coins"] = current + reward["value"]
+    elif reward["type"] == "extra_spin":
+        reward_updates["spins_today"] = spins_today  # Don't increment, giving extra spin
+        reward_updates["next_spin_time"] = now.isoformat()  # Allow immediate spin
+    
+    if reward_updates:
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": reward_updates}
+        )
     
     return {
         "success": True,
-        "message": "Reward will be added by client"
+        "reward": reward,
+        "tier": reward_tier,
+        "spin_streak": spin_streak + 1,
+        "next_spin_time": new_next_spin_time.isoformat() if reward["type"] != "extra_spin" else None,
+        "spins_remaining": max_spins - (spins_today + 1) if reward["type"] != "extra_spin" else max_spins - spins_today
     }
 
 @api_router.post("/rewards/claim-reward")
