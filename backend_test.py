@@ -169,28 +169,122 @@ class AstrologyDatingAPITester:
                 return False
         return success
 
-    def test_liked_me_with_test_auth(self):
-        """Test liked-me endpoint with test authentication"""
-        # First login to get session
-        login_data = {"email": "testuser@asign.com"}
-        login_success, login_response = self.run_test("Test Login for Liked-Me", "POST", "auth/test-login", 200, data=login_data)
+    def test_auth_me_with_session(self):
+        """Test /auth/me with valid session cookies"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping test")
+            return False
+            
+        success, response_data, response = self.run_test("Auth Me (With Session)", "GET", "auth/me", 200, use_cookies=True)
         
-        if not login_success:
+        if success and isinstance(response_data, dict):
+            if "id" in response_data and "email" in response_data:
+                print(f"   ℹ️  User authenticated: {response_data.get('email')}")
+                return True
+            else:
+                self.log_test("Auth Me Response Format", False, "Missing user data in response")
+                return False
+        return success
+
+    def test_potential_matches_with_auth(self):
+        """Test potential matches endpoint with authentication"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping test")
+            return False
+            
+        success, response_data, response = self.run_test("Potential Matches (Authenticated)", "GET", "users/potential-matches", 200, use_cookies=True)
+        
+        if success and isinstance(response_data, list):
+            print(f"   ℹ️  Found {len(response_data)} potential matches")
+            if len(response_data) > 0:
+                # Check structure of first match
+                first_match = response_data[0]
+                required_fields = ["id", "name", "zodiac_sign"]
+                missing_fields = [field for field in required_fields if field not in first_match]
+                if missing_fields:
+                    self.log_test("Match Data Structure", False, f"Missing fields: {missing_fields}")
+                    return False
+                else:
+                    print(f"   ℹ️  Sample match: {first_match.get('name')} ({first_match.get('zodiac_sign')})")
+            return True
+        elif success and response_data == []:
+            print("   ℹ️  No potential matches found (empty array)")
+            return True
+        return success
+
+    def test_cosmic_wheel_status(self):
+        """Test cosmic wheel status endpoint"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping test")
+            return False
+            
+        success, response_data, response = self.run_test("Cosmic Wheel Status", "GET", "rewards/cosmic-wheel-status", 200, use_cookies=True)
+        
+        if success and isinstance(response_data, dict):
+            required_fields = ["can_spin", "spins_remaining", "max_spins", "is_premium"]
+            missing_fields = [field for field in required_fields if field not in response_data]
+            if missing_fields:
+                self.log_test("Cosmic Wheel Status Format", False, f"Missing fields: {missing_fields}")
+                return False
+            else:
+                print(f"   ℹ️  Can spin: {response_data.get('can_spin')}, Remaining: {response_data.get('spins_remaining')}")
+                return True
+        return success
+
+    def test_cosmic_wheel_spin(self):
+        """Test cosmic wheel spin endpoint"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping test")
             return False
         
-        # Now test the liked-me endpoint
-        # Note: We can't easily test with cookies in this simple test setup
-        # But we can test that the endpoint exists and requires auth
-        success, response = self.run_test("Liked Me (After Login)", "GET", "users/liked-me", 401)
+        # First check if we can spin
+        status_success, status_data, _ = self.run_test("Cosmic Wheel Status Check", "GET", "rewards/cosmic-wheel-status", 200, use_cookies=True)
         
-        # We expect 401 because we can't easily handle cookies in this test setup
-        # But if the endpoint exists and returns 401 (not 404), that's good
-        if not success and isinstance(response, dict):
-            if "Not authenticated" in str(response) or response.get("detail") == "Not authenticated":
-                print("   ℹ️  Expected 401 - endpoint exists but requires proper session cookie")
-                self.log_test("Liked Me Endpoint Exists", True, "Endpoint properly requires authentication")
+        if not status_success:
+            return False
+            
+        can_spin = status_data.get("can_spin", False)
+        
+        if can_spin:
+            success, response_data, response = self.run_test("Cosmic Wheel Spin", "POST", "rewards/spin-cosmic-wheel", 200, use_cookies=True)
+            
+            if success and isinstance(response_data, dict):
+                if "reward" in response_data and "success" in response_data:
+                    reward = response_data.get("reward", {})
+                    print(f"   ℹ️  Spin successful! Reward: {reward.get('name', 'Unknown')}")
+                    return True
+                else:
+                    self.log_test("Cosmic Wheel Spin Format", False, "Missing reward or success in response")
+                    return False
+            return success
+        else:
+            # Test that spinning when not allowed returns appropriate error
+            success, response_data, response = self.run_test("Cosmic Wheel Spin (Not Allowed)", "POST", "rewards/spin-cosmic-wheel", 400, use_cookies=True)
+            
+            if success:
+                print("   ℹ️  Correctly prevented spin when not allowed")
                 return True
+            return success
+
+    def test_liked_me_with_auth(self):
+        """Test liked-me endpoint with authentication"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping test")
+            return False
+            
+        success, response_data, response = self.run_test("Liked Me (Authenticated)", "GET", "users/liked-me", 200, use_cookies=True)
         
+        if success and isinstance(response_data, list):
+            print(f"   ℹ️  Found {len(response_data)} users who liked you")
+            if len(response_data) > 0:
+                # Check structure of first user
+                first_user = response_data[0]
+                if "id" in first_user and "name" in first_user:
+                    print(f"   ℹ️  Sample user who liked you: {first_user.get('name')}")
+                else:
+                    self.log_test("Liked Me Data Structure", False, "Missing user data fields")
+                    return False
+            return True
         return success
 
     def test_zodiac_calculation_logic(self):
