@@ -22,7 +22,7 @@ for filename in os.listdir(components_dir):
         
         original_content = content
         
-        for pattern, replacement in api_fixes.items():
+        for pattern, replacement in api_fixes:
             content = re.sub(pattern, replacement, content)
         
         if content != original_content:
