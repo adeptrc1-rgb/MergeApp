@@ -74,41 +74,70 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
   };
 
   const spinWheel = async () => {
-    if (spinning) return;
+    if (spinning || !wheelStatus?.can_spin) return;
     
-    setSpinning(true);
-    setShowReward(false);
-    
-    // Random spins (3-5 full rotations + random position)
-    const spins = 3 + Math.random() * 2;
-    const randomDegree = Math.floor(Math.random() * 360);
-    const totalRotation = (spins * 360) + randomDegree;
-    
-    setRotation(rotation + totalRotation);
-    
-    // Determine winner based on final position
-    setTimeout(() => {
-      const finalPosition = totalRotation % 360;
-      const segmentSize = 360 / rewards.length;
-      const winnerIndex = Math.floor((360 - finalPosition) / segmentSize) % rewards.length;
-      const winner = rewards[winnerIndex];
+    try {
+      setSpinning(true);
+      setShowReward(false);
+      setError(null);
       
-      setSelectedReward(winner);
-      setShowReward(true);
+      // Random spins (3-5 full rotations + random position)
+      const spins = 3 + Math.random() * 2;
+      const randomDegree = Math.floor(Math.random() * 360);
+      const totalRotation = (spins * 360) + randomDegree;
+      
+      setRotation(rotation + totalRotation);
+      
+      // Call backend to get actual reward
+      const response = await axios.post(`${API}/api/rewards/spin-cosmic-wheel`, {}, {
+        withCredentials: true
+      });
+      
+      const { reward, tier, spin_streak } = response.data;
+      
+      // Show reward after animation
+      setTimeout(() => {
+        const Icon = REWARD_ICONS[reward.type] || Sparkles;
+        const tierColor = TIER_COLORS[tier] || TIER_COLORS.common;
+        
+        setSelectedReward({
+          ...reward,
+          icon: Icon,
+          color: tierColor,
+          tier: tier
+        });
+        setShowReward(true);
+        setSpinning(false);
+        
+        // Create celebration effects based on tier
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        
+        if (tier === 'legendary') {
+          createStarburstEffect(centerX, centerY);
+          createHeartBurst(centerX, centerY);
+          createStardustTrail(centerX, centerY, 50);
+        } else if (tier === 'rare') {
+          createStarburstEffect(centerX, centerY);
+          createStardustTrail(centerX, centerY, 30);
+        } else {
+          createStardustTrail(centerX, centerY, 15);
+        }
+        
+        // Refresh wheel status
+        fetchWheelStatus();
+        
+        // Call parent callback
+        if (onRewardClaimed) {
+          onRewardClaimed(reward);
+        }
+      }, 3000);
+      
+    } catch (err) {
+      console.error('Error spinning wheel:', err);
+      setError(err.response?.data?.detail || 'Failed to spin wheel');
       setSpinning(false);
-      
-      // Create celebration effects
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      createStarburstEffect(centerX, centerY);
-      createHeartBurst(centerX, centerY);
-      createStardustTrail(centerX, centerY, 30);
-      
-      // Call parent callback with reward
-      if (onRewardClaimed) {
-        onRewardClaimed(winner.value);
-      }
-    }, 3000);
+    }
   };
 
   const handleClose = () => {
