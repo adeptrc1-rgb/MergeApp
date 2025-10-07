@@ -680,8 +680,8 @@ async def test_login(request: TestLoginRequest, response: Response):
             value=session_token,
             max_age=7 * 24 * 60 * 60,
             httponly=False,  # Allow JavaScript access for debugging
-            secure=False,  # Set to True for HTTPS in production
-            samesite="lax",  # Changed for local development
+            secure=True,  # HTTPS in production
+            samesite="none",  # Cross-site compatible over HTTPS
             path="/"
         )
         
