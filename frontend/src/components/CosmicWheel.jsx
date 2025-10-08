@@ -300,6 +300,20 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         {/* Reward Display */}
         {showReward && selectedReward && (
           <div className="text-center animate-fadeIn">
+            {/* Dev helpers */}
+            {isPreview && (
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2 text-xs text-white/50">
+                <button
+                  onClick={async () => { await resetDevCooldown(); await fetchWheelStatus(); }}
+                  className="px-2 py-1 bg-white/10 rounded"
+                >Reset</button>
+                <button
+                  onClick={() => { setRotation(prev => prev + 360); }}
+                  className="px-2 py-1 bg-white/10 rounded"
+                >Demo Spin</button>
+              </div>
+            )}
+
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-4">
               <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
                 selectedReward.tier === 'legendary' ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black' :
