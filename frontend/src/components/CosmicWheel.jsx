@@ -83,16 +83,19 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       setLoading(false);
     }
   };
-      // Ensure dev env always spinnable
-      if (isPreview && (!wheelStatus || !wheelStatus.can_spin)) {
-        await resetDevCooldown();
-      // Force reflow to ensure CSS transition applies even on same frame
-      // eslint-disable-next-line no-unused-expressions
-      document.body.offsetHeight;
 
+  // Ensure dev env always spinnable (run when status loads)
+  useEffect(() => {
+    const ensureSpinnable = async () => {
+      if (!isPreview) return;
+      if (!wheelStatus || !wheelStatus.can_spin) {
+        await resetDevCooldown();
         await fetchWheelStatus();
       }
-
+    };
+    ensureSpinnable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPreview, wheelStatus?.can_spin]);
 
   const spinWheel = async () => {
     if (spinning || !wheelStatus?.can_spin) {
