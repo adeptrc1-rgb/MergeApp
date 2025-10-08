@@ -86,6 +86,10 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       // Ensure dev env always spinnable
       if (isPreview && (!wheelStatus || !wheelStatus.can_spin)) {
         await resetDevCooldown();
+      // Force reflow to ensure CSS transition applies even on same frame
+      // eslint-disable-next-line no-unused-expressions
+      document.body.offsetHeight;
+
         await fetchWheelStatus();
       }
 
