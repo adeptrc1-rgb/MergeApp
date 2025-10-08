@@ -139,7 +139,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
     <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
       <div className="bg-gradient-to-b from-purple-900/90 to-black/90 rounded-3xl p-8 max-w-lg w-full border border-white/10 relative">
         {/* Close Button */}
-        {!spinning &amp;&amp; (
+        {!spinning && (
           <button onClick={handleClose} className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors">
             <X className="w-6 h-6" />
           </button>
@@ -154,7 +154,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           <p className="text-white/60">Spin to reveal your mystic reward</p>
 
           {/* Spin Status */}
-          {wheelStatus &amp;&amp; !loading &amp;&amp; (
+          {wheelStatus && !loading && (
             <div className="mt-4 space-y-3">
               {wheelStatus.can_spin ? (
                 <p className="text-green-400 text-sm">✨ Spin available now!</p>
@@ -172,7 +172,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                 </div>
               )}
               <div className="flex gap-2 justify-center">
-                {wheelStatus.spin_streak &gt; 0 &amp;&amp; (
+                {wheelStatus.spin_streak &gt; 0 && (
                   <div className="bg-white/5 border border-orange-400/20 rounded-lg px-3 py-1.5">
                     <div className="flex items-center gap-1.5">
                       <div className="w-4 h-4 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
@@ -182,7 +182,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                     </div>
                   </div>
                 )}
-                {wheelStatus.spins_remaining &gt; 0 &amp;&amp; wheelStatus.max_spins &gt; 1 &amp;&amp; (
+                {wheelStatus.spins_remaining &gt; 0 && wheelStatus.max_spins &gt; 1 && (
                   <div className="bg-white/5 border border-blue-400/20 rounded-lg px-3 py-1.5">
                     <div className="flex items-center gap-2">
                       <div className="flex gap-0.5">
@@ -200,7 +200,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         </div>
 
         {/* Loading State */}
-        {loading &amp;&amp; (
+        {loading && (
           <div className="text-center py-8">
             <div className="animate-spin w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full mx-auto mb-4"></div>
             <p className="text-white/60">Loading wheel...</p>
@@ -208,7 +208,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         )}
 
         {/* Error State */}
-        {error &amp;&amp; (
+        {error && (
           <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-4 mb-6">
             <p className="text-red-400 text-sm">{error}</p>
           </div>
@@ -268,14 +268,14 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         </div>
 
         {/* Spin Button */}
-        {!showReward &amp;&amp; (
+        {!showReward && (
           <button onClick={spinWheel} disabled={spinning} className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-medium hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl">
             {spinning ? 'Spinning...' : 'Spin the Wheel'}
           </button>
         )}
 
         {/* Reward Display */}
-        {showReward &amp;&amp; selectedReward &amp;&amp; (
+        {showReward && selectedReward && (
           <div className="text-center animate-fadeIn">
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-4">
               <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
@@ -297,7 +297,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         )}
 
         {/* Spin Info */}
-        {!loading &amp;&amp; !showReward &amp;&amp; (
+        {!loading && !showReward && (
           <div className="mt-6 text-center text-white/40 text-sm">
             {wheelStatus?.is_premium ? <p>✨ Premium: 3 spins per day!</p> : <p>✨ Free: 1 spin every 48 hours</p>}
           </div>
