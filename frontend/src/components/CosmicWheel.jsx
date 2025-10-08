@@ -265,7 +265,9 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           >
             {/* Wheel Segments */}
             {rewards.map((reward, index) => {
-              const angle = (360 / rewards.length) * index;
+              const segAngle = 360 / rewards.length;
+              const angle = segAngle * index;
+              const centerAngle = angle + segAngle / 2; // center of this segment
               const Icon = reward.icon;
               
               return (
@@ -277,14 +279,16 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                     clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.sin((Math.PI * 2) / rewards.length)}% ${50 - 50 * Math.cos((Math.PI * 2) / rewards.length)}%)`
                   }}
                 >
-                  <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80`}>
-                    <div
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                      style={{ transform: 'translate(-50%, -50%) translateY(-85px)' }}
-                    >
-                      <div className="bg-white/20 rounded-full p-2.5 backdrop-blur-sm">
-                        <Icon className="w-7 h-7 text-white drop-shadow-lg" />
-                      </div>
+                  <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80`}></div>
+                  {/* Icon positioned at ring center, upright for readability */}
+                  <div
+                    className="absolute left-1/2 top-1/2"
+                    style={{
+                      transform: `translate(-50%, -50%) rotate(${centerAngle}deg) translate(0, -95px) rotate(${-centerAngle}deg)`
+                    }}
+                  >
+                    <div className="bg-white/20 rounded-full p-2.5 backdrop-blur-sm">
+                      <Icon className="w-7 h-7 text-white drop-shadow-lg" />
                     </div>
                   </div>
                 </div>
