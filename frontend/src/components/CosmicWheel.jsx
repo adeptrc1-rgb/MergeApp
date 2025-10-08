@@ -172,7 +172,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                 </div>
               )}
               <div className="flex gap-2 justify-center">
-                {wheelStatus.spin_streak &gt; 0 && (
+                {wheelStatus.spin_streak > 0 && (
                   <div className="bg-white/5 border border-orange-400/20 rounded-lg px-3 py-1.5">
                     <div className="flex items-center gap-1.5">
                       <div className="w-4 h-4 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
@@ -182,7 +182,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                     </div>
                   </div>
                 )}
-                {wheelStatus.spins_remaining &gt; 0 && wheelStatus.max_spins &gt; 1 && (
+                {wheelStatus.spins_remaining > 0 && wheelStatus.max_spins > 1 && (
                   <div className="bg-white/5 border border-blue-400/20 rounded-lg px-3 py-1.5">
                     <div className="flex items-center gap-2">
                       <div className="flex gap-0.5">
