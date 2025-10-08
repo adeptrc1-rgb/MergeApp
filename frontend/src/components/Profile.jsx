@@ -384,13 +384,33 @@ export default function Profile({ user, logout }) {
           )}
 
           {/* Logout Button */}
-          <button
-            onClick={logout}
-            className="w-full bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
-          >
-            <LogOut className="w-5 h-5" />
-            <span>Logout</span>
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={logout}
+              className="flex-1 bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
+            >
+              <LogOut className="w-5 h-5" />
+              <span>Logout</span>
+            </button>
+            {/* Dev-only Reset Wheel Button */}
+            <button
+              onClick={async () => {
+                try {
+                  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
+                  const API = `${BACKEND_URL}/api`;
+                  await fetch(`${API}/rewards/reset-cosmic-wheel`, { method: 'POST', credentials: 'include' });
+                  await checkDailySpinStatus();
+                  setShowCosmicWheel(true);
+                } catch (e) {
+                  console.error('Reset Cosmic Wheel failed', e);
+                }
+              }}
+              className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
+            >
+              <Sparkles className="w-5 h-5" />
+              <span>Reset Wheel (Dev)</span>
+            </button>
+          </div>
         </div>
       </div>
 
