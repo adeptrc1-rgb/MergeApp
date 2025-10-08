@@ -166,7 +166,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                       <span className="text-white/80 text-xs">Next spin</span>
                     </div>
                     <span className="text-purple-200 text-xs font-medium">
-                      {wheelStatus.cooldown_hours &lt; 1 ? `${Math.round(wheelStatus.cooldown_hours * 60)}m` : `${wheelStatus.cooldown_hours.toFixed(1)}h`}
+                      {wheelStatus.cooldown_hours < 1 ? `${Math.round(wheelStatus.cooldown_hours * 60)}m` : `${wheelStatus.cooldown_hours.toFixed(1)}h`}
                     </span>
                   </div>
                 </div>
@@ -187,7 +187,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                     <div className="flex items-center gap-2">
                       <div className="flex gap-0.5">
                         {Array.from({ length: wheelStatus.max_spins }, (_, i) => (
-                          <div key={i} className={`w-1.5 h-1.5 rounded-full ${i &lt; wheelStatus.spins_remaining ? 'bg-blue-400' : 'bg-white/20'}`} />
+                          <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < wheelStatus.spins_remaining ? 'bg-blue-400' : 'bg-white/20'}`} />
                         ))}
                       </div>
                       <span className="text-blue-200 text-xs font-medium">left</span>
