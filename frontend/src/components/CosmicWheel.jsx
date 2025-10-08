@@ -51,6 +51,19 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
   const [showReward, setShowReward] = useState(false);
   const [wheelStatus, setWheelStatus] = useState(null);
   const [loading, setLoading] = useState(true);
+  const isPreview = typeof window !== 'undefined' && window.location.hostname.includes('preview.emergentagent.com');
+
+  const resetDevCooldown = async () => {
+    try {
+      const res = await axios.post(`${API}/api/rewards/reset-cosmic-wheel`, {}, { withCredentials: true });
+      await fetchWheelStatus();
+      return res.data?.success;
+    } catch (e) {
+      console.error('Dev reset failed', e);
+      return false;
+    }
+  };
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
