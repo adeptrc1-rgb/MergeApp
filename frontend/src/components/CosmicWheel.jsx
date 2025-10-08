@@ -247,7 +247,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           {/* Wheel */}
           <div
             className="relative w-72 h-72 rounded-full border-4 border-purple-400/50 shadow-2xl overflow-hidden"
-            style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' }}
+            style={{ transform: `rotate(${rotation}deg)`, transition: spinning ? 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'transform 0s' }}
           >
             {/* Wheel Segments (background) */}
             {rewards.map((reward, index) => {
