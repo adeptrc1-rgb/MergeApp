@@ -348,7 +348,7 @@ export default function Home({ user }) {
       <div className="h-screen bg-black flex flex-col overflow-hidden">
         <div className="border-b border-white/10 bg-black flex-shrink-0">
           <div className="max-w-4xl mx-auto px-6 py-4">
-            <h1 className="text-3xl font-light text-white">A Sign</h1>
+            <img src="/asign-logo.png" alt="A Sign" className="h-10" />
           </div>
         </div>
 
