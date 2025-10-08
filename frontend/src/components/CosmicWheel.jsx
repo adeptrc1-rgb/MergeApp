@@ -277,11 +277,9 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                     clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.sin((Math.PI * 2) / rewards.length)}% ${50 - 50 * Math.cos((Math.PI * 2) / rewards.length)}%)`
                   }}
                 >
-                  <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80`}>
-                    <div className="absolute top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                      <div className="bg-white/20 rounded-full p-2 backdrop-blur-sm">
-                        <Icon className="w-7 h-7 text-white drop-shadow-lg" />
-                      </div>
+                  <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80 flex items-center justify-center`}>
+                    <div className="bg-white/20 rounded-full p-2.5 backdrop-blur-sm">
+                      <Icon className="w-7 h-7 text-white drop-shadow-lg" />
                     </div>
                   </div>
                 </div>
