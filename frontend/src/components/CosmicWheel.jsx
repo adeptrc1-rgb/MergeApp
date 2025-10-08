@@ -94,7 +94,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       }
     };
     ensureSpinnable();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // intentionally leaving deps minimal to avoid loops
   }, [isPreview, wheelStatus?.can_spin]);
 
   const spinWheel = async () => {
