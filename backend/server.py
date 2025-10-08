@@ -1547,6 +1547,34 @@ async def check_cosmic_wheel_status(user: User = Depends(get_current_user)):
         "extra_spin_cost": 0.49 if is_premium else 0.99
     }
 
+@api_router.post("/rewards/reset-cosmic-wheel")
+async def reset_cosmic_wheel_for_user(user: User = Depends(get_current_user)):
+    """Dev/testing helper: reset the cosmic wheel cooldown for the current user.
+    - Unsets next_spin_time
+    - Resets spins_today to 0
+    - Sets spin_reset_date to today
+    - Resets spin_streak to 0
+    """
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+
+    try:
+        await db.users.update_one(
+            {"id": user.id},
+            {
+                "$unset": {"next_spin_time": ""},
+                "$set": {
+                    "spins_today": 0,
+                    "spin_reset_date": date.today().isoformat(),
+                    "spin_streak": 0
+                }
+            }
+        )
+        return {"success": True}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @api_router.post("/rewards/spin-cosmic-wheel")
 async def spin_cosmic_wheel(user: User = Depends(get_current_user)):
     """Spin the cosmic wheel with tier-based rewards"""
