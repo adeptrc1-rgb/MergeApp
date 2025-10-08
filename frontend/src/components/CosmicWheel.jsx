@@ -278,6 +278,27 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                     transform: `rotate(${angle}deg)`,
                     clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.sin((Math.PI * 2) / rewards.length)}% ${50 - 50 * Math.cos((Math.PI * 2) / rewards.length)}%)`
                   }}
+
+            {/* Foreground icon ring (not clipped) */}
+            {rewards.map((reward, index) => {
+              const segAngle = 360 / rewards.length;
+              const angle = segAngle * index + segAngle / 2;
+              const Icon = reward.icon;
+              return (
+                <div
+                  key={`icon-${reward.id}`}
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ transform: `rotate(${angle}deg)` }}
+                >
+                  <div className="absolute left-1/2 top-1/2" style={{ transform: 'translate(-50%, -50%) translateY(-95px) rotate(-' + angle + 'deg)' }}>
+                    <div className="bg-white/20 rounded-full p-2.5 backdrop-blur-sm">
+                      <Icon className="w-7 h-7 text-white drop-shadow-lg" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
 >
                   <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80`}></div>
                 </div>
