@@ -32,6 +32,7 @@ const REWARD_ICONS = {
   seasonal_skin: Gift
 };
 
+// 8 segments
 const rewards = [
   { id: 1, icon: Zap, color: 'from-yellow-500 to-orange-500' },
   { id: 2, icon: Star, color: 'from-blue-500 to-cyan-500' },
@@ -40,7 +41,7 @@ const rewards = [
   { id: 5, icon: Zap, color: 'from-yellow-500 to-orange-500' },
   { id: 6, icon: Star, color: 'from-blue-500 to-cyan-500' },
   { id: 7, icon: Gift, color: 'from-green-500 to-teal-500' },
-  { id: 8, icon: Trophy, color: 'from-orange-500 to-red-500' },
+  { id: 8, icon: Trophy, color: 'from-orange-500 to-red-500' }
 ];
 
 export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
@@ -53,18 +54,14 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (isOpen) {
-      fetchWheelStatus();
-    }
+    if (isOpen) fetchWheelStatus();
   }, [isOpen]);
 
   const fetchWheelStatus = async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get(`${API}/api/rewards/cosmic-wheel-status`, {
-        withCredentials: true
-      });
+      const response = await axios.get(`${API}/api/rewards/cosmic-wheel-status`, { withCredentials: true });
       setWheelStatus(response.data);
     } catch (err) {
       console.error('Error fetching wheel status:', err);
@@ -76,9 +73,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
 
   const spinWheel = async () => {
     if (spinning || !wheelStatus?.can_spin) {
-      if (!wheelStatus?.can_spin) {
-        await fetchWheelStatus();
-      }
+      if (!wheelStatus?.can_spin) await fetchWheelStatus();
       return;
     }
     try {
@@ -86,36 +81,24 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       setShowReward(false);
       setError(null);
 
-      // Random spins (3-5 full rotations + random position)
-      const spins = 3 + Math.random() * 2;
+      // Decide rotation first and then apply
+      const spins = 3 + Math.random() * 2; // 3-5 turns
       const randomDegree = Math.floor(Math.random() * 360);
-      const totalRotation = (spins * 360) + randomDegree;
-
-      // Functional update to avoid stale state bugs
+      const totalRotation = spins * 360 + randomDegree;
       setRotation(prev => prev + totalRotation);
 
-      // Call backend to get actual reward
-      const response = await axios.post(`${API}/api/rewards/spin-cosmic-wheel`, {}, {
-        withCredentials: true
-      });
-
+      // Ask backend for the reward
+      const response = await axios.post(`${API}/api/rewards/spin-cosmic-wheel`, {}, { withCredentials: true });
       const { reward, tier } = response.data;
 
-      // Show reward after animation
+      // After the animation completes, show the reward
       setTimeout(() => {
         const Icon = REWARD_ICONS[reward.type] || Sparkles;
         const tierColor = TIER_COLORS[tier] || TIER_COLORS.common;
-
-        setSelectedReward({
-          ...reward,
-          icon: Icon,
-          color: tierColor,
-          tier
-        });
+        setSelectedReward({ ...reward, icon: Icon, color: tierColor, tier });
         setShowReward(true);
         setSpinning(false);
 
-        // Celebration effects
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
         if (tier === 'legendary') {
@@ -129,27 +112,20 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           createStardustTrail(centerX, centerY, 15);
         }
 
-        // Refresh wheel status
         fetchWheelStatus();
-
-        // Parent callback
         if (onRewardClaimed) onRewardClaimed(reward);
       }, 3000);
-
     } catch (err) {
       console.error('Error spinning wheel:', err);
-      const detail = err?.response?.data?.detail;
-      if (detail) setError(detail);
-      else setError('Failed to spin wheel');
+      setError(err?.response?.data?.detail || 'Failed to spin wheel');
       setSpinning(false);
-      // Refresh to show accurate can_spin message
       fetchWheelStatus();
     }
   };
 
   const handleClose = () => {
     if (!spinning) {
-      onClose();
+      onClose?.();
       setShowReward(false);
       setSelectedReward(null);
     }
@@ -157,15 +133,14 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
 
   if (!isOpen) return null;
 
+  const segAngle = 360 / rewards.length;
+
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
       <div className="bg-gradient-to-b from-purple-900/90 to-black/90 rounded-3xl p-8 max-w-lg w-full border border-white/10 relative">
         {/* Close Button */}
-        {!spinning && (
-          <button
-            onClick={handleClose}
-            className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors"
-          >
+        {!spinning &amp;&amp; (
+          <button onClick={handleClose} className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors">
             <X className="w-6 h-6" />
           </button>
         )}
@@ -177,9 +152,9 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           </div>
           <h2 className="text-3xl font-light text-white mb-2">Cosmic Wheel</h2>
           <p className="text-white/60">Spin to reveal your mystic reward</p>
-          
+
           {/* Spin Status */}
-          {wheelStatus && !loading && (
+          {wheelStatus &amp;&amp; !loading &amp;&amp; (
             <div className="mt-4 space-y-3">
               {wheelStatus.can_spin ? (
                 <p className="text-green-400 text-sm">✨ Spin available now!</p>
@@ -191,15 +166,13 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                       <span className="text-white/80 text-xs">Next spin</span>
                     </div>
                     <span className="text-purple-200 text-xs font-medium">
-                      {wheelStatus.cooldown_hours < 1 
-                        ? `${Math.round(wheelStatus.cooldown_hours * 60)}m`
-                        : `${wheelStatus.cooldown_hours.toFixed(1)}h`}
+                      {wheelStatus.cooldown_hours &lt; 1 ? `${Math.round(wheelStatus.cooldown_hours * 60)}m` : `${wheelStatus.cooldown_hours.toFixed(1)}h`}
                     </span>
                   </div>
                 </div>
               )}
               <div className="flex gap-2 justify-center">
-                {wheelStatus.spin_streak > 0 && (
+                {wheelStatus.spin_streak &gt; 0 &amp;&amp; (
                   <div className="bg-white/5 border border-orange-400/20 rounded-lg px-3 py-1.5">
                     <div className="flex items-center gap-1.5">
                       <div className="w-4 h-4 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
@@ -209,19 +182,12 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                     </div>
                   </div>
                 )}
-                {wheelStatus.spins_remaining > 0 && wheelStatus.max_spins > 1 && (
+                {wheelStatus.spins_remaining &gt; 0 &amp;&amp; wheelStatus.max_spins &gt; 1 &amp;&amp; (
                   <div className="bg-white/5 border border-blue-400/20 rounded-lg px-3 py-1.5">
                     <div className="flex items-center gap-2">
                       <div className="flex gap-0.5">
                         {Array.from({ length: wheelStatus.max_spins }, (_, i) => (
-                          <div
-                            key={i}
-                            className={`w-1.5 h-1.5 rounded-full ${
-                              i < wheelStatus.spins_remaining 
-                                ? 'bg-blue-400' 
-                                : 'bg-white/20'
-                            }`}
-                          />
+                          <div key={i} className={`w-1.5 h-1.5 rounded-full ${i &lt; wheelStatus.spins_remaining ? 'bg-blue-400' : 'bg-white/20'}`} />
                         ))}
                       </div>
                       <span className="text-blue-200 text-xs font-medium">left</span>
@@ -234,7 +200,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         </div>
 
         {/* Loading State */}
-        {loading && (
+        {loading &amp;&amp; (
           <div className="text-center py-8">
             <div className="animate-spin w-8 h-8 border-2 border-purple-400 border-t-transparent rounded-full mx-auto mb-4"></div>
             <p className="text-white/60">Loading wheel...</p>
@@ -242,7 +208,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         )}
 
         {/* Error State */}
-        {error && (
+        {error &amp;&amp; (
           <div className="bg-red-500/10 border border-red-500/30 rounded-2xl p-4 mb-6">
             <p className="text-red-400 text-sm">{error}</p>
           </div>
@@ -256,51 +222,40 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           </div>
 
           {/* Wheel */}
-          <div 
-            className="relative w-72 h-72 rounded-full border-4 border-purple-400/50 shadow-2xl"
-            style={{
-              transform: `rotate(${rotation}deg)`,
-              transition: spinning ? 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' : 'none'
-            }}
+          <div
+            className="relative w-72 h-72 rounded-full border-4 border-purple-400/50 shadow-2xl overflow-hidden"
+            style={{ transform: `rotate(${rotation}deg)`, transition: 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)' }}
           >
-            {/* Wheel Segments */}
+            {/* Wheel Segments (background) */}
             {rewards.map((reward, index) => {
-              const segAngle = 360 / rewards.length;
               const angle = segAngle * index;
-              const centerAngle = angle + segAngle / 2; // center of this segment
-              const Icon = reward.icon;
-              
               return (
                 <div
                   key={reward.id}
-                  className={`absolute inset-0 origin-center overflow-hidden`}
+                  className="absolute inset-0 origin-center overflow-hidden"
                   style={{
                     transform: `rotate(${angle}deg)`,
                     clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.sin((Math.PI * 2) / rewards.length)}% ${50 - 50 * Math.cos((Math.PI * 2) / rewards.length)}%)`
                   }}
-
-            {/* Foreground icon ring (not clipped) */}
-            {rewards.map((reward, index) => {
-              const segAngle = 360 / rewards.length;
-              const angle = segAngle * index + segAngle / 2;
-              const Icon = reward.icon;
-              return (
-                <div
-                  key={`icon-${reward.id}`}
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ transform: `rotate(${angle}deg)` }}
                 >
-                  <div className="absolute left-1/2 top-1/2" style={{ transform: 'translate(-50%, -50%) translateY(-95px) rotate(-' + angle + 'deg)' }}>
-                    <div className="bg-white/20 rounded-full p-2.5 backdrop-blur-sm">
-                      <Icon className="w-7 h-7 text-white drop-shadow-lg" />
-                    </div>
-                  </div>
+                  <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80`}></div>
                 </div>
               );
             })}
 
->
-                  <div className={`w-full h-full bg-gradient-to-br ${reward.color} opacity-80`}></div>
+            {/* Foreground icon ring (centered, upright) */}
+            {rewards.map((reward, index) => {
+              const angle = segAngle * index + segAngle / 2; // center of segment
+              const Icon = reward.icon;
+              const rotateStyle = `rotate(${angle}deg)`;
+              const unrotateStyle = `rotate(${-angle}deg)`;
+              return (
+                <div key={`icon-${reward.id}`} className="absolute inset-0 pointer-events-none" style={{ transform: rotateStyle }}>
+                  <div className="absolute left-1/2 top-1/2" style={{ transform: `translate(-50%, -50%) translateY(-95px) ${unrotateStyle}` }}>
+                    <div className="bg-white/20 rounded-full p-2.5 backdrop-blur-sm">
+                      <Icon className="w-7 h-7 text-white drop-shadow-lg" />
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -313,21 +268,16 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         </div>
 
         {/* Spin Button */}
-        {!showReward && (
-          <button
-            onClick={spinWheel}
-            disabled={spinning}
-            className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-medium hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl"
-          >
+        {!showReward &amp;&amp; (
+          <button onClick={spinWheel} disabled={spinning} className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-medium hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl">
             {spinning ? 'Spinning...' : 'Spin the Wheel'}
           </button>
         )}
 
         {/* Reward Display */}
-        {showReward && selectedReward && (
+        {showReward &amp;&amp; selectedReward &amp;&amp; (
           <div className="text-center animate-fadeIn">
             <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-4">
-              {/* Tier Badge */}
               <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
                 selectedReward.tier === 'legendary' ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black' :
                 selectedReward.tier === 'rare' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' :
@@ -335,7 +285,6 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
               }`}>
                 {selectedReward.tier?.toUpperCase()}
               </div>
-              
               <div className={`inline-block p-4 bg-gradient-to-r ${selectedReward.color} rounded-full mb-4`}>
                 {React.createElement(selectedReward.icon, { className: 'w-8 h-8 text-white' })}
               </div>
@@ -343,23 +292,14 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
               <p className="text-xl text-purple-300 font-medium mb-2">{selectedReward.name}</p>
               <p className="text-sm text-white/60">{selectedReward.description}</p>
             </div>
-            <button
-              onClick={handleClose}
-              className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full hover:scale-105 transition-all shadow-xl"
-            >
-              Collect Reward
-            </button>
+            <button onClick={handleClose} className="w-full py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full hover:scale-105 transition-all shadow-xl">Collect Reward</button>
           </div>
         )}
 
         {/* Spin Info */}
-        {!loading && !showReward && (
+        {!loading &amp;&amp; !showReward &amp;&amp; (
           <div className="mt-6 text-center text-white/40 text-sm">
-            {wheelStatus?.is_premium ? (
-              <p>✨ Premium: 3 spins per day!</p>
-            ) : (
-              <p>✨ Free: 1 spin every 48 hours</p>
-            )}
+            {wheelStatus?.is_premium ? <p>✨ Premium: 3 spins per day!</p> : <p>✨ Free: 1 spin every 48 hours</p>}
           </div>
         )}
       </div>
