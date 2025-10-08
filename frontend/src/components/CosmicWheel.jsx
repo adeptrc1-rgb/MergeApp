@@ -83,6 +83,12 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       setLoading(false);
     }
   };
+      // Ensure dev env always spinnable
+      if (isPreview && (!wheelStatus || !wheelStatus.can_spin)) {
+        await resetDevCooldown();
+        await fetchWheelStatus();
+      }
+
 
   const spinWheel = async () => {
     if (spinning || !wheelStatus?.can_spin) {
