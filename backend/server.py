@@ -849,7 +849,7 @@ async def get_potential_matches(user: User = Depends(get_current_user)):
         "id": {"$nin": swiped_ids},
         "is_active": True,
         "profile_completed": True,
-        "response_score": {"$gte": 50}
+        "responsiveness_score": {"$gte": 50}
     }).limit(100).to_list(length=None)
     
     filtered_matches = []
