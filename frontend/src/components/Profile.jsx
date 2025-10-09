@@ -347,10 +347,6 @@ export default function Profile({ user, logout }) {
                 <span className="text-white/60">Total Matches</span>
                 <span className="text-white text-xl font-light">{user.total_matches || 0}</span>
               </div>
-              <div className="flex justify-between items-center py-3 border-b border-white/10">
-                <span className="text-white/60">Responsiveness</span>
-                <span className="text-white text-xl font-light">Hidden</span>
-              </div>
               <div className="flex justify-between items-center py-3">
                 <span className="text-white/60">Profile Completion</span>
                 <span className="text-white text-xl font-light">100%</span>
