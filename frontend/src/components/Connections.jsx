@@ -149,7 +149,17 @@ export default function Connections({ user }) {
             >
               {penalty.reflect_used ? 'Reflection Complete' : 'Reflect to Realign Faster'}
             </button>
-            <div className="text-white/50 text-xs mt-2">{penalty.band ? `Band: ${penalty.band}` : ''}</div>
+            <div className="text-white/50 text-xs mt-2 flex items-center justify-center gap-2">
+              {penalty.band ? <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10">Band: {penalty.band}</span> : null}
+              <button
+                onClick={async () => { try { await axios.post(`${API}/api/penalty/clear`); fetchPenalty(); } catch {} }}
+                className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white/70"
+              >Clear (Dev)</button>
+              <button
+                onClick={async () => { try { await axios.post(`${API}/api/penalty/test-start`, { compatibility_score: 92 }); fetchPenalty(); } catch {} }}
+                className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white/70"
+              >Start Penalty (Dev)</button>
+            </div>
           </div>
         </div>
       </div>
