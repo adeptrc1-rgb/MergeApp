@@ -32,6 +32,14 @@ export default function Connections({ user }) {
   useEffect(() => {
     loadMatches();
     loadLikes();
+    // allow query to force show overlay
+    try {
+      const params = new URLSearchParams(locationObj.search);
+      if (params.get('penalty') === '1') {
+        setPenalty({ active: true, remaining_seconds: 3600, total_seconds: 7200, band: 'TrueMatch', reflect_used: false });
+      }
+    } catch (e) {}
+
     fetchPenalty();
     const t = setInterval(fetchPenalty, 5000);
     return () => clearInterval(t);
