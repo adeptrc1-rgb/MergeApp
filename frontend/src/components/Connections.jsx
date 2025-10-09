@@ -24,6 +24,7 @@ export default function Connections({ user }) {
   const [activeTab, setActiveTab] = useState('matches');
   const [likes, setLikes] = useState([]);
   const [penalty, setPenalty] = useState({ active: false, remaining_seconds: 0, total_seconds: 0, band: null, reflect_used: false });
+  const [showReflect, setShowReflect] = useState(false);
 
   useEffect(() => {
     loadMatches();
