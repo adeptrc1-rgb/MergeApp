@@ -235,6 +235,8 @@ frontend:
 
   - agent: "main"
     message: "Run automated UI test: navigate to /test, click 'Open Cosmic Wheel (Auto Login)', ensure modal opens, click 'Spin the Wheel', verify rotation and reward popup. If element not found, try /autologin then Profile->open wheel."
+  - agent: "testing"
+    message: "🚨 CRITICAL BACKEND ISSUE DISCOVERED: Cosmic Wheel frontend is fully functional (beautiful UI, modal opens, wheel displays, spin button works) but ALL backend cosmic wheel endpoints are completely missing from server.py. The user's 'Not Found' error is caused by missing backend APIs: /api/rewards/cosmic-wheel-status (404), /api/rewards/spin-cosmic-wheel (404), /api/rewards/reset-cosmic-wheel (404). Backend only contains auth, replies, penalty, and health endpoints. This is a major backend implementation gap, not a frontend issue. Main agent needs to implement the complete cosmic wheel backend API system including reward logic, spin mechanics, cooldown management, and database schema for user rewards/spins."
 metadata:
   created_by: "main_agent"
   version: "1.1"
