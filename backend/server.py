@@ -463,8 +463,10 @@ async def get_astrology_compatibility(sign1: str, sign2: str) -> float:
     
     return element_scores.get((elem1, elem2), element_scores.get((elem2, elem1), 65))
 
-async def update_responsiveness_score(user_id: str, action_type: str, match_id: str, 
-                                    compatibility_level: str, response_time_hours: Optional[float] = None):
+async def update_responsiveness_score(user_id: str, action_type: str, match_id: str,
+                                    compatibility_level: str,
+                                    response_time_hours: Optional[float] = None,
+                                    compatibility_score_value: Optional[float] = None):
     """Update user's responsiveness score based on behavior"""
     
     penalty = 0
