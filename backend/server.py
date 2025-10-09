@@ -477,12 +477,22 @@ async def update_responsiveness_score(user_id: str, action_type: str, match_id: 
     elif action_type == "continued_conversation":
         reward = 1
     elif action_type == "expired_match":
-        if compatibility_level == "high":  # 80%+
-            penalty = 15
-        elif compatibility_level == "medium":  # 50-79%
-            penalty = 8
-        else:  # <50%
-            penalty = 3
+        # Apply zero penalty for medium/low
+        if compatibility_level == "high":  # 75%+
+            # Scale penalty by exact compatibility score if provided
+            if compatibility_score_value is not None:
+                if 75 <= compatibility_score_value <= 84:
+                    penalty = 5
+                elif 85 <= compatibility_score_value <= 94:
+                    penalty = 10
+                elif 95 <= compatibility_score_value <= 100:
+                    penalty = 15
+                else:
+                    penalty = 5  # default high tier
+            else:
+                penalty = 10  # default when exact score unknown
+        else:
+            penalty = 0
     elif action_type == "ghosted":
         penalty = 5
     
