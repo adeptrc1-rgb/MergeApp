@@ -500,11 +500,14 @@ async def update_responsiveness_score(user_id: str, action_type: str, match_id: 
     # Update user's responsiveness score
     user = await db.users.find_one({"id": user_id})
     if user:
-        current_score = user.get("responsiveness_score", 80)
-        new_score = max(0, min(100, current_score + reward - penalty))
+        current_score = user.get("responsiveness_score")
+        # Backward compatibility: if only legacy field exists, start from it
+        if current_score is None:
+            current_score = user.get("response_score", 100)
+        new_score = max(0, min(100, float(current_score) + reward - penalty))
         await db.users.update_one(
             {"id": user_id},
-            {"$set": {"responsiveness_score": new_score}}
+            {"$set": {"responsiveness_score": new_score, "response_score": new_score}}
         )
 
 
