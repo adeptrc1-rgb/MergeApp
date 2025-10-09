@@ -112,7 +112,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       setShowAurora(true); // start aura sweep
 
       // Ask backend first so we can align the pointer to the correct slice
-      const response = await axios.post(`${API}/api/rewards/spin-cosmic-wheel`, {}, { withCredentials: true });
+      const response = await axios.post(`${API}/api/rewards/spin-cosmic-wheel`, {}, { withCredentials: true, validateStatus: () => true });
       const { reward, tier } = response.data;
 
       // Find a segment matching the reward type (choose randomly among duplicates)
