@@ -199,7 +199,7 @@ export default function Connections({ user }) {
       <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-4xl mx-auto px-6 py-6">
           {activeTab === 'matches' ? (
-            penalty.active ? (
+            (penalty.active || isPreview && new URLSearchParams(locationObj.search).get('penalty') === '1') ? (
               <CosmicOverlay />
             ) : (
               matches.length === 0 ? (
