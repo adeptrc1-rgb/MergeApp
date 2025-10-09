@@ -621,11 +621,6 @@ async def reset_cosmic_wheel(user: User = Depends(get_current_user)):
     )
     return {"success": True}
 
-        days = int(hours // 24)
-        rem_h = int(hours % 24)
-        return f"{days}d {rem_h}h"
-    return f"{int(hours)}h"
-
 
 async def send_penalty_notification(user_id: str, penalty_hours: float):
     msg = f"The stars are realigning… your next match in {star_time_str(penalty_hours)}."
