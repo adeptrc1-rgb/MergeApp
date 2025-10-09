@@ -910,6 +910,9 @@ async def get_potential_matches(user: User = Depends(get_current_user)):
                 "profile_photos": match_user.profile_photos,
                 # Calculate overall ranking score
                 "ranking_score": (
+            # Penalize if user is the reason a high-compat match expired (>=75%)
+            # Incorporate responsiveness_score more strongly in ranking
+
                     compatibility["score"] * 0.5 +  # 50% compatibility
                     geographic_score * 0.3 +        # 30% location
                     match_user.responsiveness_score * 0.2  # 20% responsiveness
