@@ -135,7 +135,7 @@ export default function Profile({ user, logout }) {
       }
       // Refresh status rather than full reload for smoother UX
       await checkDailySpinStatus();
-      setShowCosmicWheel(false);
+      // Do not auto-close; user will close manually via "Collect Reward"
     } catch (error) {
       console.error('Error claiming reward:', error);
       // Fallback: refetch status
