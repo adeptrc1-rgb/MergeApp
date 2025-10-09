@@ -121,6 +121,13 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         .filter(({ s }) => s.type === reward.type)
         .map(({ i }) => i);
       const targetIndex = matchingIndexes.length
+      if (!response || response.status >= 400) {
+        setError(response?.data?.detail || 'Spin temporarily unavailable');
+        setSpinning(false);
+        await fetchWheelStatus();
+        return;
+      }
+
         ? matchingIndexes[Math.floor(Math.random() * matchingIndexes.length)]
         : Math.floor(Math.random() * WHEEL_SEGMENTS.length);
 
