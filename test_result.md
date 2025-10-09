@@ -230,6 +230,8 @@ frontend:
         agent: "main"
         comment: "Connections page shows two tabs: Matches tab (existing matches) and Likes You tab (users who liked the current user using /api/users/liked-me endpoint)."
 
+  - agent: "main"
+    message: "Run automated UI test: navigate to /test, click 'Open Cosmic Wheel (Auto Login)', ensure modal opens, click 'Spin the Wheel', verify rotation and reward popup. If element not found, try /autologin then Profile->open wheel."
 metadata:
   created_by: "main_agent"
   version: "1.1"
