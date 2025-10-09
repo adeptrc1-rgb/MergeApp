@@ -18,6 +18,9 @@ const fmtTime = (secs) => {
 };
 
 export default function Connections({ user }) {
+  const isPreview = typeof window !== 'undefined' && window.location.hostname.includes('preview.emergentagent.com');
+  const locationObj = typeof window !== 'undefined' ? window.location : { search: '' };
+
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
