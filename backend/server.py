@@ -426,6 +426,198 @@ async def compute_dynamic_penalty_hours(user_id: str, compatibility_score: float
 
 def star_time_str(hours: float) -> str:
     if hours >= 24:
+# -------------------------------------
+# Cosmic Wheel Endpoints
+# -------------------------------------
+from random import choices, random
+
+REWARD_TABLE = [
+    {"type": "boost", "name": "Profile Boost", "amount": 1, "tier": "common", "weight": 25},
+    {"type": "super_like", "name": "Super Like", "amount": 1, "tier": "common", "weight": 25},
+    {"type": "dm", "name": "Direct Message", "amount": 1, "tier": "common", "weight": 25},
+    {"type": "star_coins", "name": "Star Coins", "amount": 25, "tier": "common", "weight": 15},
+    {"type": "extra_spin", "name": "Extra Spin", "amount": 1, "tier": "rare", "weight": 6},
+    {"type": "cooldown_skip", "name": "Cooldown Skip", "amount": 1, "tier": "rare", "weight": 3},
+    {"type": "spotlight", "name": "Spotlight", "amount": 1, "tier": "rare", "weight": 1}
+]
+
+
+def normalize_dt(dt_str: Optional[str]) -> Optional[datetime]:
+    if not dt_str:
+        return None
+    try:
+        return datetime.fromisoformat(dt_str)
+    except Exception:
+        return None
+
+
+@api_router.get("/rewards/cosmic-wheel-status")
+async def cosmic_wheel_status(user: User = Depends(get_current_user)):
+    udoc = await db.users.find_one({"id": user.id})
+    if not udoc:
+        raise HTTPException(status_code=404, detail="User not found")
+    now = now_utc()
+
+    # Reset daily spins at local midnight (store ISO date string)
+    spin_reset_str = udoc.get("spin_reset_date")
+    today_str = date.fromtimestamp(now.timestamp()).isoformat()
+    if spin_reset_str != today_str:
+        # new day
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {"spins_today": 0, "spin_reset_date": today_str}},
+        )
+        udoc = await db.users.find_one({"id": user.id})
+
+    max_spins = 1 + (1 if udoc.get("is_premium") else 0)  # premium gets 2/day
+    spins_today = int(udoc.get("spins_today", 0))
+
+    next_spin_time = normalize_dt(udoc.get("next_spin_time"))
+    can_spin = False
+    cooldown_hours = 0.0
+
+    if spins_today < max_spins:
+        if (not next_spin_time) or (now >= next_spin_time):
+            can_spin = True
+        else:
+            cooldown_hours = max(0.0, (next_spin_time - now).total_seconds() / 3600.0)
+    else:
+        # no spins left today
+        if next_spin_time and now < next_spin_time:
+            cooldown_hours = max(0.0, (next_spin_time - now).total_seconds() / 3600.0)
+
+    return {
+        "can_spin": can_spin,
+        "cooldown_hours": round(cooldown_hours, 2),
+        "spin_streak": int(udoc.get("spin_streak", 0)),
+        "spins_today": spins_today,
+        "max_spins": max_spins,
+        "is_premium": bool(udoc.get("is_premium", False)),
+    }
+
+
+class SpinResult(BaseModel):
+    reward: Dict[str, Any]
+    tier: str
+
+
+@api_router.post("/rewards/spin-cosmic-wheel", response_model=SpinResult)
+async def spin_cosmic_wheel(user: User = Depends(get_current_user)):
+    # Status and limits
+    udoc = await db.users.find_one({"id": user.id})
+    if not udoc:
+        raise HTTPException(status_code=404, detail="User not found")
+    now = now_utc()
+
+    # check/reset daily
+    spin_reset_str = udoc.get("spin_reset_date")
+    today_str = date.fromtimestamp(now.timestamp()).isoformat()
+    if spin_reset_str != today_str:
+        await db.users.update_one({"id": user.id}, {"$set": {"spins_today": 0, "spin_reset_date": today_str}})
+        udoc = await db.users.find_one({"id": user.id})
+
+    max_spins = 1 + (1 if udoc.get("is_premium") else 0)
+    spins_today = int(udoc.get("spins_today", 0))
+    next_spin_time = normalize_dt(udoc.get("next_spin_time"))
+    if spins_today >= max_spins:
+        raise HTTPException(status_code=400, detail="No spins remaining today")
+    if next_spin_time and now < next_spin_time:
+        raise HTTPException(status_code=400, detail="Cooldown active")
+
+    # choose reward
+    weights = [r["weight"] for r in REWARD_TABLE]
+    chosen = choices(REWARD_TABLE, weights=weights, k=1)[0]
+
+    # apply reward to inventory
+    inc = {}
+    if chosen["type"] == "boost":
+        inc["profile_boosts"] = 1
+    elif chosen["type"] == "super_like":
+        inc["super_likes"] = 1
+    elif chosen["type"] == "dm":
+        inc["direct_messages"] = 1
+    elif chosen["type"] == "star_coins":
+        inc["star_coins"] = int(chosen["amount"]) or 10
+    elif chosen["type"] == "extra_spin":
+        # immediately allow another spin by not setting cooldown
+        pass
+    elif chosen["type"] == "cooldown_skip":
+        # clear any next_spin_time
+        await db.users.update_one({"id": user.id}, {"$unset": {"next_spin_time": ""}})
+
+    # update spins and cooldown
+    spins_today += 1
+    update_doc = {"spins_today": spins_today}
+    if chosen["type"] != "extra_spin":
+        cooldown_hours = 24 if not udoc.get("is_premium") else 12
+        update_doc["next_spin_time"] = (now + timedelta(hours=cooldown_hours)).isoformat()
+    else:
+        update_doc["next_spin_time"] = None
+
+    # streak handling
+    last_spin_date = udoc.get("last_spin_date")
+    if last_spin_date:
+        try:
+            last = datetime.fromisoformat(last_spin_date).date()
+        except Exception:
+            last = None
+    else:
+        last = None
+    today = now.date()
+    streak = int(udoc.get("spin_streak", 0))
+    if last and (today - last).days == 1:
+        streak += 1
+    elif not last or (today - last).days > 1:
+        streak = 1
+    update_doc["spin_streak"] = streak
+    update_doc["last_spin_date"] = now.isoformat()
+
+    if inc:
+        await db.users.update_one({"id": user.id}, {"$inc": inc})
+
+    await db.users.update_one({"id": user.id}, {"$set": update_doc})
+
+    return {
+        "reward": {"type": chosen["type"], "name": chosen["name"], "amount": chosen["amount"]},
+        "tier": chosen["tier"],
+    }
+
+
+class ClaimBody(BaseModel):
+    reward_type: str
+    amount: int
+
+
+@api_router.post("/rewards/claim-reward")
+async def claim_reward(body: ClaimBody, user: User = Depends(get_current_user)):
+    # Basic claim passthrough (most are applied on spin); ensure no-negative
+    if body.amount <= 0:
+        raise HTTPException(status_code=422, detail="Invalid amount")
+    inc = {}
+    if body.reward_type == "boost":
+        inc["profile_boosts"] = body.amount
+    elif body.reward_type == "super_like":
+        inc["super_likes"] = body.amount
+    elif body.reward_type == "dm":
+        inc["direct_messages"] = body.amount
+    elif body.reward_type == "star_coins":
+        inc["star_coins"] = body.amount
+    else:
+        return {"success": True}  # no-op for cosmetic rewards
+
+    await db.users.update_one({"id": user.id}, {"$inc": inc})
+    return {"success": True}
+
+
+@api_router.post("/rewards/reset-cosmic-wheel")
+async def reset_cosmic_wheel(user: User = Depends(get_current_user)):
+    today_str = date.fromtimestamp(now_utc().timestamp()).isoformat()
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": {"spins_today": 0, "spin_reset_date": today_str}, "$unset": {"next_spin_time": ""}},
+    )
+    return {"success": True}
+
         days = int(hours // 24)
         rem_h = int(hours % 24)
         return f"{days}d {rem_h}h"
