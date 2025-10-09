@@ -1208,6 +1208,13 @@ async def get_matches(user: User = Depends(get_current_user)):
 
 # Background task to check expired matches
 @api_router.post("/admin/check-expired-matches")
+        # Extra penalty for high-compatibility expirations (>=75)
+        if match["compatibility_score"] >= 75:
+            if not match.get("user1_response_time"):
+                await db.users.update_one({"id": match["user1_id"]}, {"$inc": {"responsiveness_score": -2}})
+            if not match.get("user2_response_time"):
+                await db.users.update_one({"id": match["user2_id"]}, {"$inc": {"responsiveness_score": -2}})
+
 async def check_expired_matches():
     """Background task to check and update responsiveness for expired matches"""
     expired_matches = await db.matches.find({
