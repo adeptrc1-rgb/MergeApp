@@ -755,6 +755,11 @@ async def penalty_test_start(body: StartPenaltyBody, user: User = Depends(get_cu
     )
     return res
 
+@api_router.post("/penalty/clear")
+async def penalty_clear(user: User = Depends(get_current_user)):
+    await db.users.update_one({"id": user.id}, {"$set": {"penalty_active": False}, "$unset": {"penalty_started_at": "", "penalty_ends_at": "", "penalty_band": "", "penalty_reflect_used": ""}})
+    return {"success": True}
+
 
 # -------------------------------------
 # Health
