@@ -18,9 +18,6 @@ const fmtTime = (secs) => {
 };
 
 export default function Connections({ user }) {
-  const isPreview = typeof window !== 'undefined' && window.location.hostname.includes('preview.emergentagent.com');
-  const locationObj = typeof window !== 'undefined' ? window.location : { search: '' };
-
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,20 +25,21 @@ export default function Connections({ user }) {
   const [likes, setLikes] = useState([]);
   const [penalty, setPenalty] = useState({ active: false, remaining_seconds: 0, total_seconds: 0, band: null, reflect_used: false });
   const [showReflect, setShowReflect] = useState(false);
+  const isPreview = typeof window !== 'undefined' && window.location.hostname.includes('preview.emergentagent.com');
+  const locationObj = typeof window !== 'undefined' ? window.location : { search: '' };
 
   useEffect(() => {
     loadMatches();
     loadLikes();
-    // allow query to force show overlay
+    fetchPenalty();
+    const t = setInterval(fetchPenalty, 5000);
+    // allow query to force show overlay for quick preview
     try {
       const params = new URLSearchParams(locationObj.search);
       if (params.get('penalty') === '1') {
         setPenalty({ active: true, remaining_seconds: 3600, total_seconds: 7200, band: 'TrueMatch', reflect_used: false });
       }
     } catch (e) {}
-
-    fetchPenalty();
-    const t = setInterval(fetchPenalty, 5000);
     return () => clearInterval(t);
   }, []);
 
@@ -50,7 +48,7 @@ export default function Connections({ user }) {
       const res = await axios.get(`${API}/api/penalty/status`);
       setPenalty(res.data || { active: false });
     } catch (e) {
-      // noop
+      // noop: overlay can be forced via ?penalty=1
     }
   };
 
@@ -59,7 +57,6 @@ export default function Connections({ user }) {
       const res = await axios.post(`${API}/api/penalty/reflect`);
       setPenalty((p) => ({ ...p, ...res.data, reflect_used: true }));
     } catch (e) {
-      // surface minimal feedback
       alert(e?.response?.data?.detail || 'Unable to reflect right now');
     }
   };
@@ -94,82 +91,81 @@ export default function Connections({ user }) {
     );
   }
 
-  // Penalty overlay inside Matches tab
+  // Penalty overlay inside Matches tab - refined to match uploaded design
   const CosmicOverlay = () => {
     const percent = penalty.total_seconds ? Math.min(100, Math.max(0, ((penalty.total_seconds - penalty.remaining_seconds) / penalty.total_seconds) * 100)) : 0;
     return (
-      <div className="relative overflow-hidden">
-        {/* cosmic background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-black to-pink-900/40" />
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-purple-500/10 blur-3xl" />
-        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-pink-500/10 blur-3xl" />
+      <div className="relative overflow-hidden rounded-3xl border border-white/10">
+        {/* background gradients / glows */}
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/70 via-black to-black" />
+        <div className="absolute -top-40 -left-40 w-[26rem] h-[26rem] rounded-full bg-purple-500/15 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 w-[22rem] h-[22rem] rounded-full bg-pink-500/15 blur-3xl" />
 
-        <div className="relative p-6 text-center">
-          <div className="inline-block p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mb-4 border border-white/10">
-            <Sparkles className="w-8 h-8 text-purple-300" />
+        <div className="relative p-8 text-center">
+          {/* top sigil */}
+          <div className="inline-flex items-center justify-center p-3 rounded-full bg-white/5 border border-white/10 mb-4">
+            <Sparkles className="w-7 h-7 text-purple-300" />
           </div>
-          <h3 className="text-2xl font-light text-white mb-2">The Universe is Rebalancing</h3>
-          <p className="text-white/60 mb-6">High-compatibility connections are in a queue. Stay present while energies realign.</p>
+          <h3 className="text-3xl md:text-4xl font-light text-white tracking-wide mb-2">The Universe is Rebalancing</h3>
+          <p className="text-white/60 max-w-xl mx-auto mb-8">High-compatibility connections are in a queue. Stay present while energies realign.</p>
 
-          {/* Orbs Queue */}
-          <div className="flex items-center justify-center gap-6 mb-6">
+          {/* Orbs Row */}
+          <div className="flex items-center justify-center gap-8 mb-8">
             {[0,1,2].map((i) => (
-              <div key={i} className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 flex items-center justify-center backdrop-blur-md shadow-inner">
-                <div className="text-white/80 text-sm flex items-center gap-1">
-                  <Timer className="w-4 h-4 text-purple-300" />
-                  <span>{fmtTime(penalty.remaining_seconds - i * 60)}</span>
+              <div key={i} className="relative">
+                <div className="w-24 h-24 md:w-28 md:h-28 rounded-full" style={{
+                  background: 'conic-gradient(from 0deg, rgba(168,85,247,0.35), rgba(236,72,153,0.35), rgba(255,255,255,0.12), rgba(168,85,247,0.35))',
+                  boxShadow: '0 0 30px rgba(168,85,247,0.25)'
+                }} />
+                <div className="absolute inset-0 m-auto w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/5 border border-white/15 backdrop-blur-md flex items-center justify-center">
+                  <div className="text-white/85 text-sm md:text-base font-medium flex items-center gap-2">
+                    <Timer className="w-4 h-4 text-purple-300" />
+                    <span>{fmtTime(Math.max(0, (penalty.remaining_seconds || 0) - i * 60))}</span>
+                  </div>
                 </div>
+                {/* twinkles */}
+                <div className="absolute -top-2 left-2 w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse" />
+                <div className="absolute -bottom-1 right-3 w-1 h-1 rounded-full bg-white/50 animate-pulse" />
               </div>
             ))}
           </div>
 
           {/* Progress */}
-          <div className="max-w-md mx-auto text-left">
+          <div className="max-w-xl mx-auto text-left">
             <div className="flex items-center justify-between text-white/60 text-xs mb-2">
               <span>Queue Progress</span>
               <span>{Math.round(percent)}%</span>
             </div>
-            <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-              <div className="h-2 bg-gradient-to-r from-purple-400 to-pink-400" style={{width: `${percent}%`}} />
+            <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
+              <div className="relative h-3 bg-gradient-to-r from-purple-400 to-pink-400" style={{width: `${percent}%`}}>
+                <div className="absolute right-0 -top-[6px] w-3 h-3 rounded-full bg-white/90 shadow" />
+              </div>
             </div>
           </div>
 
-          {/* Reflect ritual modal */}
-          {showReflect && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
-              <div className="bg-gradient-to-b from-purple-900/80 to-black/80 border border-white/10 rounded-2xl p-6 w-full max-w-md text-center">
-                <div className="inline-block p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mb-3 border border-white/10">
-                  <Sparkles className="w-7 h-7 text-purple-300" />
-                </div>
-                <h4 className="text-xl text-white mb-2">Reflect to Realign</h4>
-                <p className="text-white/70 text-sm mb-4">Take a moment. Breathe. Acknowledge what you’d do differently. When you’re ready, press realign to reduce your wait time.</p>
-                <div className="flex gap-3 justify-center">
-                  <button onClick={() => setShowReflect(false)} className="px-4 py-2 rounded-full bg-white/10 text-white/70 hover:bg-white/15">Not now</button>
-                  <button onClick={async () => { await reflectNow(); setShowReflect(false); }} className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105">Realign</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Reflect button */}
-          <div className="mt-6">
+          {/* Actions & band */}
+          <div className="mt-8 flex flex-col items-center gap-3">
             <button
               onClick={() => setShowReflect(true)}
               disabled={penalty.reflect_used}
-              className={`px-6 py-3 rounded-full font-medium shadow-lg transition-all ${penalty.reflect_used ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105'}`}
+              className={`px-7 py-3 rounded-full font-medium shadow-lg transition-all ${penalty.reflect_used ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105'}`}
             >
               {penalty.reflect_used ? 'Reflection Complete' : 'Reflect to Realign Faster'}
             </button>
-            <div className="text-white/50 text-xs mt-2 flex items-center justify-center gap-2">
+            <div className="text-white/60 text-xs flex items-center gap-2">
               {penalty.band ? <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10">Band: {penalty.band}</span> : null}
-              <button
-                onClick={async () => { try { await axios.post(`${API}/api/penalty/clear`); fetchPenalty(); } catch {} }}
-                className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white/70"
-              >Clear (Dev)</button>
-              <button
-                onClick={async () => { try { await axios.post(`${API}/api/penalty/test-start`, { compatibility_score: 92 }); fetchPenalty(); } catch {} }}
-                className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white/70"
-              >Start Penalty (Dev)</button>
+              {isPreview && (
+                <>
+                  <button
+                    onClick={async () => { try { await axios.post(`${API}/api/penalty/test-start`, { compatibility_score: 92 }); fetchPenalty(); } catch {} }}
+                    className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10"
+                  >Start Penalty (Dev)</button>
+                  <button
+                    onClick={async () => { try { await axios.post(`${API}/api/penalty/clear`); fetchPenalty(); } catch {} }}
+                    className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10"
+                  >Clear (Dev)</button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -258,8 +254,28 @@ export default function Connections({ user }) {
         </div>
       </div>
 
+      {/* Reflect ritual modal */}
+      {showReflect && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
+          <div className="bg-gradient-to-b from-purple-900/80 to-black/80 border border-white/10 rounded-2xl p-6 w-full max-w-md text-center">
+            <div className="inline-block p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mb-3 border border-white/10">
+              <Sparkles className="w-7 h-7 text-purple-300" />
+            </div>
+            <h4 className="text-xl text-white mb-2">Reflect to Realign</h4>
+            <p className="text-white/70 text-sm mb-4">Take a moment. Breathe. Acknowledge what you’d do differently. When you’re ready, press realign to reduce your wait time.</p>
+            <div className="flex gap-3 justify-center">
+              <button onClick={() => setShowReflect(false)} className="px-4 py-2 rounded-full bg-white/10 text-white/70 hover:bg-white/15">Not now</button>
+              <button onClick={async () => { await reflectNow(); setShowReflect(false); }} className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105">Realign</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Bottom Navigation */}
       <BottomNav currentTab="connections" navigate={navigate} />
+
+      {/* Overlay keyframes */}
+      <style>{`@keyframes pulseTwinkle { 0%,100% { opacity: .7 } 50% { opacity: .2 } }`}</style>
     </div>
   );
 }
