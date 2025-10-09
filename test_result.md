@@ -246,7 +246,8 @@ test_plan:
     - "Navigation Sections (Discover, Connections, Profile)"
     - "Bottom Navigation Bar"
     - "Connections Page (Matches and Likes You tabs)"
-  stuck_tasks: []
+  stuck_tasks: 
+    - "Cosmic Wheel E2E Spin"
   test_all: false
   test_priority: "high_first"
   - agent: "main"
