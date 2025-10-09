@@ -1206,9 +1206,9 @@ async def get_matches(user: User = Depends(get_current_user)):
             
             # Apply penalty to users who haven't responded
             if match["user1_id"] == user.id and not match.get("user1_response_time"):
-                await update_responsiveness_score(user.id, "expired_match", match["id"], compatibility_level)
+                await update_responsiveness_score(user.id, "expired_match", match["id"], compatibility_level, compatibility_score_value=match["compatibility_score"])
             elif match["user2_id"] == user.id and not match.get("user2_response_time"):
-                await update_responsiveness_score(user.id, "expired_match", match["id"], compatibility_level)
+                await update_responsiveness_score(user.id, "expired_match", match["id"], compatibility_level, compatibility_score_value=match["compatibility_score"])
                 
             # Update match status
             await db.matches.update_one(
