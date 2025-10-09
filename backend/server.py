@@ -426,6 +426,9 @@ async def compute_dynamic_penalty_hours(user_id: str, compatibility_score: float
 
 def star_time_str(hours: float) -> str:
     if hours >= 24:
+        return f"{hours/24:.1f} days"
+    return f"{hours:.1f} hours"
+
 # -------------------------------------
 # Cosmic Wheel Endpoints
 # -------------------------------------
