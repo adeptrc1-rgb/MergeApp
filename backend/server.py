@@ -903,7 +903,7 @@ async def get_potential_matches(user: User = Depends(get_current_user)):
                 "distance_km": distance_km,
                 "compatibility_score": compatibility["score"],
                 "geographic_score": geographic_score,
-                "response_score": match_user.response_score,
+                "response_score": match_user.responsiveness_score,
                 "profile_photos": match_user.profile_photos,
                 # Calculate overall ranking score
                 "ranking_score": (
