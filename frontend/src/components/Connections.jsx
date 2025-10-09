@@ -123,6 +123,23 @@ export default function Connections({ user }) {
             </div>
           </div>
 
+          {/* Reflect ritual modal */}
+          {showReflect && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md">
+              <div className="bg-gradient-to-b from-purple-900/80 to-black/80 border border-white/10 rounded-2xl p-6 w-full max-w-md text-center">
+                <div className="inline-block p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mb-3 border border-white/10">
+                  <Sparkles className="w-7 h-7 text-purple-300" />
+                </div>
+                <h4 className="text-xl text-white mb-2">Reflect to Realign</h4>
+                <p className="text-white/70 text-sm mb-4">Take a moment. Breathe. Acknowledge what you’d do differently. When you’re ready, press realign to reduce your wait time.</p>
+                <div className="flex gap-3 justify-center">
+                  <button onClick={() => setShowReflect(false)} className="px-4 py-2 rounded-full bg-white/10 text-white/70 hover:bg-white/15">Not now</button>
+                  <button onClick={async () => { await reflectNow(); setShowReflect(false); }} className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105">Realign</button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Reflect button */}
           <div className="mt-6">
             <button
