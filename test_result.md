@@ -165,6 +165,18 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ COMPREHENSIVE BACKEND REGRESSION PASS #4 COMPLETE: 15/16 tests passed. ✅ Session Setup: POST /auth/test-login working correctly with testuser@asign.com, session cookies captured and stored. ✅ Auth Checks: GET /auth/me returns 200 with user object, POST /auth/logout returns 200, GET /auth/me after logout returns 401 as expected. ✅ CORS Preflight: OPTIONS requests to /auth/test-login and /users/liked-me return proper CORS headers with 200/204 status. ✅ Cosmic Wheel: GET /rewards/cosmic-wheel-status returns proper payload with can_spin, next_spin_time, streak fields. POST /rewards/spin-cosmic-wheel correctly prevents spinning when daily limit reached (returns 400). ✅ Matches: GET /users/potential-matches returns empty array (test user has no potential matches). ✅ Connections: GET /users/liked-me returns empty array when authenticated, returns 401 when not authenticated. ✅ Error Handling: GET /auth/me with invalid session cookie returns 401, no 500 errors. Minor: Cosmic wheel spin returns 400 instead of 403 when not allowed (acceptable behavior). All session cookies working properly over HTTPS with SameSite/Lax configuration."
+
+  - task: "Auth Smoke Test"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ AUTH SMOKE TEST COMPLETE: 3/3 tests passed (100% success rate). ✅ POST /auth/test-login with testuser@asign.com: Returns 200 status, success:true response, session cookies properly set and captured. ✅ GET /auth/me with cookies: Returns 200 status with complete user object including email field (testuser@asign.com), user ID: a60a00ea-4f50-4cc2-9004-2eaaa9ad00bd. ✅ CORS preflight OPTIONS for /auth/test-login: Returns 200 status with proper CORS headers including Access-Control-Allow-Credentials: true, Access-Control-Allow-Origin, Access-Control-Allow-Methods. All authentication endpoints working correctly over HTTPS with proper session management and CORS configuration."
 frontend:
   - task: "Navigation Sections (Discover, Connections, Profile)"
     implemented: true
