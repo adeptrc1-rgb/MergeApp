@@ -695,9 +695,124 @@ class AstrologyDatingAPITester:
             print(f"⚠️  {self.tests_run - self.tests_passed} tests failed")
             return 1
 
+    def run_auth_smoke_test(self):
+        """Run specific auth smoke test as requested"""
+        print("🚀 Starting Auth Smoke Test")
+        print(f"📍 Testing against: {self.api_url}")
+        print("=" * 60)
+
+        # Test 1: POST /auth/test-login with {"email":"testuser@asign.com"}, store cookies
+        print("\n" + "=" * 50)
+        print("🔐 TEST 1: POST /auth/test-login")
+        print("=" * 50)
+        
+        login_data = {"email": "testuser@asign.com"}
+        success, response_data, response = self.run_test("Auth Test Login", "POST", "auth/test-login", 200, data=login_data)
+        
+        if not success:
+            print("❌ Cannot continue without successful login")
+            return 1
+            
+        # Store cookies for subsequent tests
+        if response and response.cookies:
+            self.session_cookies = response.cookies
+            print(f"   ℹ️  Session cookies captured: {dict(response.cookies)}")
+        else:
+            print("   ⚠️  No cookies received from login")
+            return 1
+
+        # Test 2: GET /auth/me with cookies, expect 200 and email field
+        print("\n" + "=" * 50)
+        print("🔒 TEST 2: GET /auth/me with cookies")
+        print("=" * 50)
+        
+        success, response_data, response = self.run_test("Auth Me with Cookies", "GET", "auth/me", 200, use_cookies=True)
+        
+        if success and isinstance(response_data, dict):
+            if "email" in response_data:
+                print(f"   ✅ Email field found: {response_data['email']}")
+            else:
+                self.log_test("Auth Me Email Field", False, "Email field missing from response")
+                success = False
+        
+        if not success:
+            print("❌ Auth/me test failed")
+            return 1
+
+        # Test 3: CORS preflight OPTIONS for /auth/test-login and check credentials allowed headers
+        print("\n" + "=" * 50)
+        print("🌐 TEST 3: CORS preflight OPTIONS tests")
+        print("=" * 50)
+        
+        # Test CORS for /auth/test-login
+        print("\n🔍 Testing CORS preflight for /auth/test-login...")
+        try:
+            headers = {
+                'Origin': 'https://astroapp-sync.preview.emergentagent.com',
+                'Access-Control-Request-Method': 'POST',
+                'Access-Control-Request-Headers': 'Content-Type'
+            }
+            response = requests.options(f"{self.api_url}/auth/test-login", headers=headers, timeout=10)
+            
+            print(f"   Status: {response.status_code}")
+            print(f"   Headers: {dict(response.headers)}")
+            
+            # Accept both 200 and 204 as valid preflight responses
+            if response.status_code in [200, 204]:
+                cors_headers = response.headers
+                
+                # Check for required CORS headers
+                required_cors = ['Access-Control-Allow-Origin', 'Access-Control-Allow-Methods']
+                missing = [h for h in required_cors if h not in cors_headers]
+                
+                # Check for credentials allowed
+                credentials_allowed = cors_headers.get('Access-Control-Allow-Credentials', '').lower() == 'true'
+                
+                if missing:
+                    self.log_test("CORS Preflight /auth/test-login", False, f"Missing CORS headers: {missing}")
+                    success = False
+                elif not credentials_allowed:
+                    self.log_test("CORS Preflight /auth/test-login", False, "Access-Control-Allow-Credentials not set to true")
+                    success = False
+                else:
+                    self.log_test("CORS Preflight /auth/test-login", True, "All required CORS headers present with credentials allowed")
+                    print(f"   ✅ Credentials allowed: {credentials_allowed}")
+                    success = True
+            else:
+                self.log_test("CORS Preflight /auth/test-login", False, f"Expected 200/204, got {response.status_code}")
+                success = False
+                
+        except Exception as e:
+            self.log_test("CORS Preflight /auth/test-login", False, str(e))
+            success = False
+
+        # Print final summary
+        print("\n" + "=" * 60)
+        print("📊 AUTH SMOKE TEST SUMMARY")
+        print("=" * 60)
+        
+        passed_tests = [result for result in self.test_results if result["success"]]
+        failed_tests = [result for result in self.test_results if not result["success"]]
+        
+        print(f"✅ PASSED: {len(passed_tests)}/{self.tests_run} tests")
+        print(f"❌ FAILED: {len(failed_tests)}/{self.tests_run} tests")
+        
+        if failed_tests:
+            print("\n❌ Failed Tests Details:")
+            for result in failed_tests:
+                print(f"   - {result['test']}: {result['details']}")
+        
+        # Return status and details
+        if len(failed_tests) == 0:
+            print("\n🎉 AUTH SMOKE TEST: PASS")
+            return 0
+        else:
+            print(f"\n⚠️  AUTH SMOKE TEST: FAIL ({len(failed_tests)} issues)")
+            return 1
+
 def main():
     tester = AstrologyDatingAPITester()
-    return tester.run_comprehensive_regression_pass_4()
+    return tester.run_auth_smoke_test()
 
 if __name__ == "__main__":
     sys.exit(main())
