@@ -2,31 +2,55 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from './ui/button';
-import { Heart, MessageCircle, Star, MapPin, Sparkles, Users, Home, Zap } from 'lucide-react';
+import { Heart, MessageCircle, Star, MapPin, Sparkles, Users, Home, Zap, Timer, RefreshCw } from 'lucide-react';
 
 const API = process.env.REACT_APP_BACKEND_URL || '';
-
 axios.defaults.withCredentials = true;
 
-// Element compatibility
-const ELEMENT_MAP = {
-  'Aries': 'Fire', 'Leo': 'Fire', 'Sagittarius': 'Fire',
-  'Taurus': 'Earth', 'Virgo': 'Earth', 'Capricorn': 'Earth',
-  'Gemini': 'Air', 'Libra': 'Air', 'Aquarius': 'Air',
-  'Cancer': 'Water', 'Scorpio': 'Water', 'Pisces': 'Water'
+const fmtTime = (secs) => {
+  if (!secs || secs <= 0) return '0m';
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  const s = Math.floor(secs % 60);
+  if (h > 0) return `${h}h ${m}m`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
 };
 
 export default function Connections({ user }) {
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('matches'); // 'matches' or 'likes'
+  const [activeTab, setActiveTab] = useState('matches');
   const [likes, setLikes] = useState([]);
+  const [penalty, setPenalty] = useState({ active: false, remaining_seconds: 0, total_seconds: 0, band: null, reflect_used: false });
 
   useEffect(() => {
     loadMatches();
     loadLikes();
+    fetchPenalty();
+    const t = setInterval(fetchPenalty, 5000);
+    return () => clearInterval(t);
   }, []);
+
+  const fetchPenalty = async () => {
+    try {
+      const res = await axios.get(`${API}/api/penalty/status`);
+      setPenalty(res.data || { active: false });
+    } catch (e) {
+      // noop
+    }
+  };
+
+  const reflectNow = async () => {
+    try {
+      const res = await axios.post(`${API}/api/penalty/reflect`);
+      setPenalty((p) => ({ ...p, ...res.data, reflect_used: true }));
+    } catch (e) {
+      // surface minimal feedback
+      alert(e?.response?.data?.detail || 'Unable to reflect right now');
+    }
+  };
 
   const loadMatches = async () => {
     try {
@@ -40,28 +64,11 @@ export default function Connections({ user }) {
 
   const loadLikes = async () => {
     try {
-      // This would be a new endpoint to get users who liked you
       const response = await axios.get(`${API}/api/users/liked-me`);
       setLikes(response.data);
     } catch (error) {
-      console.error('Error loading likes:', error);
-      setLikes([]); // Set empty array if endpoint doesn't exist yet
+      setLikes([]);
     }
-  };
-
-  const calculateAge = (birthDate) => {
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-    return age;
-  };
-
-  const openChat = (matchId) => {
-    navigate(`/chat/${matchId}`);
   };
 
   if (loading) {
@@ -75,13 +82,60 @@ export default function Connections({ user }) {
     );
   }
 
-  // Energy levels for display
-  const getEnergyLevel = (match) => {
-    const score = match.compatibility_score || 70;
-    if (score >= 85) return { text: 'High energy today', color: 'text-green-400' };
-    if (score >= 70) return { text: 'Medium', color: 'text-yellow-400' };
-    if (score >= 60) return { text: 'Meoum energy', color: 'text-orange-400' };
-    return { text: 'Low energy', color: 'text-red-400' };
+  // Penalty overlay inside Matches tab
+  const CosmicOverlay = () => {
+    const percent = penalty.total_seconds ? Math.min(100, Math.max(0, ((penalty.total_seconds - penalty.remaining_seconds) / penalty.total_seconds) * 100)) : 0;
+    return (
+      <div className="relative overflow-hidden">
+        {/* cosmic background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-black to-pink-900/40" />
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-purple-500/10 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-pink-500/10 blur-3xl" />
+
+        <div className="relative p-6 text-center">
+          <div className="inline-block p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mb-4 border border-white/10">
+            <Sparkles className="w-8 h-8 text-purple-300" />
+          </div>
+          <h3 className="text-2xl font-light text-white mb-2">The Universe is Rebalancing</h3>
+          <p className="text-white/60 mb-6">High-compatibility connections are in a queue. Stay present while energies realign.</p>
+
+          {/* Orbs Queue */}
+          <div className="flex items-center justify-center gap-6 mb-6">
+            {[0,1,2].map((i) => (
+              <div key={i} className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 flex items-center justify-center backdrop-blur-md shadow-inner">
+                <div className="text-white/80 text-sm flex items-center gap-1">
+                  <Timer className="w-4 h-4 text-purple-300" />
+                  <span>{fmtTime(penalty.remaining_seconds - i * 60)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Progress */}
+          <div className="max-w-md mx-auto text-left">
+            <div className="flex items-center justify-between text-white/60 text-xs mb-2">
+              <span>Queue Progress</span>
+              <span>{Math.round(percent)}%</span>
+            </div>
+            <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+              <div className="h-2 bg-gradient-to-r from-purple-400 to-pink-400" style={{width: `${percent}%`}} />
+            </div>
+          </div>
+
+          {/* Reflect button */}
+          <div className="mt-6">
+            <button
+              onClick={reflectNow}
+              disabled={penalty.reflect_used}
+              className={`px-6 py-3 rounded-full font-medium shadow-lg transition-all ${penalty.reflect_used ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105'}`}
+            >
+              {penalty.reflect_used ? 'Reflection Complete' : 'Reflect to Realign Faster'}
+            </button>
+            <div className="text-white/50 text-xs mt-2">{penalty.band ? `Band: ${penalty.band}` : ''}</div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -95,31 +149,10 @@ export default function Connections({ user }) {
               <Sparkles className="w-6 h-6" />
             </button>
           </div>
-          <h2 className="text-4xl font-light text-white mb-6">Connections</h2>
-          
-          {/* Filter Tabs */}
-          <div className="flex gap-4">
-            <button
-              onClick={() => setActiveTab('matches')}
-              className={`px-6 py-2 rounded-full text-sm transition-all ${
-                activeTab === 'matches'
-                  ? 'bg-white text-black font-medium'
-                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
-              }`}
-            >
-              Matches
-            </button>
-            <button
-              onClick={() => setActiveTab('likes')}
-              className={`px-6 py-2 rounded-full text-sm transition-all ${
-                activeTab === 'likes'
-                  ? 'bg-white text-black font-medium'
-                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
-              }`}
-            >
-              Likes You
-            </button>
-          </div>
+          <h2 className="text-4xl font-light text-white mb-2">Connections</h2>
+          {penalty.active && (
+            <p className="text-white/60 text-sm">Penalty active. Your cosmic alignments will resume when the timer ends.</p>
+          )}
         </div>
       </div>
 
@@ -127,112 +160,59 @@ export default function Connections({ user }) {
       <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-4xl mx-auto px-6 py-6">
           {activeTab === 'matches' ? (
-            // Matches Tab
-            matches.length === 0 ? (
-              <div className="text-center py-20">
-                <div className="text-6xl mb-6">💫</div>
-                <h3 className="text-2xl font-light text-white mb-3">No matches yet</h3>
-                <p className="text-white/40 mb-8">
-                  Start swiping to find your cosmic connections
-                </p>
-                <button
-                  onClick={() => navigate('/home')}
-                  className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all font-medium"
-                >
-                  Start Swiping
-                </button>
-              </div>
+            penalty.active ? (
+              <CosmicOverlay />
             ) : (
-              <div className="space-y-6">
-                {matches.map((match) => {
-                  const otherUser = match.user1_id === user.id ? match.user2 : match.user1;
-                  const energy = getEnergyLevel(match);
-                  
-                  return (
-                    <div
-                      key={match.id}
-                      onClick={() => openChat(match.id)}
-                      className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
-                    >
-                      {/* Profile Photo */}
-                      <div
-                        className="w-20 h-20 rounded-2xl bg-cover bg-center flex-shrink-0"
-                        style={{
-                          backgroundImage: `url(${otherUser.photos?.[0] || 'https://via.placeholder.com/200'})`
-                        }}
-                      />
-
-                      {/* Profile Info */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-2xl font-light text-white mb-1">
-                          {otherUser.first_name} {otherUser.last_name || 'Owens'}
-                        </h3>
-                        <p className={`text-sm ${energy.color}`}>
-                          {energy.text}
-                        </p>
+              matches.length === 0 ? (
+                <div className="text-center py-20">
+                  <div className="text-6xl mb-6">💫</div>
+                  <h3 className="text-2xl font-light text-white mb-3">No matches yet</h3>
+                  <p className="text-white/40 mb-8">Start swiping to find your cosmic connections</p>
+                  <button onClick={() => navigate('/home')} className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all font-medium">Start Swiping</button>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {matches.map((match) => {
+                    const otherUser = match.user1_id === user.id ? match.user2 : match.user1;
+                    const score = match.compatibility_score || 70;
+                    const energy = score >= 85 ? { text: 'High energy today', color: 'text-green-400' } : score >= 70 ? { text: 'Medium', color: 'text-yellow-400' } : { text: 'Low energy', color: 'text-red-400' };
+                    return (
+                      <div key={match.id} onClick={() => navigate(`/chat/${match.id}`)} className="flex items-center gap-6 p-4 rounded-2xl hover:bg_white/5 transition-all cursor-pointer group">
+                        <div className="w-20 h-20 rounded-2xl bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${otherUser.photos?.[0] || 'https://via.placeholder.com/200'})` }} />
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-2xl font-light text-white mb-1">{otherUser.first_name} {otherUser.last_name || ''}</h3>
+                          <p className={`text-sm ${energy.color}`}>{energy.text}</p>
+                        </div>
+                        <div className="text-white/40 group-hover:text-white/60 transition-colors">
+                          <MessageCircle className="w-6 h-6" />
+                        </div>
                       </div>
-
-                      {/* Arrow Icon */}
-                      <div className="text-white/40 group-hover:text-white/60 transition-colors">
-                        <MessageCircle className="w-6 h-6" />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+              )
             )
           ) : (
-            // Likes You Tab
+            // Likes tab
             likes.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-6">❤️</div>
-                <h3 className="text-2xl font-light text-white mb-3">No likes yet</h3>
-                <p className="text-white/40 mb-8">
-                  Keep swiping to find people who appreciate your energy
-                </p>
-                <button
-                  onClick={() => navigate('/home')}
-                  className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all font-medium"
-                >
-                  Continue Swiping
-                </button>
+                <h3 className="text-2xl font-light text_white mb-3">No likes yet</h3>
+                <p className="text-white/40 mb-8">Keep swiping to find people who appreciate your energy</p>
               </div>
             ) : (
               <div className="space-y-6">
-                {likes.map((likedUser) => {
-                  const age = calculateAge(likedUser.birth_date);
-                  
-                  return (
-                    <div
-                      key={likedUser.id}
-                      className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
-                    >
-                      {/* Profile Photo */}
-                      <div
-                        className="w-20 h-20 rounded-2xl bg-cover bg-center flex-shrink-0"
-                        style={{
-                          backgroundImage: `url(${likedUser.photos?.[0] || 'https://via.placeholder.com/200'})`
-                        }}
-                      />
-
-                      {/* Profile Info */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-2xl font-light text-white mb-1">
-                          {likedUser.first_name}, {age}
-                        </h3>
-                        <div className="flex items-center gap-2 text-white/60">
-                          <Star className="w-4 h-4 text-purple-400" />
-                          <span>{likedUser.zodiac_sign}</span>
-                        </div>
-                      </div>
-
-                      {/* Like Badge */}
-                      <div className="bg-pink-500/20 px-4 py-2 rounded-full border border-pink-500/30">
-                        <Heart className="w-5 h-5 text-pink-400 fill-pink-400" />
-                      </div>
+                {likes.map((likedUser) => (
+                  <div key={likedUser.id} className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group">
+                    <div className="w-20 h-20 rounded-2xl bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${likedUser.photos?.[0] || 'https://via.placeholder.com/200'})` }} />
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-2xl font-light text-white mb-1">{likedUser.first_name}</h3>
                     </div>
-                  );
-                })}
+                    <div className="bg-pink-500/20 px-4 py-2 rounded-full border border-pink-500/30">
+                      <Heart className="w-5 h-5 text-pink-400 fill-pink-400" />
+                    </div>
+                  </div>
+                ))}
               </div>
             )
           )}
@@ -245,53 +225,27 @@ export default function Connections({ user }) {
   );
 }
 
-// Bottom Navigation Component
 function BottomNav({ currentTab, navigate }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 safe-area-inset-bottom">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-around">
-        <button
-          onClick={() => navigate('/home')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'home' ? 'text-white' : 'text-white/40 hover:text-white/60'
-          }`}
-        >
+        <button onClick={() => navigate('/home')} className={`flex flex-col items-center gap-1 transition-colors ${currentTab === 'home' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
           <Home className="w-5 h-5" />
           <span className="text-xs">Home</span>
         </button>
-        <button
-          onClick={() => navigate('/discover')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'discover' ? 'text-white' : 'text-white/40 hover:text-white/60'
-          }`}
-        >
+        <button onClick={() => navigate('/discover')} className={`flex flex-col items-center gap-1 transition-colors ${currentTab === 'discover' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
           <Sparkles className="w-5 h-5" />
           <span className="text-xs">Discover</span>
         </button>
-        <button
-          onClick={() => navigate('/messages')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'messages' ? 'text-white' : 'text-white/40 hover:text-white/60'
-          }`}
-        >
+        <button onClick={() => navigate('/messages')} className={`flex flex-col items-center gap-1 transition-colors ${currentTab === 'messages' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
           <MessageCircle className="w-5 h-5" />
           <span className="text-xs">Messages</span>
         </button>
-        <button
-          onClick={() => navigate('/connections')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'
-          }`}
-        >
+        <button onClick={() => navigate('/connections')} className={`flex flex_col items-center gap-1 transition-colors ${currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
           <Users className="w-5 h-5" />
           <span className="text-xs">Connect</span>
         </button>
-        <button
-          onClick={() => navigate('/profile')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'profile' ? 'text-white' : 'text-white/40 hover:text-white/60'
-          }`}
-        >
+        <button onClick={() => navigate('/profile')} className={`flex flex-col items-center gap-1 transition-colors ${currentTab === 'profile' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
           <Star className="w-5 h-5" />
           <span className="text-xs">Profile</span>
         </button>
