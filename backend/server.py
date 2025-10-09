@@ -102,6 +102,21 @@ class ReplyEvent(BaseModel):
     delivered_at: str
     replied_at: Optional[str] = None
     reply_seconds: Optional[float] = None
+    # Daily Rewards & Cosmic Wheel
+    last_spin_date: Optional[str] = None
+    next_spin_time: Optional[str] = None
+    spin_streak: int = 0
+    spins_today: int = 0
+    spin_reset_date: Optional[str] = None
+    daily_spin_available: bool = True
+    star_coins: int = 0
+
+    # Inventory
+    profile_boosts: int = 0
+    super_likes: int = 0
+    direct_messages: int = 0
+    is_premium: bool = False
+
     created_at: str = Field(default_factory=lambda: now_utc().isoformat())
 
 
