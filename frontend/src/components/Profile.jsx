@@ -129,11 +129,17 @@ export default function Profile({ user, logout }) {
 
   const handleRewardClaimed = async (reward) => {
     try {
-      await axios.post(`${API}/api/rewards/claim-reward?reward_type=${reward.type}&amount=${reward.amount}`);
-      // Refresh user data
-      window.location.reload();
+      // Many rewards are applied server-side on spin; only call claim API when amount is valid
+      if (reward && typeof reward.amount === 'number' && reward.amount > 0 && reward.type) {
+        await axios.post(`${API}/api/rewards/claim-reward`, { reward_type: reward.type, amount: reward.amount }, { withCredentials: true });
+      }
+      // Refresh status rather than full reload for smoother UX
+      await checkDailySpinStatus();
+      setShowCosmicWheel(false);
     } catch (error) {
       console.error('Error claiming reward:', error);
+      // Fallback: refetch status
+      await checkDailySpinStatus();
     }
   };
 
