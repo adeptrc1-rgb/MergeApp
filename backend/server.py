@@ -153,7 +153,8 @@ class User(BaseModel):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     is_active: bool = True
     last_active: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    response_score: float = 100.0  # Hidden responsiveness score
+    response_score: float = 100.0  # Legacy field (kept for backward compatibility)
+    responsiveness_score: float = 100.0  # Canonical responsiveness score used by ranking/penalties
     total_matches: int = 0
     responded_matches: int = 0
     avg_response_time: Optional[float] = None
