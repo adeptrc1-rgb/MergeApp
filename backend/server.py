@@ -1232,9 +1232,9 @@ async def check_expired_matches():
         
         # Apply responsiveness penalties
         if not match.get("user1_response_time"):
-            await update_responsiveness_score(match["user1_id"], "expired_match", match["id"], compatibility_level)
+            await update_responsiveness_score(match["user1_id"], "expired_match", match["id"], compatibility_level, compatibility_score_value=match["compatibility_score"])
         if not match.get("user2_response_time"):
-            await update_responsiveness_score(match["user2_id"], "expired_match", match["id"], compatibility_level)
+            await update_responsiveness_score(match["user2_id"], "expired_match", match["id"], compatibility_level, compatibility_score_value=match["compatibility_score"])
         
         # Update match status
         await db.matches.update_one(
