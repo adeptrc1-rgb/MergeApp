@@ -143,7 +143,7 @@ export default function Connections({ user }) {
           {/* Reflect button */}
           <div className="mt-6">
             <button
-              onClick={reflectNow}
+              onClick={() => setShowReflect(true)}
               disabled={penalty.reflect_used}
               className={`px-6 py-3 rounded-full font-medium shadow-lg transition-all ${penalty.reflect_used ? 'bg-white/10 text-white/40 cursor-not-allowed' : 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105'}`}
             >
