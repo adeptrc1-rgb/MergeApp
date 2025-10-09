@@ -39,16 +39,9 @@ if not MONGO_URL:
     raise RuntimeError("MONGO_URL not set in environment")
 
 client = AsyncIOMotorClient(MONGO_URL)
-# Honor DB from URI (no hardcoded names)
-try:
-    db = client.get_default_database()
-except Exception:
-    db = None
-if db is None:
-    # As a safe fallback, use the database portion of URI if present
-    # If not present, this will still create an implicit default DB per Mongo driver behavior
-    # Note: We avoid hardcoding a name per platform rules
-    db = client.get_database()
+# Use the database name from environment or default
+DB_NAME = os.environ.get("DB_NAME", "astrology_dating_db")
+db = client[DB_NAME]
 
 # -------------------------------------
 # Helpers
