@@ -1190,7 +1190,7 @@ async def get_matches(user: User = Depends(get_current_user)):
         
         # Check for expired matches and apply responsiveness penalties
         if datetime.now(timezone.utc) > match["expires_at"] and match["status"] == "matched":
-            compatibility_level = "high" if match["compatibility_score"] >= 80 else "medium" if match["compatibility_score"] >= 50 else "low"
+            compatibility_level = "high" if match["compatibility_score"] >= 75 else "medium" if match["compatibility_score"] >= 50 else "low"
             
             # Apply penalty to users who haven't responded
             if match["user1_id"] == user.id and not match.get("user1_response_time"):
@@ -1223,7 +1223,7 @@ async def check_expired_matches():
     }).to_list(length=None)
     
     for match in expired_matches:
-        compatibility_level = "high" if match["compatibility_score"] >= 80 else "medium" if match["compatibility_score"] >= 50 else "low"
+        compatibility_level = "high" if match["compatibility_score"] >= 75 else "medium" if match["compatibility_score"] >= 50 else "low"
         
         # Apply responsiveness penalties
         if not match.get("user1_response_time"):
