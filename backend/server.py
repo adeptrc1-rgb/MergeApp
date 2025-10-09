@@ -915,7 +915,7 @@ async def get_potential_matches(user: User = Depends(get_current_user)):
 
                     compatibility["score"] * 0.5 +  # 50% compatibility
                     geographic_score * 0.3 +        # 30% location
-                    match_user.responsiveness_score * 0.2  # 20% responsiveness
+                    match_user.responsiveness_score * 0.35  # 35% responsiveness penalty weighting
                 )
             }
             
