@@ -5,8 +5,12 @@ from typing import Optional, Dict, Any, List
 from datetime import datetime, timedelta, timezone, date
 import os
 import uuid
+from dotenv import load_dotenv
 
 from motor.motor_asyncio import AsyncIOMotorClient
+
+# Load environment variables
+load_dotenv()
 
 # -------------------------------------
 # App and CORS
