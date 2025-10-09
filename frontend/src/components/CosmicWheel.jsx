@@ -71,7 +71,6 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       }
     };
     ensureSpinnable();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPreview, wheelStatus?.can_spin]);
 
   const fetchWheelStatus = async () => {
