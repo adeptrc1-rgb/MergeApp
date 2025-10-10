@@ -320,7 +320,7 @@ export default function Profile({ user, logout }) {
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
             <h3 className="text-xl font-light text-white mb-6 flex items-center gap-2">
               <Award className="w-5 h-5 text-purple-400" />
-              Your Free Features
+              Your Rewards
             </h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative">
