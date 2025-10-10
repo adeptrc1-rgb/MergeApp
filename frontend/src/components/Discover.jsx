@@ -36,11 +36,13 @@ const ELEMENT_MAP = {
 export default function Discover({ user }) {
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
+  const [trendingUsers, setTrendingUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('compatible'); // 'compatible' or 'trending'
 
   useEffect(() => {
     loadMatches();
+    loadTrendingEnergies();
   }, []);
 
   const loadMatches = async () => {
@@ -51,6 +53,15 @@ export default function Discover({ user }) {
       console.error('Error loading matches:', error);
     }
     setLoading(false);
+  };
+
+  const loadTrendingEnergies = async () => {
+    try {
+      const response = await axios.get(`${API}/users/trending-energies`);
+      setTrendingUsers(response.data);
+    } catch (error) {
+      console.error('Error loading trending energies:', error);
+    }
   };
 
   const handleProfileClick = (match) => {
