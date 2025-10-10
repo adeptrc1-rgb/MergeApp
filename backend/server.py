@@ -6,8 +6,12 @@ from datetime import datetime, timedelta, timezone, date
 import os
 import uuid
 from random import choices
+from dotenv import load_dotenv
 
 from motor.motor_asyncio import AsyncIOMotorClient
+
+# Load environment variables from .env file
+load_dotenv()
 
 # -------------------------------------
 # App and CORS
