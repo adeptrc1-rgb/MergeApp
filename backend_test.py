@@ -939,7 +939,7 @@ class AstrologyDatingAPITester:
 
 def main():
     tester = AstrologyDatingAPITester()
-    return tester.run_auth_smoke_test()
+    return tester.run_trending_energies_test()
 
 if __name__ == "__main__":
     sys.exit(main())
