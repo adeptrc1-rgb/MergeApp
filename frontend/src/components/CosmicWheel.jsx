@@ -4,7 +4,7 @@ import { createStarburstEffect, createHeartBurst, createStardustTrail } from '..
 import axios from 'axios';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
-const API = `${API_BASE}`;
+const API = `${API_BASE}/api`;
 
 // Tier colors for visual feedback
 const TIER_COLORS = {
