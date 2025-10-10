@@ -183,6 +183,18 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ AUTH SMOKE TEST EXECUTED SUCCESSFULLY: Performed specific auth testing as requested in review. 3/3 tests passed (100% success rate). ✅ POST /api/auth/test-login with {\"email\": \"testuser@asign.com\"}: Returns 200 status, {\"success\": true} response, session cookies captured (session_token: 6ef3e0fb-f0c0-4c2c-a333-32705b6234d9). ✅ GET /api/auth/me with session cookies: Returns 200 status with complete user object including email field (testuser@asign.com), user ID: a60a00ea-4f50-4cc2-9004-2eaaa9ad00bd. ✅ CORS preflight OPTIONS: Returns 200 status with proper CORS headers including Access-Control-Allow-Credentials: true. Authentication system working perfectly with proper session management over HTTPS. Base URL: https://cosmic-dating.preview.emergentagent.com confirmed working."
+
+  - task: "Trending Energies Algorithm"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ TRENDING ENERGIES ALGORITHM TESTED SUCCESSFULLY: Comprehensive testing of GET /api/users/trending-energies endpoint completed. ✅ Authentication: POST /api/auth/test-login with testuser@asign.com returns 200 status and captures session cookies correctly. ✅ API Response: GET /api/users/trending-energies returns 200 status with proper JSON array format. ✅ Algorithm Logic: Verified trending energy score calculation based on 4 components - Engagement (35%), Compatibility Resonance (25%), Behavior & Trust (25%), Recency & Activity (15%). ✅ Threshold Filter: Only users with trending_energy_score >= 60.0 are returned (correctly filtered out 39 existing users with scores 47.0-50.1). ✅ Sorting: Users properly sorted by trending_energy_score in descending order. ✅ Required Fields: All users contain id, first_name, zodiac_sign, and trending_energy_score fields. ✅ Test Validation: Created high-engagement test user with 25 likes, 10 matches, 15 replies - algorithm correctly calculated score of 77.1 and returned user in results. Algorithm working perfectly as designed - empty results for existing users is correct behavior since none meet minimum trending threshold."
 frontend:
 
   - task: "Cosmic Wheel E2E Spin"
