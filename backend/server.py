@@ -403,7 +403,7 @@ async def start_penalty_window(user_id: str, compatibility_score: float):
         return {"started": False}
     started = now_utc()
     ends = started + timedelta(hours=hours)
-    await db.users.update_one({"id": user.id}, {"$set": {"penalty_active": True, "penalty_started_at": started.isoformat(), "penalty_ends_at": ends.isoformat(), "penalty_band": band_for_compat(compatibility_score), "penalty_reflect_used": False}})
+    await db.users.update_one({"id": user_id}, {"$set": {"penalty_active": True, "penalty_started_at": started.isoformat(), "penalty_ends_at": ends.isoformat(), "penalty_band": band_for_compat(compatibility_score), "penalty_reflect_used": False}})
     await send_penalty_notification(user_id, hours)
     return {"started": True, "hours": hours}
 
