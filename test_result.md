@@ -177,6 +177,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ AUTH SMOKE TEST COMPLETE: 3/3 tests passed (100% success rate). ✅ POST /auth/test-login with testuser@asign.com: Returns 200 status, success:true response, session cookies properly set and captured. ✅ GET /auth/me with cookies: Returns 200 status with complete user object including email field (testuser@asign.com), user ID: a60a00ea-4f50-4cc2-9004-2eaaa9ad00bd. ✅ CORS preflight OPTIONS for /auth/test-login: Returns 200 status with proper CORS headers including Access-Control-Allow-Credentials: true, Access-Control-Allow-Origin, Access-Control-Allow-Methods. All authentication endpoints working correctly over HTTPS with proper session management and CORS configuration."
+      - working: true
+        agent: "testing"
+        comment: "✅ AUTH SMOKE TEST RE-VERIFIED: Fixed critical backend environment configuration issue (MONGO_URL loading from .env file). Executed auth smoke test 3 times as requested - all runs passed with 100% success rate (3/3 tests each run). ✅ POST /auth/test-login: Consistently returns 200 status with success:true, session cookies properly generated and captured each time. ✅ GET /auth/me: Consistently returns 200 status with complete user object including email field (testuser@asign.com), user ID: a60a00ea-4f50-4cc2-9004-2eaaa9ad00bd. ✅ CORS preflight: Consistently returns 200 status with proper CORS headers including Access-Control-Allow-Credentials: true. Session persistence verified across multiple test runs. Backend authentication system is stable and production-ready."
 frontend:
 
   - task: "Cosmic Wheel E2E Spin"
