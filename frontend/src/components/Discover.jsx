@@ -44,7 +44,7 @@ export default function Discover({ user }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/api/users/potential-matches`);
+      const response = await axios.get(`${API}/users/potential-matches`);
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
