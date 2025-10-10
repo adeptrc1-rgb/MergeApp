@@ -8,6 +8,17 @@ import CosmicWheel from './CosmicWheel';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}`;
 
+// Map zodiac sign to unicode symbol
+const zodiacSymbol = (sign) => {
+  if (!sign) return '✧';
+  const s = sign.toLowerCase();
+  const map = {
+    aries: '♈', taurus: '♉', gemini: '♊', cancer: '♋', leo: '♌', virgo: '♍',
+    libra: '♎', scorpio: '♏', sagittarius: '♐', capricorn: '♑', aquarius: '♒', pisces: '♓'
+  };
+  return map[s] || '✧';
+};
+
 axios.defaults.withCredentials = true;
 
 export default function Profile({ user, logout }) {
