@@ -40,10 +40,8 @@ if not MONGO_URL:
     raise RuntimeError("MONGO_URL not set in environment")
 
 client = AsyncIOMotorClient(MONGO_URL)
-try:
-    db = client.get_default_database()
-except Exception:
-    db = client.get_database()
+DB_NAME = os.environ.get("DB_NAME", "astrology_dating_db")
+db = client[DB_NAME]
 
 # -------------------------------------
 # Helpers
