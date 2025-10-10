@@ -913,6 +913,48 @@ async def potential_matches(user: User = Depends(get_current_user)):
     return out
 
 
+
+@api_router.get("/users/trending-energies")
+async def trending_energies(user: User = Depends(get_current_user)):
+    """
+    Return users with high Trending Energy Score.
+    Shows people who are actively engaged, compatible, and have good behavior.
+    """
+    await ensure_test_candidates(user.id)
+    
+    # Get all potential matches
+    cur = db.users.find({"id": {"$ne": user.id}})
+    docs = await cur.to_list(length=100)
+    
+    # Calculate trending energy score for each user
+    scored_users = []
+    for u in docs:
+        energy_score = await calculate_trending_energy_score(u.get("id"), u)
+        comp = quick_compat(user.zodiac_sign, u.get("zodiac_sign"))
+        
+        scored_users.append({
+            "id": u.get("id"),
+            "first_name": u.get("first_name") or (u.get("name") or "Star"),
+            "last_name": u.get("last_name") or "",
+            "zodiac_sign": u.get("zodiac_sign") or "Gemini",
+            "birth_date": u.get("birth_date") or "1995-01-01",
+            "photos": u.get("photos") or ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80&auto=format&fit=crop"],
+            "current_location": u.get("current_location") or {"latitude": 34.05, "longitude": -118.24},
+            "compatibility_score": comp,
+            "trending_energy_score": energy_score,
+        })
+    
+    # Sort by trending energy score (descending) and return top results
+    scored_users.sort(key=lambda x: x["trending_energy_score"], reverse=True)
+    
+    # Only return users with trending energy score >= 60 (minimum threshold)
+    trending_users = [u for u in scored_users if u["trending_energy_score"] >= 60.0]
+    
+    # Return top 20 trending users
+    return trending_users[:20]
+
+
+
 @api_router.post("/users/like/{target_id}")
 async def like_user(target_id: str, user: User = Depends(get_current_user)):
     if target_id == user.id:
