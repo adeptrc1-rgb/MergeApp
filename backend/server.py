@@ -36,15 +36,12 @@ app.add_middleware(
 # Mongo connection
 # -------------------------------------
 MONGO_URL = os.environ.get("MONGO_URL")
+DB_NAME = os.environ.get("DB_NAME", "astrology_dating_db")
 if not MONGO_URL:
     raise RuntimeError("MONGO_URL not set in environment")
 
 client = AsyncIOMotorClient(MONGO_URL)
-# Use DB from URI. If driver can't infer, fall back to generic get_database()
-try:
-    db = client.get_default_database()
-except Exception:
-    db = client.get_database()
+db = client[DB_NAME]
 
 # -------------------------------------
 # Helpers
