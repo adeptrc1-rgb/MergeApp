@@ -12,8 +12,8 @@ import {
   createStardustTrail
 } from '../utils/particleEffects';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
+const API = `${API_BASE}/api`;
 
 axios.defaults.withCredentials = true;
 
