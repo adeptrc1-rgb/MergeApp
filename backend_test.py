@@ -695,6 +695,133 @@ class AstrologyDatingAPITester:
             print(f"⚠️  {self.tests_run - self.tests_passed} tests failed")
             return 1
 
+    def test_trending_energies_endpoint(self):
+        """Test the new Trending Energies endpoint"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping test")
+            return False
+            
+        success, response_data, response = self.run_test("Trending Energies", "GET", "users/trending-energies", 200, use_cookies=True)
+        
+        if not success:
+            return False
+            
+        # Verify response is an array
+        if not isinstance(response_data, list):
+            self.log_test("Trending Energies Response Type", False, f"Expected array, got {type(response_data)}")
+            return False
+        
+        print(f"   ℹ️  Found {len(response_data)} trending users")
+        
+        if len(response_data) == 0:
+            print("   ℹ️  No trending users found (empty array)")
+            self.log_test("Trending Energies (Empty)", True, "Empty array returned correctly")
+            return True
+        
+        # Verify each user has trending_energy_score field
+        for i, user in enumerate(response_data):
+            if not isinstance(user, dict):
+                self.log_test("Trending Energies User Format", False, f"User {i} is not a dict")
+                return False
+                
+            if "trending_energy_score" not in user:
+                self.log_test("Trending Energies Score Field", False, f"User {i} missing trending_energy_score field")
+                return False
+                
+            score = user.get("trending_energy_score")
+            if not isinstance(score, (int, float)):
+                self.log_test("Trending Energies Score Type", False, f"User {i} score is not numeric: {type(score)}")
+                return False
+                
+            # Verify score >= 60 (minimum threshold)
+            if score < 60.0:
+                self.log_test("Trending Energies Score Threshold", False, f"User {i} has score {score} < 60")
+                return False
+        
+        # Verify users are sorted by trending_energy_score (descending)
+        scores = [user["trending_energy_score"] for user in response_data]
+        sorted_scores = sorted(scores, reverse=True)
+        
+        if scores != sorted_scores:
+            self.log_test("Trending Energies Sorting", False, f"Users not sorted by score. Got: {scores[:5]}...")
+            return False
+        
+        # Log sample data
+        if len(response_data) > 0:
+            first_user = response_data[0]
+            print(f"   ℹ️  Top user: {first_user.get('first_name', 'Unknown')} (Score: {first_user.get('trending_energy_score')})")
+            
+            # Check for other required fields
+            required_fields = ["id", "first_name", "zodiac_sign"]
+            missing_fields = [field for field in required_fields if field not in first_user]
+            if missing_fields:
+                self.log_test("Trending Energies User Fields", False, f"Missing fields: {missing_fields}")
+                return False
+        
+        self.log_test("Trending Energies Algorithm", True, f"All {len(response_data)} users properly scored and sorted")
+        return True
+
+    def run_trending_energies_test(self):
+        """Run specific test for Trending Energies endpoint as requested"""
+        print("🚀 Starting Trending Energies Endpoint Test")
+        print(f"📍 Testing against: {self.api_url}")
+        print("=" * 60)
+
+        # Step 1: POST to /api/auth/test-login with {"email": "testuser@asign.com"} to get session cookies
+        print("\n" + "=" * 50)
+        print("🔐 STEP 1: Authentication Setup")
+        print("=" * 50)
+        
+        login_data = {"email": "testuser@asign.com"}
+        success, response_data, response = self.run_test("Test Login for Trending Energies", "POST", "auth/test-login", 200, data=login_data)
+        
+        if not success:
+            print("❌ Cannot continue without successful login")
+            return 1
+            
+        # Store cookies for subsequent tests
+        if response and response.cookies:
+            self.session_cookies = response.cookies
+            print(f"   ✅ Session cookies captured successfully")
+        else:
+            print("   ❌ No cookies received from login")
+            return 1
+
+        # Step 2: GET /api/users/trending-energies with session cookies
+        print("\n" + "=" * 50)
+        print("🌟 STEP 2: Trending Energies Algorithm Test")
+        print("=" * 50)
+        
+        trending_success = self.test_trending_energies_endpoint()
+        
+        if not trending_success:
+            print("❌ Trending Energies test failed")
+            return 1
+
+        # Print final summary
+        print("\n" + "=" * 60)
+        print("📊 TRENDING ENERGIES TEST SUMMARY")
+        print("=" * 60)
+        
+        passed_tests = [result for result in self.test_results if result["success"]]
+        failed_tests = [result for result in self.test_results if not result["success"]]
+        
+        print(f"✅ PASSED: {len(passed_tests)}/{self.tests_run} tests")
+        print(f"❌ FAILED: {len(failed_tests)}/{self.tests_run} tests")
+        
+        if failed_tests:
+            print("\n❌ Failed Tests Details:")
+            for result in failed_tests:
+                print(f"   - {result['test']}: {result['details']}")
+        
+        # Return status
+        if len(failed_tests) == 0:
+            print("\n🎉 TRENDING ENERGIES TEST: PASS")
+            return 0
+        else:
+            print(f"\n⚠️  TRENDING ENERGIES TEST: FAIL ({len(failed_tests)} issues)")
+            return 1
+
     def run_auth_smoke_test(self):
         """Run specific auth smoke test as requested"""
         print("🚀 Starting Auth Smoke Test")
