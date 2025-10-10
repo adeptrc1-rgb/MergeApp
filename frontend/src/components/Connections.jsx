@@ -45,7 +45,7 @@ export default function Connections({ user }) {
 
   const fetchPenalty = async () => {
     try {
-      const res = await axios.get(`${API}/api/penalty/status`);
+      const res = await axios.get(`${API}/penalty/status`);
       setPenalty(res.data || { active: false });
     } catch (e) {
       // noop: overlay can be forced via ?penalty=1
@@ -54,7 +54,7 @@ export default function Connections({ user }) {
 
   const reflectNow = async () => {
     try {
-      const res = await axios.post(`${API}/api/penalty/reflect`);
+      const res = await axios.post(`${API}/penalty/reflect`);
       setPenalty((p) => ({ ...p, ...res.data, reflect_used: true }));
     } catch (e) {
       alert(e?.response?.data?.detail || 'Unable to reflect right now');
@@ -63,7 +63,7 @@ export default function Connections({ user }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/api/matches`);
+      const response = await axios.get(`${API}/matches`);
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
@@ -73,7 +73,7 @@ export default function Connections({ user }) {
 
   const loadLikes = async () => {
     try {
-      const response = await axios.get(`${API}/api/users/liked-me`);
+      const response = await axios.get(`${API}/users/liked-me`);
       setLikes(response.data);
     } catch (error) {
       setLikes([]);
@@ -157,11 +157,11 @@ export default function Connections({ user }) {
               {isPreview && (
                 <>
                   <button
-                    onClick={async () => { try { await axios.post(`${API}/api/penalty/test-start`, { compatibility_score: 92 }); fetchPenalty(); } catch {} }}
+                    onClick={async () => { try { await axios.post(`${API}/penalty/test-start`, { compatibility_score: 92 }); fetchPenalty(); } catch {} }}
                     className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10"
                   >Start Penalty (Dev)</button>
                   <button
-                    onClick={async () => { try { await axios.post(`${API}/api/penalty/clear`); fetchPenalty(); } catch {} }}
+                    onClick={async () => { try { await axios.post(`${API}/penalty/clear`); fetchPenalty(); } catch {} }}
                     className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10"
                   >Clear (Dev)</button>
                 </>

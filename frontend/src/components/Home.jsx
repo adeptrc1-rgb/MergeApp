@@ -77,8 +77,8 @@ export default function Home({ user }) {
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'like', userId: currentMatch.id }]);
     
     try {
-      await axios.post(`${API}/api/users/like/${currentMatch.id}`);
-      const matchResponse = await axios.get(`${API}/api/users/check-match/${currentMatch.id}`);
+      await axios.post(`${API}/users/like/${currentMatch.id}`);
+      const matchResponse = await axios.get(`${API}/users/check-match/${currentMatch.id}`);
       if (matchResponse.data.is_match) {
         // Create match animation
         createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
@@ -122,7 +122,7 @@ export default function Home({ user }) {
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'superlike', userId: currentMatch.id }]);
     
     try {
-      await axios.post(`${API}/api/users/super-like/${currentMatch.id}`);
+      await axios.post(`${API}/users/super-like/${currentMatch.id}`);
       alert(`⭐ Super liked ${currentMatch.first_name}!`);
     } catch (error) {
       console.error('Error super liking:', error);
@@ -151,7 +151,7 @@ export default function Home({ user }) {
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'pass', userId: currentMatch.id }]);
     
     try {
-      await axios.post(`${API}/api/users/pass/${currentMatch.id}`);
+      await axios.post(`${API}/users/pass/${currentMatch.id}`);
     } catch (error) {
       console.error('Error passing:', error);
     }
@@ -179,11 +179,11 @@ export default function Home({ user }) {
     
     try {
       // Create a direct message match (bypasses mutual like requirement)
-      const response = await axios.post(`${API}/api/users/direct-message/${currentMatch.id}`);
+      const response = await axios.post(`${API}/users/direct-message/${currentMatch.id}`);
       
       if (response.data.success) {
         // Decrement DM count
-        await axios.post(`${API}/api/users/use-direct-message`);
+        await axios.post(`${API}/users/use-direct-message`);
         
         // Navigate to chat
         navigate(`/chat/${response.data.match_id}`);
@@ -200,7 +200,7 @@ export default function Home({ user }) {
     const lastSwipe = swipeHistory[swipeHistory.length - 1];
     
     try {
-      await axios.delete(`${API}/api/users/undo-swipe/${lastSwipe.userId}`);
+      await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
       setSwipeHistory(swipeHistory.slice(0, -1));
       setCurrentIndex(Math.max(0, currentIndex - 1));
       setCurrentPhotoIndex(0);

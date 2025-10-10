@@ -67,7 +67,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
     const ensureSpinnable = async () => {
       if (!isPreview) return;
       if (!wheelStatus || !wheelStatus.can_spin) {
-        try { await axios.post(`${API}/api/rewards/reset-cosmic-wheel`, {}, { withCredentials: true }); } catch {}
+        try { await axios.post(`${API}/rewards/reset-cosmic-wheel`, {}, { withCredentials: true }); } catch {}
         await fetchWheelStatus();
       }
     };
@@ -78,7 +78,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get(`${API}/api/rewards/cosmic-wheel-status`, { withCredentials: true });
+      const response = await axios.get(`${API}/rewards/cosmic-wheel-status`, { withCredentials: true });
       setWheelStatus(response.data);
     } catch (err) {
       console.error('Error fetching wheel status:', err);
@@ -111,7 +111,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
       setShowAurora(true);
 
       // Ask backend for reward first, then aim the pointer to that slice
-      const response = await axios.post(`${API}/api/rewards/spin-cosmic-wheel`, {}, { withCredentials: true, validateStatus: () => true });
+      const response = await axios.post(`${API}/rewards/spin-cosmic-wheel`, {}, { withCredentials: true, validateStatus: () => true });
       if (!response || response.status >= 400) {
         setError(response?.data?.detail || 'Spin temporarily unavailable');
         setSpinning(false);

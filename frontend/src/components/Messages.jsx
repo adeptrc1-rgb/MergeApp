@@ -20,13 +20,13 @@ export default function Messages({ user }) {
 
   const loadConversations = async () => {
     try {
-      const matchesResponse = await axios.get(`${API}/api/matches`);
+      const matchesResponse = await axios.get(`${API}/matches`);
       const matches = matchesResponse.data || [];
 
       const conversationsWithMessages = await Promise.all(
         matches.map(async (match) => {
           try {
-            const messagesResponse = await axios.get(`${API}/api/matches/${match.id}/messages`);
+            const messagesResponse = await axios.get(`${API}/matches/${match.id}/messages`);
             const messages = messagesResponse.data || [];
             const lastMessage = messages[messages.length - 1];
             const otherUser = match.user1_id === user.id ? match.user2 : match.user1;
@@ -58,12 +58,12 @@ export default function Messages({ user }) {
       const updatedMap = {};
       for (const c of conversationsWithMessages) {
         try {
-          const st = await axios.get(`${API}/api/matches/${c.id}/coinflip-status`);
+          const st = await axios.get(`${API}/matches/${c.id}/coinflip-status`);
           if (st.data && st.data.set) {
             updatedMap[c.id] = st.data;
           } else {
             if (!c.lastMessage || c.lastMessage === 'Start the conversation!') {
-              const res = await axios.post(`${API}/api/matches/${c.id}/coinflip`);
+              const res = await axios.post(`${API}/matches/${c.id}/coinflip`);
               if (res.data) {
                 updatedMap[c.id] = { set: true, first: res.data.first, second: res.data.second };
                 const youStart = res.data.first === user.id;
@@ -90,7 +90,7 @@ export default function Messages({ user }) {
   const createTestMatch = async () => {
     try {
       setCreating(true);
-      const res = await axios.post(`${API}/api/matches/test-create`, { compatibility_score: 88 });
+      const res = await axios.post(`${API}/matches/test-create`, { compatibility_score: 88 });
       if (res.data && res.data.match_id) {
         await loadConversations();
         setCoinflipToast('✨ A new alignment has arrived. The cosmos will choose who starts.');

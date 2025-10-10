@@ -45,7 +45,7 @@ export default function AstroChat({ user, logout }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/api/matches/my-matches`);
+      const response = await axios.get(`${API}/matches/my-matches`);
       setMatches(response.data);
       setLoading(false);
     } catch (error) {
@@ -56,7 +56,7 @@ export default function AstroChat({ user, logout }) {
 
   const loadMessages = async (matchId) => {
     try {
-      const response = await axios.get(`${API}/api/messages/${matchId}`);
+      const response = await axios.get(`${API}/messages/${matchId}`);
       setMessages(response.data);
     } catch (error) {
       console.error('Error loading messages:', error);
@@ -67,7 +67,7 @@ export default function AstroChat({ user, logout }) {
     if (!newMessage.trim() || !selectedMatch) return;
 
     try {
-      await axios.post(`${API}/api/messages/send`, {
+      await axios.post(`${API}/messages/send`, {
         match_id: selectedMatch.match_id,
         receiver_id: selectedMatch.id,
         message: newMessage

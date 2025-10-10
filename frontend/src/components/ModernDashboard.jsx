@@ -26,7 +26,7 @@ export default function ModernDashboard({ user, logout }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/api/users/potential-matches`);
+      const response = await axios.get(`${API}/users/potential-matches`);
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
@@ -41,7 +41,7 @@ export default function ModernDashboard({ user, logout }) {
     setSwipeDirection('right');
     
     try {
-      await axios.post(`${API}/api/users/like/${currentMatch.id}`);
+      await axios.post(`${API}/users/like/${currentMatch.id}`);
     } catch (error) {
       console.error('Error liking:', error);
     }
@@ -58,7 +58,7 @@ export default function ModernDashboard({ user, logout }) {
     setSwipeDirection('left');
 
     try {
-      await axios.post(`${API}/api/users/pass/${currentMatch.id}`);
+      await axios.post(`${API}/users/pass/${currentMatch.id}`);
     } catch (error) {
       console.error('Error passing:', error);
     }

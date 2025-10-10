@@ -320,7 +320,7 @@ export default function EnhancedOnboarding() {
         profile_photos: formData.profile_photos
       };
       
-      await axios.post(`${API}/api/users/complete-profile`, profileData);
+      await axios.post(`${API}/users/complete-profile`, profileData);
       navigate('/dashboard');
     } catch (error) {
       console.error('Profile completion error:', error);
