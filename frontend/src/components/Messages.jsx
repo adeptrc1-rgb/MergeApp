@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MessageCircle, Sparkles, Users, Home, Star, Send } from 'lucide-react';
 
-const API = process.env.REACT_APP_BACKEND_URL || '';
+const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
+const API = `${API_BASE}/api`;
 axios.defaults.withCredentials = true;
 
 export default function Messages({ user }) {
