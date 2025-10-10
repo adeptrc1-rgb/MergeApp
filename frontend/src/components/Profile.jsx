@@ -193,10 +193,19 @@ export default function Profile({ user, logout }) {
                 <h2 className="text-4xl font-light text-white mb-3">
                   {user.first_name}, {age}
                 </h2>
-                <div className="flex items-center gap-3 text-white/60 mb-4">
-                  <Star className="w-5 h-5 text-purple-400" />
+                <div className="flex items-center gap-3 text-white/60 mb-3">
+                  <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white text-sm">
+                    {zodiacSymbol(user.zodiac_sign)}
+                  </div>
                   <span className="text-lg">{user.zodiac_sign}</span>
                 </div>
+                {user.interests && user.interests.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {user.interests.slice(0, 4).map((interest, i) => (
+                      <span key={i} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs text-white/70">{interest}</span>
+                    ))}
+                  </div>
+                )}
 
                 {/* Angel Number Badge */}
                 {user.angel_number && (
