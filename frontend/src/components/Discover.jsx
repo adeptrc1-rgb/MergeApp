@@ -133,52 +133,117 @@ export default function Discover({ user }) {
       {/* Content */}
       <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-4xl mx-auto px-6 py-6">
-          {matches.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="text-6xl mb-6">✨</div>
-              <h3 className="text-2xl font-light text-white mb-3">No matches yet</h3>
-              <p className="text-white/40">Check back later for more cosmic connections</p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {matches.map((match) => {
-                const age = calculateAge(match.birth_date);
-                const compatibility = match.compatibility_score || Math.floor(Math.random() * 30) + 70;
-                
-                return (
-                  <div
-                    key={match.id}
-                    onClick={() => handleProfileClick(match)}
-                    className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
-                  >
-                    {/* Profile Photo */}
+          {/* Display based on active filter */}
+          {activeFilter === 'compatible' ? (
+            // Compatible Today Section
+            matches.length === 0 ? (
+              <div className="text-center py-20">
+                <div className="text-6xl mb-6">✨</div>
+                <h3 className="text-2xl font-light text-white mb-3">No matches yet</h3>
+                <p className="text-white/40">Check back later for more cosmic connections</p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {matches.map((match) => {
+                  const age = calculateAge(match.birth_date);
+                  const compatibility = match.compatibility_score || Math.floor(Math.random() * 30) + 70;
+                  
+                  return (
                     <div
-                      className="w-24 h-24 rounded-2xl bg-cover bg-center flex-shrink-0"
-                      style={{
-                        backgroundImage: `url(${match.photos?.[0] || 'https://via.placeholder.com/200'})`
-                      }}
-                    />
+                      key={match.id}
+                      onClick={() => handleProfileClick(match)}
+                      className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
+                    >
+                      {/* Profile Photo */}
+                      <div
+                        className="w-24 h-24 rounded-2xl bg-cover bg-center flex-shrink-0"
+                        style={{
+                          backgroundImage: `url(${match.photos?.[0] || 'https://via.placeholder.com/200'})`
+                        }}
+                      />
 
-                    {/* Profile Info */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-2xl font-light text-white mb-1">
-                        {match.first_name} {match.last_name || 'Owens'}
-                      </h3>
-                      <div className="flex items-center gap-3 text-white/60 text-sm">
-                        <span>{compatibility}% Vibe Score</span>
+                      {/* Profile Info */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-2xl font-light text-white mb-1">
+                          {match.first_name} {match.last_name || 'Owens'}
+                        </h3>
+                        <div className="flex items-center gap-3 text-white/60 text-sm">
+                          <span>{compatibility}% Vibe Score</span>
+                        </div>
+                      </div>
+
+                      {/* Arrow Icon */}
+                      <div className="text-white/40 group-hover:text-white/60 transition-colors">
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                        </svg>
                       </div>
                     </div>
+                  );
+                })}
+              </div>
+            )
+          ) : (
+            // Trending Energies Section
+            trendingUsers.length === 0 ? (
+              <div className="text-center py-20">
+                <div className="text-6xl mb-6">⚡</div>
+                <h3 className="text-2xl font-light text-white mb-3">No trending energies yet</h3>
+                <p className="text-white/40">Active and engaged users will appear here</p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {trendingUsers.map((match) => {
+                  const age = calculateAge(match.birth_date);
+                  const compatibility = match.compatibility_score || Math.floor(Math.random() * 30) + 70;
+                  const energyScore = match.trending_energy_score || 0;
+                  
+                  return (
+                    <div
+                      key={match.id}
+                      onClick={() => handleProfileClick(match)}
+                      className="relative flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
+                    >
+                      {/* Trending Badge */}
+                      <div className="absolute top-2 right-2 flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30">
+                        <Zap className="w-3 h-3 text-yellow-400" />
+                        <span className="text-xs font-medium text-yellow-400">{energyScore.toFixed(0)}% Energy</span>
+                      </div>
 
-                    {/* Arrow Icon */}
-                    <div className="text-white/40 group-hover:text-white/60 transition-colors">
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                      </svg>
+                      {/* Profile Photo */}
+                      <div
+                        className="w-24 h-24 rounded-2xl bg-cover bg-center flex-shrink-0 ring-2 ring-yellow-400/30"
+                        style={{
+                          backgroundImage: `url(${match.photos?.[0] || 'https://via.placeholder.com/200'})`
+                        }}
+                      />
+
+                      {/* Profile Info */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-2xl font-light text-white mb-1">
+                          {match.first_name} {match.last_name || 'Owens'}
+                        </h3>
+                        <div className="flex items-center gap-3 text-white/60 text-sm">
+                          <span>{compatibility}% Compatible</span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <Sparkles className="w-3 h-3" />
+                            Trending
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Arrow Icon */}
+                      <div className="text-white/40 group-hover:text-white/60 transition-colors">
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )
           )}
         </div>
       </div>
