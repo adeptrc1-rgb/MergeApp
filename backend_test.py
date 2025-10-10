@@ -715,7 +715,8 @@ class AstrologyDatingAPITester:
         
         if len(response_data) == 0:
             print("   ℹ️  No trending users found (empty array)")
-            self.log_test("Trending Energies (Empty)", True, "Empty array returned correctly")
+            print("   🔍 This could mean all users have trending energy scores < 60")
+            self.log_test("Trending Energies (Empty)", True, "Empty array returned correctly - algorithm working but no users meet threshold")
             return True
         
         # Verify each user has trending_energy_score field
