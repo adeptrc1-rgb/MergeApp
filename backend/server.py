@@ -648,6 +648,37 @@ async def start_penalty_window(user_id: str, compatibility_score: float):
                 "penalty_active": True,
                 "penalty_started_at": started.isoformat(),
                 "penalty_ends_at": ends.isoformat(),
+# -------------------------------------
+# Cosmic Coin: decide who messages first on new match
+# -------------------------------------
+class CoinFlipEvent(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    match_id: str
+    user_first_id: str
+    user_second_id: str
+    created_at: str = Field(default_factory=lambda: now_utc().isoformat())
+    note: str = "The cosmos flipped a coin to choose who messages first."
+
+@api_router.post("/matches/coinflip")
+async def matches_coinflip(match_id: str, user: User = Depends(get_current_user)):
+    # Expect match doc has user1_id, user2_id
+    match_doc = await db.matches.find_one({"id": match_id})
+    if not match_doc:
+        raise HTTPException(status_code=404, detail="Match not found")
+    uid1 = match_doc.get("user1_id")
+    uid2 = match_doc.get("user2_id")
+    if not uid1 or not uid2:
+        raise HTTPException(status_code=422, detail="Invalid match data")
+    # Flip a coin
+    import random
+    first, second = (uid1, uid2) if random.random() < 0.5 else (uid2, uid1)
+    ev = CoinFlipEvent(match_id=match_id, user_first_id=first, user_second_id=second)
+    await db.coinflip_events.insert_one(ev.dict())
+    # Notify both users (store in db.notifications)
+    await db.notifications.insert_one({"id": str(uuid.uuid4()), "user_id": first, "type": "cosmic_coin", "message": "The stars chose you to begin this connection.", "created_at": now_utc().isoformat()})
+    await db.notifications.insert_one({"id": str(uuid.uuid4()), "user_id": second, "type": "cosmic_coin", "message": "Your match will open the conversation first — the cosmos has spoken.", "created_at": now_utc().isoformat()})
+    return {"match_id": match_id, "first": first, "second": second}
+
                 "penalty_band": band_for_compat(compatibility_score),
                 "penalty_reflect_used": False,
             }
