@@ -760,7 +760,17 @@ async def ensure_test_candidates(exclude_id: str, count: int = 10):
         await db.users.update_one({"email": u.email}, {"$setOnInsert": u.dict()}, upsert=True)
 
 
+# Polarity pairs (opposite signs that attract)
+POLAR_PAIRS = {
+    "Aries": "Libra", "Taurus": "Scorpio", "Gemini": "Sagittarius",
+    "Cancer": "Capricorn", "Leo": "Aquarius", "Virgo": "Pisces",
+    "Libra": "Aries", "Scorpio": "Taurus", "Sagittarius": "Gemini",
+    "Capricorn": "Cancer", "Aquarius": "Leo", "Pisces": "Virgo"
+}
+
+
 def quick_compat(user_sign: Optional[str], other_sign: Optional[str]) -> float:
+    """Basic compatibility based on sun sign only (for backwards compatibility)"""
     if not user_sign or not other_sign:
         return 70 + int(randf()*30)
     # Simple element affinity: Fire/Air, Earth/Water pairs a bit higher
@@ -778,6 +788,53 @@ def quick_compat(user_sign: Optional[str], other_sign: Optional[str]) -> float:
     if (e1 == "Earth" and e2 == "Water") or (e1 == "Water" and e2 == "Earth"):
         base += 8
     return float(min(99, base))
+
+
+def calculate_compatibility_with_polarity(userA: dict, userB: dict) -> float:
+    """
+    Enhanced compatibility calculation with polarity bonus.
+    Considers sun_sign, moon_sign, and rising_sign for deeper compatibility.
+    
+    Args:
+        userA: User dict with zodiac_sign (sun), moon_sign, rising_sign
+        userB: User dict with zodiac_sign (sun), moon_sign, rising_sign
+    
+    Returns:
+        Compatibility score (0-100) with polarity bonuses applied
+    """
+    # Get base compatibility from sun signs
+    sun_sign_a = userA.get("zodiac_sign")
+    sun_sign_b = userB.get("zodiac_sign")
+    base_score = quick_compat(sun_sign_a, sun_sign_b)
+    
+    # Apply polarity bonus based on sun, moon, and rising signs
+    polarity_bonus = 0
+    polarity_fields = [
+        ("zodiac_sign", "Sun"),  # Sun sign (primary)
+        ("moon_sign", "Moon"),   # Moon sign (emotional)
+        ("rising_sign", "Rising") # Rising sign (appearance/first impression)
+    ]
+    
+    for field, sign_type in polarity_fields:
+        sign_a = userA.get(field)
+        sign_b = userB.get(field)
+        
+        # Check if signs exist and form a polar pair
+        if sign_a and sign_b and POLAR_PAIRS.get(sign_a) == sign_b:
+            # Higher bonus for high base scores (synergy effect)
+            if base_score > 70:
+                polarity_bonus += 8
+            elif 50 <= base_score <= 70:
+                polarity_bonus += 4
+            # Lower base scores get smaller bonus
+            elif base_score < 50:
+                polarity_bonus += 2
+    
+    # Cap polarity bonus for diminishing returns
+    polarity_bonus = min(polarity_bonus, 15)
+    
+    final_score = base_score + polarity_bonus
+    return float(min(99, final_score))
 
 
 
