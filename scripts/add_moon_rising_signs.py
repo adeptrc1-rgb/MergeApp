@@ -51,6 +51,11 @@ async def main():
     
     for i, user in enumerate(users):
         sun_sign = user.get("zodiac_sign", "Aries")
+        # Capitalize for consistency
+        if sun_sign:
+            sun_sign = sun_sign.capitalize()
+        else:
+            sun_sign = "Aries"
         
         # Strategy: Create diverse combinations
         # 25% chance of having polar moon sign (emotional connection)
