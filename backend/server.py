@@ -1176,15 +1176,15 @@ async def calculate_trending_energy_score(user_id: str, user_doc: dict) -> float
 async def potential_matches(user: User = Depends(get_current_user)):
     await ensure_test_candidates(user.id)
     
-    # Get current user data for enhanced compatibility
+    # Get current user data for holistic compatibility
     current_user_doc = await db.users.find_one({"id": user.id})
     
     cur = db.users.find({"id": {"$ne": user.id}})
     docs = await cur.to_list(length=50)
     out = []
     for u in docs:
-        # Use enhanced compatibility with polarity bonus
-        comp = calculate_compatibility_with_polarity(current_user_doc, u)
+        # Use holistic compatibility calculation
+        compat_breakdown = calculate_holistic_compatibility(current_user_doc, u)
         
         out.append({
             "id": u.get("id"),
@@ -1196,7 +1196,8 @@ async def potential_matches(user: User = Depends(get_current_user)):
             "birth_date": u.get("birth_date") or "1995-01-01",
             "photos": u.get("photos") or ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80&auto=format&fit=crop"],
             "current_location": u.get("current_location") or {"latitude": 34.05, "longitude": -118.24},
-            "compatibility_score": comp,
+            "compatibility_score": compat_breakdown["overall_compatibility"],
+            "compatibility_breakdown": compat_breakdown,
         })
     return out
 
