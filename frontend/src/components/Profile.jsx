@@ -193,11 +193,18 @@ export default function Profile({ user, logout }) {
             <div className="flex items-start gap-6">
               {/* Profile Photo */}
               <div
-                className="w-32 h-32 rounded-2xl bg-cover bg-center flex-shrink-0"
+                className="w-32 h-32 rounded-2xl bg-cover bg-center flex-shrink-0 border-2 border-white/20 bg-gradient-to-br from-purple-500/20 to-pink-500/20"
                 style={{
-                  backgroundImage: `url(${user.photos?.[0] || 'https://via.placeholder.com/200'})`
+                  backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'none'
                 }}
-              />
+              >
+                {/* Show initials if no photo */}
+                {!user.photos?.[0] && (
+                  <div className="w-full h-full flex items-center justify-center text-white text-3xl font-light">
+                    {user.first_name?.[0] || 'U'}
+                  </div>
+                )}
+              </div>
 
               {/* User Info */}
               <div className="flex-1">
