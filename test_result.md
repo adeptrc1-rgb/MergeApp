@@ -245,6 +245,18 @@ backend:
         comment: "✅ POLARITY BONUS COMPATIBILITY SYSTEM TESTED SUCCESSFULLY: Comprehensive testing of enhanced compatibility calculation with polarity bonus completed. ✅ Authentication: POST /api/auth/test-login with testuser@asign.com returns 200 status and captures session cookies. ✅ Potential Matches: GET /api/users/potential-matches returns 200 status with 38 users, all containing moon_sign and rising_sign fields. ✅ Trending Energies: GET /api/users/trending-energies returns 200 status with proper polarity fields included. ✅ Polarity Logic: System correctly identifies and applies bonuses for polar sign relationships (opposite signs). Test user (Gemini/Scorpio/Sagittarius) matched with users showing polarity bonuses: Olivia (Moon polarity: 80.0), Mia (Rising polarity: 85.0), Natalie (Sun polarity: 99.0). ✅ Bonus Calculation: Enhanced scores average 88.0 vs base scores average 83.5 (+4.5 point bonus effect). ✅ Field Requirements: All API responses include moon_sign and rising_sign fields as required. ✅ Compatibility Ranges: Polarity bonuses working within expected ranges (up to 15 points total, with sun/moon/rising bonuses of 4-8 points each). Enhanced compatibility calculation with polarity bonus is production-ready and functioning correctly."
 frontend:
 
+  - task: "Gamified Onboarding with Deal-breakers and Nice-to-haves"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/CosmicOnboarding.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Updated CosmicOnboarding component with 6 steps (randomized order except photos last): Identity, MBTI, Deal-breakers (relationship_goals, has_kids, want_kids, smoking), Lifestyle & Interests, Nice-to-haves (religion, politics, diet, exercise), Photos. Maintained cosmic animations and haptic feedback. Added deal_breakers and preferences data to onboarding submission."
+
   - task: "Cosmic Wheel E2E Spin"
     implemented: true
     working: true
