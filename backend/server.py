@@ -791,6 +791,205 @@ ZODIAC_TRAITS = {
 }
 
 
+# ============================================
+# HOLISTIC COMPATIBILITY SYSTEM
+# ============================================
+
+def calculate_mbti_compatibility(userA: dict, userB: dict) -> float:
+    """
+    Calculate MBTI personality compatibility (30% weight).
+    Uses Euclidean distance between 5-dimensional MBTI vectors.
+    
+    Dimensions (each 0-100):
+    - energy: Introversion (0) <-> Extraversion (100)
+    - information: Sensing (0) <-> Intuition (100)
+    - decision: Thinking (0) <-> Feeling (100)
+    - planning: Judging (0) <-> Perceiving (100)
+    - interaction: Reserved (0) <-> Expressive (100)
+    """
+    mbti_a = userA.get("mbti_scores")
+    mbti_b = userB.get("mbti_scores")
+    
+    if not mbti_a or not mbti_b:
+        return 70.0  # Neutral score if MBTI data missing
+    
+    # Calculate Euclidean distance for each dimension
+    dimensions = ["energy", "information", "decision", "planning", "interaction"]
+    total_distance = 0
+    
+    for dim in dimensions:
+        val_a = mbti_a.get(dim, 50.0)
+        val_b = mbti_b.get(dim, 50.0)
+        distance = abs(val_a - val_b)
+        total_distance += distance ** 2
+    
+    # Euclidean distance
+    euclidean_dist = (total_distance ** 0.5)
+    
+    # Max possible distance for 5 dimensions: sqrt(5 * 100^2) ≈ 223.6
+    max_distance = 223.6
+    
+    # Convert to similarity score (0-100)
+    # Closer distance = higher compatibility
+    similarity = 100 - (euclidean_dist / max_distance * 100)
+    
+    return max(0.0, min(100.0, similarity))
+
+
+def calculate_interests_compatibility(userA: dict, userB: dict) -> float:
+    """
+    Calculate interests compatibility using Jaccard similarity (25% weight).
+    Jaccard = intersection / union
+    """
+    interests_a = set(userA.get("interests", []))
+    interests_b = set(userB.get("interests", []))
+    
+    if not interests_a or not interests_b:
+        return 70.0  # Neutral if no interests
+    
+    intersection = len(interests_a & interests_b)
+    union = len(interests_a | interests_b)
+    
+    if union == 0:
+        return 70.0
+    
+    jaccard = intersection / union
+    
+    # Scale to 50-100 range (at least 50% base compatibility)
+    score = 50 + (jaccard * 50)
+    
+    return round(score, 1)
+
+
+def calculate_lifestyle_alignment(userA: dict, userB: dict) -> float:
+    """
+    Calculate lifestyle alignment based on 8 lifestyle factors (15% weight).
+    Uses weighted difference scoring.
+    
+    Factors:
+    - fitness_health
+    - career_ambition
+    - social_energy
+    - travel_adventure
+    - nightlife_lifestyle
+    - family_future (weighted 2x)
+    - dating_approach (weighted 2x)
+    - passions_hobbies
+    """
+    lifestyle_a = userA.get("lifestyle_factors") or userA.get("lifestyle_sliders")
+    lifestyle_b = userB.get("lifestyle_factors") or userB.get("lifestyle_sliders")
+    
+    if not lifestyle_a or not lifestyle_b:
+        return 70.0  # Neutral if missing
+    
+    factors = [
+        ("fitness_health", 1.0),
+        ("career_ambition", 1.0),
+        ("social_energy", 1.0),
+        ("travel_adventure", 1.0),
+        ("nightlife_lifestyle", 1.0),
+        ("family_future", 2.0),  # More important
+        ("dating_approach", 2.0),  # More important
+        ("passions_hobbies", 1.0)
+    ]
+    
+    total_weight = sum(weight for _, weight in factors)
+    weighted_alignment = 0
+    
+    for factor, weight in factors:
+        val_a = lifestyle_a.get(factor, 3)  # Default to neutral (3)
+        val_b = lifestyle_b.get(factor, 3)
+        
+        # Calculate alignment (0-1 scale)
+        # Max difference is 4 (1 to 5 scale)
+        difference = abs(val_a - val_b)
+        alignment = 1 - (difference / 4)
+        
+        weighted_alignment += alignment * weight
+    
+    # Normalize to 0-100 scale
+    score = (weighted_alignment / total_weight) * 100
+    
+    return round(score, 1)
+
+
+def calculate_astrology_compatibility(userA: dict, userB: dict) -> float:
+    """
+    Calculate astrology compatibility (30% weight).
+    Includes:
+    - Sun sign element affinity
+    - Polarity bonus (opposite signs)
+    - Moon sign polarity
+    - Rising sign polarity
+    - Trait alignment
+    """
+    # Use existing polarity-enhanced compatibility
+    base_score = calculate_compatibility_with_polarity(userA, userB)
+    
+    # Add trait-based similarity bonus (0-5 points)
+    sun_a = userA.get("zodiac_sign")
+    sun_b = userB.get("zodiac_sign")
+    
+    trait_bonus = 0
+    if sun_a and sun_b:
+        traits_a = set(ZODIAC_TRAITS.get(sun_a, []))
+        traits_b = set(ZODIAC_TRAITS.get(sun_b, []))
+        
+        if traits_a and traits_b:
+            # Jaccard similarity for traits
+            intersection = len(traits_a & traits_b)
+            union = len(traits_a | traits_b)
+            trait_similarity = intersection / union if union > 0 else 0
+            trait_bonus = trait_similarity * 5  # Max 5 points
+    
+    final_score = min(99.0, base_score + trait_bonus)
+    return round(final_score, 1)
+
+
+def calculate_holistic_compatibility(userA: dict, userB: dict) -> dict:
+    """
+    Master compatibility calculation combining all 4 dimensions.
+    
+    Weights:
+    - MBTI: 30%
+    - Interests: 25%
+    - Lifestyle: 15%
+    - Astrology: 30%
+    
+    Returns dict with breakdown and final score.
+    """
+    # Calculate each dimension
+    mbti_score = calculate_mbti_compatibility(userA, userB)
+    interests_score = calculate_interests_compatibility(userA, userB)
+    lifestyle_score = calculate_lifestyle_alignment(userA, userB)
+    astrology_score = calculate_astrology_compatibility(userA, userB)
+    
+    # Weighted final score
+    final_score = (
+        mbti_score * 0.30 +
+        interests_score * 0.25 +
+        lifestyle_score * 0.15 +
+        astrology_score * 0.30
+    )
+    
+    # Calculate Lifestyle Mesh Score (combination of lifestyle + interests)
+    lifestyle_mesh_score = (
+        lifestyle_score * 0.40 +
+        interests_score * 0.60
+    )
+    
+    return {
+        "overall_compatibility": round(final_score, 1),
+        "mbti_compatibility": round(mbti_score, 1),
+        "interests_compatibility": round(interests_score, 1),
+        "lifestyle_compatibility": round(lifestyle_score, 1),
+        "astrology_compatibility": round(astrology_score, 1),
+        "lifestyle_mesh_score": round(lifestyle_mesh_score, 1)
+    }
+
+
+
+
 def quick_compat(user_sign: Optional[str], other_sign: Optional[str]) -> float:
     """Basic compatibility based on sun sign only (for backwards compatibility)"""
     if not user_sign or not other_sign:
