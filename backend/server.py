@@ -928,29 +928,27 @@ def mbti_similarity(userA: dict, userB: dict) -> float:
     return max(0.0, min(100.0, similarity))
 
 
-def calculate_interests_compatibility(userA: dict, userB: dict) -> float:
+def interest_similarity(userA: dict, userB: dict) -> float:
     """
-    Calculate interests compatibility using Jaccard similarity (25% weight).
+    Calculate interests compatibility using Jaccard similarity (20% weight).
     Jaccard = intersection / union
     """
     interests_a = set(userA.get("interests", []))
     interests_b = set(userB.get("interests", []))
     
     if not interests_a or not interests_b:
-        return 70.0  # Neutral if no interests
+        return 0.0  # Return 0 if no interests (will be scaled to 0-100)
     
     intersection = len(interests_a & interests_b)
     union = len(interests_a | interests_b)
     
     if union == 0:
-        return 70.0
+        return 0.0
     
     jaccard = intersection / union
     
-    # Scale to 50-100 range (at least 50% base compatibility)
-    score = 50 + (jaccard * 50)
-    
-    return round(score, 1)
+    # Return raw Jaccard score (0-1), will be scaled to 0-100
+    return jaccard
 
 
 def calculate_lifestyle_alignment(userA: dict, userB: dict) -> float:
