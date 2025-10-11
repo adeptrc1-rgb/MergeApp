@@ -70,6 +70,12 @@ class User(BaseModel):
     bio: Optional[str] = None
     interests: Optional[List[str]] = []
     profile_completed: bool = False
+    
+    # MBTI personality scores (0-100 scale for each dimension)
+    mbti_scores: Optional[Dict[str, float]] = None  # {energy, information, decision, planning, interaction}
+    
+    # Lifestyle factors (1-5 scale)
+    lifestyle_factors: Optional[Dict[str, int]] = None  # 8 sliders
 
     # Scores and tracking
     responsiveness_score: float = 100.0  # store 0..30 here for simplicity
