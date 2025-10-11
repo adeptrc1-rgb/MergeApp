@@ -1255,7 +1255,7 @@ function App() {
             <Route path="/test" element={<TestPage />} />
             <Route path="/login" element={<LoginApp />} />
             <Route path="/session" element={<SessionHandler />} />
-            <Route path="/onboarding" element={<InteractiveOnboarding />} />
+            <Route path="/onboarding" element={<CosmicOnboarding />} />
             <Route 
               path="/settings" 
               element={
