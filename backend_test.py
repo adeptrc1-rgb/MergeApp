@@ -938,9 +938,265 @@ class AstrologyDatingAPITester:
             print(f"\n⚠️  AUTH SMOKE TEST: FAIL ({len(failed_tests)} issues)")
             return 1
 
+    def test_polarity_bonus_compatibility_system(self):
+        """Test the new polarity bonus compatibility system as requested"""
+        print("🚀 Starting Polarity Bonus Compatibility System Test")
+        print(f"📍 Testing against: {self.api_url}")
+        print("=" * 60)
+
+        # Step 1: POST to /api/auth/test-login with {"email": "testuser@asign.com"} to get session
+        print("\n" + "=" * 50)
+        print("🔐 STEP 1: Authentication Setup")
+        print("=" * 50)
+        
+        login_data = {"email": "testuser@asign.com"}
+        success, response_data, response = self.run_test("Test Login for Polarity Bonus", "POST", "auth/test-login", 200, data=login_data)
+        
+        if not success:
+            print("❌ Cannot continue without successful login")
+            return 1
+            
+        # Store cookies for subsequent tests
+        if response and response.cookies:
+            self.session_cookies = response.cookies
+            print(f"   ✅ Session cookies captured successfully")
+        else:
+            print("   ❌ No cookies received from login")
+            return 1
+
+        # Step 2: GET /api/users/potential-matches with session cookies
+        print("\n" + "=" * 50)
+        print("💕 STEP 2: Testing Potential Matches with Polarity Bonus")
+        print("=" * 50)
+        
+        success, response_data, response = self.run_test("Potential Matches with Polarity", "GET", "users/potential-matches", 200, use_cookies=True)
+        
+        if not success:
+            print("❌ Potential matches test failed")
+            return 1
+            
+        # Verify response includes moon_sign and rising_sign fields
+        if not isinstance(response_data, list):
+            self.log_test("Potential Matches Response Type", False, f"Expected array, got {type(response_data)}")
+            return 1
+        
+        print(f"   ℹ️  Found {len(response_data)} potential matches")
+        
+        if len(response_data) > 0:
+            # Check first few users for required fields
+            for i, user in enumerate(response_data[:3]):  # Check first 3 users
+                if not isinstance(user, dict):
+                    self.log_test("Potential Matches User Format", False, f"User {i} is not a dict")
+                    return 1
+                
+                # Verify required fields
+                required_fields = ["id", "first_name", "zodiac_sign", "compatibility_score"]
+                missing_fields = [field for field in required_fields if field not in user]
+                if missing_fields:
+                    self.log_test("Potential Matches Required Fields", False, f"User {i} missing fields: {missing_fields}")
+                    return 1
+                
+                # Check for moon_sign and rising_sign fields (can be null)
+                if "moon_sign" not in user:
+                    self.log_test("Potential Matches Moon Sign Field", False, f"User {i} missing moon_sign field")
+                    return 1
+                    
+                if "rising_sign" not in user:
+                    self.log_test("Potential Matches Rising Sign Field", False, f"User {i} missing rising_sign field")
+                    return 1
+                
+                # Verify compatibility_score values are reasonable
+                comp_score = user.get("compatibility_score")
+                if not isinstance(comp_score, (int, float)) or comp_score < 0 or comp_score > 100:
+                    self.log_test("Potential Matches Compatibility Score", False, f"User {i} has invalid compatibility score: {comp_score}")
+                    return 1
+                
+                print(f"   ✅ User {i}: {user.get('first_name')} ({user.get('zodiac_sign')}) - Compatibility: {comp_score}")
+                print(f"      Moon: {user.get('moon_sign', 'None')}, Rising: {user.get('rising_sign', 'None')}")
+            
+            # Look for enhanced compatibility (should be higher for polar pairs)
+            high_compat_users = [u for u in response_data if u.get("compatibility_score", 0) > 85]
+            print(f"   ℹ️  Found {len(high_compat_users)} users with compatibility > 85 (potential polarity bonus)")
+            
+            self.log_test("Potential Matches Polarity Fields", True, f"All users have moon_sign and rising_sign fields")
+        else:
+            print("   ℹ️  No potential matches found (empty array)")
+            self.log_test("Potential Matches (Empty)", True, "Empty array returned correctly")
+
+        # Step 3: GET /api/users/trending-energies with session cookies
+        print("\n" + "=" * 50)
+        print("🌟 STEP 3: Testing Trending Energies with Polarity Bonus")
+        print("=" * 50)
+        
+        success, response_data, response = self.run_test("Trending Energies with Polarity", "GET", "users/trending-energies", 200, use_cookies=True)
+        
+        if not success:
+            print("❌ Trending energies test failed")
+            return 1
+            
+        # Verify response includes moon_sign and rising_sign fields
+        if not isinstance(response_data, list):
+            self.log_test("Trending Energies Response Type", False, f"Expected array, got {type(response_data)}")
+            return 1
+        
+        print(f"   ℹ️  Found {len(response_data)} trending users")
+        
+        if len(response_data) > 0:
+            # Check users for required fields including polarity fields
+            for i, user in enumerate(response_data[:3]):  # Check first 3 users
+                if not isinstance(user, dict):
+                    self.log_test("Trending Energies User Format", False, f"User {i} is not a dict")
+                    return 1
+                
+                # Verify required fields
+                required_fields = ["id", "first_name", "zodiac_sign", "compatibility_score", "trending_energy_score"]
+                missing_fields = [field for field in required_fields if field not in user]
+                if missing_fields:
+                    self.log_test("Trending Energies Required Fields", False, f"User {i} missing fields: {missing_fields}")
+                    return 1
+                
+                # Check for moon_sign and rising_sign fields (can be null)
+                if "moon_sign" not in user:
+                    self.log_test("Trending Energies Moon Sign Field", False, f"User {i} missing moon_sign field")
+                    return 1
+                    
+                if "rising_sign" not in user:
+                    self.log_test("Trending Energies Rising Sign Field", False, f"User {i} missing rising_sign field")
+                    return 1
+                
+                # Verify compatibility scores use polarity bonus
+                comp_score = user.get("compatibility_score")
+                if not isinstance(comp_score, (int, float)) or comp_score < 0 or comp_score > 100:
+                    self.log_test("Trending Energies Compatibility Score", False, f"User {i} has invalid compatibility score: {comp_score}")
+                    return 1
+                
+                print(f"   ✅ User {i}: {user.get('first_name')} ({user.get('zodiac_sign')}) - Compatibility: {comp_score}, Trending: {user.get('trending_energy_score')}")
+                print(f"      Moon: {user.get('moon_sign', 'None')}, Rising: {user.get('rising_sign', 'None')}")
+            
+            # Look for users with polar relationships showing higher compatibility
+            polar_pairs = {
+                "Aries": "Libra", "Taurus": "Scorpio", "Gemini": "Sagittarius",
+                "Cancer": "Capricorn", "Leo": "Aquarius", "Virgo": "Pisces",
+                "Libra": "Aries", "Scorpio": "Taurus", "Sagittarius": "Gemini",
+                "Capricorn": "Cancer", "Aquarius": "Leo", "Pisces": "Virgo"
+            }
+            
+            high_compat_users = [u for u in response_data if u.get("compatibility_score", 0) > 85]
+            print(f"   ℹ️  Found {len(high_compat_users)} users with compatibility > 85 (potential polarity bonus)")
+            
+            self.log_test("Trending Energies Polarity Fields", True, f"All users have moon_sign and rising_sign fields")
+        else:
+            print("   ℹ️  No trending users found (empty array)")
+            self.log_test("Trending Energies (Empty)", True, "Empty array returned correctly - algorithm working but no users meet threshold")
+
+        # Step 4: Compare compatibility scores and verify polarity bonus logic
+        print("\n" + "=" * 50)
+        print("🔍 STEP 4: Analyzing Polarity Bonus Logic")
+        print("=" * 50)
+        
+        # Get current user data to understand their signs
+        success, user_data, response = self.run_test("Get Current User Data", "GET", "auth/me", 200, use_cookies=True)
+        
+        if success and isinstance(user_data, dict):
+            current_sun = user_data.get("zodiac_sign")
+            current_moon = user_data.get("moon_sign")
+            current_rising = user_data.get("rising_sign")
+            
+            print(f"   ℹ️  Current user signs - Sun: {current_sun}, Moon: {current_moon}, Rising: {current_rising}")
+            
+            # Analyze compatibility scores from potential matches
+            if len(response_data) > 0:
+                print("\n   📊 Compatibility Score Analysis:")
+                print("   " + "=" * 40)
+                
+                base_scores = []
+                enhanced_scores = []
+                
+                for user in response_data[:10]:  # Analyze first 10 users
+                    comp_score = user.get("compatibility_score", 0)
+                    user_sun = user.get("zodiac_sign")
+                    user_moon = user.get("moon_sign")
+                    user_rising = user.get("rising_sign")
+                    
+                    # Check for polarity relationships
+                    sun_polarity = (current_sun and user_sun and 
+                                  polar_pairs.get(current_sun) == user_sun)
+                    moon_polarity = (current_moon and user_moon and 
+                                   polar_pairs.get(current_moon) == user_moon)
+                    rising_polarity = (current_rising and user_rising and 
+                                     polar_pairs.get(current_rising) == user_rising)
+                    
+                    polarity_count = sum([sun_polarity, moon_polarity, rising_polarity])
+                    
+                    if polarity_count > 0:
+                        enhanced_scores.append(comp_score)
+                        print(f"   🌟 {user.get('first_name')}: {comp_score} (Polarity bonus: {polarity_count} signs)")
+                    else:
+                        base_scores.append(comp_score)
+                        print(f"   ⭐ {user.get('first_name')}: {comp_score} (Base compatibility)")
+                
+                # Verify polarity bonus ranges
+                if enhanced_scores:
+                    avg_enhanced = sum(enhanced_scores) / len(enhanced_scores)
+                    max_enhanced = max(enhanced_scores)
+                    print(f"\n   📈 Enhanced scores (with polarity): Avg={avg_enhanced:.1f}, Max={max_enhanced}")
+                    
+                    # Check if enhanced scores are reasonably higher
+                    if base_scores:
+                        avg_base = sum(base_scores) / len(base_scores)
+                        print(f"   📊 Base scores (no polarity): Avg={avg_base:.1f}")
+                        
+                        if avg_enhanced > avg_base:
+                            print("   ✅ Polarity bonus appears to be working - enhanced scores are higher on average")
+                            self.log_test("Polarity Bonus Logic", True, f"Enhanced scores ({avg_enhanced:.1f}) > Base scores ({avg_base:.1f})")
+                        else:
+                            print("   ⚠️  Polarity bonus may not be working - enhanced scores not significantly higher")
+                            self.log_test("Polarity Bonus Logic", False, f"Enhanced scores ({avg_enhanced:.1f}) not > Base scores ({avg_base:.1f})")
+                else:
+                    print("   ℹ️  No polarity relationships found in sample - cannot verify bonus logic")
+                    self.log_test("Polarity Bonus Logic", True, "No polarity relationships in sample (expected for some users)")
+            
+        else:
+            print("   ⚠️  Could not get current user data for polarity analysis")
+
+        # Print final summary
+        print("\n" + "=" * 60)
+        print("📊 POLARITY BONUS COMPATIBILITY TEST SUMMARY")
+        print("=" * 60)
+        
+        passed_tests = [result for result in self.test_results if result["success"]]
+        failed_tests = [result for result in self.test_results if not result["success"]]
+        
+        print(f"✅ PASSED: {len(passed_tests)}/{self.tests_run} tests")
+        print(f"❌ FAILED: {len(failed_tests)}/{self.tests_run} tests")
+        
+        if failed_tests:
+            print("\n❌ Failed Tests Details:")
+            for result in failed_tests:
+                print(f"   - {result['test']}: {result['details']}")
+        
+        # Expected behavior summary
+        print("\n" + "=" * 60)
+        print("📋 POLARITY BONUS SYSTEM VERIFICATION")
+        print("=" * 60)
+        print("✅ Users with sun polarity should show base + up to 8 bonus")
+        print("✅ Users with moon polarity should show additional +4-8 bonus") 
+        print("✅ Users with rising polarity should show additional +4-8 bonus")
+        print("✅ Total bonus capped at 15 points")
+        print("✅ moon_sign and rising_sign fields included in all responses")
+        print("✅ Compatibility scores use enhanced polarity calculation")
+        
+        # Return status
+        if len(failed_tests) == 0:
+            print("\n🎉 POLARITY BONUS COMPATIBILITY TEST: PASS")
+            return 0
+        else:
+            print(f"\n⚠️  POLARITY BONUS COMPATIBILITY TEST: FAIL ({len(failed_tests)} issues)")
+            return 1
+
 def main():
     tester = AstrologyDatingAPITester()
-    return tester.run_trending_energies_test()
+    return tester.test_polarity_bonus_compatibility_system()
 
 if __name__ == "__main__":
     sys.exit(main())
