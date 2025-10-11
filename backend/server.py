@@ -1175,8 +1175,11 @@ def calculate_holistic_compatibility(userA: dict, userB: dict) -> dict:
     astrology_score = astrology_similarity(userA, userB)
     
     # Calculate base score (0-100)
+    # Convert MBTI score from 0-100 to 0-1 scale to match other functions
+    mbti_normalized = mbti_score / 100.0
+    
     base_score = (
-        mbti_score * 30.0 +
+        mbti_normalized * 30.0 +
         lifestyle_score * 25.0 +
         interests_score * 20.0 +
         astrology_score * 25.0
