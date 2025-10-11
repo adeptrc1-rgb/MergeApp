@@ -887,43 +887,43 @@ ZODIAC_TRAITS = {
 # HOLISTIC COMPATIBILITY SYSTEM
 # ============================================
 
-def calculate_mbti_compatibility(userA: dict, userB: dict) -> float:
+def mbti_similarity(userA: dict, userB: dict) -> float:
     """
     Calculate MBTI personality compatibility (30% weight).
-    Uses Euclidean distance between 5-dimensional MBTI vectors.
-    
-    Dimensions (each 0-100):
-    - energy: Introversion (0) <-> Extraversion (100)
-    - information: Sensing (0) <-> Intuition (100)
-    - decision: Thinking (0) <-> Feeling (100)
-    - planning: Judging (0) <-> Perceiving (100)
-    - interaction: Reserved (0) <-> Expressive (100)
+    Simple letter-by-letter matching for 4-letter types.
+    Falls back to 5-dimensional scoring if types not available.
     """
+    # Try letter-by-letter matching first
+    type_a = userA.get("personality_type")
+    type_b = userB.get("personality_type")
+    
+    if type_a and type_b and len(type_a) == 4 and len(type_b) == 4:
+        matches = sum(a == b for a, b in zip(type_a, type_b))
+        return (matches / 4.0) * 100.0
+    
+    # Fallback to 5-dimensional MBTI scoring
     mbti_a = userA.get("mbti_scores")
     mbti_b = userB.get("mbti_scores")
     
     if not mbti_a or not mbti_b:
         return 70.0  # Neutral score if MBTI data missing
     
-    # Calculate Euclidean distance for each dimension
+    # Calculate similarity based on dimensional differences
     dimensions = ["energy", "information", "decision", "planning", "interaction"]
-    total_distance = 0
+    total_diff = 0
     
     for dim in dimensions:
         val_a = mbti_a.get(dim, 50.0)
         val_b = mbti_b.get(dim, 50.0)
-        distance = abs(val_a - val_b)
-        total_distance += distance ** 2
+        # Normalize difference to 0-1 scale (max diff is 100)
+        diff = abs(val_a - val_b) / 100.0
+        total_diff += diff
     
-    # Euclidean distance
-    euclidean_dist = (total_distance ** 0.5)
-    
-    # Max possible distance for 5 dimensions: sqrt(5 * 100^2) ≈ 223.6
-    max_distance = 223.6
+    # Average difference across dimensions
+    avg_diff = total_diff / len(dimensions)
     
     # Convert to similarity score (0-100)
-    # Closer distance = higher compatibility
-    similarity = 100 - (euclidean_dist / max_distance * 100)
+    similarity = (1 - avg_diff) * 100
     
     return max(0.0, min(100.0, similarity))
 
