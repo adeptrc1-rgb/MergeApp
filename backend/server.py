@@ -1212,6 +1212,13 @@ def calculate_holistic_compatibility(userA: dict, userB: dict) -> dict:
 
 
 
+# Backwards compatibility aliases
+calculate_mbti_compatibility = mbti_similarity
+calculate_interests_compatibility = interest_similarity
+calculate_lifestyle_alignment = lifestyle_similarity
+calculate_astrology_compatibility = astrology_similarity
+
+
 def quick_compat(user_sign: Optional[str], other_sign: Optional[str]) -> float:
     """Basic compatibility based on sun sign only (for backwards compatibility)"""
     if not user_sign or not other_sign:
