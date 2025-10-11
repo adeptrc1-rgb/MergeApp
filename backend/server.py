@@ -207,6 +207,78 @@ async def auth_me(user: User = Depends(get_current_user)):
     return user.dict()
 
 
+
+class OnboardingData(BaseModel):
+    first_name: str
+    birth_date: str
+    birth_time: Optional[str] = None
+    birth_location: Optional[dict] = None
+    photos: List[str]
+    interests: List[str]
+    mbti_scores: dict  # {energy, information, decision, planning, interaction}
+    lifestyle_factors: dict  # 8 sliders
+
+@api_router.post("/onboarding/complete")
+async def complete_onboarding(data: OnboardingData, user: User = Depends(get_current_user)):
+    """Complete onboarding with MBTI, interests, and lifestyle data"""
+    # Calculate zodiac sign from birth date
+    from datetime import datetime
+    birth_dt = datetime.fromisoformat(data.birth_date)
+    zodiac_sign = calculate_zodiac_sign(birth_dt.month, birth_dt.day)
+    
+    # Update user with all onboarding data
+    update_data = {
+        "first_name": data.first_name,
+        "birth_date": data.birth_date,
+        "zodiac_sign": zodiac_sign,
+        "photos": data.photos,
+        "interests": data.interests,
+        "mbti_scores": data.mbti_scores,
+        "lifestyle_factors": data.lifestyle_factors,
+        "profile_completed": True
+    }
+    
+    if data.birth_time:
+        update_data["birth_time"] = data.birth_time
+    
+    if data.birth_location:
+        update_data["birth_location"] = data.birth_location
+        update_data["current_location"] = data.birth_location
+    
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": update_data}
+    )
+    
+    return {"success": True, "message": "Onboarding completed successfully"}
+
+def calculate_zodiac_sign(month: int, day: int) -> str:
+    """Calculate zodiac sign from birth month and day"""
+    zodiac_dates = [
+        ("Capricorn", (12, 22), (1, 19)),
+        ("Aquarius", (1, 20), (2, 18)),
+        ("Pisces", (2, 19), (3, 20)),
+        ("Aries", (3, 21), (4, 19)),
+        ("Taurus", (4, 20), (5, 20)),
+        ("Gemini", (5, 21), (6, 20)),
+        ("Cancer", (6, 21), (7, 22)),
+        ("Leo", (7, 23), (8, 22)),
+        ("Virgo", (8, 23), (9, 22)),
+        ("Libra", (9, 23), (10, 22)),
+        ("Scorpio", (10, 23), (11, 21)),
+        ("Sagittarius", (11, 22), (12, 21)),
+    ]
+    
+    for sign, (start_month, start_day), (end_month, end_day) in zodiac_dates:
+        if month == start_month and day >= start_day:
+            return sign
+        if month == end_month and day <= end_day:
+            return sign
+    
+    return "Capricorn"  # Default fallback
+
+
+
 @api_router.post("/auth/logout")
 async def auth_logout(request: Request, response: Response):
     token = request.cookies.get(COOKIE_NAME)
