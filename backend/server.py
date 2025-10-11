@@ -1224,8 +1224,8 @@ async def trending_energies(user: User = Depends(get_current_user)):
     for u in docs:
         energy_score = await calculate_trending_energy_score(u.get("id"), u)
         
-        # Use enhanced compatibility calculation with polarity bonus
-        comp = calculate_compatibility_with_polarity(current_user_doc, u)
+        # Use holistic compatibility calculation
+        compat_breakdown = calculate_holistic_compatibility(current_user_doc, u)
         
         scored_users.append({
             "id": u.get("id"),
@@ -1237,7 +1237,8 @@ async def trending_energies(user: User = Depends(get_current_user)):
             "birth_date": u.get("birth_date") or "1995-01-01",
             "photos": u.get("photos") or ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80&auto=format&fit=crop"],
             "current_location": u.get("current_location") or {"latitude": 34.05, "longitude": -118.24},
-            "compatibility_score": comp,
+            "compatibility_score": compat_breakdown["overall_compatibility"],
+            "compatibility_breakdown": compat_breakdown,
             "trending_energy_score": energy_score,
         })
     
