@@ -223,11 +223,14 @@ class OnboardingData(BaseModel):
     photos: List[str]
     interests: List[str]
     mbti_scores: dict  # {energy, information, decision, planning, interaction}
+    personality_type: Optional[str] = None  # 4-letter MBTI type
     lifestyle_factors: dict  # 8 sliders
+    deal_breakers: Optional[dict] = None  # {relationship_goals, has_kids, want_kids, smoking}
+    preferences: Optional[dict] = None  # {religion, politics, diet, exercise}
 
 @api_router.post("/onboarding/complete")
 async def complete_onboarding(data: OnboardingData, user: User = Depends(get_current_user)):
-    """Complete onboarding with MBTI, interests, and lifestyle data"""
+    """Complete onboarding with MBTI, interests, lifestyle, deal-breakers, and preferences"""
     # Calculate zodiac sign from birth date
     from datetime import datetime
     birth_dt = datetime.fromisoformat(data.birth_date)
@@ -244,6 +247,16 @@ async def complete_onboarding(data: OnboardingData, user: User = Depends(get_cur
         "lifestyle_factors": data.lifestyle_factors,
         "profile_completed": True
     }
+    
+    # Add optional fields
+    if data.personality_type:
+        update_data["personality_type"] = data.personality_type
+    
+    if data.deal_breakers:
+        update_data["deal_breakers"] = data.deal_breakers
+    
+    if data.preferences:
+        update_data["preferences"] = data.preferences
     
     if data.birth_time:
         update_data["birth_time"] = data.birth_time
