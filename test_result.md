@@ -195,6 +195,18 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ TRENDING ENERGIES ALGORITHM TESTED SUCCESSFULLY: Comprehensive testing of GET /api/users/trending-energies endpoint completed. ✅ Authentication: POST /api/auth/test-login with testuser@asign.com returns 200 status and captures session cookies correctly. ✅ API Response: GET /api/users/trending-energies returns 200 status with proper JSON array format. ✅ Algorithm Logic: Verified trending energy score calculation based on 4 components - Engagement (35%), Compatibility Resonance (25%), Behavior & Trust (25%), Recency & Activity (15%). ✅ Threshold Filter: Only users with trending_energy_score >= 60.0 are returned (correctly filtered out 39 existing users with scores 47.0-50.1). ✅ Sorting: Users properly sorted by trending_energy_score in descending order. ✅ Required Fields: All users contain id, first_name, zodiac_sign, and trending_energy_score fields. ✅ Test Validation: Created high-engagement test user with 25 likes, 10 matches, 15 replies - algorithm correctly calculated score of 77.1 and returned user in results. Algorithm working perfectly as designed - empty results for existing users is correct behavior since none meet minimum trending threshold."
+
+  - task: "Polarity Bonus Compatibility System"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ POLARITY BONUS COMPATIBILITY SYSTEM TESTED SUCCESSFULLY: Comprehensive testing of enhanced compatibility calculation with polarity bonus completed. ✅ Authentication: POST /api/auth/test-login with testuser@asign.com returns 200 status and captures session cookies. ✅ Potential Matches: GET /api/users/potential-matches returns 200 status with 38 users, all containing moon_sign and rising_sign fields. ✅ Trending Energies: GET /api/users/trending-energies returns 200 status with proper polarity fields included. ✅ Polarity Logic: System correctly identifies and applies bonuses for polar sign relationships (opposite signs). Test user (Gemini/Scorpio/Sagittarius) matched with users showing polarity bonuses: Olivia (Moon polarity: 80.0), Mia (Rising polarity: 85.0), Natalie (Sun polarity: 99.0). ✅ Bonus Calculation: Enhanced scores average 88.0 vs base scores average 83.5 (+4.5 point bonus effect). ✅ Field Requirements: All API responses include moon_sign and rising_sign fields as required. ✅ Compatibility Ranges: Polarity bonuses working within expected ranges (up to 15 points total, with sun/moon/rising bonuses of 4-8 points each). Enhanced compatibility calculation with polarity bonus is production-ready and functioning correctly."
 frontend:
 
   - task: "Cosmic Wheel E2E Spin"
