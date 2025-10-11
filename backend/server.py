@@ -1046,7 +1046,10 @@ async def like_user(target_id: str, user: User = Depends(get_current_user)):
 async def check_match(target_id: str, user: User = Depends(get_current_user)):
     # auto-match if high compatibility to make testing easy
     target = await db.users.find_one({"id": target_id})
-    comp = quick_compat(user.zodiac_sign, target.get("zodiac_sign") if target else None)
+    current_user_doc = await db.users.find_one({"id": user.id})
+    
+    # Use enhanced compatibility with polarity bonus
+    comp = calculate_compatibility_with_polarity(current_user_doc, target) if target else 70.0
     if comp >= 82:
         # ensure reciprocal like
         await db.likes.update_one(
