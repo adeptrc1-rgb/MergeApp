@@ -774,6 +774,22 @@ POLAR_PAIRS = {
     "Capricorn": "Cancer", "Aquarius": "Leo", "Pisces": "Virgo"
 }
 
+# Astrology trait keywords for each sign
+ZODIAC_TRAITS = {
+    "Aries": ["adventurous", "confident", "passionate", "energetic", "bold"],
+    "Taurus": ["reliable", "patient", "practical", "devoted", "stable"],
+    "Gemini": ["curious", "adaptable", "witty", "communicative", "versatile"],
+    "Cancer": ["intuitive", "emotional", "protective", "nurturing", "sensitive"],
+    "Leo": ["creative", "passionate", "generous", "cheerful", "confident"],
+    "Virgo": ["analytical", "practical", "loyal", "kind", "hardworking"],
+    "Libra": ["diplomatic", "gracious", "fair", "social", "cooperative"],
+    "Scorpio": ["resourceful", "brave", "passionate", "stubborn", "intense"],
+    "Sagittarius": ["generous", "idealistic", "adventurous", "philosophical", "optimistic"],
+    "Capricorn": ["responsible", "disciplined", "self-control", "ambitious", "patient"],
+    "Aquarius": ["progressive", "original", "independent", "humanitarian", "intellectual"],
+    "Pisces": ["compassionate", "artistic", "intuitive", "gentle", "wise"]
+}
+
 
 def quick_compat(user_sign: Optional[str], other_sign: Optional[str]) -> float:
     """Basic compatibility based on sun sign only (for backwards compatibility)"""
