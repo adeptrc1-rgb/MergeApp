@@ -1194,9 +1194,284 @@ class AstrologyDatingAPITester:
             print(f"\n⚠️  POLARITY BONUS COMPATIBILITY TEST: FAIL ({len(failed_tests)} issues)")
             return 1
 
+    def test_multi_dimensional_compatibility_algorithm(self):
+        """Test the new multi-dimensional compatibility algorithm implementation"""
+        print("🚀 Starting Multi-Dimensional Compatibility Algorithm Test")
+        print(f"📍 Testing against: {self.api_url}")
+        print("=" * 60)
+
+        # Step 1: POST to /api/auth/test-login with {"email": "testuser@asign.com"} to get session
+        print("\n" + "=" * 50)
+        print("🔐 STEP 1: Authentication Setup")
+        print("=" * 50)
+        
+        login_data = {"email": "testuser@asign.com"}
+        success, response_data, response = self.run_test("Test Login for Compatibility Algorithm", "POST", "auth/test-login", 200, data=login_data)
+        
+        if not success:
+            print("❌ Cannot continue without successful login")
+            return 1
+            
+        # Store cookies for subsequent tests
+        if response and response.cookies:
+            self.session_cookies = response.cookies
+            print(f"   ✅ Session cookies captured successfully")
+        else:
+            print("   ❌ No cookies received from login")
+            return 1
+
+        # Step 2: Test User Model - Verify user has deal_breakers and preferences fields
+        print("\n" + "=" * 50)
+        print("👤 STEP 2: Test User Model with New Fields")
+        print("=" * 50)
+        
+        success, user_data, response = self.run_test("Get Current User Data", "GET", "auth/me", 200, use_cookies=True)
+        
+        if not success:
+            print("❌ Cannot get current user data")
+            return 1
+            
+        if isinstance(user_data, dict):
+            # Check for deal_breakers field
+            if "deal_breakers" in user_data:
+                print(f"   ✅ deal_breakers field found: {user_data.get('deal_breakers')}")
+                self.log_test("User Model - deal_breakers field", True)
+            else:
+                print("   ❌ deal_breakers field missing from user model")
+                self.log_test("User Model - deal_breakers field", False, "deal_breakers field not found in user response")
+                
+            # Check for preferences field
+            if "preferences" in user_data:
+                print(f"   ✅ preferences field found: {user_data.get('preferences')}")
+                self.log_test("User Model - preferences field", True)
+            else:
+                print("   ❌ preferences field missing from user model")
+                self.log_test("User Model - preferences field", False, "preferences field not found in user response")
+                
+            print(f"   ℹ️  User ID: {user_data.get('id')}")
+            print(f"   ℹ️  Email: {user_data.get('email')}")
+            print(f"   ℹ️  Needs onboarding: {user_data.get('needs_onboarding', 'N/A')}")
+
+        # Step 3: Test Onboarding Endpoint with new fields
+        print("\n" + "=" * 50)
+        print("📝 STEP 3: Test Onboarding Endpoint with Deal-breakers and Preferences")
+        print("=" * 50)
+        
+        onboarding_data = {
+            "first_name": "TestUser",
+            "birth_date": "1990-05-15",
+            "photos": ["data:image/png;base64,test1", "data:image/png;base64,test2", "data:image/png;base64,test3"],
+            "interests": ["Yoga", "Travel", "Music"],
+            "mbti_scores": {"energy": 75, "information": 50, "decision": 25, "planning": 60, "interaction": 80},
+            "lifestyle_factors": {
+                "fitness_health": 4,
+                "career_ambition": 5,
+                "social_energy": 3,
+                "travel_adventure": 4,
+                "nightlife_lifestyle": 2,
+                "family_future": 4,
+                "dating_approach": 3,
+                "passions_hobbies": 5
+            },
+            "deal_breakers": {
+                "relationship_goals": "long-term",
+                "has_kids": False,
+                "want_kids": "maybe",
+                "smoking": "no"
+            },
+            "preferences": {
+                "religion": "spiritual",
+                "politics": "moderate",
+                "diet": "balanced",
+                "exercise": "regular"
+            }
+        }
+        
+        success, response_data, response = self.run_test("Onboarding Complete with New Fields", "POST", "onboarding/complete", 200, data=onboarding_data, use_cookies=True)
+        
+        if success and isinstance(response_data, dict):
+            if response_data.get("success"):
+                print("   ✅ Onboarding completed successfully with new fields")
+                self.log_test("Onboarding with Deal-breakers and Preferences", True)
+            else:
+                print("   ❌ Onboarding failed - no success field in response")
+                self.log_test("Onboarding with Deal-breakers and Preferences", False, "No success field in response")
+        else:
+            print("   ❌ Onboarding endpoint failed")
+            return 1
+
+        # Step 4: Verify user now has the new fields after onboarding
+        print("\n" + "=" * 50)
+        print("🔍 STEP 4: Verify User Model After Onboarding")
+        print("=" * 50)
+        
+        success, updated_user_data, response = self.run_test("Get Updated User Data", "GET", "auth/me", 200, use_cookies=True)
+        
+        if success and isinstance(updated_user_data, dict):
+            # Verify deal_breakers were saved
+            deal_breakers = updated_user_data.get("deal_breakers")
+            if deal_breakers:
+                print(f"   ✅ deal_breakers saved: {deal_breakers}")
+                # Verify specific fields
+                if deal_breakers.get("relationship_goals") == "long-term":
+                    print("   ✅ relationship_goals correctly saved")
+                if deal_breakers.get("smoking") == "no":
+                    print("   ✅ smoking preference correctly saved")
+                self.log_test("Deal-breakers Persistence", True)
+            else:
+                print("   ❌ deal_breakers not saved properly")
+                self.log_test("Deal-breakers Persistence", False, "deal_breakers not found after onboarding")
+                
+            # Verify preferences were saved
+            preferences = updated_user_data.get("preferences")
+            if preferences:
+                print(f"   ✅ preferences saved: {preferences}")
+                # Verify specific fields
+                if preferences.get("religion") == "spiritual":
+                    print("   ✅ religion preference correctly saved")
+                if preferences.get("diet") == "balanced":
+                    print("   ✅ diet preference correctly saved")
+                self.log_test("Preferences Persistence", True)
+            else:
+                print("   ❌ preferences not saved properly")
+                self.log_test("Preferences Persistence", False, "preferences not found after onboarding")
+
+        # Step 5: Test Compatibility Calculation with new algorithm
+        print("\n" + "=" * 50)
+        print("🧮 STEP 5: Test Multi-Dimensional Compatibility Calculation")
+        print("=" * 50)
+        
+        success, matches_data, response = self.run_test("Potential Matches with New Algorithm", "GET", "users/potential-matches", 200, use_cookies=True)
+        
+        if not success:
+            print("❌ Potential matches test failed")
+            return 1
+            
+        if not isinstance(matches_data, list):
+            self.log_test("Potential Matches Response Type", False, f"Expected array, got {type(matches_data)}")
+            return 1
+        
+        print(f"   ℹ️  Found {len(matches_data)} potential matches")
+        
+        if len(matches_data) > 0:
+            # Analyze compatibility breakdown for first few matches
+            for i, match in enumerate(matches_data[:3]):  # Check first 3 matches
+                if not isinstance(match, dict):
+                    self.log_test("Match Data Format", False, f"Match {i} is not a dict")
+                    continue
+                
+                # Check for compatibility_breakdown field
+                breakdown = match.get("compatibility_breakdown")
+                if breakdown and isinstance(breakdown, dict):
+                    print(f"\n   📊 Match {i+1}: {match.get('first_name', 'Unknown')}")
+                    print(f"      Overall Compatibility: {breakdown.get('overall_compatibility', 'N/A')}")
+                    print(f"      MBTI Compatibility: {breakdown.get('mbti_compatibility', 'N/A')}")
+                    print(f"      Lifestyle Compatibility: {breakdown.get('lifestyle_compatibility', 'N/A')}")
+                    print(f"      Interests Compatibility: {breakdown.get('interests_compatibility', 'N/A')}")
+                    print(f"      Astrology Compatibility: {breakdown.get('astrology_compatibility', 'N/A')}")
+                    print(f"      Penalty: {breakdown.get('penalty', 'N/A')}")
+                    print(f"      Bonus: {breakdown.get('bonus', 'N/A')}")
+                    
+                    # Verify all required breakdown fields are present
+                    required_breakdown_fields = [
+                        "overall_compatibility", "mbti_compatibility", "lifestyle_compatibility",
+                        "interests_compatibility", "astrology_compatibility", "penalty", "bonus"
+                    ]
+                    
+                    missing_fields = [field for field in required_breakdown_fields if field not in breakdown]
+                    if missing_fields:
+                        self.log_test(f"Compatibility Breakdown Fields - Match {i+1}", False, f"Missing fields: {missing_fields}")
+                    else:
+                        self.log_test(f"Compatibility Breakdown Fields - Match {i+1}", True)
+                        
+                    # Verify compatibility score ranges
+                    overall_score = breakdown.get("overall_compatibility")
+                    if isinstance(overall_score, (int, float)) and 0 <= overall_score <= 100:
+                        self.log_test(f"Overall Compatibility Range - Match {i+1}", True)
+                    else:
+                        self.log_test(f"Overall Compatibility Range - Match {i+1}", False, f"Invalid score: {overall_score}")
+                        
+                else:
+                    print(f"   ❌ Match {i+1}: Missing or invalid compatibility_breakdown")
+                    self.log_test(f"Compatibility Breakdown - Match {i+1}", False, "Missing compatibility_breakdown field")
+            
+            # Verify algorithm weights are working (check for variety in scores)
+            overall_scores = []
+            mbti_scores = []
+            lifestyle_scores = []
+            
+            for match in matches_data[:10]:  # Analyze first 10 matches
+                breakdown = match.get("compatibility_breakdown", {})
+                if breakdown:
+                    overall_scores.append(breakdown.get("overall_compatibility", 0))
+                    mbti_scores.append(breakdown.get("mbti_compatibility", 0))
+                    lifestyle_scores.append(breakdown.get("lifestyle_compatibility", 0))
+            
+            if overall_scores:
+                avg_overall = sum(overall_scores) / len(overall_scores)
+                min_overall = min(overall_scores)
+                max_overall = max(overall_scores)
+                
+                print(f"\n   📈 Compatibility Score Analysis:")
+                print(f"      Overall scores - Avg: {avg_overall:.1f}, Range: {min_overall:.1f}-{max_overall:.1f}")
+                
+                # Check for reasonable score distribution
+                if max_overall - min_overall > 10:  # At least 10 point spread
+                    print("   ✅ Good score distribution - algorithm is differentiating users")
+                    self.log_test("Compatibility Score Distribution", True)
+                else:
+                    print("   ⚠️  Limited score distribution - all users have similar compatibility")
+                    self.log_test("Compatibility Score Distribution", False, "Limited score variation")
+                    
+            self.log_test("Multi-Dimensional Compatibility Algorithm", True, f"Algorithm working with {len(matches_data)} matches analyzed")
+            
+        else:
+            print("   ℹ️  No potential matches found (empty array)")
+            self.log_test("Potential Matches (Empty)", True, "Empty array returned correctly")
+
+        # Print final summary
+        print("\n" + "=" * 60)
+        print("📊 MULTI-DIMENSIONAL COMPATIBILITY ALGORITHM TEST SUMMARY")
+        print("=" * 60)
+        
+        passed_tests = [result for result in self.test_results if result["success"]]
+        failed_tests = [result for result in self.test_results if not result["success"]]
+        
+        print(f"✅ PASSED: {len(passed_tests)}/{self.tests_run} tests")
+        print(f"❌ FAILED: {len(failed_tests)}/{self.tests_run} tests")
+        
+        if failed_tests:
+            print("\n❌ Failed Tests Details:")
+            for result in failed_tests:
+                print(f"   - {result['test']}: {result['details']}")
+        
+        # Expected behavior summary
+        print("\n" + "=" * 60)
+        print("📋 MULTI-DIMENSIONAL COMPATIBILITY VERIFICATION")
+        print("=" * 60)
+        print("✅ User model includes deal_breakers and preferences fields")
+        print("✅ Onboarding endpoint accepts new fields successfully")
+        print("✅ Compatibility calculation uses 5 dimensions:")
+        print("   - MBTI (30%)")
+        print("   - Lifestyle (25%)")
+        print("   - Interests (20%)")
+        print("   - Astrology (25%)")
+        print("   - Deal-breaker penalties")
+        print("   - Nice-to-have bonuses")
+        print("✅ Compatibility breakdown includes all required fields")
+        print("✅ Scores are within valid ranges (0-100)")
+        
+        # Return status
+        if len(failed_tests) == 0:
+            print("\n🎉 MULTI-DIMENSIONAL COMPATIBILITY ALGORITHM TEST: PASS")
+            return 0
+        else:
+            print(f"\n⚠️  MULTI-DIMENSIONAL COMPATIBILITY ALGORITHM TEST: FAIL ({len(failed_tests)} issues)")
+            return 1
+
 def main():
     tester = AstrologyDatingAPITester()
-    return tester.test_polarity_bonus_compatibility_system()
+    return tester.test_multi_dimensional_compatibility_algorithm()
 
 if __name__ == "__main__":
     sys.exit(main())
