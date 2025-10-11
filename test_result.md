@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the new navigation and sections added to the app: 1) Added three new sections similar to Tinder but with unique names: 'Discover' (main swipe/explore section), 'Connections' (view matches and people who liked you), 'Profile' (user profile with stats, angel number, free features). 2) New backend endpoint: GET /api/users/liked-me (returns users who liked the current user but haven't been swiped on yet). 3) Bottom navigation bar with 3 tabs: Discover, Connections, Profile."
+user_problem_statement: "Implement multi-dimensional compatibility algorithm with deal-breakers and nice-to-haves. Algorithm combines 5 dimensions: MBTI (30%), Lifestyle (25%), Interests (20%), Astrology (25%), plus deal-breaker penalties and nice-to-have bonuses. Deal-breakers include relationship_goals, kids (has_kids, want_kids), and smoking. Nice-to-haves include religion, politics, diet, and exercise. Onboarding flow updated with randomized step order including new deal-breakers and nice-to-haves steps while keeping cosmic animations and haptic feedback."
 
 backend:
   - task: "Google OAuth Session Handler"
