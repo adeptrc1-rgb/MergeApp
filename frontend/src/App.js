@@ -14,6 +14,7 @@ import { CalendarIcon, Heart, X, Star, Sparkles, Moon, Sun } from 'lucide-react'
 import { format } from 'date-fns';
 import EnhancedOnboarding from './components/EnhancedOnboarding';
 import InteractiveOnboarding from './components/InteractiveOnboarding';
+import CosmicOnboarding from './components/CosmicOnboarding';
 import EnhancedDashboard from './components/EnhancedDashboard';
 import ModernDashboard from './components/ModernDashboard';
 import AstroMatchDashboard from './components/AstroMatchDashboard';
