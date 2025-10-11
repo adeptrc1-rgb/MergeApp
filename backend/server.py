@@ -998,37 +998,59 @@ def lifestyle_similarity(userA: dict, userB: dict) -> float:
     return max(0.0, min(1.0, similarity))
 
 
-def calculate_astrology_compatibility(userA: dict, userB: dict) -> float:
+def astrology_similarity(userA: dict, userB: dict) -> float:
     """
-    Calculate astrology compatibility (30% weight).
-    Includes:
-    - Sun sign element affinity
-    - Polarity bonus (opposite signs)
-    - Moon sign polarity
-    - Rising sign polarity
-    - Trait alignment
+    Calculate astrology compatibility (25% weight).
+    Simplified scoring:
+    - Element affinity (50% weight): 0.5 if same element
+    - Polarity bonus (30% weight): 0.3 if same polarity
+    - Sun-Moon match (20% weight): 0.2 if sun matches moon
+    Returns score 0-1.
     """
-    # Use existing polarity-enhanced compatibility
-    base_score = calculate_compatibility_with_polarity(userA, userB)
-    
-    # Add trait-based similarity bonus (0-5 points)
     sun_a = userA.get("zodiac_sign")
     sun_b = userB.get("zodiac_sign")
+    moon_a = userA.get("moon_sign")
+    moon_b = userB.get("moon_sign")
     
-    trait_bonus = 0
-    if sun_a and sun_b:
-        traits_a = set(ZODIAC_TRAITS.get(sun_a, []))
-        traits_b = set(ZODIAC_TRAITS.get(sun_b, []))
-        
-        if traits_a and traits_b:
-            # Jaccard similarity for traits
-            intersection = len(traits_a & traits_b)
-            union = len(traits_a | traits_b)
-            trait_similarity = intersection / union if union > 0 else 0
-            trait_bonus = trait_similarity * 5  # Max 5 points
+    if not sun_a or not sun_b:
+        return 0.5  # Neutral if missing
     
-    final_score = min(99.0, base_score + trait_bonus)
-    return round(final_score, 1)
+    # Element mapping
+    elements = {
+        "Aries": "Fire", "Leo": "Fire", "Sagittarius": "Fire",
+        "Taurus": "Earth", "Virgo": "Earth", "Capricorn": "Earth",
+        "Gemini": "Air", "Libra": "Air", "Aquarius": "Air",
+        "Cancer": "Water", "Scorpio": "Water", "Pisces": "Water"
+    }
+    
+    # Polarity mapping (positive/negative)
+    polarities = {
+        "Aries": "Positive", "Gemini": "Positive", "Leo": "Positive",
+        "Libra": "Positive", "Sagittarius": "Positive", "Aquarius": "Positive",
+        "Taurus": "Negative", "Cancer": "Negative", "Virgo": "Negative",
+        "Scorpio": "Negative", "Capricorn": "Negative", "Pisces": "Negative"
+    }
+    
+    score = 0.0
+    
+    # Element affinity (50% weight)
+    elem_a = elements.get(sun_a)
+    elem_b = elements.get(sun_b)
+    if elem_a and elem_b and elem_a == elem_b:
+        score += 0.5
+    
+    # Polarity bonus (30% weight)
+    pol_a = polarities.get(sun_a)
+    pol_b = polarities.get(sun_b)
+    if pol_a and pol_b and pol_a == pol_b:
+        score += 0.3
+    
+    # Sun-Moon match (20% weight)
+    if moon_a and moon_b:
+        if sun_a == moon_b or sun_b == moon_a:
+            score += 0.2
+    
+    return min(1.0, score)
 
 
 def calculate_holistic_compatibility(userA: dict, userB: dict) -> dict:
