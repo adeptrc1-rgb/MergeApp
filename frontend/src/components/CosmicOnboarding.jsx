@@ -614,44 +614,46 @@ export default function CosmicOnboarding() {
         {step === 3 && renderStep3()}
         {step === 4 && renderStep4()}
 
-        {/* Navigation */}
-        <div className="flex gap-4 mt-12">
-          {step > 1 && (
-            <button
-              onClick={() => setStep(step - 1)}
-              className="flex-1 px-6 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-medium transition-all flex items-center justify-center gap-2 backdrop-blur-sm border border-white/20"
-            >
-              <ChevronLeft className="w-5 h-5" />
-              Back
-            </button>
-          )}
+        {/* Navigation - Sticky at bottom */}
+        <div className="sticky bottom-0 left-0 right-0 bg-gradient-to-t from-indigo-900 to-transparent pt-8 pb-6 mt-12">
+          <div className="flex gap-4">
+            {step > 1 && (
+              <button
+                onClick={() => setStep(step - 1)}
+                className="flex-1 px-6 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-medium transition-all flex items-center justify-center gap-2 backdrop-blur-sm border border-white/20"
+              >
+                <ChevronLeft className="w-5 h-5" />
+                Back
+              </button>
+            )}
 
-          {step < 4 ? (
-            <button
-              onClick={() => setStep(step + 1)}
-              disabled={!canContinue()}
-              className={`flex-1 px-6 py-4 rounded-2xl font-medium transition-all flex items-center justify-center gap-2 ${
-                canContinue()
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg'
-                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-              }`}
-            >
-              Continue
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          ) : (
-            <button
-              onClick={handleComplete}
-              disabled={!canContinue() || loading}
-              className={`flex-1 px-6 py-4 rounded-2xl font-medium transition-all ${
-                canContinue() && !loading
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg'
-                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-              }`}
-            >
-              {loading ? 'Creating your cosmic profile...' : 'Complete ✨'}
-            </button>
-          )}
+            {step < 4 ? (
+              <button
+                onClick={() => setStep(step + 1)}
+                disabled={!canContinue()}
+                className={`flex-1 px-6 py-4 rounded-2xl font-medium transition-all flex items-center justify-center gap-2 ${
+                  canContinue()
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg'
+                    : 'bg-white/10 text-white/40 cursor-not-allowed'
+                }`}
+              >
+                Continue
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            ) : (
+              <button
+                onClick={handleComplete}
+                disabled={!canContinue() || loading}
+                className={`flex-1 px-6 py-4 rounded-2xl font-medium transition-all ${
+                  canContinue() && !loading
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg'
+                    : 'bg-white/10 text-white/40 cursor-not-allowed'
+                }`}
+              >
+                {loading ? 'Creating your cosmic profile...' : 'Complete ✨'}
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
