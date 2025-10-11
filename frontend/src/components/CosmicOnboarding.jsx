@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Sparkles, ChevronRight, ChevronLeft, Upload, Zap, MapPin } from 'lucide-react';
+import { Sparkles, ChevronRight, ChevronLeft, Upload, Zap, MapPin, Heart, Star } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -129,19 +129,41 @@ export default function CosmicOnboarding() {
   const [loading, setLoading] = useState(false);
   const [locationSearch, setLocationSearch] = useState('');
 
+  // Randomize step order (but keep photos last)
+  const stepOrder = useMemo(() => {
+    const steps = [
+      { id: 'identity', title: 'Cosmic Identity', icon: Sparkles },
+      { id: 'mbti', title: 'Personality', icon: Zap },
+      { id: 'dealbreakers', title: 'Deal-Breakers', icon: Heart },
+      { id: 'lifestyle', title: 'Your Vibe', icon: Star },
+      { id: 'nicetohaves', title: 'Fine-tune your vibe', icon: Sparkles }
+    ];
+    // Shuffle steps (Fisher-Yates)
+    for (let i = steps.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [steps[i], steps[j]] = [steps[j], steps[i]];
+    }
+    // Always keep photos last
+    steps.push({ id: 'photos', title: 'Show Your Spark', icon: Upload });
+    return steps;
+  }, []);
+
+  const totalSteps = stepOrder.length;
+  const currentStepData = stepOrder[step - 1];
+
   // Scroll to top when step changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [step]);
 
   const [formData, setFormData] = useState({
-    // Step 1: Cosmic Identity (5 questions)
+    // Identity
     first_name: '',
     birth_date: '',
     birth_time: '',
     birth_location: null,
 
-    // Step 2: MBTI (5 questions)
+    // MBTI
     mbti_answers: {
       energy: 3,
       information: 3,
@@ -150,7 +172,15 @@ export default function CosmicOnboarding() {
       interaction: 3
     },
 
-    // Step 3: Interests & Lifestyle
+    // Deal-breakers
+    deal_breakers: {
+      relationship_goals: '',
+      has_kids: false,
+      want_kids: '',
+      smoking: ''
+    },
+
+    // Lifestyle & Interests
     interests: [],
     lifestyle_factors: {
       fitness_health: 3,
@@ -163,28 +193,35 @@ export default function CosmicOnboarding() {
       passions_hobbies: 3
     },
 
-    // Step 4: Photos
+    // Nice-to-haves
+    preferences: {
+      religion: '',
+      politics: '',
+      diet: '',
+      exercise: ''
+    },
+
+    // Photos
     photos: [null, null, null]
   });
 
   // Calculate completed questions for progress
   const getCompletedQuestions = () => {
     let count = 0;
-    if (step === 1) {
-      if (formData.first_name) count++;
-      if (formData.birth_date) count++;
-      if (formData.birth_time) count++;
-      if (formData.birth_location) count++;
-      return count;
-    } else if (step === 2) {
-      return 4 + 5; // All 5 MBTI questions always counted
-    } else if (step === 3) {
-      return 9 + formData.interests.length > 0 ? 1 : 0; // 9 from step 1+2, +1 if interests selected
+    // Count all steps up to current
+    for (let i = 0; i < step; i++) {
+      const stepId = stepOrder[i].id;
+      if (stepId === 'identity') count += formData.first_name ? 4 : 0;
+      else if (stepId === 'mbti') count += 5;
+      else if (stepId === 'dealbreakers') count += 3;
+      else if (stepId === 'lifestyle') count += formData.interests.length > 0 ? 9 : 0;
+      else if (stepId === 'nicetohaves') count += 4;
+      else if (stepId === 'photos') count += formData.photos.filter(p => p !== null).length;
     }
-    return 13;
+    return count;
   };
 
-  const totalQuestions = 13;
+  const totalQuestions = 28; // 4 + 5 + 3 + 9 + 4 + 3
 
   // Mock location search
   const searchLocations = (query) => {
@@ -247,7 +284,9 @@ export default function CosmicOnboarding() {
         photos: formData.photos.filter(p => p !== null),
         interests: formData.interests,
         mbti_scores: mbti_scores,
-        lifestyle_factors: formData.lifestyle_factors
+        lifestyle_factors: formData.lifestyle_factors,
+        deal_breakers: formData.deal_breakers,
+        preferences: formData.preferences
       };
 
       await axios.post(`${API}/onboarding/complete`, profileData, {
@@ -264,10 +303,16 @@ export default function CosmicOnboarding() {
   };
 
   const canContinue = () => {
-    if (step === 1) {
+    const stepId = currentStepData.id;
+    if (stepId === 'identity') {
       return formData.first_name && formData.birth_date;
     }
-    if (step === 4) {
+    if (stepId === 'dealbreakers') {
+      return formData.deal_breakers.relationship_goals && 
+             formData.deal_breakers.want_kids && 
+             formData.deal_breakers.smoking;
+    }
+    if (stepId === 'photos') {
       return formData.photos.every(p => p !== null);
     }
     return true;
@@ -300,7 +345,7 @@ export default function CosmicOnboarding() {
     );
   };
 
-  const renderStep1 = () => (
+  const renderIdentityStep = () => (
     <div className="space-y-6 animate-fadeIn">
       <div className="text-center mb-8">
         <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center shadow-2xl">
@@ -390,7 +435,7 @@ export default function CosmicOnboarding() {
     </div>
   );
 
-  const renderStep2 = () => (
+  const renderMBTIStep = () => (
     <div className="space-y-8 animate-fadeIn pb-8">
       <div className="text-center mb-8">
         <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl">
@@ -462,7 +507,132 @@ export default function CosmicOnboarding() {
     </div>
   );
 
-  const renderStep3 = () => (
+  const renderDealBreakersStep = () => (
+    <div className="space-y-8 animate-fadeIn pb-8">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center shadow-2xl">
+          <Heart className="w-10 h-10 text-white animate-pulse" />
+        </div>
+        <h2 className="text-4xl font-light text-white mb-3">
+          What Matters Most
+        </h2>
+        <p className="text-white/60 text-lg">Help us find your perfect match</p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Relationship Goals */}
+        <div>
+          <label className="text-white font-medium mb-3 block text-center">What are you looking for? *</label>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['casual', 'long-term', 'marriage', 'figuring_out'].map((goal) => (
+              <button
+                key={goal}
+                onClick={() => setFormData({
+                  ...formData,
+                  deal_breakers: { ...formData.deal_breakers, relationship_goals: goal }
+                })}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  formData.deal_breakers.relationship_goals === goal
+                    ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg scale-105'
+                    : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+                }`}
+              >
+                {goal === 'casual' ? '🎉 Casual Dating' : 
+                 goal === 'long-term' ? '💕 Long-term' : 
+                 goal === 'marriage' ? '💍 Marriage' : 
+                 '🤔 Figuring it out'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Kids */}
+        <div className="space-y-4">
+          <label className="text-white font-medium mb-3 block text-center">Do you have kids? *</label>
+          <div className="flex gap-3 justify-center">
+            <button
+              onClick={() => setFormData({
+                ...formData,
+                deal_breakers: { ...formData.deal_breakers, has_kids: false }
+              })}
+              className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                formData.deal_breakers.has_kids === false
+                  ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg scale-105'
+                  : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+              }`}
+            >
+              No
+            </button>
+            <button
+              onClick={() => setFormData({
+                ...formData,
+                deal_breakers: { ...formData.deal_breakers, has_kids: true }
+              })}
+              className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                formData.deal_breakers.has_kids === true
+                  ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg scale-105'
+                  : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+              }`}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label className="text-white font-medium mb-3 block text-center">Do you want kids in the future? *</label>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['yes', 'no', 'maybe', 'open'].map((want) => (
+              <button
+                key={want}
+                onClick={() => setFormData({
+                  ...formData,
+                  deal_breakers: { ...formData.deal_breakers, want_kids: want }
+                })}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  formData.deal_breakers.want_kids === want
+                    ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg scale-105'
+                    : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+                }`}
+              >
+                {want === 'yes' ? '✅ Yes' :
+                 want === 'no' ? '❌ No' :
+                 want === 'maybe' ? '🤷 Maybe' :
+                 '💭 Open to it'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Smoking */}
+        <div>
+          <label className="text-white font-medium mb-3 block text-center">Do you smoke? *</label>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['no', 'occasionally', 'yes'].map((smoke) => (
+              <button
+                key={smoke}
+                onClick={() => setFormData({
+                  ...formData,
+                  deal_breakers: { ...formData.deal_breakers, smoking: smoke }
+                })}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  formData.deal_breakers.smoking === smoke
+                    ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg scale-105'
+                    : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+                }`}
+              >
+                {smoke === 'no' ? '🚭 Never' :
+                 smoke === 'occasionally' ? '🤏 Occasionally' :
+                 '🚬 Yes'}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderLifestyleStep = () => (
     <div className="space-y-8 animate-fadeIn pb-8">
       <div className="text-center mb-8">
         <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-orange-600 rounded-full flex items-center justify-center shadow-2xl">
@@ -542,7 +712,126 @@ export default function CosmicOnboarding() {
     </div>
   );
 
-  const renderStep4 = () => (
+  const renderNiceToHavesStep = () => (
+    <div className="space-y-8 animate-fadeIn pb-8">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl">
+          <Sparkles className="w-10 h-10 text-white animate-pulse" />
+        </div>
+        <h2 className="text-4xl font-light text-white mb-3">
+          Fine-tune your vibe 💫
+        </h2>
+        <p className="text-white/60 text-lg">Optional - helps us find better matches</p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Religion */}
+        <div>
+          <label className="text-white font-medium mb-3 block text-center">Religion / Spirituality</label>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['not_religious', 'spiritual', 'christian', 'other'].map((rel) => (
+              <button
+                key={rel}
+                onClick={() => setFormData({
+                  ...formData,
+                  preferences: { ...formData.preferences, religion: rel }
+                })}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  formData.preferences.religion === rel
+                    ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg scale-105'
+                    : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+                }`}
+              >
+                {rel === 'not_religious' ? '🙅 Not Religious' :
+                 rel === 'spiritual' ? '✨ Spiritual' :
+                 rel === 'christian' ? '⛪ Christian' :
+                 '🌍 Other'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Politics */}
+        <div>
+          <label className="text-white font-medium mb-3 block text-center">Political Views</label>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['liberal', 'moderate', 'conservative', 'apolitical'].map((pol) => (
+              <button
+                key={pol}
+                onClick={() => setFormData({
+                  ...formData,
+                  preferences: { ...formData.preferences, politics: pol }
+                })}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  formData.preferences.politics === pol
+                    ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg scale-105'
+                    : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+                }`}
+              >
+                {pol === 'liberal' ? '🔵 Liberal' :
+                 pol === 'moderate' ? '🟣 Moderate' :
+                 pol === 'conservative' ? '🔴 Conservative' :
+                 '🤷 Apolitical'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Diet */}
+        <div>
+          <label className="text-white font-medium mb-3 block text-center">Diet Preference</label>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['balanced', 'vegetarian', 'vegan', 'no_preference'].map((diet) => (
+              <button
+                key={diet}
+                onClick={() => setFormData({
+                  ...formData,
+                  preferences: { ...formData.preferences, diet: diet }
+                })}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  formData.preferences.diet === diet
+                    ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg scale-105'
+                    : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+                }`}
+              >
+                {diet === 'balanced' ? '🍽️ Balanced' :
+                 diet === 'vegetarian' ? '🥗 Vegetarian' :
+                 diet === 'vegan' ? '🌱 Vegan' :
+                 '🍕 No Preference'}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Exercise */}
+        <div>
+          <label className="text-white font-medium mb-3 block text-center">Exercise Frequency</label>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {['regular', 'occasional', 'rarely'].map((ex) => (
+              <button
+                key={ex}
+                onClick={() => setFormData({
+                  ...formData,
+                  preferences: { ...formData.preferences, exercise: ex }
+                })}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+                  formData.preferences.exercise === ex
+                    ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg scale-105'
+                    : 'bg-white/10 text-white/70 border border-white/30 hover:bg-white/20'
+                }`}
+              >
+                {ex === 'regular' ? '💪 Regular (3+/week)' :
+                 ex === 'occasional' ? '🏃 Occasional (1-2/week)' :
+                 '🛋️ Rarely'}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderPhotosStep = () => (
     <div className="space-y-6 animate-fadeIn">
       <div className="text-center mb-8">
         <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center shadow-2xl">
@@ -603,6 +892,18 @@ export default function CosmicOnboarding() {
     </div>
   );
 
+  const renderCurrentStep = () => {
+    switch (currentStepData.id) {
+      case 'identity': return renderIdentityStep();
+      case 'mbti': return renderMBTIStep();
+      case 'dealbreakers': return renderDealBreakersStep();
+      case 'lifestyle': return renderLifestyleStep();
+      case 'nicetohaves': return renderNiceToHavesStep();
+      case 'photos': return renderPhotosStep();
+      default: return null;
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 overflow-y-auto">
       {/* Animated background */}
@@ -614,10 +915,7 @@ export default function CosmicOnboarding() {
       {renderProgressTracker()}
 
       <div className="relative z-10 container mx-auto px-6 pt-32 pb-32 max-w-2xl">
-        {step === 1 && renderStep1()}
-        {step === 2 && renderStep2()}
-        {step === 3 && renderStep3()}
-        {step === 4 && renderStep4()}
+        {renderCurrentStep()}
 
         {/* Navigation */}
         <div className="flex gap-4 mt-12">
@@ -631,7 +929,7 @@ export default function CosmicOnboarding() {
             </button>
           )}
 
-          {step < 4 ? (
+          {step < totalSteps ? (
             <button
               onClick={() => setStep(step + 1)}
               disabled={!canContinue()}
