@@ -1203,7 +1203,7 @@ def calculate_holistic_compatibility(userA: dict, userB: dict) -> dict:
     
     return {
         "overall_compatibility": round(final_score, 1),
-        "mbti_compatibility": round(mbti_score * 100, 1),
+        "mbti_compatibility": round(mbti_score, 1),  # mbti_score is already 0-100
         "lifestyle_compatibility": round(lifestyle_score * 100, 1),
         "interests_compatibility": round(interests_score * 100, 1),
         "astrology_compatibility": round(astrology_score * 100, 1),
