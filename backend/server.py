@@ -978,8 +978,12 @@ async def trending_energies(user: User = Depends(get_current_user)):
     """
     Return users with high Trending Energy Score.
     Shows people who are actively engaged, compatible, and have good behavior.
+    Now uses enhanced compatibility with polarity bonus.
     """
     await ensure_test_candidates(user.id)
+    
+    # Get current user data for compatibility calculation
+    current_user_doc = await db.users.find_one({"id": user.id})
     
     # Get all potential matches
     cur = db.users.find({"id": {"$ne": user.id}})
@@ -989,13 +993,17 @@ async def trending_energies(user: User = Depends(get_current_user)):
     scored_users = []
     for u in docs:
         energy_score = await calculate_trending_energy_score(u.get("id"), u)
-        comp = quick_compat(user.zodiac_sign, u.get("zodiac_sign"))
+        
+        # Use enhanced compatibility calculation with polarity bonus
+        comp = calculate_compatibility_with_polarity(current_user_doc, u)
         
         scored_users.append({
             "id": u.get("id"),
             "first_name": u.get("first_name") or (u.get("name") or "Star"),
             "last_name": u.get("last_name") or "",
             "zodiac_sign": u.get("zodiac_sign") or "Gemini",
+            "moon_sign": u.get("moon_sign"),
+            "rising_sign": u.get("rising_sign"),
             "birth_date": u.get("birth_date") or "1995-01-01",
             "photos": u.get("photos") or ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80&auto=format&fit=crop"],
             "current_location": u.get("current_location") or {"latitude": 34.05, "longitude": -118.24},
