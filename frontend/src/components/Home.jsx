@@ -519,7 +519,7 @@ export default function Home({ user }) {
                 createShootingStar(rect.left + rect.width / 2, rect.top + rect.height / 2, 'left');
                 handlePass();
               }}
-              className="bg-black rounded-full p-4 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-red-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-red-500/50"
               title="Pass"
             >
               <X className="w-7 h-7 text-red-500" />
@@ -534,7 +534,7 @@ export default function Home({ user }) {
                 createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2);
                 handleLike();
               }}
-              className="bg-black rounded-full p-5 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-pink-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-5 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-pink-500/50"
               title="Like"
             >
               <Heart className="w-8 h-8 text-pink-500 fill-pink-500" />
@@ -549,7 +549,7 @@ export default function Home({ user }) {
                 createHeartBurst(rect.left + rect.width / 2, rect.top);
                 handleSuperLike();
               }}
-              className="bg-black rounded-full p-4 hover:scale-110 active:scale-95 transition-all shadow-2xl hover:shadow-blue-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-blue-500/50"
               title="Super Like"
             >
               <Star className="w-6 h-6 text-blue-500 fill-blue-500" />
