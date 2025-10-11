@@ -1156,43 +1156,57 @@ def nice_to_have_bonus(userA: dict, userB: dict) -> float:
 
 def calculate_holistic_compatibility(userA: dict, userB: dict) -> dict:
     """
-    Master compatibility calculation combining all 4 dimensions.
+    Master compatibility calculation with 5 dimensions plus adjustments.
     
     Weights:
     - MBTI: 30%
-    - Interests: 25%
-    - Lifestyle: 15%
-    - Astrology: 30%
+    - Lifestyle: 25%
+    - Interests: 20%
+    - Astrology: 25%
+    - Deal-breakers: variable penalties
+    - Nice-to-haves: variable bonuses
     
-    Returns dict with breakdown and final score.
+    Returns dict with breakdown and final score (0-100).
     """
-    # Calculate each dimension
-    mbti_score = calculate_mbti_compatibility(userA, userB)
-    interests_score = calculate_interests_compatibility(userA, userB)
-    lifestyle_score = calculate_lifestyle_alignment(userA, userB)
-    astrology_score = calculate_astrology_compatibility(userA, userB)
+    # Calculate each dimension (returns 0-1 scale)
+    mbti_score = mbti_similarity(userA, userB)
+    lifestyle_score = lifestyle_similarity(userA, userB)
+    interests_score = interest_similarity(userA, userB)
+    astrology_score = astrology_similarity(userA, userB)
     
-    # Weighted final score
-    final_score = (
-        mbti_score * 0.30 +
-        interests_score * 0.25 +
-        lifestyle_score * 0.15 +
-        astrology_score * 0.30
+    # Calculate base score (0-100)
+    base_score = (
+        mbti_score * 30.0 +
+        lifestyle_score * 25.0 +
+        interests_score * 20.0 +
+        astrology_score * 25.0
     )
+    
+    # Apply deal-breaker penalties
+    penalty = dealbreaker_penalty(userA, userB)
+    
+    # Apply nice-to-have bonuses
+    bonus = nice_to_have_bonus(userA, userB)
+    
+    # Calculate final score
+    final_score = base_score - penalty + bonus
+    final_score = max(0, min(100, final_score))
     
     # Calculate Lifestyle Mesh Score (combination of lifestyle + interests)
     lifestyle_mesh_score = (
-        lifestyle_score * 0.40 +
-        interests_score * 0.60
+        lifestyle_score * 40.0 +
+        interests_score * 60.0
     )
     
     return {
         "overall_compatibility": round(final_score, 1),
-        "mbti_compatibility": round(mbti_score, 1),
-        "interests_compatibility": round(interests_score, 1),
-        "lifestyle_compatibility": round(lifestyle_score, 1),
-        "astrology_compatibility": round(astrology_score, 1),
-        "lifestyle_mesh_score": round(lifestyle_mesh_score, 1)
+        "mbti_compatibility": round(mbti_score * 100, 1),
+        "lifestyle_compatibility": round(lifestyle_score * 100, 1),
+        "interests_compatibility": round(interests_score * 100, 1),
+        "astrology_compatibility": round(astrology_score * 100, 1),
+        "lifestyle_mesh_score": round(lifestyle_mesh_score, 1),
+        "penalty": round(penalty, 1),
+        "bonus": round(bonus, 1)
     }
 
 
