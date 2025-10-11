@@ -951,56 +951,51 @@ def interest_similarity(userA: dict, userB: dict) -> float:
     return jaccard
 
 
-def calculate_lifestyle_alignment(userA: dict, userB: dict) -> float:
+def lifestyle_similarity(userA: dict, userB: dict) -> float:
     """
-    Calculate lifestyle alignment based on 8 lifestyle factors (15% weight).
-    Uses weighted difference scoring.
-    
-    Factors:
-    - fitness_health
-    - career_ambition
-    - social_energy
-    - travel_adventure
-    - nightlife_lifestyle
-    - family_future (weighted 2x)
-    - dating_approach (weighted 2x)
-    - passions_hobbies
+    Calculate lifestyle alignment based on 8 lifestyle factors (25% weight).
+    Normalized difference scoring across all sliders.
+    Each slider is 1-5 scale.
     """
-    lifestyle_a = userA.get("lifestyle_factors") or userA.get("lifestyle_sliders")
-    lifestyle_b = userB.get("lifestyle_factors") or userB.get("lifestyle_sliders")
+    lifestyle_a = userA.get("lifestyle_factors") or userA.get("lifestyle")
+    lifestyle_b = userB.get("lifestyle_factors") or userB.get("lifestyle")
     
     if not lifestyle_a or not lifestyle_b:
-        return 70.0  # Neutral if missing
+        return 0.5  # Neutral 50% if missing
     
     factors = [
-        ("fitness_health", 1.0),
-        ("career_ambition", 1.0),
-        ("social_energy", 1.0),
-        ("travel_adventure", 1.0),
-        ("nightlife_lifestyle", 1.0),
-        ("family_future", 2.0),  # More important
-        ("dating_approach", 2.0),  # More important
-        ("passions_hobbies", 1.0)
+        "fitness_health", "career_ambition", "social_energy", 
+        "travel_adventure", "nightlife_lifestyle", "family_future",
+        "dating_approach", "passions_hobbies"
     ]
     
-    total_weight = sum(weight for _, weight in factors)
-    weighted_alignment = 0
+    # Special weighting for family and dating (2x importance)
+    weights = {
+        "family_future": 2.0,
+        "dating_approach": 2.0
+    }
     
-    for factor, weight in factors:
+    total_diff = 0
+    total_weight = 0
+    
+    for factor in factors:
         val_a = lifestyle_a.get(factor, 3)  # Default to neutral (3)
         val_b = lifestyle_b.get(factor, 3)
+        weight = weights.get(factor, 1.0)
         
-        # Calculate alignment (0-1 scale)
+        # Calculate normalized difference (0-1 scale, where 0 = identical, 1 = max diff)
         # Max difference is 4 (1 to 5 scale)
-        difference = abs(val_a - val_b)
-        alignment = 1 - (difference / 4)
-        
-        weighted_alignment += alignment * weight
+        diff = abs(val_a - val_b) / 4.0
+        total_diff += diff * weight
+        total_weight += weight
     
-    # Normalize to 0-100 scale
-    score = (weighted_alignment / total_weight) * 100
+    # Average weighted difference
+    avg_diff = total_diff / total_weight if total_weight > 0 else 0
     
-    return round(score, 1)
+    # Convert to similarity (0-1 scale)
+    similarity = 1 - avg_diff
+    
+    return max(0.0, min(1.0, similarity))
 
 
 def calculate_astrology_compatibility(userA: dict, userB: dict) -> float:
