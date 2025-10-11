@@ -1053,6 +1053,107 @@ def astrology_similarity(userA: dict, userB: dict) -> float:
     return min(1.0, score)
 
 
+def dealbreaker_penalty(userA: dict, userB: dict) -> float:
+    """
+    Calculate penalty points for deal-breaker mismatches.
+    Returns penalty value (0-100 points to subtract).
+    
+    Deal-breakers:
+    - relationship_goals: 30 points
+    - kids (has_kids + want_kids): 40 points
+    - smoking: 20 points
+    """
+    penalty = 0
+    
+    deal_breakers_a = userA.get("deal_breakers", {})
+    deal_breakers_b = userB.get("deal_breakers", {})
+    
+    if not deal_breakers_a or not deal_breakers_b:
+        return 0  # No penalty if data missing
+    
+    # Relationship goals mismatch (30 points)
+    goals_a = deal_breakers_a.get("relationship_goals")
+    goals_b = deal_breakers_b.get("relationship_goals")
+    
+    if goals_a and goals_b and goals_a != goals_b:
+        # Critical mismatches
+        critical_pairs = [
+            ("casual", "long-term"),
+            ("casual", "marriage"),
+            ("friends", "long-term"),
+            ("friends", "marriage")
+        ]
+        for g1, g2 in critical_pairs:
+            if (goals_a == g1 and goals_b == g2) or (goals_a == g2 and goals_b == g1):
+                penalty += 30
+                break
+    
+    # Kids mismatch (40 points)
+    has_kids_a = deal_breakers_a.get("has_kids", False)
+    has_kids_b = deal_breakers_b.get("has_kids", False)
+    want_kids_a = deal_breakers_a.get("want_kids")
+    want_kids_b = deal_breakers_b.get("want_kids")
+    
+    # Critical: One has kids and wants different things about future kids
+    if (has_kids_a or has_kids_b) and want_kids_a and want_kids_b:
+        if (want_kids_a == "yes" and want_kids_b == "no") or \
+           (want_kids_a == "no" and want_kids_b == "yes"):
+            penalty += 40
+    
+    # Smoking mismatch (20 points)
+    smoking_a = deal_breakers_a.get("smoking")
+    smoking_b = deal_breakers_b.get("smoking")
+    
+    if smoking_a and smoking_b:
+        if (smoking_a == "no" and smoking_b == "yes") or \
+           (smoking_a == "yes" and smoking_b == "no"):
+            penalty += 20
+    
+    return penalty
+
+
+def nice_to_have_bonus(userA: dict, userB: dict) -> float:
+    """
+    Calculate bonus points for nice-to-have matches.
+    Returns bonus value (0-20 points to add).
+    
+    Nice-to-haves (5 points each):
+    - religion
+    - politics
+    - diet
+    - exercise
+    """
+    bonus = 0
+    
+    prefs_a = userA.get("preferences", {})
+    prefs_b = userB.get("preferences", {})
+    
+    if not prefs_a or not prefs_b:
+        return 0  # No bonus if data missing
+    
+    # Religion match (5 points)
+    if prefs_a.get("religion") and prefs_b.get("religion"):
+        if prefs_a["religion"] == prefs_b["religion"]:
+            bonus += 5
+    
+    # Politics match (5 points)
+    if prefs_a.get("politics") and prefs_b.get("politics"):
+        if prefs_a["politics"] == prefs_b["politics"]:
+            bonus += 5
+    
+    # Diet match (5 points)
+    if prefs_a.get("diet") and prefs_b.get("diet"):
+        if prefs_a["diet"] == prefs_b["diet"]:
+            bonus += 5
+    
+    # Exercise match (5 points)
+    if prefs_a.get("exercise") and prefs_b.get("exercise"):
+        if prefs_a["exercise"] == prefs_b["exercise"]:
+            bonus += 5
+    
+    return bonus
+
+
 def calculate_holistic_compatibility(userA: dict, userB: dict) -> dict:
     """
     Master compatibility calculation combining all 4 dimensions.
