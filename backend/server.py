@@ -63,7 +63,9 @@ class User(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     birth_date: Optional[str] = None
-    zodiac_sign: Optional[str] = None
+    zodiac_sign: Optional[str] = None  # Sun sign
+    moon_sign: Optional[str] = None
+    rising_sign: Optional[str] = None
     photos: Optional[List[str]] = []
     bio: Optional[str] = None
     interests: Optional[List[str]] = []
