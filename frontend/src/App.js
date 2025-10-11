@@ -1257,6 +1257,7 @@ function App() {
             <Route path="/login" element={<LoginApp />} />
             <Route path="/session" element={<SessionHandler />} />
             <Route path="/onboarding" element={<CosmicOnboarding />} />
+            <Route path="/test-onboarding" element={<TestOnboarding />} />
             <Route 
               path="/settings" 
               element={
