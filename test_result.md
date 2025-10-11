@@ -334,6 +334,8 @@ test_plan:
   test_priority: "high_first"
   - agent: "main"
     message: "Initiating Comprehensive Backend Regression Pass #4 via testing agent. Please validate cookies over HTTPS, CORS OPTIONS behavior, and all core endpoints listed in the task entry. Base URL: https://starswipe.preview.emergentagent.com/api . Test user: use /api/auth/test-login with email testuser@asign.com."
+  - agent: "main"
+    message: "Implemented new multi-dimensional compatibility algorithm with deal-breakers and nice-to-haves. Backend: Updated User model, added dealbreaker_penalty() and nice_to_have_bonus() functions, updated compatibility calculation to new formula (MBTI 30%, Lifestyle 25%, Interests 20%, Astrology 25% + penalties/bonuses). Frontend: Updated CosmicOnboarding with 6 randomized steps including deal-breakers and nice-to-haves collection. Migrated 39 existing users with default values. Ready for backend testing of new endpoints and compatibility calculations."
 
 agent_communication:
   - agent: "main"
