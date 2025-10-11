@@ -326,9 +326,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Navigation Sections (Discover, Connections, Profile)"
-    - "Bottom Navigation Bar"
-    - "Connections Page (Matches and Likes You tabs)"
+    - "Multi-Dimensional Compatibility Algorithm"
+    - "Deal-breakers and Nice-to-haves Backend Logic"
+    - "Gamified Onboarding with Deal-breakers and Nice-to-haves"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
