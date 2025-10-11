@@ -20,7 +20,7 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 FRONTEND_ORIGINS = [
-    "https://cosmic-dating.preview.emergentagent.com",
+    "https://starswipe.preview.emergentagent.com",
     "http://localhost:3000",
 ]
 
