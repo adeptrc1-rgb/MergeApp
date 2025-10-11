@@ -129,6 +129,11 @@ export default function CosmicOnboarding() {
   const [loading, setLoading] = useState(false);
   const [locationSearch, setLocationSearch] = useState('');
 
+  // Scroll to top when step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
   const [formData, setFormData] = useState({
     // Step 1: Cosmic Identity (5 questions)
     first_name: '',
