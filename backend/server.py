@@ -73,9 +73,16 @@ class User(BaseModel):
     
     # MBTI personality scores (0-100 scale for each dimension)
     mbti_scores: Optional[Dict[str, float]] = None  # {energy, information, decision, planning, interaction}
+    personality_type: Optional[str] = None  # 4-letter MBTI type (e.g., "INFJ")
     
     # Lifestyle factors (1-5 scale)
     lifestyle_factors: Optional[Dict[str, int]] = None  # 8 sliders
+
+    # Deal-breakers (critical compatibility factors)
+    deal_breakers: Optional[Dict[str, Any]] = None  # {relationship_goals, has_kids, want_kids, smoking}
+    
+    # Preferences / Nice-to-haves (bonus compatibility factors)
+    preferences: Optional[Dict[str, Any]] = None  # {religion, politics, diet, exercise}
 
     # Scores and tracking
     responsiveness_score: float = 100.0  # store 0..30 here for simplicity
