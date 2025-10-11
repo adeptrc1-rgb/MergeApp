@@ -386,7 +386,7 @@ export default function CosmicOnboarding() {
   );
 
   const renderStep2 = () => (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-8 animate-fadeIn pb-8">
       <div className="text-center mb-8">
         <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl">
           <Zap className="w-10 h-10 text-white animate-pulse" />
