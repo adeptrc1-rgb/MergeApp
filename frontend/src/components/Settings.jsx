@@ -123,15 +123,15 @@ export default function Settings({ user, logout }) {
                   onChange={(e) => setPreferences({...preferences, max_distance_miles: parseInt(e.target.value)})}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400 transition-colors"
                 >
-                  <option value={5} className="bg-black">Within 5 km</option>
-                  <option value={10} className="bg-black">Within 10 km</option>
-                  <option value={25} className="bg-black">Within 25 km</option>
-                  <option value={50} className="bg-black">Within 50 km</option>
-                  <option value={100} className="bg-black">Within 100 km</option>
-                  <option value={250} className="bg-black">Within 250 km</option>
-                  <option value={500} className="bg-black">Within 500 km</option>
-                  <option value={1000} className="bg-black">Within 1000 km</option>
-                  <option value={5000} className="bg-black">Anywhere</option>
+                  <option value={3} className="bg-black">Within 3 miles</option>
+                  <option value={6} className="bg-black">Within 6 miles</option>
+                  <option value={16} className="bg-black">Within 16 miles</option>
+                  <option value={31} className="bg-black">Within 31 miles</option>
+                  <option value={62} className="bg-black">Within 62 miles</option>
+                  <option value={155} className="bg-black">Within 155 miles</option>
+                  <option value={311} className="bg-black">Within 311 miles</option>
+                  <option value={621} className="bg-black">Within 621 miles</option>
+                  <option value={3107} className="bg-black">Anywhere</option>
                 </select>
               </div>
 
