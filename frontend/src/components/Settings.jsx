@@ -13,7 +13,7 @@ export default function Settings({ user, logout }) {
   const [preferences, setPreferences] = useState({
     age_range_min: user?.age_range_min || 18,
     age_range_max: user?.age_range_max || 35,
-    max_distance_km: user?.max_distance_km || 50
+    max_distance_miles: user?.max_distance_miles || 31
   });
   const [saving, setSaving] = useState(false);
 
