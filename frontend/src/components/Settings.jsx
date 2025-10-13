@@ -119,8 +119,8 @@ export default function Settings({ user, logout }) {
                   Maximum Distance
                 </label>
                 <select
-                  value={preferences.max_distance_km}
-                  onChange={(e) => setPreferences({...preferences, max_distance_km: parseInt(e.target.value)})}
+                  value={preferences.max_distance_miles}
+                  onChange={(e) => setPreferences({...preferences, max_distance_miles: parseInt(e.target.value)})}
                   className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400 transition-colors"
                 >
                   <option value={5} className="bg-black">Within 5 km</option>
