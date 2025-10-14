@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from './ui/button';
 import { Heart, X, Info, MapPin, Briefcase, Sparkles, Star, Zap, RotateCcw, Home, Users, MessageCircle } from 'lucide-react';
-import ConstellationIcon from './ConstellationIcon';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api`;
