@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, MessageCircle, Zap } from 'lucide-react';
+import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, MessageCircle, Zap, XCircle } from 'lucide-react';
+import ConstellationIcon from './ConstellationIcon';
 import { 
   createStarburstEffect, 
   createSparkleTrail, 
