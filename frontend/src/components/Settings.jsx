@@ -1,12 +1,186 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ArrowLeft, User, MapPin, Heart, Bell, Shield, LogOut, Sparkles, Star, Users, Home, MessageCircle } from 'lucide-react';
+import { requestNotificationPermission, isNotificationSupported, getNotificationPermission } from '../utils/firebase';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 axios.defaults.withCredentials = true;
+
+// Horoscope Notification Settings Component
+function HoroscopeNotificationSettings({ user }) {
+  const [horoscopePrefs, setHoroscopePrefs] = useState({
+    opt_in: false,
+    time: '08:00',
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [testSending, setTestSending] = useState(false);
+
+  useEffect(() => {
+    loadHoroscopePreferences();
+  }, []);
+
+  const loadHoroscopePreferences = async () => {
+    try {
+      const response = await axios.get(`${API}/horoscope/preferences`);
+      setHoroscopePrefs(response.data);
+    } catch (error) {
+      console.error('Error loading horoscope preferences:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleToggle = async () => {
+    if (!horoscopePrefs.opt_in) {
+      // User wants to opt in - request notification permission
+      if (!isNotificationSupported()) {
+        alert('Push notifications are not supported in this browser');
+        return;
+      }
+
+      const currentPermission = getNotificationPermission();
+      if (currentPermission === 'denied') {
+        alert('Notifications are blocked. Please enable them in your browser settings.');
+        return;
+      }
+
+      setSaving(true);
+      try {
+        // Request permission and get FCM token
+        const fcmToken = await requestNotificationPermission();
+        
+        if (fcmToken) {
+          // Save preferences with token
+          await axios.post(`${API}/horoscope/preferences`, {
+            opt_in: true,
+            time: horoscopePrefs.time,
+            timezone: horoscopePrefs.timezone,
+            fcm_token: fcmToken
+          });
+          
+          setHoroscopePrefs(prev => ({ ...prev, opt_in: true }));
+          alert('✨ Daily horoscope notifications enabled!');
+        } else {
+          alert('Failed to get notification permission. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error enabling notifications:', error);
+        alert('Failed to enable notifications');
+      } finally {
+        setSaving(false);
+      }
+    } else {
+      // User wants to opt out
+      setSaving(true);
+      try {
+        await axios.post(`${API}/horoscope/preferences`, {
+          opt_in: false
+        });
+        setHoroscopePrefs(prev => ({ ...prev, opt_in: false }));
+      } catch (error) {
+        console.error('Error disabling notifications:', error);
+      } finally {
+        setSaving(false);
+      }
+    }
+  };
+
+  const handleTimeChange = async (newTime) => {
+    setHoroscopePrefs(prev => ({ ...prev, time: newTime }));
+    
+    if (horoscopePrefs.opt_in) {
+      try {
+        await axios.post(`${API}/horoscope/preferences`, {
+          time: newTime
+        });
+      } catch (error) {
+        console.error('Error updating time:', error);
+      }
+    }
+  };
+
+  const handleTestSend = async () => {
+    setTestSending(true);
+    try {
+      await axios.post(`${API}/horoscope/test-send`);
+      alert('✨ Test notification sent! Check your notifications.');
+    } catch (error) {
+      console.error('Error sending test:', error);
+      alert(error.response?.data?.detail || 'Failed to send test notification');
+    } finally {
+      setTestSending(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-white/5 rounded-2xl border border-white/10 p-6">
+        <p className="text-white/60">Loading...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
+      <div className="px-6 py-4 border-b border-white/10">
+        <h2 className="text-lg font-light text-white flex items-center gap-2">
+          <Sparkles className="w-5 h-5 text-purple-400" />
+          Daily Horoscope
+        </h2>
+      </div>
+      <div className="p-6 space-y-4">
+        <div className="flex items-center justify-between py-3">
+          <div>
+            <p className="text-white font-light">Daily Energy Reading</p>
+            <p className="text-white/40 text-sm">Get personalized horoscope notifications</p>
+          </div>
+          <button
+            onClick={handleToggle}
+            disabled={saving}
+            className={`w-12 h-6 rounded-full relative transition-all ${
+              horoscopePrefs.opt_in ? 'bg-purple-500' : 'bg-white/20'
+            } ${saving ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${
+              horoscopePrefs.opt_in ? 'right-1' : 'left-1'
+            }`}></div>
+          </button>
+        </div>
+
+        {horoscopePrefs.opt_in && (
+          <>
+            <div className="border-t border-white/10 pt-4">
+              <label className="text-white/80 text-sm mb-2 block">Delivery Time</label>
+              <input
+                type="time"
+                value={horoscopePrefs.time}
+                onChange={(e) => handleTimeChange(e.target.value)}
+                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400 transition-colors"
+                style={{ colorScheme: 'dark' }}
+              />
+              <p className="text-white/40 text-xs mt-2">
+                🔮 Receive your cosmic reading at {horoscopePrefs.time} daily
+              </p>
+            </div>
+
+            <button
+              onClick={handleTestSend}
+              disabled={testSending}
+              className="w-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 text-purple-300 py-3 rounded-xl hover:bg-purple-500/30 transition-all disabled:opacity-50 text-sm"
+            >
+              {testSending ? 'Sending...' : '✨ Send Test Notification'}
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Settings({ user, logout }) {
   const navigate = useNavigate();
