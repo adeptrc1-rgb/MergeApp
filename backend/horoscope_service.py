@@ -7,13 +7,29 @@ import random
 from datetime import date
 
 # Horoscope message templates by zodiac sign
+# Each entry has: (short_message, long_message)
 HOROSCOPE_TEMPLATES = {
     "Aries": [
-        "✨ Your confidence draws others in — speak your truth boldly today.",
-        "🔥 Fire energy surrounds you. Channel passion into action.",
-        "⚡ Today's cosmic momentum favors your bold initiatives.",
-        "💫 Leadership calls — your courage inspires those around you.",
-        "🌟 Take that leap. The universe has your back, Aries."
+        (
+            "Your confidence draws others in — speak your truth.",
+            "✨ Your confidence feels magnetic today, Aries. The stars align to amplify your natural boldness and courage. This is the perfect time to speak your truth and step into leadership roles. Your pioneering spirit inspires those around you, and your authentic self-expression opens doors you didn't know existed. Trust your instincts, take decisive action, and don't hold back. The universe is backing your bold moves right now."
+        ),
+        (
+            "Fire energy surrounds you — channel passion into action.",
+            "🔥 Powerful fire energy courses through your being today. Your ruling planet Mars energizes your ambitions and desires, pushing you toward meaningful action. Channel this passionate intensity into your most important goals. Whether it's a personal project, career move, or relationship milestone, your drive is unstoppable. Others feel your enthusiasm and want to join your journey. Lead with confidence and watch the world respond."
+        ),
+        (
+            "Today's cosmic momentum favors your bold initiatives.",
+            "⚡ The cosmic winds are at your back, Aries, creating perfect conditions for launching new ventures and taking calculated risks. Your natural courage is amplified, making this an ideal time to pursue opportunities others might fear. The universe rewards your bravery with unexpected support and resources. Trust your warrior spirit and move forward with conviction. Success follows those who dare, and today, that's you."
+        ),
+        (
+            "Leadership calls — your courage inspires those around you.",
+            "💫 Your leadership qualities shine brilliantly under today's celestial configuration. People naturally gravitate toward your energy and vision. Your courage to stand up for what's right and pursue ambitious goals creates a ripple effect, inspiring others to find their own bravery. Step into positions of influence with confidence. Your authentic leadership style, marked by directness and passion, is exactly what's needed right now."
+        ),
+        (
+            "Take that leap — the universe has your back.",
+            "🌟 Today calls for bold action and fearless moves, Aries. That leap you've been contemplating? The stars say it's time. The universe is conspiring in your favor, creating safety nets you can't even see yet. Your natural optimism and pioneering spirit are perfectly aligned with cosmic energies. Trust that your instincts are guiding you toward growth and success. Fortune favors the brave, and you're feeling particularly courageous today."
+        )
     ],
     "Taurus": [
         "🌿 Ground yourself in nature's rhythm — stability is your superpower.",
