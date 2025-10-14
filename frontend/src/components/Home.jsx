@@ -413,8 +413,8 @@ export default function Home({ user }) {
             </div>
             
             <div className="space-y-4">
-              <p className="text-white/90 text-lg font-light leading-relaxed">
-                {todayHoroscope.message}
+              <p className="text-white/90 text-base font-light leading-relaxed">
+                {todayHoroscope.message_long || todayHoroscope.message}
               </p>
               
               <div className="pt-4 border-t border-white/10">
