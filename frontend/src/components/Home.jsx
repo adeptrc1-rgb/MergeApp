@@ -34,6 +34,8 @@ export default function Home({ user }) {
   const [loading, setLoading] = useState(true);
   const [swipeDirection, setSwipeDirection] = useState(null);
   const [swipeHistory, setSwipeHistory] = useState([]);
+  const [todayHoroscope, setTodayHoroscope] = useState(null);
+  const [showHoroscopeModal, setShowHoroscopeModal] = useState(false);
   const cardRef = useRef(null);
   const likeButtonRef = useRef(null);
   const passButtonRef = useRef(null);
@@ -46,7 +48,17 @@ export default function Home({ user }) {
 
   useEffect(() => {
     loadMatches();
+    loadTodayHoroscope();
   }, []);
+
+  const loadTodayHoroscope = async () => {
+    try {
+      const response = await axios.get(`${API}/horoscope/today`);
+      setTodayHoroscope(response.data);
+    } catch (error) {
+      console.error('Error loading horoscope:', error);
+    }
+  };
 
   const loadMatches = async () => {
     try {
