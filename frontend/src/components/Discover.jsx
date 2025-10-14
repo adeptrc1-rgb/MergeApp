@@ -39,11 +39,22 @@ export default function Discover({ user }) {
   const [trendingUsers, setTrendingUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('compatible'); // 'compatible' or 'trending'
+  const [todayHoroscope, setTodayHoroscope] = useState(null);
 
   useEffect(() => {
     loadMatches();
     loadTrendingEnergies();
+    loadTodayHoroscope();
   }, []);
+
+  const loadTodayHoroscope = async () => {
+    try {
+      const response = await axios.get(`${API}/horoscope/today`);
+      setTodayHoroscope(response.data);
+    } catch (error) {
+      console.error('Error loading horoscope:', error);
+    }
+  };
 
   const loadMatches = async () => {
     try {
