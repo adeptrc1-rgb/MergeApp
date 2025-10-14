@@ -108,11 +108,8 @@ export default function Discover({ user }) {
       {/* Daily Horoscope Ticker */}
       {todayHoroscope && (
         <div className="bg-black border-b border-white/10">
-          <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-center gap-4 animate-fadeIn">
-            <div className="animate-pulse flex-shrink-0">
-              <ConstellationIcon sign={todayHoroscope.constellation} className="w-6 h-6" />
-            </div>
-            <div className="text-center flex-1">
+          <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-center animate-fadeIn">
+            <div className="text-center">
               <p className="text-white/80 text-sm font-light tracking-wide">
                 {todayHoroscope.message_short || todayHoroscope.message}
               </p>
