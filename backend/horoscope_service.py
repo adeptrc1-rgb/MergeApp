@@ -133,17 +133,24 @@ def get_daily_horoscope(zodiac_sign: str, date_str: str = None) -> dict:
     messages = HOROSCOPE_TEMPLATES[zodiac_sign]
     
     # Rotate through messages based on day of year for variety
-    # This ensures different messages each day while maintaining consistency
     from datetime import datetime
     date_obj = datetime.fromisoformat(date_str)
     day_of_year = date_obj.timetuple().tm_yday
     message_index = day_of_year % len(messages)
-    selected_message = messages[message_index]
+    
+    # Handle both tuple (short, long) and simple string formats
+    selected = messages[message_index]
+    if isinstance(selected, tuple):
+        short_msg, long_msg = selected
+    else:
+        # Fallback for old format - use same message for both
+        short_msg = long_msg = selected
     
     return {
         "date": date_str,
         "sign": zodiac_sign,
-        "message": selected_message,
+        "message_short": short_msg,
+        "message_long": long_msg,
         "emoji": get_zodiac_emoji(zodiac_sign),
         "constellation": get_zodiac_constellation_name(zodiac_sign)
     }
