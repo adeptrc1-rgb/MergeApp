@@ -114,16 +114,22 @@ def get_daily_horoscope(zodiac_sign: str, date_str: str = None) -> dict:
     if zodiac_sign not in HOROSCOPE_TEMPLATES:
         zodiac_sign = "Aries"  # Fallback
     
-    # Use date as seed for consistent daily message per sign
-    random.seed(f"{zodiac_sign}_{date_str}")
     messages = HOROSCOPE_TEMPLATES[zodiac_sign]
-    selected_message = random.choice(messages)
+    
+    # Rotate through messages based on day of year for variety
+    # This ensures different messages each day while maintaining consistency
+    from datetime import datetime
+    date_obj = datetime.fromisoformat(date_str)
+    day_of_year = date_obj.timetuple().tm_yday
+    message_index = day_of_year % len(messages)
+    selected_message = messages[message_index]
     
     return {
         "date": date_str,
         "sign": zodiac_sign,
         "message": selected_message,
-        "emoji": get_zodiac_emoji(zodiac_sign)
+        "emoji": get_zodiac_emoji(zodiac_sign),
+        "constellation": get_zodiac_constellation_name(zodiac_sign)
     }
 
 def get_zodiac_emoji(zodiac_sign: str) -> str:
