@@ -502,8 +502,8 @@ export default function Home({ user }) {
                   e.preventDefault();
                   return;
                 }
-                // Click anywhere to cycle to next photo
-                nextPhoto();
+                // Click to toggle profile info
+                setShowProfileInfo(!showProfileInfo);
               }}
             >
               {/* Photo Navigation Dots */}
