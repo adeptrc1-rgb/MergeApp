@@ -19,6 +19,17 @@ load_dotenv()
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
+# Start horoscope scheduler on app startup
+@app.on_event("startup")
+async def startup_event():
+    """Initialize services on app startup"""
+    try:
+        from horoscope_scheduler import start_scheduler
+        start_scheduler()
+        print("✅ Horoscope notification scheduler started")
+    except Exception as e:
+        print(f"⚠️ Could not start horoscope scheduler: {e}")
+
 FRONTEND_ORIGINS = [
     "https://starswipe.preview.emergentagent.com",
     "http://localhost:3000",
