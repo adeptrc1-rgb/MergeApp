@@ -150,6 +150,25 @@ def get_zodiac_emoji(zodiac_sign: str) -> str:
     }
     return emoji_map.get(zodiac_sign, "✧")
 
+
+def get_zodiac_constellation_name(zodiac_sign: str) -> str:
+    """Get constellation identifier for zodiac sign (for SVG icon lookup)"""
+    constellation_map = {
+        "Aries": "aries",
+        "Taurus": "taurus",
+        "Gemini": "gemini",
+        "Cancer": "cancer",
+        "Leo": "leo",
+        "Virgo": "virgo",
+        "Libra": "libra",
+        "Scorpio": "scorpio",
+        "Sagittarius": "sagittarius",
+        "Capricorn": "capricorn",
+        "Aquarius": "aquarius",
+        "Pisces": "pisces"
+    }
+    return constellation_map.get(zodiac_sign, "aries")
+
 def get_all_daily_horoscopes(date_str: str = None) -> dict:
     """Get horoscopes for all 12 zodiac signs"""
     if not date_str:
