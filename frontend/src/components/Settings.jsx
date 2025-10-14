@@ -147,34 +147,7 @@ export default function Settings({ user, logout }) {
           </div>
 
           {/* Notifications */}
-          <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
-            <div className="px-6 py-4 border-b border-white/10">
-              <h2 className="text-lg font-light text-white flex items-center gap-2">
-                <Bell className="w-5 h-5 text-purple-400" />
-                Notifications
-              </h2>
-            </div>
-            <div className="p-6 space-y-4">
-              <div className="flex items-center justify-between py-3">
-                <div>
-                  <p className="text-white font-light">New Matches</p>
-                  <p className="text-white/40 text-sm">Get notified about new connections</p>
-                </div>
-                <div className="w-12 h-6 bg-purple-500 rounded-full relative">
-                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between py-3 border-t border-white/10">
-                <div>
-                  <p className="text-white font-light">Messages</p>
-                  <p className="text-white/40 text-sm">Get notified about new messages</p>
-                </div>
-                <div className="w-12 h-6 bg-purple-500 rounded-full relative">
-                  <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HoroscopeNotificationSettings user={user} />
 
           {/* Privacy & Safety */}
           <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
