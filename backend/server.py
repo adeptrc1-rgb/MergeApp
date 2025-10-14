@@ -84,6 +84,9 @@ class User(BaseModel):
     # Preferences / Nice-to-haves (bonus compatibility factors)
     preferences: Optional[Dict[str, Any]] = None  # {religion, politics, diet, exercise}
 
+    # Horoscope Notification Preferences
+    horoscope_preferences: Optional[Dict[str, Any]] = None  # {opt_in, time, timezone, frequency, last_sent, fcm_token}
+
     # Scores and tracking
     responsiveness_score: float = 100.0  # store 0..30 here for simplicity
     response_score: float = 100.0  # legacy sync
