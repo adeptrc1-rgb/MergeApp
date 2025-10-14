@@ -301,6 +301,108 @@ def calculate_zodiac_sign(month: int, day: int) -> str:
     return "Capricorn"  # Default fallback
 
 
+# =====================================
+# HOROSCOPE ENDPOINTS
+# =====================================
+
+@api_router.get("/horoscope/today")
+async def get_today_horoscope(user: User = Depends(get_current_user)):
+    """Get today's horoscope for the current user"""
+    from horoscope_service import get_daily_horoscope
+    from datetime import date
+    
+    if not user.zodiac_sign:
+        raise HTTPException(status_code=400, detail="User zodiac sign not set")
+    
+    horoscope = get_daily_horoscope(user.zodiac_sign, date.today().isoformat())
+    return horoscope
+
+
+@api_router.post("/horoscope/preferences")
+async def update_horoscope_preferences(
+    opt_in: Optional[bool] = None,
+    time: Optional[str] = None,
+    timezone: Optional[str] = None,
+    fcm_token: Optional[str] = None,
+    user: User = Depends(get_current_user)
+):
+    """Update user's horoscope notification preferences"""
+    
+    # Get existing preferences or create new
+    prefs = user.horoscope_preferences or {
+        "opt_in": False,
+        "time": "08:00",
+        "timezone": "America/New_York",
+        "frequency": "daily",
+        "last_sent": None,
+        "fcm_token": None
+    }
+    
+    # Update fields if provided
+    if opt_in is not None:
+        prefs["opt_in"] = opt_in
+    if time is not None:
+        prefs["time"] = time
+    if timezone is not None:
+        prefs["timezone"] = timezone
+    if fcm_token is not None:
+        prefs["fcm_token"] = fcm_token
+    
+    # Save to database
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": {"horoscope_preferences": prefs}}
+    )
+    
+    return {"success": True, "preferences": prefs}
+
+
+@api_router.get("/horoscope/preferences")
+async def get_horoscope_preferences(user: User = Depends(get_current_user)):
+    """Get user's horoscope notification preferences"""
+    prefs = user.horoscope_preferences or {
+        "opt_in": False,
+        "time": "08:00",
+        "timezone": "America/New_York",
+        "frequency": "daily",
+        "last_sent": None,
+        "fcm_token": None
+    }
+    return prefs
+
+
+@api_router.post("/horoscope/test-send")
+async def test_send_horoscope(user: User = Depends(get_current_user)):
+    """Test endpoint to send a horoscope notification immediately"""
+    from horoscope_service import get_daily_horoscope
+    from firebase_service import send_horoscope_notification
+    from datetime import date
+    
+    if not user.zodiac_sign:
+        raise HTTPException(status_code=400, detail="User zodiac sign not set")
+    
+    prefs = user.horoscope_preferences or {}
+    fcm_token = prefs.get("fcm_token")
+    
+    if not fcm_token:
+        raise HTTPException(status_code=400, detail="FCM token not set. Please enable notifications in settings.")
+    
+    # Get horoscope
+    horoscope = get_daily_horoscope(user.zodiac_sign, date.today().isoformat())
+    
+    # Send notification
+    success = await send_horoscope_notification(
+        fcm_token=fcm_token,
+        zodiac_sign=user.zodiac_sign,
+        horoscope_message=horoscope["message"],
+        date_str=date.today().isoformat()
+    )
+    
+    if success:
+        return {"success": True, "message": "Test notification sent!", "horoscope": horoscope}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to send notification")
+
 
 @api_router.post("/auth/logout")
 async def auth_logout(request: Request, response: Response):
