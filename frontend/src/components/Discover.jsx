@@ -107,7 +107,7 @@ export default function Discover({ user }) {
     <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Daily Horoscope Ticker */}
       {todayHoroscope && (
-        <div className="bg-gradient-to-r from-purple-900/20 via-pink-900/20 to-purple-900/20 border-b border-white/10 backdrop-blur-md">
+        <div className="bg-black border-b border-white/10">
           <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-center gap-4 animate-fadeIn">
             <div className="animate-pulse">
               <ConstellationIcon sign={todayHoroscope.constellation} className="w-8 h-8" />
