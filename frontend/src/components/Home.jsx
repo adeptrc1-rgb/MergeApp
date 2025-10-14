@@ -389,10 +389,60 @@ export default function Home({ user }) {
 
   return (
     <div className="h-screen bg-black flex flex-col overflow-hidden">
+      {/* Horoscope Modal */}
+      {showHoroscopeModal && todayHoroscope && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+          onClick={() => setShowHoroscopeModal(false)}
+        >
+          <div 
+            className="bg-gradient-to-br from-purple-900/90 via-black to-pink-900/90 border border-white/20 rounded-3xl p-8 max-w-md w-full shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <ConstellationIcon sign={todayHoroscope.constellation} className="w-10 h-10" />
+                <h2 className="text-2xl font-light text-white">{todayHoroscope.sign}</h2>
+              </div>
+              <button 
+                onClick={() => setShowHoroscopeModal(false)}
+                className="text-white/60 hover:text-white transition-colors"
+              >
+                <XCircle className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <p className="text-white/90 text-lg font-light leading-relaxed">
+                {todayHoroscope.message}
+              </p>
+              
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-white/50 text-sm text-center">
+                  Your cosmic energy for today
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="border-b border-white/10 bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <img src="/asign-logo.png" alt="A Sign" className="h-10" />
+          {todayHoroscope ? (
+            <button 
+              onClick={() => setShowHoroscopeModal(true)}
+              className="hover:scale-110 transition-transform cursor-pointer"
+              title="View today's horoscope"
+            >
+              <ConstellationIcon sign={todayHoroscope.constellation} className="w-10 h-10" />
+            </button>
+          ) : (
+            <div className="w-10 h-10 flex items-center justify-center">
+              <Sparkles className="w-6 h-6 text-purple-400 animate-pulse" />
+            </div>
+          )}
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1 text-purple-400">
               <Star className="w-4 h-4" />
