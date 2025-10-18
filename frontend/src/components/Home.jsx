@@ -486,6 +486,7 @@ export default function Home({ user }) {
               height: '65vh',
               maxHeight: '600px',
               transformStyle: 'preserve-3d',
+              transition: showProfileInfo || !isDragging ? 'transform 0.6s' : 'none',
               transform: showProfileInfo 
                 ? 'rotateY(180deg)' 
                 : isDragging 
