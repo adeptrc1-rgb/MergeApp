@@ -758,7 +758,7 @@ export default function Home({ user }) {
           </div>
 
           {/* Action Buttons - Overlapping card, tucked under compatibility score */}
-          <div className="w-full -mt-8 flex items-center justify-center gap-6 px-4 relative z-10">
+          <div className="w-full -mt-6 flex items-center justify-center gap-4 px-2 relative z-10">
             {/* Reverse Button */}
             <button
               onClick={(e) => {
@@ -767,10 +767,10 @@ export default function Home({ user }) {
                 handleUndo();
               }}
               disabled={swipeHistory.length === 0}
-              className="bg-white/10 backdrop-blur-md rounded-full p-3.5 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
+              className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
               title="Undo"
             >
-              <RotateCcw className="w-5 h-5 text-yellow-400" />
+              <RotateCcw className="w-4 h-4 text-yellow-400" />
             </button>
 
             {/* Pass Button */}
@@ -781,10 +781,10 @@ export default function Home({ user }) {
                 createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
                 handlePass();
               }}
-              className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-red-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-3.5 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-red-500/50"
               title="Pass"
             >
-              <X className="w-6 h-6 text-red-500" />
+              <X className="w-5 h-5 text-red-500" />
             </button>
 
             {/* Like Button */}
@@ -795,10 +795,10 @@ export default function Home({ user }) {
                 createFloatingHearts(rect.left + rect.width / 2, rect.top, 8);
                 handleLike();
               }}
-              className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-green-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-3.5 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-green-500/50"
               title="Like"
             >
-              <Heart className="w-6 h-6 text-green-500" />
+              <Heart className="w-5 h-5 text-green-500" />
             </button>
 
             {/* Super Like Button */}
@@ -809,10 +809,10 @@ export default function Home({ user }) {
                 createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
                 handleSuperLike();
               }}
-              className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-blue-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-3.5 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-blue-500/50"
               title="Super Like"
             >
-              <Star className="w-6 h-6 text-blue-500 fill-blue-500" />
+              <Star className="w-5 h-5 text-blue-500 fill-blue-500" />
             </button>
 
             {/* Direct Message Button */}
@@ -822,10 +822,10 @@ export default function Home({ user }) {
                 createFloatingSign(e.currentTarget);
                 handleDirectMessage();
               }}
-              className="bg-white/10 backdrop-blur-md rounded-full p-3.5 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
+              className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
               title="Direct Message"
             >
-              <MessageCircle className="w-5 h-5 text-purple-400" />
+              <MessageCircle className="w-4 h-4 text-purple-400" />
             </button>
           </div>
         </div>
