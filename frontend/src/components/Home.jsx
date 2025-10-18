@@ -532,9 +532,32 @@ export default function Home({ user }) {
                 backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`
               }}
             >
+              {/* Photo Navigation Tap Zones */}
+              {currentMatch.photos && currentMatch.photos.length > 1 && (
+                <>
+                  {/* Left tap zone - previous photo */}
+                  <div 
+                    className="absolute left-0 top-0 bottom-0 w-1/3 z-20 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevPhoto();
+                    }}
+                  />
+                  
+                  {/* Right tap zone - next photo */}
+                  <div 
+                    className="absolute right-0 top-0 bottom-0 w-1/3 z-20 cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextPhoto();
+                    }}
+                  />
+                </>
+              )}
+
               {/* Photo Navigation Dots */}
               {currentMatch.photos && currentMatch.photos.length > 1 && (
-                <div className="absolute top-4 left-0 right-0 flex justify-center gap-1 px-4 z-10">
+                <div className="absolute top-4 left-0 right-0 flex justify-center gap-1 px-4 z-10 pointer-events-none">
                   {currentMatch.photos.map((_, idx) => (
                     <div
                       key={idx}
