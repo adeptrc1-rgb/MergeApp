@@ -610,6 +610,11 @@ export default function Home({ user }) {
                   </div>
                   
                   {/* Dropdown Toggle Button */}
+                {/* Small spacer to ensure facts remain visible when expanded */}
+                {showDropdown && (
+                  <div className="h-1"></div>
+                )}
+
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
