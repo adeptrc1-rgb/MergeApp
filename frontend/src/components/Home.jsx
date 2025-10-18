@@ -717,7 +717,7 @@ export default function Home({ user }) {
                   className="absolute top-4 right-4 z-20 bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-md border border-white/30 rounded-full p-3 hover:from-purple-500/40 hover:to-pink-500/40 hover:scale-110 transition-all shadow-xl"
                   title="Flip to see profile details"
                 >
-                  <RotateCcw className="w-5 h-5 text-purple-200" />
+                  <Info className="w-5 h-5 text-purple-200" />
                 </button>
 
                 {/* Tap indicator */}
