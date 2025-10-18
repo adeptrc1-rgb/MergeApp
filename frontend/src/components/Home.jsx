@@ -479,12 +479,14 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content - Card with 3D Flip */}
-      <div className="flex-1 flex flex-col overflow-hidden pb-16">
-        <div className="w-full h-full relative flex flex-col">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 pb-32 pt-4 bg-gradient-to-b from-black via-purple-900/20 to-black">
+        <div className="w-full max-w-md relative flex flex-col items-center">
           <div 
-            className="w-full h-full"
+            className="w-full"
             style={{ 
-              perspective: '1000px'
+              perspective: '1000px',
+              height: '65vh',
+              maxHeight: '600px'
             }}
           >
           <div 
