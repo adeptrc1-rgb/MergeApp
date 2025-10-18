@@ -485,13 +485,9 @@ export default function Home({ user }) {
             style={{
               height: '65vh',
               maxHeight: '600px',
-              transformStyle: 'preserve-3d',
-              transition: showProfileInfo || !isDragging ? 'transform 0.6s' : 'none',
-              transform: showProfileInfo 
-                ? 'rotateY(180deg)' 
-                : isDragging 
-                  ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
-                  : 'rotateY(0deg)'
+              transform: isDragging 
+                ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
+                : 'none'
             }}
           >
             {/* Swipe Overlay Labels */}
