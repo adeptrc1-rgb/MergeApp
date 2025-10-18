@@ -34,26 +34,7 @@ export default function MainDashboard({ user, logout }) {
         {renderContent()}
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-md border-t border-white/10">
-        <div className="flex justify-around items-center py-2 px-4 safe-bottom">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              data-tab={tab.id}
-              className={`flex flex-col items-center justify-center p-2 rounded-lg transition-all ${
-                activeTab === tab.id
-                  ? 'text-purple-400 bg-purple-500/20'
-                  : 'text-white/60 hover:text-white/80'
-              }`}
-            >
-              <span className="text-xl mb-1">{tab.icon}</span>
-              <span className="text-xs font-medium">{tab.label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Bottom Navigation intentionally removed to avoid duplicate nav bars when child components include their own nav. */}
 
       {/* Floating Cosmic Wheel Button */}
       <button
