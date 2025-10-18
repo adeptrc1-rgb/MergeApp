@@ -693,159 +693,25 @@ export default function Home({ user }) {
               </div>
             </div>
 
-            {/* Info Section */}
-            <div className="absolute bottom-0 left-0 right-0 text-white flex flex-col">
-              {/* Expandable Info Dropdown */}
-              {showProfileInfo && (
-                <div className="bg-gradient-to-b from-purple-900/40 via-black/95 to-black/98 backdrop-blur-xl border-t border-white/10 shadow-2xl animate-slideUp">
-                  <div className="p-5 space-y-4 max-h-48 overflow-y-auto custom-scrollbar">
-                    {/* Bio */}
-                    {currentMatch.bio && (
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
-                          <h3 className="text-purple-300 text-xs uppercase tracking-widest font-light">About</h3>
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
-                        </div>
-                        <p className="text-white/90 text-sm leading-relaxed font-light">{currentMatch.bio}</p>
-                      </div>
-                    )}
-
-                    {/* Interests */}
-                    {currentMatch.interests && currentMatch.interests.length > 0 && (
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2">
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-pink-500/30 to-transparent"></div>
-                          <h3 className="text-pink-300 text-xs uppercase tracking-widest font-light">Interests</h3>
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-pink-500/30 to-transparent"></div>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {currentMatch.interests.slice(0, 6).map((interest, idx) => (
-                            <span 
-                              key={idx}
-                              className="px-4 py-1.5 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-400/20 rounded-full text-xs text-white/90 font-light backdrop-blur-sm hover:border-purple-400/40 transition-colors"
-                            >
-                              {interest}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Relationship Goals */}
-                    {currentMatch.deal_breakers?.relationship_goals && (
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-rose-500/30 to-transparent"></div>
-                          <h3 className="text-rose-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
-                            <Heart className="w-3 h-3" />
-                            Looking For
-                          </h3>
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-rose-500/30 to-transparent"></div>
-                        </div>
-                        <p className="text-white/90 text-sm font-light capitalize">{currentMatch.deal_breakers.relationship_goals.replace('_', ' ')}</p>
-                      </div>
-                    )}
-
-                    {/* Lifestyle */}
-                    {currentMatch.lifestyle_factors && (
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2">
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
-                          <h3 className="text-cyan-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
-                            <Sparkles className="w-3 h-3" />
-                            Lifestyle
-                          </h3>
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 text-xs">
-                          {currentMatch.lifestyle_factors.fitness_health && (
-                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
-                              <span className="text-white/70 font-light">Fitness</span>
-                              <div className="flex gap-1">
-                                {[...Array(5)].map((_, i) => (
-                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.fitness_health ? 'bg-cyan-400' : 'bg-white/20'}`}></div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          {currentMatch.lifestyle_factors.social_energy && (
-                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
-                              <span className="text-white/70 font-light">Social</span>
-                              <div className="flex gap-1">
-                                {[...Array(5)].map((_, i) => (
-                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.social_energy ? 'bg-pink-400' : 'bg-white/20'}`}></div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          {currentMatch.lifestyle_factors.travel_adventure && (
-                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
-                              <span className="text-white/70 font-light">Travel</span>
-                              <div className="flex gap-1">
-                                {[...Array(5)].map((_, i) => (
-                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.travel_adventure ? 'bg-purple-400' : 'bg-white/20'}`}></div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          {currentMatch.lifestyle_factors.family_future && (
-                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
-                              <span className="text-white/70 font-light">Family</span>
-                              <div className="flex gap-1">
-                                {[...Array(5)].map((_, i) => (
-                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.family_future ? 'bg-rose-400' : 'bg-white/20'}`}></div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Music Preferences */}
-                    {currentMatch.preferences?.music && (
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
-                          <h3 className="text-indigo-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
-                            <Music className="w-3 h-3" />
-                            Music
-                          </h3>
-                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
-                        </div>
-                        <p className="text-white/90 text-sm font-light">{currentMatch.preferences.music}</p>
-                      </div>
-                    )}
-                  </div>
-
-                </div>
-              )}
-
-              {/* Main Info Bar */}
+            {/* Front Side Info - Basic Info Bar */}
+            <div className="absolute bottom-0 left-0 right-0 text-white">
               <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative">
-                {/* Toggle Info Button */}
+                {/* Flip Card Button */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowProfileInfo(!showProfileInfo);
                   }}
                   className="absolute top-4 right-4 z-20 bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-md border border-white/30 rounded-full p-3 hover:from-purple-500/40 hover:to-pink-500/40 hover:scale-110 transition-all shadow-xl"
-                  title={showProfileInfo ? "Hide details" : "Show more"}
+                  title="Flip to see profile details"
                 >
-                  {showProfileInfo ? (
-                    <ChevronDown className="w-5 h-5 text-white" />
-                  ) : (
-                    <ChevronUp className="w-5 h-5 text-purple-200 animate-bounce" />
-                  )}
+                  <RotateCcw className="w-5 h-5 text-purple-200" />
                 </button>
 
                 {/* Tap indicator */}
-                {!showProfileInfo && (
-                  <div className="absolute top-14 right-4 text-xs text-white/60 font-light animate-pulse">
-                    Tap for info
-                  </div>
-                )}
+                <div className="absolute top-14 right-4 text-xs text-white/60 font-light animate-pulse">
+                  Tap to flip
+                </div>
 
                 <h2 className="text-4xl font-light mb-2">
                   {currentMatch.first_name}, {age}
