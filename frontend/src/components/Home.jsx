@@ -530,10 +530,9 @@ export default function Home({ user }) {
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90 pointer-events-none" />
             </div>
 
-            {/* Info Section */}
-            <div className="absolute bottom-0 left-0 right-0 text-white">
-              {/* Expandable Info Dropdown */}
-              {showProfileInfo && (
+            {/* Expandable Info Dropdown - Positioned above info bar */}
+            {showProfileInfo && (
+              <div className="absolute bottom-0 left-0 right-0 mb-36 text-white z-10">(
                 <div className="bg-gradient-to-b from-purple-900/40 via-black/95 to-black/98 backdrop-blur-xl border-t border-white/10 shadow-2xl animate-slideUp">
                   <div className="p-6 space-y-5 max-h-72 overflow-y-auto custom-scrollbar">
                     {/* Bio */}
