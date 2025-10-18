@@ -633,7 +633,7 @@ export default function Home({ user }) {
                   </button>
                 {showDropdown && (
                   <div className="text-white/70 text-xs mb-2">Facts</div>
-                )
+                )}
 
                 </div>
 
