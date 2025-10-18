@@ -1227,7 +1227,7 @@ function HomeWrapper() {
 
 function MessagesWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <MainDashboard user={user} logout={logout} />;
+  return <Messages user={user} logout={logout} />;
 }
 
 function ConnectionsWrapper() {
