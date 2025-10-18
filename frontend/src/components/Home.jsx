@@ -542,25 +542,33 @@ export default function Home({ user }) {
             <div className="absolute bottom-0 left-0 right-0 text-white">
               {/* Expandable Info Dropdown */}
               {showProfileInfo && (
-                <div className="bg-black/95 backdrop-blur-lg border-t border-white/20 p-6 max-h-64 overflow-y-auto animate-slideUp">
-                  <div className="space-y-4">
+                <div className="bg-gradient-to-b from-purple-900/40 via-black/95 to-black/98 backdrop-blur-xl border-t border-white/10 shadow-2xl animate-slideUp">
+                  <div className="p-6 space-y-5 max-h-72 overflow-y-auto custom-scrollbar">
                     {/* Bio */}
                     {currentMatch.bio && (
-                      <div>
-                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2">About</h3>
-                        <p className="text-white/90 text-sm leading-relaxed">{currentMatch.bio}</p>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
+                          <h3 className="text-purple-300 text-xs uppercase tracking-widest font-light">About</h3>
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
+                        </div>
+                        <p className="text-white/90 text-sm leading-relaxed font-light">{currentMatch.bio}</p>
                       </div>
                     )}
 
                     {/* Interests */}
                     {currentMatch.interests && currentMatch.interests.length > 0 && (
-                      <div>
-                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2">Interests</h3>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-pink-500/30 to-transparent"></div>
+                          <h3 className="text-pink-300 text-xs uppercase tracking-widest font-light">Interests</h3>
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-pink-500/30 to-transparent"></div>
+                        </div>
                         <div className="flex flex-wrap gap-2">
                           {currentMatch.interests.slice(0, 6).map((interest, idx) => (
                             <span 
                               key={idx}
-                              className="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full text-xs text-white/90"
+                              className="px-4 py-1.5 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-400/20 rounded-full text-xs text-white/90 font-light backdrop-blur-sm hover:border-purple-400/40 transition-colors"
                             >
                               {interest}
                             </span>
@@ -571,23 +579,37 @@ export default function Home({ user }) {
 
                     {/* Relationship Goals */}
                     {currentMatch.deal_breakers?.relationship_goals && (
-                      <div>
-                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2">Looking For</h3>
-                        <p className="text-white/90 text-sm capitalize">{currentMatch.deal_breakers.relationship_goals.replace('_', ' ')}</p>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-rose-500/30 to-transparent"></div>
+                          <h3 className="text-rose-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
+                            <Heart className="w-3 h-3" />
+                            Looking For
+                          </h3>
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-rose-500/30 to-transparent"></div>
+                        </div>
+                        <p className="text-white/90 text-sm font-light capitalize">{currentMatch.deal_breakers.relationship_goals.replace('_', ' ')}</p>
                       </div>
                     )}
 
                     {/* Music Preferences */}
                     {currentMatch.preferences?.music && (
-                      <div>
-                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2 flex items-center gap-1">
-                          <Music className="w-3 h-3" />
-                          Music
-                        </h3>
-                        <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+                          <h3 className="text-indigo-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
+                            <Music className="w-3 h-3" />
+                            Music
+                          </h3>
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+                        </div>
+                        <p className="text-white/90 text-sm font-light">{currentMatch.preferences.music}</p>
                       </div>
                     )}
                   </div>
+
+                  {/* Cosmic bottom accent */}
+                  <div className="h-1 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20"></div>
                 </div>
               )}
 
