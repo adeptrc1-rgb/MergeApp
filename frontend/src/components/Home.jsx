@@ -757,8 +757,8 @@ export default function Home({ user }) {
           </div>
           </div>
 
-          {/* Action Buttons - Overlapping card, tucked under compatibility score */}
-          <div className="w-full -mt-8 flex items-center justify-center gap-6 px-4 relative z-10">
+          {/* Action Buttons - Hidden in Tinder-style layout */}
+          <div className="hidden">
             {/* Reverse Button */}
             <button
               onClick={(e) => {
