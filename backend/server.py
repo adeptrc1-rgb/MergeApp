@@ -1546,6 +1546,11 @@ async def potential_matches(user: User = Depends(get_current_user)):
             "current_location": u.get("current_location") or {"latitude": 34.05, "longitude": -118.24},
             "compatibility_score": compat_breakdown["overall_compatibility"],
             "compatibility_breakdown": compat_breakdown,
+            "bio": u.get("bio"),
+            "interests": u.get("interests"),
+            "lifestyle_factors": u.get("lifestyle_factors"),
+            "deal_breakers": u.get("deal_breakers"),
+            "preferences": u.get("preferences"),
         })
     return out
 
