@@ -698,7 +698,7 @@ export default function Home({ user }) {
             </div>
 
             {/* Front Side Info - Basic Info Bar */}
-            <div className="absolute bottom-0 left-0 right-0 text-white">
+            <div className={`absolute bottom-0 left-0 right-0 text-white transition-all duration-500 ${showProfileInfo ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
               <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative">
                 {/* Flip Card Button */}
                 <button
