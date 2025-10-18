@@ -633,10 +633,6 @@ export default function Home({ user }) {
                   <div className="h-1"></div>
                 )}
 
-                {showDropdown && (
-                  <div className="text-white/70 text-xs mb-2">Facts</div>
-                )}
-
                 {/* Expandable Dropdown Content */}
                 <div 
                   className={`transition-all duration-300 ease-in-out ${
