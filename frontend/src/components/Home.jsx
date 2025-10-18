@@ -479,7 +479,7 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content - Card with 3D Flip */}
-      <div className="flex-1 flex flex-col items-center justify-center px-2 pb-20 pt-2 overflow-hidden">
+      <div className="flex-1 flex flex-col items-center justify-start px-2 pb-20 pt-6 overflow-hidden">
         <div className="w-full max-w-md relative flex flex-col items-center">
           <div 
             className="w-full"
