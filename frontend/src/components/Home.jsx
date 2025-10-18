@@ -247,7 +247,6 @@ export default function Home({ user }) {
     const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
     
     setIsDragging(true);
-    setHasDragged(false);
     setDragStart({ x: clientX, y: clientY });
   };
 
@@ -263,11 +262,6 @@ export default function Home({ user }) {
     const deltaX = clientX - dragStart.x;
     const deltaY = clientY - dragStart.y;
     
-    // Mark as dragged if moved more than 10px
-    if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
-      setHasDragged(true);
-    }
-    
     setDragOffset({ x: deltaX, y: deltaY });
   };
 
@@ -278,13 +272,6 @@ export default function Home({ user }) {
     
     const swipeThreshold = 100;
     const superLikeThreshold = -150; // Swipe up
-    
-    // If user didn't drag (just tapped), toggle card flip
-    if (!hasDragged && Math.abs(dragOffset.x) < 10 && Math.abs(dragOffset.y) < 10) {
-      setShowProfileInfo(!showProfileInfo);
-      setDragOffset({ x: 0, y: 0 });
-      return;
-    }
     
     // Check for super like (swipe up)
     if (dragOffset.y < superLikeThreshold && Math.abs(dragOffset.x) < 100) {
