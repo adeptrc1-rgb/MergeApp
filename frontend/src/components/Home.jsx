@@ -589,6 +589,17 @@ export default function Home({ user }) {
                   }`}
                 >
                   <div className="space-y-4 pt-2 pb-4 max-h-80 overflow-y-auto custom-scrollbar">
+                    {/* Check if any data exists */}
+                    {!currentMatch.bio && 
+                     (!currentMatch.interests || currentMatch.interests.length === 0) && 
+                     !currentMatch.deal_breakers?.relationship_goals && 
+                     !currentMatch.lifestyle_factors && 
+                     !currentMatch.preferences?.music && (
+                      <div className="text-center py-4">
+                        <p className="text-white/50 text-sm italic">No additional profile information available</p>
+                      </div>
+                    )}
+
                     {/* Bio */}
                     {currentMatch.bio && (
                       <div className="space-y-2">
