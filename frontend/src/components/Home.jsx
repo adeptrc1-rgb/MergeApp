@@ -482,6 +482,14 @@ export default function Home({ user }) {
       <div className="flex-1 flex flex-col items-center justify-center p-4 pb-32 overflow-hidden">
         <div className="w-full max-w-md relative flex flex-col items-center">
           <div 
+            className="w-full"
+            style={{ 
+              perspective: '1000px',
+              height: '65vh',
+              maxHeight: '600px'
+            }}
+          >
+          <div 
             ref={cardRef}
             onMouseDown={handleDragStart}
             onMouseMove={handleDragMove}
@@ -490,20 +498,19 @@ export default function Home({ user }) {
             onTouchStart={handleDragStart}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
-            className={`relative bg-white/5 rounded-3xl border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
+            className={`relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
               swipeDirection === 'right' ? 'translate-x-full rotate-12' :
               swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
               swipeDirection === 'up' ? '-translate-y-full scale-110' :
               ''
             }`}
             style={{
-              height: showDropdown ? '75vh' : '65vh',
-              maxHeight: showDropdown ? '700px' : '600px',
+              height: '65vh',
+              maxHeight: '600px',
               transform: isDragging 
                 ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                 : swipeDirection ? undefined : 'translate(0, 0)',
-              transition: isDragging ? 'none' : 'transform 0.3s ease-out, height 0.3s ease-out, max-height 0.3s ease-out',
-              overflow: showDropdown ? 'auto' : 'hidden'
+              transition: isDragging ? 'none' : 'transform 0.3s ease-out'
             }}
           >
             {/* Swipe Overlay Labels */}
