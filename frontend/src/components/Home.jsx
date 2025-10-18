@@ -456,9 +456,13 @@ export default function Home({ user }) {
         </div>
       </div>
 
-      {/* Main Content - Card */}
+      {/* Main Content - Card with 3D Flip */}
       <div className="flex-1 flex flex-col items-center justify-center p-4 pb-32 overflow-hidden">
         <div className="w-full max-w-md relative flex flex-col items-center">
+          <div 
+            className="absolute inset-0"
+            style={{ perspective: '1000px' }}
+          >
           <div 
             ref={cardRef}
             onMouseDown={handleDragStart}
