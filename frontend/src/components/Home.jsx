@@ -482,11 +482,9 @@ export default function Home({ user }) {
       <div className="flex-1 flex flex-col items-center justify-start px-0 pb-0 pt-0 overflow-hidden">
         <div className="w-full max-w-md relative flex flex-col items-center">
           <div 
-            className="w-full"
+            className="w-full h-full"
             style={{ 
-              perspective: '1000px',
-              height: '85vh',
-              maxHeight: '800px'
+              perspective: '1000px'
             }}
           >
           <div 
