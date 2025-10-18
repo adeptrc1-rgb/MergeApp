@@ -498,12 +498,12 @@ export default function Home({ user }) {
             onTouchStart={handleDragStart}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
-            className={`relative bg-white/5 rounded-2xl overflow-visible border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
+            className={`relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
               swipeDirection === 'right' ? 'translate-x-full rotate-12' :
               swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
               swipeDirection === 'up' ? '-translate-y-full scale-110' :
               ''
-            } ${showDropdown ? 'z-50 -mt-6 md:-mt-8' : ''}`}
+            }`}
             style={{
               height: showDropdown ? '78vh' : '68vh',
               maxHeight: showDropdown ? '720px' : '620px',
