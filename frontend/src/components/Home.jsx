@@ -153,6 +153,7 @@ export default function Home({ user }) {
   const handlePass = async () => {
     if (!currentMatch) return;
     setSwipeDirection('left');
+    setShowProfileInfo(false); // Close info on swipe
     
     // Create shooting star animation
     if (cardRef.current) {
