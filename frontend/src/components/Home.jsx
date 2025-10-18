@@ -505,11 +505,12 @@ export default function Home({ user }) {
               </div>
             )}
 
-            {/* Photo */}
+            {/* Front Side - Photo */}
             <div 
               className="absolute inset-0 bg-cover bg-center transition-all duration-300"
               style={{ 
-                backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})` 
+                backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`,
+                backfaceVisibility: 'hidden'
               }}
             >
               {/* Photo Navigation Dots */}
