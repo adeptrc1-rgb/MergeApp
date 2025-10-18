@@ -626,6 +626,10 @@ export default function Home({ user }) {
                       <ChevronDown className="w-4 h-4" />
                     )}
                   </button>
+                {showDropdown && (
+                  <div className="text-white/70 text-xs mb-2">Facts</div>
+                )
+
                 </div>
 
                 {/* Expandable Dropdown Content */}
