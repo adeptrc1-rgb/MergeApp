@@ -77,7 +77,7 @@ export default function Home({ user }) {
   const handleLike = async () => {
     if (!currentMatch) return;
     setSwipeDirection('right');
-    setShowProfileInfo(false); // Close info on swipe
+    setShowDropdown(false); // Close dropdown on swipe
     
     // Create starburst and sparkle trail animation
     if (cardRef.current) {
