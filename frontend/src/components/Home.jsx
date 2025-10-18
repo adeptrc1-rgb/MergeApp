@@ -532,7 +532,7 @@ export default function Home({ user }) {
 
             {/* Expandable Info Dropdown - Positioned above info bar */}
             {showProfileInfo && (
-              <div className="absolute bottom-0 left-0 right-0 mb-36 text-white z-10">(
+              <div className="absolute bottom-48 left-0 right-0 text-white z-10">
                 <div className="bg-gradient-to-b from-purple-900/40 via-black/95 to-black/98 backdrop-blur-xl border-t border-white/10 shadow-2xl animate-slideUp">
                   <div className="p-6 space-y-5 max-h-72 overflow-y-auto custom-scrollbar">
                     {/* Bio */}
