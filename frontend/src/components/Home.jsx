@@ -122,6 +122,7 @@ export default function Home({ user }) {
     }
     
     setSwipeDirection('up');
+    setShowProfileInfo(false); // Close info on swipe
     
     // Create star burst effect from center going up
     if (cardRef.current) {
