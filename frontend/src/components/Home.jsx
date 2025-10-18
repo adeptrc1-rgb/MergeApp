@@ -528,7 +528,7 @@ export default function Home({ user }) {
 
             {/* Front Side - Photo */}
             <div 
-              className="absolute inset-0 bg-cover bg-center transition-all duration-300"
+              className={`absolute inset-0 bg-cover bg-center transition-all duration-300 ${showDropdown ? 'top-[-40px]' : ''}`}
               style={{ 
                 backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`
               }}
