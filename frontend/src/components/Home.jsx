@@ -771,19 +771,21 @@ export default function Home({ user }) {
             className="w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0"
             style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)' }}
           >
-            {/* Reverse Button */}
-            <button
-              onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
-                handleUndo();
-              }}
-              disabled={swipeHistory.length === 0}
-              className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
-              title="Undo"
-            >
-              <RotateCcw className="w-4 h-4 text-yellow-400" />
-            </button>
+            {/* Reverse Button (hidden when expanded) */}
+            {!showDropdown && (
+              <button
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+                  handleUndo();
+                }}
+                disabled={swipeHistory.length === 0}
+                className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
+                title="Undo"
+              >
+                <RotateCcw className="w-4 h-4 text-yellow-400" />
+              </button>
+            )}
 
             {/* Pass Button */}
             <button
