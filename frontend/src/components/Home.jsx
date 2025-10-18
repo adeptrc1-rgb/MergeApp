@@ -708,6 +708,7 @@ export default function Home({ user }) {
                   </div>
                 )}
               </div>
+              </div>
             </div>
 
             {/* Front Side Info - Basic Info Bar */}
