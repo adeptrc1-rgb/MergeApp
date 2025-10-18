@@ -542,6 +542,157 @@ export default function Home({ user }) {
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90 pointer-events-none" />
             </div>
 
+            {/* Back Side - Profile Info */}
+            <div 
+              className="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-black/95 to-pink-900/90 backdrop-blur-xl"
+              style={{ 
+                backfaceVisibility: 'hidden',
+                transform: 'rotateY(180deg)'
+              }}
+            >
+              <div className="p-6 space-y-4 h-full overflow-y-auto custom-scrollbar">
+                {/* Profile Header */}
+                <div className="text-center mb-6">
+                  <h2 className="text-3xl font-light mb-2 text-white">
+                    {currentMatch.first_name}, {age}
+                  </h2>
+                  <div className="flex items-center justify-center gap-2 text-white/80 mb-3">
+                    <Star className="w-4 h-4 text-purple-400" />
+                    <span className="text-base">{currentMatch.zodiac_sign}</span>
+                    <span className="text-white/40">•</span>
+                    <span className="text-sm">
+                      {getDistance(currentMatch) !== null 
+                        ? `${getDistance(currentMatch)} miles away` 
+                        : 'Location unavailable'}
+                    </span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                    <Zap className="w-3.5 h-3.5 text-purple-400" />
+                    <span className="text-sm font-medium">{compatibility}% Compatible</span>
+                  </div>
+                </div>
+
+                {/* Bio */}
+                {currentMatch.bio && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
+                      <h3 className="text-purple-300 text-xs uppercase tracking-widest font-light">About</h3>
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
+                    </div>
+                    <p className="text-white/90 text-sm leading-relaxed font-light">{currentMatch.bio}</p>
+                  </div>
+                )}
+
+                {/* Interests */}
+                {currentMatch.interests && currentMatch.interests.length > 0 && (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-pink-500/30 to-transparent"></div>
+                      <h3 className="text-pink-300 text-xs uppercase tracking-widest font-light">Interests</h3>
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-pink-500/30 to-transparent"></div>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {currentMatch.interests.slice(0, 6).map((interest, idx) => (
+                        <span 
+                          key={idx}
+                          className="px-4 py-1.5 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-400/20 rounded-full text-xs text-white/90 font-light backdrop-blur-sm hover:border-purple-400/40 transition-colors"
+                        >
+                          {interest}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Relationship Goals */}
+                {currentMatch.deal_breakers?.relationship_goals && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-rose-500/30 to-transparent"></div>
+                      <h3 className="text-rose-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
+                        <Heart className="w-3 h-3" />
+                        Looking For
+                      </h3>
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-rose-500/30 to-transparent"></div>
+                    </div>
+                    <p className="text-white/90 text-sm font-light capitalize">{currentMatch.deal_breakers.relationship_goals.replace('_', ' ')}</p>
+                  </div>
+                )}
+
+                {/* Lifestyle */}
+                {currentMatch.lifestyle_factors && (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                      <h3 className="text-cyan-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
+                        <Sparkles className="w-3 h-3" />
+                        Lifestyle
+                      </h3>
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      {currentMatch.lifestyle_factors.fitness_health && (
+                        <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                          <span className="text-white/70 font-light">Fitness</span>
+                          <div className="flex gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.fitness_health ? 'bg-cyan-400' : 'bg-white/20'}`}></div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {currentMatch.lifestyle_factors.social_energy && (
+                        <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                          <span className="text-white/70 font-light">Social</span>
+                          <div className="flex gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.social_energy ? 'bg-pink-400' : 'bg-white/20'}`}></div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {currentMatch.lifestyle_factors.travel_adventure && (
+                        <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                          <span className="text-white/70 font-light">Travel</span>
+                          <div className="flex gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.travel_adventure ? 'bg-purple-400' : 'bg-white/20'}`}></div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {currentMatch.lifestyle_factors.family_future && (
+                        <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                          <span className="text-white/70 font-light">Family</span>
+                          <div className="flex gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.family_future ? 'bg-rose-400' : 'bg-white/20'}`}></div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Music Preferences */}
+                {currentMatch.preferences?.music && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+                      <h3 className="text-indigo-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
+                        <Music className="w-3 h-3" />
+                        Music
+                      </h3>
+                      <div className="h-px flex-grow bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+                    </div>
+                    <p className="text-white/90 text-sm font-light">{currentMatch.preferences.music}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
             {/* Info Section */}
             <div className="absolute bottom-0 left-0 right-0 text-white flex flex-col">
               {/* Expandable Info Dropdown */}
