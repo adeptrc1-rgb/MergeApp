@@ -505,7 +505,7 @@ export default function Home({ user }) {
 
             {/* Front Side - Photo */}
             <div 
-              className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${showProfileInfo ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+              className="absolute inset-0 bg-cover bg-center transition-all duration-300"
               style={{ 
                 backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`
               }}
