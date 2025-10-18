@@ -544,11 +544,7 @@ export default function Home({ user }) {
 
             {/* Back Side - Profile Info */}
             <div 
-              className="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-black/95 to-pink-900/90 backdrop-blur-xl"
-              style={{ 
-                backfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)'
-              }}
+              className={`absolute inset-0 bg-gradient-to-br from-purple-900/90 via-black/95 to-pink-900/90 backdrop-blur-xl transition-all duration-500 ${showProfileInfo ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             >
               {/* Back to Front Button */}
               <button
