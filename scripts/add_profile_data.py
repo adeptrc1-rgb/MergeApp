@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""
+Add bio, interests, lifestyle, and music preferences to test users
+"""
+
+import os
+import asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
+from dotenv import load_dotenv
+import random
+
+load_dotenv()
+
+MONGO_URL = os.environ.get("MONGO_URL")
+DB_NAME = os.environ.get("DB_NAME", "astrology_dating_db")
+
+# Sample data
+SAMPLE_BIOS = [
+    "Adventure seeker with a passion for life. Love exploring new places and meeting interesting people. ✨",
+    "Coffee enthusiast, bookworm, and stargazer. Looking for someone to share meaningful conversations with. 📚☕",
+    "Fitness lover and foodie. Believer in living life to the fullest. Let's make memories together! 💪🍕",
+    "Creative soul who loves art, music, and spontaneous adventures. Life's too short for boring moments. 🎨🎵",
+    "Yoga instructor by day, Netflix binger by night. Looking for someone who can balance both worlds. 🧘‍♀️📺",
+    "Tech geek with a love for hiking. Enjoy deep conversations under the stars. Let's connect! 💻⛰️",
+    "Traveler, dreamer, and hopeless romantic. Searching for my partner in crime for life's adventures. ✈️❤️",
+    "Music lover and concert goer. Life is better with a good playlist and great company. 🎧🎤",
+    "Nature enthusiast who loves camping and outdoor activities. Let's explore the world together! 🏕️🌲",
+    "Foodie, wine lover, and amateur chef. Looking for someone to share culinary adventures with. 🍷👨‍🍳"
+]
+
+INTERESTS_POOL = [
+    "Yoga", "Hiking", "Photography", "Cooking", "Travel", "Music",
+    "Art", "Reading", "Gaming", "Sports", "Dancing", "Movies",
+    "Theatre", "Foodie", "Wine", "Coffee", "Meditation", "Fitness",
+    "Fashion", "Tech", "DIY", "Volunteering", "Pets", "Nature",
+    "Concerts", "Museums", "Beach", "Mountains", "Camping", "Surfing"
+]
+
+MUSIC_PREFERENCES = [
+    "Indie, Alternative Rock, and Chill Vibes",
+    "Hip-Hop, R&B, and Soul",
+    "Electronic, House, and Techno",
+    "Pop, Top 40, and Dance Music",
+    "Rock, Classic Rock, and Metal",
+    "Jazz, Blues, and Classical",
+    "Country, Folk, and Americana",
+    "Reggae, Latin, and World Music",
+    "Everything from Mozart to Drake",
+    "Live music lover - all genres!"
+]
+
+async def add_profile_data():
+    """Add bio, interests, and music to users"""
+    client = AsyncIOMotorClient(MONGO_URL)
+    db = client[DB_NAME]
+    
+    try:
+        # Find users without profile data
+        cursor = db.users.find({})
+        updated_count = 0
+        
+        async for user in cursor:
+            update_data = {}
+            
+            # Add bio if missing
+            if not user.get("bio"):
+                update_data["bio"] = random.choice(SAMPLE_BIOS)
+            
+            # Add interests if missing or empty
+            if not user.get("interests") or len(user.get("interests", [])) == 0:
+                num_interests = random.randint(4, 8)
+                update_data["interests"] = random.sample(INTERESTS_POOL, num_interests)
+            
+            # Add lifestyle_factors if missing
+            if not user.get("lifestyle_factors"):
+                update_data["lifestyle_factors"] = {
+                    "fitness_health": random.randint(2, 5),
+                    "career_ambition": random.randint(2, 5),
+                    "social_energy": random.randint(2, 5),
+                    "travel_adventure": random.randint(2, 5),
+                    "nightlife_lifestyle": random.randint(1, 4),
+                    "family_future": random.randint(3, 5),
+                    "dating_approach": random.randint(2, 4),
+                    "passions_hobbies": random.randint(3, 5)
+                }
+            
+            # Add music preference if missing
+            if not user.get("preferences"):
+                update_data["preferences"] = {"music": random.choice(MUSIC_PREFERENCES)}
+            elif not user.get("preferences", {}).get("music"):
+                update_data["preferences.music"] = random.choice(MUSIC_PREFERENCES)
+            
+            # Update if we have data to add
+            if update_data:
+                await db.users.update_one(
+                    {"id": user["id"]},
+                    {"$set": update_data}
+                )
+                updated_count += 1
+                print(f"✅ Updated {user.get('email', user.get('first_name', 'Unknown'))}")
+        
+        print(f"\n🎉 Successfully updated {updated_count} users with profile data!")
+        
+    except Exception as e:
+        print(f"❌ Error: {e}")
+    finally:
+        client.close()
+
+if __name__ == "__main__":
+    print("🚀 Adding profile data to users...\n")
+    asyncio.run(add_profile_data())
