@@ -503,8 +503,7 @@ export default function Home({ user }) {
               ''
             }`}
             style={{
-              height: '85vh',
-              maxHeight: '800px',
+              height: '100%',
               transform: isDragging 
                 ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                 : swipeDirection ? undefined : 'translate(0, 0)',
