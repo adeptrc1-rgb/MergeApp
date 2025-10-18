@@ -592,6 +592,62 @@ export default function Home({ user }) {
                       </div>
                     )}
 
+                    {/* Lifestyle */}
+                    {currentMatch.lifestyle_factors && (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                          <h3 className="text-cyan-300 text-xs uppercase tracking-widest font-light flex items-center gap-1">
+                            <Sparkles className="w-3 h-3" />
+                            Lifestyle
+                          </h3>
+                          <div className="h-px flex-grow bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          {currentMatch.lifestyle_factors.fitness_health && (
+                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                              <span className="text-white/70 font-light">Fitness</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.fitness_health ? 'bg-cyan-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {currentMatch.lifestyle_factors.social_energy && (
+                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                              <span className="text-white/70 font-light">Social</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.social_energy ? 'bg-pink-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {currentMatch.lifestyle_factors.travel_adventure && (
+                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                              <span className="text-white/70 font-light">Travel</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.travel_adventure ? 'bg-purple-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {currentMatch.lifestyle_factors.family_future && (
+                            <div className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2">
+                              <span className="text-white/70 font-light">Family</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.family_future ? 'bg-rose-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Music Preferences */}
                     {currentMatch.preferences?.music && (
                       <div className="space-y-2">
