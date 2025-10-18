@@ -656,14 +656,9 @@ export default function Home({ user }) {
                     )}
                   </div>
 
-                  {/* Cosmic bottom accent */}
-                  <div className="h-1 bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20"></div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Info Section */}
-            <div className="absolute bottom-0 left-0 right-0 text-white">
               {/* Main Info Bar */}
               <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative">
                 {/* Toggle Info Button */}
