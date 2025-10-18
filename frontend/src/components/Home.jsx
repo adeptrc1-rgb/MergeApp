@@ -588,23 +588,19 @@ export default function Home({ user }) {
             <div className="absolute bottom-0 left-0 right-0 text-white">
               <div className={`bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative transition-all ${showDropdown ? 'pb-4' : ''}`}>
 
-                {!showDropdown && (
-                  <>
-                    <h2 className="text-4xl font-light mb-2">
-                      {currentMatch.first_name}, {age}
-                    </h2>
-                    <div className="flex items-center gap-2 text-white/80 mb-3">
-                      <Star className="w-4 h-4 text-purple-400" />
-                      <span className="text-base">{currentMatch.zodiac_sign}</span>
-                      <span className="text-white/40">•</span>
-                      <span className="text-sm">
-                        {getDistance(currentMatch) !== null 
-                          ? `${getDistance(currentMatch)} miles away` 
-                          : 'Location unavailable'}
-                      </span>
-                    </div>
-                  </>
-                )}
+                <h2 className="text-4xl font-light mb-2">
+                  {currentMatch.first_name}, {age}
+                </h2>
+                <div className="flex items-center gap-2 text-white/80 mb-3">
+                  <Star className="w-4 h-4 text-purple-400" />
+                  <span className="text-base">{currentMatch.zodiac_sign}</span>
+                  <span className="text-white/40">•</span>
+                  <span className="text-sm">
+                    {getDistance(currentMatch) !== null 
+                      ? `${getDistance(currentMatch)} miles away` 
+                      : 'Location unavailable'}
+                  </span>
+                </div>
 
                 {/* Compatibility Badge */}
                 <div className="flex items-center gap-3 mb-3 pointer-events-auto">
