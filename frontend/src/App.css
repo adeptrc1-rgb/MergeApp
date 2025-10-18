@@ -66,6 +66,25 @@ body {
   animation: slideUp 0.3s ease-out;
 }
 
+/* Custom scrollbar for profile dropdown */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(168, 85, 247, 0.5), rgba(236, 72, 153, 0.5));
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(168, 85, 247, 0.7), rgba(236, 72, 153, 0.7));
+}
+
 /* Moving background animations */
 @keyframes subtle-move {
   0%, 100% {
