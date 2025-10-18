@@ -829,17 +829,19 @@ export default function Home({ user }) {
               <Star className="w-5 h-5 text-blue-500 fill-blue-500" />
             </button>
 
-            {/* Direct Message Button (hidden when showing more) */}
-            <button
-              onClick={(e) => {
-                createFloatingSign(e.currentTarget);
-                handleDirectMessage();
-              }}
-              className={`bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50 ${showDropdown ? 'hidden' : ''}`}
-              title="Direct Message"
-            >
-              <MessageCircle className="w-4 h-4 text-purple-400" />
-            </button>
+            {/* Direct Message Button (removed when expanded) */}
+            {!showDropdown && (
+              <button
+                onClick={(e) => {
+                  createFloatingSign(e.currentTarget);
+                  handleDirectMessage();
+                }}
+                className="bg-white/10 backdrop-blur-md rounded-full p-3 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
+                title="Direct Message"
+              >
+                <MessageCircle className="w-4 h-4 text-purple-400" />
+              </button>
+            )}
           </div>
         </div>
       </div>
