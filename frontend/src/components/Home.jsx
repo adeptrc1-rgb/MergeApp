@@ -558,9 +558,139 @@ export default function Home({ user }) {
                 </div>
 
                 {/* Compatibility Badge */}
-                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                  <Zap className="w-3.5 h-3.5 text-purple-400" />
-                  <span className="text-sm font-medium">{compatibility}% Compatible</span>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                    <Zap className="w-3.5 h-3.5 text-purple-400" />
+                    <span className="text-sm font-medium">{compatibility}% Compatible</span>
+                  </div>
+                  
+                  {/* Dropdown Toggle Button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowDropdown(!showDropdown);
+                    }}
+                    className="flex items-center gap-1 text-white/80 hover:text-white transition-colors"
+                  >
+                    <span className="text-sm font-light">
+                      {showDropdown ? 'Show less' : 'Show more'}
+                    </span>
+                    {showDropdown ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )}
+                  </button>
+                </div>
+
+                {/* Expandable Dropdown Content */}
+                <div 
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    showDropdown ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="space-y-4 pt-2 pb-4 max-h-80 overflow-y-auto custom-scrollbar">
+                    {/* Bio */}
+                    {currentMatch.bio && (
+                      <div className="space-y-2">
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium">About</h3>
+                        <p className="text-white/90 text-sm leading-relaxed">{currentMatch.bio}</p>
+                      </div>
+                    )}
+
+                    {/* Interests */}
+                    {currentMatch.interests && currentMatch.interests.length > 0 && (
+                      <div className="space-y-2">
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium">Interests</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {currentMatch.interests.map((interest, idx) => (
+                            <span 
+                              key={idx}
+                              className="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-xs text-white/90"
+                            >
+                              {interest}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Relationship Goals */}
+                    {currentMatch.deal_breakers?.relationship_goals && (
+                      <div className="space-y-2">
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
+                          <Heart className="w-3 h-3" />
+                          Looking For
+                        </h3>
+                        <p className="text-white/90 text-sm capitalize">
+                          {currentMatch.deal_breakers.relationship_goals.replace(/_/g, ' ')}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Lifestyle */}
+                    {currentMatch.lifestyle_factors && (
+                      <div className="space-y-2">
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
+                          <Sparkles className="w-3 h-3" />
+                          Lifestyle
+                        </h3>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          {currentMatch.lifestyle_factors.fitness_health && (
+                            <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
+                              <span className="text-white/80">Fitness</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.fitness_health ? 'bg-purple-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {currentMatch.lifestyle_factors.social_energy && (
+                            <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
+                              <span className="text-white/80">Social</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.social_energy ? 'bg-pink-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {currentMatch.lifestyle_factors.travel_adventure && (
+                            <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
+                              <span className="text-white/80">Travel</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.travel_adventure ? 'bg-cyan-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {currentMatch.lifestyle_factors.family_future && (
+                            <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
+                              <span className="text-white/80">Family</span>
+                              <div className="flex gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.family_future ? 'bg-rose-400' : 'bg-white/20'}`}></div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Music Preferences */}
+                    {currentMatch.preferences?.music && (
+                      <div className="space-y-2">
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
+                          <Music className="w-3 h-3" />
+                          Music
+                        </h3>
+                        <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
