@@ -547,7 +547,7 @@ export default function Home({ user }) {
               className="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-black/95 to-pink-900/90 backdrop-blur-xl"
               style={{ 
                 backfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)'
+                transform: 'rotateY(180deg) scaleX(-1)'
               }}
             >
               {/* Back to Front Button */}
