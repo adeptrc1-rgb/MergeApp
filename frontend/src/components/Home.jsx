@@ -609,17 +609,14 @@ export default function Home({ user }) {
 
                 {/* Compatibility Badge */}
                 <div className="flex items-center gap-3 mb-3 pointer-events-auto">
-                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                    <Zap className="w-3.5 h-3.5 text-purple-400" />
-                    <span className="text-sm font-medium">{compatibility}% Compatible</span>
-                  </div>
+                  {!showDropdown && (
+                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                      <Zap className="w-3.5 h-3.5 text-purple-400" />
+                      <span className="text-sm font-medium">{compatibility}% Compatible</span>
+                    </div>
+                  )}
                   
                   {/* Dropdown Toggle Button */}
-                {/* Small spacer to ensure facts remain visible when expanded */}
-                {showDropdown && (
-                  <div className="h-1"></div>
-                )}
-
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -636,11 +633,16 @@ export default function Home({ user }) {
                       <ChevronDown className="w-4 h-4" />
                     )}
                   </button>
+                </div>
+
+                {/* Small spacer to ensure facts remain visible when expanded */}
+                {showDropdown && (
+                  <div className="h-1"></div>
+                )}
+
                 {showDropdown && (
                   <div className="text-white/70 text-xs mb-2">Facts</div>
                 )}
-
-                </div>
 
                 {/* Expandable Dropdown Content */}
                 <div 
