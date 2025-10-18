@@ -489,7 +489,8 @@ export default function Home({ user }) {
               maxHeight: '600px',
               transform: isDragging 
                 ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
-                : 'none'
+                : swipeDirection ? undefined : 'translate(0, 0)',
+              transition: isDragging ? 'none' : 'transform 0.3s ease-out'
             }}
           >
             {/* Swipe Overlay Labels */}
