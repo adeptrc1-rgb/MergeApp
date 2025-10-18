@@ -252,9 +252,6 @@ export default function Home({ user }) {
   const handleDragMove = (e) => {
     if (!isDragging) return;
     
-    // Prevent page scrolling during drag
-    e.preventDefault();
-    
     const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
     const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
     
@@ -262,6 +259,11 @@ export default function Home({ user }) {
     const deltaY = clientY - dragStart.y;
     
     setDragOffset({ x: deltaX, y: deltaY });
+    
+    // Prevent page scrolling only if user is actually dragging (moved more than 5px)
+    if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+      e.preventDefault();
+    }
   };
 
   const handleDragEnd = () => {
