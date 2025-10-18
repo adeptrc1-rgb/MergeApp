@@ -472,18 +472,19 @@ export default function Home({ user }) {
             onTouchStart={handleDragStart}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
-            className={`relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full ${
-              swipeDirection === 'right' ? 'animate-swipe-right' : 
-              swipeDirection === 'left' ? 'animate-swipe-left' :
-              swipeDirection === 'up' ? 'animate-swipe-up' : ''
+            className={`relative w-full h-full transition-all duration-500 ${
+              swipeDirection === 'right' ? 'translate-x-full rotate-12' :
+              swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
+              swipeDirection === 'up' ? '-translate-y-full scale-110' :
+              ''
             }`}
-            style={{ 
-              height: '65vh',
-              maxHeight: '600px',
-              transform: isDragging 
-                ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${getRotation()}deg)` 
-                : 'translate(0, 0) rotate(0)',
-              transition: isDragging ? 'none' : 'transform 0.3s ease-out'
+            style={{
+              transformStyle: 'preserve-3d',
+              transform: showProfileInfo 
+                ? 'rotateY(180deg)' 
+                : isDragging 
+                  ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
+                  : 'rotateY(0deg)'
             }}
           >
             {/* Swipe Overlay Labels */}
