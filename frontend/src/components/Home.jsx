@@ -479,7 +479,7 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content - Card with 3D Flip */}
-      <div className="flex-1 flex flex-col items-center justify-center px-3 pb-24 pt-2 bg-gradient-to-b from-black via-purple-900/20 to-black">
+      <div className="flex-1 flex flex-col bg-gradient-to-b from-black via-purple-900/20 to-black pt-8 px-3 pb-20">
         <div className="w-full relative flex flex-col items-center">
           <div 
             className="w-full"
