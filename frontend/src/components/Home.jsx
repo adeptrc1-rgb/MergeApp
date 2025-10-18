@@ -670,18 +670,29 @@ export default function Home({ user }) {
               )}
 
               {/* Main Info Bar */}
-              <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-12">
+              <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative">
+                {/* Toggle Info Button */}
                 <button
-                  onClick={() => setShowProfileInfo(!showProfileInfo)}
-                  className="absolute top-2 right-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-md border border-white/20 rounded-full p-2.5 hover:from-purple-500/30 hover:to-pink-500/30 hover:border-white/30 transition-all shadow-lg"
-                  title={showProfileInfo ? "Hide details" : "Show details"}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowProfileInfo(!showProfileInfo);
+                  }}
+                  className="absolute top-4 right-4 z-20 bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-md border border-white/30 rounded-full p-3 hover:from-purple-500/40 hover:to-pink-500/40 hover:scale-110 transition-all shadow-xl"
+                  title={showProfileInfo ? "Hide details" : "Show more"}
                 >
                   {showProfileInfo ? (
-                    <ChevronDown className="w-4 h-4 text-white" />
+                    <ChevronDown className="w-5 h-5 text-white" />
                   ) : (
-                    <ChevronUp className="w-4 h-4 text-purple-300" />
+                    <ChevronUp className="w-5 h-5 text-purple-200 animate-bounce" />
                   )}
                 </button>
+
+                {/* Tap indicator */}
+                {!showProfileInfo && (
+                  <div className="absolute top-14 right-4 text-xs text-white/60 font-light animate-pulse">
+                    Tap for info
+                  </div>
+                )}
 
                 <h2 className="text-4xl font-light mb-2">
                   {currentMatch.first_name}, {age}
