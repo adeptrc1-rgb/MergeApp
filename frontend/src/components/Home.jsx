@@ -505,8 +505,8 @@ export default function Home({ user }) {
               ''
             }`}
             style={{
-              height: '68vh',
-              maxHeight: '620px',
+              height: showDropdown ? '78vh' : '68vh',
+              maxHeight: showDropdown ? '720px' : '620px',
               transform: isDragging 
                 ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                 : swipeDirection ? undefined : 'translate(0, 0)',
