@@ -144,17 +144,17 @@ REACT_APP_FIREBASE_VAPID_KEY=BDSZc3aqqQfaCOm...
 ### Backend Testing
 ```bash
 # Test horoscope generation
-curl https://star-swipe.preview.emergentagent.com/api/horoscope/today \
+curl https://starsign-love.preview.emergentagent.com/api/horoscope/today \
   -H "Cookie: session_token=YOUR_TOKEN"
 
 # Test preferences update
-curl -X POST https://star-swipe.preview.emergentagent.com/api/horoscope/preferences \
+curl -X POST https://starsign-love.preview.emergentagent.com/api/horoscope/preferences \
   -H "Cookie: session_token=YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"opt_in": true, "time": "09:00", "fcm_token": "YOUR_FCM_TOKEN"}'
 
 # Send test notification
-curl -X POST https://star-swipe.preview.emergentagent.com/api/horoscope/test-send \
+curl -X POST https://starsign-love.preview.emergentagent.com/api/horoscope/test-send \
   -H "Cookie: session_token=YOUR_TOKEN"
 ```
 
