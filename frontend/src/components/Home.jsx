@@ -757,8 +757,11 @@ export default function Home({ user }) {
           </div>
           </div>
 
-          {/* Action Buttons - Below card like Tinder */}
-          <div className="w-full flex items-center justify-center gap-5 px-2 mt-2">
+          {/* Action Buttons - Responsive positioning */}
+          <div
+            className="w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0"
+            style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)' }}
+          >
             {/* Reverse Button */}
             <button
               onClick={(e) => {
@@ -818,7 +821,6 @@ export default function Home({ user }) {
             {/* Direct Message Button */}
             <button
               onClick={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
                 createFloatingSign(e.currentTarget);
                 handleDirectMessage();
               }}
