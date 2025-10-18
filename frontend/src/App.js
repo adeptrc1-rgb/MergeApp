@@ -1217,7 +1217,7 @@ function AstroChatWrapper() {
 
 function DiscoverWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <MainDashboard user={user} logout={logout} />;
+  return <Discover user={user} logout={logout} />;
 }
 
 function HomeWrapper() {
