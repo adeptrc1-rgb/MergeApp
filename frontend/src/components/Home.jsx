@@ -518,11 +518,14 @@ export default function Home({ user }) {
               </div>
             )}
 
-            {/* Front Side - Photo */}
+            {/* Photo Section */}
             <div 
-              className="absolute inset-0 bg-cover bg-center transition-all duration-300"
+              className="relative bg-cover bg-center flex-shrink-0"
               style={{ 
-                backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`
+                backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`,
+                height: showDropdown ? '50vh' : '100%',
+                maxHeight: showDropdown ? '400px' : '100%',
+                transition: 'height 0.3s ease-out, max-height 0.3s ease-out'
               }}
             >
               {/* Photo Navigation Tap Zones */}
