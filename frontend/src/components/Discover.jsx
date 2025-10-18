@@ -119,7 +119,7 @@ export default function Discover({ user }) {
       )}
 
       {/* Header */}
-      <div className="border-b border-white/10 bg-black flex-shrink-0">
+      <div className="border-b border-white/10 bg-black flex-shrink-0 select-none" style={{ WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
         <div className="max-w-4xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-6">
             <img src="/asign-logo.png" alt="A Sign" className="h-10" />
