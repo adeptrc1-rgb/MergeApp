@@ -768,7 +768,7 @@ export default function Home({ user }) {
 
           {/* Action Buttons - Responsive positioning */}
           <div
-            className={`w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0 ${showDropdown ? 'pointer-events-none opacity-0' : ''}`}
+            className="w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0"
             style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)' }}
           >
             {/* Reverse Button */}
