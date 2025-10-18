@@ -496,17 +496,9 @@ export default function Home({ user }) {
 
             {/* Photo */}
             <div 
-              className="absolute inset-0 bg-cover bg-center transition-all duration-300 cursor-pointer"
+              className="absolute inset-0 bg-cover bg-center transition-all duration-300"
               style={{ 
                 backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})` 
-              }}
-              onClickCapture={(e) => {
-                if (isDragging) {
-                  e.preventDefault();
-                  return;
-                }
-                // Click to toggle profile info
-                setShowProfileInfo(!showProfileInfo);
               }}
             >
               {/* Photo Navigation Dots */}
