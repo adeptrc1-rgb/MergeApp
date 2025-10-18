@@ -31,7 +31,7 @@ async def startup_event():
         print(f"⚠️ Could not start horoscope scheduler: {e}")
 
 FRONTEND_ORIGINS = [
-    "https://starswipe.preview.emergentagent.com",
+    "https://star-swipe.preview.emergentagent.com",
     "http://localhost:3000",
 ]
 
