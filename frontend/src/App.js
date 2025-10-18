@@ -1222,7 +1222,7 @@ function DiscoverWrapper() {
 
 function HomeWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <MainDashboard user={user} logout={logout} />;
+  return <Home user={user} logout={logout} />;
 }
 
 function MessagesWrapper() {
