@@ -536,25 +536,90 @@ export default function Home({ user }) {
             </div>
 
             {/* Info Section */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <h2 className="text-4xl font-light mb-2">
-                {currentMatch.first_name}, {age}
-              </h2>
-              <div className="flex items-center gap-2 text-white/80 mb-3">
-                <Star className="w-4 h-4 text-purple-400" />
-                <span className="text-base">{currentMatch.zodiac_sign}</span>
-                <span className="text-white/40">•</span>
-                <span className="text-sm">
-                  {getDistance(currentMatch) !== null 
-                    ? `${getDistance(currentMatch)} miles away` 
-                    : 'Location unavailable'}
-                </span>
-              </div>
+            <div className="absolute bottom-0 left-0 right-0 text-white">
+              {/* Expandable Info Dropdown */}
+              {showProfileInfo && (
+                <div className="bg-black/95 backdrop-blur-lg border-t border-white/20 p-6 max-h-64 overflow-y-auto animate-slideUp">
+                  <div className="space-y-4">
+                    {/* Bio */}
+                    {currentMatch.bio && (
+                      <div>
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2">About</h3>
+                        <p className="text-white/90 text-sm leading-relaxed">{currentMatch.bio}</p>
+                      </div>
+                    )}
 
-              {/* Compatibility Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                <Zap className="w-3.5 h-3.5 text-purple-400" />
-                <span className="text-sm font-medium">{compatibility}% Compatible</span>
+                    {/* Interests */}
+                    {currentMatch.interests && currentMatch.interests.length > 0 && (
+                      <div>
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2">Interests</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {currentMatch.interests.slice(0, 6).map((interest, idx) => (
+                            <span 
+                              key={idx}
+                              className="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full text-xs text-white/90"
+                            >
+                              {interest}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Relationship Goals */}
+                    {currentMatch.deal_breakers?.relationship_goals && (
+                      <div>
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2">Looking For</h3>
+                        <p className="text-white/90 text-sm capitalize">{currentMatch.deal_breakers.relationship_goals.replace('_', ' ')}</p>
+                      </div>
+                    )}
+
+                    {/* Music Preferences */}
+                    {currentMatch.preferences?.music && (
+                      <div>
+                        <h3 className="text-white/60 text-xs uppercase tracking-wider mb-2 flex items-center gap-1">
+                          <Music className="w-3 h-3" />
+                          Music
+                        </h3>
+                        <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Main Info Bar */}
+              <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-12">
+                <button
+                  onClick={() => setShowProfileInfo(!showProfileInfo)}
+                  className="absolute top-2 right-6 bg-black/50 backdrop-blur-md rounded-full p-2 hover:bg-black/70 transition-all"
+                >
+                  {showProfileInfo ? (
+                    <ChevronDown className="w-5 h-5 text-white" />
+                  ) : (
+                    <ChevronUp className="w-5 h-5 text-white" />
+                  )}
+                </button>
+
+                <h2 className="text-4xl font-light mb-2">
+                  {currentMatch.first_name}, {age}
+                </h2>
+                <div className="flex items-center gap-2 text-white/80 mb-3">
+                  <Star className="w-4 h-4 text-purple-400" />
+                  <span className="text-base">{currentMatch.zodiac_sign}</span>
+                  <span className="text-white/40">•</span>
+                  <span className="text-sm">
+                    {getDistance(currentMatch) !== null 
+                      ? `${getDistance(currentMatch)} miles away` 
+                      : 'Location unavailable'}
+                  </span>
+                </div>
+
+                {/* Compatibility Badge */}
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                  <Zap className="w-3.5 h-3.5 text-purple-400" />
+                  <span className="text-sm font-medium">{compatibility}% Compatible</span>
+                </div>
               </div>
             </div>
           </div>
