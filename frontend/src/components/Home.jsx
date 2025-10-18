@@ -617,12 +617,13 @@ export default function Home({ user }) {
               <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-12">
                 <button
                   onClick={() => setShowProfileInfo(!showProfileInfo)}
-                  className="absolute top-2 right-6 bg-black/50 backdrop-blur-md rounded-full p-2 hover:bg-black/70 transition-all"
+                  className="absolute top-2 right-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-md border border-white/20 rounded-full p-2.5 hover:from-purple-500/30 hover:to-pink-500/30 hover:border-white/30 transition-all shadow-lg"
+                  title={showProfileInfo ? "Hide details" : "Show details"}
                 >
                   {showProfileInfo ? (
-                    <ChevronDown className="w-5 h-5 text-white" />
+                    <ChevronDown className="w-4 h-4 text-white" />
                   ) : (
-                    <ChevronUp className="w-5 h-5 text-white" />
+                    <ChevronUp className="w-4 h-4 text-purple-300" />
                   )}
                 </button>
 
