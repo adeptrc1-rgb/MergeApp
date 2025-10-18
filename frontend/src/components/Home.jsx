@@ -52,6 +52,31 @@ export default function Home({ user }) {
     loadTodayHoroscope();
   }, []);
 
+  // Add touch event listener with passive: false to allow preventDefault
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const handleTouchMove = (e) => {
+      if (isDragging) {
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - dragStart.x;
+        const deltaY = touch.clientY - dragStart.y;
+        
+        // Prevent scrolling if actually dragging
+        if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+          e.preventDefault();
+        }
+      }
+    };
+
+    card.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+    return () => {
+      card.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [isDragging, dragStart]);
+
   const loadTodayHoroscope = async () => {
     try {
       const response = await axios.get(`${API}/horoscope/today`);
