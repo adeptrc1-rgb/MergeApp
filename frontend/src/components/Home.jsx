@@ -36,7 +36,7 @@ export default function Home({ user }) {
   const [swipeHistory, setSwipeHistory] = useState([]);
   const [todayHoroscope, setTodayHoroscope] = useState(null);
   const [showHoroscopeModal, setShowHoroscopeModal] = useState(false);
-  const [showProfileInfo, setShowProfileInfo] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const cardRef = useRef(null);
   const likeButtonRef = useRef(null);
   const passButtonRef = useRef(null);
