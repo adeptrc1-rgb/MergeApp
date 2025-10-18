@@ -750,7 +750,9 @@ export default function Home({ user }) {
           </div>
 
           {/* Action Buttons - Overlapping card, tucked under compatibility score */}
-          <div className="w-full -mt-8 flex items-center justify-center gap-6 px-4 relative z-10">
+          <div className={`w-full -mt-8 flex items-center justify-center gap-6 px-4 relative z-10 transition-all duration-300 ${
+            showDropdown ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}>
             {/* Reverse Button */}
             <button
               onClick={(e) => {
