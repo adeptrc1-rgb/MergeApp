@@ -485,8 +485,8 @@ export default function Home({ user }) {
             className="w-full"
             style={{ 
               perspective: '1000px',
-              height: '65vh',
-              maxHeight: '600px'
+              height: '85vh',
+              maxHeight: '800px'
             }}
           >
           <div 
