@@ -508,11 +508,9 @@ export default function Home({ user }) {
 
             {/* Front Side - Photo */}
             <div 
-              className="absolute inset-0 bg-cover bg-center transition-all duration-300"
+              className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${showProfileInfo ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
               style={{ 
-                backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`,
-                backfaceVisibility: 'hidden',
-                transform: 'rotateY(0deg)'
+                backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`
               }}
             >
               {/* Photo Navigation Dots */}
