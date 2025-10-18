@@ -485,8 +485,8 @@ export default function Home({ user }) {
             className="w-full"
             style={{ 
               perspective: '1000px',
-              height: '72vh',
-              maxHeight: '680px'
+              height: '68vh',
+              maxHeight: '620px'
             }}
           >
           <div 
@@ -498,15 +498,15 @@ export default function Home({ user }) {
             onTouchStart={handleDragStart}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
-            className={`relative bg-white/5 rounded-xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
+            className={`relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
               swipeDirection === 'right' ? 'translate-x-full rotate-12' :
               swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
               swipeDirection === 'up' ? '-translate-y-full scale-110' :
               ''
             }`}
             style={{
-              height: '72vh',
-              maxHeight: '680px',
+              height: '68vh',
+              maxHeight: '620px',
               transform: isDragging 
                 ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                 : swipeDirection ? undefined : 'translate(0, 0)',
