@@ -55,54 +55,60 @@ async def add_profile_data():
     db = client[DB_NAME]
     
     try:
-        # Find users without profile data
+        # Find all users
         cursor = db.users.find({})
         updated_count = 0
+        total_count = 0
         
         async for user in cursor:
+            total_count += 1
+            print(f"\n📋 Processing user: {user.get('email', user.get('first_name', 'Unknown'))}")
+            
             update_data = {}
             
-            # Add bio if missing
-            if not user.get("bio"):
-                update_data["bio"] = random.choice(SAMPLE_BIOS)
+            # Always add/update bio
+            update_data["bio"] = random.choice(SAMPLE_BIOS)
+            print(f"  Adding bio")
             
-            # Add interests if missing or empty
-            if not user.get("interests") or len(user.get("interests", [])) == 0:
-                num_interests = random.randint(4, 8)
-                update_data["interests"] = random.sample(INTERESTS_POOL, num_interests)
+            # Always add/update interests
+            num_interests = random.randint(4, 8)
+            update_data["interests"] = random.sample(INTERESTS_POOL, num_interests)
+            print(f"  Adding {num_interests} interests")
             
-            # Add lifestyle_factors if missing
-            if not user.get("lifestyle_factors"):
-                update_data["lifestyle_factors"] = {
-                    "fitness_health": random.randint(2, 5),
-                    "career_ambition": random.randint(2, 5),
-                    "social_energy": random.randint(2, 5),
-                    "travel_adventure": random.randint(2, 5),
-                    "nightlife_lifestyle": random.randint(1, 4),
-                    "family_future": random.randint(3, 5),
-                    "dating_approach": random.randint(2, 4),
-                    "passions_hobbies": random.randint(3, 5)
-                }
+            # Always add/update lifestyle_factors
+            update_data["lifestyle_factors"] = {
+                "fitness_health": random.randint(2, 5),
+                "career_ambition": random.randint(2, 5),
+                "social_energy": random.randint(2, 5),
+                "travel_adventure": random.randint(2, 5),
+                "nightlife_lifestyle": random.randint(1, 4),
+                "family_future": random.randint(3, 5),
+                "dating_approach": random.randint(2, 4),
+                "passions_hobbies": random.randint(3, 5)
+            }
+            print(f"  Adding lifestyle factors")
             
-            # Add music preference if missing
+            # Always add/update music preference
             if not user.get("preferences"):
                 update_data["preferences"] = {"music": random.choice(MUSIC_PREFERENCES)}
-            elif not user.get("preferences", {}).get("music"):
-                update_data["preferences.music"] = random.choice(MUSIC_PREFERENCES)
+            else:
+                update_data["preferences"] = {**user.get("preferences", {}), "music": random.choice(MUSIC_PREFERENCES)}
+            print(f"  Adding music preferences")
             
-            # Update if we have data to add
-            if update_data:
-                await db.users.update_one(
-                    {"id": user["id"]},
-                    {"$set": update_data}
-                )
-                updated_count += 1
-                print(f"✅ Updated {user.get('email', user.get('first_name', 'Unknown'))}")
+            # Update user
+            await db.users.update_one(
+                {"id": user["id"]},
+                {"$set": update_data}
+            )
+            updated_count += 1
+            print(f"  ✅ Successfully updated!")
         
-        print(f"\n🎉 Successfully updated {updated_count} users with profile data!")
+        print(f"\n🎉 Successfully updated {updated_count}/{total_count} users with profile data!")
         
     except Exception as e:
         print(f"❌ Error: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
         client.close()
 
