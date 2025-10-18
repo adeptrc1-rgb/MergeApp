@@ -604,7 +604,7 @@ export default function Home({ user }) {
                 </div>
 
                 {/* Compatibility Badge */}
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-3 mb-3 pointer-events-auto">
                   <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
                     <Zap className="w-3.5 h-3.5 text-purple-400" />
                     <span className="text-sm font-medium">{compatibility}% Compatible</span>
