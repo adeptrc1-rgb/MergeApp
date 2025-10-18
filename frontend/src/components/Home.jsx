@@ -586,8 +586,8 @@ export default function Home({ user }) {
             </div>
 
             {/* Profile Info Bar with Dropdown */}
-            <div className="absolute bottom-0 left-0 right-0 text-white">
-              <div className="bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative">
+            <div className="absolute bottom-0 left-0 right-0 text-white pointer-events-none">
+              <div className={`bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative transition-all ${showDropdown ? 'pb-4' : ''}`}>
 
                 <h2 className="text-4xl font-light mb-2">
                   {currentMatch.first_name}, {age}
