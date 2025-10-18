@@ -548,26 +548,22 @@ export default function Home({ user }) {
               className="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-black/95 to-pink-900/90 backdrop-blur-xl"
               style={{ 
                 backfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)'
+                transform: 'rotateY(180deg) scaleX(-1)'
               }}
             >
-              <div 
-                className="w-full h-full"
-                style={{ transform: 'scaleX(-1)' }}
+              {/* Back to Front Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowProfileInfo(false);
+                }}
+                className="absolute top-4 right-4 z-20 bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-md border border-white/30 rounded-full p-3 hover:from-purple-500/40 hover:to-pink-500/40 hover:scale-110 transition-all shadow-xl"
+                title="Flip back to photo"
               >
-                {/* Back to Front Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowProfileInfo(false);
-                  }}
-                  className="absolute top-4 right-4 z-20 bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-md border border-white/30 rounded-full p-3 hover:from-purple-500/40 hover:to-pink-500/40 hover:scale-110 transition-all shadow-xl"
-                  title="Flip back to photo"
-                >
-                  <XCircle className="w-5 h-5 text-purple-200" />
-                </button>
+                <XCircle className="w-5 h-5 text-purple-200" />
+              </button>
 
-                <div className="p-6 space-y-4 h-full overflow-y-auto custom-scrollbar">
+              <div className="p-6 space-y-4 h-full overflow-y-auto custom-scrollbar">
                 {/* Profile Header */}
                 <div className="text-center mb-6">
                   <h2 className="text-3xl font-light mb-2 text-white">
