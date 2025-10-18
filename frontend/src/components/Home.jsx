@@ -842,52 +842,52 @@ export default function Home({ user }) {
 // Bottom Navigation Component
 function BottomNav({ currentTab, navigate }) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 safe-area-inset-bottom">
-      <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-around">
+    <div className="fixed bottom-0 left-0 right-0 bg-black/95 backdrop-blur-lg border-t border-white/10 safe-area-inset-bottom">
+      <div className="max-w-4xl mx-auto px-6 py-2 flex items-center justify-around">
         <button
           onClick={() => navigate('/home')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'home' ? 'text-white' : 'text-white/40 hover:text-white/60'
+          className={`flex flex-col items-center gap-1 transition-all min-w-[60px] ${
+            currentTab === 'home' ? 'text-pink-500' : 'text-white/50 hover:text-white/70'
           }`}
         >
-          <HomeIcon className="w-5 h-5" />
-          <span className="text-xs">Home</span>
+          <HomeIcon className={`w-6 h-6 ${currentTab === 'home' ? 'fill-pink-500' : ''}`} />
+          <span className="text-[10px] font-medium">Home</span>
         </button>
         <button
           onClick={() => navigate('/discover')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'discover' ? 'text-white' : 'text-white/40 hover:text-white/60'
+          className={`flex flex-col items-center gap-1 transition-all min-w-[60px] ${
+            currentTab === 'discover' ? 'text-pink-500' : 'text-white/50 hover:text-white/70'
           }`}
         >
-          <Sparkles className="w-5 h-5" />
-          <span className="text-xs">Discover</span>
-        </button>
-        <button
-          onClick={() => navigate('/messages')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'messages' ? 'text-white' : 'text-white/40 hover:text-white/60'
-          }`}
-        >
-          <MessageCircle className="w-5 h-5" />
-          <span className="text-xs">Messages</span>
+          <Sparkles className={`w-6 h-6 ${currentTab === 'discover' ? 'fill-pink-500' : ''}`} />
+          <span className="text-[10px] font-medium">Explore</span>
         </button>
         <button
           onClick={() => navigate('/connections')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'
+          className={`flex flex-col items-center gap-1 transition-all min-w-[60px] ${
+            currentTab === 'connections' ? 'text-pink-500' : 'text-white/50 hover:text-white/70'
           }`}
         >
-          <Users className="w-5 h-5" />
-          <span className="text-xs">Connect</span>
+          <Heart className={`w-6 h-6 ${currentTab === 'connections' ? 'fill-pink-500' : ''}`} />
+          <span className="text-[10px] font-medium">Likes</span>
+        </button>
+        <button
+          onClick={() => navigate('/messages')}
+          className={`flex flex-col items-center gap-1 transition-all min-w-[60px] ${
+            currentTab === 'messages' ? 'text-pink-500' : 'text-white/50 hover:text-white/70'
+          }`}
+        >
+          <MessageCircle className={`w-6 h-6 ${currentTab === 'messages' ? 'fill-pink-500' : ''}`} />
+          <span className="text-[10px] font-medium">Chat</span>
         </button>
         <button
           onClick={() => navigate('/profile')}
-          className={`flex flex-col items-center gap-1 transition-colors ${
-            currentTab === 'profile' ? 'text-white' : 'text-white/40 hover:text-white/60'
+          className={`flex flex-col items-center gap-1 transition-all min-w-[60px] ${
+            currentTab === 'profile' ? 'text-pink-500' : 'text-white/50 hover:text-white/70'
           }`}
         >
-          <Star className="w-5 h-5" />
-          <span className="text-xs">Profile</span>
+          <Users className={`w-6 h-6 ${currentTab === 'profile' ? 'fill-pink-500' : ''}`} />
+          <span className="text-[10px] font-medium">Profile</span>
         </button>
       </div>
     </div>
