@@ -460,8 +460,12 @@ export default function Home({ user }) {
       <div className="flex-1 flex flex-col items-center justify-center p-4 pb-32 overflow-hidden">
         <div className="w-full max-w-md relative flex flex-col items-center">
           <div 
-            className="absolute inset-0"
-            style={{ perspective: '1000px' }}
+            className="w-full"
+            style={{ 
+              perspective: '1000px',
+              height: '65vh',
+              maxHeight: '600px'
+            }}
           >
           <div 
             ref={cardRef}
