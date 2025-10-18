@@ -231,9 +231,9 @@ function BottomNav({ currentTab, navigate }) {
           <MessageCircle className="w-5 h-5" />
           <span className="text-xs">Messages</span>
         </button>
-        <button onClick={() => navigate('/connections')} className={`flex flex_col items-center gap-1 transition-colors ${currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
-          <Users className="w-5 h-5" />
-          <span className="text-xs">Connect</span>
+        <button onClick={() => navigate('/connections')} className={`flex flex-col items-center gap-0.5 transition-colors ${currentTab === 'connections' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
+          <Users className="w-4 h-4" />
+          <span className="text-[10px] leading-none mt-1">Connect</span>
         </button>
         <button onClick={() => navigate('/profile')} className={`flex flex-col items-center gap-1 transition-colors ${currentTab === 'profile' ? 'text-white' : 'text-white/40 hover:text-white/60'}`}>
           <Star className="w-5 h-5" />
