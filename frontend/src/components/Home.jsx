@@ -472,13 +472,15 @@ export default function Home({ user }) {
             onTouchStart={handleDragStart}
             onTouchMove={handleDragMove}
             onTouchEnd={handleDragEnd}
-            className={`relative w-full h-full transition-all duration-500 ${
+            className={`relative bg-white/5 rounded-3xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
               swipeDirection === 'right' ? 'translate-x-full rotate-12' :
               swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
               swipeDirection === 'up' ? '-translate-y-full scale-110' :
               ''
             }`}
             style={{
+              height: '65vh',
+              maxHeight: '600px',
               transformStyle: 'preserve-3d',
               transform: showProfileInfo 
                 ? 'rotateY(180deg)' 
