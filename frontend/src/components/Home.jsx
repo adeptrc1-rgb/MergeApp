@@ -630,11 +630,15 @@ export default function Home({ user }) {
 
                 {/* Expandable Dropdown Content */}
                 <div 
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  className={`transition-all duration-300 ease-in-out ${
                     showDropdown ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                   }`}
+                  style={{
+                    overflowY: showDropdown ? 'auto' : 'hidden',
+                    overflowX: 'hidden'
+                  }}
                 >
-                  <div className="space-y-4 pt-2 pb-4 max-h-80 overflow-y-auto custom-scrollbar">
+                  <div className="space-y-4 pt-2 pb-4">
                     {/* Check if any data exists */}
                     {!currentMatch.bio && 
                      (!currentMatch.interests || currentMatch.interests.length === 0) && 
