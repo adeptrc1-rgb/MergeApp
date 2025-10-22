@@ -62,51 +62,6 @@ const ASTRO_ICEBREAKERS = {
   'Taurus': ['Favorite comfort food?', 'Netflix or a nice dinner out?'],
   'Gemini': ['What are you reading right now?', 'Deep conversation or fun banter?'],
   'Cancer': ['Ideal cozy night in?', 'How do you show you care?'],
-  const [sign, setSign] = React.useState('Leo');
-  const [loading, setLoading] = React.useState(false);
-  const navigate = useNavigate();
-  const apply = async () => {
-    try {
-      setLoading(true);
-      await axios.post(`${API}/season/test-start?sign=${encodeURIComponent(sign)}&notify=false`);
-      // refresh with preview query
-      const qs = new URLSearchParams(window.location.search);
-      qs.set('forceSeason', sign);
-      qs.set('dev', '1');
-      navigate(`/discover?${qs.toString()}`);
-    } catch (e) {
-      alert('Failed to start season preview');
-    } finally {
-      setLoading(false);
-    }
-  };
-  const clear = async () => {
-    try {
-      setLoading(true);
-      await axios.post(`${API}/season/clear-test`);
-      const qs = new URLSearchParams(window.location.search);
-      qs.delete('forceSeason');
-      qs.set('dev', '1');
-      navigate(`/discover?${qs.toString()}`);
-    } catch (e) {
-      // ignore
-    } finally {
-      setLoading(false);
-    }
-  };
-  return (
-    <div className="flex items-center gap-2 text-white/60">
-      <select value={sign} onChange={(e) => setSign(e.target.value)} className="bg-white/10 border border-white/10 rounded-md px-2 py-1 text-xs">
-        {['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'].map(s => (
-          <option key={s} value={s}>{s}</option>
-        ))}
-      </select>
-      <button onClick={apply} disabled={loading} className="text-xs px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15">{loading ? 'Applying…' : 'Apply'}</button>
-      <button onClick={clear} disabled={loading} className="text-xs px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15">Clear</button>
-    </div>
-  );
-}
-
   'Leo': ['What makes you feel most confident?', 'Karaoke song of choice?'],
   'Virgo': ['What is your morning routine?', 'Organization tips?'],
   'Libra': ['Art museum or music festival?', 'How do you find balance?'],
