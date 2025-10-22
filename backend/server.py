@@ -1606,6 +1606,76 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "lifestyle_factors": u.get("lifestyle_factors"),
             "deal_breakers": u.get("deal_breakers"),
             "preferences": u.get("preferences"),
+
+# =====================================
+# Zodiac Season Spotlight - Test Routes
+# =====================================
+@api_router.post("/season/test-start")
+async def season_test_start(sign: Optional[str] = None, notify: bool = True, user: User = Depends(get_current_user)):
+    """Simulate the start of a Zodiac season for validation.
+    - Persists a preview flag on the user
+    - Optionally sends a push notification if FCM token is present
+    """
+    # Normalize sign
+    today = date.fromtimestamp(now_utc().timestamp())
+    chosen = (sign.title() if sign else current_season_sign(today))
+    preview = {
+        "active": True,
+        "sign": chosen,
+        "started_at": now_utc().isoformat()
+    }
+    await db.users.update_one({"id": user.id}, {"$set": {"season_spotlight_preview": preview}})
+
+    notification_sent = False
+    if notify:
+        # Try sending a push notification if token exists
+        try:
+            udoc = await db.users.find_one({"id": user.id})
+            prefs = (udoc or {}).get("horoscope_preferences", {})
+            token = prefs.get("fcm_token")
+            if token:
+                from firebase_service import send_push_notification
+                title = f"\u2728 Your season has started, {chosen}!"
+                body = "You're glowing and getting extra exposure."
+                # Use default deep link fallback configured in firebase_service
+                notification_sent = await send_push_notification(
+                    fcm_token=token,
+                    title=title,
+                    body=body,
+                    deep_link=None,
+                    data={"type": "season_spotlight", "sign": chosen}
+                )
+        except Exception as e:
+            print(f"Season test notification error: {e}")
+            notification_sent = False
+
+    # Provide a preview URL hint for the frontend (use forceSeason query)
+    return {
+        "success": True,
+        "sign": chosen,
+        "preview": preview,
+        "notification_sent": bool(notification_sent),
+        "hint": {
+            "preview_query": f"?forceSeason={chosen}",
+            "force_param": "force_season in /api/users/potential-matches"
+        }
+    }
+
+
+@api_router.get("/season/status")
+async def season_status(user: User = Depends(get_current_user)):
+    udoc = await db.users.find_one({"id": user.id})
+    return {
+        "active": bool((udoc or {}).get("season_spotlight_preview", {}).get("active", False)),
+        "data": (udoc or {}).get("season_spotlight_preview")
+    }
+
+
+@api_router.post("/season/clear-test")
+async def season_clear_test(user: User = Depends(get_current_user)):
+    await db.users.update_one({"id": user.id}, {"$unset": {"season_spotlight_preview": ""}})
+    return {"success": True}
+
             "season_spotlight_active": it["in_season"],
             "season_color": SIGN_COLORS.get(it["sign"], "#a78bfa"),
             "season_sign": season_sign
