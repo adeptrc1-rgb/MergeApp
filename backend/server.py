@@ -202,10 +202,8 @@ class LoginBody(BaseModel):
 
 @api_router.post("/auth/test-login")
 async def auth_test_login(response: Response, body: Optional[LoginBody] = None):
-    # Allow missing body for dev convenience
-    email = ((body.email if body else 'testuser@asign.com') or '').lower().strip()
-
-    # Ensure user exists and has a stable UUID id
+    email = (body.email if body else 'testuser@asign.com')
+    return await _ensure_user_and_session(email, response)
 
 async def _ensure_user_and_session(email: str, response: Response) -> Dict[str, Any]:
     email = (email or '').lower().strip()
