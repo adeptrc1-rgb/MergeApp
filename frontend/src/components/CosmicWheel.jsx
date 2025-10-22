@@ -175,7 +175,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-      <div className="bg-gradient-to-b from-purple-900/90 to-black/90 rounded-3xl p-6 sm:p-8 max-w-md sm:max-w-lg w-full border border-white/10 relative overflow-visible">
+      <div className="bg-gradient-to-b from-purple-900/90 to-black/90 rounded-3xl p-6 sm:p-8 max-w-md sm:max-w-lg w-full border border-white/10 relative overflow-visible max-h-[90vh] overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain' }} >
         {/* Close Button - always visible on mobile */}
         <button onClick={handleClose} className="absolute -top-3 -right-3 sm:top-4 sm:right-4 text-white/80 hover:text-white transition-colors bg-black/60 rounded-full p-2 border border-white/10">
           <X className="w-5 h-5 sm:w-6 sm:h-6" />
