@@ -520,13 +520,13 @@ export default function Home({ user }) {
           >
           <div 
             ref={cardRef}
-            onMouseDown={handleDragStart}
-            onMouseMove={handleDragMove}
-            onMouseUp={handleDragEnd}
-            onMouseLeave={handleDragEnd}
-            onTouchStart={handleDragStart}
-            onTouchMove={handleDragMove}
-            onTouchEnd={handleDragEnd}
+            onMouseDown={!showDropdown ? handleDragStart : undefined}
+            onMouseMove={!showDropdown ? handleDragMove : undefined}
+            onMouseUp={!showDropdown ? handleDragEnd : undefined}
+            onMouseLeave={!showDropdown ? handleDragEnd : undefined}
+            onTouchStart={!showDropdown ? handleDragStart : undefined}
+            onTouchMove={!showDropdown ? handleDragMove : undefined}
+            onTouchEnd={!showDropdown ? handleDragEnd : undefined}
             className={`relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
               swipeDirection === 'right' ? 'translate-x-full rotate-12' :
               swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
