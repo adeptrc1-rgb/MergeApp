@@ -1,50 +1,56 @@
 <analysis>
-The AI engineer's work involved a significant evolution of the A Sign application, moving from initial bug fixes to feature-rich development. The early phase addressed critical stability issues like API routing errors and environment variable loading. Subsequently, core features such as a Trending Energies algorithm, a Polarity Bonus for compatibility, and a comprehensive 13-question gamified onboarding flow were implemented. A major user-driven update involved a multi-dimensional compatibility algorithm with deal-breakers and nice-to-haves. A personalized daily horoscope system, complete with Firebase push notifications and scheduling, was integrated. The most recent efforts focused on frontend UI/UX, redesigning action buttons, implementing a profile picture fallback, converting distance units, and crucially, transforming a profile info dropdown into a 3D card flip animation to display user data (bio, interests, lifestyle) on the Home page. Repeated user feedback indicated persistent issues with this profile data visibility, leading to continuous debugging attempts.
+The AI engineer's work on A Sign app was highly iterative, primarily focused on UI refinements, bug fixes, and feature additions, particularly around the  component and user authentication. Initial tasks involved fixing card animations, then evolved to implementing a Tinder-like dropdown for profile details and refining bottom navigation. Persistent issues with Test Login and routing () consumed significant effort, leading to multiple troubleshooting attempts and a crucial manual restoration phase. A key feature, Zodiac Season Spotlight, was partially implemented, facing integration challenges with backend data structures. The trajectory highlights a cycle of user feedback, implementation, bug identification, and targeted fixes, culminating in a restored, albeit minimal, functional state for login and core features.
 </analysis>
 
 <product_requirements>
-The A Sign app is an astrology-based dating platform with core features like Google login, user profiles, compatibility matching, interactive onboarding, Star Swiping, Astro Chat, and a Daily Star Feed, alongside gamification elements like a Cosmic Wheel.
+The A Sign application is an astrology-based dating platform with core features including Google login, user profiles, compatibility matching, interactive onboarding, Star Swiping, Astro Chat, and a Daily Star Feed, alongside gamification like the Cosmic Wheel.
 
-Key feature additions include:
-1.  **Multi-dimensional Compatibility Algorithm:** A 0-100 score combining Myers-Briggs (30%), Lifestyle Mesh (25%), Interests (20%), and Astrology (25%), with Deal-Breakers (penalties for relationship goals, kids, smoking) and Nice-to-Haves (bonuses for religion, politics, diet, exercise) as adjustment factors. User profile data was expanded to support these factors.
-2.  **Personalized Daily Horoscope System:** Delivers short/long daily horoscopes as timezone-aware push notifications (via Firebase) with opt-in/out controls. It features a constellation icon on the Home page to access a modal for the long message, and a short message ticker on the Discover page.
-3.  **UI/UX Enhancements:** Redesigned Home page action buttons (Like, Super Like, Pass) with a translucent glass-morphism style. Improved profile picture display with fallbacks. Converted distance measurements to miles in settings. Evolved the profile information display on swipe cards from a sophisticated dropdown to a 3D card flip animation, aiming to show user bio, interests, relationship goals, and lifestyle answers elegantly.
+Recent and ongoing feature developments:
+1.  **Multi-dimensional Compatibility Algorithm:** Calculates scores using Myers-Briggs, Lifestyle Mesh, Interests, and Astrology, incorporating deal-breakers and nice-to-haves. Profile data has been expanded to support these factors.
+2.  **Personalized Daily Horoscope System:** Delivers short/long horoscopes via Firebase push notifications and a Discover page ticker.
+3.  **UI/UX Enhancements:**
+    *   Redesigned Home page action buttons (Like, Super Like, Pass) with glass-morphism style.
+    *   Improved profile picture display with fallbacks.
+    *   Distance measurements in miles in settings.
+    *   Profile info display on swipe cards transitioned from a 3D flip to a Tinder-style expand/collapse dropdown for bio, interests, relationship goals, lifestyle, and music.
+    *   Layout adjustments to mimic Tinder's card size, action button placement, and bottom navigation, with mobile responsiveness.
+    *   Zodiac Season Spotlight: Implement animated glow and badge on profile cards for users in their zodiac season, with a 2.0x exposure multiplier in the feed, and optional push/in-app notifications.
+    *   Improved Your Rewards section with Redos and Star Coins.
+    *   Enhanced Cosmic Wheel for mobile (close button, scaling, reward screen).
+4.  **Core Functionality Fixes:** Debugging App.js routing, bottom navigation consistency, Firebase messaging errors, and persistent Test Login failures on the preview environment.
 </product_requirements>
 
 <key_technical_concepts>
 -   **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
--   **UI/UX:** Tailwind CSS,  for animations, Lucide-React icons.
--   **Authentication:** Cookie-based sessions.
+-   **UI/UX:** Tailwind CSS,  (initially), Lucide-React icons.
+-   **Authentication:** Cookie-based sessions, Authlib (proposed for Facebook), secure/SameSite cookies.
 -   **API Communication:** Axios with credentials,  routing prefix.
--   **Data Models:** Pydantic models for user data and preferences.
--   **Algorithms:** Multi-dimensional compatibility, Deal-breakers and Nice-to-haves scoring.
--   **External Services:** Firebase Cloud Messaging (FCM) for push notifications.
--   **Scheduling:** APScheduler for backend tasks.
+-   **Data Models:** Pydantic models for user data.
+-   **Algorithms:** Multi-dimensional compatibility, Zodiac Season exposure multiplier.
+-   **External Services:** Firebase Cloud Messaging (FCM).
+-   **Scheduling:** APScheduler (for horoscopes/notifications).
+-   **Frontend Routing:** React Router (, ).
 </key_technical_concepts>
 
 <code_architecture>
 
--   ****:
-    -   **Summary:** Central FastAPI application.
-    -   **Changes Made:** User model enhanced with , , . Core compatibility functions (, , etc.) were refactored for the new multi-dimensional algorithm including deal-breakers and nice-to-haves. New API endpoints for horoscope preferences and daily horoscopes were added. The  was integrated to start on application startup.
--   ****:
-    -   **Summary:** Displays swipe cards.
-    -   **Changes Made:** Action buttons (Like, Super Like, Pass) now use a frosted glass () style. The app logo was replaced with a  which, when tapped, triggers a modal to display the long daily horoscope message. The profile info dropdown was converted into a 3D card flip animation, displaying user bio, interests, relationship goals, and lifestyle details on the back. Swipe actions now automatically close the flipped card.
--   ****:
-    -   **Summary:** Used for discovering users and displaying a daily energy ticker.
-    -   **Changes Made:** Previously held a horoscope ticker with a . The icon was removed, and the ticker now displays only the short daily horoscope message with a  background to match the tab's aesthetic.
--   ****:
-    -   **Summary:** The interactive onboarding flow.
-    -   **Changes Made:** Expanded to collect  and  data (e.g., relationship goals, smoking, diet) through new, gamified steps, with randomized question order.
--   ****:
-    -   **Summary:** User's personal profile display.
-    -   **Changes Made:** Profile picture area enhanced with a border, gradient background, and a fallback display of user initials if no photo is available.
--   ****:
-    -   **Summary:** User configuration.
-    -   **Changes Made:** Distance measurements converted from kilometers to miles. A new Notifications section was added, allowing users to opt-in/out of daily horoscopes and set their preferred delivery time.
--   ** (NEW)**:
-    -   **Summary:** A script to populate test users with sample , , , and  data for testing the profile display.
-    -   **Changes Made:** Created and executed to address missing data in user profiles for frontend display.
+-   ****: Central FastAPI app. Initially, enhanced user model and compatibility. During Zodiac Season Spotlight, added season detection, exposure multiplier,  flag to match payload, and dev test endpoints (, , ). Most recently, restored to a minimal, stable version with essential auth/feed logic and in-memory stores, including GET and POST  and , with secure cookie settings.
+-   ****: Handles daily horoscope scheduling. Temporarily replaced with a placeholder during manual restoration.
+-   ****: Main router. Fixed  and  to render distinct components.
+-   ****: Displays swipeable cards. Major changes include replacing 3D flip with Tinder-style dropdown, refining card dimensions, adjusting bottom nav proportions, responsive action buttons, adding subtle dark gradient/blur to text, removing photo progress indicators, implementing Zodiac Season Spotlight glow/badge, and dynamic spacing for Show more. Recently restored to a minimal version for stability.
+-   ****: Displays messages. Header height and padding were refined. Adjusted to open chat from URL query ().
+-   ****: Displays horoscope ticker and filters. Horoscope ticker modified for short daily message. Header height and padding refined. Dev Season Toggle UI was added, then fixed to be a standalone function.
+-   ****: User profile. Profile picture area enhanced. Header height and padding refined. Reward section redesigned to Your Rewards piggy bank.
+-   ****: User connections. Header height and padding refined.
+-   ****: Cosmic Wheel gamification. Fixed close button accessibility, mobile responsiveness, and reward screen layout for smaller screens. Restored with working mobile close, scaling, spin animation, and reward panel.
+-   ****: Login page. Modified to use  and  prefix for  and  calls, ensuring  for cookie handling. Updated to send bare POST for Test Login and use  on success.
+-   ** (NEW)**: Extracted component to centralize bottom navigation logic for consistency across Home, Discover, Messages, Profile, and Connections. Ensures uniform 16px icons and stable behavior.
+-   ****: Chat UI. Adjusted to correctly auto-select conversations based on  from route parameters () and maintain consistent BottomNav on mobile. Fixed  detection and  placement.
+-   ****: Firebase configuration. Hardened init to check  before initializing messaging, handling unsupported browser gracefully.
+-   ****: Particle effects for UI interactions. Standardized and linked to action buttons.
+-   ****: Populates test data. Modified to force data addition and log details.
+-   ****: Creates test users. Executed to ensure base users.
+-   ****: New script to add comprehensive profile data including multiple photos.
 </code_architecture>
 
 <pending_tasks>
@@ -54,13 +60,16 @@ Key feature additions include:
 -   **Playwright Test Fixes**: Automated frontend tests consistently fail due to cookie handling issues.
 -   **Bio Sentiment Matching**: Integrate sentiment analysis for bio (+0-10 boost).
 -   **Real-time Astrology Transits**: Implement bonuses based on cosmic polarity alignment (+2-5 bonus).
--   **Verify 3D Card Flip Content**: Ensure user's bio, interests, relationship goals, and lifestyle answers are correctly displayed on the back of the card.
+-   **Cosmic Wheel Enhancements**: Optional next steps include tap-to-dismiss, swipe down to close, larger close button for mid-size phones, persisting wheel state.
+-   **Restore full server functionality**: Reconnect auth and matches to MongoDB.
+-   **Restore full UI**: Replace minimal Home.jsx with full-feature version plus UI fixes.
+-   **Zodiac Season Spotlight**: Implement push notifications (FCM) and in-app toasts for season start, polish glow animation.
 </pending_tasks>
 
 <current_work>
-The AI engineer is currently addressing a critical issue where the user's , , , and  answers are not visible on the back of the 3D card flip animation on the Home page. This is despite previous efforts to update  to display this information and running  to ensure test users have this data. The previous attempt to fix this involved adjusting button positioning and ensuring photo clicks toggle the info. The user's most recent feedback indicates the problem persists, showing a blank or incorrectly displayed section on the flipped card. The AI engineer has identified that the data *should* be present based on the backend model and a test script, and is now preparing to take a screenshot to visually debug the frontend rendering issue.
+Due to persistent issues with Test Login and various compilation errors, the AI engineer initiated a manual restoration process. This involved a targeted re-establishment of core functionalities. Currently, the backend has been restored to a minimal, stable state with essential auth endpoints (,  for both GET and POST) and a simplified feed that returns a basic array of matches (including season fields) using in-memory stores instead of MongoDB. The frontend's Test Login () has been updated to use these new backend endpoints, including proper cookie handling (Secure, SameSite=None, HttpOnly) and triggering a hard redirect to  upon successful login to ensure session propagation. The  component has also been restored to its last functional state, complete with mobile fixes, scaling, spin animation, and reward panel, supported by minimal backend stubs for its API interactions. The application is in a state designed for the user to verify basic login and Cosmic Wheel functionality on the preview site before proceeding with further restoration and feature development.
 </current_work>
 
 <optional_next_step>
-Take a screenshot to visually inspect why profile data is not appearing on the flipped card.
+Wait for user confirmation on the restored Test Login and Cosmic Wheel functionality.
 </optional_next_step>
