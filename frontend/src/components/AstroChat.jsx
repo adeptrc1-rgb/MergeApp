@@ -13,6 +13,7 @@ axios.defaults.withCredentials = true;
 
 export default function AstroChat({ user, logout }) {
   const navigate = useNavigate();
+  const { matchId: routeMatchId } = useParams();
   const [matches, setMatches] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [messages, setMessages] = useState([]);
