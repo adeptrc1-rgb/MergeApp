@@ -1520,25 +1520,80 @@ async def calculate_trending_energy_score(user_id: str, user_doc: dict) -> float
 
 
 
+def current_season_sign(today: date) -> str:
+    seasons = [
+        ("Capricorn", (12, 22), (1, 19)),
+        ("Aquarius", (1, 20), (2, 18)),
+        ("Pisces", (2, 19), (3, 20)),
+        ("Aries", (3, 21), (4, 19)),
+        ("Taurus", (4, 20), (5, 20)),
+        ("Gemini", (5, 21), (6, 20)),
+        ("Cancer", (6, 21), (7, 22)),
+        ("Leo", (7, 23), (8, 22)),
+        ("Virgo", (8, 23), (9, 22)),
+        ("Libra", (9, 23), (10, 22)),
+        ("Scorpio", (10, 23), (11, 21)),
+        ("Sagittarius", (11, 22), (12, 21)),
+    ]
+    m = today.month
+    d = today.day
+    for sign, (sm, sd), (em, ed) in seasons:
+        if (m == sm and d >= sd) or (m == em and d <= ed) or (sm < em and (m > sm and m < em)):
+            # Note: wrap-around handled for Capricorn explicitly below
+            if sign != "Capricorn":
+                return sign
+    # Capricorn or wrap-around
+    return "Capricorn"
+
+SIGN_COLORS = {
+    "Aries": "#ef4444", "Taurus": "#10b981", "Gemini": "#22d3ee", "Cancer": "#60a5fa",
+    "Leo": "#f59e0b", "Virgo": "#84cc16", "Libra": "#a78bfa", "Scorpio": "#f43f5e",
+    "Sagittarius": "#f97316", "Capricorn": "#64748b", "Aquarius": "#06b6d4", "Pisces": "#38bdf8"
+}
+
 @api_router.get("/users/potential-matches")
-async def potential_matches(user: User = Depends(get_current_user)):
+async def potential_matches(user: User = Depends(get_current_user), force_season: Optional[str] = None):
     await ensure_test_candidates(user.id)
     
     # Get current user data for holistic compatibility
     current_user_doc = await db.users.find_one({"id": user.id})
+
+    # Determine current season sign (UTC)
+    today = date.fromtimestamp(now_utc().timestamp())
+    season_sign = force_season if force_season else current_season_sign(today)
     
+    # Query others
     cur = db.users.find({"id": {"$ne": user.id}})
-    docs = await cur.to_list(length=50)
-    out = []
+    docs = await cur.to_list(length=100)
+
+    # Build and weight
+    items = []
     for u in docs:
-        # Use holistic compatibility calculation
         compat_breakdown = calculate_holistic_compatibility(current_user_doc, u)
-        
+        sign = u.get("zodiac_sign") or "Gemini"
+        in_season = (sign == season_sign)
+        weight = 2.0 if in_season else 1.0  # 2.0x exposure multiplier
+        items.append({
+            "doc": u,
+            "sign": sign,
+            "in_season": in_season,
+            "weight": weight,
+            "compat": compat_breakdown
+        })
+
+    # Weighted shuffle: sort by random()/weight so higher weight rises
+    from random import random as rnd
+    items.sort(key=lambda x: rnd() / x["weight"])  # bias toward in-season
+
+    out = []
+    for it in items[:50]:
+        u = it["doc"]
+        compat_breakdown = it["compat"]
         out.append({
             "id": u.get("id"),
             "first_name": u.get("first_name") or (u.get("name") or "Star"),
             "last_name": u.get("last_name") or "",
-            "zodiac_sign": u.get("zodiac_sign") or "Gemini",
+            "zodiac_sign": it["sign"],
             "moon_sign": u.get("moon_sign"),
             "rising_sign": u.get("rising_sign"),
             "birth_date": u.get("birth_date") or "1995-01-01",
@@ -1551,6 +1606,9 @@ async def potential_matches(user: User = Depends(get_current_user)):
             "lifestyle_factors": u.get("lifestyle_factors"),
             "deal_breakers": u.get("deal_breakers"),
             "preferences": u.get("preferences"),
+            "season_spotlight_active": it["in_season"],
+            "season_color": SIGN_COLORS.get(it["sign"], "#a78bfa"),
+            "season_sign": season_sign
         })
     return out
 
