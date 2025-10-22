@@ -297,6 +297,11 @@ export default function AstroChat({ user, logout }) {
           </div>
         )}
       </div>
+      
+      {/* Bottom Navigation on mobile for consistency */}
+      {isMobile && (
+        <BottomNav currentTab="messages" navigate={navigate} />
+      )}
     </div>
   );
 }
