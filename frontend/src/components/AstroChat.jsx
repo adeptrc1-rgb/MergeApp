@@ -110,6 +110,8 @@ export default function AstroChat({ user, logout }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center">
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : true;
+
         <div className="text-center">
           <div className="text-6xl mb-4 animate-pulse">💬</div>
           <p className="text-white text-lg">Loading your cosmic connections...</p>
