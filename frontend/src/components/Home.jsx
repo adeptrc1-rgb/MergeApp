@@ -515,7 +515,6 @@ export default function Home({ user }) {
                   <div
                     className="absolute inset-0 pointer-events-none transition-opacity duration-300 rounded-2xl"
                     style={{
-                      backdropFilter: 'blur(2px)',
                       background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.20) 70%, rgba(0,0,0,0.05) 100%)'
                     }}
                   />
