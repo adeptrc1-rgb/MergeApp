@@ -206,6 +206,46 @@ async def auth_test_login(response: Response, body: Optional[LoginBody] = None):
     email = ((body.email if body else 'testuser@asign.com') or '').lower().strip()
 
     # Ensure user exists and has a stable UUID id
+
+async def _ensure_user_and_session(email: str, response: Response) -> Dict[str, Any]:
+    email = (email or '').lower().strip()
+    user = await db.users.find_one({"email": email})
+    if not user:
+        new_user = User(email=email, first_name="Test", last_name="User", zodiac_sign="Gemini")
+        await db.users.insert_one(new_user.dict())
+        user = new_user.dict()
+    else:
+        if not user.get("id"):
+            new_id = str(uuid.uuid4())
+            await db.users.update_one({"_id": user.get("_id")}, {"$set": {"id": new_id}})
+            user["id"] = new_id
+    token = str(uuid.uuid4())
+    expires_at = (now_utc() + timedelta(days=7)).isoformat()
+    await db.sessions.insert_one(Session(token=token, user_id=user["id"], expires_at=expires_at).dict())
+    response.set_cookie(
+        key=COOKIE_NAME,
+        value=token,
+        max_age=7 * 24 * 60 * 60,
+        httponly=True,
+        secure=SECURE_COOKIES,
+        samesite="none",
+        path="/",
+    )
+    public_user = {
+        "id": user["id"],
+        "email": user.get("email"),
+        "first_name": user.get("first_name"),
+        "last_name": user.get("last_name"),
+        "zodiac_sign": user.get("zodiac_sign"),
+        "photos": user.get("photos", [])
+    }
+    return {"success": True, "user": public_user, "needs_onboarding": bool(not user.get("first_name") or not user.get("birth_date"))}
+
+
+@api_router.get("/auth/health")
+async def auth_health():
+    return {"ok": True, "time": now_utc().isoformat()}
+
     user = await db.users.find_one({"email": email})
     if not user:
         new_user = User(email=email, first_name="Test", last_name="User", zodiac_sign="Gemini")
