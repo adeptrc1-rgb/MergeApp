@@ -667,7 +667,11 @@ export default function Home({ user }) {
                   className={`transition-all duration-300 ease-in-out ${
                     showDropdown ? 'max-h-[50vh] opacity-100' : 'max-h-0 opacity-0'
                   }`}
+                  onWheel={(e) => e.stopPropagation()}
+                  onTouchMove={(e) => e.stopPropagation()}
+                  onScroll={(e) => e.stopPropagation()}
                   style={{
+                    WebkitOverflowScrolling: 'touch',
                     overflowY: showDropdown ? 'auto' : 'hidden',
                     overflowX: 'hidden'
                   }}
