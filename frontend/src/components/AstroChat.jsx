@@ -302,3 +302,6 @@ export default function AstroChat({ user, logout }) {
     </div>
   );
 }
+
+  // Mobile bottom nav for consistency
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
