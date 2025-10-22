@@ -201,10 +201,9 @@ class LoginBody(BaseModel):
 
 
 @api_router.post("/auth/test-login")
-async def auth_test_login(body: LoginBody, response: Response):
-    email = (body.email or "").lower().strip()
-    if not email:
-        raise HTTPException(status_code=400, detail="Email required")
+async def auth_test_login(response: Response, body: Optional[LoginBody] = None):
+    # Allow missing body for dev convenience
+    email = ((body.email if body else 'testuser@asign.com') or '').lower().strip()
 
     # Ensure user exists and has a stable UUID id
     user = await db.users.find_one({"email": email})
@@ -234,7 +233,7 @@ async def auth_test_login(body: LoginBody, response: Response):
         samesite="none",
         path="/",
     )
-    
+
     # Return user snapshot to allow immediate UI update
     public_user = {
         "id": user["id"],
