@@ -31,6 +31,17 @@ export default function Messages({ user }) {
           try {
             const messagesResponse = await axios.get(`${API}/matches/${match.id}/messages`);
             const messages = messagesResponse.data || [];
+  // Auto-open chat when arriving with ?chat=<matchId>
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const matchId = params.get('chat');
+      if (matchId) {
+        setTimeout(() => openChat(matchId), 200);
+      }
+    } catch (e) {}
+  }, []);
+
             const lastMessage = messages[messages.length - 1];
             const otherUser = match.user1_id === user.id ? match.user2 : match.user1;
             return {
