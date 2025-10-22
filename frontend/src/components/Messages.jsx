@@ -89,13 +89,8 @@ export default function Messages({ user }) {
     navigate(`/chat/${matchId}`);
   };
 
-  // Auto-open chat when navigated with state
-  useEffect(() => {
-    if (window.history.state && window.history.state.usr && window.history.state.usr.openMatchId) {
-      const mid = window.history.state.usr.openMatchId;
-      setTimeout(() => openChat(mid), 100);
-    }
-  }, []);
+  // Auto-open chat when navigated with state (disabled in favor of direct /chat/:matchId navigation)
+  useEffect(() => {}, []);
 
   const createTestMatch = async () => {
     try {
