@@ -510,6 +510,10 @@ export default function Home({ user }) {
 
                 {/* subtle background gradient to dark */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90 pointer-events-none" />
+                {/* Temporary readability blur when expanded */}
+                {showDropdown && (
+                  <div className="absolute inset-0 pointer-events-none transition-opacity duration-300" style={{ backdropFilter: 'blur(4px)', backgroundColor: 'rgba(0,0,0,0.15)' }} />
+                )}
               </div>
 
               {/* Bottom info + dropdown */}
