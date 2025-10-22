@@ -88,7 +88,11 @@ export default function Home({ user }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/users/potential-matches`);
+      // Allow dev preview toggle (?forceSeason=Leo)
+      const params = new URLSearchParams(window.location.search);
+      const force = params.get('forceSeason');
+      const url = force ? `${API}/users/potential-matches?force_season=${encodeURIComponent(force)}` : `${API}/users/potential-matches`;
+      const response = await axios.get(url);
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
