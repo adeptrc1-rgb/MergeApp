@@ -28,7 +28,8 @@ export default function SimpleLogin({ onLoginSuccess }) {
         if (data.user) {
           setMessage('✅ Login successful! Redirecting...');
           setLoading(false);
-          setTimeout(() => onLoginSuccess(data.user), 300);
+          // Hard navigation to ensure cookie/session is picked up across the app shell
+          window.location.replace('/home');
           return;
         }
         // Fallback: verify with /auth/me if no user was returned
