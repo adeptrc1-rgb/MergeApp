@@ -242,8 +242,8 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
           <div
             className="relative rounded-full border-4 border-purple-400/50 shadow-2xl overflow-hidden z-0"
             style={{
-              width: Math.min(WHEEL_SIZE, window.innerWidth - 120),
-              height: Math.min(WHEEL_SIZE, window.innerWidth - 120),
+              width: Math.min(WHEEL_SIZE, (typeof window !== 'undefined' ? window.innerWidth : 320) - 140),
+              height: Math.min(WHEEL_SIZE, (typeof window !== 'undefined' ? window.innerWidth : 320) - 140),
               transform: `rotate(${rotation}deg)`,
               transition: spinning ? 'transform 3.2s cubic-bezier(0.14, 0.7, 0, 1.02)' : 'transform 0s'
             }}
