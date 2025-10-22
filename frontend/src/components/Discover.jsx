@@ -32,6 +32,17 @@ export default function Discover({ user }) {
   const [trendingUsers, setTrendingUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('compatible'); // 'compatible' or 'trending'
+  // Dev toggle: force season via query (?forceSeason=Leo)
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const force = params.get('forceSeason');
+      if (force) {
+        // nothing to do here, backend will accept ?force_season, we’ll call it on load
+      }
+    } catch (e) {}
+  }, []);
+
   const [todayHoroscope, setTodayHoroscope] = useState(null);
 
   useEffect(() => {
