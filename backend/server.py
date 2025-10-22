@@ -251,45 +251,6 @@ async def auth_test_login_get(response: Response):
 async def auth_health():
     return {"ok": True, "time": now_utc().isoformat()}
 
-    user = await db.users.find_one({"email": email})
-    if not user:
-        new_user = User(email=email, first_name="Test", last_name="User", zodiac_sign="Gemini")
-        await db.users.insert_one(new_user.dict())
-        user = new_user.dict()
-    else:
-        if not user.get("id"):
-            # Backfill missing id for legacy records
-            new_id = str(uuid.uuid4())
-            await db.users.update_one({"_id": user.get("_id")}, {"$set": {"id": new_id}})
-            user["id"] = new_id
-
-    # Create session
-    token = str(uuid.uuid4())
-    expires_at = (now_utc() + timedelta(days=7)).isoformat()
-    await db.sessions.insert_one(Session(token=token, user_id=user["id"], expires_at=expires_at).dict())
-
-    # Set secure session cookie for preview/prod
-    response.set_cookie(
-        key=COOKIE_NAME,
-        value=token,
-        max_age=7 * 24 * 60 * 60,
-        httponly=True,
-        secure=SECURE_COOKIES,
-        samesite="none",
-        path="/",
-    )
-
-    # Return user snapshot to allow immediate UI update
-    public_user = {
-        "id": user["id"],
-        "email": user.get("email"),
-        "first_name": user.get("first_name"),
-        "last_name": user.get("last_name"),
-        "zodiac_sign": user.get("zodiac_sign"),
-        "photos": user.get("photos", [])
-    }
-    return {"success": True, "user": public_user, "needs_onboarding": bool(not user.get("first_name") or not user.get("birth_date"))}
-
 
 @api_router.get("/auth/me")
 async def auth_me(user: User = Depends(get_current_user)):
