@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+const API_BASE = process.env.REACT_APP_BACKEND_URL || ''; const API = `${API_BASE}/api`;
 
 export default function SimpleLogin({ onLoginSuccess }) {
   const [loading, setLoading] = useState(false);
