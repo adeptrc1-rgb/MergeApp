@@ -227,7 +227,7 @@ export default function Discover({ user }) {
               <div className="space-y-6">
                 {matches.map((match) => {
                   const age = calculateAge(match.birth_date);
-                  const compatibility = match.compatibility_score || Math.floor(Math.random() * 30) + 70;
+                  const compatibility = Math.round(match.compatibility_score || Math.floor(Math.random() * 30) + 70);
                   return (
                     <div
                       key={match.id}
