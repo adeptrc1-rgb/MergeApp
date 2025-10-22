@@ -206,8 +206,8 @@ export default function Home({ user }) {
       if (response.data.success) {
         await axios.post(`${API}/users/use-direct-message`);
         const matchId = encodeURIComponent(String(response.data.match_id));
-        // Navigate to Messages and open the conversation in-app
-        navigate('/messages', { state: { openMatchId: matchId } });
+        // Navigate directly to chat route for a focused conversation UI
+        navigate(`/chat/${matchId}`);
       }
     } catch (error) {
       console.error('Error sending direct message:', error);
