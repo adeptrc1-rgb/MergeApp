@@ -1637,7 +1637,7 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "preferences": u.get("preferences")
         })
     
-    return {"season_sign": season_sign, "matches": out}
+    return out
 
 
 # =====================================
