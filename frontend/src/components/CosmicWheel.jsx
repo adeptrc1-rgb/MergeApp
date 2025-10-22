@@ -310,7 +310,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         {/* Reward Display */}
         {showReward && selectedReward && (
           <div className="text-center animate-fadeIn">
-            <div className="bg-white/5 rounded-2xl p-3 sm:p-5 border border-white/10 mb-3 sm:mb-4">
+            <div className="bg-white/5 rounded-2xl p-3 sm:p-4 border border-white/10 mb-3">
               <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 ${
                 selectedReward.tier === 'legendary' ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black' :
                 selectedReward.tier === 'rare' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' :
