@@ -205,7 +205,7 @@ export default function Home({ user }) {
       const response = await axios.post(`${API}/users/direct-message/${currentMatch.id}`);
       if (response.data.success) {
         await axios.post(`${API}/users/use-direct-message`);
-        const matchId = encodeURIComponent(String(response.data.match_id));
+        const matchId = String(response.data.match_id);
         // Navigate directly to chat route for a focused conversation UI
         navigate(`/chat/${matchId}`);
       }
