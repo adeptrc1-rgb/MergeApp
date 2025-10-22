@@ -125,9 +125,19 @@ export default function Discover({ user }) {
         <div className="max-w-4xl mx-auto px-4 py-2">
           <div className="flex items-center justify-between mb-2">
             <img src="/asign-logo.png" alt="A Sign" className="h-8" />
-            <button className="text-white/60 hover:text-white">
-              <Sparkles className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Dev Season Toggle */}
+              {(() => {
+                const qs = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+                const showDev = (typeof window !== 'undefined' && window.location.hostname === 'localhost') || (qs && qs.get('dev') === '1');
+                return showDev ? (
+                  <DevSeasonToggle />
+                ) : null;
+              })()}
+              <button className="text-white/60 hover:text-white">
+                <Sparkles className="w-5 h-5" />
+              </button>
+            </div>
           </div>
           <h2 className="text-3xl font-light text-white mb-3">Discover</h2>
           {/* Filter Tabs */}
