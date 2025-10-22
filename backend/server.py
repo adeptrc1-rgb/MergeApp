@@ -1674,6 +1674,11 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "lifestyle_factors": u.get("lifestyle_factors"),
             "deal_breakers": u.get("deal_breakers"),
             "preferences": u.get("preferences"),
+            "season_spotlight_active": it["in_season"],
+            "season_color": SIGN_COLORS.get(it["sign"], "#a78bfa"),
+            "season_sign": season_sign
+        })
+    return out
 
 # =====================================
 # Zodiac Season Spotlight - Test Routes
