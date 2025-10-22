@@ -515,7 +515,7 @@ export default function Home({ user }) {
                   <div
                     className="absolute inset-0 pointer-events-none transition-opacity duration-300 rounded-2xl"
                     style={{
-                      backgroundColor: 'rgba(0,0,0,0.6)'
+                      backgroundColor: 'rgba(0,0,0,0.8)'
                     }}
                   />
                 )}
