@@ -284,6 +284,11 @@ export default function AstroChat({ user, logout }) {
                 >
                   <Send className="w-5 h-5" />
                 </button>
+      {/* Bottom Navigation on mobile for consistency */}
+      {isMobile && (
+        <BottomNav currentTab="messages" navigate={navigate} />
+      )}
+
               </div>
             </div>
           </>
