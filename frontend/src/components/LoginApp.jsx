@@ -13,7 +13,8 @@ export default function LoginApp() {
 
   const checkAuth = async () => {
     try {
-      const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+      const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
+      const API = `${API_BASE}/api`;
       const response = await fetch(`${API}/auth/me`, {
         credentials: 'include'
       });
