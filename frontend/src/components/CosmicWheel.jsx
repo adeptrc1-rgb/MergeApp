@@ -182,7 +182,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         </button>
 
         {/* Header */}
-        <div className="text-center mb-7">
+        <div className="text-center mb-5 sm:mb-7">
           <div className="inline-block p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full mb-4 border border-white/10">
             <Sparkles className="w-8 h-8 text-purple-300" />
           </div>
