@@ -204,7 +204,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
         )}
 
         {/* Wheel Container */}
-        <div className="relative mb-8 flex items-center justify-center">
+        <div className="relative mb-6 sm:mb-8 flex items-center justify-center">
           {/* Pointer (elegant neon) */}
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
             <div className="relative">
