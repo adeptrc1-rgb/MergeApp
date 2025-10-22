@@ -499,16 +499,7 @@ export default function Home({ user }) {
                 {/* Dots */}
                 {/* Dots removed as per design */}
 
-                {currentMatch.photos && currentMatch.photos.length > 1 && (
-                  <div className="absolute top-4 left-0 right-0 flex justify-center gap-1 px-4 z-10 pointer-events-none">
-                    {currentMatch.photos.map((_, idx) => (
-                      <div
-                        key={idx}
-                        className={`h-1 flex-1 rounded-full transition-all duration-300 ${idx === currentPhotoIndex ? 'bg-white' : 'bg-white/30'}`}
-                      />
-                    ))}
-                  </div>
-                )}
+                {/* Progress dots hidden */}
 
                 {/* subtle background gradient to dark */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90 pointer-events-none" />
