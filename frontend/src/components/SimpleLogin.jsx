@@ -17,47 +17,36 @@ export default function SimpleLogin({ onLoginSuccess }) {
       
       const response = await fetch(`${API}/auth/test-login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include', // Important for cookies
-        body: JSON.stringify({
-          email: 'testuser@asign.com'
-        })
+        credentials: 'include'
       });
 
       const data = await response.json();
       console.log('Login response:', data);
 
       if (data.success) {
-        setMessage('✅ Login successful! Checking authentication...');
-        
-        // Wait a moment for cookie to be set
-        setTimeout(async () => {
-          try {
-            const authResponse = await fetch(`${API}/auth/me`, {
-              method: 'GET',
-              credentials: 'include'
-            });
-            
-            if (authResponse.ok) {
-              const userData = await authResponse.json();
-              console.log('User data:', userData);
-              setMessage('✅ Authentication verified! Redirecting...');
-              
-              setTimeout(() => {
-                onLoginSuccess(userData);
-              }, 1000);
-            } else {
-              setMessage('❌ Authentication failed after login');
-              console.log('Auth check failed:', authResponse.status);
-            }
-          } catch (authError) {
-            console.error('Auth check error:', authError);
-            setMessage('❌ Error checking authentication');
-          }
+        // Use returned user immediately for a faster UX
+        if (data.user) {
+          setMessage('✅ Login successful! Redirecting...');
           setLoading(false);
-        }, 1000);
+          setTimeout(() => onLoginSuccess(data.user), 300);
+          return;
+        }
+        // Fallback: verify with /auth/me if no user was returned
+        setMessage('✅ Login successful! Verifying session...');
+        try {
+          const authResponse = await fetch(`${API}/auth/me`, { method: 'GET', credentials: 'include' });
+          if (authResponse.ok) {
+            const userData = await authResponse.json();
+            setMessage('✅ Authentication verified! Redirecting...');
+            setTimeout(() => onLoginSuccess(userData), 300);
+          } else {
+            setMessage('❌ Authentication failed after login');
+          }
+        } catch (authError) {
+          console.error('Auth check error:', authError);
+          setMessage('❌ Error checking authentication');
+        }
+        setLoading(false);
       } else {
         setMessage('❌ Login failed');
         setLoading(false);
