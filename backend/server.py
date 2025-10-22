@@ -228,12 +228,9 @@ async def _ensure_user_and_session(email: str, response: Response) -> Dict[str, 
         secure=SECURE_COOKIES,
         samesite="none",
         path="/",
-
-@api_router.get("/auth/test-login")
-async def auth_test_login_get(response: Response):
-    return await _ensure_user_and_session('testuser@asign.com', response)
-
     )
+    
+    # Return user snapshot to allow immediate UI update
     public_user = {
         "id": user["id"],
         "email": user.get("email"),
@@ -243,6 +240,11 @@ async def auth_test_login_get(response: Response):
         "photos": user.get("photos", [])
     }
     return {"success": True, "user": public_user, "needs_onboarding": bool(not user.get("first_name") or not user.get("birth_date"))}
+
+
+@api_router.get("/auth/test-login")
+async def auth_test_login_get(response: Response):
+    return await _ensure_user_and_session('testuser@asign.com', response)
 
 
 @api_router.get("/auth/health")
