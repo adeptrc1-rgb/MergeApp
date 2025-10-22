@@ -23,7 +23,6 @@ export default function Messages({ user }) {
   const loadConversations = async () => {
     try {
       const matchesResponse = await axios.get(`${API}/matches`);
-  const location = useLocation();
 
       const matches = matchesResponse.data || [];
 
