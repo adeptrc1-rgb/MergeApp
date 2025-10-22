@@ -234,7 +234,17 @@ async def auth_test_login(body: LoginBody, response: Response):
         samesite="none",
         path="/",
     )
-    return {"success": True}
+    
+    # Return user snapshot to allow immediate UI update
+    public_user = {
+        "id": user["id"],
+        "email": user.get("email"),
+        "first_name": user.get("first_name"),
+        "last_name": user.get("last_name"),
+        "zodiac_sign": user.get("zodiac_sign"),
+        "photos": user.get("photos", [])
+    }
+    return {"success": True, "user": public_user, "needs_onboarding": bool(not user.get("first_name") or not user.get("birth_date"))}
 
 
 @api_router.get("/auth/me")
