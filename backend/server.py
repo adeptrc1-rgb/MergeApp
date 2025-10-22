@@ -202,20 +202,34 @@ class LoginBody(BaseModel):
 
 @api_router.post("/auth/test-login")
 async def auth_test_login(body: LoginBody, response: Response):
-    email = body.email.lower().strip()
+    email = (body.email or "").lower().strip()
+    if not email:
+        raise HTTPException(status_code=400, detail="Email required")
+
+    # Ensure user exists and has a stable UUID id
     user = await db.users.find_one({"email": email})
     if not user:
         new_user = User(email=email, first_name="Test", last_name="User", zodiac_sign="Gemini")
         await db.users.insert_one(new_user.dict())
         user = new_user.dict()
+    else:
+        if not user.get("id"):
+            # Backfill missing id for legacy records
+            new_id = str(uuid.uuid4())
+            await db.users.update_one({"_id": user.get("_id")}, {"$set": {"id": new_id}})
+            user["id"] = new_id
+
+    # Create session
     token = str(uuid.uuid4())
     expires_at = (now_utc() + timedelta(days=7)).isoformat()
     await db.sessions.insert_one(Session(token=token, user_id=user["id"], expires_at=expires_at).dict())
+
+    # Set secure session cookie for preview/prod
     response.set_cookie(
         key=COOKIE_NAME,
         value=token,
         max_age=7 * 24 * 60 * 60,
-        httponly=False,  # allow JS for debug; consider True later
+        httponly=True,
         secure=SECURE_COOKIES,
         samesite="none",
         path="/",
