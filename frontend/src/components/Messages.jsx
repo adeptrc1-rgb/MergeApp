@@ -145,14 +145,14 @@ export default function Messages({ user }) {
     <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
       <div className="border-b border-white/10 bg-black flex-shrink-0 select-none" style={{ WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between mb-6">
-            <img src="/asign-logo.png" alt="A Sign" className="h-10" />
+        <div className="max-w-4xl mx-auto px-4 py-2">
+          <div className="flex items-center justify-between mb-2">
+            <img src="/asign-logo.png" alt="A Sign" className="h-8" />
             <button className="text-white/60 hover:text-white">
-              <Sparkles className="w-6 h-6" />
+              <Sparkles className="w-5 h-5" />
             </button>
           </div>
-          <h2 className="text-4xl font-light text-white">Messages</h2>
+          <h2 className="text-3xl font-light text-white">Messages</h2>
           {coinflipToast && (
             <div className="mt-3 bg-white/5 border border-white/10 text-white/80 rounded-xl px-4 py-2 inline-flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-purple-300" />
