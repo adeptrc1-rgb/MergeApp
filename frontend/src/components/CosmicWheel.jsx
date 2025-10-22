@@ -319,7 +319,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                 {selectedReward.tier?.toUpperCase()}
               </div>
               <div className={`inline-block p-3 sm:p-4 bg-gradient-to-r ${selectedReward.color} rounded-full mb-3 sm:mb-4 shadow-[0_0_40px_rgba(168,85,247,0.35)]`}>
-                {React.createElement(selectedReward.icon, { className: 'w-9 h-9 text-white' })}
+                {React.createElement(selectedReward.icon, { className: 'w-7 h-7 sm:w-9 sm:h-9 text-white' })}
               </div>
               <h3 className="text-2xl font-light text-white mb-2">You Won!</h3>
               <p className="text-xl text-purple-300 font-medium mb-2">{selectedReward.name}</p>
