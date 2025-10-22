@@ -155,14 +155,14 @@ export default function Connections({ user }) {
     <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
       <div className="border-b border-white/10 bg-black flex-shrink-0">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between mb-6">
-            <img src="/asign-logo.png" alt="A Sign" className="h-10" />
+        <div className="max-w-4xl mx-auto px-4 py-2">
+          <div className="flex items-center justify-between mb-2">
+            <img src="/asign-logo.png" alt="A Sign" className="h-8" />
             <button className="text-white/60 hover:text-white">
-              <Sparkles className="w-6 h-6" />
+              <Sparkles className="w-5 h-5" />
             </button>
           </div>
-          <h2 className="text-4xl font-light text-white mb-2">Connections</h2>
+          <h2 className="text-3xl font-light text-white mb-1">Connections</h2>
           {penalty.active && (
             <p className="text-white/60 text-sm">Penalty active. Your cosmic alignments will resume when the timer ends.</p>
           )}
