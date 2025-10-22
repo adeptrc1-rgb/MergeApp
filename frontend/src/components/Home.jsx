@@ -12,6 +12,8 @@ import {
   createFloatingSign,
   createMatchAnimation,
   createStardustTrail
+,
+  createFloatingHearts
 } from '../utils/particleEffects';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
