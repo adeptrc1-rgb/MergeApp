@@ -615,13 +615,7 @@ export default function Home({ user }) {
 
             {/* Profile Info Bar with Dropdown */}
             <div className="absolute bottom-0 left-0 right-0 text-white">
-              <div className={`relative p-6 pt-16 transition-all ${showDropdown ? 'pb-4' : ''}`}>
-                {/* Subtle overlay for readability */}
-                <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.70), rgba(0,0,0,0.50), rgba(0,0,0,0.0))',
-                  backdropFilter: 'blur(1.5px)'
-                }} />
-                <div className="relative">
+              <div className={`bg-gradient-to-t from-black/95 via-black/90 to-transparent p-6 pt-16 relative transition-all ${showDropdown ? 'pb-4' : ''}`}>
 
                 <h2 className="text-4xl font-light mb-2">
                   {currentMatch.first_name}, {age}
