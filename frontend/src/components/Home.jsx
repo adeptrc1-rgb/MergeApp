@@ -589,8 +589,8 @@ export default function Home({ user }) {
               <div className={`relative p-6 pt-16 transition-all ${showDropdown ? 'pb-4' : ''}`}>
                 {/* Subtle overlay for readability */}
                 <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.55), rgba(0,0,0,0.0))',
-                  backdropFilter: 'blur(2px)'
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.70), rgba(0,0,0,0.50), rgba(0,0,0,0.0))',
+                  backdropFilter: 'blur(1.5px)'
                 }} />
                 <div className="relative">
 
