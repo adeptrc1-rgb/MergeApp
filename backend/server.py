@@ -1709,12 +1709,6 @@ async def season_clear_test(user: User = Depends(get_current_user)):
     await db.users.update_one({"id": user.id}, {"$unset": {"season_spotlight_preview": ""}})
     return {"success": True}
 
-            "season_spotlight_active": it["in_season"],
-            "season_color": SIGN_COLORS.get(it["sign"], "#a78bfa"),
-            "season_sign": season_sign
-        })
-    return out
-
 
 
 @api_router.get("/users/trending-energies")
