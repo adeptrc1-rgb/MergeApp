@@ -236,47 +236,74 @@ export default function Profile({ user, logout }) {
             </button>
           </div>
 
-          {/* Rewards */}
+          {/* Rewards Piggy Bank */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
             <h3 className="text-xl font-light text-white mb-6 flex items-center gap-2">
               <Award className="w-5 h-5 text-purple-400" />
               Your Rewards
             </h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative">
-                <Zap className="w-6 h-6 text-purple-400 mb-3" />
-                <div className="text-3xl font-light text-white mb-1">{user.profile_boosts || 0}</div>
-                <div className="text-sm text-white/40 mb-2">Profile Boosts</div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {/* Profile Boosts */}
+              <div className="bg-white/5 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-purple-500/10 blur-2xl" />
+                <Zap className="w-6 h-6 text-purple-300 mb-2" />
+                <div className="text-3xl font-light text-white">{user.profile_boosts || 0}</div>
+                <div className="text-xs text-white/50 mt-1">Profile Boosts</div>
                 {timeRemaining.boosts && (
-                  <div className="flex items-center gap-1 text-xs text-orange-400">
+                  <div className="flex items-center gap-1 text-xs text-orange-400 mt-2">
                     <Clock className="w-3 h-3" />
                     <span>{timeRemaining.boosts}</span>
                   </div>
                 )}
               </div>
-              <div className="bg-white/5 rounded-xl p-6 border border-white/10 relative">
-                <Heart className="w-6 h-6 text-purple-400 mb-3" />
-                <div className="text-3xl font-light text-white mb-1">{user.super_likes || 0}</div>
-                <div className="text-sm text-white/40 mb-2">Super Likes</div>
+
+              {/* Super Likes */}
+              <div className="bg-white/5 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-pink-500/10 blur-2xl" />
+                <Heart className="w-6 h-6 text-pink-300 mb-2" />
+                <div className="text-3xl font-light text-white">{user.super_likes || 0}</div>
+                <div className="text-xs text-white/50 mt-1">Super Likes</div>
                 {timeRemaining.super_likes && (
-                  <div className="flex items-center gap-1 text-xs text-orange-400">
+                  <div className="flex items-center gap-1 text-xs text-orange-400 mt-2">
                     <Clock className="w-3 h-3" />
                     <span>{timeRemaining.super_likes}</span>
                   </div>
                 )}
               </div>
-              <div className="bg-white/5 rounded-xl p-6 border border-white/10 col-span-2 relative">
-                <MessageCircle className="w-6 h-6 text-purple-400 mb-3" />
-                <div className="text-3xl font-light text-white mb-1">{user.direct_messages || 0}</div>
-                <div className="text-sm text-white/40 mb-2">Direct Messages</div>
+
+              {/* Direct Messages */}
+              <div className="bg-white/5 rounded-xl p-5 border border-white/10 relative overflow-hidden col-span-2 md:col-span-1">
+                <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-blue-500/10 blur-2xl" />
+                <MessageCircle className="w-6 h-6 text-blue-300 mb-2" />
+                <div className="text-3xl font-light text-white">{user.direct_messages || 0}</div>
+                <div className="text-xs text-white/50 mt-1">Direct Messages</div>
                 {timeRemaining.dms && (
-                  <div className="flex items-center gap-1 text-xs text-orange-400">
+                  <div className="flex items-center gap-1 text-xs text-orange-400 mt-2">
                     <Clock className="w-3 h-3" />
                     <span>{timeRemaining.dms}</span>
                   </div>
                 )}
               </div>
+
+              {/* Redos */}
+              <div className="bg-white/5 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-yellow-500/10 blur-2xl" />
+                <RotateCcw className="w-6 h-6 text-yellow-300 mb-2" />
+                <div className="text-3xl font-light text-white">{user.redos || 0}</div>
+                <div className="text-xs text-white/50 mt-1">Redos</div>
+              </div>
+
+              {/* Star Coins */}
+              <div className="bg-white/5 rounded-xl p-5 border border-white/10 relative overflow-hidden">
+                <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-amber-500/10 blur-2xl" />
+                <Coins className="w-6 h-6 text-amber-300 mb-2" />
+                <div className="text-3xl font-light text-white">{user.star_coins || 0}</div>
+                <div className="text-xs text-white/50 mt-1">Star Coins</div>
+              </div>
             </div>
+
+            {/* Helper text */}
+            <p className="text-white/50 text-xs mt-4">This is your piggy bank — items you've purchased or won from the Cosmic Wheel live here.</p>
           </div>
 
           {/* Stats */}
