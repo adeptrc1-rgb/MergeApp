@@ -33,6 +33,13 @@ export default function AstroChat({ user, logout }) {
         loadMessages(selectedMatch.id);
       }, 3000);
       return () => clearInterval(interval);
+  // When route includes /chat/:matchId, auto-select that match for consistent UI
+  useEffect(() => {
+    if (!routeMatchId || matches.length === 0) return;
+    const m = matches.find(m => String(m.id) === String(routeMatchId) || String(m.match_id) === String(routeMatchId));
+    if (m) setSelectedMatch(m);
+  }, [routeMatchId, matches]);
+
     }
   }, [selectedMatch]);
 
