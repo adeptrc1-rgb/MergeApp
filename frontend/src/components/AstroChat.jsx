@@ -21,6 +21,9 @@ export default function AstroChat({ user, logout }) {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef(null);
+  
+  // Mobile detection for responsive UI
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   useEffect(() => {
     loadMatches();
