@@ -165,11 +165,10 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
   };
 
   const handleClose = () => {
-    if (!spinning) {
-      onClose?.();
-      setShowReward(false);
-      setSelectedReward(null);
-    }
+    onClose?.();
+    setShowReward(false);
+    setSelectedReward(null);
+    setSpinning(false);
   };
 
   if (!isOpen) return null;
