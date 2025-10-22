@@ -515,7 +515,7 @@ export default function Home({ user }) {
                   <div
                     className="absolute inset-0 pointer-events-none transition-opacity duration-300 rounded-2xl"
                     style={{
-                      background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 35%, rgba(0,0,0,0.20) 70%, rgba(0,0,0,0.05) 100%)'
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.60) 55%, rgba(0,0,0,0.30) 85%, rgba(0,0,0,0.10) 100%)'
                     }}
                   />
                 )}
