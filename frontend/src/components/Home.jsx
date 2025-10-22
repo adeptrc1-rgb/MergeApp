@@ -514,7 +514,7 @@ export default function Home({ user }) {
 
               {/* Bottom info + dropdown */}
               <div className="absolute bottom-0 left-0 right-0 text-white">
-                <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 pt-16 relative transition-all rounded-2xl backdrop-blur-sm ${showDropdown ? 'pb-4' : ''}`}>
+                <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 pt-16 relative transition-all rounded-2xl ${showDropdown ? 'pb-4' : ''}`}>
                   <h2 className="text-4xl font-light mb-2">
                     {currentMatch.first_name}, {age}
                   </h2>
