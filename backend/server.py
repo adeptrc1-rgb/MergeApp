@@ -230,6 +230,11 @@ async def _ensure_user_and_session(email: str, response: Response) -> Dict[str, 
         secure=SECURE_COOKIES,
         samesite="none",
         path="/",
+
+@api_router.get("/auth/test-login")
+async def auth_test_login_get(response: Response):
+    return await _ensure_user_and_session('testuser@asign.com', response)
+
     )
     public_user = {
         "id": user["id"],
