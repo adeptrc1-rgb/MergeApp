@@ -520,7 +520,26 @@ export default function Home({ user }) {
 
               {/* Bottom info + dropdown */}
               <div className="absolute bottom-0 left-0 right-0 text-white">
+                {/* Zodiac Season Glow */}
+                {currentMatch.season_spotlight_active && (
+                  <div className="absolute -inset-2 rounded-3xl pointer-events-none" style={{
+                    boxShadow: `0 0 24px 8px ${currentMatch.season_color || '#a78bfa'}`,
+                    opacity: 0.75,
+                    filter: 'saturate(120%)'
+                  }} />
+                )}
                 <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 relative transition-all rounded-2xl ${showDropdown ? 'pt-4 sm:pt-6 pb-1' : 'pt-16'}`}>
+                  {/* Season badge */}
+                  {currentMatch.season_spotlight_active && (
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border mb-2" style={{
+                      backgroundColor: 'rgba(0,0,0,0.35)',
+                      borderColor: (currentMatch.season_color || '#a78bfa') + '55',
+                      color: currentMatch.season_color || '#a78bfa'
+                    }}>
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: currentMatch.season_color || '#a78bfa' }} />
+                      {currentMatch.season_sign} Season
+                    </div>
+                  )}
                   <h2 className="text-4xl font-light mb-2">
                     {currentMatch.first_name}, {age}
                   </h2>
