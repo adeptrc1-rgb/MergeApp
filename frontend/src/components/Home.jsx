@@ -465,7 +465,8 @@ export default function Home({ user }) {
                 transform: isDragging 
                   ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                   : swipeDirection ? undefined : 'translate(0, 0)',
-                transition: isDragging ? 'none' : 'transform 0.3s ease-out'
+                transition: isDragging ? 'none' : 'transform 0.3s ease-out',
+                boxShadow: `0 0 40px ${getZodiacTheme(currentMatch.zodiac_sign).accentColor}40, 0 0 80px ${getZodiacTheme(currentMatch.zodiac_sign).accentColor}20`
               }}
             >
               {/* Zodiac Season Background Glow */}
