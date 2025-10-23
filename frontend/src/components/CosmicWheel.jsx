@@ -322,7 +322,7 @@ export default function CosmicWheel({ isOpen, onClose, onRewardClaimed }) {
                 {React.createElement(selectedReward.icon, { className: 'w-7 h-7 sm:w-9 sm:h-9 text-white' })}
               </div>
               <h3 className="text-2xl font-light text-white mb-2">You Won!</h3>
-              <p className="text-xl text-purple-300 font-medium mb-2">{selectedReward.name}</p>
+              <p className="text-xl text-purple-300 font-medium mb-2">{selectedReward.label || selectedReward.name}</p>
               {selectedReward.amount ? (
                 <p className="text-sm text-white/60">x{selectedReward.amount}</p>
               ) : null}
