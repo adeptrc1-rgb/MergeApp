@@ -425,16 +425,7 @@ export default function Home({ user }) {
           )}
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 text-purple-400">
-              <div 
-                style={{
-                  filter: 'drop-shadow(0 0 4px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 8px rgba(168, 85, 247, 0.3))'
-                }}
-              >
-                <ConstellationIcon 
-                  sign={user.zodiac_sign?.toLowerCase() || 'leo'} 
-                  className="w-5 h-5"
-                />
-              </div>
+              <Star className="w-4 h-4" />
               <span className="text-sm">{user.zodiac_sign}</span>
             </div>
           </div>
