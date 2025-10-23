@@ -20,7 +20,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'pulse',
     duration: '10s',
     accentColor: '#C5D9A4',
-    opacity: 0.25
+    opacity: 0.45
   },
   gemini: {
     name: 'Gemini',
@@ -29,7 +29,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'flicker',
     duration: '9s',
     accentColor: '#98D0E8',
-    opacity: 0.25
+    opacity: 0.45
   },
   cancer: {
     name: 'Cancer',
@@ -38,7 +38,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'ripple',
     duration: '10s',
     accentColor: '#C3ECEF',
-    opacity: 0.25
+    opacity: 0.45
   },
   leo: {
     name: 'Leo',
@@ -47,7 +47,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'flare',
     duration: '9s',
     accentColor: '#FFD090',
-    opacity: 0.28
+    opacity: 0.48
   },
   virgo: {
     name: 'Virgo',
@@ -56,7 +56,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'sweep',
     duration: '12s',
     accentColor: '#CCD9BD',
-    opacity: 0.25
+    opacity: 0.45
   },
   libra: {
     name: 'Libra',
@@ -65,7 +65,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'mirror-fade',
     duration: '10s',
     accentColor: '#E6CDEA',
-    opacity: 0.25
+    opacity: 0.45
   },
   scorpio: {
     name: 'Scorpio',
@@ -74,7 +74,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'pulsation',
     duration: '8s',
     accentColor: '#BA76A0',
-    opacity: 0.26
+    opacity: 0.46
   },
   sagittarius: {
     name: 'Sagittarius',
@@ -83,7 +83,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'streak',
     duration: '12s',
     accentColor: '#B36C8E',
-    opacity: 0.27
+    opacity: 0.47
   },
   capricorn: {
     name: 'Capricorn',
@@ -92,7 +92,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'shimmer',
     duration: '11s',
     accentColor: '#858585',
-    opacity: 0.24
+    opacity: 0.44
   },
   aquarius: {
     name: 'Aquarius',
@@ -101,7 +101,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'orbital',
     duration: '13s',
     accentColor: '#3FFFD9',
-    opacity: 0.26
+    opacity: 0.46
   },
   pisces: {
     name: 'Pisces',
@@ -110,7 +110,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'drift',
     duration: '11s',
     accentColor: '#C3D7E3',
-    opacity: 0.25
+    opacity: 0.45
   }
 };
 
