@@ -544,7 +544,24 @@ export default function Home({ user }) {
                     {currentMatch.first_name}, {age}
                   </h2>
                   <div className="flex items-center gap-2 text-white/80 mb-3">
-                    <Star className="w-4 h-4 text-purple-400" />
+                    {/* Constellation with compatibility-based glow */}
+                    <div 
+                      className="relative"
+                      style={{
+                        filter: compatibility >= 90 
+                          ? 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.9)) drop-shadow(0 0 16px rgba(168, 85, 247, 0.6))'
+                          : compatibility >= 80
+                          ? 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.7)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4))'
+                          : compatibility >= 75
+                          ? 'drop-shadow(0 0 4px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 8px rgba(168, 85, 247, 0.3))'
+                          : 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.3))'
+                      }}
+                    >
+                      <ConstellationIcon 
+                        sign={currentMatch.zodiac_sign?.toLowerCase() || 'leo'} 
+                        className="w-5 h-5"
+                      />
+                    </div>
                     <span className="text-base">{currentMatch.zodiac_sign}</span>
                     <span className="text-white/40">•</span>
                     <span className="text-sm">
