@@ -11,7 +11,7 @@ export const ZODIAC_SEASON_THEMES = {
     motionType: 'breathing',
     duration: '8s',
     accentColor: '#FF8533',
-    opacity: 0.25
+    opacity: 0.45
   },
   taurus: {
     name: 'Taurus',
