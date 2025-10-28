@@ -244,19 +244,11 @@ export default function Profile({ user, logout }) {
                   );
                 })()}
 
-                {/* Active Skin Background */}
+                {/* Active Premium Skin Background */}
                 {inventory?.active_skin && (() => {
                   const skinItem = storeItems.find(i => i.id === inventory.active_skin);
-                  if (skinItem?.effect?.colors) {
-                    return (
-                      <div 
-                        className="absolute inset-0 z-0"
-                        style={{
-                          background: `linear-gradient(135deg, ${skinItem.effect.colors.join(', ')})`,
-                          opacity: 0.6
-                        }}
-                      />
-                    );
+                  if (skinItem?.effect) {
+                    return <PremiumSkinRenderer skinEffect={skinItem.effect} zodiacSign={user.zodiac_sign} />;
                   }
                   return null;
                 })()}
