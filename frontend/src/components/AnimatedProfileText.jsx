@@ -1,0 +1,78 @@
+import React from 'react';
+
+/**
+ * Animated Profile Text Component
+ * Applies skin-specific text animations (glow, gradient shift, shimmer, neon pulse)
+ */
+export default function AnimatedProfileText({ children, animationType, glowColor, className = '' }) {
+  if (!animationType) {
+    return <span className={className}>{children}</span>;
+  }
+
+  // Glow animation (Galaxy)
+  if (animationType === 'glow') {
+    return (
+      <span 
+        className={`${className} animate-text-glow`}
+        style={{
+          textShadow: `0 0 10px ${glowColor || '#a78bfa'}, 0 0 20px ${glowColor || '#a78bfa'}60`,
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
+
+  // Gradient shift animation (Pastel)
+  if (animationType === 'gradient_shift') {
+    return (
+      <span 
+        className={`${className} animate-text-gradient`}
+        style={{
+          background: 'linear-gradient(90deg, #ffc9e5, #e5c9ff, #c9ffe5, #ffc9e5)',
+          backgroundSize: '200% auto',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
+
+  // Shimmer animation (Zodiac)
+  if (animationType === 'shimmer') {
+    return (
+      <span 
+        className={`${className} animate-text-shimmer`}
+        style={{
+          background: `linear-gradient(90deg, white 0%, ${glowColor || '#ffd700'} 50%, white 100%)`,
+          backgroundSize: '200% auto',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
+
+  // Neon pulse animation (Neon)
+  if (animationType === 'neon_pulse') {
+    return (
+      <span 
+        className={`${className} animate-text-neon`}
+        style={{
+          color: glowColor || '#00ffff',
+          textShadow: `0 0 10px ${glowColor || '#00ffff'}, 0 0 20px ${glowColor || '#00ffff'}80, 0 0 30px ${glowColor || '#00ffff'}40`,
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
+
+  return <span className={className}>{children}</span>;
+}
