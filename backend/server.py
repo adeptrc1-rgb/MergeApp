@@ -424,6 +424,16 @@ async def reset_cosmic_wheel(user: User = Depends(get_current_user)):
     )
     return {"success": True}
 
+@api_router.post("/dev/add-coins")
+async def add_coins_dev(user: User = Depends(get_current_user)):
+    """Dev endpoint to add 5000 star coins"""
+    await db.users.update_one(
+        {"id": user.id},
+        {"$inc": {"star_coins": 5000}}
+    )
+    udoc = await db.users.find_one({"id": user.id})
+    return {"success": True, "new_balance": udoc.get("star_coins", 0)}
+
 # Store System - Lights and Skins
 STORE_ITEMS = [
     # Lights - Visual effects around profile cards
