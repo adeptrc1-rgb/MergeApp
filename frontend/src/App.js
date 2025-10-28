@@ -1316,6 +1316,14 @@ function App() {
               } 
             />
             <Route 
+              path="/store" 
+              element={
+                <ProtectedRoute>
+                  <StoreWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path="/chat" 
               element={
                 <ProtectedRoute>
