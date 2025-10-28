@@ -38,6 +38,7 @@ export default function Profile({ user, logout }) {
   useEffect(() => {
     checkDailySpinStatus();
     calculateTimeRemaining();
+    loadStoreInventory();
     const interval = setInterval(() => {
       calculateTimeRemaining();
       updateCooldownCountdown();
@@ -53,6 +54,19 @@ export default function Profile({ user, logout }) {
     } catch (e) {}
     return () => clearInterval(interval);
   }, [user, wheelStatus]);
+
+  const loadStoreInventory = async () => {
+    try {
+      const [inventoryRes, itemsRes] = await Promise.all([
+        axios.get(`${API}/store/inventory`),
+        axios.get(`${API}/store/items`)
+      ]);
+      setInventory(inventoryRes.data);
+      setStoreItems(itemsRes.data || []);
+    } catch (error) {
+      console.error('Error loading store inventory:', error);
+    }
+  };
 
   const checkDailySpinStatus = async () => {
     try {
