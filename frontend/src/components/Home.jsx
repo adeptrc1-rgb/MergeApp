@@ -43,6 +43,8 @@ export default function Home({ user }) {
   const [todayHoroscope, setTodayHoroscope] = useState(null);
   const [showHoroscopeModal, setShowHoroscopeModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [storeItems, setStoreItems] = useState([]);
+  const [userInventory, setUserInventory] = useState(null);
   const cardRef = useRef(null);
   const likeButtonRef = useRef(null);
   const passButtonRef = useRef(null);
