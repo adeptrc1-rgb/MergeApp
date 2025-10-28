@@ -5,6 +5,7 @@ import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircl
 import CosmicWheel from './CosmicWheel';
 import BottomNav from './BottomNav';
 import ConstellationIcon from './ConstellationIcon';
+import PremiumSkinRenderer from './PremiumSkinRenderer';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
