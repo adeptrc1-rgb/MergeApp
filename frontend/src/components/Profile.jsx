@@ -31,6 +31,8 @@ export default function Profile({ user, logout }) {
   const [wheelStatus, setWheelStatus] = useState(null);
   const [cooldownCountdown, setCooldownCountdown] = useState('');
   const [cooldownProgress, setCooldownProgress] = useState(0);
+  const [inventory, setInventory] = useState(null);
+  const [storeItems, setStoreItems] = useState([]);
   const location = window.location;
 
   useEffect(() => {
