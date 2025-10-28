@@ -203,6 +203,61 @@
   animation: text-neon 2s ease-in-out infinite;
 }
 
+/* Light Effect Animations (external glows) */
+@keyframes aurora-shimmer {
+  0%, 100% {
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  33% {
+    filter: brightness(1.1) hue-rotate(10deg);
+  }
+  66% {
+    filter: brightness(0.9) hue-rotate(-10deg);
+  }
+}
+
+@keyframes cosmic-pulse {
+  0%, 100% {
+    filter: brightness(1) blur(0px);
+  }
+  50% {
+    filter: brightness(1.2) blur(1px);
+  }
+}
+
+@keyframes flame-flicker {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  25% {
+    filter: brightness(1.15);
+  }
+  50% {
+    filter: brightness(0.95);
+  }
+  75% {
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes moonbeam-pulse {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+}
+
+@keyframes starfield-twinkle {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.3);
+  }
+}
+
 /* Accessibility: Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .animate-twinkle,
@@ -217,6 +272,14 @@
   .animate-text-gradient,
   .animate-text-shimmer,
   .animate-text-neon {
+    animation: none !important;
+  }
+  
+  [style*="aurora-shimmer"],
+  [style*="cosmic-pulse"],
+  [style*="flame-flicker"],
+  [style*="moonbeam-pulse"],
+  [style*="starfield-twinkle"] {
     animation: none !important;
   }
 }
