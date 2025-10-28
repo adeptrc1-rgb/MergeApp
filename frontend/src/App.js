@@ -26,6 +26,7 @@ import Messages from './components/Messages';
 import Connections from './components/Connections';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
+import Store from './components/Store';
 import TestPage from './components/TestPage';
 import LoginApp from './components/LoginApp';
 const AutoTestLogin = React.lazy(() => import('./components/AutoTestLogin'));
