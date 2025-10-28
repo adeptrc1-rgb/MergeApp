@@ -602,24 +602,50 @@ export default function Home({ user }) {
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
                   <div className="flex items-center gap-2 text-white/80 mb-3">
-                    {/* Constellation with compatibility-based glow */}
-                    <div 
-                      className="relative"
-                      style={{
-                        filter: compatibility >= 90 
-                          ? 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.9)) drop-shadow(0 0 16px rgba(168, 85, 247, 0.6))'
-                          : compatibility >= 80
-                          ? 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.7)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4))'
-                          : compatibility >= 75
-                          ? 'drop-shadow(0 0 4px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 8px rgba(168, 85, 247, 0.3))'
-                          : 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.3))'
-                      }}
-                    >
-                      <ConstellationIcon 
-                        sign={currentMatch.zodiac_sign?.toLowerCase() || 'leo'} 
-                        className="w-5 h-5"
-                      />
-                    </div>
+                    {/* Constellation with skin-based animation */}
+                    {(() => {
+                      const activeSkin = storeItems.find(item => item.id === userInventory?.active_skin);
+                      const glowColor = activeSkin?.effect?.textGlow || '#a78bfa';
+                      const baseGlow = compatibility >= 90 
+                        ? 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.9)) drop-shadow(0 0 16px rgba(168, 85, 247, 0.6))'
+                        : compatibility >= 80
+                        ? 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.7)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4))'
+                        : compatibility >= 75
+                        ? 'drop-shadow(0 0 4px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 8px rgba(168, 85, 247, 0.3))'
+                        : 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.3))';
+                      
+                      // Add skin-specific glow and animation
+                      let customGlow = baseGlow;
+                      let animationClass = '';
+                      
+                      if (activeSkin?.effect) {
+                        if (activeSkin.effect.type === 'galaxy') {
+                          customGlow = `drop-shadow(0 0 6px ${glowColor}) drop-shadow(0 0 12px ${glowColor}80)`;
+                          animationClass = 'animate-pulse-glow';
+                        } else if (activeSkin.effect.type === 'pastel') {
+                          customGlow = `drop-shadow(0 0 4px ${glowColor}) drop-shadow(0 0 8px ${glowColor}60)`;
+                          animationClass = 'animate-float-gentle';
+                        } else if (activeSkin.effect.type === 'zodiac') {
+                          customGlow = `drop-shadow(0 0 8px ${glowColor}) drop-shadow(0 0 16px ${glowColor}80)`;
+                          animationClass = 'animate-text-shimmer';
+                        } else if (activeSkin.effect.type === 'neon') {
+                          customGlow = `drop-shadow(0 0 10px ${glowColor}) drop-shadow(0 0 20px ${glowColor})`;
+                          animationClass = 'animate-neon-pulse';
+                        }
+                      }
+                      
+                      return (
+                        <div 
+                          className={`relative ${animationClass}`}
+                          style={{ filter: customGlow }}
+                        >
+                          <ConstellationIcon 
+                            sign={currentMatch.zodiac_sign?.toLowerCase() || 'leo'} 
+                            className="w-5 h-5"
+                          />
+                        </div>
+                      );
+                    })()}
                     <span className="text-base">{currentMatch.zodiac_sign}</span>
                     <span className="text-white/40">•</span>
                     <span className="text-sm">
