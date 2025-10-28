@@ -468,19 +468,21 @@ STORE_ITEMS = [
         "effect": {"type": "particles", "particle": "star", "count": 15}
     },
     
-    # Premium Skins - Dynamic background themes for profile cards
+    # Premium Skins - Overlay-based themes (no borders/frames)
     {
         "id": "skin_galaxy",
         "name": "Cosmic Galaxy",
         "type": "skin",
         "price": 1200,
-        "description": "Dark space with stars, nebula patterns, glowing border & animated sparkles",
+        "description": "Semi-transparent star sparkles and nebula overlays on your photo",
         "effect": {
             "type": "galaxy",
-            "colors": ["#0a0e27", "#1a1a3e", "#2d1b4e"],
-            "features": ["stars", "nebula", "sparkles", "glowing_border"],
-            "borderColor": "#8b5cf6",
-            "particleCount": 50
+            "overlay": "nebula_gradient",
+            "overlayOpacity": 0.3,
+            "particles": {"type": "stars", "count": 40, "twinkle": True},
+            "textGlow": "#a78bfa",
+            "badgeFloat": True,
+            "nameAnimation": "glow"
         }
     },
     {
@@ -488,13 +490,16 @@ STORE_ITEMS = [
         "name": "Pastel Dreams",
         "type": "skin",
         "price": 1000,
-        "description": "Soft gradient with pink, lavender & mint, floating particles & gentle overlay",
+        "description": "Soft gradient overlay with gentle floating particles",
         "effect": {
             "type": "pastel",
-            "colors": ["#ffc9e5", "#e5c9ff", "#c9ffe5"],
-            "features": ["gradient", "particles", "rounded_border", "overlay"],
-            "borderRadius": "24px",
-            "particleCount": 30
+            "overlay": "soft_gradient",
+            "overlayColors": ["#ffc9e5", "#e5c9ff", "#c9ffe5"],
+            "overlayOpacity": 0.25,
+            "particles": {"type": "bubbles", "count": 25, "float": True},
+            "textGlow": "#ffc9e5",
+            "badgeFloat": True,
+            "nameAnimation": "gradient_shift"
         }
     },
     {
@@ -502,13 +507,16 @@ STORE_ITEMS = [
         "name": "Zodiac Mystique",
         "type": "skin",
         "price": 1500,
-        "description": "Astrological symbols, glowing zodiac overlay & soft halo around edges",
+        "description": "Faint constellation patterns and zodiac symbols over your photo",
         "effect": {
             "type": "zodiac",
-            "colors": ["#1a1a2e", "#2d2d44", "#3d3d5c"],
-            "features": ["zodiac_symbols", "zodiac_overlay", "halo_effect", "constellation_bg"],
-            "glowColor": "#ffd700",
-            "symbolOpacity": 0.15
+            "overlay": "constellation_pattern",
+            "overlayOpacity": 0.2,
+            "particles": {"type": "zodiac_symbols", "count": 12, "float": True},
+            "textGlow": "#ffd700",
+            "badgeFloat": True,
+            "badgeHalo": True,
+            "nameAnimation": "shimmer"
         }
     },
     {
@@ -516,14 +524,16 @@ STORE_ITEMS = [
         "name": "Neon Nights",
         "type": "skin",
         "price": 1300,
-        "description": "Black background with neon frame, animated glow & futuristic accents",
+        "description": "Dark overlay with glowing neon accents and floating icons",
         "effect": {
             "type": "neon",
-            "colors": ["#000000", "#0a0a0a"],
-            "features": ["neon_border", "animated_glow", "futuristic_font"],
-            "neonColor": "#00ffff",
-            "accentColor": "#ff00ff",
-            "glowIntensity": "high"
+            "overlay": "dark_vignette",
+            "overlayOpacity": 0.4,
+            "particles": {"type": "neon_icons", "count": 8, "glow": True},
+            "textGlow": "#00ffff",
+            "accentGlow": "#ff00ff",
+            "nameAnimation": "neon_pulse",
+            "badgeFloat": True
         }
     }
 ]
