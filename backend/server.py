@@ -468,46 +468,63 @@ STORE_ITEMS = [
         "effect": {"type": "particles", "particle": "star", "count": 15}
     },
     
-    # Skins - Background themes for profile cards
+    # Premium Skins - Dynamic background themes for profile cards
     {
         "id": "skin_galaxy",
-        "name": "Galaxy Nebula",
+        "name": "Cosmic Galaxy",
         "type": "skin",
-        "price": 800,
-        "description": "Deep space nebula with swirling cosmic clouds",
-        "effect": {"type": "gradient", "colors": ["#1a0033", "#330066", "#660099"], "pattern": "nebula"}
+        "price": 1200,
+        "description": "Dark space with stars, nebula patterns, glowing border & animated sparkles",
+        "effect": {
+            "type": "galaxy",
+            "colors": ["#0a0e27", "#1a1a3e", "#2d1b4e"],
+            "features": ["stars", "nebula", "sparkles", "glowing_border"],
+            "borderColor": "#8b5cf6",
+            "particleCount": 50
+        }
     },
     {
-        "id": "skin_sunset",
-        "name": "Mystic Sunset",
+        "id": "skin_pastel",
+        "name": "Pastel Dreams",
         "type": "skin",
-        "price": 700,
-        "description": "Warm sunset hues with golden hour magic",
-        "effect": {"type": "gradient", "colors": ["#ff6b35", "#f7931e", "#fbb03b"], "pattern": "rays"}
+        "price": 1000,
+        "description": "Soft gradient with pink, lavender & mint, floating particles & gentle overlay",
+        "effect": {
+            "type": "pastel",
+            "colors": ["#ffc9e5", "#e5c9ff", "#c9ffe5"],
+            "features": ["gradient", "particles", "rounded_border", "overlay"],
+            "borderRadius": "24px",
+            "particleCount": 30
+        }
     },
     {
-        "id": "skin_ocean",
-        "name": "Deep Ocean",
+        "id": "skin_zodiac",
+        "name": "Zodiac Mystique",
         "type": "skin",
-        "price": 650,
-        "description": "Tranquil underwater depths with flowing currents",
-        "effect": {"type": "gradient", "colors": ["#001f3f", "#0074D9", "#7FDBFF"], "pattern": "waves"}
+        "price": 1500,
+        "description": "Astrological symbols, glowing zodiac overlay & soft halo around edges",
+        "effect": {
+            "type": "zodiac",
+            "colors": ["#1a1a2e", "#2d2d44", "#3d3d5c"],
+            "features": ["zodiac_symbols", "zodiac_overlay", "halo_effect", "constellation_bg"],
+            "glowColor": "#ffd700",
+            "symbolOpacity": 0.15
+        }
     },
     {
-        "id": "skin_forest",
-        "name": "Enchanted Forest",
+        "id": "skin_neon",
+        "name": "Neon Nights",
         "type": "skin",
-        "price": 700,
-        "description": "Lush green canopy with dappled light",
-        "effect": {"type": "gradient", "colors": ["#0a3d0a", "#2d5016", "#6b8e23"], "pattern": "organic"}
-    },
-    {
-        "id": "skin_crystal",
-        "name": "Crystal Palace",
-        "type": "skin",
-        "price": 900,
-        "description": "Shimmering crystalline structures with prismatic light",
-        "effect": {"type": "gradient", "colors": ["#e0f2f7", "#b3e5fc", "#81d4fa"], "pattern": "crystal"}
+        "price": 1300,
+        "description": "Black background with neon frame, animated glow & futuristic accents",
+        "effect": {
+            "type": "neon",
+            "colors": ["#000000", "#0a0a0a"],
+            "features": ["neon_border", "animated_glow", "futuristic_font"],
+            "neonColor": "#00ffff",
+            "accentColor": "#ff00ff",
+            "glowIntensity": "high"
+        }
     }
 ]
 
