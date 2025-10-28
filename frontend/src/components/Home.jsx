@@ -58,7 +58,21 @@ export default function Home({ user }) {
   useEffect(() => {
     loadMatches();
     loadTodayHoroscope();
+    loadStoreData();
   }, []);
+
+  const loadStoreData = async () => {
+    try {
+      const [itemsRes, inventoryRes] = await Promise.all([
+        axios.get(`${API}/store/items`),
+        axios.get(`${API}/store/inventory`)
+      ]);
+      setStoreItems(itemsRes.data || []);
+      setUserInventory(inventoryRes.data);
+    } catch (error) {
+      console.error('Error loading store data:', error);
+    }
+  };
 
   // Add touch event listener with passive: false to allow preventDefault
   useEffect(() => {
