@@ -81,6 +81,9 @@ class User(BaseModel):
     super_likes: int = 0
     direct_messages: int = 0
     is_premium: bool = False
+    owned_items: Optional[List[str]] = []
+    active_light: Optional[str] = None
+    active_skin: Optional[str] = None
 
 class LoginBody(BaseModel):
     email: str
