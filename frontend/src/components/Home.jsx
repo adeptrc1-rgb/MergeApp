@@ -585,7 +585,20 @@ export default function Home({ user }) {
                     </div>
                   )}
                   <h2 className="text-4xl font-light mb-2">
-                    {currentMatch.first_name}, {age}
+                    {userInventory?.active_skin && (() => {
+                      const activeSkin = storeItems.find(item => item.id === userInventory.active_skin);
+                      if (activeSkin?.effect?.nameAnimation) {
+                        return (
+                          <AnimatedProfileText 
+                            animationType={activeSkin.effect.nameAnimation}
+                            glowColor={activeSkin.effect.textGlow}
+                          >
+                            {currentMatch.first_name}, {age}
+                          </AnimatedProfileText>
+                        );
+                      }
+                      return `${currentMatch.first_name}, ${age}`;
+                    })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
                   <div className="flex items-center gap-2 text-white/80 mb-3">
                     {/* Constellation with compatibility-based glow */}
