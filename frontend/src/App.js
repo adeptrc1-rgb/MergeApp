@@ -1241,6 +1241,11 @@ function ProfileWrapper() {
   return <Profile user={user} logout={logout} />;
 }
 
+function StoreWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <Store user={user} logout={logout} />;
+}
+
 function SettingsWrapper() {
   const { user, logout } = React.useContext(AuthContext);
   return <Settings user={user} logout={logout} />;
