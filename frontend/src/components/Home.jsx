@@ -497,21 +497,6 @@ export default function Home({ user }) {
                 })
               }}
             >
-              {/* Zodiac Season Background Glow */}
-              {(() => {
-                const zodiacTheme = getZodiacTheme(currentMatch.zodiac_sign);
-                return (
-                  <div 
-                    className={`zodiac-season-bg zodiac-motion-${zodiacTheme.motionType}`}
-                    style={{
-                      background: getGradientString(zodiacTheme),
-                      opacity: zodiacTheme.opacity,
-                      '--zodiac-duration': zodiacTheme.duration
-                    }}
-                  />
-                );
-              })()}
-
               {/* Swipe Overlay Labels */}
               {isDragging && getSwipeLabel().show && (
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
