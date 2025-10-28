@@ -6,6 +6,7 @@ import ConstellationIcon from './ConstellationIcon';
 import BottomNav from './BottomNav';
 import PremiumSkinRenderer from './PremiumSkinRenderer';
 import AnimatedProfileText from './AnimatedProfileText';
+import LightEffectRenderer from './LightEffectRenderer';
 import { 
   createStarburstEffect, 
   createSparkleTrail, 
