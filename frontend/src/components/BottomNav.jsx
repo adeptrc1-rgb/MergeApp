@@ -1,13 +1,13 @@
 import React from 'react';
-import { Home as HomeIcon, Sparkles, MessageCircle, Users, Star } from 'lucide-react';
+import { Home as HomeIcon, Sparkles, MessageCircle, Users, Star, ShoppingBag } from 'lucide-react';
 
 // Shared Bottom Navigation (16px icons, consistent sizing)
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
     { id: 'home', icon: HomeIcon, label: 'Home', path: '/home' },
     { id: 'discover', icon: Sparkles, label: 'Discover', path: '/discover' },
+    { id: 'store', icon: ShoppingBag, label: 'Store', path: '/store' },
     { id: 'messages', icon: MessageCircle, label: 'Messages', path: '/messages' },
-    { id: 'connections', icon: Users, label: 'Connect', path: '/connections' },
     { id: 'profile', icon: Star, label: 'Profile', path: '/profile' },
   ];
   return (
