@@ -424,4 +424,196 @@ async def reset_cosmic_wheel(user: User = Depends(get_current_user)):
     )
     return {"success": True}
 
+# Store System - Lights and Skins
+STORE_ITEMS = [
+    # Lights - Visual effects around profile cards
+    {
+        "id": "light_aurora",
+        "name": "Aurora Shimmer",
+        "type": "light",
+        "price": 500,
+        "description": "Mystical northern lights dance around your profile",
+        "effect": {"type": "aurora", "colors": ["#00ff88", "#00ffff", "#8800ff"], "intensity": "medium"}
+    },
+    {
+        "id": "light_cosmic_glow",
+        "name": "Cosmic Glow",
+        "type": "light",
+        "price": 300,
+        "description": "A soft cosmic glow that pulses with stardust",
+        "effect": {"type": "glow", "color": "#a78bfa", "intensity": "soft"}
+    },
+    {
+        "id": "light_fire_aura",
+        "name": "Fire Aura",
+        "type": "light",
+        "price": 400,
+        "description": "Flickering flames surround your profile with warmth",
+        "effect": {"type": "flames", "colors": ["#ff6600", "#ffaa00"], "intensity": "medium"}
+    },
+    {
+        "id": "light_moonbeam",
+        "name": "Moonbeam",
+        "type": "light",
+        "price": 350,
+        "description": "Gentle lunar rays illuminate your presence",
+        "effect": {"type": "rays", "color": "#e0e7ff", "intensity": "soft"}
+    },
+    {
+        "id": "light_starfield",
+        "name": "Starfield",
+        "type": "light",
+        "price": 600,
+        "description": "Twinkling stars orbit around your card",
+        "effect": {"type": "particles", "particle": "star", "count": 15}
+    },
+    
+    # Skins - Background themes for profile cards
+    {
+        "id": "skin_galaxy",
+        "name": "Galaxy Nebula",
+        "type": "skin",
+        "price": 800,
+        "description": "Deep space nebula with swirling cosmic clouds",
+        "effect": {"type": "gradient", "colors": ["#1a0033", "#330066", "#660099"], "pattern": "nebula"}
+    },
+    {
+        "id": "skin_sunset",
+        "name": "Mystic Sunset",
+        "type": "skin",
+        "price": 700,
+        "description": "Warm sunset hues with golden hour magic",
+        "effect": {"type": "gradient", "colors": ["#ff6b35", "#f7931e", "#fbb03b"], "pattern": "rays"}
+    },
+    {
+        "id": "skin_ocean",
+        "name": "Deep Ocean",
+        "type": "skin",
+        "price": 650,
+        "description": "Tranquil underwater depths with flowing currents",
+        "effect": {"type": "gradient", "colors": ["#001f3f", "#0074D9", "#7FDBFF"], "pattern": "waves"}
+    },
+    {
+        "id": "skin_forest",
+        "name": "Enchanted Forest",
+        "type": "skin",
+        "price": 700,
+        "description": "Lush green canopy with dappled light",
+        "effect": {"type": "gradient", "colors": ["#0a3d0a", "#2d5016", "#6b8e23"], "pattern": "organic"}
+    },
+    {
+        "id": "skin_crystal",
+        "name": "Crystal Palace",
+        "type": "skin",
+        "price": 900,
+        "description": "Shimmering crystalline structures with prismatic light",
+        "effect": {"type": "gradient", "colors": ["#e0f2f7", "#b3e5fc", "#81d4fa"], "pattern": "crystal"}
+    }
+]
+
+@api_router.get("/store/items")
+async def get_store_items(user: User = Depends(get_current_user)):
+    """Get all available store items"""
+    return STORE_ITEMS
+
+@api_router.get("/store/inventory")
+async def get_user_inventory(user: User = Depends(get_current_user)):
+    """Get user's owned items and active selections"""
+    udoc = await db.users.find_one({"id": user.id})
+    if not udoc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    return {
+        "owned_items": udoc.get("owned_items", []),
+        "active_light": udoc.get("active_light"),
+        "active_skin": udoc.get("active_skin"),
+        "star_coins": udoc.get("star_coins", 0)
+    }
+
+class PurchaseBody(BaseModel):
+    item_id: str
+
+@api_router.post("/store/purchase")
+async def purchase_item(body: PurchaseBody, user: User = Depends(get_current_user)):
+    """Purchase an item from the store"""
+    udoc = await db.users.find_one({"id": user.id})
+    if not udoc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Find the item
+    item = next((i for i in STORE_ITEMS if i["id"] == body.item_id), None)
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    
+    # Check if already owned
+    owned_items = udoc.get("owned_items", [])
+    if body.item_id in owned_items:
+        raise HTTPException(status_code=400, detail="Item already owned")
+    
+    # Check if user has enough star coins
+    star_coins = udoc.get("star_coins", 0)
+    if star_coins < item["price"]:
+        raise HTTPException(status_code=400, detail=f"Insufficient star coins. Need {item['price']}, have {star_coins}")
+    
+    # Deduct coins and add item to owned
+    new_coins = star_coins - item["price"]
+    owned_items.append(body.item_id)
+    
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": {"star_coins": new_coins, "owned_items": owned_items}}
+    )
+    
+    return {
+        "success": True,
+        "item": item,
+        "remaining_coins": new_coins
+    }
+
+class ActivateBody(BaseModel):
+    item_id: Optional[str] = None
+    item_type: str  # "light" or "skin"
+
+@api_router.post("/store/activate")
+async def activate_item(body: ActivateBody, user: User = Depends(get_current_user)):
+    """Activate/equip an owned item"""
+    udoc = await db.users.find_one({"id": user.id})
+    if not udoc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # If item_id is None, deactivate the item type
+    if body.item_id is None:
+        field = "active_light" if body.item_type == "light" else "active_skin"
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {field: None}}
+        )
+        return {"success": True, "message": f"Deactivated {body.item_type}"}
+    
+    # Check if user owns the item
+    owned_items = udoc.get("owned_items", [])
+    if body.item_id not in owned_items:
+        raise HTTPException(status_code=400, detail="Item not owned")
+    
+    # Find the item to verify type
+    item = next((i for i in STORE_ITEMS if i["id"] == body.item_id), None)
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    
+    if item["type"] != body.item_type:
+        raise HTTPException(status_code=400, detail="Item type mismatch")
+    
+    # Activate the item
+    field = "active_light" if body.item_type == "light" else "active_skin"
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": {field: body.item_id}}
+    )
+    
+    return {
+        "success": True,
+        "item": item,
+        "message": f"Activated {item['name']}"
+    }
+
 app.include_router(api_router)
