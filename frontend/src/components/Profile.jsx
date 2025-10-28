@@ -586,6 +586,17 @@ export default function Profile({ user, logout }) {
 
       {/* Cosmic Wheel Modal */}
       <CosmicWheel isOpen={showCosmicWheel} onClose={() => setShowCosmicWheel(false)} onRewardClaimed={handleRewardClaimed} />
+      
+      <style>{`
+        @keyframes shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        @keyframes flicker {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
