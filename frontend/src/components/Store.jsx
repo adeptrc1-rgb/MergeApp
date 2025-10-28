@@ -194,52 +194,44 @@ export default function Store({ user }) {
                     </div>
                   )}
                   {item.type === 'skin' && (
-                    <div className="absolute inset-0">
-                      {/* Render preview based on skin type */}
-                      {item.effect.type === 'galaxy' && (
-                        <>
-                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-black" />
-                          <div className="absolute inset-0">
-                            {[...Array(20)].map((_, i) => (
-                              <div
-                                key={i}
-                                className="absolute w-1 h-1 bg-white rounded-full"
-                                style={{
-                                  top: `${Math.random() * 100}%`,
-                                  left: `${Math.random() * 100}%`,
-                                  opacity: Math.random() * 0.8,
-                                }}
-                              />
-                            ))}
-                          </div>
-                        </>
-                      )}
-                      {item.effect.type === 'pastel' && (
-                        <div
-                          className="absolute inset-0"
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+                      {/* Show sample profile with animated text */}
+                      <div className="text-center">
+                        <div 
+                          className="text-4xl font-light mb-2"
                           style={{
-                            background: item.effect.overlayColors 
-                              ? `linear-gradient(135deg, ${item.effect.overlayColors.join(', ')})`
-                              : 'linear-gradient(135deg, #ffc9e5, #e5c9ff, #c9ffe5)',
-                            opacity: 0.7
+                            color: item.effect.textGlow || '#ffffff',
+                            textShadow: `0 0 10px ${item.effect.textGlow || '#ffffff'}`,
+                            ...(item.effect.nameAnimation === 'glow' && { animation: 'text-glow 3s ease-in-out infinite' }),
+                            ...(item.effect.nameAnimation === 'gradient_shift' && { 
+                              background: `linear-gradient(90deg, ${item.effect.overlayColors?.join(', ')})`,
+                              backgroundSize: '200% auto',
+                              WebkitBackgroundClip: 'text',
+                              WebkitTextFillColor: 'transparent',
+                              animation: 'text-gradient 4s linear infinite'
+                            }),
+                            ...(item.effect.nameAnimation === 'shimmer' && {
+                              background: `linear-gradient(90deg, white, ${item.effect.textGlow}, white)`,
+                              backgroundSize: '200% auto',
+                              WebkitBackgroundClip: 'text',
+                              WebkitTextFillColor: 'transparent',
+                              animation: 'text-shimmer 5s linear infinite'
+                            }),
+                            ...(item.effect.nameAnimation === 'neon_pulse' && { animation: 'text-neon 2s ease-in-out infinite' })
                           }}
-                        />
-                      )}
-                      {item.effect.type === 'zodiac' && (
-                        <>
-                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950" />
-                          <div className="absolute inset-0 flex items-center justify-center text-6xl text-yellow-500/30">
-                            ♈
-                          </div>
-                        </>
-                      )}
-                      {item.effect.type === 'neon' && (
-                        <>
-                          <div className="absolute inset-0 bg-black" />
-                          <div className="absolute top-0 left-0 right-0 h-1 bg-cyan-400" style={{ boxShadow: '0 0 10px #00ffff' }} />
-                          <div className="absolute bottom-0 left-0 right-0 h-1 bg-pink-500" style={{ boxShadow: '0 0 10px #ff00ff' }} />
-                        </>
-                      )}
+                        >
+                          Name
+                        </div>
+                        <div 
+                          className="text-2xl"
+                          style={{
+                            color: item.effect.textGlow || '#ffffff',
+                            filter: `drop-shadow(0 0 8px ${item.effect.textGlow})`,
+                          }}
+                        >
+                          ♈
+                        </div>
+                      </div>
                     </div>
                   )}
                   
