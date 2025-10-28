@@ -134,7 +134,7 @@ async def test_login(body: LoginBody, response: Response):
             "bio": "Test user",
             "interests": ["music", "coffee"],
             "profile_completed": True,
-            "star_coins": 100,
+            "star_coins": 5000,
             "super_likes": 5,
             "profile_boosts": 2,
             "direct_messages": 10,
