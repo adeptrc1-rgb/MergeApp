@@ -512,15 +512,6 @@ export default function Home({ user }) {
                 );
               })()}
 
-              {/* Premium Skin Overlay (if user has active skin) */}
-              {userInventory?.active_skin && (() => {
-                const activeSkin = storeItems.find(item => item.id === userInventory.active_skin);
-                if (activeSkin?.effect) {
-                  return <PremiumSkinRenderer skinEffect={activeSkin.effect} zodiacSign={currentMatch.zodiac_sign} />;
-                }
-                return null;
-              })()}
-
               {/* Swipe Overlay Labels */}
               {isDragging && getSwipeLabel().show && (
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
