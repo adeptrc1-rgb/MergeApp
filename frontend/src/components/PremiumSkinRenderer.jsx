@@ -281,7 +281,7 @@ export default function PremiumSkinRenderer({ skinEffect, zodiacSign }) {
             />
             <div className="absolute bottom-0 right-0 w-12 h-12 z-0 border-b-4 border-r-4 rounded-br-2xl"
               style={{
-                borderColor: accentColor || '#ff00ff'},
+                borderColor: accentColor || '#ff00ff',
                 boxShadow: `0 0 15px ${accentColor || '#ff00ff'}`,
               }}
             />
