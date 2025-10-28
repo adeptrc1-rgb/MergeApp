@@ -194,13 +194,53 @@ export default function Store({ user }) {
                     </div>
                   )}
                   {item.type === 'skin' && (
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: `linear-gradient(135deg, ${item.effect.colors.join(', ')})`,
-                        opacity: 0.8
-                      }}
-                    />
+                    <div className="absolute inset-0">
+                      {/* Render preview based on skin type */}
+                      {item.effect.type === 'galaxy' && (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-black" />
+                          <div className="absolute inset-0">
+                            {[...Array(20)].map((_, i) => (
+                              <div
+                                key={i}
+                                className="absolute w-1 h-1 bg-white rounded-full"
+                                style={{
+                                  top: `${Math.random() * 100}%`,
+                                  left: `${Math.random() * 100}%`,
+                                  opacity: Math.random() * 0.8,
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      )}
+                      {item.effect.type === 'pastel' && (
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background: item.effect.overlayColors 
+                              ? `linear-gradient(135deg, ${item.effect.overlayColors.join(', ')})`
+                              : 'linear-gradient(135deg, #ffc9e5, #e5c9ff, #c9ffe5)',
+                            opacity: 0.7
+                          }}
+                        />
+                      )}
+                      {item.effect.type === 'zodiac' && (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-950" />
+                          <div className="absolute inset-0 flex items-center justify-center text-6xl text-yellow-500/30">
+                            ♈
+                          </div>
+                        </>
+                      )}
+                      {item.effect.type === 'neon' && (
+                        <>
+                          <div className="absolute inset-0 bg-black" />
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-cyan-400" style={{ boxShadow: '0 0 10px #00ffff' }} />
+                          <div className="absolute bottom-0 left-0 right-0 h-1 bg-pink-500" style={{ boxShadow: '0 0 10px #ff00ff' }} />
+                        </>
+                      )}
+                    </div>
                   )}
                   
                   {/* Active Badge */}
