@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, MessageCircle, Zap, XCircle, ChevronDown, ChevronUp, Music } from 'lucide-react';
 import ConstellationIcon from './ConstellationIcon';
 import BottomNav from './BottomNav';
+import PremiumSkinRenderer from './PremiumSkinRenderer';
+import AnimatedProfileText from './AnimatedProfileText';
 import { 
   createStarburstEffect, 
   createSparkleTrail, 
