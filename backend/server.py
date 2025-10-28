@@ -241,6 +241,76 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
 async def get_matches(user: User = Depends(get_current_user)):
     return []
 
+# Coinflip endpoints for matches
+@api_router.get("/matches/{match_id}/coinflip-status")
+async def get_coinflip_status(match_id: str, user: User = Depends(get_current_user)):
+    """Get coinflip status for a match"""
+    coinflip = await db.coinflips.find_one({"match_id": match_id})
+    if coinflip:
+        return {"set": True, "first": coinflip.get("first_user_id"), "second": coinflip.get("second_user_id")}
+    return {"set": False}
+
+@api_router.post("/matches/{match_id}/coinflip")
+async def create_coinflip(match_id: str, user: User = Depends(get_current_user)):
+    """Create a coinflip to determine who messages first"""
+    # Check if coinflip already exists
+    existing = await db.coinflips.find_one({"match_id": match_id})
+    if existing:
+        return {"first": existing.get("first_user_id"), "second": existing.get("second_user_id")}
+    
+    # Get match details to find both users
+    match = await db.matches.find_one({"id": match_id})
+    if not match:
+        # For testing, create a mock coinflip with current user
+        import random
+        users = [user.id, "other_user_" + str(uuid.uuid4())]
+        random.shuffle(users)
+        
+        coinflip = {
+            "id": str(uuid.uuid4()),
+            "match_id": match_id,
+            "first_user_id": users[0],
+            "second_user_id": users[1],
+            "created_at": now_utc().isoformat()
+        }
+        await db.coinflips.insert_one(coinflip)
+        return {"first": users[0], "second": users[1]}
+    
+    # Randomly determine who goes first
+    import random
+    users = [match.get("user1_id"), match.get("user2_id")]
+    random.shuffle(users)
+    
+    coinflip = {
+        "id": str(uuid.uuid4()),
+        "match_id": match_id,
+        "first_user_id": users[0],
+        "second_user_id": users[1],
+        "created_at": now_utc().isoformat()
+    }
+    await db.coinflips.insert_one(coinflip)
+    return {"first": users[0], "second": users[1]}
+
+@api_router.get("/matches/{match_id}/messages")
+async def get_match_messages(match_id: str, user: User = Depends(get_current_user)):
+    """Get messages for a specific match"""
+    messages = await db.messages.find({"match_id": match_id}).sort("created_at", 1).to_list(length=1000)
+    return messages
+
+@api_router.post("/matches/test-create")
+async def test_create_match(user: User = Depends(get_current_user)):
+    """Create a test match for development"""
+    match_id = str(uuid.uuid4())
+    match = {
+        "id": match_id,
+        "user1_id": user.id,
+        "user2_id": "test_user_" + str(uuid.uuid4()),
+        "matched_at": now_utc().isoformat(),
+        "compatibility_score": 88
+    }
+    await db.matches.insert_one(match)
+    return {"match_id": match_id}
+
 # Cosmic Wheel Rewards
 REWARD_TABLE = [
     {"type": "boost", "label": "Profile Boost", "weight": 15, "tier": "common"},
