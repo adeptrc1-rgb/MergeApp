@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award, Gift, Clock, RotateCcw, Coins } from 'lucide-react';
+import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award, Gift, Clock, RotateCcw, Coins, Eye } from 'lucide-react';
 import CosmicWheel from './CosmicWheel';
 import BottomNav from './BottomNav';
+import ConstellationIcon from './ConstellationIcon';
+import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
