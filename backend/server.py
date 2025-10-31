@@ -84,6 +84,7 @@ class User(BaseModel):
     owned_items: Optional[List[str]] = []
     active_light: Optional[str] = None
     active_skin: Optional[str] = None
+    responsiveness_score: float = 95.0
 
 class LoginBody(BaseModel):
     email: str
