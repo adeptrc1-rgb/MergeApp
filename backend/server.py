@@ -247,6 +247,108 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
 async def get_matches(user: User = Depends(get_current_user)):
     return []
 
+# Trending Energies Algorithm with Responsiveness
+def calculate_trending_energy_score(user_data: dict) -> float:
+    """
+    Calculate Trending Energy Score (0-100)
+    Formula: Engagement(35%) + Compatibility Resonance(25%) + Behavior & Trust(25%) + Recency(15%)
+    Responsiveness is integrated into Behavior & Trust at 30% weight
+    """
+    
+    # 1. Engagement Score (35% weight) - max 100 pts
+    likes_received = min(user_data.get("likes_received_30d", 0), 50)
+    matches_created = min(user_data.get("matches_created_30d", 0), 20)
+    message_replies = min(user_data.get("message_replies_30d", 0), 30)
+    
+    engagement_score = (
+        (likes_received / 50 * 40) +
+        (matches_created / 20 * 35) +
+        (message_replies / 30 * 25)
+    )
+    
+    # 2. Compatibility Resonance (25% weight) - average compatibility of matches
+    avg_compatibility = user_data.get("avg_match_compatibility", 75.0)
+    compatibility_resonance = min(avg_compatibility * 1.1, 100)  # 10% boost, capped at 100
+    
+    # 3. Behavior & Trust Score (25% weight) - includes RESPONSIVENESS
+    trust_score = user_data.get("trust_score", 85.0)
+    responsiveness_score = user_data.get("responsiveness_score", 75.0)  # KEY INTEGRATION
+    behavior_quality = user_data.get("behavior_quality_30d", 80.0)
+    
+    behavior_trust_score = (
+        trust_score * 0.50 +
+        responsiveness_score * 0.30 +  # 30% weight for responsiveness
+        behavior_quality * 0.20
+    )
+    
+    # 4. Recency & Activity (15% weight)
+    last_active_days = user_data.get("last_active_days", 7)
+    if last_active_days == 0:
+        recency_score = 100
+    elif last_active_days <= 3:
+        recency_score = 85
+    elif last_active_days <= 7:
+        recency_score = 70
+    elif last_active_days <= 14:
+        recency_score = 50
+    else:
+        recency_score = 30
+    
+    profile_completeness = user_data.get("profile_completeness", 70.0)
+    recency_activity = recency_score * 0.70 + profile_completeness * 0.30
+    
+    # Final Trending Energy Score
+    trending_score = (
+        engagement_score * 0.35 +
+        compatibility_resonance * 0.25 +
+        behavior_trust_score * 0.25 +
+        recency_activity * 0.15
+    )
+    
+    return round(trending_score, 1)
+
+@api_router.get("/users/trending")
+async def get_trending_users(user: User = Depends(get_current_user)):
+    """Get trending users based on energy score (minimum 60)"""
+    cur = db.users.find({"id": {"$ne": user.id}})
+    docs = await cur.to_list(length=100)
+    
+    trending_users = []
+    for u in docs:
+        # Calculate trending energy score
+        user_data = {
+            "likes_received_30d": u.get("likes_received_30d", 0),
+            "matches_created_30d": u.get("matches_created_30d", 0),
+            "message_replies_30d": u.get("message_replies_30d", 0),
+            "avg_match_compatibility": u.get("avg_match_compatibility", 75.0),
+            "trust_score": u.get("trust_score", 85.0),
+            "responsiveness_score": u.get("responsiveness_score", 75.0),
+            "behavior_quality_30d": u.get("behavior_quality_30d", 80.0),
+            "last_active_days": u.get("last_active_days", 5),
+            "profile_completeness": u.get("profile_completeness", 70.0)
+        }
+        
+        energy_score = calculate_trending_energy_score(user_data)
+        
+        # Only include users with energy score >= 60
+        if energy_score >= 60:
+            trending_users.append({
+                "id": u.get("id"),
+                "first_name": u.get("first_name", "Star"),
+                "last_name": u.get("last_name", ""),
+                "zodiac_sign": u.get("zodiac_sign", "Leo"),
+                "photos": u.get("photos", []),
+                "bio": u.get("bio", ""),
+                "interests": u.get("interests", []),
+                "responsiveness_score": u.get("responsiveness_score", 75.0),
+                "trending_energy_score": energy_score,
+                "compatibility_score": randf() * 30 + 70
+            })
+    
+    # Sort by energy score (highest first) and return top 20
+    trending_users.sort(key=lambda x: x["trending_energy_score"], reverse=True)
+    return trending_users[:20]
+
 # Coinflip endpoints for matches
 @api_router.get("/matches/{match_id}/coinflip-status")
 async def get_coinflip_status(match_id: str, user: User = Depends(get_current_user)):
