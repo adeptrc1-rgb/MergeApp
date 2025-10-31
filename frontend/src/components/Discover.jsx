@@ -118,7 +118,7 @@ export default function Discover({ user }) {
 
   const loadTrendingEnergies = async () => {
     try {
-      const response = await axios.get(`${API}/users/trending-energies`);
+      const response = await axios.get(`${API}/users/trending`);
       setTrendingUsers(response.data);
     } catch (error) {
       console.error('Error loading trending energies:', error);
