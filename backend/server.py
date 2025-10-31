@@ -141,7 +141,8 @@ async def test_login(body: LoginBody, response: Response):
             "direct_messages": 10,
             "is_premium": False,
             "spins_today": 0,
-            "spin_streak": 0
+            "spin_streak": 0,
+            "responsiveness_score": 95.0
         }
         await db.users.insert_one(udoc)
     user = User(**udoc)
