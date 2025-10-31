@@ -144,11 +144,11 @@ async def test_login(body: LoginBody, response: Response):
             "spins_today": 0,
             "spin_streak": 0,
             "responsiveness_score": 95.0,
+            "low_ghosting_rate": 92.0,
             "likes_received_30d": 15,
             "matches_created_30d": 8,
             "message_replies_30d": 12,
             "trust_score": 90.0,
-            "behavior_quality_30d": 88.0,
             "last_active_days": 0,
             "profile_completeness": 95.0
         }
