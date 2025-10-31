@@ -280,12 +280,12 @@ def calculate_trending_energy_score(user_data: dict) -> float:
     # 3. Behavior & Trust Score (25% weight) - includes RESPONSIVENESS
     trust_score = user_data.get("trust_score", 85.0)
     responsiveness_score = user_data.get("responsiveness_score", 75.0)  # KEY INTEGRATION
-    behavior_quality = user_data.get("behavior_quality_30d", 80.0)
+    low_ghosting_rate = user_data.get("low_ghosting_rate", 80.0)  # 100 = never ghosts, 0 = always ghosts
     
     behavior_trust_score = (
         trust_score * 0.50 +
         responsiveness_score * 0.30 +  # 30% weight for responsiveness
-        behavior_quality * 0.20
+        low_ghosting_rate * 0.20  # 20% weight for not ghosting
     )
     
     # 4. Recency & Activity (15% weight)
