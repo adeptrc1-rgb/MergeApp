@@ -85,6 +85,7 @@ class User(BaseModel):
     active_light: Optional[str] = None
     active_skin: Optional[str] = None
     responsiveness_score: float = 95.0
+    low_ghosting_rate: float = 90.0
 
 class LoginBody(BaseModel):
     email: str
