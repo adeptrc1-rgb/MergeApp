@@ -638,6 +638,24 @@ export default function Home({ user }) {
                     </span>
                   </div>
 
+                  {/* Responsiveness Rate Badge */}
+                  {currentMatch.responsiveness_score && (
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-3">
+                      <MessageCircle className="w-3.5 h-3.5 text-green-400" />
+                      <span className="text-xs font-medium text-white/90">
+                        {Math.round(currentMatch.responsiveness_score)}% response rate
+                      </span>
+                      <div 
+                        className="w-1.5 h-1.5 rounded-full animate-pulse"
+                        style={{
+                          backgroundColor: currentMatch.responsiveness_score >= 90 ? '#22c55e' : 
+                                         currentMatch.responsiveness_score >= 75 ? '#eab308' : 
+                                         '#f59e0b'
+                        }}
+                      />
+                    </div>
+                  )}
+
                   {/* Compatibility + toggle */}
                   <div className="flex items-center gap-3 mb-3">
                     <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
