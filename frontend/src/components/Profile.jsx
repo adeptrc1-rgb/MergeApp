@@ -463,6 +463,136 @@ export default function Profile({ user, logout }) {
       {/* Cosmic Wheel Modal */}
       <CosmicWheel isOpen={showCosmicWheel} onClose={() => setShowCosmicWheel(false)} onRewardClaimed={handleRewardClaimed} />
       
+      {/* Streak Details Modal */}
+      {showStreakClaim && streakStatus && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setShowStreakClaim(false)}
+        >
+          <div 
+            className="relative max-w-md w-full bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl border border-orange-400/30 p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowStreakClaim(false)}
+              className="absolute -top-10 right-0 text-white/80 hover:text-white transition-colors text-2xl"
+            >
+              ✕
+            </button>
+
+            {/* Title */}
+            <div className="text-center mb-6">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Flame className="w-6 h-6 text-orange-400" />
+                <h3 className="text-2xl font-light text-white">Daily Login Streak</h3>
+              </div>
+              <p className="text-white/60 text-sm">Login daily for 21 days to unlock epic rewards!</p>
+            </div>
+
+            {/* Streak Counter */}
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center border-4 border-orange-300/50 shadow-lg shadow-orange-500/30">
+                <span className="text-white text-3xl font-bold">{streakStatus.current_streak}</span>
+              </div>
+              <div>
+                <div className="text-white/80 text-sm">Current Streak</div>
+                <div className="text-orange-200 text-lg font-medium">{streakStatus.current_streak}/21 Days</div>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="mb-6">
+              <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                <div 
+                  className="bg-gradient-to-r from-orange-400 to-red-500 h-2 rounded-full transition-all duration-500 ease-out relative"
+                  style={{ width: `${(streakStatus.current_streak / 21) * 100}%` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                </div>
+              </div>
+            </div>
+
+            {/* Milestones */}
+            <div className="flex items-center justify-between mb-6 gap-2">
+              {[7, 14, 21].map((milestone) => {
+                const achieved = streakStatus.current_streak >= milestone;
+                return (
+                  <div 
+                    key={milestone}
+                    className={`flex-1 rounded-lg p-2 border transition-all ${
+                      achieved 
+                        ? 'bg-yellow-500/20 border-yellow-400/40' 
+                        : 'bg-white/5 border-white/10'
+                    }`}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        achieved 
+                          ? 'bg-gradient-to-br from-yellow-400 to-orange-500' 
+                          : 'bg-white/10'
+                      }`}>
+                        {achieved ? (
+                          <Trophy className="w-4 h-4 text-white" />
+                        ) : (
+                          <span className="text-white/40 text-xs">{milestone}</span>
+                        )}
+                      </div>
+                      <div className={`text-xs font-medium ${achieved ? 'text-yellow-200' : 'text-white/40'}`}>
+                        Day {milestone}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Current Reward */}
+            {streakStatus.current_reward && (
+              <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                    <Gift className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-white/60 text-xs mb-1">Today's Reward</div>
+                    <div className="text-white font-medium">{streakStatus.current_reward.label}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Claim Button */}
+            <button 
+              onClick={claimStreakReward}
+              disabled={!streakStatus.can_claim || claimingStreak}
+              className={`w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
+                streakStatus.can_claim && !claimingStreak
+                  ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white hover:scale-105 shadow-lg shadow-orange-500/30' 
+                  : 'bg-white/10 text-white/40 cursor-not-allowed'
+              }`}
+            >
+              {claimingStreak ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  Claiming...
+                </>
+              ) : streakStatus.can_claim ? (
+                <>
+                  <Gift className="w-5 h-5" />
+                  Claim Today's Reward
+                </>
+              ) : (
+                <>
+                  <Clock className="w-5 h-5" />
+                  Already Claimed Today
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
+      
       {/* Profile Preview Modal */}
       {showPreviewModal && (
         <div 
