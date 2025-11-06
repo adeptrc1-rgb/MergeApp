@@ -73,6 +73,35 @@ export default function Profile({ user, logout }) {
     }
   };
 
+  const loadStreakStatus = async () => {
+    try {
+      const response = await axios.get(`${API}/streaks/status`);
+      setStreakStatus(response.data);
+    } catch (error) {
+      console.error('Error loading streak status:', error);
+    }
+  };
+
+  const claimStreakReward = async () => {
+    if (claimingStreak) return;
+    setClaimingStreak(true);
+    try {
+      const response = await axios.post(`${API}/streaks/claim`);
+      if (response.data.success) {
+        setShowStreakClaim(true);
+        // Reload streak status and user data
+        await loadStreakStatus();
+        // Optionally reload user data to show updated coins
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Error claiming streak reward:', error);
+      alert(error.response?.data?.detail || 'Failed to claim reward');
+    } finally {
+      setClaimingStreak(false);
+    }
+  };
+
   const checkDailySpinStatus = async () => {
     try {
       const response = await axios.get(`${API}/rewards/cosmic-wheel-status`);
