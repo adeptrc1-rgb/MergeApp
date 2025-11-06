@@ -86,6 +86,11 @@ class User(BaseModel):
     active_skin: Optional[str] = None
     responsiveness_score: float = 95.0
     low_ghosting_rate: float = 90.0
+    current_streak: int = 0
+    last_login_date: Optional[str] = None
+    streak_saver_count: int = 0
+    claimed_today: bool = False
+    active_multiplier: Optional[Dict[str, Any]] = None
 
 class LoginBody(BaseModel):
     email: str
