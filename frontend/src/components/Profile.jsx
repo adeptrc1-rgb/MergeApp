@@ -37,6 +37,7 @@ export default function Profile({ user, logout }) {
   const [streakStatus, setStreakStatus] = useState(null);
   const [showStreakClaim, setShowStreakClaim] = useState(false);
   const [claimingStreak, setClaimingStreak] = useState(false);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
   const location = window.location;
 
   useEffect(() => {
