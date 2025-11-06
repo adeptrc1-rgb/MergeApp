@@ -17,7 +17,7 @@ SECURE_COOKIES = True  # Preview/prod over HTTPS
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
-preview_origin = os.environ.get("PREVIEW_ORIGIN", "https://cosmic-match-11.preview.emergentagent.com")
+preview_origin = os.environ.get("PREVIEW_ORIGIN", "https://zodiac-dating.preview.emergentagent.com")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[preview_origin, "http://localhost:3000", "https://localhost:3000"],

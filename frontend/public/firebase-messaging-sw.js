@@ -47,7 +47,7 @@ self.addEventListener('notificationclick', (event) => {
   event.notification.close();
 
   // Get deep link from notification data
-  const deepLink = event.notification.data?.deep_link || 'https://cosmic-match-11.preview.emergentagent.com/discover';
+  const deepLink = event.notification.data?.deep_link || 'https://zodiac-dating.preview.emergentagent.com/discover';
 
   // Open or focus the app
   event.waitUntil(

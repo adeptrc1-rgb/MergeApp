@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 class ComprehensiveBackendTester:
-    def __init__(self, base_url="https://cosmic-match-11.preview.emergentagent.com"):
+    def __init__(self, base_url="https://zodiac-dating.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_cookies = None
