@@ -43,6 +43,7 @@ export default function Profile({ user, logout }) {
     checkDailySpinStatus();
     calculateTimeRemaining();
     loadStoreInventory();
+    loadStreakStatus();
     const interval = setInterval(() => {
       calculateTimeRemaining();
       updateCooldownCountdown();
