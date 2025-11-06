@@ -207,15 +207,25 @@ export default function Profile({ user, logout }) {
           {/* Profile Header */}
           <div className="bg-white/5 rounded-2xl p-8 border border-white/10 mb-6">
             <div className="flex items-start gap-6">
-              <div
-                className="w-32 h-32 rounded-2xl bg-cover bg-center flex-shrink-0 border-2 border-white/20 bg-gradient-to-br from-purple-500/20 to-pink-500/20"
-                style={{ backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'none' }}
-              >
-                {!user.photos?.[0] && (
-                  <div className="w-full h-full flex items-center justify-center text-white text-3xl font-light">
-                    {user.first_name?.[0] || 'U'}
-                  </div>
-                )}
+              <div className="relative flex-shrink-0">
+                <div
+                  className="w-32 h-32 rounded-2xl bg-cover bg-center border-2 border-white/20 bg-gradient-to-br from-purple-500/20 to-pink-500/20"
+                  style={{ backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'none' }}
+                >
+                  {!user.photos?.[0] && (
+                    <div className="w-full h-full flex items-center justify-center text-white text-3xl font-light">
+                      {user.first_name?.[0] || 'U'}
+                    </div>
+                  )}
+                </div>
+                {/* Preview Button */}
+                <button
+                  onClick={() => setShowPreviewModal(true)}
+                  className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 hover:scale-105 transition-all shadow-lg border border-purple-300/30 whitespace-nowrap"
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                  Preview Card
+                </button>
               </div>
               <div className="flex-1">
                 <h2 className="text-4xl font-light text-white mb-3">{user.first_name}, {age}</h2>
