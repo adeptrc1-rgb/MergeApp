@@ -300,15 +300,115 @@ export default function Profile({ user, logout }) {
                 </button>
               </div>
               <div className="flex-1">
-                <h2 className="text-4xl font-light text-white mb-3">{user.first_name}, {age}</h2>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-4xl font-light text-white">{user.first_name}, {age}</h2>
+                  <button
+                    onClick={isEditingProfile ? saveProfileEdits : startEditingProfile}
+                    className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1 transition-colors"
+                  >
+                    {isEditingProfile ? (
+                      <>
+                        <Star className="w-4 h-4" />
+                        Save
+                      </>
+                    ) : (
+                      <>
+                        <Settings className="w-4 h-4" />
+                        Edit Profile
+                      </>
+                    )}
+                  </button>
+                </div>
+                
                 <div className="flex items-center gap-3 text-white/60 mb-3">
                   <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white text-sm">
                     {zodiacSymbol(user.zodiac_sign)}
                   </div>
                   <span className="text-lg">{user.zodiac_sign}</span>
                 </div>
+
+                {/* Interests */}
+                <div className="mb-3">
+                  <h3 className="text-white/80 text-xs uppercase tracking-wide mb-2">Interests</h3>
+                  {isEditingProfile ? (
+                    <div>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {editedInterests.map((interest, i) => (
+                          <span 
+                            key={i} 
+                            className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs text-white/70 flex items-center gap-1"
+                          >
+                            {interest}
+                            <button
+                              onClick={() => removeInterest(interest)}
+                              className="text-red-400 hover:text-red-300 ml-1"
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={newInterest}
+                          onChange={(e) => setNewInterest(e.target.value)}
+                          onKeyPress={(e) => e.key === 'Enter' && addInterest()}
+                          placeholder="Add interest..."
+                          className="flex-1 bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
+                        />
+                        <button
+                          onClick={addInterest}
+                          className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap gap-2">
+                      {user.interests && user.interests.length > 0 ? (
+                        user.interests.map((interest, i) => (
+                          <span key={i} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs text-white/70">
+                            {interest}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="text-white/40 text-sm italic">No interests added yet</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Bio / About Me */}
+                <div className="mb-3">
+                  <h3 className="text-white/80 text-xs uppercase tracking-wide mb-2">About Me</h3>
+                  {isEditingProfile ? (
+                    <textarea
+                      value={editedBio}
+                      onChange={(e) => setEditedBio(e.target.value)}
+                      placeholder="Tell others about yourself..."
+                      className="w-full bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400 min-h-[80px] resize-none"
+                      maxLength={500}
+                    />
+                  ) : (
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      {user.bio || <span className="italic text-white/40">No bio added yet</span>}
+                    </p>
+                  )}
+                </div>
+
+                {isEditingProfile && (
+                  <button
+                    onClick={cancelEditingProfile}
+                    className="text-white/60 hover:text-white text-sm transition-colors"
+                  >
+                    Cancel
+                  </button>
+                )}
+
                 {user.angel_number && (
-                  <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                  <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mt-2">
                     <Sparkles className="w-4 h-4 text-purple-400" />
                     <span className="text-white/80 text-sm">Angel Number: {user.angel_number}</span>
                   </div>
