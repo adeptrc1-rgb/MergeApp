@@ -424,26 +424,6 @@ export default function Profile({ user, logout }) {
             </div>
           </div>
 
-          {/* About Me */}
-          {user.bio && (
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
-              <h3 className="text-xl font-light text-white mb-3">About Me</h3>
-              <p className="text-white/60 leading-relaxed">{user.bio}</p>
-            </div>
-          )}
-
-          {/* Interests */}
-          {user.interests && user.interests.length > 0 && (
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
-              <h3 className="text-xl font-light text-white mb-4">Interests</h3>
-              <div className="flex flex-wrap gap-2">
-                {user.interests.map((interest, idx) => (
-                  <span key={idx} className="px-4 py-2 bg-white/10 rounded-full text-white/80 text-sm border border-white/10">{interest}</span>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* Logout Button */}
           <div className="flex gap-3">
             <button onClick={logout} className="flex-1 bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all">
