@@ -109,6 +109,44 @@ export default function Profile({ user, logout }) {
     }
   };
 
+  const startEditingProfile = () => {
+    setEditedBio(user.bio || '');
+    setEditedInterests(user.interests || []);
+    setIsEditingProfile(true);
+  };
+
+  const cancelEditingProfile = () => {
+    setIsEditingProfile(false);
+    setEditedBio('');
+    setEditedInterests([]);
+    setNewInterest('');
+  };
+
+  const saveProfileEdits = async () => {
+    try {
+      await axios.put(`${API}/users/me`, {
+        bio: editedBio,
+        interests: editedInterests
+      });
+      // Reload the page to get updated data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile. Please try again.');
+    }
+  };
+
+  const addInterest = () => {
+    if (newInterest.trim() && !editedInterests.includes(newInterest.trim())) {
+      setEditedInterests([...editedInterests, newInterest.trim()]);
+      setNewInterest('');
+    }
+  };
+
+  const removeInterest = (interest) => {
+    setEditedInterests(editedInterests.filter(i => i !== interest));
+  };
+
   const checkDailySpinStatus = async () => {
     try {
       const response = await axios.get(`${API}/rewards/cosmic-wheel-status`);
