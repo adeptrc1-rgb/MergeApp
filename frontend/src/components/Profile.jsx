@@ -477,6 +477,167 @@ export default function Profile({ user, logout }) {
             </button>
           </div>
 
+          {/* 21-Day Streak System */}
+          {streakStatus && (
+            <div className="bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-2xl p-6 border border-orange-400/30 mb-6 relative overflow-hidden">
+              {/* Animated Background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-500/10 animate-pulse opacity-50" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-light text-white mb-2 flex items-center gap-2">
+                      <Flame className="w-5 h-5 text-orange-400" />
+                      Daily Login Streak
+                    </h3>
+                    <p className="text-white/60 text-sm">Login daily for 21 days to unlock epic rewards!</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center border-2 border-orange-300/50 shadow-lg shadow-orange-500/30">
+                      <span className="text-white text-2xl font-bold">{streakStatus.current_streak}</span>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-white/80 text-xs">Current</div>
+                      <div className="text-orange-200 text-xs font-medium">Streak</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Streak Progress Bar */}
+                <div className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-white/60 text-sm">Progress to Day 21</span>
+                    <span className="text-orange-200 text-sm font-medium">{streakStatus.current_streak}/21</span>
+                  </div>
+                  <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                    <div 
+                      className="bg-gradient-to-r from-orange-400 to-red-500 h-2 rounded-full transition-all duration-500 ease-out relative"
+                      style={{ width: `${(streakStatus.current_streak / 21) * 100}%` }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-white/40 text-xs">Day 1</span>
+                    <span className="text-white/40 text-xs flex items-center gap-1">
+                      <Trophy className="w-3 h-3 text-yellow-400" />
+                      Day 21
+                    </span>
+                  </div>
+                </div>
+
+                {/* Milestone Indicators */}
+                <div className="flex items-center justify-between mb-4 gap-2">
+                  {[7, 14, 21].map((milestone) => {
+                    const achieved = streakStatus.current_streak >= milestone;
+                    return (
+                      <div 
+                        key={milestone}
+                        className={`flex-1 rounded-lg p-3 border transition-all ${
+                          achieved 
+                            ? 'bg-yellow-500/20 border-yellow-400/40' 
+                            : 'bg-white/5 border-white/10'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                            achieved 
+                              ? 'bg-gradient-to-br from-yellow-400 to-orange-500' 
+                              : 'bg-white/10'
+                          }`}>
+                            {achieved ? (
+                              <Trophy className="w-3 h-3 text-white" />
+                            ) : (
+                              <span className="text-white/40 text-xs">{milestone}</span>
+                            )}
+                          </div>
+                          <div>
+                            <div className={`text-xs font-medium ${achieved ? 'text-yellow-200' : 'text-white/40'}`}>
+                              Day {milestone}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Current Reward Display */}
+                {streakStatus.current_reward && (
+                  <div className="bg-gradient-to-r from-white/5 to-white/10 border border-white/20 rounded-xl p-4 mb-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                          <Gift className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-white/60 text-xs mb-1">Today's Reward</div>
+                          <div className="text-white font-medium">{streakStatus.current_reward.label}</div>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-white/40" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Next Reward Preview */}
+                {streakStatus.next_reward && streakStatus.current_streak < 21 && (
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-3 mb-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                          <Gift className="w-4 h-4 text-white/60" />
+                        </div>
+                        <div>
+                          <div className="text-white/40 text-xs">Tomorrow</div>
+                          <div className="text-white/80 text-sm">{streakStatus.next_reward.label}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Claim Button */}
+                <button 
+                  onClick={claimStreakReward}
+                  disabled={!streakStatus.can_claim || claimingStreak}
+                  className={`w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
+                    streakStatus.can_claim && !claimingStreak
+                      ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white hover:scale-105 shadow-lg shadow-orange-500/30' 
+                      : 'bg-white/10 text-white/40 cursor-not-allowed'
+                  }`}
+                >
+                  {claimingStreak ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Claiming...
+                    </>
+                  ) : streakStatus.can_claim ? (
+                    <>
+                      <Gift className="w-5 h-5" />
+                      Claim Today's Reward
+                    </>
+                  ) : (
+                    <>
+                      <Clock className="w-5 h-5" />
+                      Already Claimed Today
+                    </>
+                  )}
+                </button>
+
+                {/* Streak Saver Count */}
+                {streakStatus.streak_saver_count > 0 && (
+                  <div className="mt-3 flex items-center justify-center gap-2 text-sm">
+                    <div className="bg-blue-500/20 border border-blue-400/30 rounded-full px-3 py-1 flex items-center gap-2">
+                      <Zap className="w-4 h-4 text-blue-400" />
+                      <span className="text-blue-200">{streakStatus.streak_saver_count} Streak Saver{streakStatus.streak_saver_count > 1 ? 's' : ''}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Rewards Piggy Bank */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
             <h3 className="text-xl font-light text-white mb-6 flex items-center gap-2">
