@@ -465,132 +465,91 @@ export default function Profile({ user, logout }) {
       {/* Cosmic Wheel Modal */}
       <CosmicWheel isOpen={showCosmicWheel} onClose={() => setShowCosmicWheel(false)} onRewardClaimed={handleRewardClaimed} />
       
-      {/* Streak Details Modal */}
+      {/* Streak Details Modal - Tarot Card Edition */}
       {showStreakClaim && streakStatus && (
         <div 
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
           onClick={() => setShowStreakClaim(false)}
         >
           <div 
-            className="relative max-w-md w-full bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl border border-orange-400/30 p-6"
+            className="relative max-w-lg w-full"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setShowStreakClaim(false)}
-              className="absolute -top-10 right-0 text-white/80 hover:text-white transition-colors text-2xl"
+              className="absolute -top-12 right-0 text-white/80 hover:text-white transition-colors text-3xl z-10"
             >
               ✕
             </button>
 
             {/* Title */}
-            <div className="text-center mb-6">
+            <div className="text-center mb-4">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <Flame className="w-6 h-6 text-orange-400" />
-                <h3 className="text-2xl font-light text-white">Daily Login Streak</h3>
+                <h3 className="text-2xl font-light text-white">Day {streakStatus.current_streak} — Keep the cosmic flow alive!</h3>
               </div>
-              <p className="text-white/60 text-sm">Login daily for 21 days to unlock epic rewards!</p>
+              <p className="text-white/60 text-sm">Every day you flip a new card of destiny</p>
             </div>
 
-            {/* Streak Counter */}
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center border-4 border-orange-300/50 shadow-lg shadow-orange-500/30">
-                <span className="text-white text-3xl font-bold">{streakStatus.current_streak}</span>
-              </div>
-              <div>
-                <div className="text-white/80 text-sm">Current Streak</div>
-                <div className="text-orange-200 text-lg font-medium">{streakStatus.current_streak}/21 Days</div>
-              </div>
-            </div>
+            {/* Tarot Card */}
+            <TarotStreakCard
+              streakDay={streakStatus.current_streak + 1}
+              reward={streakStatus.current_reward}
+              onClaim={claimStreakReward}
+              canClaim={streakStatus.can_claim}
+              isClaiming={claimingStreak}
+            />
 
-            {/* Progress Bar */}
-            <div className="mb-6">
-              <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-                <div 
-                  className="bg-gradient-to-r from-orange-400 to-red-500 h-2 rounded-full transition-all duration-500 ease-out relative"
-                  style={{ width: `${(streakStatus.current_streak / 21) * 100}%` }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
-                </div>
-              </div>
-            </div>
-
-            {/* Milestones */}
-            <div className="flex items-center justify-between mb-6 gap-2">
-              {[7, 14, 21].map((milestone) => {
-                const achieved = streakStatus.current_streak >= milestone;
-                return (
-                  <div 
-                    key={milestone}
-                    className={`flex-1 rounded-lg p-2 border transition-all ${
-                      achieved 
-                        ? 'bg-yellow-500/20 border-yellow-400/40' 
-                        : 'bg-white/5 border-white/10'
-                    }`}
-                  >
-                    <div className="flex flex-col items-center gap-1">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                        achieved 
-                          ? 'bg-gradient-to-br from-yellow-400 to-orange-500' 
-                          : 'bg-white/10'
-                      }`}>
-                        {achieved ? (
-                          <Trophy className="w-4 h-4 text-white" />
-                        ) : (
-                          <span className="text-white/40 text-xs">{milestone}</span>
-                        )}
-                      </div>
-                      <div className={`text-xs font-medium ${achieved ? 'text-yellow-200' : 'text-white/40'}`}>
-                        Day {milestone}
-                      </div>
+            {/* 21-Star Progress Tracker */}
+            <div className="mt-6 px-4">
+              <div className="flex items-center justify-center gap-1 flex-wrap">
+                {[...Array(21)].map((_, i) => {
+                  const day = i + 1;
+                  const isCurrent = day === streakStatus.current_streak;
+                  const isCompleted = day <= streakStatus.current_streak;
+                  const isMilestone = [7, 14, 21].includes(day);
+                  
+                  return (
+                    <div
+                      key={day}
+                      className={`relative transition-all ${
+                        isCurrent ? 'scale-125' : 'scale-100'
+                      }`}
+                    >
+                      <div
+                        className={`w-3 h-3 rounded-full transition-all ${
+                          isCompleted
+                            ? isMilestone
+                              ? 'bg-gradient-to-br from-yellow-400 to-amber-500 shadow-lg'
+                              : 'bg-gradient-to-br from-orange-400 to-red-500'
+                            : 'bg-white/20'
+                        } ${isCurrent ? 'animate-pulse' : ''}`}
+                        style={{
+                          boxShadow: isCompleted
+                            ? isMilestone
+                              ? '0 0 10px #fbbf24'
+                              : '0 0 6px #f97316'
+                            : 'none'
+                        }}
+                      />
+                      {isMilestone && (
+                        <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                          <Trophy className={`w-3 h-3 ${isCompleted ? 'text-yellow-400' : 'text-white/30'}`} />
+                        </div>
+                      )}
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Current Reward */}
-            {streakStatus.current_reward && (
-              <div className="bg-white/10 border border-white/20 rounded-xl p-4 mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
-                    <Gift className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-white/60 text-xs mb-1">Today's Reward</div>
-                    <div className="text-white font-medium">{streakStatus.current_reward.label}</div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
-            )}
-
-            {/* Claim Button */}
-            <button 
-              onClick={claimStreakReward}
-              disabled={!streakStatus.can_claim || claimingStreak}
-              className={`w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
-                streakStatus.can_claim && !claimingStreak
-                  ? 'bg-gradient-to-r from-orange-500 to-red-600 text-white hover:scale-105 shadow-lg shadow-orange-500/30' 
-                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-              }`}
-            >
-              {claimingStreak ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Claiming...
-                </>
-              ) : streakStatus.can_claim ? (
-                <>
-                  <Gift className="w-5 h-5" />
-                  Claim Today's Reward
-                </>
-              ) : (
-                <>
-                  <Clock className="w-5 h-5" />
-                  Already Claimed Today
-                </>
-              )}
-            </button>
+              <div className="flex items-center justify-between mt-2 text-xs text-white/40">
+                <span>Day 1</span>
+                <span className="flex items-center gap-1">
+                  <Trophy className="w-3 h-3 text-yellow-400" />
+                  Day 21
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       )}
