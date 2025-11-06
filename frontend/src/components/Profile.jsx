@@ -265,14 +265,31 @@ export default function Profile({ user, logout }) {
                   </div>
                   <span className="text-lg">{user.zodiac_sign}</span>
                 </div>
+                {user.interests && user.interests.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {user.interests.slice(0, 4).map((interest, i) => (
+                      <span key={i} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs text-white/70">{interest}</span>
+                    ))}
+                  </div>
+                )}
                 {user.angel_number && (
-                  <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                  <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-3">
                     <Sparkles className="w-4 h-4 text-purple-400" />
                     <span className="text-white/80 text-sm">Angel Number: {user.angel_number}</span>
                   </div>
                 )}
               </div>
             </div>
+            
+            {/* About Me Section */}
+            {user.bio && (
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <h3 className="text-white/80 text-sm font-medium mb-3 uppercase tracking-wide">About Me</h3>
+                <p className="text-white/70 text-base leading-relaxed">
+                  {user.bio}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Daily Cosmic Wheel */}
