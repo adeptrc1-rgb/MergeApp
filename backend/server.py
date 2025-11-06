@@ -552,6 +552,139 @@ async def add_coins_dev(user: User = Depends(get_current_user)):
     udoc = await db.users.find_one({"id": user.id})
     return {"success": True, "new_balance": udoc.get("star_coins", 0)}
 
+# 21-Day Streak System
+STREAK_REWARDS = [
+    {"day": 1, "type": "coins", "amount": 10, "tier": "bronze", "label": "10 Star Coins"},
+    {"day": 2, "type": "multiplier", "amount": 1.05, "duration_hours": 24, "tier": "bronze", "label": "1.05× Multiplier (24h)"},
+    {"day": 3, "type": "utility", "item": "redo", "amount": 1, "tier": "silver", "milestone": True, "label": "1 Redo"},
+    {"day": 4, "type": "coins", "amount": 15, "tier": "bronze", "label": "15 Star Coins"},
+    {"day": 5, "type": "cosmetic", "item": "basic_skin", "tier": "silver", "label": "Basic Profile Frame"},
+    {"day": 6, "type": "utility", "item": "super_like", "amount": 1, "tier": "bronze", "label": "1 Super Like"},
+    {"day": 7, "type": "boost", "duration_minutes": 15, "tier": "gold", "milestone": True, "label": "Profile Boost (15 min)"},
+    {"day": 8, "type": "multiplier", "amount": 1.1, "duration_hours": 24, "tier": "bronze", "label": "1.10× Multiplier (24h)"},
+    {"day": 9, "type": "coins", "amount": 20, "tier": "bronze", "label": "20 Star Coins"},
+    {"day": 10, "type": "utility", "item": "dm_token", "amount": 1, "tier": "silver", "label": "1 Direct Message Token"},
+    {"day": 11, "type": "cosmetic", "item": "premium_frame", "tier": "silver", "label": "Premium Card Frame"},
+    {"day": 12, "type": "coins", "amount": 25, "tier": "bronze", "label": "25 Star Coins"},
+    {"day": 13, "type": "utility", "item": "redo", "amount": 1, "tier": "bronze", "label": "1 Redo"},
+    {"day": 14, "type": "boost", "duration_minutes": 30, "tier": "gold", "milestone": True, "label": "Profile Boost (30 min)"},
+    {"day": 15, "type": "multiplier", "amount": 1.15, "duration_hours": 24, "tier": "silver", "label": "1.15× Multiplier (24h)"},
+    {"day": 16, "type": "coins", "amount": 30, "tier": "bronze", "label": "30 Star Coins"},
+    {"day": 17, "type": "cosmetic", "item": "rare_skin", "tier": "silver", "label": "Rare Premium Skin"},
+    {"day": 18, "type": "utility", "item": "super_like", "amount": 1, "tier": "bronze", "label": "1 Super Like"},
+    {"day": 19, "type": "coins", "amount": 35, "tier": "bronze", "label": "35 Star Coins"},
+    {"day": 20, "type": "utility", "item": "dm_token", "amount": 1, "tier": "silver", "label": "1 Direct Message Token"},
+    {"day": 21, "type": "legendary", "tier": "gold", "milestone": True, "label": "Legendary Bundle", 
+     "bundle": {"premium_skin": 1, "boost": 2, "multiplier": {"amount": 1.25, "duration_hours": 48}}}
+]
+
+@api_router.get("/streaks/status")
+async def get_streak_status(user: User = Depends(get_current_user)):
+    """Get current streak status and available reward"""
+    udoc = await db.users.find_one({"id": user.id})
+    if not udoc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    today = date.today().isoformat()
+    last_login = udoc.get("last_login_date")
+    current_streak = udoc.get("current_streak", 0)
+    claimed_today = udoc.get("claimed_today", False)
+    
+    # Check if streak should reset
+    if last_login and last_login != today:
+        try:
+            last_date = date.fromisoformat(last_login)
+            today_date = date.today()
+            days_diff = (today_date - last_date).days
+            
+            if days_diff > 1:
+                # Streak broken
+                current_streak = 0
+                claimed_today = False
+                await db.users.update_one(
+                    {"id": user.id},
+                    {"$set": {"current_streak": 0, "claimed_today": False}}
+                )
+        except:
+            pass
+    
+    # Get current day reward (1-21, cycles)
+    reward_day = (current_streak % 21) + 1 if current_streak < 21 else 21
+    current_reward = next((r for r in STREAK_REWARDS if r["day"] == reward_day), STREAK_REWARDS[0])
+    next_reward = next((r for r in STREAK_REWARDS if r["day"] == reward_day + 1), STREAK_REWARDS[0])
+    
+    return {
+        "current_streak": current_streak,
+        "claimed_today": claimed_today,
+        "can_claim": not claimed_today,
+        "current_reward": current_reward,
+        "next_reward": next_reward,
+        "streak_saver_count": udoc.get("streak_saver_count", 0),
+        "days_until_milestone": 21 - (current_streak % 21) if current_streak < 21 else 0
+    }
+
+@api_router.post("/streaks/claim")
+async def claim_streak_reward(user: User = Depends(get_current_user)):
+    """Claim today's streak reward"""
+    udoc = await db.users.find_one({"id": user.id})
+    if not udoc:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    today = date.today().isoformat()
+    claimed_today = udoc.get("claimed_today", False)
+    
+    if claimed_today:
+        raise HTTPException(status_code=400, detail="Already claimed today's reward")
+    
+    current_streak = udoc.get("current_streak", 0)
+    reward_day = (current_streak % 21) + 1 if current_streak < 21 else 21
+    reward = next((r for r in STREAK_REWARDS if r["day"] == reward_day), STREAK_REWARDS[0])
+    
+    # Apply reward
+    updates = {
+        "current_streak": current_streak + 1,
+        "claimed_today": True,
+        "last_login_date": today
+    }
+    inc_updates = {}
+    
+    if reward["type"] == "coins":
+        inc_updates["star_coins"] = reward["amount"]
+    elif reward["type"] == "utility":
+        if reward["item"] == "redo":
+            inc_updates["redos"] = reward.get("amount", 1)
+        elif reward["item"] == "super_like":
+            inc_updates["super_likes"] = reward.get("amount", 1)
+        elif reward["item"] == "dm_token":
+            inc_updates["direct_messages"] = reward.get("amount", 1)
+    elif reward["type"] == "boost":
+        inc_updates["profile_boosts"] = 1
+    elif reward["type"] == "multiplier":
+        expires_at = (now_utc() + timedelta(hours=reward.get("duration_hours", 24))).isoformat()
+        updates["active_multiplier"] = {
+            "amount": reward["amount"],
+            "expires_at": expires_at
+        }
+    elif reward["type"] == "legendary":
+        bundle = reward.get("bundle", {})
+        inc_updates["profile_boosts"] = bundle.get("boost", 2)
+        if "multiplier" in bundle:
+            expires_at = (now_utc() + timedelta(hours=bundle["multiplier"]["duration_hours"])).isoformat()
+            updates["active_multiplier"] = {
+                "amount": bundle["multiplier"]["amount"],
+                "expires_at": expires_at
+            }
+    
+    if inc_updates:
+        await db.users.update_one({"id": user.id}, {"$inc": inc_updates})
+    await db.users.update_one({"id": user.id}, {"$set": updates})
+    
+    return {
+        "success": True,
+        "reward": reward,
+        "new_streak": current_streak + 1
+    }
+
 # Store System - Lights and Skins
 STORE_ITEMS = [
     # Lights - Visual effects around profile cards
