@@ -6,7 +6,9 @@ import CosmicWheel from './CosmicWheel';
 import BottomNav from './BottomNav';
 import ConstellationIcon from './ConstellationIcon';
 import PremiumSkinRenderer from './PremiumSkinRenderer';
+import TarotStreakCard from './TarotStreakCard';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
+import '../styles/tarotCard.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
