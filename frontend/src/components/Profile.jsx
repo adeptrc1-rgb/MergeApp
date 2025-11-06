@@ -727,16 +727,7 @@ export default function Profile({ user, logout }) {
                   <span className="text-base">{user.zodiac_sign}</span>
                 </div>
                 {user.bio && (
-                  <p className="text-white/70 text-sm mb-2 line-clamp-2">{user.bio}</p>
-                )}
-                {user.interests && user.interests.length > 0 && (
-                  <div className="flex flex-wrap gap-1">
-                    {user.interests.slice(0, 3).map((interest, i) => (
-                      <span key={i} className="px-2 py-1 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/70 border border-white/20">
-                        {interest}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-white/70 text-sm line-clamp-2">{user.bio}</p>
                 )}
               </div>
 
