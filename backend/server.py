@@ -181,6 +181,26 @@ async def test_login(body: LoginBody, response: Response):
 async def auth_me(user: User = Depends(get_current_user)):
     return user.dict()
 
+@api_router.put("/users/me")
+async def update_user_profile(
+    bio: Optional[str] = None,
+    interests: Optional[list] = None,
+    user: User = Depends(get_current_user)
+):
+    update_data = {}
+    if bio is not None:
+        update_data["bio"] = bio
+    if interests is not None:
+        update_data["interests"] = interests
+    
+    if update_data:
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": update_data}
+        )
+    
+    return {"success": True, "message": "Profile updated successfully"}
+
 # Horoscope
 @api_router.get("/horoscope/today")
 async def horoscope_today(user: User = Depends(get_current_user)):
