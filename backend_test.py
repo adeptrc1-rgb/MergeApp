@@ -634,6 +634,229 @@ class AstrologyDatingAPITester:
             
             return 1
 
+    def test_streak_system(self):
+        """Test the 21-day streak system endpoints"""
+        if not self.session_cookies:
+            print("   ⚠️  No session cookies available, skipping streak tests")
+            return False
+        
+        print("🚀 Starting 21-Day Streak System Tests")
+        print("=" * 60)
+        
+        # Test 1: Get Streak Status (New User - No Streak)
+        print("\n" + "=" * 50)
+        print("📊 TEST 1: Get Streak Status (New User)")
+        print("=" * 50)
+        
+        success, response_data, response = self.run_test("Get Streak Status", "GET", "streaks/status", 200, use_cookies=True)
+        
+        if not success:
+            return False
+            
+        if isinstance(response_data, dict):
+            # Verify expected fields for new user
+            expected_fields = ["current_streak", "claimed_today", "can_claim", "current_reward", "next_reward", "streak_saver_count"]
+            missing_fields = [field for field in expected_fields if field not in response_data]
+            
+            if missing_fields:
+                self.log_test("Streak Status Fields", False, f"Missing fields: {missing_fields}")
+                return False
+            
+            # Check initial values for new user
+            current_streak = response_data.get("current_streak")
+            claimed_today = response_data.get("claimed_today")
+            can_claim = response_data.get("can_claim")
+            current_reward = response_data.get("current_reward")
+            streak_saver_count = response_data.get("streak_saver_count")
+            
+            print(f"   ℹ️  Current streak: {current_streak}")
+            print(f"   ℹ️  Claimed today: {claimed_today}")
+            print(f"   ℹ️  Can claim: {can_claim}")
+            print(f"   ℹ️  Streak saver count: {streak_saver_count}")
+            
+            if current_reward and isinstance(current_reward, dict):
+                print(f"   ℹ️  Current reward: Day {current_reward.get('day')} - {current_reward.get('label')}")
+            
+            # Verify new user expectations
+            if current_streak == 0 and can_claim == True and streak_saver_count == 0:
+                print("   ✅ New user streak status correct")
+                self.log_test("New User Streak Status", True)
+            else:
+                self.log_test("New User Streak Status", False, f"Unexpected values: streak={current_streak}, can_claim={can_claim}, saver_count={streak_saver_count}")
+                return False
+        else:
+            self.log_test("Streak Status Response Format", False, "Response is not a dict")
+            return False
+        
+        # Test 2: Claim First Streak Reward
+        print("\n" + "=" * 50)
+        print("🎁 TEST 2: Claim First Streak Reward")
+        print("=" * 50)
+        
+        success, response_data, response = self.run_test("Claim First Streak Reward", "POST", "streaks/claim", 200, use_cookies=True)
+        
+        if not success:
+            return False
+            
+        if isinstance(response_data, dict):
+            # Verify claim response
+            if not response_data.get("success"):
+                self.log_test("Streak Claim Success", False, "Success field not true")
+                return False
+            
+            reward = response_data.get("reward")
+            new_streak = response_data.get("new_streak")
+            
+            print(f"   ℹ️  Reward claimed: {reward.get('label') if reward else 'None'}")
+            print(f"   ℹ️  New streak: {new_streak}")
+            
+            # Verify first day reward (should be 10 Star Coins)
+            if reward and reward.get("day") == 1 and reward.get("type") == "coins" and reward.get("amount") == 10:
+                print("   ✅ Day 1 reward correct (10 Star Coins)")
+                self.log_test("Day 1 Reward", True)
+            else:
+                self.log_test("Day 1 Reward", False, f"Unexpected reward: {reward}")
+                return False
+            
+            # Verify new streak is 1
+            if new_streak == 1:
+                print("   ✅ Streak incremented to 1")
+                self.log_test("Streak Increment", True)
+            else:
+                self.log_test("Streak Increment", False, f"Expected streak 1, got {new_streak}")
+                return False
+        else:
+            self.log_test("Streak Claim Response Format", False, "Response is not a dict")
+            return False
+        
+        # Test 3: Try to Claim Again Same Day (Should Fail)
+        print("\n" + "=" * 50)
+        print("❌ TEST 3: Try to Claim Again Same Day")
+        print("=" * 50)
+        
+        success, response_data, response = self.run_test("Claim Again Same Day", "POST", "streaks/claim", 400, use_cookies=True)
+        
+        if success:
+            # Verify error message
+            if isinstance(response_data, dict) and "Already claimed today's reward" in str(response_data.get("detail", "")):
+                print("   ✅ Correctly prevented double claiming")
+                self.log_test("Prevent Double Claim", True)
+            else:
+                self.log_test("Prevent Double Claim", False, f"Unexpected error response: {response_data}")
+                return False
+        else:
+            self.log_test("Prevent Double Claim", False, "Expected 400 error for double claim")
+            return False
+        
+        # Test 4: Get Streak Status After Claiming
+        print("\n" + "=" * 50)
+        print("📊 TEST 4: Get Streak Status After Claiming")
+        print("=" * 50)
+        
+        success, response_data, response = self.run_test("Get Streak Status After Claim", "GET", "streaks/status", 200, use_cookies=True)
+        
+        if not success:
+            return False
+            
+        if isinstance(response_data, dict):
+            current_streak = response_data.get("current_streak")
+            claimed_today = response_data.get("claimed_today")
+            can_claim = response_data.get("can_claim")
+            current_reward = response_data.get("current_reward")
+            
+            print(f"   ℹ️  Current streak: {current_streak}")
+            print(f"   ℹ️  Claimed today: {claimed_today}")
+            print(f"   ℹ️  Can claim: {can_claim}")
+            
+            if current_reward and isinstance(current_reward, dict):
+                print(f"   ℹ️  Next reward: Day {current_reward.get('day')} - {current_reward.get('label')}")
+            
+            # Verify post-claim status
+            if current_streak == 1 and claimed_today == True and can_claim == False:
+                print("   ✅ Post-claim status correct")
+                self.log_test("Post-Claim Status", True)
+                
+                # Verify next reward is Day 2 (1.05× Multiplier)
+                if current_reward and current_reward.get("day") == 2 and current_reward.get("type") == "multiplier":
+                    print("   ✅ Next reward is Day 2 multiplier")
+                    self.log_test("Next Reward Day 2", True)
+                else:
+                    self.log_test("Next Reward Day 2", False, f"Unexpected next reward: {current_reward}")
+                    return False
+            else:
+                self.log_test("Post-Claim Status", False, f"Unexpected values: streak={current_streak}, claimed={claimed_today}, can_claim={can_claim}")
+                return False
+        else:
+            self.log_test("Post-Claim Status Response Format", False, "Response is not a dict")
+            return False
+        
+        print("\n" + "=" * 60)
+        print("🎉 21-Day Streak System Tests Completed")
+        print("=" * 60)
+        
+        return True
+
+    def run_streak_system_test(self):
+        """Run specific test for 21-day streak system as requested"""
+        print("🚀 Starting 21-Day Streak System Test")
+        print(f"📍 Testing against: {self.api_url}")
+        print("=" * 60)
+
+        # Step 1: Authentication Setup
+        print("\n" + "=" * 50)
+        print("🔐 STEP 1: Authentication Setup")
+        print("=" * 50)
+        
+        login_data = {"email": "streakuser@asign.com"}
+        success, response_data, response = self.run_test("Test Login for Streak System", "POST", "auth/test-login", 200, data=login_data)
+        
+        if not success:
+            print("❌ Cannot continue without successful login")
+            return 1
+            
+        # Store cookies for subsequent tests
+        if response and response.cookies:
+            self.session_cookies = response.cookies
+            print(f"   ✅ Session cookies captured successfully")
+        else:
+            print("   ❌ No cookies received from login")
+            return 1
+
+        # Step 2: Run streak system tests
+        print("\n" + "=" * 50)
+        print("🏆 STEP 2: 21-Day Streak System Tests")
+        print("=" * 50)
+        
+        streak_success = self.test_streak_system()
+        
+        if not streak_success:
+            print("❌ Streak system tests failed")
+            return 1
+
+        # Print final summary
+        print("\n" + "=" * 60)
+        print("📊 STREAK SYSTEM TEST SUMMARY")
+        print("=" * 60)
+        
+        passed_tests = [result for result in self.test_results if result["success"]]
+        failed_tests = [result for result in self.test_results if not result["success"]]
+        
+        print(f"✅ PASSED: {len(passed_tests)}/{self.tests_run} tests")
+        print(f"❌ FAILED: {len(failed_tests)}/{self.tests_run} tests")
+        
+        if failed_tests:
+            print("\n❌ Failed Tests Details:")
+            for result in failed_tests:
+                print(f"   - {result['test']}: {result['details']}")
+        
+        # Return status
+        if len(failed_tests) == 0:
+            print("\n🎉 STREAK SYSTEM TEST: PASS")
+            return 0
+        else:
+            print(f"\n⚠️  STREAK SYSTEM TEST: FAIL ({len(failed_tests)} issues)")
+            return 1
+
     def run_all_tests(self):
         """Run all backend tests"""
         print("🚀 Starting A Sign Dating App Backend API Tests")
@@ -675,6 +898,7 @@ class AstrologyDatingAPITester:
             self.test_liked_me_with_auth()
             self.test_cosmic_wheel_status()
             self.test_cosmic_wheel_spin()
+            self.test_streak_system()
         else:
             print("\n⚠️  Skipping authenticated tests - no session cookies available")
         
