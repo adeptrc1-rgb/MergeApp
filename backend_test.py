@@ -1695,7 +1695,7 @@ class AstrologyDatingAPITester:
 
 def main():
     tester = AstrologyDatingAPITester()
-    return tester.test_multi_dimensional_compatibility_algorithm()
+    return tester.run_streak_system_test()
 
 if __name__ == "__main__":
     sys.exit(main())
