@@ -34,6 +34,9 @@ export default function Profile({ user, logout }) {
   const [cooldownProgress, setCooldownProgress] = useState(0);
   const [inventory, setInventory] = useState(null);
   const [storeItems, setStoreItems] = useState([]);
+  const [streakStatus, setStreakStatus] = useState(null);
+  const [showStreakClaim, setShowStreakClaim] = useState(false);
+  const [claimingStreak, setClaimingStreak] = useState(false);
   const location = window.location;
 
   useEffect(() => {
