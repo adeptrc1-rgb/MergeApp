@@ -729,6 +729,14 @@ STORE_ITEMS = [
         "description": "Twinkling stars orbit around your card",
         "effect": {"type": "particles", "particle": "star", "count": 15}
     },
+    {
+        "id": "light_pride_rainbow",
+        "name": "Pride Rainbow",
+        "type": "light",
+        "price": 450,
+        "description": "Celebrate love and identity with vibrant LGBTQ+ pride colors",
+        "effect": {"type": "aurora", "colors": ["#e40303", "#ff8c00", "#ffed00", "#008026", "#24408e", "#732982"], "intensity": "vibrant"}
+    },
     
     # Premium Skins - Overlay-based themes (no borders/frames)
     {
