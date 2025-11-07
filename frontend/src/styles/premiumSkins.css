@@ -266,28 +266,52 @@
 /* Pride Strobe Effect - Cycles through pride colors */
 @keyframes pride-strobe {
   0%, 16.66% {
-    --pride-color: var(--pride-red);
-    filter: saturate(1.5);
+    box-shadow: 
+      0 0 40px #e40303,
+      0 0 60px #e40303,
+      0 0 90px #e40303,
+      0 0 120px #e4030380;
+    filter: saturate(1.5) brightness(1.1);
   }
   16.67%, 33.33% {
-    --pride-color: var(--pride-orange);
-    filter: saturate(1.5);
+    box-shadow: 
+      0 0 40px #ff8c00,
+      0 0 60px #ff8c00,
+      0 0 90px #ff8c00,
+      0 0 120px #ff8c0080;
+    filter: saturate(1.5) brightness(1.1);
   }
   33.34%, 50% {
-    --pride-color: var(--pride-yellow);
-    filter: saturate(1.5);
+    box-shadow: 
+      0 0 40px #ffed00,
+      0 0 60px #ffed00,
+      0 0 90px #ffed00,
+      0 0 120px #ffed0080;
+    filter: saturate(1.5) brightness(1.1);
   }
   50.01%, 66.66% {
-    --pride-color: var(--pride-green);
-    filter: saturate(1.5);
+    box-shadow: 
+      0 0 40px #008026,
+      0 0 60px #008026,
+      0 0 90px #008026,
+      0 0 120px #00802680;
+    filter: saturate(1.5) brightness(1.1);
   }
   66.67%, 83.33% {
-    --pride-color: var(--pride-blue);
-    filter: saturate(1.5);
+    box-shadow: 
+      0 0 40px #24408e,
+      0 0 60px #24408e,
+      0 0 90px #24408e,
+      0 0 120px #24408e80;
+    filter: saturate(1.5) brightness(1.1);
   }
   83.34%, 100% {
-    --pride-color: var(--pride-purple);
-    filter: saturate(1.5);
+    box-shadow: 
+      0 0 40px #732982,
+      0 0 60px #732982,
+      0 0 90px #732982,
+      0 0 120px #73298280;
+    filter: saturate(1.5) brightness(1.1);
   }
 }
 
