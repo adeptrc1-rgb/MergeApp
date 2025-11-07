@@ -249,6 +249,20 @@
   }
 }
 
+/* Rainbow gradient animation (Pride Theme) */
+@keyframes rainbow-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-text-rainbow {
+  animation: rainbow-gradient 3s ease infinite;
+}
+
 /* Accessibility: Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .animate-twinkle,
