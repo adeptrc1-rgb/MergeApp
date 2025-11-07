@@ -277,7 +277,7 @@ export default function Profile({ user, logout }) {
       <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-4xl mx-auto px-6 py-6">
           {/* Profile Header */}
-          <div className="bg-white/5 rounded-2xl p-8 border border-white/10 mb-6">
+          <div className="bg-white/5 rounded-2xl p-4 md:p-8 border border-white/10 mb-6">
             <div className="flex items-start gap-6">
               <div className="relative flex-shrink-0">
                 <div
