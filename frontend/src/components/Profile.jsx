@@ -293,13 +293,13 @@ export default function Profile({ user, logout }) {
                 {/* Preview Button */}
                 <button
                   onClick={() => setShowPreviewModal(true)}
-                  className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 hover:scale-105 transition-all shadow-lg border border-purple-300/30 whitespace-nowrap"
+                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-600 text-white px-3 py-1 rounded-full text-[10px] md:text-xs font-medium flex items-center gap-1 hover:scale-105 transition-all shadow-lg border border-purple-300/30 whitespace-nowrap"
                 >
-                  <Eye className="w-3.5 h-3.5" />
-                  Preview Card
+                  <Eye className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                  Preview
                 </button>
               </div>
-              <div className="flex-1">
+              <div className="flex-1 w-full">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-4xl font-light text-white">{user.first_name}, {age}</h2>
                   <button
