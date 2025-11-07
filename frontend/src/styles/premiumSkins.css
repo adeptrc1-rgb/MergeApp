@@ -263,6 +263,18 @@
   animation: rainbow-gradient 3s ease infinite;
 }
 
+/* Rainbow pulse for Pride Light */
+@keyframes rainbow-pulse {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
 /* Accessibility: Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .animate-twinkle,
