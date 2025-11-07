@@ -300,21 +300,23 @@ export default function Profile({ user, logout }) {
                 </button>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-2xl md:text-4xl font-light text-white">{user.first_name}, {age}</h2>
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <h2 className="text-xl md:text-4xl font-light text-white leading-tight">{user.first_name}, {age}</h2>
+                  </div>
                   <button
                     onClick={isEditingProfile ? saveProfileEdits : startEditingProfile}
-                    className="text-purple-400 hover:text-purple-300 text-xs md:text-sm flex items-center gap-1 transition-colors flex-shrink-0"
+                    className="text-purple-400 hover:text-purple-300 text-xs md:text-sm flex items-center gap-1 transition-colors flex-shrink-0 ml-2"
                   >
                     {isEditingProfile ? (
                       <>
-                        <Star className="w-3 h-3 md:w-4 md:h-4" />
-                        <span className="hidden sm:inline">Save</span>
+                        <Star className="w-4 h-4" />
+                        <span className="hidden md:inline">Save</span>
                       </>
                     ) : (
                       <>
-                        <Settings className="w-3 h-3 md:w-4 md:h-4" />
-                        <span className="hidden sm:inline">Edit</span>
+                        <Settings className="w-4 h-4" />
+                        <span className="hidden md:inline">Edit</span>
                       </>
                     )}
                   </button>
