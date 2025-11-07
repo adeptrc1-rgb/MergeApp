@@ -320,10 +320,10 @@ def calculate_trending_energy_score(user_data: dict) -> float:
     
     # Final Trending Energy Score
     trending_score = (
-        engagement_score * 0.35 +
-        compatibility_resonance * 0.25 +
-        behavior_trust_score * 0.25 +
-        recency_activity * 0.15
+        engagement_score * 0.40 +
+        compatibility_resonance * 0.30 +
+        behavior_trust_score * 0.20 +
+        recency_activity * 0.10
     )
     
     return round(trending_score, 1)
