@@ -279,11 +279,10 @@ async def get_matches(user: User = Depends(get_current_user)):
 def calculate_trending_energy_score(user_data: dict) -> float:
     """
     Calculate Trending Energy Score (0-100)
-    Formula: Engagement(35%) + Compatibility Resonance(25%) + Behavior & Trust(25%) + Recency(15%)
-    Responsiveness is integrated into Behavior & Trust at 30% weight
+    Formula: Engagement(40%) + Compatibility Resonance(30%) + Behavior & Trust(20%) + Recency(10%)
     """
     
-    # 1. Engagement Score (35% weight) - max 100 pts
+    # 1. Engagement Score (40% weight) - max 100 pts
     likes_received = min(user_data.get("likes_received_30d", 0), 50)
     matches_created = min(user_data.get("matches_created_30d", 0), 20)
     message_replies = min(user_data.get("message_replies_30d", 0), 30)
@@ -294,20 +293,14 @@ def calculate_trending_energy_score(user_data: dict) -> float:
         (message_replies / 30 * 25)
     )
     
-    # 2. Compatibility Resonance (25% weight) - average compatibility of matches
+    # 2. Compatibility Resonance (30% weight) - average compatibility of matches
     avg_compatibility = user_data.get("avg_match_compatibility", 75.0)
     compatibility_resonance = min(avg_compatibility * 1.1, 100)  # 10% boost, capped at 100
     
-    # 3. Behavior & Trust Score (25% weight) - includes RESPONSIVENESS
+    # 3. Behavior & Trust Score (20% weight)
     trust_score = user_data.get("trust_score", 85.0)
-    responsiveness_score = user_data.get("responsiveness_score", 75.0)  # KEY INTEGRATION
-    low_ghosting_rate = user_data.get("low_ghosting_rate", 80.0)  # 100 = never ghosts, 0 = always ghosts
     
-    behavior_trust_score = (
-        trust_score * 0.50 +
-        responsiveness_score * 0.30 +  # 30% weight for responsiveness
-        low_ghosting_rate * 0.20  # 20% weight for not ghosting
-    )
+    behavior_trust_score = trust_score
     
     # 4. Recency & Activity (15% weight)
     last_active_days = user_data.get("last_active_days", 7)
