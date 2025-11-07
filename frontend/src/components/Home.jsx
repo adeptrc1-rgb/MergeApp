@@ -558,7 +558,7 @@ export default function Home({ user }) {
                     filter: 'saturate(120%)'
                   }} />
                 )}
-                <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 relative transition-all rounded-2xl ${showDropdown ? 'pt-4 sm:pt-6 pb-1' : 'pt-16'}`}>
+                <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`}>
                   {/* Season badge */}
                   {currentMatch.season_spotlight_active && (
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border mb-2" style={{
