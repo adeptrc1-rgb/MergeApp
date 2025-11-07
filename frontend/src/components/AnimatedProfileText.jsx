@@ -74,5 +74,23 @@ export default function AnimatedProfileText({ children, animationType, glowColor
     );
   }
 
+  // Rainbow gradient animation (Pride)
+  if (animationType === 'rainbow_gradient') {
+    return (
+      <span 
+        className={`${className} animate-text-rainbow`}
+        style={{
+          background: 'linear-gradient(90deg, #e40303 0%, #ff8c00 16%, #ffed00 33%, #008026 50%, #24408e 66%, #732982 83%, #e40303 100%)',
+          backgroundSize: '200% auto',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
+
   return <span className={className}>{children}</span>;
 }
