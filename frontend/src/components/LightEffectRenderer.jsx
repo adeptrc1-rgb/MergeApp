@@ -12,7 +12,26 @@ export default function LightEffectRenderer({ lightEffect }) {
 
   // Aurora - Multiple colored glows that shift
   if (type === 'aurora') {
-    const [color1, color2, color3] = colors || ['#00ff88', '#00ffff', '#8800ff'];
+    const [color1, color2, color3, color4, color5, color6] = colors || ['#00ff88', '#00ffff', '#8800ff'];
+    
+    // Special handling for Pride Rainbow (6 colors)
+    if (intensity === 'vibrant' && colors && colors.length === 6) {
+      return {
+        boxShadow: `
+          0 0 40px ${color1}80,
+          0 0 50px ${color2}70,
+          0 0 60px ${color3}70,
+          0 0 70px ${color4}70,
+          0 0 80px ${color5}70,
+          0 0 90px ${color6}80,
+          0 0 120px ${color1}40,
+          0 0 150px ${color6}40
+        `,
+        animation: 'rainbow-pulse 3s ease-in-out infinite'
+      };
+    }
+    
+    // Standard aurora (3 colors)
     return {
       boxShadow: `
         0 0 30px ${color1}60,
