@@ -322,16 +322,16 @@ export default function Profile({ user, logout }) {
                   </button>
                 </div>
                 
-                <div className="flex items-center gap-2 text-white/60 mb-3">
-                  <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white text-xs md:text-sm">
+                <div className="flex items-center gap-2 text-white/60 mb-2">
+                  <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white text-xs md:text-sm">
                     {zodiacSymbol(user.zodiac_sign)}
                   </div>
-                  <span className="text-sm md:text-lg">{user.zodiac_sign}</span>
+                  <span className="text-xs md:text-lg">{user.zodiac_sign}</span>
                 </div>
 
                 {/* Interests */}
                 <div className="mb-2">
-                  <h3 className="text-white/80 text-[10px] md:text-xs uppercase tracking-wide mb-1.5">Interests</h3>
+                  <h3 className="text-white/80 text-[11px] md:text-xs uppercase tracking-wide mb-1">Interests</h3>
                   {isEditingProfile ? (
                     <div>
                       <div className="flex flex-wrap gap-1.5 mb-2">
