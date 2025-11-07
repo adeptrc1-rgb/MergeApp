@@ -267,8 +267,7 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "preferences": u.get("preferences", {}),
             "season_spotlight_active": in_season,
             "season_color": SIGN_COLORS.get(sign, "#a78bfa"),
-            "season_sign": season,
-            "responsiveness_score": u.get("responsiveness_score", 85.0 + randf() * 15)
+            "season_sign": season
         })
     return result
 
