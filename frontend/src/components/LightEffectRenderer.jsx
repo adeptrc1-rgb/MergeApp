@@ -14,20 +14,17 @@ export default function LightEffectRenderer({ lightEffect }) {
   if (type === 'aurora') {
     const [color1, color2, color3, color4, color5, color6] = colors || ['#00ff88', '#00ffff', '#8800ff'];
     
-    // Special handling for Pride Rainbow (6 colors)
+    // Special handling for Pride Rainbow (6 colors) - Strobe effect
     if (intensity === 'vibrant' && colors && colors.length === 6) {
       return {
-        boxShadow: `
-          0 0 40px ${color1}80,
-          0 0 50px ${color2}70,
-          0 0 60px ${color3}70,
-          0 0 70px ${color4}70,
-          0 0 80px ${color5}70,
-          0 0 90px ${color6}80,
-          0 0 120px ${color1}40,
-          0 0 150px ${color6}40
-        `,
-        animation: 'rainbow-pulse 3s ease-in-out infinite'
+        boxShadow: '0 0 60px var(--pride-color), 0 0 90px var(--pride-color), 0 0 120px var(--pride-color)',
+        animation: 'pride-strobe 3s linear infinite',
+        '--pride-red': color1,
+        '--pride-orange': color2,
+        '--pride-yellow': color3,
+        '--pride-green': color4,
+        '--pride-blue': color5,
+        '--pride-purple': color6
       };
     }
     
