@@ -146,8 +146,6 @@ async def test_login(body: LoginBody, response: Response):
             "is_premium": False,
             "spins_today": 0,
             "spin_streak": 0,
-            "responsiveness_score": 95.0,
-            "low_ghosting_rate": 92.0,
             "likes_received_30d": 15,
             "matches_created_30d": 8,
             "message_replies_30d": 12,
