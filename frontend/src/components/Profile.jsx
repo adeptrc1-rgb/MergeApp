@@ -332,16 +332,16 @@ export default function Profile({ user, logout }) {
                   <h3 className="text-white/80 text-[10px] md:text-xs uppercase tracking-wide mb-1.5">Interests</h3>
                   {isEditingProfile ? (
                     <div>
-                      <div className="flex flex-wrap gap-2 mb-2">
+                      <div className="flex flex-wrap gap-1.5 mb-2">
                         {editedInterests.map((interest, i) => (
                           <span 
                             key={i} 
-                            className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs text-white/70 flex items-center gap-1"
+                            className="px-2 py-0.5 md:px-3 md:py-1 rounded-full bg-white/10 border border-white/10 text-[10px] md:text-xs text-white/70 flex items-center gap-1"
                           >
                             {interest}
                             <button
                               onClick={() => removeInterest(interest)}
-                              className="text-red-400 hover:text-red-300 ml-1"
+                              className="text-red-400 hover:text-red-300"
                             >
                               ×
                             </button>
@@ -355,34 +355,34 @@ export default function Profile({ user, logout }) {
                           onChange={(e) => setNewInterest(e.target.value)}
                           onKeyPress={(e) => e.key === 'Enter' && addInterest()}
                           placeholder="Add interest..."
-                          className="flex-1 bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
+                          className="flex-1 bg-white/5 border border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-white text-xs md:text-sm focus:outline-none focus:border-purple-400"
                         />
                         <button
                           onClick={addInterest}
-                          className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                          className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm transition-colors"
                         >
                           Add
                         </button>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {user.interests && user.interests.length > 0 ? (
                         user.interests.map((interest, i) => (
-                          <span key={i} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs text-white/70">
+                          <span key={i} className="px-2 py-0.5 md:px-3 md:py-1 rounded-full bg-white/10 border border-white/10 text-[10px] md:text-xs text-white/70">
                             {interest}
                           </span>
                         ))
                       ) : (
-                        <span className="text-white/40 text-sm italic">No interests added yet</span>
+                        <span className="text-white/40 text-xs md:text-sm italic">No interests added yet</span>
                       )}
                     </div>
                   )}
                 </div>
 
                 {/* Bio / About Me */}
-                <div className="mb-3">
-                  <h3 className="text-white/80 text-xs uppercase tracking-wide mb-2">About Me</h3>
+                <div className="mb-2">
+                  <h3 className="text-white/80 text-[10px] md:text-xs uppercase tracking-wide mb-1.5">About Me</h3>
                   {isEditingProfile ? (
                     <textarea
                       value={editedBio}
