@@ -278,10 +278,10 @@ export default function Profile({ user, logout }) {
         <div className="max-w-4xl mx-auto px-6 py-6">
           {/* Profile Header */}
           <div className="bg-white/5 rounded-2xl p-4 md:p-8 border border-white/10 mb-6">
-            <div className="flex items-start gap-6">
-              <div className="relative flex-shrink-0">
+            <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
+              <div className="relative flex-shrink-0 mx-auto md:mx-0">
                 <div
-                  className="w-32 h-32 rounded-2xl bg-cover bg-center border-2 border-white/20 bg-gradient-to-br from-purple-500/20 to-pink-500/20"
+                  className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-cover bg-center border-2 border-white/20 bg-gradient-to-br from-purple-500/20 to-pink-500/20"
                   style={{ backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'none' }}
                 >
                   {!user.photos?.[0] && (
