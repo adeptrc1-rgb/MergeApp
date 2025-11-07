@@ -263,15 +263,31 @@
   animation: rainbow-gradient 3s ease infinite;
 }
 
-/* Rainbow pulse for Pride Light */
-@keyframes rainbow-pulse {
-  0%, 100% {
-    opacity: 0.9;
-    transform: scale(1);
+/* Pride Strobe Effect - Cycles through pride colors */
+@keyframes pride-strobe {
+  0%, 16.66% {
+    --pride-color: var(--pride-red);
+    filter: saturate(1.5);
   }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
+  16.67%, 33.33% {
+    --pride-color: var(--pride-orange);
+    filter: saturate(1.5);
+  }
+  33.34%, 50% {
+    --pride-color: var(--pride-yellow);
+    filter: saturate(1.5);
+  }
+  50.01%, 66.66% {
+    --pride-color: var(--pride-green);
+    filter: saturate(1.5);
+  }
+  66.67%, 83.33% {
+    --pride-color: var(--pride-blue);
+    filter: saturate(1.5);
+  }
+  83.34%, 100% {
+    --pride-color: var(--pride-purple);
+    filter: saturate(1.5);
   }
 }
 
