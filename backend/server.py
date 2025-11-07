@@ -805,6 +805,24 @@ STORE_ITEMS = [
             "nameAnimation": "neon_pulse",
             "badgeFloat": True
         }
+    },
+    {
+        "id": "skin_pride_spectrum",
+        "name": "Pride Spectrum",
+        "type": "skin",
+        "price": 1100,
+        "description": "Your name and zodiac shimmer with vibrant LGBTQ+ rainbow colors",
+        "effect": {
+            "type": "pride",
+            "overlay": "subtle_rainbow",
+            "overlayOpacity": 0.15,
+            "particles": {"type": "rainbow_sparkles", "count": 30, "float": True},
+            "textGlow": "rainbow",
+            "gradientColors": ["#e40303", "#ff8c00", "#ffed00", "#008026", "#24408e", "#732982"],
+            "nameAnimation": "rainbow_gradient",
+            "badgeFloat": True,
+            "badgeRainbow": True
+        }
     }
 ]
 
