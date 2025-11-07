@@ -334,11 +334,11 @@ export default function Profile({ user, logout }) {
                   <h3 className="text-white/80 text-[11px] md:text-xs uppercase tracking-wide mb-1">Interests</h3>
                   {isEditingProfile ? (
                     <div>
-                      <div className="flex flex-wrap gap-1.5 mb-2">
+                      <div className="flex flex-wrap gap-1 mb-2">
                         {editedInterests.map((interest, i) => (
                           <span 
                             key={i} 
-                            className="px-2 py-0.5 md:px-3 md:py-1 rounded-full bg-white/10 border border-white/10 text-[10px] md:text-xs text-white/70 flex items-center gap-1"
+                            className="px-2 py-1 md:px-3 md:py-1 rounded-full bg-white/10 border border-white/10 text-[11px] md:text-xs text-white/70 flex items-center gap-1"
                           >
                             {interest}
                             <button
@@ -361,17 +361,17 @@ export default function Profile({ user, logout }) {
                         />
                         <button
                           onClick={addInterest}
-                          className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm transition-colors"
+                          className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm transition-colors flex-shrink-0"
                         >
                           Add
                         </button>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1">
                       {user.interests && user.interests.length > 0 ? (
                         user.interests.map((interest, i) => (
-                          <span key={i} className="px-2 py-0.5 md:px-3 md:py-1 rounded-full bg-white/10 border border-white/10 text-[10px] md:text-xs text-white/70">
+                          <span key={i} className="px-2 py-1 md:px-3 md:py-1 rounded-full bg-white/10 border border-white/10 text-[11px] md:text-xs text-white/70">
                             {interest}
                           </span>
                         ))
@@ -384,7 +384,7 @@ export default function Profile({ user, logout }) {
 
                 {/* Bio / About Me */}
                 <div className="mb-2">
-                  <h3 className="text-white/80 text-[10px] md:text-xs uppercase tracking-wide mb-1.5">About Me</h3>
+                  <h3 className="text-white/80 text-[11px] md:text-xs uppercase tracking-wide mb-1">About Me</h3>
                   {isEditingProfile ? (
                     <textarea
                       value={editedBio}
