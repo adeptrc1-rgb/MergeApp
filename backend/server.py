@@ -248,7 +248,6 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
     result = []
     for u in docs:
         sign = u.get("zodiac_sign", "Gemini")
-        in_season = (sign == season)
         result.append({
             "id": u.get("id"),
             "first_name": u.get("first_name", "Star"),
@@ -264,10 +263,7 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "interests": u.get("interests", ["music", "coffee"]),
             "lifestyle_factors": u.get("lifestyle_factors", {}),
             "deal_breakers": u.get("deal_breakers", {}),
-            "preferences": u.get("preferences", {}),
-            "season_spotlight_active": in_season,
-            "season_color": SIGN_COLORS.get(sign, "#a78bfa"),
-            "season_sign": season
+            "preferences": u.get("preferences", {})
         })
     return result
 
