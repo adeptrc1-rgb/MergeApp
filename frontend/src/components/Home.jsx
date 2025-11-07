@@ -802,7 +802,7 @@ export default function Home({ user }) {
                   createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
                   handlePass();
                 }}
-                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border-2 border-white/20 hover:shadow-red-500/50"
+                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-red-500/50"
                 title="Pass"
               >
                 <X className="w-6 h-6 text-red-500" />
@@ -816,7 +816,7 @@ export default function Home({ user }) {
                   createFloatingHearts(rect.left + rect.width / 2, rect.top, 8);
                   handleLike();
                 }}
-                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border-2 border-white/20 hover:shadow-green-500/50"
+                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-green-500/50"
                 title="Like"
               >
                 <Heart className="w-6 h-6 text-green-500" />
@@ -830,7 +830,7 @@ export default function Home({ user }) {
                   createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
                   handleSuperLike();
                 }}
-                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border-2 border-white/20 hover:shadow-blue-500/50"
+                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-blue-500/50"
                 title="Super Like"
               >
                 <Star className="w-6 h-6 text-blue-500 fill-blue-500" />
