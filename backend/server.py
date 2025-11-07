@@ -343,8 +343,6 @@ async def get_trending_users(user: User = Depends(get_current_user)):
             "message_replies_30d": u.get("message_replies_30d", 0),
             "avg_match_compatibility": u.get("avg_match_compatibility", 75.0),
             "trust_score": u.get("trust_score", 85.0),
-            "responsiveness_score": u.get("responsiveness_score", 75.0),
-            "low_ghosting_rate": u.get("low_ghosting_rate", 80.0),
             "last_active_days": u.get("last_active_days", 5),
             "profile_completeness": u.get("profile_completeness", 70.0)
         }
@@ -361,7 +359,6 @@ async def get_trending_users(user: User = Depends(get_current_user)):
                 "photos": u.get("photos", []),
                 "bio": u.get("bio", ""),
                 "interests": u.get("interests", []),
-                "responsiveness_score": u.get("responsiveness_score", 75.0),
                 "trending_energy_score": energy_score,
                 "compatibility_score": randf() * 30 + 70
             })
