@@ -84,8 +84,6 @@ class User(BaseModel):
     owned_items: Optional[List[str]] = []
     active_light: Optional[str] = None
     active_skin: Optional[str] = None
-    responsiveness_score: float = 95.0
-    low_ghosting_rate: float = 90.0
     current_streak: int = 0
     last_login_date: Optional[str] = None
     streak_saver_count: int = 0
