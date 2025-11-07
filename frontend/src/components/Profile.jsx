@@ -390,11 +390,11 @@ export default function Profile({ user, logout }) {
                       value={editedBio}
                       onChange={(e) => setEditedBio(e.target.value)}
                       placeholder="Tell others about yourself..."
-                      className="w-full bg-white/5 border border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-white text-xs md:text-sm focus:outline-none focus:border-purple-400 min-h-[60px] md:min-h-[80px] resize-none"
+                      className="w-full bg-white/5 border border-white/20 rounded-lg px-2 py-1.5 md:px-3 md:py-2 text-white text-[11px] md:text-sm focus:outline-none focus:border-purple-400 min-h-[50px] md:min-h-[80px] resize-none"
                       maxLength={500}
                     />
                   ) : (
-                    <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                    <p className="text-white/70 text-[11px] md:text-sm leading-relaxed">
                       {user.bio || <span className="italic text-white/40">No bio added yet</span>}
                     </p>
                   )}
@@ -403,7 +403,7 @@ export default function Profile({ user, logout }) {
                 {isEditingProfile && (
                   <button
                     onClick={cancelEditingProfile}
-                    className="text-white/60 hover:text-white text-xs md:text-sm transition-colors"
+                    className="text-white/60 hover:text-white text-xs md:text-sm transition-colors mt-1"
                   >
                     Cancel
                   </button>
@@ -412,7 +412,7 @@ export default function Profile({ user, logout }) {
                 {user.angel_number && (
                   <div className="inline-flex items-center gap-1.5 md:gap-2 bg-white/10 px-2 py-1 md:px-4 md:py-2 rounded-full mt-2">
                     <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-purple-400" />
-                    <span className="text-white/80 text-[10px] md:text-sm">Angel Number: {user.angel_number}</span>
+                    <span className="text-white/80 text-[11px] md:text-sm">Angel Number: {user.angel_number}</span>
                   </div>
                 )}
               </div>
