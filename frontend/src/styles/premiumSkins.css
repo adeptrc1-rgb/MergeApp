@@ -262,7 +262,8 @@
   .animate-text-glow,
   .animate-text-gradient,
   .animate-text-shimmer,
-  .animate-text-neon {
+  .animate-text-neon,
+  .animate-text-rainbow {
     animation: none !important;
   }
   
