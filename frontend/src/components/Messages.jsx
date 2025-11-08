@@ -131,11 +131,27 @@ export default function Messages({ user }) {
       setCreating(true);
       const res = await axios.post(`${API}/matches/test-create`, { compatibility_score: 88 });
       if (res.data && res.data.match_id) {
+        const matchId = res.data.match_id;
         await loadConversations();
-        setCoinflipToast('✨ A new alignment has arrived. The cosmos will choose who starts.');
-        setTimeout(() => setCoinflipToast(null), 4000);
+        
+        // Create coinflip and trigger synchronized animation
+        const flipRes = await axios.post(`${API}/matches/${matchId}/coinflip`);
+        if (flipRes.data) {
+          // Get the conversation details
+          const conversation = conversations.find(c => c.id === matchId) || { user: { first_name: 'Test User' } };
+          
+          // Show synchronized cosmic flip animation
+          setFlipData({
+            matchId: matchId,
+            winnerId: flipRes.data.winner_user_id || flipRes.data.first_user_id,
+            animationStartTime: flipRes.data.animation_start_time,
+            otherUserName: conversation.user?.first_name || 'Test Match'
+          });
+          setShowSyncFlip(true);
+        }
       }
     } catch (e) {
+      console.error('Error creating test match:', e);
       alert('Unable to create match');
     } finally {
       setCreating(false);
