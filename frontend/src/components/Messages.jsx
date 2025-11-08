@@ -270,8 +270,9 @@ export default function Messages({ user }) {
       {showSyncFlip && flipData && (
         <SynchronizedCosmicFlip
           isOpen={showSyncFlip}
-          onClose={() => {
+          onClose={async () => {
             setShowSyncFlip(false);
+            await loadConversations(); // Reload to update coinflip status
             navigate(`/chat/${flipData.matchId}`);
           }}
           matchData={flipData}
