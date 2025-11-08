@@ -236,6 +236,19 @@ export default function Messages({ user }) {
       </div>
 
       <BottomNav currentTab="messages" navigate={navigate} />
+      
+      {/* Synchronized Cosmic Flip Modal */}
+      {showSyncFlip && flipData && (
+        <SynchronizedCosmicFlip
+          isOpen={showSyncFlip}
+          onClose={() => setShowSyncFlip(false)}
+          matchData={flipData}
+          currentUserId={user.id}
+          winnerId={flipData.winnerId}
+          animationStartTime={flipData.animationStartTime}
+          otherUserName={flipData.otherUserName}
+        />
+      )}
     </div>
   );
 }
