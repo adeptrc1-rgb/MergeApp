@@ -254,7 +254,10 @@ export default function Messages({ user }) {
       {showSyncFlip && flipData && (
         <SynchronizedCosmicFlip
           isOpen={showSyncFlip}
-          onClose={() => setShowSyncFlip(false)}
+          onClose={() => {
+            setShowSyncFlip(false);
+            navigate(`/chat/${flipData.matchId}`);
+          }}
           matchData={flipData}
           currentUserId={user.id}
           winnerId={flipData.winnerId}
