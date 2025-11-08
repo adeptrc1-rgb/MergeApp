@@ -219,7 +219,7 @@ export default function Messages({ user }) {
               {conversations.map((conversation) => {
                 const age = calculateAge(conversation.user.birth_date);
                 const cf = coinflipMap[conversation.id];
-                const youStart = cf?.set ? (cf.first === user.id) : null;
+                const youStart = cf?.set ? (cf.first_user_id === user.id || cf.winner_user_id === user.id) : null;
                 return (
                   <div key={conversation.id} onClick={() => openChat(conversation.id)} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group">
                     <div className="w-16 h-16 rounded-2xl bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${conversation.user.photos?.[0] || 'https://via.placeholder.com/200'})` }} />
