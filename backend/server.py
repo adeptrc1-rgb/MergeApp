@@ -363,22 +363,33 @@ async def get_trending_users(user: User = Depends(get_current_user)):
     trending_users.sort(key=lambda x: x["trending_energy_score"], reverse=True)
     return trending_users[:20]
 
-# Coinflip endpoints for matches
+# Synchronized Cosmic Coinflip endpoints
 @api_router.get("/matches/{match_id}/coinflip-status")
 async def get_coinflip_status(match_id: str, user: User = Depends(get_current_user)):
-    """Get coinflip status for a match"""
+    """Get synchronized coinflip status for a match"""
     coinflip = await db.coinflips.find_one({"match_id": match_id})
     if coinflip:
-        return {"set": True, "first": coinflip.get("first_user_id"), "second": coinflip.get("second_user_id")}
+        return {
+            "set": True,
+            "first_user_id": coinflip.get("first_user_id"),
+            "second_user_id": coinflip.get("second_user_id"),
+            "animation_start_time": coinflip.get("animation_start_time"),
+            "created_at": coinflip.get("created_at")
+        }
     return {"set": False}
 
 @api_router.post("/matches/{match_id}/coinflip")
 async def create_coinflip(match_id: str, user: User = Depends(get_current_user)):
-    """Create a coinflip to determine who messages first"""
+    """Create a synchronized coinflip with animation timing"""
     # Check if coinflip already exists
     existing = await db.coinflips.find_one({"match_id": match_id})
     if existing:
-        return {"first": existing.get("first_user_id"), "second": existing.get("second_user_id")}
+        return {
+            "first_user_id": existing.get("first_user_id"),
+            "second_user_id": existing.get("second_user_id"),
+            "animation_start_time": existing.get("animation_start_time"),
+            "winner_user_id": existing.get("first_user_id")
+        }
     
     # Get match details to find both users
     match = await db.matches.find_one({"id": match_id})
@@ -388,30 +399,48 @@ async def create_coinflip(match_id: str, user: User = Depends(get_current_user))
         users = [user.id, "other_user_" + str(uuid.uuid4())]
         random.shuffle(users)
         
+        # Schedule animation to start 2 seconds from now for sync
+        animation_start = now_utc() + timedelta(seconds=2)
+        
         coinflip = {
             "id": str(uuid.uuid4()),
             "match_id": match_id,
             "first_user_id": users[0],
             "second_user_id": users[1],
+            "animation_start_time": animation_start.isoformat(),
             "created_at": now_utc().isoformat()
         }
         await db.coinflips.insert_one(coinflip)
-        return {"first": users[0], "second": users[1]}
+        return {
+            "first_user_id": users[0],
+            "second_user_id": users[1],
+            "animation_start_time": animation_start.isoformat(),
+            "winner_user_id": users[0]
+        }
     
     # Randomly determine who goes first
     import random
     users = [match.get("user1_id"), match.get("user2_id")]
     random.shuffle(users)
     
+    # Schedule animation to start 2 seconds from now for sync
+    animation_start = now_utc() + timedelta(seconds=2)
+    
     coinflip = {
         "id": str(uuid.uuid4()),
         "match_id": match_id,
         "first_user_id": users[0],
         "second_user_id": users[1],
+        "animation_start_time": animation_start.isoformat(),
         "created_at": now_utc().isoformat()
     }
     await db.coinflips.insert_one(coinflip)
-    return {"first": users[0], "second": users[1]}
+    return {
+        "first_user_id": users[0],
+        "second_user_id": users[1],
+        "animation_start_time": animation_start.isoformat(),
+        "winner_user_id": users[0]
+    }
 
 @api_router.get("/matches/{match_id}/messages")
 async def get_match_messages(match_id: str, user: User = Depends(get_current_user)):
