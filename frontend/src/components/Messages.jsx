@@ -82,10 +82,16 @@ export default function Messages({ user }) {
             if (!c.lastMessage || c.lastMessage === 'Start the conversation!') {
               const res = await axios.post(`${API}/matches/${c.id}/coinflip`);
               if (res.data) {
-                updatedMap[c.id] = { set: true, first: res.data.first, second: res.data.second };
-                const youStart = res.data.first === user.id;
-                setCoinflipToast(youStart ? 'The stars chose you to begin this connection.' : 'Your match will open the conversation first — the cosmos has spoken.');
-                setTimeout(() => setCoinflipToast(null), 4000);
+                updatedMap[c.id] = { set: true, first: res.data.first_user_id, second: res.data.second_user_id };
+                
+                // Show synchronized cosmic flip animation
+                setFlipData({
+                  matchId: c.id,
+                  winnerId: res.data.winner_user_id,
+                  animationStartTime: res.data.animation_start_time,
+                  otherUserName: c.otherUser?.first_name || 'Your Match'
+                });
+                setShowSyncFlip(true);
               }
             }
           }
