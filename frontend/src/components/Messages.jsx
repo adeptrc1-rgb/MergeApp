@@ -15,6 +15,8 @@ export default function Messages({ user }) {
   const [loading, setLoading] = useState(true);
   const [coinflipMap, setCoinflipMap] = useState({});
   const [coinflipToast, setCoinflipToast] = useState(null);
+  const [showSyncFlip, setShowSyncFlip] = useState(false);
+  const [flipData, setFlipData] = useState(null);
   const [creating, setCreating] = useState(false);
 
   useEffect(() => {
