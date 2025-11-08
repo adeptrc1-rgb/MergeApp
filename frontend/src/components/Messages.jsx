@@ -104,7 +104,23 @@ export default function Messages({ user }) {
   };
 
   const openChat = (matchId) => {
-    navigate(`/chat/${matchId}`);
+    const conversation = conversations.find(c => c.id === matchId);
+    const cf = coinflipMap[matchId];
+    
+    // Show sync flip animation if this is the first time opening a new match
+    if (cf && cf.animation_start_time && (!conversation.lastMessage || conversation.lastMessage === 'Start the conversation!')) {
+      const otherUser = conversation.user;
+      setFlipData({
+        matchId: matchId,
+        winnerId: cf.winner_user_id,
+        animationStartTime: cf.animation_start_time,
+        otherUserName: otherUser?.first_name || 'Your Match'
+      });
+      setShowSyncFlip(true);
+      // Don't navigate yet - wait for animation to finish
+    } else {
+      navigate(`/chat/${matchId}`);
+    }
   };
 
   // Auto-open chat when navigated with state (disabled in favor of direct /chat/:matchId navigation)
