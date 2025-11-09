@@ -50,6 +50,13 @@ export default function Home({ user }) {
   const [storeItems, setStoreItems] = useState([]);
   const [userInventory, setUserInventory] = useState(null);
   const [justSwiped, setJustSwiped] = useState(false);
+  
+  // AI Conversation Starters State
+  const [cosmicInsights, setCosmicInsights] = useState(null);
+  const [aiStarters, setAiStarters] = useState([]);
+  const [loadingAI, setLoadingAI] = useState(false);
+  const [showAIStarters, setShowAIStarters] = useState(false);
+  
   const cardRef = useRef(null);
   const likeButtonRef = useRef(null);
   const passButtonRef = useRef(null);
