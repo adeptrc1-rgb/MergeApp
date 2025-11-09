@@ -738,7 +738,7 @@ export default function Home({ user }) {
                       <span className="text-sm font-medium">{compatibility}% Compatible</span>
                     </div>
                     <button
-                      onClick={(e) => { e.stopPropagation(); setShowDropdown((prev) => !prev); }}
+                      onClick={(e) => { e.stopPropagation(); handleShowMore(currentMatch, compatibility); }}
                       className="flex items-center gap-1 text-white/80 hover:text-white transition-colors"
                     >
                       <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
