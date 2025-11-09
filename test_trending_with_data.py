@@ -14,7 +14,7 @@ import uuid
 load_dotenv('backend/.env')
 MONGO_URL = os.environ.get('MONGO_URL')
 DB_NAME = os.environ.get('DB_NAME', 'astrology_dating_db')
-BASE_URL = "https://zodiac-dating.preview.emergentagent.com"
+BASE_URL = "https://astrosign-1.preview.emergentagent.com"
 
 def now_utc():
     return datetime.now(timezone.utc)

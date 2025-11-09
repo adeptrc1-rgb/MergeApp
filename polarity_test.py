@@ -6,7 +6,7 @@ import requests
 import json
 
 def test_polarity_bonus():
-    base_url = "https://zodiac-dating.preview.emergentagent.com/api"
+    base_url = "https://astrosign-1.preview.emergentagent.com/api"
     
     # Step 1: Login
     print("🔐 Logging in...")
