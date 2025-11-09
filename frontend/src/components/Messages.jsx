@@ -101,26 +101,24 @@ export default function Messages({ user }) {
     setLoading(false);
   };
 
-  const openChat = (matchId) => {
+  const openChat = async (matchId) => {
     const conversation = conversations.find(c => c.id === matchId);
     const cf = coinflipMap[matchId];
     
-    // Show sync flip animation if this is the first time opening a new match
-    if (cf && cf.animation_start_time && (!conversation.lastMessage || conversation.lastMessage === 'Start the conversation!')) {
-      const otherUser = conversation.user;
-      setFlipData({
-        matchId: matchId,
-        winnerId: cf.winner_user_id,
-        animationStartTime: cf.animation_start_time,
-        otherUserName: otherUser?.first_name || 'Your Match',
-        currentUserZodiac: user.zodiac_sign || 'Leo',
-        otherUserZodiac: otherUser?.zodiac_sign || 'Aries'
-      });
-      setShowSyncFlip(true);
-      // Don't navigate yet - wait for animation to finish
-    } else {
-      navigate(`/chat/${matchId}`);
+    // If coinflip not set yet, trigger it with simple loading
+    if (!cf || !cf.set) {
+      setOpeningChat(true);
+      try {
+        await axios.post(`${API}/matches/${matchId}/coinflip`);
+        await loadConversations(); // Reload to update coinflip status
+      } catch (e) {
+        console.error('Coinflip error:', e);
+      }
+      setOpeningChat(false);
     }
+    
+    // Navigate directly to chat
+    navigate(`/chat/${matchId}`);
   };
 
   // Auto-open chat when navigated with state (disabled in favor of direct /chat/:matchId navigation)
