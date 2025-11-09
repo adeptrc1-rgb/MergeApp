@@ -860,6 +860,24 @@ STORE_ITEMS = [
             "badgeFloat": True,
             "badgeRainbow": True
         }
+    },
+    {
+        "id": "skin_autism_spectrum",
+        "name": "Autism Spectrum",
+        "type": "skin",
+        "price": 1100,
+        "description": "Your name and zodiac shine with autism awareness colors",
+        "effect": {
+            "type": "autism",
+            "overlay": "subtle_puzzle",
+            "overlayOpacity": 0.15,
+            "particles": {"type": "puzzle_sparkles", "count": 25, "float": True},
+            "textGlow": "autism",
+            "gradientColors": ["#0066cc", "#ffd700", "#22c55e", "#ef4444"],
+            "nameAnimation": "autism_gradient",
+            "badgeFloat": True,
+            "puzzleGlow": True
+        }
     }
 ]
 
