@@ -114,7 +114,9 @@ export default function Messages({ user }) {
         matchId: matchId,
         winnerId: cf.winner_user_id,
         animationStartTime: cf.animation_start_time,
-        otherUserName: otherUser?.first_name || 'Your Match'
+        otherUserName: otherUser?.first_name || 'Your Match',
+        currentUserZodiac: user.zodiac_sign || 'Leo',
+        otherUserZodiac: otherUser?.zodiac_sign || 'Aries'
       });
       setShowSyncFlip(true);
       // Don't navigate yet - wait for animation to finish
