@@ -254,23 +254,14 @@ export default function Messages({ user }) {
 
       <BottomNav currentTab="messages" navigate={navigate} />
       
-      {/* Synchronized Cosmic Flip Modal */}
-      {showSyncFlip && flipData && (
-        <SynchronizedCosmicFlip
-          isOpen={showSyncFlip}
-          onClose={async () => {
-            setShowSyncFlip(false);
-            await loadConversations(); // Reload to update coinflip status
-            navigate(`/chat/${flipData.matchId}`);
-          }}
-          matchData={flipData}
-          currentUserId={user.id}
-          winnerId={flipData.winnerId}
-          animationStartTime={flipData.animationStartTime}
-          otherUserName={flipData.otherUserName}
-          currentUserZodiac={flipData.currentUserZodiac}
-          otherUserZodiac={flipData.otherUserZodiac}
-        />
+      {/* Simple loading overlay when opening chat */}
+      {openingChat && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="text-center">
+            <Sparkles className="w-12 h-12 text-purple-400 animate-spin mx-auto mb-4" />
+            <p className="text-white/60 text-lg">Opening chat...</p>
+          </div>
+        </div>
       )}
     </div>
   );
