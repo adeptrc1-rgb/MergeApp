@@ -379,7 +379,8 @@
   .animate-text-gradient,
   .animate-text-shimmer,
   .animate-text-neon,
-  .animate-text-rainbow {
+  .animate-text-rainbow,
+  .animate-text-autism {
     animation: none !important;
   }
   
