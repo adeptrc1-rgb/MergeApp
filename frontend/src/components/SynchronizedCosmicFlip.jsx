@@ -331,6 +331,44 @@ export default function SynchronizedCosmicFlip({
           50% { text-shadow: 0 0 30px currentColor, 0 0 60px currentColor; }
         }
         
+        @keyframes zodiac-glow-pulse {
+          0%, 100% { 
+            box-shadow: 0 0 40px rgba(168, 85, 247, 0.6), 0 0 80px rgba(168, 85, 247, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1);
+            transform: scale(1);
+          }
+          50% { 
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.9), 0 0 120px rgba(168, 85, 247, 0.6), inset 0 0 40px rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+          }
+        }
+        
+        @keyframes constellation-spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes vs-pulse {
+          0%, 100% { 
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% { 
+            transform: scale(1.1);
+            opacity: 0.9;
+          }
+        }
+        
+        @keyframes sparkle-orbit {
+          0%, 100% { 
+            opacity: 0.3;
+            transform: rotate(var(--angle, 0deg)) translateX(50px) scale(1);
+          }
+          50% { 
+            opacity: 1;
+            transform: rotate(var(--angle, 0deg)) translateX(55px) scale(1.2);
+          }
+        }
+        
         .animate-float-up { animation: float-up 4s ease-out infinite; }
         .animate-cosmic-reveal { animation: cosmic-reveal 1s ease-out; }
         .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
