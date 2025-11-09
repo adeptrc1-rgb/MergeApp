@@ -47,6 +47,7 @@ export default function Home({ user }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [storeItems, setStoreItems] = useState([]);
   const [userInventory, setUserInventory] = useState(null);
+  const [justSwiped, setJustSwiped] = useState(false);
   const cardRef = useRef(null);
   const likeButtonRef = useRef(null);
   const passButtonRef = useRef(null);
