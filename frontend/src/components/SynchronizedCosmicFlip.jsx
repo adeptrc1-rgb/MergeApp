@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Star, Zap } from 'lucide-react';
+import ConstellationIcon from './ConstellationIcon';
 
 const ANIMATION_PHASES = {
   MATCH_REVEAL: { duration: 2000, label: "IT'S A COSMIC ALIGNMENT!" },
