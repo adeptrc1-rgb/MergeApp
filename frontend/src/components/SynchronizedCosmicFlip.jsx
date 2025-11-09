@@ -104,16 +104,92 @@ export default function SynchronizedCosmicFlip({
       )}
 
       <div className="relative max-w-md w-full">
-        {/* Phase 1: Match Reveal */}
+        {/* Phase 1: Match Reveal - Zodiac Versus */}
         {currentPhase === 'match_reveal' && (
           <div className="text-center animate-cosmic-reveal">
-            <h1 className="text-4xl font-light text-white mb-8 animate-pulse-glow">
+            <h1 className="text-3xl font-light text-white mb-8 animate-pulse-glow">
               {ANIMATION_PHASES.MATCH_REVEAL.label}
             </h1>
-            <div className="flex items-center justify-center gap-6 mb-6">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 border-2 border-white/30 animate-float-slow" />
-              <Sparkles className="w-8 h-8 text-purple-400 animate-spin-slow" />
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border-2 border-white/30 animate-float-slow" />
+            
+            {/* Zodiac VS Display */}
+            <div className="flex items-center justify-center gap-8 mb-6">
+              {/* Current User Zodiac */}
+              <div className="relative group">
+                <div 
+                  className="w-32 h-32 rounded-full flex items-center justify-center animate-float-slow relative"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(219, 39, 119, 0.3) 100%)',
+                    boxShadow: '0 0 40px rgba(168, 85, 247, 0.6), 0 0 80px rgba(168, 85, 247, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1)',
+                    border: '2px solid rgba(168, 85, 247, 0.5)',
+                    animation: 'zodiac-glow-pulse 2s ease-in-out infinite'
+                  }}
+                >
+                  <ConstellationIcon 
+                    sign={currentUserZodiac.toLowerCase()} 
+                    className="w-20 h-20 text-white"
+                    style={{
+                      filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(168, 85, 247, 1))',
+                      animation: 'constellation-spin 4s linear infinite'
+                    }}
+                  />
+                </div>
+                {/* Zodiac Name */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                  <span className="text-white font-medium text-sm tracking-wider">{currentUserZodiac.toUpperCase()}</span>
+                </div>
+              </div>
+
+              {/* VS Text */}
+              <div className="relative">
+                <div 
+                  className="text-6xl font-bold text-white animate-pulse-glow"
+                  style={{
+                    textShadow: '0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(168, 85, 247, 0.6), 0 0 60px rgba(219, 39, 119, 0.4)',
+                    animation: 'vs-pulse 1s ease-in-out infinite'
+                  }}
+                >
+                  VS
+                </div>
+                {/* Sparkle effects around VS */}
+                {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+                  <div
+                    key={i}
+                    className="absolute top-1/2 left-1/2"
+                    style={{
+                      transform: `rotate(${angle}deg) translateX(50px)`,
+                      animation: `sparkle-orbit ${2 + i * 0.1}s ease-in-out infinite`
+                    }}
+                  >
+                    <Star className="w-3 h-3 text-yellow-400" fill="currentColor" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Other User Zodiac */}
+              <div className="relative group">
+                <div 
+                  className="w-32 h-32 rounded-full flex items-center justify-center animate-float-slow relative"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%)',
+                    boxShadow: '0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.1)',
+                    border: '2px solid rgba(59, 130, 246, 0.5)',
+                    animation: 'zodiac-glow-pulse 2s ease-in-out infinite 0.5s'
+                  }}
+                >
+                  <ConstellationIcon 
+                    sign={otherUserZodiac.toLowerCase()} 
+                    className="w-20 h-20 text-white"
+                    style={{
+                      filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(59, 130, 246, 1))',
+                      animation: 'constellation-spin 4s linear infinite reverse'
+                    }}
+                  />
+                </div>
+                {/* Zodiac Name */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                  <span className="text-white font-medium text-sm tracking-wider">{otherUserZodiac.toUpperCase()}</span>
+                </div>
+              </div>
             </div>
           </div>
         )}
