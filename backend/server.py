@@ -766,6 +766,14 @@ STORE_ITEMS = [
         "description": "Celebrate love and identity with vibrant LGBTQ+ pride colors",
         "effect": {"type": "aurora", "colors": ["#e40303", "#ff8c00", "#ffed00", "#008026", "#24408e", "#732982"], "intensity": "vibrant"}
     },
+    {
+        "id": "light_autism_awareness",
+        "name": "Autism Awareness",
+        "type": "light",
+        "price": 450,
+        "description": "Support autism awareness with puzzle piece colors",
+        "effect": {"type": "aurora", "colors": ["#0066cc", "#ffd700", "#22c55e", "#ef4444"], "intensity": "awareness"}
+    },
     
     # Premium Skins - Overlay-based themes (no borders/frames)
     {
