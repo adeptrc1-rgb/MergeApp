@@ -263,6 +263,56 @@
   animation: rainbow-gradient 3s ease infinite;
 }
 
+/* Autism Strobe Effect - Cycles through autism awareness colors */
+@keyframes autism-strobe {
+  0%, 25% {
+    box-shadow: 
+      0 0 40px #0066cc,
+      0 0 60px #0066cc,
+      0 0 90px #0066cc,
+      0 0 120px #0066cc80;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  25.01%, 50% {
+    box-shadow: 
+      0 0 40px #ffd700,
+      0 0 60px #ffd700,
+      0 0 90px #ffd700,
+      0 0 120px #ffd70080;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  50.01%, 75% {
+    box-shadow: 
+      0 0 40px #22c55e,
+      0 0 60px #22c55e,
+      0 0 90px #22c55e,
+      0 0 120px #22c55e80;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  75.01%, 100% {
+    box-shadow: 
+      0 0 40px #ef4444,
+      0 0 60px #ef4444,
+      0 0 90px #ef4444,
+      0 0 120px #ef444480;
+    filter: saturate(1.5) brightness(1.1);
+  }
+}
+
+/* Autism text gradient animation */
+@keyframes autism-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-text-autism {
+  animation: autism-gradient 3s ease infinite;
+}
+
 /* Pride Strobe Effect - Cycles through pride colors */
 @keyframes pride-strobe {
   0%, 16.66% {
