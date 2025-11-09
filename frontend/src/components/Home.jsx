@@ -19,6 +19,7 @@ import {
   createFloatingHearts
 } from '../utils/particleEffects';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
+import '../styles/swipeButtons.css';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api`;
