@@ -140,14 +140,16 @@ export default function Messages({ user }) {
         const flipRes = await axios.post(`${API}/matches/${matchId}/coinflip`);
         if (flipRes.data) {
           // Get the conversation details
-          const conversation = conversations.find(c => c.id === matchId) || { user: { first_name: 'Test User' } };
+          const conversation = conversations.find(c => c.id === matchId) || { user: { first_name: 'Test User', zodiac_sign: 'Aries' } };
           
           // Show synchronized cosmic flip animation
           setFlipData({
             matchId: matchId,
             winnerId: flipRes.data.winner_user_id || flipRes.data.first_user_id,
             animationStartTime: flipRes.data.animation_start_time,
-            otherUserName: conversation.user?.first_name || 'Test Match'
+            otherUserName: conversation.user?.first_name || 'Test Match',
+            currentUserZodiac: user.zodiac_sign || 'Leo',
+            otherUserZodiac: conversation.user?.zodiac_sign || 'Aries'
           });
           setShowSyncFlip(true);
         }
