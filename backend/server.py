@@ -986,4 +986,90 @@ async def activate_item(body: ActivateBody, user: User = Depends(get_current_use
         "message": f"Activated {item['name']}"
     }
 
+# ==================== AI CONVERSATION STARTERS ====================
+
+class AIStarterRequest(BaseModel):
+    prompt: str
+    currentUser: Dict[str, Any]
+    matchUser: Dict[str, Any]
+    cosmicInsights: Dict[str, Any]
+
+@api_router.post("/ai/conversation-starters")
+async def generate_conversation_starters(body: AIStarterRequest, request: Request):
+    """
+    Generate AI-powered conversation starters using OpenAI GPT-4
+    """
+    try:
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
+        
+        # Get API key from environment
+        api_key = os.environ.get("EMERGENT_LLM_KEY")
+        if not api_key:
+            raise HTTPException(status_code=500, detail="AI service not configured")
+        
+        # Create unique session ID for this request
+        session_id = f"ai_starters_{uuid.uuid4()}"
+        
+        # Initialize LLM chat with GPT-4o-mini (fast and cost-effective)
+        chat = LlmChat(
+            api_key=api_key,
+            session_id=session_id,
+            system_message="You are a witty, astrology-savvy dating coach."
+        ).with_model("openai", "gpt-4o-mini")
+        
+        # Create user message with the prompt
+        user_message = UserMessage(text=body.prompt)
+        
+        # Send message and get response
+        response = await chat.send_message(user_message)
+        
+        # Parse the response to extract 3 starters
+        starters = []
+        lines = response.strip().split('\n')
+        
+        for line in lines:
+            line = line.strip()
+            # Remove numbering like "1.", "2.", "3."
+            if line and (line[0].isdigit() or line.startswith('-')):
+                # Remove leading number/dash and dot
+                cleaned = line.lstrip('0123456789.-) ').strip()
+                if cleaned and len(cleaned) > 10:  # Valid starter
+                    starters.append(cleaned)
+        
+        # Ensure we have exactly 3 starters
+        if len(starters) < 3:
+            # Fallback starters if parsing failed
+            match_name = body.matchUser.get('name', 'there')
+            match_sign = body.matchUser.get('sign', 'sign')
+            starters = [
+                f"Hey {match_name}! Fellow {match_sign}—what's your cosmic vibe today? ✨",
+                f"Your {match_sign} energy is fascinating—what makes you you? 🌙",
+                f"The stars suggest we'd vibe well—coffee to explore this? ☕"
+            ]
+        
+        # Return only first 3
+        starters = starters[:3]
+        
+        return {
+            "success": True,
+            "starters": starters,
+            "model": "gpt-4o-mini"
+        }
+        
+    except Exception as e:
+        print(f"AI generation error: {e}")
+        # Return fallback starters on any error
+        match_name = body.matchUser.get('name', 'there')
+        match_sign = body.matchUser.get('sign', 'sign')
+        
+        return {
+            "success": True,
+            "starters": [
+                f"Hey {match_name}! Your {match_sign} energy caught my attention ✨",
+                f"Fellow cosmic explorer—what's your story? 🌙",
+                f"The universe brought us here—let's see where this goes ⭐"
+            ],
+            "model": "fallback"
+        }
+
 app.include_router(api_router)
