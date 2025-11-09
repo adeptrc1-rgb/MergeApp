@@ -860,6 +860,75 @@ export default function Home({ user }) {
                           <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
                         </div>
                       )}
+
+                      {/* Cosmic Insights */}
+                      {cosmicInsights && (
+                        <div className="mt-6 pt-6 border-t border-white/10 space-y-4">
+                          <div className="cosmic-connection bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl p-4 border border-purple-500/20">
+                            <h3 className="text-white/90 text-sm font-medium mb-3 flex items-center gap-2">
+                              <Sparkles className="w-4 h-4 text-purple-400" />
+                              Cosmic Connection
+                            </h3>
+                            <div className="space-y-3 text-white/80 text-sm">
+                              <p className="leading-relaxed">{cosmicInsights.compatibilityInsight}</p>
+                              <p className="leading-relaxed italic text-white/70">{cosmicInsights.elementalInsight}</p>
+                              <div className="flex items-center gap-2 text-xs text-purple-300">
+                                <span className="px-2 py-1 bg-purple-500/20 rounded-full">{cosmicInsights.element1}</span>
+                                <span>+</span>
+                                <span className="px-2 py-1 bg-pink-500/20 rounded-full">{cosmicInsights.element2}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* AI Conversation Starters */}
+                      {showAIStarters && (
+                        <div className="mt-4 space-y-3">
+                          <div className="flex items-center justify-between">
+                            <h3 className="text-white/90 text-sm font-medium flex items-center gap-2">
+                              <Zap className="w-4 h-4 text-yellow-400" />
+                              AI Conversation Starters
+                            </h3>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); regenerateStarters(); }}
+                              disabled={loadingAI}
+                              className="text-xs text-purple-400 hover:text-purple-300 disabled:opacity-50"
+                            >
+                              {loadingAI ? 'Generating...' : 'Generate More'}
+                            </button>
+                          </div>
+                          
+                          {loadingAI ? (
+                            <div className="flex items-center justify-center py-8">
+                              <Sparkles className="w-6 h-6 text-purple-400 animate-spin" />
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              {aiStarters.map((starter, index) => (
+                                <div
+                                  key={index}
+                                  className="bg-white/5 border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all group"
+                                >
+                                  <p className="text-white/90 text-sm mb-2 leading-relaxed">{starter}</p>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      trackStarterUsed(currentMatch.id, index, starter);
+                                      // Navigate to chat with pre-filled message
+                                      navigate(`/chat/${currentMatch.id}`, { state: { messageText: starter } });
+                                    }}
+                                    className="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                  >
+                                    <MessageCircle className="w-3 h-3" />
+                                    Send This Message
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
