@@ -766,7 +766,7 @@ export default function Home({ user }) {
           {/* Action Buttons */}
           {!showDropdown && (
             <div
-              className="w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0"
+              className={`swipe-buttons-container w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0 ${justSwiped ? 'after-swipe' : ''}`}
               style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)' }}
             >
               {/* Undo */}
@@ -777,10 +777,10 @@ export default function Home({ user }) {
                   handleUndo();
                 }}
                 disabled={swipeHistory.length === 0}
-                className="bg-white/10 backdrop-blur-md rounded-full p-3.5 hover:bg-white/20 active:scale-95 transition-all border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-xl"
+                className="swipe-button undo rounded-full p-3.5 shadow-xl"
                 title="Undo"
               >
-                <RotateCcw className="w-5 h-5 text-yellow-400" />
+                <RotateCcw className="w-5 h-5 text-white" />
               </button>
 
               {/* Pass */}
@@ -791,10 +791,10 @@ export default function Home({ user }) {
                   createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
                   handlePass();
                 }}
-                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-red-500/50"
+                className="swipe-button pass rounded-full p-4 shadow-xl"
                 title="Pass"
               >
-                <X className="w-6 h-6 text-red-500" />
+                <X className="w-6 h-6 text-white" />
               </button>
 
               {/* Like */}
@@ -805,10 +805,10 @@ export default function Home({ user }) {
                   createFloatingHearts(rect.left + rect.width / 2, rect.top, 8);
                   handleLike();
                 }}
-                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-green-500/50"
+                className={`swipe-button like rounded-full p-4 shadow-xl ${compatibility >= 85 ? 'high-compatibility' : ''}`}
                 title="Like"
               >
-                <Heart className="w-6 h-6 text-green-500" />
+                <Heart className="icon-heart w-6 h-6 text-white" />
               </button>
 
               {/* Super Like */}
@@ -819,19 +819,19 @@ export default function Home({ user }) {
                   createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
                   handleSuperLike();
                 }}
-                className="bg-white/10 backdrop-blur-md rounded-full p-4 hover:bg-white/20 hover:scale-110 active:scale-95 transition-all shadow-xl border border-white/20 hover:shadow-blue-500/50"
+                className={`swipe-button super rounded-full p-4 shadow-xl ${compatibility < 50 ? 'low-compatibility' : ''}`}
                 title="Super Like"
               >
-                <Star className="w-6 h-6 text-blue-500 fill-blue-500" />
+                <Star className="icon-star w-6 h-6 text-white fill-white" />
               </button>
 
               {/* Direct Message */}
               <button
                 onClick={(e) => { createFloatingSign(e.currentTarget); handleDirectMessage(); }}
-                className="bg-white/10 backdrop-blur-md rounded-full p-3.5 hover:bg-white/20 active:scale-95 transition-all shadow-xl hover:scale-110 border border-white/20 hover:shadow-purple-500/50"
+                className="swipe-button message rounded-full p-3.5 shadow-xl"
                 title="Direct Message"
               >
-                <MessageCircle className="w-5 h-5 text-purple-400" />
+                <MessageCircle className="icon-message w-5 h-5 text-white" />
               </button>
             </div>
           )}
