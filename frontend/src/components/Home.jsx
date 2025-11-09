@@ -86,6 +86,92 @@ export default function Home({ user }) {
     }
   };
 
+  // Generate cosmic insights and AI starters
+  const generateInsightsAndStarters = async (matchUser, compatibilityScore) => {
+    try {
+      // Generate cosmic insights from templates
+      const insights = generateCosmicInsights(
+        user.zodiac_sign || 'Leo',
+        matchUser.zodiac_sign || 'Aries',
+        compatibilityScore
+      );
+      setCosmicInsights(insights);
+      
+      // Generate AI conversation starters
+      setLoadingAI(true);
+      const starters = await generateAIConversationStarters(
+        {
+          id: user.id,
+          first_name: user.first_name,
+          age: calculateAge(user.birth_date),
+          zodiac_sign: user.zodiac_sign,
+          interests: user.interests,
+          bio: user.bio
+        },
+        {
+          id: matchUser.id,
+          first_name: matchUser.first_name,
+          age: calculateAge(matchUser.birth_date),
+          zodiac_sign: matchUser.zodiac_sign,
+          interests: matchUser.interests,
+          bio: matchUser.bio
+        },
+        insights
+      );
+      setAiStarters(starters);
+      setShowAIStarters(true);
+    } catch (error) {
+      console.error('Error generating insights:', error);
+    } finally {
+      setLoadingAI(false);
+    }
+  };
+
+  // Handle "Show more" toggle
+  const handleShowMore = (matchUser, compatibilityScore) => {
+    const newState = !showDropdown;
+    setShowDropdown(newState);
+    
+    // Generate insights when expanding
+    if (newState && !cosmicInsights) {
+      generateInsightsAndStarters(matchUser, compatibilityScore);
+    }
+  };
+  
+  // Regenerate AI starters
+  const regenerateStarters = async () => {
+    if (!currentMatch || !cosmicInsights) return;
+    
+    setLoadingAI(true);
+    try {
+      const starters = await generateAIConversationStarters(
+        {
+          id: user.id,
+          first_name: user.first_name,
+          age: calculateAge(user.birth_date),
+          zodiac_sign: user.zodiac_sign,
+          interests: user.interests,
+          bio: user.bio
+        },
+        {
+          id: currentMatch.id,
+          first_name: currentMatch.first_name,
+          age: calculateAge(currentMatch.birth_date),
+          zodiac_sign: currentMatch.zodiac_sign,
+          interests: currentMatch.interests,
+          bio: currentMatch.bio
+        },
+        cosmicInsights,
+        true // Force new generation
+      );
+      setAiStarters(starters);
+    } catch (error) {
+      console.error('Error regenerating starters:', error);
+    } finally {
+      setLoadingAI(false);
+    }
+  };
+
   // Add touch event listener with passive: false to allow preventDefault
   useEffect(() => {
     const card = cardRef.current;
