@@ -17,7 +17,9 @@ export default function SynchronizedCosmicFlip({
   currentUserId,
   winnerId,
   animationStartTime,
-  otherUserName = "Your Match"
+  otherUserName = "Your Match",
+  currentUserZodiac = "Leo",
+  otherUserZodiac = "Aries"
 }) {
   const [currentPhase, setCurrentPhase] = useState('waiting');
   const [coinRotation, setCoinRotation] = useState(0);
