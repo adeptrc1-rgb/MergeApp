@@ -92,5 +92,23 @@ export default function AnimatedProfileText({ children, animationType, glowColor
     );
   }
 
+  // Autism awareness gradient animation
+  if (animationType === 'autism_gradient') {
+    return (
+      <span 
+        className={`${className} animate-text-autism`}
+        style={{
+          background: 'linear-gradient(90deg, #0066cc 0%, #ffd700 33%, #22c55e 66%, #ef4444 100%, #0066cc 133%)',
+          backgroundSize: '200% auto',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
+
   return <span className={className}>{children}</span>;
 }
