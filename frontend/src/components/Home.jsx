@@ -148,10 +148,12 @@ export default function Home({ user }) {
       console.error('Error liking:', error);
     }
 
+    setJustSwiped(true);
     setTimeout(() => {
       setCurrentIndex(currentIndex + 1);
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
+      setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
   };
 
@@ -181,10 +183,12 @@ export default function Home({ user }) {
       console.error('Error super liking:', error);
     }
 
+    setJustSwiped(true);
     setTimeout(() => {
       setCurrentIndex(currentIndex + 1);
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
+      setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
   };
 
@@ -207,10 +211,12 @@ export default function Home({ user }) {
       console.error('Error passing:', error);
     }
 
+    setJustSwiped(true);
     setTimeout(() => {
       setCurrentIndex(currentIndex + 1);
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
+      setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
   };
 
