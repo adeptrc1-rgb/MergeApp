@@ -21,6 +21,13 @@ export default function LightEffectRenderer({ lightEffect }) {
       };
     }
     
+    // Special handling for Autism Awareness (4 colors) - Strobe effect
+    if (intensity === 'awareness' && colors && colors.length === 4) {
+      return {
+        animation: 'autism-strobe 2.4s linear infinite'
+      };
+    }
+    
     // Standard aurora (3 colors)
     return {
       boxShadow: `
