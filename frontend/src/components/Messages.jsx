@@ -284,6 +284,8 @@ export default function Messages({ user }) {
           winnerId={flipData.winnerId}
           animationStartTime={flipData.animationStartTime}
           otherUserName={flipData.otherUserName}
+          currentUserZodiac={flipData.currentUserZodiac}
+          otherUserZodiac={flipData.otherUserZodiac}
         />
       )}
     </div>
