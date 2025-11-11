@@ -580,16 +580,14 @@ export default function Home({ user }) {
                   ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                   : swipeDirection ? undefined : 'translate(0, 0)',
                 transition: isDragging ? 'none' : 'transform 0.3s ease-out',
-                // Apply light effect if user has active light, otherwise use zodiac glow
+                // Apply light effect ONLY if user has purchased and activated a light
                 ...(userInventory?.active_light && (() => {
                   const activeLight = storeItems.find(item => item.id === userInventory.active_light);
                   if (activeLight?.effect) {
                     return LightEffectRenderer({ lightEffect: activeLight.effect });
                   }
                   return {};
-                })() || {
-                  boxShadow: `0 0 40px ${getZodiacTheme(currentMatch.zodiac_sign).accentColor}40, 0 0 80px ${getZodiacTheme(currentMatch.zodiac_sign).accentColor}20`
-                })
+                })())
               }}
             >
               {/* Swipe Overlay Labels */}
