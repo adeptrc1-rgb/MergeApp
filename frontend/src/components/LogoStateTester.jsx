@@ -14,32 +14,32 @@ const LogoStateTester = () => {
     {
       name: 'default',
       label: 'Default',
-      color: '#FFFFFF',
-      description: 'Static white dot'
+      color: '#f8fafc',
+      description: 'Normal browsing'
+    },
+    {
+      name: 'connected',
+      label: 'Connected',
+      color: '#22c55e',
+      description: 'Unread messages (persistent)'
     },
     {
       name: 'highMatch',
       label: 'High Match',
-      color: '#a855f7',
-      description: '85%+ compatibility (3s)'
+      color: '#f59e0b',
+      description: '85%+ compatibility (4.5s)'
     },
     {
       name: 'newMatch',
       label: 'New Match',
-      color: '#fbbf24',
-      description: 'Mutual match confirmed (10s)'
+      color: '#a855f7',
+      description: 'Mutual match confirmed (5s)'
     },
     {
-      name: 'superLike',
-      label: 'Super Like',
-      color: '#60a5fa',
-      description: 'Super Like sent (4s)'
-    },
-    {
-      name: 'highEnergy',
-      label: 'High Energy',
-      color: '#22c55e',
-      description: 'High engagement (persistent)'
+      name: 'peakEnergy',
+      label: 'Peak Energy',
+      color: '#3b82f6',
+      description: 'High engagement period (persistent)'
     }
   ];
 
