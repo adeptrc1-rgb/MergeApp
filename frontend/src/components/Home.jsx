@@ -1005,10 +1005,10 @@ export default function Home({ user }) {
                   handleUndo();
                 }}
                 disabled={swipeHistory.length === 0}
-                className="swipe-button undo rounded-full p-3.5 shadow-xl"
+                className="swipe-button undo rounded-full p-4 md:p-5 shadow-xl"
                 title="Undo"
               >
-                <RotateCcw className="w-5 h-5 text-white" />
+                <RotateCcw className="w-6 h-6 md:w-7 md:h-7 text-white" />
               </button>
 
               {/* Pass */}
@@ -1019,10 +1019,10 @@ export default function Home({ user }) {
                   createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
                   handlePass();
                 }}
-                className="swipe-button pass rounded-full p-4 shadow-xl"
+                className="swipe-button pass rounded-full p-5 md:p-6 shadow-xl"
                 title="Pass"
               >
-                <X className="w-6 h-6 text-white" />
+                <X className="w-7 h-7 md:w-8 md:h-8 text-white" />
               </button>
 
               {/* Like */}
@@ -1033,10 +1033,10 @@ export default function Home({ user }) {
                   createFloatingHearts(rect.left + rect.width / 2, rect.top, 8);
                   handleLike();
                 }}
-                className={`swipe-button like rounded-full p-4 shadow-xl ${compatibility >= 85 ? 'high-compatibility' : ''}`}
+                className={`swipe-button like rounded-full p-5 md:p-6 shadow-xl ${compatibility >= 85 ? 'high-compatibility' : ''}`}
                 title="Like"
               >
-                <Heart className="icon-heart w-6 h-6 text-white" />
+                <Heart className="icon-heart w-7 h-7 md:w-8 md:h-8 text-white" />
               </button>
 
               {/* Super Like */}
@@ -1047,10 +1047,10 @@ export default function Home({ user }) {
                   createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
                   handleSuperLike();
                 }}
-                className={`swipe-button super rounded-full p-4 shadow-xl ${compatibility < 50 ? 'low-compatibility' : ''}`}
+                className={`swipe-button super rounded-full p-5 md:p-6 shadow-xl ${compatibility < 50 ? 'low-compatibility' : ''}`}
                 title="Super Like"
               >
-                <Star className="icon-star w-6 h-6 text-white fill-white" />
+                <Star className="icon-star w-7 h-7 md:w-8 md:h-8 text-white fill-white" />
               </button>
 
               {/* Boost */}
@@ -1060,10 +1060,10 @@ export default function Home({ user }) {
                   createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
                   handleBoost(); 
                 }}
-                className="swipe-button boost rounded-full p-3.5 shadow-xl"
+                className="swipe-button boost rounded-full p-4 md:p-5 shadow-xl"
                 title="Boost Profile"
               >
-                <Zap className="icon-boost w-5 h-5 text-white" />
+                <Zap className="icon-boost w-6 h-6 md:w-7 md:h-7 text-white" />
               </button>
             </div>
           )}
