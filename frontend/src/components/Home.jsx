@@ -576,18 +576,34 @@ export default function Home({ user }) {
           {/* Logo on the left */}
           <CosmeLogo size="md" iconOnly={true} enableStates={true} />
           
-          {/* Messages icon on the right */}
+          {/* Messages icon on the right - Elegant design */}
           <button
             onClick={() => navigate('/messages')}
-            className="relative p-2 hover:bg-white/10 rounded-full transition-all"
+            className="relative group"
             title="Messages"
           >
-            <MessageCircle className="w-6 h-6 text-white" />
-            {unreadCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-                {unreadCount > 9 ? '9+' : unreadCount}
-              </span>
-            )}
+            {/* Elegant container with gradient border */}
+            <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-2.5 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group-hover:scale-105">
+              <MessageCircle className="w-5 h-5 text-white/90 group-hover:text-white transition-colors" />
+              
+              {/* Elegant notification badge */}
+              {unreadCount > 0 && (
+                <div className="absolute -top-1.5 -right-1.5">
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-md opacity-60 animate-pulse" />
+                  
+                  {/* Badge */}
+                  <div className="relative bg-gradient-to-r from-red-500 to-pink-600 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center border border-red-400/50 shadow-lg">
+                    {unreadCount > 9 ? '9+' : unreadCount}
+                  </div>
+                </div>
+              )}
+              
+              {/* Subtle shine effect on hover */}
+              <div className="absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              </div>
+            </div>
           </button>
         </div>
       </div>
