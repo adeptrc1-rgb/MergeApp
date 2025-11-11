@@ -47,6 +47,11 @@
   transform: scale(1.1);
 }
 
+.swipe-button.pass:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.6));
+  stroke-width: 2;
+}
+
 .swipe-button.pass:not(:disabled):active {
   animation: pulse-red 0.3s ease-out;
 }
