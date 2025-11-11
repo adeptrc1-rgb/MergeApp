@@ -1,11 +1,20 @@
 /**
  * Cosme Logo Component
  * Minimalist wordmark with orbital dot icon
+ * Supports icon-only mode and state-based animations
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import logoStateManager from '../utils/logoStateManager';
+import '../styles/logoStates.css';
 
-const CosmeLogo = ({ className = '', size = 'md', showGradient = true }) => {
+const CosmeLogo = ({ 
+  className = '', 
+  size = 'md', 
+  showGradient = true, 
+  iconOnly = false,
+  enableStates = false
+}) => {
   // Size configurations
   const sizes = {
     sm: { height: 24, iconSize: 16, fontSize: 'text-base', gap: 8 },
