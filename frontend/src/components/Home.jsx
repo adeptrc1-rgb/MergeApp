@@ -77,6 +77,11 @@ export default function Home({ user }) {
     loadMatches();
     loadTodayHoroscope();
     loadStoreData();
+    loadUnreadCount();
+    
+    // Refresh unread count every 30 seconds
+    const interval = setInterval(loadUnreadCount, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const loadStoreData = async () => {
