@@ -22,6 +22,7 @@ import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 import { generateCosmicInsights } from '../utils/cosmicTemplates';
 import { generateAIConversationStarters, trackStarterUsed } from '../services/aiConversationService';
 import CosmeLogo from './CosmeLogo';
+import LogoStateTester from './LogoStateTester';
 import { updateLogoState } from '../utils/logoStateManager';
 import '../styles/swipeButtons.css';
 
