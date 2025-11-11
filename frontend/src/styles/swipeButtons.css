@@ -166,6 +166,33 @@
   }
 }
 
+/* Tier 2: Boost Button - Power action */
+.swipe-button.boost:not(:disabled):hover {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.4);
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.3);
+  transform: scale(1.1);
+}
+
+.swipe-button.boost:not(:disabled):active .icon-boost {
+  animation: boost-flash 0.4s ease-out;
+}
+
+@keyframes boost-flash {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.3);
+    filter: brightness(1.5) drop-shadow(0 0 8px rgba(234, 179, 8, 0.8));
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
 /* After swipe: Encourage next action */
 .swipe-buttons-container.after-swipe .swipe-button:not(:disabled) {
   animation: encourage-pulse 1.5s ease-in-out 1;
