@@ -92,6 +92,15 @@ export default function Home({ user }) {
     }
   };
 
+  const loadUnreadCount = async () => {
+    try {
+      const response = await axios.get(`${API}/messages/unread-count`);
+      setUnreadCount(response.data.unread_count || 0);
+    } catch (error) {
+      console.error('Error loading unread count:', error);
+    }
+  };
+
   // Generate cosmic insights and AI starters
   const generateInsightsAndStarters = async (matchUser, compatibilityScore) => {
     try {
