@@ -7,6 +7,7 @@ import BottomNav from './BottomNav';
 import ConstellationIcon from './ConstellationIcon';
 import PremiumSkinRenderer from './PremiumSkinRenderer';
 import TarotStreakCard from './TarotStreakCard';
+import CosmeLogo from './CosmeLogo';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 import '../styles/tarotCard.css';
 
