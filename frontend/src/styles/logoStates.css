@@ -105,34 +105,15 @@
 
 /* ==================== ORBITAL RING STATES ==================== */
 
-/* Match ring color to dot for strong states */
-.logo-ring-highMatch {
-  stroke: #a855f7;
-  animation: logo-glow 1s ease-in-out infinite;
-  transition: stroke 0.3s ease;
-}
-
-.logo-ring-newMatch {
-  stroke: #fbbf24;
-  animation: logo-pulse 1.5s ease-in-out infinite;
-  transition: stroke 0.3s ease;
-}
-
-.logo-ring-superLike {
-  stroke: #60a5fa;
-  animation: logo-sparkle 2s ease-in-out infinite;
-  transition: stroke 0.3s ease;
-}
-
-.logo-ring-highEnergy {
-  stroke: #22c55e;
-  animation: logo-breathe 3s ease-in-out infinite;
-  transition: stroke 0.3s ease;
-}
-
+/* Orbital ring stays WHITE and STATIC in all states */
+.logo-ring-highMatch,
+.logo-ring-newMatch,
+.logo-ring-superLike,
+.logo-ring-highEnergy,
 .logo-ring-default {
   stroke: #FFFFFF;
-  transition: stroke 0.3s ease;
+  transition: none;
+  animation: none;
 }
 
 /* ==================== ACCESSIBILITY ==================== */
