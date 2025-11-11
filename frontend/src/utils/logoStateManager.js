@@ -3,6 +3,8 @@
  * Centralized system for managing logo dot states and animations
  */
 
+import React from 'react';
+
 class LogoStateManager {
   constructor() {
     this.currentState = 'default';
