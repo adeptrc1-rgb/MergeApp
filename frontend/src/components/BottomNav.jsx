@@ -7,7 +7,6 @@ export default function BottomNav({ currentTab, navigate }) {
     { id: 'home', icon: HomeIcon, label: 'Home', path: '/home' },
     { id: 'discover', icon: Sparkles, label: 'Discover', path: '/discover' },
     { id: 'messages', icon: MessageCircle, label: 'Messages', path: '/messages' },
-    { id: 'connections', icon: Users, label: 'Connect', path: '/connections' },
     { id: 'profile', icon: Star, label: 'Profile', path: '/profile' },
   ];
   return (
