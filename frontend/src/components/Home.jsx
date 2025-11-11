@@ -222,6 +222,12 @@ export default function Home({ user }) {
     setSwipeDirection('right');
     setShowDropdown(false);
 
+    // Trigger logo state for high compatibility
+    const compatibility = Math.round(currentMatch.compatibility_score || 70);
+    if (compatibility >= 85) {
+      updateLogoState('highMatch');
+    }
+
     if (cardRef.current) {
       const rect = cardRef.current.getBoundingClientRect();
       const x = rect.right - 50;
@@ -236,6 +242,8 @@ export default function Home({ user }) {
       await axios.post(`${API}/users/like/${currentMatch.id}`);
       const matchResponse = await axios.get(`${API}/users/check-match/${currentMatch.id}`);
       if (matchResponse.data.is_match) {
+        // Trigger new match logo state
+        updateLogoState('newMatch');
         createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
         setTimeout(() => {
           alert(`🎉 It's a match! You and ${currentMatch.first_name} both liked each other!`);
