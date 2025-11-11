@@ -73,6 +73,11 @@
   transform: scale(1.1);
 }
 
+.swipe-button.like:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.6));
+  stroke-width: 2;
+}
+
 .swipe-button.like:not(:disabled):active .icon-heart {
   animation: heart-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
