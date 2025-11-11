@@ -1043,13 +1043,17 @@ export default function Home({ user }) {
                 <Star className="icon-star w-6 h-6 text-white fill-white" />
               </button>
 
-              {/* Direct Message */}
+              {/* Boost */}
               <button
-                onClick={(e) => { createFloatingSign(e.currentTarget); handleDirectMessage(); }}
-                className="swipe-button message rounded-full p-3.5 shadow-xl"
-                title="Direct Message"
+                onClick={(e) => { 
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
+                  handleBoost(); 
+                }}
+                className="swipe-button boost rounded-full p-3.5 shadow-xl"
+                title="Boost Profile"
               >
-                <MessageCircle className="icon-message w-5 h-5 text-white" />
+                <Zap className="icon-boost w-5 h-5 text-white" />
               </button>
             </div>
           )}
