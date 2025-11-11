@@ -320,11 +320,19 @@ export default function Profile({ user, logout }) {
                   </button>
                 </div>
                 
-                <div className="flex items-center gap-2 text-white/60 mb-2">
-                  <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white text-xs md:text-sm">
-                    {zodiacSymbol(user.zodiac_sign)}
+                <div className="flex items-center gap-3 text-white/60 mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white text-xs md:text-sm">
+                      {zodiacSymbol(user.zodiac_sign)}
+                    </div>
+                    <span className="text-xs md:text-lg">{user.zodiac_sign}</span>
                   </div>
-                  <span className="text-xs md:text-lg">{user.zodiac_sign}</span>
+                  
+                  {/* Coin Balance */}
+                  <div className="flex items-center gap-1.5 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 px-2 md:px-3 py-1 rounded-full border border-yellow-500/30">
+                    <Coins className="w-3 h-3 md:w-4 md:h-4 text-yellow-400" />
+                    <span className="text-xs md:text-sm font-medium text-yellow-300">{user.star_coins || 0}</span>
+                  </div>
                 </div>
 
                 {/* Interests */}
