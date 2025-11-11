@@ -355,26 +355,29 @@ export default function Home({ user }) {
     }, 300);
   };
 
-  const handleDirectMessage = async () => {
+  const handleBoost = async () => {
     if (!currentMatch) return;
-    if ((user.direct_messages || 0) <= 0) {
-      alert('No direct messages remaining! Spin the cosmic wheel or match with someone to get more.');
+    if ((user.profile_boosts || 0) <= 0) {
+      alert('No boosts remaining! Spin the cosmic wheel or claim your daily streak to get more.');
       return;
     }
-    if (likeButtonRef.current) {
-      createFloatingSign(likeButtonRef.current);
+    
+    // Visual effect
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      createStarburstEffect(x, y);
+      createSparkleTrail(x, y);
     }
+    
     try {
-      const response = await axios.post(`${API}/users/direct-message/${currentMatch.id}`);
-      if (response.data.success) {
-        await axios.post(`${API}/users/use-direct-message`);
-        const matchId = String(response.data.match_id);
-        // Navigate to Messages within app shell and open the conversation inline
-        navigate(`/messages?chat=${encodeURIComponent(matchId)}`);
-      }
+      // Use profile boost to increase visibility
+      await axios.post(`${API}/users/use-boost`, { target_user_id: currentMatch.id });
+      alert(`⚡ Boosted! Your profile will be shown to ${currentMatch.first_name} with higher priority.`);
     } catch (error) {
-      console.error('Error sending direct message:', error);
-      alert('Failed to send direct message. Please try again.');
+      console.error('Error using boost:', error);
+      alert('Failed to use boost. Please try again.');
     }
   };
 
