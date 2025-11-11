@@ -622,14 +622,14 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center bg-gradient-to-b from-black via-purple-900/20 to-black pt-8 px-4 pb-20">
+      <div className="flex-1 flex flex-col items-center bg-gradient-to-b from-black via-purple-900/20 to-black pt-4 md:pt-8 px-4 pb-32 md:pb-20">
         <div className="w-full max-w-md relative flex flex-col space-y-4">
           <div 
             className="w-full"
             style={{ 
               perspective: '1000px',
-              height: showDropdown ? '78vh' : '68vh',
-              maxHeight: showDropdown ? '720px' : '620px'
+              height: showDropdown ? '78vh' : '62vh',
+              maxHeight: showDropdown ? '720px' : '560px'
             }}
           >
             <div 
