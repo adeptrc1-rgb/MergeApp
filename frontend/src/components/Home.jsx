@@ -24,6 +24,7 @@ import { generateAIConversationStarters, trackStarterUsed } from '../services/ai
 import CosmeLogo from './CosmeLogo';
 import LogoStateTester from './LogoStateTester';
 import { updateLogoState } from '../utils/logoStateManager';
+import logoStateManager from '../utils/logoStateManager';
 import '../styles/swipeButtons.css';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
