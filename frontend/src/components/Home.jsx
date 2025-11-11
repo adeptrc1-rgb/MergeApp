@@ -542,26 +542,8 @@ export default function Home({ user }) {
 
       {/* Header */}
       <div className="border-b border-white/10 bg-black flex-shrink-0">
-        <div className="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between">
-          {todayHoroscope ? (
-            <button 
-              onClick={() => setShowHoroscopeModal(true)}
-              className="hover:scale-110 transition-transform cursor-pointer"
-              title="View today's horoscope"
-            >
-              <ConstellationIcon sign={todayHoroscope.constellation} className="w-7 h-7" />
-            </button>
-          ) : (
-            <div className="w-7 h-7 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-purple-400 animate-pulse" />
-            </div>
-          )}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 text-purple-400">
-              <Star className="w-4 h-4" />
-              <span className="text-sm">{user.zodiac_sign}</span>
-            </div>
-          </div>
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-center">
+          <CosmeLogo size="md" showGradient={true} />
         </div>
       </div>
 
