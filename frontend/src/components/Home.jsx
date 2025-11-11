@@ -305,9 +305,6 @@ export default function Home({ user }) {
     setSwipeDirection('up');
     setShowDropdown(false);
 
-    // Trigger superLike logo state
-    updateLogoState('superLike');
-
     if (cardRef.current) {
       const rect = cardRef.current.getBoundingClientRect();
       const x = rect.left + rect.width / 2;
