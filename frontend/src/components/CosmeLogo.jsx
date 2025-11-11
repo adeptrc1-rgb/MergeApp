@@ -39,6 +39,16 @@ const CosmeLogo = ({
   const endX = center + orbitRadius * Math.cos((endAngle * Math.PI) / 180);
   const endY = center + orbitRadius * Math.sin((endAngle * Math.PI) / 180);
 
+  // State management for animated dot
+  const [logoState, setLogoState] = useState('default');
+
+  useEffect(() => {
+    if (enableStates) {
+      const unsubscribe = logoStateManager.subscribe(setLogoState);
+      return unsubscribe;
+    }
+  }, [enableStates]);
+
   return (
     <div className={`flex items-center ${className}`} style={{ gap: `${config.gap}px` }}>
       {/* Orbital Dot Icon */}
