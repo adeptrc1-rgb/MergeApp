@@ -542,7 +542,7 @@ export default function Home({ user }) {
 
       {/* Header */}
       <div className="border-b border-white/10 bg-black flex-shrink-0">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-center">
+        <div className="max-w-4xl mx-auto px-4 py-3">
           <CosmeLogo size="md" showGradient={true} />
         </div>
       </div>
