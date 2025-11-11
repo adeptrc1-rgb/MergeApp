@@ -30,6 +30,11 @@
   transform: scale(1.1);
 }
 
+.swipe-button.undo:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.6));
+  stroke-width: 2;
+}
+
 .swipe-button.undo:not(:disabled):active {
   box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
 }
