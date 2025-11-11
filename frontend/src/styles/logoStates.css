@@ -1,0 +1,173 @@
+/**
+ * Logo State Animations
+ * State-based visual feedback for the Cosme orbital dot
+ */
+
+/* ==================== KEYFRAME ANIMATIONS ==================== */
+
+/* Pulse Animation - For newMatch state */
+@keyframes logo-pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.15);
+  }
+}
+
+/* Glow Animation - For highMatch state */
+@keyframes logo-glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 4px #a855f7) drop-shadow(0 0 8px #ec4899);
+  }
+  50% { 
+    filter: drop-shadow(0 0 12px #a855f7) drop-shadow(0 0 20px #ec4899);
+  }
+}
+
+/* Breathing Animation - For highEnergy state */
+@keyframes logo-breathe {
+  0%, 100% { 
+    filter: drop-shadow(0 0 3px #22c55e);
+    opacity: 1;
+  }
+  50% { 
+    filter: drop-shadow(0 0 8px #22c55e) drop-shadow(0 0 12px #22c55e);
+    opacity: 0.9;
+  }
+}
+
+/* Sparkle Animation - For superLike state */
+@keyframes logo-sparkle {
+  0%, 100% { 
+    filter: drop-shadow(0 0 6px #60a5fa) brightness(1);
+    transform: rotate(0deg);
+  }
+  25% { 
+    filter: drop-shadow(0 0 12px #60a5fa) brightness(1.3);
+  }
+  50% { 
+    filter: drop-shadow(0 0 16px #60a5fa) brightness(1.5);
+    transform: rotate(5deg);
+  }
+  75% { 
+    filter: drop-shadow(0 0 12px #60a5fa) brightness(1.3);
+  }
+}
+
+/* Gentle Idle Animation - Subtle movement for default state */
+@keyframes logo-idle {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-1px);
+  }
+}
+
+/* ==================== STATE CLASSES ==================== */
+
+/* Default State - Static white or subtle idle */
+.logo-dot-default {
+  fill: #FFFFFF;
+  transition: all 0.3s ease;
+}
+
+.logo-dot-default:hover {
+  animation: logo-idle 3s ease-in-out infinite;
+}
+
+/* High Match State - Intense purple-pink glow */
+.logo-dot-highMatch {
+  fill: #a855f7;
+  animation: logo-glow 1s ease-in-out infinite;
+  transition: fill 0.3s ease;
+}
+
+/* New Match State - Golden yellow pulse */
+.logo-dot-newMatch {
+  fill: #fbbf24;
+  animation: logo-pulse 1.5s ease-in-out infinite;
+  transition: fill 0.3s ease;
+}
+
+/* Super Like State - Electric blue with sparkle */
+.logo-dot-superLike {
+  fill: #60a5fa;
+  animation: logo-sparkle 2s ease-in-out infinite;
+  transition: fill 0.3s ease;
+}
+
+/* High Energy State - Gentle green breathing */
+.logo-dot-highEnergy {
+  fill: #22c55e;
+  animation: logo-breathe 3s ease-in-out infinite;
+  transition: fill 0.3s ease;
+}
+
+/* ==================== ORBITAL RING STATES ==================== */
+
+/* Match ring color to dot for strong states */
+.logo-ring-highMatch {
+  stroke: #a855f7;
+  animation: logo-glow 1s ease-in-out infinite;
+  transition: stroke 0.3s ease;
+}
+
+.logo-ring-newMatch {
+  stroke: #fbbf24;
+  animation: logo-pulse 1.5s ease-in-out infinite;
+  transition: stroke 0.3s ease;
+}
+
+.logo-ring-superLike {
+  stroke: #60a5fa;
+  animation: logo-sparkle 2s ease-in-out infinite;
+  transition: stroke 0.3s ease;
+}
+
+.logo-ring-highEnergy {
+  stroke: #22c55e;
+  animation: logo-breathe 3s ease-in-out infinite;
+  transition: stroke 0.3s ease;
+}
+
+.logo-ring-default {
+  stroke: #FFFFFF;
+  transition: stroke 0.3s ease;
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .logo-dot-default,
+  .logo-dot-highMatch,
+  .logo-dot-newMatch,
+  .logo-dot-superLike,
+  .logo-dot-highEnergy,
+  .logo-ring-highMatch,
+  .logo-ring-newMatch,
+  .logo-ring-superLike,
+  .logo-ring-highEnergy {
+    animation: none !important;
+  }
+  
+  /* Keep color changes but remove motion */
+  .logo-dot-default:hover {
+    animation: none !important;
+  }
+}
+
+/* ==================== CONTAINER STYLES ==================== */
+
+/* Ensure smooth transitions on the SVG container */
+.logo-icon-container {
+  transition: transform 0.2s ease;
+}
+
+.logo-icon-container:active {
+  transform: scale(0.95);
+}
