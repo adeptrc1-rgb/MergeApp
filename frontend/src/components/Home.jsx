@@ -1008,7 +1008,7 @@ export default function Home({ user }) {
                 className="swipe-button undo rounded-full p-4 md:p-5 shadow-xl"
                 title="Undo"
               >
-                <RotateCcw className="w-6 h-6 md:w-7 md:h-7 text-white" />
+                <RotateCcw className="w-6 h-6 md:w-7 md:h-7 text-white transition-all" strokeWidth={1.5} />
               </button>
 
               {/* Pass */}
@@ -1022,7 +1022,7 @@ export default function Home({ user }) {
                 className="swipe-button pass rounded-full p-5 md:p-6 shadow-xl"
                 title="Pass"
               >
-                <X className="w-7 h-7 md:w-8 md:h-8 text-white" />
+                <X className="w-7 h-7 md:w-8 md:h-8 text-white transition-all" strokeWidth={1.5} />
               </button>
 
               {/* Like */}
@@ -1036,7 +1036,7 @@ export default function Home({ user }) {
                 className={`swipe-button like rounded-full p-5 md:p-6 shadow-xl ${compatibility >= 85 ? 'high-compatibility' : ''}`}
                 title="Like"
               >
-                <Heart className="icon-heart w-7 h-7 md:w-8 md:h-8 text-white" />
+                <Heart className="icon-heart w-7 h-7 md:w-8 md:h-8 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
 
               {/* Super Like */}
@@ -1050,7 +1050,7 @@ export default function Home({ user }) {
                 className={`swipe-button super rounded-full p-5 md:p-6 shadow-xl ${compatibility < 50 ? 'low-compatibility' : ''}`}
                 title="Super Like"
               >
-                <Star className="icon-star w-7 h-7 md:w-8 md:h-8 text-white fill-white" />
+                <Star className="icon-star w-7 h-7 md:w-8 md:h-8 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
 
               {/* Boost */}
@@ -1063,7 +1063,7 @@ export default function Home({ user }) {
                 className="swipe-button boost rounded-full p-4 md:p-5 shadow-xl"
                 title="Boost Profile"
               >
-                <Zap className="icon-boost w-6 h-6 md:w-7 md:h-7 text-white" />
+                <Zap className="icon-boost w-6 h-6 md:w-7 md:h-7 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
             </div>
           )}
