@@ -776,24 +776,18 @@ export default function Home({ user }) {
                     </span>
                   </div>
 
-                  {/* Compatibility Score - Prominent Pill Badge */}
-                  <div className="flex flex-col items-center gap-2 mb-3">
-                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-md px-5 py-2.5 rounded-full border border-purple-400/40 shadow-lg">
-                      <Sparkles className="w-4 h-4 text-purple-300" />
-                      <span className="text-base font-semibold text-white tracking-wide">{compatibility}% Compatible</span>
+                  {/* Compatibility + toggle */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                      <Zap className="w-3.5 h-3.5 text-purple-400" />
+                      <span className="text-sm font-medium">{compatibility}% Compatible</span>
                     </div>
-                    
-                    {/* Show More/Less - Simple Chevron */}
                     <button
                       onClick={(e) => { e.stopPropagation(); handleShowMore(currentMatch, compatibility); }}
-                      className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 transition-all hover:scale-110"
-                      title={showDropdown ? 'Show less' : 'Show more'}
+                      className="flex items-center gap-1 text-white/80 hover:text-white transition-colors"
                     >
-                      {showDropdown ? (
-                        <ChevronUp className="w-5 h-5 text-white/80" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5 text-white/80" />
-                      )}
+                      <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
+                      {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
                     </button>
                   </div>
 
