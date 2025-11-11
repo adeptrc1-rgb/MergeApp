@@ -194,6 +194,11 @@
   transform: scale(1.1);
 }
 
+.swipe-button.boost:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.6));
+  stroke-width: 2;
+}
+
 .swipe-button.boost:not(:disabled):active .icon-boost {
   animation: boost-flash 0.4s ease-out;
 }
