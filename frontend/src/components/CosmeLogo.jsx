@@ -83,11 +83,16 @@ const CosmeLogo = ({
       {/* Wordmark - Hidden in icon-only mode */}
       {!iconOnly && (
         <span
-          className={`font-light tracking-wide ${config.fontSize}`}
+          className={`${config.fontSize}`}
           style={{
-            fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+            fontWeight: 300,
             color: '#FFFFFF',
-            letterSpacing: '0.05em'
+            letterSpacing: '0.15em',
+            textTransform: 'lowercase',
+            fontFeatureSettings: '"ss01" 1',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale'
           }}
         >
           cosme
