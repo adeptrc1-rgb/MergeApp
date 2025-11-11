@@ -40,16 +40,6 @@ const CosmeLogo = ({ className = '', size = 'md', showGradient = true }) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Define gradient for the central dot (optional) */}
-        {showGradient && (
-          <defs>
-            <linearGradient id="cosmeDotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#a855f7" /> {/* Purple */}
-              <stop offset="100%" stopColor="#ec4899" /> {/* Pink */}
-            </linearGradient>
-          </defs>
-        )}
-
         {/* 3/4 Orbital Ring - incomplete circle with gap at top */}
         <path
           d={`M ${startX} ${startY} A ${orbitRadius} ${orbitRadius} 0 1 1 ${endX} ${endY}`}
@@ -59,12 +49,12 @@ const CosmeLogo = ({ className = '', size = 'md', showGradient = true }) => {
           strokeLinecap="round"
         />
 
-        {/* Central Celestial Dot */}
+        {/* Central Celestial Dot - Pure White */}
         <circle
           cx={center}
           cy={center}
           r={dotRadius}
-          fill={showGradient ? "url(#cosmeDotGradient)" : "#FFFFFF"}
+          fill="#FFFFFF"
         />
       </svg>
 
