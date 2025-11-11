@@ -12,7 +12,7 @@ class LogoStateManager {
     this.stateTimeout = null;
     this.listeners = new Set();
     
-    // State configuration
+    // State configuration with priority: highMatch > newMatch > connected > peakEnergy > default
     this.stateConfig = {
       default: {
         persistent: true,
@@ -21,23 +21,23 @@ class LogoStateManager {
       },
       highMatch: {
         persistent: false,
-        priority: 3,
-        duration: 3000
+        priority: 5, // Highest priority
+        duration: 4500 // 4.5 seconds
       },
       newMatch: {
         persistent: false,
-        priority: 5,
-        duration: 10000
-      },
-      superLike: {
-        persistent: false,
         priority: 4,
-        duration: 4000
+        duration: 5000 // 5 seconds
       },
-      highEnergy: {
+      connected: {
+        persistent: true,
+        priority: 2,
+        duration: null // Persistent - stays until unread messages are cleared
+      },
+      peakEnergy: {
         persistent: true,
         priority: 1,
-        duration: null
+        duration: null // Persistent
       }
     };
   }
