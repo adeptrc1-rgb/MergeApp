@@ -61,9 +61,9 @@
 
 /* ==================== STATE CLASSES ==================== */
 
-/* Default State - Static white or subtle idle */
+/* Default State - Clean white */
 .logo-dot-default {
-  fill: #FFFFFF;
+  fill: #f8fafc;
   transition: fill 0.3s ease;
 }
 
@@ -71,33 +71,33 @@
   animation: logo-idle 3s ease-in-out infinite;
 }
 
-/* High Match State - Intense purple-pink glow - DOT ONLY */
-.logo-dot-highMatch {
-  fill: #a855f7;
-  animation: logo-glow 1.2s ease-in-out infinite;
-  transition: fill 0.3s ease;
-  transform-origin: center;
-}
-
-/* New Match State - Golden yellow pulse - DOT ONLY */
-.logo-dot-newMatch {
-  fill: #fbbf24;
-  animation: logo-pulse 1.5s ease-in-out infinite;
-  transition: fill 0.3s ease;
-  transform-origin: center;
-}
-
-/* Super Like State - Electric blue with sparkle - DOT ONLY */
-.logo-dot-superLike {
-  fill: #60a5fa;
-  animation: logo-sparkle 1.8s ease-in-out infinite;
-  transition: fill 0.3s ease;
-  transform-origin: center;
-}
-
-/* High Energy State - Gentle green breathing - DOT ONLY */
-.logo-dot-highEnergy {
+/* Connected State - Green with gentle continuous glow - DOT ONLY */
+.logo-dot-connected {
   fill: #22c55e;
+  animation: logo-glow 2s ease-in-out infinite;
+  transition: fill 0.3s ease;
+  transform-origin: center;
+}
+
+/* High Match State - Gold with sparkle burst - DOT ONLY */
+.logo-dot-highMatch {
+  fill: #f59e0b;
+  animation: logo-sparkle 0.5s ease-out;
+  transition: fill 0.3s ease;
+  transform-origin: center;
+}
+
+/* New Match State - Brand purple with energetic pulse - DOT ONLY */
+.logo-dot-newMatch {
+  fill: #a855f7;
+  animation: logo-pulse 1s ease-in-out infinite;
+  transition: fill 0.3s ease;
+  transform-origin: center;
+}
+
+/* Peak Energy State - Blue with slow breathing - DOT ONLY */
+.logo-dot-peakEnergy {
+  fill: #3b82f6;
   animation: logo-breathe 3s ease-in-out infinite;
   transition: fill 0.3s ease;
   transform-origin: center;
