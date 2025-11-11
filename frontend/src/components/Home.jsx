@@ -23,9 +23,11 @@ import { generateCosmicInsights } from '../utils/cosmicTemplates';
 import { generateAIConversationStarters, trackStarterUsed } from '../services/aiConversationService';
 import CosmeLogo from './CosmeLogo';
 import LogoStateTester from './LogoStateTester';
+import CosmicStarfield from './CosmicStarfield';
 import { updateLogoState } from '../utils/logoStateManager';
 import logoStateManager from '../utils/logoStateManager';
 import '../styles/swipeButtons.css';
+import '../styles/cosmicStarfield.css';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api`;
