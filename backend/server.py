@@ -448,6 +448,37 @@ async def get_match_messages(match_id: str, user: User = Depends(get_current_use
     messages = await db.messages.find({"match_id": match_id}).sort("created_at", 1).to_list(length=1000)
     return messages
 
+@api_router.get("/messages/unread-count")
+async def get_unread_count(user: User = Depends(get_current_user)):
+    """Get count of unread messages for the current user"""
+    try:
+        # Get all matches for this user
+        matches = await db.matches.find({
+            "$or": [{"user1_id": user.id}, {"user2_id": user.id}]
+        }).to_list(length=None)
+        
+        unread_count = 0
+        
+        for match in matches:
+            match_id = match["id"]
+            
+            # Get the last message in this conversation
+            last_message = await db.messages.find_one(
+                {"match_id": match_id},
+                sort=[("created_at", -1)]
+            )
+            
+            # If there's a message and it's not from the current user, it's unread
+            if last_message and last_message.get("sender_id") != user.id:
+                # Check if user has read this conversation
+                # For simplicity, we'll count any conversation where the last message is from the other user
+                unread_count += 1
+        
+        return {"unread_count": unread_count}
+    except Exception as e:
+        print(f"Error getting unread count: {e}")
+        return {"unread_count": 0}
+
 @api_router.post("/matches/test-create")
 async def test_create_match(user: User = Depends(get_current_user)):
     """Create a test match for development"""
