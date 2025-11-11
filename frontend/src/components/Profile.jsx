@@ -236,11 +236,8 @@ export default function Profile({ user, logout }) {
       {/* Header */}
       <div className="border-b border-white/10 bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-4 py-2">
-          <div className="flex items-center justify-between mb-2">
-            <img src="/asign-logo.png" alt="A Sign" className="h-8" />
-            <button onClick={() => navigate('/settings')} className="text-white/60 hover:text-white transition-colors">
-              <Settings className="w-5 h-5" />
-            </button>
+          <div className="flex items-center justify-between mb-4">
+            <CosmeLogo size="md" showGradient={true} />
           </div>
           <h2 className="text-3xl font-light text-white">Profile</h2>
           
