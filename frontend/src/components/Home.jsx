@@ -666,11 +666,6 @@ export default function Home({ user }) {
                 </div>
               )}
 
-              {/* Cosme Logo - Top Left */}
-              <div className="absolute top-4 left-4 z-30">
-                <CosmeLogo size="sm" showGradient={false} iconOnly={false} enableStates={false} />
-              </div>
-
               {/* Photo */}
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-all duration-300"
