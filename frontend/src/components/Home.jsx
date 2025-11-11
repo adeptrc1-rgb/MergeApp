@@ -60,6 +60,9 @@ export default function Home({ user }) {
   const [loadingAI, setLoadingAI] = useState(false);
   const [showAIStarters, setShowAIStarters] = useState(false);
   
+  // Unread messages state
+  const [unreadCount, setUnreadCount] = useState(0);
+  
   const cardRef = useRef(null);
   const likeButtonRef = useRef(null);
   const passButtonRef = useRef(null);
