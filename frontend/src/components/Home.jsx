@@ -543,7 +543,7 @@ export default function Home({ user }) {
       {/* Header */}
       <div className="bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-4 py-3">
-          <CosmeLogo size="md" showGradient={true} />
+          <CosmeLogo size="md" iconOnly={true} enableStates={true} />
         </div>
       </div>
 
