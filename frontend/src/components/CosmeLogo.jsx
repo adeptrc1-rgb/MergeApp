@@ -50,9 +50,10 @@ const CosmeLogo = ({
   }, [enableStates]);
 
   return (
-    <div className={`flex items-center ${className}`} style={{ gap: `${config.gap}px` }}>
+    <div className={`flex items-center ${className}`} style={{ gap: iconOnly ? 0 : `${config.gap}px` }}>
       {/* Orbital Dot Icon */}
       <svg
+        className="logo-icon-container"
         width={iconSize}
         height={iconSize}
         viewBox={`0 0 ${iconSize} ${iconSize}`}
@@ -61,6 +62,7 @@ const CosmeLogo = ({
       >
         {/* 3/4 Orbital Ring - incomplete circle with gap at top */}
         <path
+          className={enableStates ? `logo-ring-${logoState}` : 'logo-ring-default'}
           d={`M ${startX} ${startY} A ${orbitRadius} ${orbitRadius} 0 1 1 ${endX} ${endY}`}
           stroke="#FFFFFF"
           strokeWidth={strokeWidth}
@@ -68,8 +70,9 @@ const CosmeLogo = ({
           strokeLinecap="round"
         />
 
-        {/* Central Celestial Dot - Pure White */}
+        {/* Central Celestial Dot - Pure White with State Support */}
         <circle
+          className={enableStates ? `logo-dot-${logoState}` : 'logo-dot-default'}
           cx={center}
           cy={center}
           r={dotRadius}
@@ -77,17 +80,19 @@ const CosmeLogo = ({
         />
       </svg>
 
-      {/* Wordmark */}
-      <span
-        className={`font-light tracking-wide ${config.fontSize}`}
-        style={{
-          fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-          color: '#FFFFFF',
-          letterSpacing: '0.05em'
-        }}
-      >
-        cosme
-      </span>
+      {/* Wordmark - Hidden in icon-only mode */}
+      {!iconOnly && (
+        <span
+          className={`font-light tracking-wide ${config.fontSize}`}
+          style={{
+            fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+            color: '#FFFFFF',
+            letterSpacing: '0.05em'
+          }}
+        >
+          cosme
+        </span>
+      )}
     </div>
   );
 };
