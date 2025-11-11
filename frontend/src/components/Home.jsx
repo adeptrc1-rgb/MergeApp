@@ -576,8 +576,8 @@ export default function Home({ user }) {
       {/* Header */}
       <div className="bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-          {/* Logo on the left - Full horizontal logo */}
-          <CosmeLogo size="md" iconOnly={false} enableStates={false} />
+          {/* Logo on the left */}
+          <CosmeLogo size="md" iconOnly={true} enableStates={true} />
           
           {/* Messages icon on the right - Elegant design */}
           <button
