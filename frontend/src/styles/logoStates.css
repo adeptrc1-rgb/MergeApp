@@ -5,47 +5,56 @@
 
 /* ==================== KEYFRAME ANIMATIONS ==================== */
 
-/* Pulse Animation - For newMatch state - DOT ONLY */
+/* Glow Animation - For connected state - Gentle continuous - DOT ONLY */
+@keyframes logo-glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 5px #22c55e);
+  }
+  50% { 
+    filter: drop-shadow(0 0 15px #22c55e);
+  }
+}
+
+/* Sparkle Animation - For highMatch state - Burst effect - DOT ONLY */
+@keyframes logo-sparkle {
+  0% { 
+    transform: scale(0);
+    opacity: 0;
+    filter: drop-shadow(0 0 0px #f59e0b);
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 1;
+    filter: drop-shadow(0 0 20px #f59e0b) drop-shadow(0 0 30px #f59e0b);
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 5px #f59e0b);
+  }
+}
+
+/* Pulse Animation - For newMatch state - Energetic - DOT ONLY */
 @keyframes logo-pulse {
   0%, 100% { 
     opacity: 1; 
     transform: scale(1);
   }
   50% { 
-    opacity: 0.75; 
-    transform: scale(1.2);
+    opacity: 0.8; 
+    transform: scale(1.1);
   }
 }
 
-/* Glow Animation - For highMatch state - DOT ONLY */
-@keyframes logo-glow {
-  0%, 100% { 
-    filter: drop-shadow(0 0 3px #a855f7) drop-shadow(0 0 6px #ec4899);
-  }
-  50% { 
-    filter: drop-shadow(0 0 8px #a855f7) drop-shadow(0 0 12px #ec4899);
-  }
-}
-
-/* Breathing Animation - For highEnergy state - DOT ONLY */
+/* Breathing Animation - For peakEnergy state - Slow breathing - DOT ONLY */
 @keyframes logo-breathe {
   0%, 100% { 
-    filter: drop-shadow(0 0 2px #22c55e);
+    opacity: 0.7;
+    filter: drop-shadow(0 0 3px #3b82f6);
+  }
+  50% { 
     opacity: 1;
-  }
-  50% { 
-    filter: drop-shadow(0 0 6px #22c55e) drop-shadow(0 0 8px #22c55e);
-    opacity: 0.95;
-  }
-}
-
-/* Sparkle Animation - For superLike state - DOT ONLY */
-@keyframes logo-sparkle {
-  0%, 100% { 
-    filter: drop-shadow(0 0 4px #60a5fa);
-  }
-  50% { 
-    filter: drop-shadow(0 0 10px #60a5fa) drop-shadow(0 0 15px #60a5fa);
+    filter: drop-shadow(0 0 10px #3b82f6);
   }
 }
 
