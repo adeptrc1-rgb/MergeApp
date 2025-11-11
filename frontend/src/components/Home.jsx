@@ -100,7 +100,19 @@ export default function Home({ user }) {
   const loadUnreadCount = async () => {
     try {
       const response = await axios.get(`${API}/messages/unread-count`);
-      setUnreadCount(response.data.unread_count || 0);
+      const count = response.data.unread_count || 0;
+      setUnreadCount(count);
+      
+      // Update logo state based on unread messages
+      if (count > 0) {
+        updateLogoState('connected');
+      } else {
+        // Only revert to default if currently in connected state
+        const currentState = logoStateManager.getState();
+        if (currentState === 'connected') {
+          updateLogoState('default');
+        }
+      }
     } catch (error) {
       console.error('Error loading unread count:', error);
     }
