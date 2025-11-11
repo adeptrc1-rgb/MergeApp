@@ -425,6 +425,33 @@ export default function Profile({ user, logout }) {
             </div>
           </div>
 
+          {/* Cosmic Store Entry Point */}
+          <button
+            onClick={() => navigate('/store')}
+            className="w-full bg-gradient-to-r from-indigo-600/30 via-purple-600/30 to-pink-600/30 hover:from-indigo-600/40 hover:via-purple-600/40 hover:to-pink-600/40 rounded-2xl p-6 border border-purple-400/40 hover:border-purple-400/60 mb-6 transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Sparkles className="w-7 h-7 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xl font-light text-white mb-1 flex items-center gap-2">
+                    Cosmic Store
+                    <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                  </h3>
+                  <p className="text-white/60 text-sm">Browse lights, skins & more</p>
+                </div>
+              </div>
+              
+              {/* Coin Balance Reminder */}
+              <div className="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-full">
+                <Coins className="w-4 h-4 text-yellow-400" />
+                <span className="text-yellow-300 font-medium">{user.star_coins || 0}</span>
+              </div>
+            </div>
+          </button>
+
           {/* Daily Cosmic Wheel */}
           <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl p-6 border border-purple-400/30 mb-6">
             <div className="flex items-center justify-between mb-4">
