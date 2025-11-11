@@ -119,6 +119,11 @@
   animation: super-glow 1.5s ease-in-out infinite;
 }
 
+.swipe-button.super:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.8));
+  stroke-width: 2;
+}
+
 @keyframes super-glow {
   0%, 100% {
     box-shadow: 
