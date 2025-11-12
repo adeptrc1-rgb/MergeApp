@@ -820,13 +820,25 @@ export default function Home({ user }) {
                     </button>
                   </div>
 
-                  {/* Cosmic Insights - Expands upward when clicked (only visible when Show more is expanded) */}
+                  {/* Cosmic Insights - Only visible when Show more is expanded */}
                   {showDropdown && (
-                    <div className="mb-3 relative">
-                      {/* Cosmic Insights Content - Renders ABOVE the button */}
+                    <div className="mb-3">
+                      {/* Cosmic Insights Button */}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleCosmicInsightsToggle(currentMatch, compatibility); }}
+                        className="w-full flex items-center justify-between bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-lg px-4 py-3 hover:bg-purple-900/30 transition-all"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-purple-400" />
+                          <span className="text-sm font-medium text-white/90">Cosmic Insights</span>
+                        </div>
+                        {showCosmicInsights ? (<ChevronUp className="w-4 h-4 text-white/60" />) : (<ChevronDown className="w-4 h-4 text-white/60" />)}
+                      </button>
+                      
+                      {/* Cosmic Insights Content - Expands DOWNWARD */}
                       <div 
                         className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                          showCosmicInsights ? 'max-h-[300px] opacity-100 mb-2' : 'max-h-0 opacity-0'
+                          showCosmicInsights ? 'max-h-[300px] opacity-100 mt-2' : 'max-h-0 opacity-0'
                         }`}
                       >
                         {cosmicInsights ? (
@@ -851,18 +863,6 @@ export default function Home({ user }) {
                           </div>
                         ) : null}
                       </div>
-                      
-                      {/* Cosmic Insights Button */}
-                      <button
-                        onClick={(e) => { e.stopPropagation(); handleCosmicInsightsToggle(currentMatch, compatibility); }}
-                        className="w-full flex items-center justify-between bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-lg px-4 py-3 hover:bg-purple-900/30 transition-all"
-                      >
-                        <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-purple-400" />
-                          <span className="text-sm font-medium text-white/90">Cosmic Insights</span>
-                        </div>
-                        {showCosmicInsights ? (<ChevronDown className="w-4 h-4 text-white/60" />) : (<ChevronUp className="w-4 h-4 text-white/60" />)}
-                      </button>
                     </div>
                   )}
 
