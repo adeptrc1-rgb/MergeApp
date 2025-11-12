@@ -784,9 +784,9 @@ export default function Home({ user }) {
                         </div>
                       );
                     })()}
-                    <span>{currentMatch.zodiac_sign}</span>
-                    <span>•</span>
-                    <span>
+                    <span className="text-base">{currentMatch.zodiac_sign}</span>
+                    <span className="text-white/40">•</span>
+                    <span className="text-sm">
                       {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Location unavailable'}
                     </span>
                   </div>
