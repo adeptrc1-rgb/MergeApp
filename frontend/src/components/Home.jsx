@@ -866,16 +866,16 @@ export default function Home({ user }) {
                     </div>
                   )}
 
-                  {/* Expandable Dropdown Content */}
+                  {/* Expandable Dropdown Content - Hidden when Cosmic Insights is expanded */}
                   <div 
-                    className={`transition-all duration-300 ease-in-out ${showDropdown ? 'max-h-[60vh] opacity-100' : 'max-h-0 opacity-0'}`}
+                    className={`transition-all duration-300 ease-in-out ${showDropdown && !showCosmicInsights ? 'max-h-[60vh] opacity-100' : 'max-h-0 opacity-0'}`}
                     onWheel={(e) => e.stopPropagation()}
                     onTouchMove={(e) => e.stopPropagation()}
                     onScroll={(e) => e.stopPropagation()}
                     style={{
                       WebkitOverflowScrolling: 'touch',
                       overscrollBehavior: 'contain',
-                      overflowY: showDropdown ? 'auto' : 'hidden',
+                      overflowY: showDropdown && !showCosmicInsights ? 'auto' : 'hidden',
                       overflowX: 'hidden'
                     }}
                   >
