@@ -813,15 +813,11 @@ export default function Home({ user }) {
                     </div>
                     <button
                       onClick={(e) => { 
-                        e.stopPropagation(); 
-                        e.preventDefault();
+                        e.stopPropagation();
                         handleShowMore(currentMatch, compatibility); 
                       }}
-                      onTouchEnd={(e) => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                      }}
                       className="flex items-center gap-1 text-white/80 hover:text-white transition-colors touch-manipulation"
+                      style={{ pointerEvents: 'auto' }}
                     >
                       <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
                       {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
