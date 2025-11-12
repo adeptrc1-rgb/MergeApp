@@ -799,14 +799,58 @@ export default function Home({ user }) {
                     </span>
                   </div>
 
-                  {/* Cosme Score + toggle */}
-                  <div className="flex items-center gap-3 mb-3">
+                  {/* Cosme Score */}
+                  <div className="mb-3">
                     <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
                       <Zap className="w-3.5 h-3.5 text-purple-400" />
                       <span className="text-sm font-medium">{compatibility}% Cosme Score</span>
                     </div>
+                  </div>
+
+                  {/* Cosmic Insights - Expandable Card */}
+                  <div className="mb-3">
                     <button
-                      onClick={(e) => { e.stopPropagation(); handleShowMore(currentMatch, compatibility); }}
+                      onClick={(e) => { e.stopPropagation(); handleCosmicInsightsToggle(currentMatch, compatibility); }}
+                      className="w-full flex items-center justify-between bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-lg px-4 py-3 hover:bg-purple-900/30 transition-all"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-purple-400" />
+                        <span className="text-sm font-medium text-white/90">Cosmic Insights</span>
+                      </div>
+                      {showCosmicInsights ? (<ChevronUp className="w-4 h-4 text-white/60" />) : (<ChevronDown className="w-4 h-4 text-white/60" />)}
+                    </button>
+                    
+                    {/* Cosmic Insights Content */}
+                    {showCosmicInsights && cosmicInsights && (
+                      <div className="mt-2 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl p-4 border border-purple-500/20 space-y-3">
+                        <div className="flex items-start gap-2 text-white/80 text-sm">
+                          <span className="text-base">🔥</span>
+                          <p className="leading-relaxed">{cosmicInsights.elementalInsight}</p>
+                        </div>
+                        <div className="flex items-start gap-2 text-white/80 text-sm">
+                          <span className="text-base">💫</span>
+                          <p className="leading-relaxed">{cosmicInsights.compatibilityInsight}</p>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <span className="px-2 py-1 bg-purple-500/20 rounded-full text-purple-300">{cosmicInsights.element1}</span>
+                          <span className="text-white/40">+</span>
+                          <span className="px-2 py-1 bg-pink-500/20 rounded-full text-pink-300">{cosmicInsights.element2}</span>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Loading state */}
+                    {showCosmicInsights && loadingAI && !cosmicInsights && (
+                      <div className="mt-2 flex items-center justify-center py-8 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl border border-purple-500/20">
+                        <Sparkles className="w-6 h-6 text-purple-400 animate-spin" />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Show More toggle for profile details */}
+                  <div className="mb-3">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleShowMore(); }}
                       className="flex items-center gap-1 text-white/80 hover:text-white transition-colors"
                     >
                       <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
