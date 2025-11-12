@@ -166,19 +166,19 @@ export default function Home({ user }) {
   };
 
   // Handle "Show more" toggle for profile details
-  const handleShowMore = () => {
-    setShowDropdown(!showDropdown);
-  };
-  
-  // Handle Cosmic Insights toggle
-  const handleCosmicInsightsToggle = (matchUser, compatibilityScore) => {
-    const newState = !showCosmicInsights;
-    setShowCosmicInsights(newState);
+  const handleShowMore = (matchUser, compatibilityScore) => {
+    const newState = !showDropdown;
+    setShowDropdown(newState);
     
-    // Generate insights when expanding for the first time
+    // Generate insights when Show more is expanded for the first time
     if (newState && !cosmicInsights) {
       generateInsightsAndStarters(matchUser, compatibilityScore);
     }
+  };
+  
+  // Handle Cosmic Insights toggle - expands upward
+  const handleCosmicInsightsToggle = (matchUser, compatibilityScore) => {
+    setShowCosmicInsights(!showCosmicInsights);
   };
   
   // Regenerate AI starters
