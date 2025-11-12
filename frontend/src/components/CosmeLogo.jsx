@@ -89,12 +89,11 @@ const CosmeLogo = ({
             fontWeight: 600,
             color: '#FFFFFF',
             letterSpacing: '0.5px',
-            textTransform: 'lowercase',
             WebkitFontSmoothing: 'antialiased',
             MozOsxFontSmoothing: 'grayscale'
           }}
         >
-          cosme
+          Cosme
         </span>
       )}
     </div>
