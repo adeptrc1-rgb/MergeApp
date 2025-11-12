@@ -847,25 +847,83 @@ export default function Home({ user }) {
                       
                       {/* Cosmic Insights Content - Expands DOWNWARD */}
                       <div 
-                        className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                          showCosmicInsights ? 'max-h-[300px] opacity-100 mt-2' : 'max-h-0 opacity-0'
+                        className={`transition-all duration-300 ease-in-out overflow-y-auto ${
+                          showCosmicInsights ? 'max-h-[500px] opacity-100 mt-2' : 'max-h-0 opacity-0'
                         }`}
+                        style={{
+                          WebkitOverflowScrolling: 'touch',
+                          overscrollBehavior: 'contain'
+                        }}
+                        onWheel={(e) => e.stopPropagation()}
+                        onTouchMove={(e) => e.stopPropagation()}
                       >
                         {cosmicInsights ? (
-                          <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl p-4 border border-purple-500/20 space-y-3">
-                            <div className="flex items-start gap-2 text-white/80 text-sm">
-                              <span className="text-base">🔥</span>
-                              <p className="leading-relaxed">{cosmicInsights.elementalInsight}</p>
+                          <div className="space-y-4">
+                            {/* Cosmic Insights */}
+                            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl p-4 border border-purple-500/20 space-y-3">
+                              <div className="flex items-start gap-2 text-white/80 text-sm">
+                                <span className="text-base">🔥</span>
+                                <p className="leading-relaxed">{cosmicInsights.elementalInsight}</p>
+                              </div>
+                              <div className="flex items-start gap-2 text-white/80 text-sm">
+                                <span className="text-base">💫</span>
+                                <p className="leading-relaxed">{cosmicInsights.compatibilityInsight}</p>
+                              </div>
+                              <div className="flex items-center gap-2 text-xs">
+                                <span className="px-2 py-1 bg-purple-500/20 rounded-full text-purple-300">{cosmicInsights.element1}</span>
+                                <span className="text-white/40">+</span>
+                                <span className="px-2 py-1 bg-pink-500/20 rounded-full text-pink-300">{cosmicInsights.element2}</span>
+                              </div>
                             </div>
-                            <div className="flex items-start gap-2 text-white/80 text-sm">
-                              <span className="text-base">💫</span>
-                              <p className="leading-relaxed">{cosmicInsights.compatibilityInsight}</p>
-                            </div>
-                            <div className="flex items-center gap-2 text-xs">
-                              <span className="px-2 py-1 bg-purple-500/20 rounded-full text-purple-300">{cosmicInsights.element1}</span>
-                              <span className="text-white/40">+</span>
-                              <span className="px-2 py-1 bg-pink-500/20 rounded-full text-pink-300">{cosmicInsights.element2}</span>
-                            </div>
+
+                            {/* AI Conversation Starters */}
+                            {showAIStarters && (
+                              <div className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                  <h3 className="text-white/90 text-sm font-medium flex items-center gap-2">
+                                    <Zap className="w-4 h-4 text-yellow-400" />
+                                    AI Conversation Starters
+                                  </h3>
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); regenerateStarters(); }}
+                                    disabled={loadingAI}
+                                    className="text-xs text-purple-400 hover:text-purple-300 disabled:opacity-50"
+                                    style={{ pointerEvents: 'auto' }}
+                                  >
+                                    {loadingAI ? 'Generating...' : 'Generate More'}
+                                  </button>
+                                </div>
+                                
+                                {loadingAI ? (
+                                  <div className="flex items-center justify-center py-8 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl border border-purple-500/20">
+                                    <Sparkles className="w-6 h-6 text-purple-400 animate-spin" />
+                                  </div>
+                                ) : (
+                                  <div className="space-y-2">
+                                    {aiStarters.map((starter, index) => (
+                                      <div
+                                        key={index}
+                                        className="bg-white/5 border border-white/10 rounded-lg p-3 hover:bg-white/10 transition-all group"
+                                      >
+                                        <p className="text-white/90 text-sm mb-2 leading-relaxed">{starter}</p>
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            trackStarterUsed(currentMatch.id, index, starter);
+                                            navigate(`/chat/${currentMatch.id}`, { state: { messageText: starter } });
+                                          }}
+                                          className="text-xs text-purple-400 hover:text-purple-300 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                          style={{ pointerEvents: 'auto' }}
+                                        >
+                                          <MessageCircle className="w-3 h-3" />
+                                          Send This Message
+                                        </button>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
                         ) : loadingAI ? (
                           <div className="flex items-center justify-center py-8 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl border border-purple-500/20">
