@@ -165,12 +165,17 @@ export default function Home({ user }) {
     }
   };
 
-  // Handle "Show more" toggle
-  const handleShowMore = (matchUser, compatibilityScore) => {
-    const newState = !showDropdown;
-    setShowDropdown(newState);
+  // Handle "Show more" toggle for profile details
+  const handleShowMore = () => {
+    setShowDropdown(!showDropdown);
+  };
+  
+  // Handle Cosmic Insights toggle
+  const handleCosmicInsightsToggle = (matchUser, compatibilityScore) => {
+    const newState = !showCosmicInsights;
+    setShowCosmicInsights(newState);
     
-    // Generate insights when expanding
+    // Generate insights when expanding for the first time
     if (newState && !cosmicInsights) {
       generateInsightsAndStarters(matchUser, compatibilityScore);
     }
