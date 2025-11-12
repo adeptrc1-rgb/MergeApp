@@ -812,8 +812,16 @@ export default function Home({ user }) {
                       <span className="text-sm font-medium">{compatibility}% Cosme Score</span>
                     </div>
                     <button
-                      onClick={(e) => { e.stopPropagation(); handleShowMore(currentMatch, compatibility); }}
-                      className="flex items-center gap-1 text-white/80 hover:text-white transition-colors"
+                      onClick={(e) => { 
+                        e.stopPropagation(); 
+                        e.preventDefault();
+                        handleShowMore(currentMatch, compatibility); 
+                      }}
+                      onTouchEnd={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                      }}
+                      className="flex items-center gap-1 text-white/80 hover:text-white transition-colors touch-manipulation"
                     >
                       <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
                       {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
