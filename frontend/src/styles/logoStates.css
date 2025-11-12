@@ -20,17 +20,17 @@
   0% { 
     transform: scale(0);
     opacity: 0;
-    filter: drop-shadow(0 0 0px #f59e0b);
+    filter: drop-shadow(0 0 0px #fbbf24);
   }
   50% { 
     transform: scale(1.2);
     opacity: 1;
-    filter: drop-shadow(0 0 20px #f59e0b) drop-shadow(0 0 30px #f59e0b);
+    filter: drop-shadow(0 0 25px #fbbf24) drop-shadow(0 0 40px #fcd34d) drop-shadow(0 0 60px #fde68a);
   }
   100% { 
     transform: scale(1);
     opacity: 1;
-    filter: drop-shadow(0 0 5px #f59e0b);
+    filter: drop-shadow(0 0 10px #fbbf24) drop-shadow(0 0 20px #fcd34d);
   }
 }
 
