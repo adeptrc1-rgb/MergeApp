@@ -85,7 +85,7 @@ const CosmeLogo = ({
         <span
           className={`${config.fontSize}`}
           style={{
-            fontFamily: "'Poppins', '-apple-system-ui-rounded', 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, sans-serif",
+            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
             fontWeight: 600,
             color: '#FFFFFF',
             letterSpacing: '0.5px',
