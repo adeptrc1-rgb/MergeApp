@@ -739,7 +739,7 @@ export default function Home({ user }) {
                       return `${currentMatch.first_name}, ${age}`;
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
-                  <div className="flex items-center gap-2 mb-3" style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '16pt', color: '#8A8A8E' }}>
+                  <div className="flex items-center gap-2 text-white/80 mb-3">
                     {/* Constellation with skin-based animation */}
                     {(() => {
                       const activeSkin = storeItems.find(item => item.id === userInventory?.active_skin);
