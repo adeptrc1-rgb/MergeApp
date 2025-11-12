@@ -892,7 +892,8 @@ export default function Home({ user }) {
                       WebkitOverflowScrolling: 'touch',
                       overscrollBehavior: 'contain',
                       overflowY: showDropdown && !showCosmicInsights ? 'auto' : 'hidden',
-                      overflowX: 'hidden'
+                      overflowX: 'hidden',
+                      pointerEvents: 'auto'
                     }}
                   >
                     <div className="space-y-4 pt-2 pb-12">
