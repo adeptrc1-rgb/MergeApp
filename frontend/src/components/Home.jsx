@@ -723,7 +723,7 @@ export default function Home({ user }) {
               {/* Bottom info + dropdown */}
               <div className="absolute bottom-0 left-0 right-0 text-white">
                 <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`}>
-                  <h2 className="text-4xl font-light mb-2">
+                  <h2 className="mb-2" style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '24pt', lineHeight: '1.2' }}>
                     {userInventory?.active_skin && (() => {
                       const activeSkin = storeItems.find(item => item.id === userInventory.active_skin);
                       if (activeSkin?.effect?.nameAnimation) {
