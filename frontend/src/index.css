@@ -16,6 +16,15 @@ code {
         monospace;
 }
 
+/* Touch interaction improvements for mobile */
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.touch-manipulation {
+    touch-action: manipulation;
+}
+
 
 
 @layer base {
