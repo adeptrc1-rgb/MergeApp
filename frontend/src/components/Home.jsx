@@ -702,15 +702,17 @@ export default function Home({ user }) {
                   backgroundImage: `url(${currentMatch.photos?.[currentPhotoIndex] || 'https://via.placeholder.com/400x600'})`
                 }}
               >
-                {/* Photo nav tap zones */}
-                {currentMatch.photos && currentMatch.photos.length > 1 && (
+                {/* Photo nav tap zones - Only cover photo area, not buttons */}
+                {currentMatch.photos && currentMatch.photos.length > 1 && !showDropdown && (
                   <>
                     <div 
-                      className="absolute left-0 top-0 bottom-0 w-1/3 z-20 cursor-pointer"
+                      className="absolute left-0 top-0 w-1/3 z-20 cursor-pointer"
+                      style={{ height: '70%' }}
                       onClick={(e) => { e.stopPropagation(); prevPhoto(); }}
                     />
                     <div 
-                      className="absolute right-0 top-0 bottom-0 w-1/3 z-20 cursor-pointer"
+                      className="absolute right-0 top-0 w-1/3 z-20 cursor-pointer"
+                      style={{ height: '70%' }}
                       onClick={(e) => { e.stopPropagation(); nextPhoto(); }}
                     />
                   </>
