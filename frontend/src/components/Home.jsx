@@ -735,7 +735,7 @@ export default function Home({ user }) {
               </div>
 
               {/* Bottom info + dropdown */}
-              <div className="absolute bottom-0 left-0 right-0 text-white">
+              <div className="absolute bottom-0 left-0 right-0 text-white" style={{ pointerEvents: 'auto' }}>
                 <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`}>
                   <h2 className="text-4xl font-light mb-2">
                     {userInventory?.active_skin && (() => {
