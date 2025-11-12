@@ -830,15 +830,11 @@ export default function Home({ user }) {
                       {/* Cosmic Insights Button */}
                       <button
                         onClick={(e) => { 
-                          e.stopPropagation(); 
-                          e.preventDefault();
+                          e.stopPropagation();
                           handleCosmicInsightsToggle(currentMatch, compatibility); 
                         }}
-                        onTouchEnd={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                        }}
                         className="w-full flex items-center justify-between bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-lg px-4 py-3 hover:bg-purple-900/30 transition-all touch-manipulation"
+                        style={{ pointerEvents: 'auto' }}
                       >
                         <div className="flex items-center gap-2">
                           <Sparkles className="w-4 h-4 text-purple-400" />
