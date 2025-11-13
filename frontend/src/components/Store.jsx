@@ -294,7 +294,7 @@ export default function Store({ user }) {
                   ) : (
                     <button
                       onClick={() => activateItem(item.id, item.type)}
-                      className="w-full py-2 rounded-lg font-medium bg-gradient-to-r from-purple-500 to-pink-600 hover:scale-105 transition-all"
+                      className="w-full py-2 rounded-lg font-medium bg-[#2563EB] hover:bg-[#1d4ed8] hover:scale-105 transition-all"
                     >
                       Activate
                     </button>
