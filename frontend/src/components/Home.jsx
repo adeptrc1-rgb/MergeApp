@@ -735,11 +735,10 @@ export default function Home({ user }) {
                 )}
               </div>
 
-              {/* Bottom info - Modern card design */}
+              {/* Bottom info + dropdown */}
               <div className="absolute bottom-0 left-0 right-0 text-white z-30" style={{ pointerEvents: 'auto' }}>
-                <div className="bg-gradient-to-t from-black via-black/95 to-transparent px-6 pb-6 pt-12 relative rounded-2xl">
-                  {/* Name */}
-                  <h2 className="text-3xl font-semibold mb-4">
+                <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`}>
+                  <h2 className="text-4xl font-light mb-2">
                     {userInventory?.active_skin && (() => {
                       const activeSkin = storeItems.find(item => item.id === userInventory.active_skin);
                       if (activeSkin?.effect?.nameAnimation) {
@@ -755,55 +754,45 @@ export default function Home({ user }) {
                       return `${currentMatch.first_name}, ${age}`;
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
+                  {/* Merge Score + Location */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                      <Zap className="w-3.5 h-3.5 text-blue-500" />
+                      <span className="text-sm font-medium">{compatibility}% Merge Score</span>
+                    </div>
+                    <span className="text-white/40">•</span>
+                    <span className="text-sm text-white/80">
+                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Location unavailable'}
+                    </span>
+                  </div>
 
-                  {/* Stats Bar */}
-                  <div className="flex gap-6 mb-4">
-                    <div className="flex flex-col">
-                      <div className="text-2xl font-bold text-[#2563EB]">{compatibility}%</div>
-                      <div className="text-xs text-white/60 uppercase tracking-wide">Match</div>
-                    </div>
-                    <div className="flex flex-col">
-                      <div className="text-2xl font-bold text-white">
-                        {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} mi` : 'N/A'}
-                      </div>
-                      <div className="text-xs text-white/60 uppercase tracking-wide">
-                        {getDistance(currentMatch) !== null ? 'Away' : 'Location'}
-                      </div>
-                    </div>
-                    <div className="flex flex-col">
-                      <div className="text-2xl font-bold text-white relative group cursor-help">
+                  {/* Connection Integrity Tier + Show More toggle */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="relative inline-flex items-center group cursor-help">
+                      <span className="text-sm font-medium text-white/90">
                         {
-                          (currentMatch.trustScore || 0) >= 90 ? '⭐' :
-                          (currentMatch.trustScore || 0) >= 75 ? '✓' :
-                          '⏳'
+                          (currentMatch.trustScore || 0) >= 90 ? 'Reliable' :
+                          (currentMatch.trustScore || 0) >= 75 ? 'Solid' :
+                          'Building Trust'
                         }
-                        {/* Tooltip */}
-                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-black/90 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                          {currentMatch.trustScore || 0}% Trust Score
-                        </div>
+                      </span>
+                      {/* Tooltip with exact percentage */}
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-black/90 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                        {currentMatch.trustScore || 0}% Trust Score
                       </div>
-                      <div className="text-xs text-white/60 uppercase tracking-wide">Trust</div>
                     </div>
+                    <button
+                      onClick={(e) => { 
+                        e.stopPropagation();
+                        handleShowMore(currentMatch, compatibility); 
+                      }}
+                      className="flex items-center gap-1 text-white/80 hover:text-white transition-colors touch-manipulation"
+                      style={{ pointerEvents: 'auto' }}
+                    >
+                      <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
+                      {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
+                    </button>
                   </div>
-
-                  {/* Bio Preview */}
-                  <div className="mb-4">
-                    <p className="text-sm text-white/80 leading-relaxed line-clamp-2">
-                      {currentMatch.bio || 'Building connections through shared interests and authentic conversations.'}
-                    </p>
-                  </div>
-
-                  {/* Primary Action Button */}
-                  <button
-                    onClick={(e) => { 
-                      e.stopPropagation();
-                      handleShowMore(currentMatch, compatibility); 
-                    }}
-                    className="w-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white font-medium py-3 px-6 rounded-xl transition-all hover:shadow-lg hover:shadow-[#2563EB]/20 touch-manipulation"
-                    style={{ pointerEvents: 'auto' }}
-                  >
-                    {showDropdown ? 'Show Less' : `Connect with ${currentMatch.first_name}`}
-                  </button>
 
                   {/* Cosmic Insights - Only visible when Show more is expanded */}
                   {showDropdown && (
