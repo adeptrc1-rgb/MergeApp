@@ -1,148 +1,151 @@
 /**
  * Merge Logo Component
- * Intelligent use of negative space where R's counterform defines G's structure
- * Clean, minimalist, geometric construction
+ * Wordmark where R's counterform defines G's structure
+ * The enclosed space inside the R forms the crossbar and hook of the G
  */
 
-import React, { useState, useEffect } from 'react';
-import logoStateManager from '../utils/logoStateManager';
-import '../styles/logoStates.css';
+import React from 'react';
 
 const MergeLogo = ({ 
   className = '', 
-  size = 'md', 
-  showGradient = true, 
-  iconOnly = false,
-  enableStates = false
+  size = 'md'
 }) => {
   // Size configurations
   const sizes = {
-    sm: { height: 24, iconSize: 32, fontSize: 'text-base', gap: 8 },
-    md: { height: 32, iconSize: 40, fontSize: 'text-xl', gap: 10 },
-    lg: { height: 40, iconSize: 48, fontSize: 'text-2xl', gap: 12 },
-    xl: { height: 48, iconSize: 56, fontSize: 'text-3xl', gap: 14 }
+    sm: { height: 28 },
+    md: { height: 36 },
+    lg: { height: 44 },
+    xl: { height: 52 }
   };
 
   const config = sizes[size] || sizes.md;
-  const iconSize = config.iconSize;
-
-  // State management for animated logo
-  const [logoState, setLogoState] = useState('default');
-
-  useEffect(() => {
-    if (enableStates) {
-      const unsubscribe = logoStateManager.subscribe(setLogoState);
-      return unsubscribe;
-    }
-  }, [enableStates]);
 
   return (
-    <div className={`flex items-center ${className}`} style={{ gap: iconOnly ? 0 : `${config.gap}px` }}>
-      {/* R+G Icon - Clever negative space integration */}
+    <div className={`flex items-center ${className}`}>
+      {/* Custom Merge wordmark with R+G negative space integration */}
       <svg
-        className="logo-icon-container"
-        width={iconSize}
-        height={iconSize}
-        viewBox="0 0 100 100"
+        height={config.height}
+        viewBox="0 0 300 80"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <defs>
-          {/* Gradient for the logo */}
-          <linearGradient id="mergeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6D28D9" />
-            <stop offset="100%" stopColor="#3B82F6" />
-          </linearGradient>
-          
-          {/* Glow filter for animation */}
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* R+G Combined Shape - Shared vertical stem, negative space defines G */}
-        <g className={enableStates ? `logo-merge-rg-${logoState}` : 'logo-merge-rg-default'}>
-          {/* Shared vertical stem */}
-          <rect x="20" y="20" width="8" height="60" fill="url(#mergeGradient)" />
-          
-          {/* R's bowl (top circle) */}
-          <path
-            d="M 28 20 L 28 35 C 28 35, 28 28, 35 28 C 42 28, 48 28, 48 35 C 48 42, 42 42, 35 42 L 28 42"
-            stroke="url(#mergeGradient)"
-            strokeWidth="8"
-            fill="none"
+        {/* M */}
+        <path
+          d="M 10 65 L 10 15 L 25 40 L 40 15 L 40 65"
+          stroke="#FFFFFF"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        
+        {/* E */}
+        <path
+          d="M 60 15 L 90 15 M 60 15 L 60 65 M 60 40 L 85 40 M 60 65 L 90 65"
+          stroke="#FFFFFF"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        
+        {/* R - with enclosed counterform that will flow into G */}
+        <g>
+          {/* R's vertical stem */}
+          <line
+            x1="110"
+            y1="15"
+            x2="110"
+            y2="65"
+            stroke="#FFFFFF"
+            strokeWidth="6"
             strokeLinecap="round"
-            strokeLinejoin="round"
           />
           
-          {/* R's leg (diagonal stroke at 45°) */}
+          {/* R's bowl/counter - this negative space defines G's structure */}
+          <path
+            d="M 110 15 L 135 15 C 145 15, 148 20, 148 30 C 148 40, 145 42, 135 42 L 110 42"
+            stroke="#FFFFFF"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          
+          {/* R's leg */}
           <line
-            x1="35"
+            x1="130"
             y1="42"
-            x2="48"
-            y2="58"
-            stroke="url(#mergeGradient)"
-            strokeWidth="8"
+            x2="148"
+            y2="65"
+            stroke="#FFFFFF"
+            strokeWidth="6"
             strokeLinecap="round"
-          />
-          
-          {/* G's structure - Uses negative space from R */}
-          {/* G's top curve */}
-          <path
-            d="M 72 28 C 65 28, 60 28, 60 35 L 60 65 C 60 72, 65 72, 72 72 C 79 72, 84 72, 84 65 L 84 50"
-            stroke="url(#mergeGradient)"
-            strokeWidth="8"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          
-          {/* G's horizontal bar (connects to R's negative space) */}
-          <line
-            x1="72"
-            y1="50"
-            x2="84"
-            y2="50"
-            stroke="url(#mergeGradient)"
-            strokeWidth="8"
-            strokeLinecap="round"
-          />
-          
-          {/* Connecting element - subtle bridge between R and G */}
-          <circle
-            cx="54"
-            cy="50"
-            r="3"
-            fill="url(#mergeGradient)"
-            className="merge-connector"
-            opacity="0.6"
           />
         </g>
+        
+        {/* G - Uses R's counterform as its defining structure */}
+        <g>
+          {/* G's vertical stem (flows from R's negative space) */}
+          <line
+            x1="168"
+            y1="20"
+            x2="168"
+            y2="60"
+            stroke="#FFFFFF"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+          
+          {/* G's top curve (connects to R's bowl space) */}
+          <path
+            d="M 148 28 C 152 20, 160 15, 168 15"
+            stroke="#FFFFFF"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          
+          {/* G's bottom curve */}
+          <path
+            d="M 168 65 C 160 65, 152 60, 148 52"
+            stroke="#FFFFFF"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          
+          {/* G's horizontal bar (forms from R's counter space) */}
+          <line
+            x1="168"
+            y1="40"
+            x2="190"
+            y2="40"
+            stroke="#FFFFFF"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+          
+          {/* Subtle connector showing negative space flow */}
+          <circle
+            cx="156"
+            cy="34"
+            r="2"
+            fill="#FFFFFF"
+            opacity="0.4"
+          />
+        </g>
+        
+        {/* E (second E) */}
+        <path
+          d="M 210 15 L 240 15 M 210 15 L 210 65 M 210 40 L 235 40 M 210 65 L 240 65"
+          stroke="#FFFFFF"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
-
-      {/* Wordmark - Hidden in icon-only mode */}
-      {!iconOnly && (
-        <span
-          className={`${config.fontSize}`}
-          style={{
-            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-            fontWeight: 500,
-            background: 'linear-gradient(135deg, #6D28D9 0%, #3B82F6 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            letterSpacing: '0.5px',
-            WebkitFontSmoothing: 'antialiased',
-            MozOsxFontSmoothing: 'grayscale'
-          }}
-        >
-          Merge
-        </span>
-      )}
     </div>
   );
 };
