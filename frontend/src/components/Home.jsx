@@ -834,14 +834,14 @@ export default function Home({ user }) {
                           e.stopPropagation();
                           handleCosmicInsightsToggle(currentMatch, compatibility); 
                         }}
-                        className="w-full flex items-center justify-between bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 rounded-lg px-4 py-3 hover:bg-purple-900/30 transition-all touch-manipulation"
+                        className="w-full flex items-center justify-between bg-[#F4F4F5] border border-[#E4E4E7] rounded-lg px-4 py-3 hover:bg-[#FAFAFA] transition-all touch-manipulation"
                         style={{ pointerEvents: 'auto' }}
                       >
                         <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-purple-400" />
-                          <span className="text-sm font-medium text-white/90">Cosmic Insights</span>
+                          <Sparkles className="w-4 h-4 text-[#2563EB]" />
+                          <span className="text-sm font-medium text-[#3F3F46]">Compatibility Insights</span>
                         </div>
-                        {showCosmicInsights ? (<ChevronUp className="w-4 h-4 text-white/60" />) : (<ChevronDown className="w-4 h-4 text-white/60" />)}
+                        {showCosmicInsights ? (<ChevronUp className="w-4 h-4 text-[#A1A1AA]" />) : (<ChevronDown className="w-4 h-4 text-[#A1A1AA]" />)}
                       </button>
                       
                       {/* Cosmic Insights Content - Expands DOWNWARD */}
