@@ -859,19 +859,19 @@ export default function Home({ user }) {
                         {cosmicInsights ? (
                           <div className="space-y-4">
                             {/* Compatibility Insights */}
-                            <div className="bg-[#FAFAFA] rounded-xl p-4 border border-[#E4E4E7] space-y-3">
-                              <div className="flex items-start gap-2 text-[#3F3F46] text-sm">
+                            <div className="bg-transparent rounded-xl p-4 border border-white/10 space-y-3">
+                              <div className="flex items-start gap-2 text-white/90 text-sm">
                                 <span className="text-base">🔥</span>
                                 <p className="leading-relaxed">{cosmicInsights.elementalInsight}</p>
                               </div>
-                              <div className="flex items-start gap-2 text-[#3F3F46] text-sm">
+                              <div className="flex items-start gap-2 text-white/90 text-sm">
                                 <span className="text-base">💫</span>
                                 <p className="leading-relaxed">{cosmicInsights.compatibilityInsight}</p>
                               </div>
                               <div className="flex items-center gap-2 text-xs">
-                                <span className="px-2 py-1 bg-[#E4E4E7] rounded-full text-[#3F3F46]">{cosmicInsights.element1}</span>
-                                <span className="text-[#A1A1AA]">+</span>
-                                <span className="px-2 py-1 bg-[#E4E4E7] rounded-full text-[#3F3F46]">{cosmicInsights.element2}</span>
+                                <span className="px-2 py-1 bg-white/10 rounded-full text-white/80">{cosmicInsights.element1}</span>
+                                <span className="text-white/40">+</span>
+                                <span className="px-2 py-1 bg-white/10 rounded-full text-white/80">{cosmicInsights.element2}</span>
                               </div>
                             </div>
 
