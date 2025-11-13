@@ -237,7 +237,7 @@ export default function Profile({ user, logout }) {
       <div className="border-b border-white/10 bg-black flex-shrink-0">
         <div className="max-w-4xl mx-auto px-4 py-2">
           <div className="flex items-center justify-between mb-4">
-            <CosmeLogo size="md" showGradient={true} />
+            <MergeLogo size="md" color="#FFFFFF" />
           </div>
           <h2 className="text-3xl font-light text-white">Profile</h2>
           
