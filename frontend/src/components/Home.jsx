@@ -809,7 +809,7 @@ export default function Home({ user }) {
                   {/* Merge Score + Show More toggle */}
                   <div className="flex items-center gap-3 mb-3">
                     <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                      <Zap className="w-3.5 h-3.5 text-purple-400" />
+                      <Zap className="w-3.5 h-3.5 text-blue-500" />
                       <span className="text-sm font-medium">{compatibility}% Merge Score</span>
                     </div>
                     <button
