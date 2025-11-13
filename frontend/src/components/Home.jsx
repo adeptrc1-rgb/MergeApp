@@ -759,7 +759,7 @@ export default function Home({ user }) {
                     <div className="inline-flex items-center gap-1.5">
                       <Shield className="w-4 h-4 text-[#2563EB]" strokeWidth={1.5} />
                       <span className="text-sm font-medium text-white/90">
-                        {currentMatch.trustScore || 0}% Verified
+                        {currentMatch.trustScore || 0}%
                       </span>
                     </div>
                     <span className="text-white/40">•</span>
