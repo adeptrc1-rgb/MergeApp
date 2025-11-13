@@ -797,7 +797,7 @@ export default function Home({ user }) {
                   {/* Cosmic Insights - Only visible when Show more is expanded */}
                   {showDropdown && (
                     <div className="mb-3">
-                      {/* Cosmic Insights Button */}
+                      {/* Compatibility Insights Button */}
                       <button
                         onClick={(e) => { 
                           e.stopPropagation();
@@ -807,7 +807,7 @@ export default function Home({ user }) {
                         style={{ pointerEvents: 'auto' }}
                       >
                         <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-[#2563EB]" />
+                          <Sparkles className="w-4 h-4" style={{ color: '#00FFE0' }} />
                           <span className="text-sm font-medium text-white/90">Compatibility Insights</span>
                         </div>
                         {showCosmicInsights ? (<ChevronUp className="w-4 h-4 text-white/60" />) : (<ChevronDown className="w-4 h-4 text-white/60" />)}
