@@ -137,7 +137,7 @@ export default function Store({ user }) {
               onClick={() => setActiveTab('lights')}
               className={`flex-1 px-4 py-2 rounded-lg transition-all ${
                 activeTab === 'lights'
-                  ? 'bg-purple-500/30 border border-purple-400/50 text-white'
+                  ? 'bg-[#2563EB] border border-[#2563EB] text-white'
                   : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
               }`}
             >
@@ -148,7 +148,7 @@ export default function Store({ user }) {
               onClick={() => setActiveTab('skins')}
               className={`flex-1 px-4 py-2 rounded-lg transition-all ${
                 activeTab === 'skins'
-                  ? 'bg-purple-500/30 border border-purple-400/50 text-white'
+                  ? 'bg-[#2563EB] border border-[#2563EB] text-white'
                   : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
               }`}
             >
