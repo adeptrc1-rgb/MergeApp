@@ -879,14 +879,14 @@ export default function Home({ user }) {
                             {showAIStarters && (
                               <div className="space-y-3">
                                 <div className="flex items-center justify-between">
-                                  <h3 className="text-[#3F3F46] text-sm font-medium flex items-center gap-2">
+                                  <h3 className="text-white/90 text-sm font-medium flex items-center gap-2">
                                     <Zap className="w-4 h-4 text-[#2563EB]" />
                                     AI Conversation Starters
                                   </h3>
                                   <button
                                     onClick={(e) => { e.stopPropagation(); regenerateStarters(); }}
                                     disabled={loadingAI}
-                                    className="text-xs text-[#2563EB] hover:text-[#1d4ed8] disabled:opacity-50"
+                                    className="text-xs text-[#2563EB] hover:text-[#60a5fa] disabled:opacity-50"
                                     style={{ pointerEvents: 'auto' }}
                                   >
                                     {loadingAI ? 'Generating...' : 'Generate More'}
@@ -894,7 +894,7 @@ export default function Home({ user }) {
                                 </div>
                                 
                                 {loadingAI ? (
-                                  <div className="flex items-center justify-center py-8 bg-[#FAFAFA] rounded-xl border border-[#E4E4E7]">
+                                  <div className="flex items-center justify-center py-8 bg-transparent rounded-xl border border-white/10">
                                     <Sparkles className="w-6 h-6 text-[#2563EB] animate-spin" />
                                   </div>
                                 ) : (
@@ -902,16 +902,16 @@ export default function Home({ user }) {
                                     {aiStarters.map((starter, index) => (
                                       <div
                                         key={index}
-                                        className="bg-[#FAFAFA] border border-[#E4E4E7] rounded-lg p-3 hover:bg-[#F4F4F5] transition-all group"
+                                        className="bg-transparent border border-white/10 rounded-lg p-3 hover:bg-white/5 transition-all group"
                                       >
-                                        <p className="text-[#3F3F46] text-sm mb-2 leading-relaxed">{starter}</p>
+                                        <p className="text-white/90 text-sm mb-2 leading-relaxed">{starter}</p>
                                         <button
                                           onClick={(e) => {
                                             e.stopPropagation();
                                             trackStarterUsed(currentMatch.id, index, starter);
                                             navigate(`/chat/${currentMatch.id}`, { state: { messageText: starter } });
                                           }}
-                                          className="text-xs text-[#2563EB] hover:text-[#1d4ed8] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                          className="text-xs text-[#2563EB] hover:text-[#60a5fa] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
                                           style={{ pointerEvents: 'auto' }}
                                         >
                                           <MessageCircle className="w-3 h-3" />
