@@ -157,3 +157,50 @@
 .logo-icon-container:active {
   transform: scale(0.95);
 }
+
+/* ==================== MERGE LOGO STATES ==================== */
+
+/* Gentle pulse animation for negative space glow */
+@keyframes merge-pulse {
+  0%, 100% { 
+    filter: drop-shadow(0 0 2px rgba(109, 40, 217, 0.4));
+  }
+  50% { 
+    filter: drop-shadow(0 0 6px rgba(109, 40, 217, 0.8)) drop-shadow(0 0 12px rgba(59, 130, 246, 0.4));
+  }
+}
+
+/* Default state for Merge R+G logo */
+.logo-merge-rg-default {
+  transition: all 0.3s ease;
+  animation: merge-pulse 3s ease-in-out infinite;
+}
+
+/* Connected State - Green pulse for Merge */
+.logo-merge-rg-connected {
+  animation: merge-pulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.6));
+}
+
+/* High Match State - Bright gold pulse for Merge */
+.logo-merge-rg-highMatch {
+  animation: merge-pulse 0.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.8)) drop-shadow(0 0 20px rgba(252, 211, 77, 0.6));
+}
+
+/* New Match State - Purple pulse for Merge */
+.logo-merge-rg-newMatch {
+  animation: merge-pulse 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.8));
+}
+
+/* Peak Energy State - Blue pulse for Merge */
+.logo-merge-rg-peakEnergy {
+  animation: merge-pulse 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.7));
+}
+
+/* Connector element subtle pulse */
+.merge-connector {
+  animation: merge-pulse 3s ease-in-out infinite;
+}
