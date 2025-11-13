@@ -895,7 +895,7 @@ export default function Home({ user }) {
                           </div>
                         ) : loadingAI ? (
                           <div className="flex items-center justify-center py-8 bg-transparent rounded-xl border border-white/10">
-                            <Sparkles className="w-6 h-6 text-[#2563EB] animate-spin" />
+                            <Sparkles className="w-6 h-6 animate-spin" style={{ color: '#00FFE0' }} />
                           </div>
                         ) : null}
                       </div>
