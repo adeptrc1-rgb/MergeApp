@@ -163,10 +163,10 @@
 /* Gentle pulse animation for negative space glow */
 @keyframes merge-pulse {
   0%, 100% { 
-    filter: drop-shadow(0 0 2px rgba(109, 40, 217, 0.4));
+    filter: drop-shadow(0 0 2px rgba(37, 99, 235, 0.4));
   }
   50% { 
-    filter: drop-shadow(0 0 6px rgba(109, 40, 217, 0.8)) drop-shadow(0 0 12px rgba(59, 130, 246, 0.4));
+    filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.8)) drop-shadow(0 0 12px rgba(37, 99, 235, 0.4));
   }
 }
 
