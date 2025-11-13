@@ -858,20 +858,20 @@ export default function Home({ user }) {
                       >
                         {cosmicInsights ? (
                           <div className="space-y-4">
-                            {/* Cosmic Insights */}
-                            <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl p-4 border border-purple-500/20 space-y-3">
-                              <div className="flex items-start gap-2 text-white/80 text-sm">
+                            {/* Compatibility Insights */}
+                            <div className="bg-[#FAFAFA] rounded-xl p-4 border border-[#E4E4E7] space-y-3">
+                              <div className="flex items-start gap-2 text-[#3F3F46] text-sm">
                                 <span className="text-base">🔥</span>
                                 <p className="leading-relaxed">{cosmicInsights.elementalInsight}</p>
                               </div>
-                              <div className="flex items-start gap-2 text-white/80 text-sm">
+                              <div className="flex items-start gap-2 text-[#3F3F46] text-sm">
                                 <span className="text-base">💫</span>
                                 <p className="leading-relaxed">{cosmicInsights.compatibilityInsight}</p>
                               </div>
                               <div className="flex items-center gap-2 text-xs">
-                                <span className="px-2 py-1 bg-purple-500/20 rounded-full text-purple-300">{cosmicInsights.element1}</span>
-                                <span className="text-white/40">+</span>
-                                <span className="px-2 py-1 bg-pink-500/20 rounded-full text-pink-300">{cosmicInsights.element2}</span>
+                                <span className="px-2 py-1 bg-[#E4E4E7] rounded-full text-[#3F3F46]">{cosmicInsights.element1}</span>
+                                <span className="text-[#A1A1AA]">+</span>
+                                <span className="px-2 py-1 bg-[#E4E4E7] rounded-full text-[#3F3F46]">{cosmicInsights.element2}</span>
                               </div>
                             </div>
 
