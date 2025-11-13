@@ -237,7 +237,7 @@ export default function Store({ user }) {
                   
                   {/* Active Badge */}
                   {active && (
-                    <div className="absolute top-2 right-2 bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                    <div className="absolute top-2 right-2 bg-[#2563EB] text-white px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
                       <Check className="w-3 h-3" />
                       Active
                     </div>
