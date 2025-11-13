@@ -722,14 +722,14 @@ export default function Home({ user }) {
 
                 {/* Progress dots hidden */}
 
-                {/* subtle background gradient to dark */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90 pointer-events-none" />
-                {/* Temporary readability dark scrim when expanded */}
+                {/* Gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black pointer-events-none rounded-2xl" />
+                {/* Additional overlay when expanded */}
                 {showDropdown && (
                   <div
                     className="absolute inset-0 pointer-events-none transition-opacity duration-300 rounded-2xl"
                     style={{
-                      backgroundColor: 'rgba(0,0,0,0.8)'
+                      backgroundColor: 'rgba(0,0,0,0.7)'
                     }}
                   />
                 )}
