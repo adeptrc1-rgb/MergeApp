@@ -171,7 +171,7 @@ export default function Store({ user }) {
                 key={item.id}
                 className={`relative bg-white/5 rounded-2xl border overflow-hidden transition-all ${
                   active
-                    ? 'border-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+                    ? 'border-[#2563EB] shadow-[0_0_20px_rgba(37,99,235,0.4)]'
                     : 'border-white/10 hover:border-white/20'
                 }`}
               >
