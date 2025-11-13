@@ -110,13 +110,13 @@ export default function Store({ user }) {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <ShoppingBag className="w-8 h-8 text-purple-400" />
-              <h1 className="text-3xl font-light">Cosmic Store</h1>
+              <ShoppingBag className="w-8 h-8 text-[#2563EB]" />
+              <h1 className="text-3xl font-medium">Aura Lab</h1>
             </div>
-            <div className="flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 px-4 py-2 rounded-full border border-purple-400/30">
-              <Star className="w-5 h-5 text-yellow-400" />
-              <span className="text-xl font-medium">{inventory.star_coins}</span>
-              <span className="text-sm text-white/60">coins</span>
+            <div className="flex items-center gap-2 bg-[#F4F4F5] px-4 py-2 rounded-full border border-[#E4E4E7]">
+              <Star className="w-5 h-5 text-[#2563EB]" />
+              <span className="text-xl font-medium text-[#3F3F46]">{inventory.star_coins}</span>
+              <span className="text-sm text-[#A1A1AA]">coins</span>
             </div>
           </div>
 
