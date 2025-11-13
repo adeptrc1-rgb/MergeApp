@@ -108,32 +108,32 @@
   }
 }
 
-/* Tier 3: Super Like - Premium magical */
+/* Tier 3: Super Like - Premium intelligent */
 .swipe-button.super:not(:disabled):hover {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.2));
-  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.5);
   box-shadow: 
-    0 0 30px rgba(59, 130, 246, 0.4),
-    0 0 60px rgba(168, 85, 247, 0.3);
+    0 0 30px rgba(37, 99, 235, 0.4),
+    0 0 60px rgba(37, 99, 235, 0.3);
   transform: scale(1.1);
   animation: super-glow 1.5s ease-in-out infinite;
 }
 
 .swipe-button.super:not(:disabled):hover svg {
-  filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.8));
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.8));
   stroke-width: 2;
 }
 
 @keyframes super-glow {
   0%, 100% {
     box-shadow: 
-      0 0 30px rgba(59, 130, 246, 0.4),
-      0 0 60px rgba(168, 85, 247, 0.3);
+      0 0 30px rgba(37, 99, 235, 0.4),
+      0 0 60px rgba(37, 99, 235, 0.3);
   }
   50% {
     box-shadow: 
-      0 0 40px rgba(59, 130, 246, 0.6),
-      0 0 80px rgba(168, 85, 247, 0.5);
+      0 0 40px rgba(37, 99, 235, 0.6),
+      0 0 80px rgba(37, 99, 235, 0.5);
   }
 }
 
