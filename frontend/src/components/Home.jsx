@@ -754,54 +754,16 @@ export default function Home({ user }) {
                       return `${currentMatch.first_name}, ${age}`;
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
-                  <div className="flex items-center gap-2 text-white/80 mb-3">
-                    {/* Constellation with skin-based animation */}
-                    {(() => {
-                      const activeSkin = storeItems.find(item => item.id === userInventory?.active_skin);
-                      const glowColor = activeSkin?.effect?.textGlow || '#a78bfa';
-                      const baseGlow = compatibility >= 90 
-                        ? 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.9)) drop-shadow(0 0 16px rgba(168, 85, 247, 0.6))'
-                        : compatibility >= 80
-                        ? 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.7)) drop-shadow(0 0 12px rgba(168, 85, 247, 0.4))'
-                        : compatibility >= 75
-                        ? 'drop-shadow(0 0 4px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 8px rgba(168, 85, 247, 0.3))'
-                        : 'drop-shadow(0 0 2px rgba(168, 85, 247, 0.3))';
-                      
-                      // Add skin-specific glow and animation
-                      let customGlow = baseGlow;
-                      let animationClass = '';
-                      
-                      if (activeSkin?.effect) {
-                        if (activeSkin.effect.type === 'galaxy') {
-                          customGlow = `drop-shadow(0 0 6px ${glowColor}) drop-shadow(0 0 12px ${glowColor}80)`;
-                          animationClass = 'animate-pulse-glow';
-                        } else if (activeSkin.effect.type === 'pastel') {
-                          customGlow = `drop-shadow(0 0 4px ${glowColor}) drop-shadow(0 0 8px ${glowColor}60)`;
-                          animationClass = 'animate-float-gentle';
-                        } else if (activeSkin.effect.type === 'zodiac') {
-                          customGlow = `drop-shadow(0 0 8px ${glowColor}) drop-shadow(0 0 16px ${glowColor}80)`;
-                          animationClass = 'animate-text-shimmer';
-                        } else if (activeSkin.effect.type === 'neon') {
-                          customGlow = `drop-shadow(0 0 10px ${glowColor}) drop-shadow(0 0 20px ${glowColor})`;
-                          animationClass = 'animate-neon-pulse';
-                        }
-                      }
-                      
-                      return (
-                        <div 
-                          className={`relative ${animationClass}`}
-                          style={{ filter: customGlow }}
-                        >
-                          <ConstellationIcon 
-                            sign={currentMatch.zodiac_sign?.toLowerCase() || 'leo'} 
-                            className="w-5 h-5"
-                          />
-                        </div>
-                      );
-                    })()}
-                    <span className="text-base">{currentMatch.zodiac_sign}</span>
+                  {/* Connection Integrity Badge + Location */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="inline-flex items-center gap-1.5 bg-[#F4F4F5] px-3 py-1.5 rounded-full border border-[#E4E4E7]">
+                      <Shield className="w-3.5 h-3.5 text-[#2563EB]" />
+                      <span className="text-xs font-medium text-[#3F3F46]">
+                        {currentMatch.trustScore || 0}% Verified
+                      </span>
+                    </div>
                     <span className="text-white/40">•</span>
-                    <span className="text-sm">
+                    <span className="text-sm text-white/80">
                       {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Location unavailable'}
                     </span>
                   </div>
