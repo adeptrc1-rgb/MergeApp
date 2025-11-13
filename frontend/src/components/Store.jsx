@@ -96,8 +96,8 @@ export default function Store({ user }) {
     return (
       <div className="h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin w-12 h-12 border-4 border-purple-400 border-t-transparent rounded-full mx-auto mb-4" />
-          <p className="text-white/60">Loading cosmic store...</p>
+          <div className="animate-spin w-12 h-12 border-4 border-[#2563EB] border-t-transparent rounded-full mx-auto mb-4" />
+          <p className="text-white/60">Loading Aura Lab...</p>
         </div>
       </div>
     );
