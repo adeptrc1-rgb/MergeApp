@@ -188,10 +188,10 @@
   filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.8)) drop-shadow(0 0 20px rgba(252, 211, 77, 0.6));
 }
 
-/* New Match State - Purple pulse for Merge */
+/* New Match State - Blue pulse for Merge */
 .logo-merge-rg-newMatch {
   animation: merge-pulse 1s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.8));
+  filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.8));
 }
 
 /* Peak Energy State - Blue pulse for Merge */
