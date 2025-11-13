@@ -849,14 +849,14 @@ export default function Home({ user }) {
                               <div className="space-y-3">
                                 <div className="flex items-center justify-between">
                                   <h3 className="text-white/90 text-sm font-medium flex items-center gap-2">
-                                    <Zap className="w-4 h-4 text-[#2563EB]" />
+                                    <Zap className="w-4 h-4" style={{ color: '#00FFE0' }} />
                                     AI Conversation Starters
                                   </h3>
                                   <button
                                     onClick={(e) => { e.stopPropagation(); regenerateStarters(); }}
                                     disabled={loadingAI}
-                                    className="text-xs text-[#2563EB] hover:text-[#60a5fa] disabled:opacity-50"
-                                    style={{ pointerEvents: 'auto' }}
+                                    className="text-xs disabled:opacity-50"
+                                    style={{ color: '#00FFE0', pointerEvents: 'auto' }}
                                   >
                                     {loadingAI ? 'Generating...' : 'Generate More'}
                                   </button>
@@ -864,7 +864,7 @@ export default function Home({ user }) {
                                 
                                 {loadingAI ? (
                                   <div className="flex items-center justify-center py-8 bg-transparent rounded-xl border border-white/10">
-                                    <Sparkles className="w-6 h-6 text-[#2563EB] animate-spin" />
+                                    <Sparkles className="w-6 h-6 animate-spin" style={{ color: '#00FFE0' }} />
                                   </div>
                                 ) : (
                                   <div className="space-y-2">
@@ -880,8 +880,8 @@ export default function Home({ user }) {
                                             trackStarterUsed(currentMatch.id, index, starter);
                                             navigate(`/chat/${currentMatch.id}`, { state: { messageText: starter } });
                                           }}
-                                          className="text-xs text-[#2563EB] hover:text-[#60a5fa] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                                          style={{ pointerEvents: 'auto' }}
+                                          className="text-xs flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                          style={{ color: '#00FFE0', pointerEvents: 'auto' }}
                                         >
                                           <MessageCircle className="w-3 h-3" />
                                           Send This Message
