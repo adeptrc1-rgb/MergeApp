@@ -756,9 +756,9 @@ export default function Home({ user }) {
                   </h2>
                   {/* Connection Integrity Badge + Location */}
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="inline-flex items-center gap-1.5 bg-[#F4F4F5] px-3 py-1.5 rounded-full border border-[#E4E4E7]">
-                      <Shield className="w-3.5 h-3.5 text-[#2563EB]" />
-                      <span className="text-xs font-medium text-[#3F3F46]">
+                    <div className="inline-flex items-center gap-1.5">
+                      <Shield className="w-4 h-4 text-[#2563EB]" strokeWidth={1.5} />
+                      <span className="text-sm font-medium text-white/90">
                         {currentMatch.trustScore || 0}% Verified
                       </span>
                     </div>
