@@ -1,7 +1,8 @@
 /**
  * Merge Logo Component
- * Wordmark where R's counterform defines G's structure
+ * Clean, minimalist, geometric construction
  * The enclosed space inside the R forms the crossbar and hook of the G
+ * Custom geometric sans-serif, medium weight
  */
 
 import React from 'react';
@@ -22,129 +23,97 @@ const MergeLogo = ({
 
   return (
     <div className={`flex items-center ${className}`}>
-      {/* Custom Merge wordmark with R+G negative space integration */}
+      {/* Custom Merge wordmark - R's enclosed counter space defines G's crossbar and hook */}
       <svg
         height={config.height}
-        viewBox="0 0 300 80"
+        viewBox="0 0 340 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* M */}
-        <path
-          d="M 10 65 L 10 15 L 25 40 L 40 15 L 40 65"
-          stroke="#FFFFFF"
-          strokeWidth="6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        
-        {/* E */}
-        <path
-          d="M 60 15 L 90 15 M 60 15 L 60 65 M 60 40 L 85 40 M 60 65 L 90 65"
-          stroke="#FFFFFF"
-          strokeWidth="6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        
-        {/* R - with enclosed counterform that will flow into G */}
+        {/* M - Geometric sans-serif construction */}
         <g>
-          {/* R's vertical stem */}
-          <line
-            x1="110"
-            y1="15"
-            x2="110"
-            y2="65"
-            stroke="#FFFFFF"
-            strokeWidth="6"
-            strokeLinecap="round"
-          />
-          
-          {/* R's bowl/counter - this negative space defines G's structure */}
+          <rect x="15" y="20" width="7" height="60" fill="#FFFFFF" rx="3.5"/>
+          <rect x="48" y="20" width="7" height="60" fill="#FFFFFF" rx="3.5"/>
           <path
-            d="M 110 15 L 135 15 C 145 15, 148 20, 148 30 C 148 40, 145 42, 135 42 L 110 42"
+            d="M 18.5 20 L 35 50 L 51.5 20"
             stroke="#FFFFFF"
-            strokeWidth="6"
+            strokeWidth="7"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
-          />
-          
-          {/* R's leg */}
-          <line
-            x1="130"
-            y1="42"
-            x2="148"
-            y2="65"
-            stroke="#FFFFFF"
-            strokeWidth="6"
-            strokeLinecap="round"
           />
         </g>
         
-        {/* G - Uses R's counterform as its defining structure */}
+        {/* E - Clean geometric */}
         <g>
-          {/* G's vertical stem (flows from R's negative space) */}
-          <line
-            x1="168"
-            y1="20"
-            x2="168"
-            y2="60"
-            stroke="#FFFFFF"
-            strokeWidth="6"
-            strokeLinecap="round"
-          />
-          
-          {/* G's top curve (connects to R's bowl space) */}
-          <path
-            d="M 148 28 C 152 20, 160 15, 168 15"
-            stroke="#FFFFFF"
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          
-          {/* G's bottom curve */}
-          <path
-            d="M 168 65 C 160 65, 152 60, 148 52"
-            stroke="#FFFFFF"
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          
-          {/* G's horizontal bar (forms from R's counter space) */}
-          <line
-            x1="168"
-            y1="40"
-            x2="190"
-            y2="40"
-            stroke="#FFFFFF"
-            strokeWidth="6"
-            strokeLinecap="round"
-          />
-          
-          {/* Subtle connector showing negative space flow */}
-          <circle
-            cx="156"
-            cy="34"
-            r="2"
-            fill="#FFFFFF"
-            opacity="0.4"
-          />
+          <rect x="75" y="20" width="7" height="60" fill="#FFFFFF" rx="3.5"/>
+          <rect x="75" y="20" width="30" height="7" fill="#FFFFFF" rx="3.5"/>
+          <rect x="75" y="46.5" width="27" height="7" fill="#FFFFFF" rx="3.5"/>
+          <rect x="75" y="73" width="30" height="7" fill="#FFFFFF" rx="3.5"/>
         </g>
         
-        {/* E (second E) */}
-        <path
-          d="M 210 15 L 240 15 M 210 15 L 210 65 M 210 40 L 235 40 M 210 65 L 240 65"
-          stroke="#FFFFFF"
-          strokeWidth="6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        {/* R+G - THE CRITICAL NEGATIVE SPACE INTEGRATION */}
+        <g>
+          {/* R - Geometric construction with enclosed counter */}
+          <g>
+            {/* R's vertical stem */}
+            <rect x="125" y="20" width="7" height="60" fill="#FFFFFF" rx="3.5"/>
+            
+            {/* R's bowl - creates the enclosed counter space */}
+            <path
+              d="M 132 20 L 155 20 C 165 20, 170 25, 170 35 C 170 45, 165 50, 155 50 L 132 50"
+              stroke="#FFFFFF"
+              strokeWidth="7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+            
+            {/* R's leg - diagonal at geometric angle */}
+            <path
+              d="M 148 50 L 170 80"
+              stroke="#FFFFFF"
+              strokeWidth="7"
+              strokeLinecap="round"
+            />
+          </g>
+          
+          {/* G - Defined by R's enclosed counter space */}
+          <g>
+            {/* G's main vertical stem - positioned where R's counter flows */}
+            <rect x="185" y="25" width="7" height="50" fill="#FFFFFF" rx="3.5"/>
+            
+            {/* G's top curve - connects from R's bowl opening */}
+            <path
+              d="M 170 30 C 175 22, 180 20, 185 20"
+              stroke="#FFFFFF"
+              strokeWidth="7"
+              strokeLinecap="round"
+              fill="none"
+            />
+            
+            {/* G's bottom curve */}
+            <path
+              d="M 185 80 C 180 80, 175 78, 170 70"
+              stroke="#FFFFFF"
+              strokeWidth="7"
+              strokeLinecap="round"
+              fill="none"
+            />
+            
+            {/* G's crossbar - FORMED BY R'S COUNTER SPACE */}
+            {/* This is the key: the horizontal bar sits at the same height as R's bowl */}
+            <rect x="185" y="46.5" width="25" height="7" fill="#FFFFFF" rx="3.5"/>
+          </g>
+        </g>
+        
+        {/* E - Second E, matching first */}
+        <g>
+          <rect x="235" y="20" width="7" height="60" fill="#FFFFFF" rx="3.5"/>
+          <rect x="235" y="20" width="30" height="7" fill="#FFFFFF" rx="3.5"/>
+          <rect x="235" y="46.5" width="27" height="7" fill="#FFFFFF" rx="3.5"/>
+          <rect x="235" y="73" width="30" height="7" fill="#FFFFFF" rx="3.5"/>
+        </g>
       </svg>
     </div>
   );
