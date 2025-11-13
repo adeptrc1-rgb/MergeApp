@@ -757,8 +757,8 @@ export default function Home({ user }) {
                   {/* Merge Score + Location */}
                   <div className="flex items-center gap-2 mb-3">
                     <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                      <Zap className="w-3.5 h-3.5 text-blue-500" />
-                      <span className="text-sm font-medium">{compatibility}% Merge Score</span>
+                      <Zap className="w-3.5 h-3.5" style={{ color: '#00FFE0' }} />
+                      <span className="text-sm font-medium"><span style={{ color: '#00FFE0' }}>{compatibility}%</span> Merge Score</span>
                     </div>
                     <span className="text-white/40">•</span>
                     <span className="text-sm text-white/80">
