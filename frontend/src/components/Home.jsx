@@ -754,17 +754,11 @@ export default function Home({ user }) {
                       return `${currentMatch.first_name}, ${age}`;
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
-                  {/* Connection Integrity Badge + Location */}
+                  {/* Merge Score + Location */}
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="inline-flex items-center gap-1.5">
-                      <Shield className="w-4 h-4 text-[#2563EB]" strokeWidth={1.5} />
-                      <span className="text-sm font-medium text-white/90">
-                        {currentMatch.trustScore || 0}% {
-                          (currentMatch.trustScore || 0) >= 90 ? 'Reliable' :
-                          (currentMatch.trustScore || 0) >= 75 ? 'Solid' :
-                          'Building Trust'
-                        }
-                      </span>
+                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                      <Zap className="w-3.5 h-3.5 text-blue-500" />
+                      <span className="text-sm font-medium">{compatibility}% Merge Score</span>
                     </div>
                     <span className="text-white/40">•</span>
                     <span className="text-sm text-white/80">
@@ -772,11 +766,20 @@ export default function Home({ user }) {
                     </span>
                   </div>
 
-                  {/* Merge Score + Show More toggle */}
+                  {/* Connection Integrity Tier + Show More toggle */}
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                      <Zap className="w-3.5 h-3.5 text-blue-500" />
-                      <span className="text-sm font-medium">{compatibility}% Merge Score</span>
+                    <div className="relative inline-flex items-center group cursor-help">
+                      <span className="text-sm font-medium text-white/90">
+                        {
+                          (currentMatch.trustScore || 0) >= 90 ? 'Reliable' :
+                          (currentMatch.trustScore || 0) >= 75 ? 'Solid' :
+                          'Building Trust'
+                        }
+                      </span>
+                      {/* Tooltip with exact percentage */}
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-black/90 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                        {currentMatch.trustScore || 0}% Trust Score
+                      </div>
                     </div>
                     <button
                       onClick={(e) => { 
