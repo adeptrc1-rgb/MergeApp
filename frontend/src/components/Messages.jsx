@@ -185,23 +185,28 @@ export default function Messages({ user }) {
   return (
     <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="border-b border-white/10 bg-black flex-shrink-0 select-none" style={{ WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
-        <div className="max-w-4xl mx-auto px-4 py-2">
-          <div className="flex items-center justify-between mb-2">
-            <img src="/asign-logo.png" alt="A Sign" className="h-8" />
-            <button className="text-white/60 hover:text-white">
-              <Sparkles className="w-5 h-5" />
-            </button>
-          </div>
-          <h2 className="text-3xl font-light text-white">Messages</h2>
+      <div className="border-b bg-black flex-shrink-0 select-none" style={{ borderColor: '#262626', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          <h2 className="text-3xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>Messages</h2>
           {coinflipToast && (
-            <div className="mt-3 bg-white/5 border border-white/10 text-white/80 rounded-xl px-4 py-2 inline-flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-purple-300" />
+            <div className="mt-3 rounded-xl px-4 py-2 inline-flex items-center gap-2" style={{ backgroundColor: '#171717', border: '1px solid #262626', color: '#FAFAFA' }}>
+              <Sparkles className="w-4 h-4" style={{ color: '#3B82F6' }} />
               <span className="text-sm">{coinflipToast}</span>
             </div>
           )}
           <div className="mt-3 flex gap-2">
-            <button onClick={createTestMatch} disabled={creating} className="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-white/80 hover:bg-white/15 text-sm">
+            <button 
+              onClick={createTestMatch} 
+              disabled={creating} 
+              className="px-4 py-2 rounded-full text-sm transition-all"
+              style={{ 
+                backgroundColor: '#171717', 
+                border: '1px solid #404040', 
+                color: '#A3A3A3'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#262626'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#171717'}
+            >
               {creating ? 'Creating…' : 'Create Test Match (Dev)'}
             </button>
             <button 
@@ -209,7 +214,13 @@ export default function Messages({ user }) {
                 console.log('Navigating to test starters...');
                 navigate('/chat/test-starters');
               }} 
-              className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 hover:bg-purple-500/30 text-sm flex items-center gap-2"
+              className="px-4 py-2 rounded-full text-sm flex items-center gap-2 transition-all"
+              style={{ 
+                backgroundColor: '#3B82F6', 
+                color: '#FAFAFA'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
             >
               <Sparkles className="w-4 h-4" />
               Test AI Starters
