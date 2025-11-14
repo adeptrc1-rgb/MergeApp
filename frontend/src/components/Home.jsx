@@ -768,8 +768,8 @@ export default function Home({ user }) {
 
                       {/* Interests */}
                       {currentMatch.interests && currentMatch.interests.length > 0 && (
-                        <div className="space-y-2">
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium">Interests</h3>
+                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Interests</h3>
                           <div className="flex flex-wrap gap-2">
                             {currentMatch.interests.map((interest, idx) => (
                               <span key={idx} className="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-xs text-white/90">{interest}</span>
