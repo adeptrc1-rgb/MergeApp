@@ -61,35 +61,7 @@ export default function AstroChat({ user, logout }) {
       return () => clearInterval(interval);
   // When route includes /chat/:matchId, auto-select that match for consistent UI
   useEffect(() => {
-    if (!routeMatchId) return;
-    
-    // Handle test-starters route
-    if (routeMatchId === 'test-starters') {
-      const testMatch = {
-        id: 'test-match-id',
-        first_name: 'Sarah',
-        last_name: 'Chen',
-        birth_date: '1996-08-15',
-        zodiac_sign: 'Leo',
-        photos: ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'],
-        bio: 'Adventure seeker, coffee enthusiast, and weekend hiker.',
-        interests: ['hiking', 'photography', 'coffee', 'travel'],
-        current_location: { city: 'San Francisco' },
-        compatibility_score: 92
-      };
-      
-      // Add test match to matches array if not already there
-      setMatches(prevMatches => {
-        const existingTest = prevMatches.find(m => m.id === 'test-match-id');
-        if (existingTest) return prevMatches;
-        return [testMatch, ...prevMatches];
-      });
-      
-      setSelectedMatch(testMatch);
-      setMessages([]);
-      setLoading(false);
-      return;
-    }
+    if (!routeMatchId || routeMatchId === 'test-starters') return;
     
     if (matches.length === 0) return;
     const m = matches.find(m => String(m.id) === String(routeMatchId) || String(m.match_id) === String(routeMatchId));
