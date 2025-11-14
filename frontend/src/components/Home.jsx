@@ -780,12 +780,9 @@ export default function Home({ user }) {
 
                       {/* Relationship Goals */}
                       {currentMatch.deal_breakers?.relationship_goals && (
-                        <div className="space-y-2">
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
-                            <Sparkles className="w-3 h-3" />
-                            Looking For
-                          </h3>
-                          <p className="text-white/90 text-sm capitalize">{currentMatch.deal_breakers.relationship_goals.replace(/_/g, ' ')}</p>
+                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Looking For</h3>
+                          <p className="text-white/90 text-sm">{currentMatch.deal_breakers.relationship_goals.replace(/_/g, ' ')}</p>
                         </div>
                       )}
 
