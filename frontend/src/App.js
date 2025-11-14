@@ -419,8 +419,6 @@ function LandingPage() {
           }
         }
       `}</style>
-      
-      {/* Distant twinkling stars */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Brighter stars with slower twinkle */}
         <div className="absolute top-[8%] left-[15%] w-1 h-1 bg-white rounded-full animate-pulse opacity-40" style={{animationDuration: '3s'}}></div>
