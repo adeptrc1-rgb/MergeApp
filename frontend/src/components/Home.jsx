@@ -736,9 +736,9 @@ export default function Home({ user }) {
               </div>
 
               {/* Bottom info + dropdown */}
-              <div className="absolute bottom-0 left-0 right-0 text-white z-30" style={{ pointerEvents: 'auto' }}>
-                <div className={`bg-gradient-to-t from-black/70 via-black/40 to-transparent px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`}>
-                  <h2 className="text-4xl font-light mb-2">
+              <div className="absolute bottom-0 left-0 right-0 z-30" style={{ pointerEvents: 'auto', color: '#FAFAFA' }}>
+                <div className={`px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`} style={{ background: 'linear-gradient(to top, #0A0A0A, rgba(10, 10, 10, 0.95), transparent)' }}>
+                  <h2 className="text-4xl font-light mb-2" style={{ color: '#FAFAFA' }}>
                     {userInventory?.active_skin && (() => {
                       const activeSkin = storeItems.find(item => item.id === userInventory.active_skin);
                       if (activeSkin?.effect?.nameAnimation) {
