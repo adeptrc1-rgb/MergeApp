@@ -788,11 +788,8 @@ export default function Home({ user }) {
 
                       {/* Lifestyle */}
                       {currentMatch.lifestyle_factors && (
-                        <div className="space-y-2">
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
-                            <Sparkles className="w-3 h-3" />
-                            Lifestyle
-                          </h3>
+                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Lifestyle</h3>
                           <div className="grid grid-cols-2 gap-2 text-xs">
                             {currentMatch.lifestyle_factors.fitness_health && (
                               <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
