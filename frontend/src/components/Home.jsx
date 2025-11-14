@@ -770,6 +770,27 @@ export default function Home({ user }) {
                         </div>
                       )}
 
+                      {/* Background */}
+                      {(currentMatch.current_location?.city || currentMatch.education?.college) && (
+                        <div className="space-y-2">
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium">Background</h3>
+                          <div className="space-y-1.5">
+                            {currentMatch.current_location?.city && (
+                              <div className="flex items-start gap-2">
+                                <span className="text-white/60 text-sm font-medium min-w-[80px]">From:</span>
+                                <span className="text-white/90 text-sm">{currentMatch.current_location.city}</span>
+                              </div>
+                            )}
+                            {currentMatch.education?.college && (
+                              <div className="flex items-start gap-2">
+                                <span className="text-white/60 text-sm font-medium min-w-[80px]">Education:</span>
+                                <span className="text-white/90 text-sm">{currentMatch.education.college}</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Interests */}
                       {currentMatch.interests && currentMatch.interests.length > 0 && (
                         <div className="space-y-2">
