@@ -19,7 +19,6 @@ import {
   createFloatingHearts
 } from '../utils/particleEffects';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
-import { generateCosmicInsights } from '../utils/cosmicTemplates';
 import MergeLogo from './MergeLogo';
 import CosmicStarfield from './CosmicStarfield';
 import CompatibilityInsights from './CompatibilityInsights';
