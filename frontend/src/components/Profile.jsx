@@ -494,8 +494,19 @@ export default function Profile({ user, logout }) {
                 </div>
               </div>
             )}
-            <button onClick={() => setShowCosmicWheel(true)} disabled={!canSpin} className={`w-full py-3 rounded-xl font-medium transition-all ${canSpin ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white hover:scale-105 shadow-lg shadow-purple-500/30' : 'bg-white/10 text-white/40 cursor-not-allowed'}`}>
-              {canSpin ? '✨ Spin Now' : `⏳ Next spin: ${cooldownCountdown || 'Soon'}`}
+            <button 
+              onClick={() => setShowCosmicWheel(true)} 
+              disabled={!canSpin} 
+              className="w-full py-3 rounded-xl font-semibold transition-all disabled:opacity-50"
+              style={{ 
+                backgroundColor: canSpin ? '#3B82F6' : '#171717',
+                color: canSpin ? '#FAFAFA' : '#737373',
+                border: canSpin ? '1px solid #3B82F6' : '1px solid #262626'
+              }}
+              onMouseEnter={(e) => canSpin && (e.currentTarget.style.backgroundColor = '#2563EB')}
+              onMouseLeave={(e) => canSpin && (e.currentTarget.style.backgroundColor = '#3B82F6')}
+            >
+              {canSpin ? '🔷 Analyze Now' : `⏳ Next analysis: ${cooldownCountdown || 'Soon'}`}
             </button>
           </div>
 
