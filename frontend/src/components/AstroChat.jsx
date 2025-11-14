@@ -44,7 +44,26 @@ export default function AstroChat({ user, logout }) {
       return () => clearInterval(interval);
   // When route includes /chat/:matchId, auto-select that match for consistent UI
   useEffect(() => {
-    if (!routeMatchId || matches.length === 0) return;
+    if (!routeMatchId) return;
+    
+    // Handle test-starters route
+    if (routeMatchId === 'test-starters') {
+      setSelectedMatch({
+        id: 'test-match-id',
+        first_name: 'Sarah',
+        last_name: 'Chen',
+        age: 28,
+        zodiac_sign: 'Leo',
+        photos: ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'],
+        bio: 'Adventure seeker, coffee enthusiast, and weekend hiker.',
+        interests: ['hiking', 'photography', 'coffee', 'travel']
+      });
+      setMessages([]);
+      setLoading(false);
+      return;
+    }
+    
+    if (matches.length === 0) return;
     const m = matches.find(m => String(m.id) === String(routeMatchId) || String(m.match_id) === String(routeMatchId));
     if (m) setSelectedMatch(m);
   }, [routeMatchId, matches]);
