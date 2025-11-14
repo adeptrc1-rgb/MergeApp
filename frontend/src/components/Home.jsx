@@ -300,7 +300,6 @@ export default function Home({ user }) {
       setCosmicInsights(null);
       setAiStarters([]);
       setShowAIStarters(false);
-      setShowCosmicInsights(false);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
@@ -340,7 +339,6 @@ export default function Home({ user }) {
       setCosmicInsights(null);
       setAiStarters([]);
       setShowAIStarters(false);
-      setShowCosmicInsights(false);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
@@ -373,7 +371,6 @@ export default function Home({ user }) {
       setCosmicInsights(null);
       setAiStarters([]);
       setShowAIStarters(false);
-      setShowCosmicInsights(false);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
