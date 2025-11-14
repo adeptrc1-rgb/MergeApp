@@ -419,6 +419,9 @@ function LandingPage() {
           }
         }
       `}</style>
+    </div>
+  );
+}
 
 // Session Handler
 function SessionHandler() {
