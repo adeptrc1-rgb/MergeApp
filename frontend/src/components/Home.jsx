@@ -836,7 +836,7 @@ export default function Home({ user }) {
                     style={{
                       WebkitOverflowScrolling: 'touch',
                       overscrollBehavior: 'contain',
-                      overflowY: showDropdown && !showCosmicInsights ? 'auto' : 'hidden',
+                      overflowY: showDropdown ? 'auto' : 'hidden',
                       overflowX: 'hidden',
                       pointerEvents: 'auto'
                     }}
