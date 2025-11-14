@@ -117,30 +117,9 @@ export default function Home({ user }) {
     }
   };
 
-  // Generate cosmic insights
-  const generateInsights = async (matchUser, compatibilityScore) => {
-    try {
-      // Generate cosmic insights from templates
-      const insights = generateCosmicInsights(
-        user.zodiac_sign || 'Leo',
-        matchUser.zodiac_sign || 'Aries',
-        compatibilityScore
-      );
-      setCosmicInsights(insights);
-    } catch (error) {
-      console.error('Error generating insights:', error);
-    }
-  };
-
   // Handle "Show more" toggle for profile details
-  const handleShowMore = (matchUser, compatibilityScore) => {
-    const newState = !showDropdown;
-    setShowDropdown(newState);
-    
-    // Generate insights when Show more is expanded for the first time
-    if (newState && !cosmicInsights) {
-      generateInsights(matchUser, compatibilityScore);
-    }
+  const handleShowMore = () => {
+    setShowDropdown(!showDropdown);
   };
 
   // Add touch event listener with passive: false to allow preventDefault
