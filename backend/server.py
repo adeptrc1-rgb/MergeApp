@@ -257,13 +257,14 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "rising_sign": u.get("rising_sign"),
             "birth_date": u.get("birth_date", "1995-01-01"),
             "photos": u.get("photos", ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80"]),
-            "current_location": u.get("current_location", {"latitude": 34.05, "longitude": -118.24}),
+            "current_location": u.get("current_location", {"latitude": 34.05, "longitude": -118.24, "city": "Los Angeles"}),
             "compatibility_score": randf() * 30 + 70,
             "bio": u.get("bio", "Stargazer. Coffee lover."),
             "interests": u.get("interests", ["music", "coffee"]),
             "lifestyle_factors": u.get("lifestyle_factors", {}),
             "deal_breakers": u.get("deal_breakers", {}),
-            "preferences": u.get("preferences", {})
+            "preferences": u.get("preferences", {}),
+            "education": u.get("education", {"college": "UCLA"})
         })
     return result
 
