@@ -675,8 +675,15 @@ export default function Home({ user }) {
                       return `${currentMatch.first_name}, ${age}`;
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
-                  {/* Merge Score + Location */}
-                  <div className="flex items-center gap-2 mb-3">
+                  {/* Distance */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm" style={{ color: '#A3A3A3' }}>
+                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Distance unavailable'}
+                    </span>
+                  </div>
+
+                  {/* Merge Score */}
+                  <div className="mb-2">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -707,11 +714,16 @@ export default function Home({ user }) {
                         }}>{compatibility}%</span> Merge Score
                       </span>
                     </button>
-                    <span style={{ color: '#525252' }}>•</span>
-                    <span className="text-sm" style={{ color: '#A3A3A3' }}>
-                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Location unavailable'}
-                    </span>
                   </div>
+
+                  {/* Industry */}
+                  {currentMatch.lifestyle_factors?.occupation && (
+                    <div className="mb-3">
+                      <span className="text-sm" style={{ color: '#A3A3A3' }}>
+                        {currentMatch.lifestyle_factors.occupation}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Show More toggle */}
                   <div className="mb-3">
