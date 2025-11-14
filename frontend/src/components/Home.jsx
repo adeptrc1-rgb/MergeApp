@@ -851,6 +851,14 @@ export default function Home({ user }) {
                           <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
                         </div>
                       )}
+
+                      {/* AI Compatibility Insights */}
+                      <CompatibilityInsights
+                        currentUserId={user.id}
+                        otherUserId={currentMatch.id}
+                        context="profile_view"
+                        depth="standard"
+                      />
                     </div>
                   </div>
                 </div>
