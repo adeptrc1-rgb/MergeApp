@@ -178,36 +178,40 @@ export default function AstroChat({ user, logout }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex">
+    <div className="min-h-screen bg-black flex">
       {/* Matches Sidebar */}
-      <div className={`w-full md:w-96 bg-black/30 backdrop-blur-md border-r border-white/10 flex flex-col ${selectedMatch ? 'hidden md:flex' : 'flex'}`}>
+      <div className={`w-full md:w-96 bg-black border-r flex flex-col ${selectedMatch ? 'hidden md:flex' : 'flex'}`} style={{ borderColor: '#262626' }}>
         {/* Header */}
-        <div className="p-4 border-b border-white/10">
+        <div className="p-4 border-b" style={{ borderColor: '#262626' }}>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-              <Heart className="w-6 h-6 text-pink-400 fill-pink-400" />
-              Matches
+            <h2 className="text-2xl font-semibold flex items-center gap-2" style={{ color: '#FAFAFA' }}>
+              <MessageCircle className="w-6 h-6" style={{ color: '#3B82F6' }} />
+              Connections
             </h2>
             <button 
-              onClick={() => navigate('/dashboard')}
-              className="text-white/60 hover:text-white transition-colors"
+              onClick={() => navigate('/home')}
+              className="transition-colors"
+              style={{ color: '#A3A3A3' }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#FAFAFA'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#A3A3A3'}
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
           </div>
-          <p className="text-purple-200 text-sm">{matches.length} cosmic connection{matches.length !== 1 ? 's' : ''}</p>
+          <p className="text-sm" style={{ color: '#A3A3A3' }}>{matches.length} active connection{matches.length !== 1 ? 's' : ''}</p>
         </div>
 
         {/* Matches List */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto custom-scrollbar">
           {matches.length === 0 ? (
             <div className="p-8 text-center">
-              <div className="text-5xl mb-4">✨</div>
-              <p className="text-purple-200 mb-2">No matches yet!</p>
-              <p className="text-purple-300 text-sm mb-4">Start swiping to find your cosmic connections</p>
+              <div className="text-5xl mb-4">💬</div>
+              <p className="mb-2" style={{ color: '#FAFAFA' }}>No connections yet</p>
+              <p className="text-sm mb-4" style={{ color: '#525252' }}>Start swiping to make connections</p>
               <Button 
-                onClick={() => navigate('/dashboard')}
-                className="bg-gradient-to-r from-purple-500 to-pink-600"
+                onClick={() => navigate('/home')}
+                className="rounded-full px-6 py-2 font-medium transition-all"
+                style={{ backgroundColor: '#3B82F6', color: '#FAFAFA' }}
               >
                 Start Swiping
               </Button>
@@ -217,28 +221,39 @@ export default function AstroChat({ user, logout }) {
               <button
                 key={match.id}
                 onClick={() => setSelectedMatch(match)}
-                className={`w-full p-4 flex items-center gap-3 hover:bg-white/5 transition-colors border-b border-white/5 ${
-                  selectedMatch?.id === match.id ? 'bg-white/10' : ''
-                }`}
+                className={`w-full p-4 flex items-center gap-3 transition-colors border-b`}
+                style={{ 
+                  borderColor: '#262626',
+                  backgroundColor: selectedMatch?.id === match.id ? '#171717' : 'transparent'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#171717'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = selectedMatch?.id === match.id ? '#171717' : 'transparent'}
               >
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl">
-                  {match.first_name.charAt(0)}
+                <div 
+                  className="w-14 h-14 rounded-full bg-cover bg-center flex-shrink-0"
+                  style={{ 
+                    backgroundImage: match.photos?.[0] ? `url(${match.photos[0]})` : 'none',
+                    backgroundColor: !match.photos?.[0] ? '#3B82F6' : 'transparent'
+                  }}
+                >
+                  {!match.photos?.[0] && (
+                    <div className="w-full h-full flex items-center justify-center text-white font-bold text-xl">
+                      {match.first_name.charAt(0)}
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1 text-left">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-white font-semibold">
-                      {match.first_name} {match.last_name?.charAt(0)}.
-                    </h3>
-                    <span className="text-yellow-400 text-xs">
-                      {match.zodiac_sign}
-                    </span>
-                  </div>
-                  <p className="text-purple-200 text-sm">
+                  <h3 className="font-semibold" style={{ color: '#FAFAFA' }}>
+                    {match.first_name} {match.last_name?.charAt(0)}.
+                  </h3>
+                  <p className="text-sm" style={{ color: '#A3A3A3' }}>
                     {calculateAge(match.birth_date)} • {match.current_location?.city || 'Unknown'}
                   </p>
-                  <p className="text-purple-300 text-xs mt-1">
-                    {match.compatibility_score}% Match
-                  </p>
+                  {match.compatibility_score && (
+                    <p className="text-xs mt-1" style={{ color: '#3B82F6' }}>
+                      {match.compatibility_score}% Merge Score
+                    </p>
+                  )}
                 </div>
               </button>
             ))
