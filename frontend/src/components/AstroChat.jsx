@@ -305,7 +305,7 @@ export default function AstroChat({ user, logout }) {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar" style={{ backgroundColor: '#000000' }}>
               {messages.length === 0 ? (
                 <ConversationStarters
                   matchId={selectedMatch.id}
@@ -319,13 +319,16 @@ export default function AstroChat({ user, logout }) {
                   const isMe = msg.sender_id === user.id;
                   return (
                     <div key={idx} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`max-w-xs md:max-w-md px-4 py-3 rounded-2xl ${
-                        isMe 
-                          ? 'bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-br-sm' 
-                          : 'bg-white/10 backdrop-blur-sm text-white rounded-bl-sm border border-white/20'
-                      }`}>
+                      <div 
+                        className={`max-w-xs md:max-w-md px-4 py-3 rounded-2xl ${isMe ? 'rounded-br-sm' : 'rounded-bl-sm'}`}
+                        style={{
+                          backgroundColor: isMe ? '#3B82F6' : '#171717',
+                          color: '#FAFAFA',
+                          border: isMe ? 'none' : '1px solid #262626'
+                        }}
+                      >
                         <p className="text-sm">{msg.message}</p>
-                        <p className={`text-xs mt-1 ${isMe ? 'text-white/70' : 'text-purple-300'}`}>
+                        <p className="text-xs mt-1" style={{ color: isMe ? '#DBEAFE' : '#737373' }}>
                           {new Date(msg.sent_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </p>
                       </div>
