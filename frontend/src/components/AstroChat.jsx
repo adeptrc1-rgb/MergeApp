@@ -68,14 +68,38 @@ export default function AstroChat({ user, logout }) {
         loadMessages(selectedMatch.id);
       }, 3000);
       return () => clearInterval(interval);
-  // When route includes /chat/:matchId, auto-select that match for consistent UI
+  // Handle test-starters route when navigating to it
   useEffect(() => {
-    if (!routeMatchId || routeMatchId === 'test-starters') return;
+    if (routeMatchId === 'test-starters') {
+      const testMatchData = {
+        id: 'test-match-id',
+        first_name: 'Sarah',
+        last_name: 'Chen',
+        birth_date: '1996-08-15',
+        zodiac_sign: 'Leo',
+        photos: ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'],
+        bio: 'Adventure seeker, coffee enthusiast, and weekend hiker.',
+        interests: ['hiking', 'photography', 'coffee', 'travel'],
+        current_location: { city: 'San Francisco' },
+        compatibility_score: 92
+      };
+      
+      console.log('Setting test match:', testMatchData);
+      
+      // Set matches array with test match
+      setMatches([testMatchData]);
+      setSelectedMatch(testMatchData);
+      setMessages([]);
+      setLoading(false);
+      return;
+    }
     
+    // Normal route handling
+    if (!routeMatchId) return;
     if (matches.length === 0) return;
     const m = matches.find(m => String(m.id) === String(routeMatchId) || String(m.match_id) === String(routeMatchId));
     if (m) setSelectedMatch(m);
-  }, [routeMatchId, matches]);
+  }, [routeMatchId]);
 
     }
   }, [selectedMatch]);
