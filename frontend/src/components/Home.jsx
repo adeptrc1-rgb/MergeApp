@@ -771,20 +771,22 @@ export default function Home({ user }) {
                       )}
 
                       {/* Background */}
-                      {(currentMatch.current_location?.city || currentMatch.education?.college) && (
+                      {(currentMatch.current_location?.city || currentMatch.education?.college || currentMatch.education?.school || currentMatch.education) && (
                         <div className="space-y-2">
                           <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium">Background</h3>
                           <div className="space-y-1.5">
                             {currentMatch.current_location?.city && (
                               <div className="flex items-start gap-2">
-                                <span className="text-white/60 text-sm font-medium min-w-[80px]">From:</span>
-                                <span className="text-white/90 text-sm">{currentMatch.current_location.city}</span>
+                                <span className="text-white/60 text-sm font-medium" style={{ minWidth: '90px' }}>From:</span>
+                                <span className="text-white/90 text-sm flex-1">{currentMatch.current_location.city}</span>
                               </div>
                             )}
-                            {currentMatch.education?.college && (
+                            {(currentMatch.education?.college || currentMatch.education?.school || (typeof currentMatch.education === 'string' && currentMatch.education)) && (
                               <div className="flex items-start gap-2">
-                                <span className="text-white/60 text-sm font-medium min-w-[80px]">Education:</span>
-                                <span className="text-white/90 text-sm">{currentMatch.education.college}</span>
+                                <span className="text-white/60 text-sm font-medium" style={{ minWidth: '90px' }}>Education:</span>
+                                <span className="text-white/90 text-sm flex-1">
+                                  {currentMatch.education?.college || currentMatch.education?.school || currentMatch.education}
+                                </span>
                               </div>
                             )}
                           </div>
