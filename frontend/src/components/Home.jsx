@@ -179,11 +179,6 @@ export default function Home({ user }) {
     }
   };
   
-  // Handle Cosmic Insights toggle - expands upward
-  const handleCosmicInsightsToggle = (matchUser, compatibilityScore) => {
-    setShowCosmicInsights(!showCosmicInsights);
-  };
-  
   // Regenerate AI starters
   const regenerateStarters = async () => {
     if (!currentMatch || !cosmicInsights) return;
