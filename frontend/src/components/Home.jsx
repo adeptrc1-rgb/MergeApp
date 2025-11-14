@@ -837,22 +837,21 @@ export default function Home({ user }) {
 
                       {/* Music */}
                       {currentMatch.preferences?.music && (
-                        <div className="space-y-2">
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
-                            <Music className="w-3 h-3" />
-                            Music
-                          </h3>
+                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Music</h3>
                           <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
                         </div>
                       )}
 
                       {/* AI Compatibility Insights */}
-                      <CompatibilityInsights
-                        currentUserId={user.id}
-                        otherUserId={currentMatch.id}
-                        context="profile_view"
-                        depth="standard"
-                      />
+                      <div className="py-4" style={{ backgroundColor: '#1F1F1F', borderRadius: '8px', marginTop: '8px' }}>
+                        <CompatibilityInsights
+                          currentUserId={user.id}
+                          otherUserId={currentMatch.id}
+                          context="profile_view"
+                          depth="standard"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
