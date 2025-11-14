@@ -168,10 +168,10 @@ export default function AstroChat({ user, logout }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4 animate-pulse">💬</div>
-          <p className="text-white text-lg">Loading your cosmic connections...</p>
+          <p className="text-lg" style={{ color: '#A3A3A3' }}>Loading messages...</p>
         </div>
       </div>
     );
