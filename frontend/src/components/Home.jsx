@@ -66,6 +66,9 @@ export default function Home({ user }) {
   // Cosmic Insights expansion state
   const [showCosmicInsights, setShowCosmicInsights] = useState(false);
   
+  // Merge Score breakdown modal state
+  const [showScoreBreakdown, setShowScoreBreakdown] = useState(false);
+  
   // Unread messages state
   const [unreadCount, setUnreadCount] = useState(0);
   
