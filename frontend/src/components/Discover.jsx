@@ -245,7 +245,7 @@ export default function Discover({ user }) {
                           {match.first_name} {match.last_name || 'Owens'}
                         </h3>
                         <div className="flex items-center gap-3 text-white/60 text-sm">
-                          <span>{compatibility}% Vibe Score</span>
+                          <span>{compatibility}% Merge Score</span>
                         </div>
                       </div>
                       {/* Arrow Icon */}
