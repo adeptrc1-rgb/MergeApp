@@ -452,15 +452,15 @@ export default function Profile({ user, logout }) {
             </div>
           </button>
 
-          {/* Daily Cosmic Wheel */}
-          <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl p-6 border border-purple-400/30 mb-6">
+          {/* Connection Matrix */}
+          <div className="rounded-2xl p-6 mb-6" style={{ backgroundColor: '#0A0A0A', border: '1px solid #3B82F6' }}>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-xl font-light text-white mb-2 flex items-center gap-2">
-                  <Gift className="w-5 h-5 text-purple-400 cosmic-pulse-icon" />
-                  Daily Cosmic Wheel
+                <h3 className="text-xl font-semibold mb-2 flex items-center gap-2" style={{ color: '#FAFAFA' }}>
+                  <Gift className="w-5 h-5" style={{ color: '#3B82F6' }} />
+                  Connection Matrix
                 </h3>
-                <p className="text-white/60 text-sm">Spin for free rewards!</p>
+                <p className="text-sm" style={{ color: '#A3A3A3' }}>Analyze patterns for rewards</p>
               </div>
               <Sparkles className="w-8 h-8 text-purple-400 cosmic-pulse-icon" />
             </div>
