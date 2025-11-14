@@ -20,7 +20,6 @@ import {
 } from '../utils/particleEffects';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 import { generateCosmicInsights } from '../utils/cosmicTemplates';
-import { generateAIConversationStarters, trackStarterUsed } from '../services/aiConversationService';
 import MergeLogo from './MergeLogo';
 import LogoStateTester from './LogoStateTester';
 import CosmicStarfield from './CosmicStarfield';
