@@ -60,7 +60,7 @@ export default function Profile({ user, logout }) {
       const params = new URLSearchParams(location.search);
       const openWheel = params.get('openWheel');
       if (openWheel === '1') {
-        setShowCosmicWheel(true);
+        setShowConnectionMatrix(true);
         const newUrl = window.location.pathname;
         window.history.replaceState(null, '', newUrl);
       }
@@ -595,7 +595,7 @@ export default function Profile({ user, logout }) {
                 try {
                   await fetch(`${API}/rewards/reset-cosmic-wheel`, { method: 'POST', credentials: 'include' });
                   await checkDailySpinStatus();
-                  setShowCosmicWheel(true);
+                  setShowConnectionMatrix(true);
                 } catch (e) {
                   console.error('Reset Cosmic Wheel failed', e);
                 }
