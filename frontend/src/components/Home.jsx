@@ -21,7 +21,6 @@ import {
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 import { generateCosmicInsights } from '../utils/cosmicTemplates';
 import MergeLogo from './MergeLogo';
-import LogoStateTester from './LogoStateTester';
 import CosmicStarfield from './CosmicStarfield';
 import { updateLogoState } from '../utils/logoStateManager';
 import logoStateManager from '../utils/logoStateManager';
