@@ -33,6 +33,8 @@ export default function AstroChat({ user, logout }) {
     compatibility_score: 92
   } : null;
   
+  console.log('AstroChat initialized:', { isTestStarters, routeMatchId, testMatch });
+  
   const [matches, setMatches] = useState(isTestStarters && testMatch ? [testMatch] : []);
   const [selectedMatch, setSelectedMatch] = useState(testMatch);
   const [messages, setMessages] = useState([]);
