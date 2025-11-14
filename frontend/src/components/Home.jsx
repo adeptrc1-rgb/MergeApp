@@ -756,12 +756,36 @@ export default function Home({ user }) {
                   </h2>
                   {/* Merge Score + Location */}
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full" style={{ backgroundColor: '#171717', border: '1px solid #404040' }}>
-                      <Zap className="w-3.5 h-3.5" style={{ color: '#3B82F6' }} />
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowScoreBreakdown(!showScoreBreakdown);
+                      }}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer transition-all hover:scale-105"
+                      style={{ 
+                        backgroundColor: '#171717', 
+                        border: '1px solid #404040',
+                        boxShadow: compatibility >= 95 ? '0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.3)' :
+                                   compatibility >= 85 ? '0 0 15px #8B5CF6, 0 0 30px rgba(139, 92, 246, 0.3)' :
+                                   compatibility >= 75 ? '0 0 15px #3B82F6, 0 0 30px rgba(59, 130, 246, 0.3)' :
+                                   'none'
+                      }}
+                    >
+                      <Zap className="w-3.5 h-3.5" style={{ 
+                        color: compatibility >= 95 ? '#00FFFF' :
+                               compatibility >= 85 ? '#8B5CF6' :
+                               compatibility >= 75 ? '#3B82F6' :
+                               '#A3A3A3'
+                      }} />
                       <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>
-                        <span style={{ color: '#3B82F6' }}>{compatibility}%</span> Merge Score
+                        <span style={{ 
+                          color: compatibility >= 95 ? '#00FFFF' :
+                                 compatibility >= 85 ? '#8B5CF6' :
+                                 compatibility >= 75 ? '#3B82F6' :
+                                 '#A3A3A3'
+                        }}>{compatibility}%</span> Merge Score
                       </span>
-                    </div>
+                    </button>
                     <span style={{ color: '#525252' }}>•</span>
                     <span className="text-sm" style={{ color: '#A3A3A3' }}>
                       {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Location unavailable'}
