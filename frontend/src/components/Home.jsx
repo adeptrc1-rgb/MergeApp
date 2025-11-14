@@ -975,9 +975,6 @@ export default function Home({ user }) {
 
       {/* Bottom Navigation */}
       <BottomNav currentTab="home" navigate={navigate} />
-      
-      {/* Logo State Tester (Developer Tool) */}
-      <LogoStateTester />
 
       {/* Merge Score Breakdown Modal */}
       {showScoreBreakdown && currentMatch && (
