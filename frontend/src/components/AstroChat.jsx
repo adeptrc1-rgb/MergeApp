@@ -267,22 +267,13 @@ export default function AstroChat({ user, logout }) {
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {messages.length === 0 ? (
-                <div className="flex items-center justify-center h-full">
-                  <div className="text-center max-w-md">
-                    <div className="text-5xl mb-4">✨</div>
-                    <h3 className="text-white text-xl font-semibold mb-2">
-                      It's a match!
-                    </h3>
-                    <p className="text-purple-200 mb-4">
-                      You and {selectedMatch.first_name} both liked each other. Start the conversation!
-                    </p>
-                    <div className="bg-purple-500/20 border border-purple-400/30 rounded-xl p-4 mb-4">
-                      <p className="text-purple-100 text-sm">
-                        💫 Cosmic Tip: {selectedMatch.zodiac_sign}s appreciate genuine conversations!
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <ConversationStarters
+                  matchId={selectedMatch.id}
+                  matchUser={selectedMatch}
+                  messageCount={messages.length}
+                  onSelectStarter={handleSelectStarter}
+                  variant="empty"
+                />
               ) : (
                 messages.map((msg, idx) => {
                   const isMe = msg.sender_id === user.id;
