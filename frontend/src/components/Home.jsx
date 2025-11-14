@@ -600,10 +600,10 @@ export default function Home({ user }) {
       )}
 
       {/* Header */}
-      <div className="flex-shrink-0" style={{ backgroundColor: '#000000' }}>
+      <div className="flex-shrink-0" style={{ backgroundColor: '#171717' }}>
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Merge wordmark */}
-          <MergeLogo size="md" color="#FFFFFF" />
+          <MergeLogo size="md" color="#FAFAFA" />
           
           {/* Messages icon on the right - Elegant design */}
           <button
