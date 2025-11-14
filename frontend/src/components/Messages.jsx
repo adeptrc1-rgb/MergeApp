@@ -200,9 +200,13 @@ export default function Messages({ user }) {
               <span className="text-sm">{coinflipToast}</span>
             </div>
           )}
-          <div className="mt-3">
+          <div className="mt-3 flex gap-2">
             <button onClick={createTestMatch} disabled={creating} className="px-4 py-2 rounded-full bg-white/10 border border-white/15 text-white/80 hover:bg-white/15 text-sm">
               {creating ? 'Creating…' : 'Create Test Match (Dev)'}
+            </button>
+            <button onClick={() => navigate('/chat/test-starters')} className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 hover:bg-purple-500/30 text-sm flex items-center gap-2">
+              <Sparkles className="w-4 h-4" />
+              Test AI Starters
             </button>
           </div>
         </div>
