@@ -21,7 +21,11 @@ export default function AstroChat({ user, logout }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [inputFocusTime, setInputFocusTime] = useState(0);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [showInlineStarters, setShowInlineStarters] = useState(false);
   const messagesEndRef = useRef(null);
+  const inputFocusTimer = useRef(null);
   
   // Mobile detection for responsive UI
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
