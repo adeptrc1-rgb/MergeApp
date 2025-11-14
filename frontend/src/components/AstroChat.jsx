@@ -63,7 +63,7 @@ export default function AstroChat({ user, logout }) {
 
   const loadMatches = async () => {
     try {
-      const response = await axios.get(`${API}/matches/my-matches`);
+      const response = await axios.get(`${API}/matches`);
       setMatches(response.data);
       setLoading(false);
     } catch (error) {
