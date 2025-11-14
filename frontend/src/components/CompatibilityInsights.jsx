@@ -99,24 +99,24 @@ export default function CompatibilityInsights({
         </button>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-3">
         {insights.map((insight, index) => (
           <div
             key={index}
             className="rounded-lg p-3 transition-all hover:scale-[1.01]"
             style={{ 
-              backgroundColor: '#171717', 
-              border: '1px solid #404040',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
+              backgroundColor: '#0A0A0A', 
+              border: '1px solid #262626',
+              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.5)'
             }}
           >
-            <div className="flex items-start gap-2">
-              <span className="text-lg flex-shrink-0">{insight.icon}</span>
+            <div className="flex items-start gap-3">
+              <span className="text-xl flex-shrink-0 mt-0.5">{insight.icon}</span>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium mb-1" style={{ color: '#FAFAFA' }}>
+                <h4 className="text-sm font-semibold mb-1.5 tracking-wide" style={{ color: '#FAFAFA', lineHeight: '1.4' }}>
                   {insight.title}
                 </h4>
-                <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                <p className="text-xs leading-relaxed tracking-wide" style={{ color: '#A3A3A3', lineHeight: '1.6' }}>
                   {insight.description}
                 </p>
               </div>
