@@ -1103,4 +1103,261 @@ async def generate_conversation_starters(body: AIStarterRequest, request: Reques
             "model": "fallback"
         }
 
+# ==================== CONVERSATION STARTERS FOR MESSAGING ====================
+
+class ConversationStartersRequest(BaseModel):
+    match_id: str
+    conversation_stage: str = "first_message"  # first_message, stalled, active
+
+@api_router.get("/conversation-starters/{match_id}")
+async def get_conversation_starters(
+    match_id: str,
+    conversation_stage: str = "first_message",
+    user: User = Depends(get_current_user)
+):
+    """
+    Get personalized conversation starters for a specific match
+    """
+    try:
+        # Get match data
+        match_doc = await db.matches.find_one({"id": match_id})
+        if not match_doc:
+            raise HTTPException(status_code=404, detail="Match not found")
+        
+        # Determine the other user
+        other_user_id = match_doc["user2_id"] if match_doc["user1_id"] == user.id else match_doc["user1_id"]
+        other_user_doc = await db.users.find_one({"id": other_user_id})
+        if not other_user_doc:
+            raise HTTPException(status_code=404, detail="Match user not found")
+        
+        # Get message history to determine context
+        messages_cursor = db.messages.find({"match_id": match_id}).sort("sent_at", 1).limit(10)
+        messages = await messages_cursor.to_list(length=10)
+        
+        # Get or generate conversation starters
+        starter_doc = await db.conversation_starters.find_one({
+            "match_id": match_id,
+            "user_id": user.id,
+            "conversation_stage": conversation_stage
+        })
+        
+        # Check if starters are recent (within 2 hours)
+        if starter_doc and starter_doc.get("created_at"):
+            created_at = starter_doc["created_at"]
+            if isinstance(created_at, str):
+                created_at = datetime.fromisoformat(created_at)
+            age = now_utc() - created_at
+            if age < timedelta(hours=2):
+                return {
+                    "success": True,
+                    "starters": starter_doc.get("starters", []),
+                    "cached": True
+                }
+        
+        # Generate new starters using AI
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
+        
+        api_key = os.environ.get("EMERGENT_LLM_KEY")
+        if not api_key:
+            # Return fallback starters
+            return generate_fallback_starters(user, other_user_doc, conversation_stage)
+        
+        # Build context for AI
+        shared_interests = find_shared_interests(user, other_user_doc)
+        
+        prompt = build_starter_prompt(
+            user,
+            other_user_doc,
+            shared_interests,
+            conversation_stage,
+            len(messages)
+        )
+        
+        session_id = f"starters_{match_id}_{uuid.uuid4()}"
+        chat = LlmChat(
+            api_key=api_key,
+            session_id=session_id,
+            system_message="You are a witty, empathetic dating coach who creates personalized, engaging conversation starters."
+        ).with_model("openai", "gpt-4o-mini")
+        
+        user_message = UserMessage(text=prompt)
+        response = await chat.send_message(user_message)
+        
+        # Parse starters
+        starters = parse_ai_starters(response)
+        
+        # Store in database
+        await db.conversation_starters.insert_one({
+            "id": str(uuid.uuid4()),
+            "match_id": match_id,
+            "user_id": user.id,
+            "conversation_stage": conversation_stage,
+            "starters": starters,
+            "created_at": now_utc(),
+            "used": []
+        })
+        
+        return {
+            "success": True,
+            "starters": starters,
+            "cached": False
+        }
+        
+    except Exception as e:
+        print(f"Error generating conversation starters: {e}")
+        # Return fallback starters on error
+        try:
+            other_user_doc = await db.users.find_one({"id": other_user_id})
+            return generate_fallback_starters(user, other_user_doc, conversation_stage)
+        except:
+            return {
+                "success": True,
+                "starters": [
+                    "Hey! I'd love to get to know you better. What brings you joy?",
+                    "Your profile caught my attention! What's something you're passionate about?",
+                    "Let's start with something fun—what's your go-to weekend activity?"
+                ],
+                "cached": False
+            }
+
+@api_router.post("/conversation-starters/{match_id}/track")
+async def track_starter_usage(
+    match_id: str,
+    body: dict,
+    user: User = Depends(get_current_user)
+):
+    """
+    Track which conversation starters users actually use
+    """
+    try:
+        starter_text = body.get("starter_text", "")
+        starter_index = body.get("starter_index", -1)
+        
+        await db.conversation_starters.update_one(
+            {
+                "match_id": match_id,
+                "user_id": user.id
+            },
+            {
+                "$push": {
+                    "used": {
+                        "starter_text": starter_text,
+                        "starter_index": starter_index,
+                        "used_at": now_utc()
+                    }
+                }
+            }
+        )
+        
+        return {"success": True}
+    except Exception as e:
+        print(f"Error tracking starter usage: {e}")
+        return {"success": False, "error": str(e)}
+
+def find_shared_interests(user1, user2):
+    """Find shared interests between two users"""
+    interests1 = set(user1.interests or [])
+    interests2 = set(user2.get("interests", []))
+    shared = list(interests1 & interests2)
+    return shared
+
+def build_starter_prompt(user, other_user, shared_interests, conversation_stage, message_count):
+    """Build AI prompt for conversation starters"""
+    
+    user1_name = user.first_name
+    user2_name = other_user.get("first_name", "them")
+    user1_sign = user.zodiac_sign or "Unknown"
+    user2_sign = other_user.get("zodiac_sign", "Unknown")
+    user1_interests = ", ".join(user.interests[:5]) if user.interests else "not specified"
+    user2_interests = ", ".join(other_user.get("interests", [])[:5]) or "not specified"
+    shared_text = ", ".join(shared_interests) if shared_interests else "none identified"
+    
+    if conversation_stage == "first_message":
+        context = f"This is the very first message between {user1_name} and {user2_name}."
+    elif conversation_stage == "stalled":
+        context = f"{user1_name} and {user2_name} had {message_count} messages but the conversation has stalled."
+    else:
+        context = f"{user1_name} and {user2_name} have an active conversation with {message_count} messages."
+    
+    prompt = f"""Generate 3 personalized, engaging conversation starters for a dating app match.
+
+CONTEXT: {context}
+
+USER 1 ({user1_name}):
+- Zodiac: {user1_sign}
+- Interests: {user1_interests}
+
+USER 2 ({user2_name}):
+- Zodiac: {user2_sign}
+- Interests: {user2_interests}
+
+SHARED INTERESTS: {shared_text}
+
+Create starters that are:
+1. Personalized to their interests and signs
+2. Open-ended questions that invite conversation
+3. Natural, warm, and authentic (not cheesy)
+4. 10-20 words each
+5. Reference specific details when possible
+
+Return ONLY 3 starters, one per line, numbered 1-3."""
+    
+    return prompt
+
+def parse_ai_starters(response_text):
+    """Parse AI response into list of starters"""
+    starters = []
+    lines = response_text.strip().split('\n')
+    
+    for line in lines:
+        line = line.strip()
+        if line and (line[0].isdigit() or line.startswith('-')):
+            cleaned = line.lstrip('0123456789.-) ').strip()
+            if cleaned and len(cleaned) > 10:
+                starters.append(cleaned)
+    
+    # Ensure we have exactly 3
+    if len(starters) < 3:
+        starters = [
+            "Hey! What's something you're passionate about?",
+            "Your profile caught my attention—tell me more about yourself!",
+            "Let's start with something fun—what's your favorite way to spend a weekend?"
+        ][:3]
+    
+    return starters[:3]
+
+def generate_fallback_starters(user, other_user, conversation_stage):
+    """Generate fallback starters when AI is unavailable"""
+    name = other_user.get("first_name", "there")
+    sign = other_user.get("zodiac_sign", "")
+    interests = other_user.get("interests", [])
+    
+    if conversation_stage == "first_message":
+        starters = [
+            f"Hey {name}! Your profile caught my attention. What brings you here?",
+            f"Hi {name}! I'd love to hear more about you. What are you passionate about?",
+            f"Hey! Your vibe seems really cool. What's something that makes you smile?"
+        ]
+    elif conversation_stage == "stalled":
+        starters = [
+            f"Hey {name}! How has your week been going?",
+            f"I was thinking about our conversation—how are you doing?",
+            f"Hey! What's been the highlight of your week so far?"
+        ]
+    else:
+        starters = [
+            f"What's your take on this: {interests[0] if interests else 'your favorite hobby'}?",
+            f"I'm curious—what's something you've always wanted to try?",
+            f"If you could be anywhere right now, where would it be?"
+        ]
+    
+    if sign:
+        starters[0] = f"Hey {name}! As a {sign}, what's your vibe been like lately? ✨"
+    
+    return {
+        "success": True,
+        "starters": starters,
+        "cached": False
+    }
+
 app.include_router(api_router)
