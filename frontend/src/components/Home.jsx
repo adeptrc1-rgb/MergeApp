@@ -727,7 +727,7 @@ export default function Home({ user }) {
                       pointerEvents: 'auto'
                     }}
                   >
-                    <div className="space-y-4 pt-2 pb-12">
+                    <div className="space-y-0 pt-2 pb-12">
                       {/* No data fallback */}
                       {!currentMatch.bio && (!currentMatch.interests || currentMatch.interests.length === 0) && !currentMatch.deal_breakers?.relationship_goals && !currentMatch.lifestyle_factors && !currentMatch.preferences?.music && (
                         <div className="text-center py-4">
@@ -737,8 +737,8 @@ export default function Home({ user }) {
 
                       {/* Bio */}
                       {currentMatch.bio && (
-                        <div className="space-y-2">
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium">About</h3>
+                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">About</h3>
                           <p className="text-white/90 text-sm leading-relaxed">{currentMatch.bio}</p>
                         </div>
                       )}
