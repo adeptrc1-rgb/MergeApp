@@ -206,7 +206,6 @@ export default function Home({ user }) {
       setCurrentIndex(currentIndex + 1);
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
-      setCosmicInsights(null);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
@@ -243,7 +242,6 @@ export default function Home({ user }) {
       setCurrentIndex(currentIndex + 1);
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
-      setCosmicInsights(null);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
@@ -273,7 +271,6 @@ export default function Home({ user }) {
       setCurrentIndex(currentIndex + 1);
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
-      setCosmicInsights(null);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
