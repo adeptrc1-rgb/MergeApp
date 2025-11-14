@@ -29,7 +29,7 @@ axios.defaults.withCredentials = true;
 
 export default function Profile({ user, logout }) {
   const navigate = useNavigate();
-  const [showCosmicWheel, setShowCosmicWheel] = useState(false);
+  const [showConnectionMatrix, setShowConnectionMatrix] = useState(false);
   const [canSpin, setCanSpin] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState({});
   const [wheelStatus, setWheelStatus] = useState(null);
