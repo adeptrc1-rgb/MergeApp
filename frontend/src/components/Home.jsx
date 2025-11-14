@@ -231,8 +231,6 @@ export default function Home({ user }) {
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
       setCosmicInsights(null);
-      setAiStarters([]);
-      setShowAIStarters(false);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
@@ -270,8 +268,6 @@ export default function Home({ user }) {
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
       setCosmicInsights(null);
-      setAiStarters([]);
-      setShowAIStarters(false);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
@@ -302,8 +298,6 @@ export default function Home({ user }) {
       setSwipeDirection(null);
       setCurrentPhotoIndex(0);
       setCosmicInsights(null);
-      setAiStarters([]);
-      setShowAIStarters(false);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
     }, 300);
