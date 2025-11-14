@@ -31,15 +31,10 @@ export default function AstroChat({ user, logout }) {
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   useEffect(() => {
-    console.log('LoadMatches effect:', { isTestStarters });
-    if (!isTestStarters) {
+    if (routeMatchId !== 'test-starters') {
       loadMatches();
-    } else {
-      console.log('Test starters mode - skipping loadMatches');
-      console.log('Current matches:', matches);
-      console.log('Current selectedMatch:', selectedMatch);
     }
-  }, [isTestStarters]);
+  }, []);
 
   useEffect(() => {
     if (selectedMatch) {
