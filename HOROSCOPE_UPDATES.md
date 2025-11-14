@@ -140,7 +140,7 @@ Each zodiac has a unique star pattern:
 ### Verify Message Rotation
 ```bash
 # Get today's horoscope
-curl https://star-match-4.preview.emergentagent.com/api/horoscope/today \
+curl https://datamerge-dev.preview.emergentagent.com/api/horoscope/today \
   -H "Cookie: session_token=YOUR_TOKEN"
 
 # Check different days

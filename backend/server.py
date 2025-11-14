@@ -15,7 +15,7 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 # CORS
-preview_origin = os.environ.get("PREVIEW_ORIGIN", "https://star-match-4.preview.emergentagent.com")
+preview_origin = os.environ.get("PREVIEW_ORIGIN", "https://datamerge-dev.preview.emergentagent.com")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[preview_origin, "http://localhost:3000", "https://localhost:3000"],
