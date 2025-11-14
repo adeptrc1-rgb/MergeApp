@@ -46,8 +46,20 @@ export default function LoginApp() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center">
-        <div className="text-white text-xl">🔄 Loading...</div>
+      <div 
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#0A0A0A' }}
+      >
+        <div className="text-center">
+          <div 
+            className="w-12 h-12 mx-auto mb-4 rounded-full animate-spin"
+            style={{ 
+              border: '3px solid #404040',
+              borderTopColor: '#3B82F6'
+            }}
+          />
+          <div style={{ color: '#FAFAFA', fontSize: '16px' }}>Loading...</div>
+        </div>
       </div>
     );
   }
