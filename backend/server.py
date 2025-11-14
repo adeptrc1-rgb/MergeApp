@@ -264,7 +264,8 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "lifestyle_factors": u.get("lifestyle_factors", {}),
             "deal_breakers": u.get("deal_breakers", {}),
             "preferences": u.get("preferences", {}),
-            "education": u.get("education", {"college": "UCLA"})
+            "education": u.get("education", {"college": "UCLA"}),
+            "trustScore": u.get("trust_score", 75)
         })
     return result
 
