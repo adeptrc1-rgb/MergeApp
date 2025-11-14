@@ -713,25 +713,8 @@ export default function Home({ user }) {
                     </span>
                   </div>
 
-                  {/* Connection Integrity Tier + Show More toggle */}
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="relative inline-flex items-center group cursor-help">
-                      <span className="text-sm font-medium" style={{ 
-                        color: (currentMatch.trustScore || 0) >= 90 ? '#3B82F6' : 
-                               (currentMatch.trustScore || 0) >= 75 ? '#F59E0B' : 
-                               '#A3A3A3'
-                      }}>
-                        {
-                          (currentMatch.trustScore || 0) >= 90 ? 'Reliable' :
-                          (currentMatch.trustScore || 0) >= 75 ? 'Solid' :
-                          'Building Trust'
-                        }
-                      </span>
-                      {/* Tooltip with exact percentage */}
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap" style={{ backgroundColor: '#171717', color: '#FAFAFA' }}>
-                        {currentMatch.trustScore || 0}% Trust Score
-                      </div>
-                    </div>
+                  {/* Show More toggle */}
+                  <div className="mb-3">
                     <button
                       onClick={(e) => { 
                         e.stopPropagation();
