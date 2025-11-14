@@ -56,11 +56,8 @@ export default function Home({ user }) {
   const [userInventory, setUserInventory] = useState(null);
   const [justSwiped, setJustSwiped] = useState(false);
   
-  // AI Conversation Starters State
+  // Cosmic Insights State
   const [cosmicInsights, setCosmicInsights] = useState(null);
-  const [aiStarters, setAiStarters] = useState([]);
-  const [loadingAI, setLoadingAI] = useState(false);
-  const [showAIStarters, setShowAIStarters] = useState(false);
   
   // Merge Score breakdown modal state
   const [showScoreBreakdown, setShowScoreBreakdown] = useState(false);
