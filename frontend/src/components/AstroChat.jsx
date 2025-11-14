@@ -31,7 +31,12 @@ export default function AstroChat({ user, logout }) {
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   useEffect(() => {
-    if (routeMatchId !== 'test-starters') {
+    console.log('Initial mount effect, routeMatchId:', routeMatchId);
+    if (routeMatchId === 'test-starters') {
+      console.log('Test starters route detected, skipping loadMatches');
+      setLoading(false);
+    } else {
+      console.log('Normal route, calling loadMatches');
       loadMatches();
     }
   }, []);
