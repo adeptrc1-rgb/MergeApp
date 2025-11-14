@@ -16,11 +16,28 @@ axios.defaults.withCredentials = true;
 export default function AstroChat({ user, logout }) {
   const navigate = useNavigate();
   const { matchId: routeMatchId } = useParams();
-  const [matches, setMatches] = useState([]);
-  const [selectedMatch, setSelectedMatch] = useState(null);
+  // Check if this is test-starters route
+  const isTestStarters = routeMatchId === 'test-starters';
+  
+  // Initialize with test match if test-starters route
+  const testMatch = isTestStarters ? {
+    id: 'test-match-id',
+    first_name: 'Sarah',
+    last_name: 'Chen',
+    birth_date: '1996-08-15',
+    zodiac_sign: 'Leo',
+    photos: ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'],
+    bio: 'Adventure seeker, coffee enthusiast, and weekend hiker.',
+    interests: ['hiking', 'photography', 'coffee', 'travel'],
+    current_location: { city: 'San Francisco' },
+    compatibility_score: 92
+  } : null;
+  
+  const [matches, setMatches] = useState(isTestStarters && testMatch ? [testMatch] : []);
+  const [selectedMatch, setSelectedMatch] = useState(testMatch);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!isTestStarters);
   const [inputFocusTime, setInputFocusTime] = useState(0);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [showInlineStarters, setShowInlineStarters] = useState(false);
