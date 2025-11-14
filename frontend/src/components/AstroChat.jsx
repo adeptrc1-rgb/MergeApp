@@ -17,10 +17,6 @@ export default function AstroChat({ user, logout }) {
   const navigate = useNavigate();
   const { matchId: routeMatchId } = useParams();
   
-  console.log('=== AstroChat Render ===');
-  console.log('routeMatchId:', routeMatchId);
-  console.log('user:', user);
-  
   const [matches, setMatches] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [messages, setMessages] = useState([]);
