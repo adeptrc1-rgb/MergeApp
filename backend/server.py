@@ -1362,4 +1362,268 @@ def generate_fallback_starters(user, other_user, conversation_stage):
         "cached": False
     }
 
+# ==================== COMPATIBILITY INSIGHTS AI ====================
+
+class CompatibilityAnalysisRequest(BaseModel):
+    user_a_id: str
+    user_b_id: str
+    context: str = "profile_view"  # profile_view, match_screen, conversation_starter
+    depth: str = "standard"  # quick, standard, deep
+
+@api_router.post("/analyze-compatibility")
+async def analyze_compatibility(
+    body: CompatibilityAnalysisRequest,
+    user: User = Depends(get_current_user)
+):
+    """
+    Generate AI-powered compatibility insights between two users
+    """
+    try:
+        # Get both user profiles
+        user_a_doc = await db.users.find_one({"id": body.user_a_id})
+        user_b_doc = await db.users.find_one({"id": body.user_b_id})
+        
+        if not user_a_doc or not user_b_doc:
+            raise HTTPException(status_code=404, detail="One or both users not found")
+        
+        # Check cache first
+        cache_key = f"insights_{body.user_a_id}_{body.user_b_id}_{body.context}"
+        cached_insights = await db.compatibility_insights.find_one({"cache_key": cache_key})
+        
+        # Check if cache is still valid (24 hours)
+        if cached_insights and cached_insights.get("created_at"):
+            created_at = cached_insights["created_at"]
+            if isinstance(created_at, str):
+                created_at = datetime.fromisoformat(created_at)
+            age = now_utc() - created_at
+            if age < timedelta(hours=24):
+                return {
+                    "success": True,
+                    "insights": cached_insights.get("insights", []),
+                    "summary": cached_insights.get("summary", ""),
+                    "cached": True
+                }
+        
+        # Generate new insights using AI
+        from emergentintegrations.llm.chat import LlmChat, UserMessage
+        
+        api_key = os.environ.get("EMERGENT_LLM_KEY")
+        if not api_key:
+            # Return template-based insights as fallback
+            return generate_template_insights(user_a_doc, user_b_doc)
+        
+        # Build analysis prompt
+        prompt = build_compatibility_prompt(user_a_doc, user_b_doc, body.context, body.depth)
+        
+        session_id = f"compat_{body.user_a_id}_{body.user_b_id}_{uuid.uuid4()}"
+        chat = LlmChat(
+            api_key=api_key,
+            session_id=session_id,
+            system_message="You are an expert relationship compatibility analyst. Generate insightful, personalized, and actionable compatibility insights for dating app users."
+        ).with_model("openai", "gpt-4o-mini")
+        
+        user_message = UserMessage(text=prompt)
+        response = await chat.send_message(user_message)
+        
+        # Parse AI response into structured insights
+        parsed_insights = parse_compatibility_insights(response)
+        
+        # Store in cache
+        await db.compatibility_insights.insert_one({
+            "cache_key": cache_key,
+            "user_a_id": body.user_a_id,
+            "user_b_id": body.user_b_id,
+            "context": body.context,
+            "insights": parsed_insights["insights"],
+            "summary": parsed_insights["summary"],
+            "created_at": now_utc()
+        })
+        
+        return {
+            "success": True,
+            "insights": parsed_insights["insights"],
+            "summary": parsed_insights["summary"],
+            "cached": False
+        }
+        
+    except Exception as e:
+        print(f"Error analyzing compatibility: {e}")
+        # Return template-based fallback
+        try:
+            return generate_template_insights(user_a_doc, user_b_doc)
+        except:
+            return {
+                "success": False,
+                "insights": [],
+                "summary": "Unable to generate insights at this time",
+                "cached": False
+            }
+
+def build_compatibility_prompt(user_a, user_b, context, depth):
+    """Build AI prompt for compatibility analysis"""
+    
+    # Extract profile data
+    user_a_name = user_a.get("first_name", "User A")
+    user_b_name = user_b.get("first_name", "User B")
+    
+    user_a_interests = ", ".join(user_a.get("interests", [])[:5]) or "not specified"
+    user_b_interests = ", ".join(user_b.get("interests", [])[:5]) or "not specified"
+    
+    user_a_bio = user_a.get("bio", "No bio")
+    user_b_bio = user_b.get("bio", "No bio")
+    
+    user_a_lifestyle = user_a.get("lifestyle_factors", {})
+    user_b_lifestyle = user_b.get("lifestyle_factors", {})
+    
+    user_a_goals = user_a.get("deal_breakers", {}).get("relationship_goals", "not specified")
+    user_b_goals = user_b.get("deal_breakers", {}).get("relationship_goals", "not specified")
+    
+    user_a_music = user_a.get("preferences", {}).get("music", "not specified")
+    user_b_music = user_b.get("preferences", {}).get("music", "not specified")
+    
+    user_a_occupation = user_a_lifestyle.get("occupation", "not specified")
+    user_b_occupation = user_b_lifestyle.get("occupation", "not specified")
+    
+    # Find shared interests
+    shared_interests = list(set(user_a.get("interests", [])) & set(user_b.get("interests", [])))
+    shared_text = ", ".join(shared_interests) if shared_interests else "none identified"
+    
+    prompt = f"""Analyze these two dating app users and generate 3-4 personalized compatibility insights.
+
+USER A ({user_a_name}):
+- Interests: {user_a_interests}
+- Bio: {user_a_bio}
+- Occupation: {user_a_occupation}
+- Relationship Goals: {user_a_goals}
+- Music: {user_a_music}
+
+USER B ({user_b_name}):
+- Interests: {user_b_interests}
+- Bio: {user_b_bio}
+- Occupation: {user_b_occupation}
+- Relationship Goals: {user_b_goals}
+- Music: {user_b_music}
+
+SHARED INTERESTS: {shared_text}
+
+Generate 3-4 compatibility insights that:
+1. Focus on LIFESTYLE COMPATIBILITY (daily routines, social preferences, work-life balance)
+2. Highlight SHARED VALUES and outlooks on life
+3. Suggest PRACTICAL dating scenarios they'd both enjoy
+4. Are POSITIVE and encouraging (focus on opportunities, not problems)
+5. Feel PERSONALIZED to these specific users (not generic)
+6. Are concise and actionable
+
+Format EXACTLY as follows (one insight per line):
+[EMOJI] **[Title]**
+[1-2 sentence explanation]
+
+Example:
+🎯 **Shared Adventure Spirit**
+Both of you prioritize spontaneous experiences and exploring new places. Weekend getaways and trying new restaurants would be natural date ideas for you two.
+
+Now generate 3-4 insights for {user_a_name} and {user_b_name}:"""
+    
+    return prompt
+
+def parse_compatibility_insights(ai_response):
+    """Parse AI response into structured insights"""
+    insights = []
+    lines = ai_response.strip().split('\n')
+    
+    current_insight = None
+    
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+            
+        # Check if line starts with emoji (indicates new insight)
+        if line and (line[0] in ['🎯', '💫', '🌟', '✨', '🔥', '💝', '🎨', '🌈', '⭐', '💡', '🎭', '🎪'] or 
+                     (len(line) > 1 and line[0:2] in ['🎯', '💫', '🌟'])):
+            # Save previous insight if exists
+            if current_insight:
+                insights.append(current_insight)
+            
+            # Parse new insight
+            parts = line.split('**')
+            if len(parts) >= 2:
+                icon = parts[0].strip()
+                title = parts[1].strip()
+                current_insight = {
+                    "icon": icon,
+                    "title": title,
+                    "description": "",
+                    "category": "lifestyle"
+                }
+        elif current_insight and line:
+            # Add to description
+            current_insight["description"] = (current_insight["description"] + " " + line).strip()
+    
+    # Add last insight
+    if current_insight and current_insight.get("description"):
+        insights.append(current_insight)
+    
+    # Generate summary
+    summary = "Strong compatibility potential" if len(insights) >= 3 else "Good compatibility indicators"
+    
+    return {
+        "insights": insights[:4],  # Max 4 insights
+        "summary": summary
+    }
+
+def generate_template_insights(user_a, user_b):
+    """Generate template-based insights when AI is unavailable"""
+    insights = []
+    
+    # Check shared interests
+    shared_interests = list(set(user_a.get("interests", [])) & set(user_b.get("interests", [])))
+    if shared_interests:
+        insights.append({
+            "icon": "🎯",
+            "title": "Shared Interests",
+            "description": f"You both enjoy {', '.join(shared_interests[:3])}. This gives you natural conversation topics and date ideas.",
+            "category": "interests"
+        })
+    
+    # Check lifestyle factors
+    user_a_lifestyle = user_a.get("lifestyle_factors", {})
+    user_b_lifestyle = user_b.get("lifestyle_factors", {})
+    
+    if user_a_lifestyle and user_b_lifestyle:
+        insights.append({
+            "icon": "💼",
+            "title": "Professional Connection",
+            "description": "Your professional backgrounds suggest you'd understand each other's work-life balance needs.",
+            "category": "lifestyle"
+        })
+    
+    # Check relationship goals
+    user_a_goals = user_a.get("deal_breakers", {}).get("relationship_goals", "")
+    user_b_goals = user_b.get("deal_breakers", {}).get("relationship_goals", "")
+    
+    if user_a_goals and user_b_goals and user_a_goals == user_b_goals:
+        insights.append({
+            "icon": "💝",
+            "title": "Aligned Relationship Goals",
+            "description": f"You're both looking for {user_a_goals.replace('_', ' ')}. This alignment is a strong foundation.",
+            "category": "goals"
+        })
+    
+    # Default insight if none generated
+    if not insights:
+        insights.append({
+            "icon": "✨",
+            "title": "Potential Connection",
+            "description": "Your profiles suggest interesting conversation possibilities. Take time to get to know each other!",
+            "category": "general"
+        })
+    
+    return {
+        "success": True,
+        "insights": insights[:4],
+        "summary": "Good compatibility indicators",
+        "cached": False
+    }
+
 app.include_router(api_router)
