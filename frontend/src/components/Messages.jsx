@@ -194,26 +194,10 @@ export default function Messages({ user }) {
               <span className="text-sm">{coinflipToast}</span>
             </div>
           )}
-          <div className="mt-3 flex gap-2">
+          <div className="mt-3">
             <button 
               onClick={createTestMatch} 
               disabled={creating} 
-              className="px-4 py-2 rounded-full text-sm transition-all"
-              style={{ 
-                backgroundColor: '#171717', 
-                border: '1px solid #404040', 
-                color: '#A3A3A3'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#262626'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#171717'}
-            >
-              {creating ? 'Creating…' : 'Create Test Match (Dev)'}
-            </button>
-            <button 
-              onClick={() => {
-                console.log('Navigating to test starters...');
-                navigate('/chat/test-starters');
-              }} 
               className="px-4 py-2 rounded-full text-sm flex items-center gap-2 transition-all"
               style={{ 
                 backgroundColor: '#3B82F6', 
@@ -223,7 +207,7 @@ export default function Messages({ user }) {
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
             >
               <Sparkles className="w-4 h-4" />
-              Test AI Starters
+              {creating ? 'Creating…' : 'Test AI Conversation Starters'}
             </button>
           </div>
         </div>
