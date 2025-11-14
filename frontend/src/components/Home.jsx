@@ -1142,6 +1142,136 @@ export default function Home({ user }) {
       
       {/* Logo State Tester (Developer Tool) */}
       <LogoStateTester />
+
+      {/* Merge Score Breakdown Modal */}
+      {showScoreBreakdown && currentMatch && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}
+          onClick={() => setShowScoreBreakdown(false)}
+        >
+          <div 
+            className="relative w-full max-w-md rounded-2xl p-6 animate-fade-in-up"
+            style={{ backgroundColor: '#171717', border: '1px solid #404040' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowScoreBreakdown(false)}
+              className="absolute top-4 right-4 transition-opacity hover:opacity-70"
+              style={{ color: '#A3A3A3' }}
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Header */}
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold mb-1" style={{ 
+                color: compatibility >= 95 ? '#00FFFF' :
+                       compatibility >= 85 ? '#8B5CF6' :
+                       compatibility >= 75 ? '#3B82F6' :
+                       '#FAFAFA'
+              }}>
+                Merge Score: {compatibility}%
+              </h2>
+              <p className="text-sm" style={{ color: '#A3A3A3' }}>Why you mesh</p>
+            </div>
+
+            {/* Breakdown */}
+            <div className="space-y-4 mb-6">
+              {/* Lifestyle Sync */}
+              <div className="flex gap-3">
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
+                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Lifestyle Sync</span>
+                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>88%</span>
+                  </div>
+                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                    {currentMatch.interests ? `You both enjoy ${currentMatch.interests.slice(0, 2).join(', ')}` : 'Shared interests create connection'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Conversation Flow */}
+              <div className="flex gap-3">
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
+                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Conversation Flow</span>
+                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>90%</span>
+                  </div>
+                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                    Your communication styles complement each other
+                  </p>
+                </div>
+              </div>
+
+              {/* Emotional Rhythm */}
+              <div className="flex gap-3">
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
+                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Emotional Rhythm</span>
+                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>95%</span>
+                  </div>
+                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                    Natural emotional understanding and connection
+                  </p>
+                </div>
+              </div>
+
+              {/* Future Alignment */}
+              <div className="flex gap-3">
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
+                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Future Alignment</span>
+                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>95%</span>
+                  </div>
+                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                    {currentMatch.relationship_goal || 'You\'re both looking for meaningful connections'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Level Footer */}
+            <div className="pt-4" style={{ borderTop: '1px solid #404040' }}>
+              <div className="flex items-center justify-between">
+                <span className="text-sm" style={{ color: '#A3A3A3' }}>Trust Level</span>
+                <span className="text-sm font-medium" style={{ 
+                  color: (currentMatch.trustScore || 0) >= 90 ? '#3B82F6' : 
+                         (currentMatch.trustScore || 0) >= 75 ? '#F59E0B' : 
+                         '#A3A3A3'
+                }}>
+                  {
+                    (currentMatch.trustScore || 0) >= 90 ? 'Reliable' :
+                    (currentMatch.trustScore || 0) >= 75 ? 'Solid' :
+                    'Building Trust'
+                  } ({currentMatch.trustScore || 0}%)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
