@@ -809,14 +809,14 @@ export default function Home({ user }) {
                           e.stopPropagation();
                           handleCosmicInsightsToggle(currentMatch, compatibility); 
                         }}
-                        className="w-full flex items-center justify-between bg-white/5 border border-white/10 rounded-lg px-4 py-3 hover:bg-white/10 transition-all touch-manipulation"
-                        style={{ pointerEvents: 'auto' }}
+                        className="w-full flex items-center justify-between rounded-lg px-4 py-3 transition-all touch-manipulation"
+                        style={{ backgroundColor: '#171717', border: '1px solid #404040', pointerEvents: 'auto' }}
                       >
                         <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4" style={{ color: '#00FFE0' }} />
-                          <span className="text-sm font-medium text-white/90">Compatibility Insights</span>
+                          <Sparkles className="w-4 h-4" style={{ color: '#3B82F6' }} />
+                          <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Compatibility Insights</span>
                         </div>
-                        {showCosmicInsights ? (<ChevronUp className="w-4 h-4 text-white/60" />) : (<ChevronDown className="w-4 h-4 text-white/60" />)}
+                        {showCosmicInsights ? (<ChevronUp className="w-4 h-4" style={{ color: '#A3A3A3' }} />) : (<ChevronDown className="w-4 h-4" style={{ color: '#A3A3A3' }} />)}
                       </button>
                       
                       {/* Cosmic Insights Content - Expands DOWNWARD */}
