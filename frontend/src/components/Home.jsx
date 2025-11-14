@@ -56,9 +56,6 @@ export default function Home({ user }) {
   const [userInventory, setUserInventory] = useState(null);
   const [justSwiped, setJustSwiped] = useState(false);
   
-  // Cosmic Insights State
-  const [cosmicInsights, setCosmicInsights] = useState(null);
-  
   // Merge Score breakdown modal state
   const [showScoreBreakdown, setShowScoreBreakdown] = useState(false);
   
