@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, MessageCircle, Zap, XCircle, ChevronDown, ChevronUp, Music } from 'lucide-react';
+import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, XCircle, ChevronDown, ChevronUp, Music } from 'lucide-react';
 import ConstellationIcon from './ConstellationIcon';
 import BottomNav from './BottomNav';
 import PremiumSkinRenderer from './PremiumSkinRenderer';
