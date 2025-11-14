@@ -794,6 +794,14 @@ export default function Home({ user }) {
                         </div>
                       )}
 
+                      {/* AI Compatibility Insights */}
+                      <CompatibilityInsights
+                        currentUserId={user.id}
+                        otherUserId={currentMatch.id}
+                        context="profile_view"
+                        depth="standard"
+                      />
+
                       {/* Interests */}
                       {currentMatch.interests && currentMatch.interests.length > 0 && (
                         <div className="space-y-2">
