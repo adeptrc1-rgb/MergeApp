@@ -887,33 +887,6 @@ export default function Home({ user }) {
                           <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
                         </div>
                       )}
-
-                      {/* Compatibility Insights - Static Section */}
-                      {cosmicInsights && (
-                        <div className="space-y-4 mt-4">
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
-                            <Sparkles className="w-3 h-3" />
-                            Compatibility Insights
-                          </h3>
-                          
-                          {/* Compatibility Insights Content */}
-                          <div className="rounded-xl p-4 space-y-3" style={{ backgroundColor: '#171717', border: '1px solid #404040' }}>
-                            <div className="flex items-start gap-2 text-sm" style={{ color: '#FAFAFA' }}>
-                              <span className="text-base">🔥</span>
-                              <p className="leading-relaxed">{cosmicInsights.elementalInsight}</p>
-                            </div>
-                            <div className="flex items-start gap-2 text-sm" style={{ color: '#FAFAFA' }}>
-                              <span className="text-base">💫</span>
-                              <p className="leading-relaxed">{cosmicInsights.compatibilityInsight}</p>
-                            </div>
-                            <div className="flex items-center gap-2 text-xs">
-                              <span className="px-2 py-1 rounded-full" style={{ backgroundColor: '#262626', color: '#FAFAFA' }}>{cosmicInsights.element1}</span>
-                              <span style={{ color: '#525252' }}>+</span>
-                              <span className="px-2 py-1 rounded-full" style={{ backgroundColor: '#262626', color: '#FAFAFA' }}>{cosmicInsights.element2}</span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>
