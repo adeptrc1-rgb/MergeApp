@@ -104,6 +104,38 @@ export default function AstroChat({ user, logout }) {
     }
   };
 
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+    // Start timer to show inline starters after 5 seconds
+    if (messages.length > 0 && newMessage.trim() === '') {
+      inputFocusTimer.current = setTimeout(() => {
+        setShowInlineStarters(true);
+      }, 5000);
+    }
+  };
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
+    if (inputFocusTimer.current) {
+      clearTimeout(inputFocusTimer.current);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setNewMessage(e.target.value);
+    setShowInlineStarters(false);
+    
+    // Reset timer if user starts typing
+    if (inputFocusTimer.current) {
+      clearTimeout(inputFocusTimer.current);
+    }
+  };
+
+  const handleSelectStarter = (starter) => {
+    setNewMessage(starter);
+    setShowInlineStarters(false);
+  };
+
   const calculateAge = (birthDate) => {
     const today = new Date();
     const birth = new Date(birthDate);
