@@ -351,7 +351,7 @@ export default function AstroChat({ user, logout }) {
             )}
 
             {/* Message Input */}
-            <div className="p-4 bg-black/30 backdrop-blur-md border-t border-white/10">
+            <div className="p-4 border-t" style={{ backgroundColor: '#0A0A0A', borderColor: '#262626' }}>
               <div className="flex items-center gap-2">
                 <Input
                   value={newMessage}
@@ -360,12 +360,21 @@ export default function AstroChat({ user, logout }) {
                   onFocus={handleInputFocus}
                   onBlur={handleInputBlur}
                   placeholder="Type a message..."
-                  className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-purple-400 rounded-full px-4 py-3"
+                  className="flex-1 rounded-full px-4 py-3"
+                  style={{ 
+                    backgroundColor: '#171717', 
+                    border: '1px solid #404040', 
+                    color: '#FAFAFA'
+                  }}
                 />
                 <button
                   onClick={sendMessage}
                   disabled={!newMessage.trim()}
-                  className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white flex items-center justify-center hover:from-purple-600 hover:to-pink-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                  className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ 
+                    backgroundColor: newMessage.trim() ? '#3B82F6' : '#262626',
+                    color: '#FAFAFA'
+                  }}
                 >
                   <Send className="w-5 h-5" />
                 </button>
