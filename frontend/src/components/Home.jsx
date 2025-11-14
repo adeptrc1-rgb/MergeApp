@@ -771,7 +771,11 @@ export default function Home({ user }) {
                   {/* Connection Integrity Tier + Show More toggle */}
                   <div className="flex items-center gap-3 mb-3">
                     <div className="relative inline-flex items-center group cursor-help">
-                      <span className="text-sm font-medium text-white/90">
+                      <span className="text-sm font-medium" style={{ 
+                        color: (currentMatch.trustScore || 0) >= 90 ? '#3B82F6' : 
+                               (currentMatch.trustScore || 0) >= 75 ? '#F59E0B' : 
+                               '#A3A3A3'
+                      }}>
                         {
                           (currentMatch.trustScore || 0) >= 90 ? 'Reliable' :
                           (currentMatch.trustScore || 0) >= 75 ? 'Solid' :
@@ -779,7 +783,7 @@ export default function Home({ user }) {
                         }
                       </span>
                       {/* Tooltip with exact percentage */}
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-black/90 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap" style={{ backgroundColor: '#171717', color: '#FAFAFA' }}>
                         {currentMatch.trustScore || 0}% Trust Score
                       </div>
                     </div>
@@ -788,8 +792,8 @@ export default function Home({ user }) {
                         e.stopPropagation();
                         handleShowMore(currentMatch, compatibility); 
                       }}
-                      className="flex items-center gap-1 text-white/80 hover:text-white transition-colors touch-manipulation"
-                      style={{ pointerEvents: 'auto' }}
+                      className="flex items-center gap-1 transition-colors touch-manipulation"
+                      style={{ color: '#A3A3A3', pointerEvents: 'auto' }}
                     >
                       <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
                       {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
