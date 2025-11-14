@@ -188,9 +188,8 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col overflow-hidden bg-black">
-      {/* Very subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black"></div>
+    <div className="min-h-screen relative flex flex-col overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
+      {/* Clean background - no stars or mystical elements */}
       
       {/* Distant twinkling stars */}
       <div className="absolute inset-0 overflow-hidden">
