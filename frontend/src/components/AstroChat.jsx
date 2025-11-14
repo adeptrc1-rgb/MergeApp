@@ -382,10 +382,10 @@ export default function AstroChat({ user, logout }) {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-center justify-center" style={{ backgroundColor: '#000000' }}>
             <div className="text-center">
               <div className="text-6xl mb-4">💬</div>
-              <p className="text-purple-200 text-lg">Select a match to start chatting</p>
+              <p className="text-lg" style={{ color: '#A3A3A3' }}>Select a connection to start chatting</p>
             </div>
           </div>
         )}
