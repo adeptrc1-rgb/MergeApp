@@ -120,8 +120,8 @@ export default function Home({ user }) {
     }
   };
 
-  // Generate cosmic insights and AI starters
-  const generateInsightsAndStarters = async (matchUser, compatibilityScore) => {
+  // Generate cosmic insights
+  const generateInsights = async (matchUser, compatibilityScore) => {
     try {
       // Generate cosmic insights from templates
       const insights = generateCosmicInsights(
@@ -130,34 +130,8 @@ export default function Home({ user }) {
         compatibilityScore
       );
       setCosmicInsights(insights);
-      
-      // Generate AI conversation starters
-      setLoadingAI(true);
-      const starters = await generateAIConversationStarters(
-        {
-          id: user.id,
-          first_name: user.first_name,
-          age: calculateAge(user.birth_date),
-          zodiac_sign: user.zodiac_sign,
-          interests: user.interests,
-          bio: user.bio
-        },
-        {
-          id: matchUser.id,
-          first_name: matchUser.first_name,
-          age: calculateAge(matchUser.birth_date),
-          zodiac_sign: matchUser.zodiac_sign,
-          interests: matchUser.interests,
-          bio: matchUser.bio
-        },
-        insights
-      );
-      setAiStarters(starters);
-      setShowAIStarters(true);
     } catch (error) {
       console.error('Error generating insights:', error);
-    } finally {
-      setLoadingAI(false);
     }
   };
 
@@ -168,41 +142,7 @@ export default function Home({ user }) {
     
     // Generate insights when Show more is expanded for the first time
     if (newState && !cosmicInsights) {
-      generateInsightsAndStarters(matchUser, compatibilityScore);
-    }
-  };
-  
-  // Regenerate AI starters
-  const regenerateStarters = async () => {
-    if (!currentMatch || !cosmicInsights) return;
-    
-    setLoadingAI(true);
-    try {
-      const starters = await generateAIConversationStarters(
-        {
-          id: user.id,
-          first_name: user.first_name,
-          age: calculateAge(user.birth_date),
-          zodiac_sign: user.zodiac_sign,
-          interests: user.interests,
-          bio: user.bio
-        },
-        {
-          id: currentMatch.id,
-          first_name: currentMatch.first_name,
-          age: calculateAge(currentMatch.birth_date),
-          zodiac_sign: currentMatch.zodiac_sign,
-          interests: currentMatch.interests,
-          bio: currentMatch.bio
-        },
-        cosmicInsights,
-        true // Force new generation
-      );
-      setAiStarters(starters);
-    } catch (error) {
-      console.error('Error regenerating starters:', error);
-    } finally {
-      setLoadingAI(false);
+      generateInsights(matchUser, compatibilityScore);
     }
   };
 
