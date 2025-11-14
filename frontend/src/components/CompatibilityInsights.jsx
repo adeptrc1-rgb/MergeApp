@@ -50,10 +50,6 @@ export default function CompatibilityInsights({
     }
   };
 
-  const handleRefresh = () => {
-    loadInsights();
-  };
-
   if (loading && insights.length === 0) {
     return (
       <div className="space-y-2">
