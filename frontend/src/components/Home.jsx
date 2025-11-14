@@ -756,12 +756,14 @@ export default function Home({ user }) {
                   </h2>
                   {/* Merge Score + Location */}
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                      <Zap className="w-3.5 h-3.5" style={{ color: '#00FFE0' }} />
-                      <span className="text-sm font-medium"><span style={{ color: '#00FFE0' }}>{compatibility}%</span> Merge Score</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full" style={{ backgroundColor: '#171717', border: '1px solid #404040' }}>
+                      <Zap className="w-3.5 h-3.5" style={{ color: '#3B82F6' }} />
+                      <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>
+                        <span style={{ color: '#3B82F6' }}>{compatibility}%</span> Merge Score
+                      </span>
                     </div>
-                    <span className="text-white/40">•</span>
-                    <span className="text-sm text-white/80">
+                    <span style={{ color: '#525252' }}>•</span>
+                    <span className="text-sm" style={{ color: '#A3A3A3' }}>
                       {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Location unavailable'}
                     </span>
                   </div>
