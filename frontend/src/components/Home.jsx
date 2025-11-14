@@ -745,8 +745,8 @@ export default function Home({ user }) {
 
                       {/* Background */}
                       {(currentMatch.current_location?.city || currentMatch.education?.college || currentMatch.education?.school || currentMatch.education) && (
-                        <div className="space-y-2">
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium">Background</h3>
+                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Background</h3>
                           <div className="space-y-1.5">
                             {currentMatch.current_location?.city && (
                               <div className="flex items-start gap-2">
