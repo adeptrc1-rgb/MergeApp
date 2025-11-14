@@ -613,7 +613,7 @@ export default function Profile({ user, logout }) {
       <BottomNav currentTab="profile" navigate={navigate} />
 
       {/* Cosmic Wheel Modal */}
-      <CosmicWheel isOpen={showCosmicWheel} onClose={() => setShowCosmicWheel(false)} onRewardClaimed={handleRewardClaimed} />
+      <ConnectionMatrix isOpen={showConnectionMatrix} onClose={() => setShowConnectionMatrix(false)} onRewardClaimed={handleRewardClaimed} />
       
       {/* Streak Details Modal - Tarot Card Edition */}
       {showStreakClaim && streakStatus && (
