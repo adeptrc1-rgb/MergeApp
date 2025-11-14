@@ -63,9 +63,6 @@ export default function Home({ user }) {
   const [loadingAI, setLoadingAI] = useState(false);
   const [showAIStarters, setShowAIStarters] = useState(false);
   
-  // Cosmic Insights expansion state
-  const [showCosmicInsights, setShowCosmicInsights] = useState(false);
-  
   // Merge Score breakdown modal state
   const [showScoreBreakdown, setShowScoreBreakdown] = useState(false);
   
