@@ -715,7 +715,7 @@ export default function Home({ user }) {
 
                   {/* Expandable Dropdown Content */}
                   <div 
-                    className={`transition-all duration-300 ease-in-out ${showDropdown ? 'max-h-[60vh] opacity-100' : 'max-h-0 opacity-0'}`}
+                    className={`custom-scrollbar transition-all duration-300 ease-in-out ${showDropdown ? 'max-h-[60vh] opacity-100' : 'max-h-0 opacity-0'}`}
                     onWheel={(e) => e.stopPropagation()}
                     onTouchMove={(e) => e.stopPropagation()}
                     onScroll={(e) => e.stopPropagation()}
