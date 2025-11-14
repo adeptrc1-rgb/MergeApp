@@ -266,36 +266,42 @@ export default function AstroChat({ user, logout }) {
         {selectedMatch ? (
           <>
             {/* Chat Header */}
-            <div className="p-4 bg-black/30 backdrop-blur-md border-b border-white/10 flex items-center justify-between">
+            <div className="p-4 border-b flex items-center justify-between" style={{ backgroundColor: '#0A0A0A', borderColor: '#262626' }}>
               <div className="flex items-center gap-3">
                 <button 
                   onClick={() => setSelectedMatch(null)}
-                  className="md:hidden text-white/60 hover:text-white"
+                  className="md:hidden transition-colors"
+                  style={{ color: '#A3A3A3' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#FAFAFA'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#A3A3A3'}
                 >
                   <ArrowLeft className="w-5 h-5" />
                 </button>
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg">
-                  {selectedMatch.first_name.charAt(0)}
+                <div 
+                  className="w-12 h-12 rounded-full bg-cover bg-center flex-shrink-0"
+                  style={{ 
+                    backgroundImage: selectedMatch.photos?.[0] ? `url(${selectedMatch.photos[0]})` : 'none',
+                    backgroundColor: !selectedMatch.photos?.[0] ? '#3B82F6' : 'transparent'
+                  }}
+                >
+                  {!selectedMatch.photos?.[0] && (
+                    <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg">
+                      {selectedMatch.first_name.charAt(0)}
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold flex items-center gap-2">
+                  <h3 className="font-semibold flex items-center gap-2" style={{ color: '#FAFAFA' }}>
                     {selectedMatch.first_name} {selectedMatch.last_name?.charAt(0)}.
-                    <span className="text-yellow-400 text-sm">
-                      {selectedMatch.zodiac_sign}
-                    </span>
                   </h3>
-                  <div className="flex items-center gap-2 text-purple-200 text-sm">
-                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                    <span>{selectedMatch.compatibility_score}% Compatible</span>
-                  </div>
+                  {selectedMatch.compatibility_score && (
+                    <div className="flex items-center gap-2 text-sm" style={{ color: '#3B82F6' }}>
+                      <Star className="w-3 h-3 fill-current" />
+                      <span>{selectedMatch.compatibility_score}% Merge Score</span>
+                    </div>
+                  )}
                 </div>
               </div>
-              <button 
-                onClick={logout}
-                className="text-white/60 hover:text-white text-sm"
-              >
-                Logout
-              </button>
             </div>
 
             {/* Messages */}
