@@ -608,10 +608,11 @@ export default function Profile({ user, logout }) {
                   await checkDailySpinStatus();
                   setShowConnectionMatrix(true);
                 } catch (e) {
-                  console.error('Reset Cosmic Wheel failed', e);
+                  console.error('Reset Connection Matrix failed', e);
                 }
               }}
-              className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
+              className="flex-1 text-white border rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
+              style={{ backgroundColor: '#3B82F6', borderColor: '#3B82F6' }}
             >
               <Sparkles className="w-5 h-5" />
               <span>Reset Wheel (Dev)</span>
