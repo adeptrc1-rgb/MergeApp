@@ -296,13 +296,26 @@ export default function AstroChat({ user, logout }) {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Inline Conversation Starters */}
+            {showInlineStarters && messages.length > 0 && (
+              <ConversationStarters
+                matchId={selectedMatch.id}
+                matchUser={selectedMatch}
+                messageCount={messages.length}
+                onSelectStarter={handleSelectStarter}
+                variant="inline"
+              />
+            )}
+
             {/* Message Input */}
             <div className="p-4 bg-black/30 backdrop-blur-md border-t border-white/10">
               <div className="flex items-center gap-2">
                 <Input
                   value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
+                  onChange={handleInputChange}
                   onKeyPress={handleKeyPress}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
                   placeholder="Type a message..."
                   className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-purple-400 rounded-full px-4 py-3"
                 />
