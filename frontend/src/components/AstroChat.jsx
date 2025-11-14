@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { ArrowLeft, Send, Heart, Star, Sparkles } from 'lucide-react';
+import { ArrowLeft, Send, Heart, Star, Sparkles, MessageCircle } from 'lucide-react';
 import { createMessageSentEffect, createMessageReceivedEffect, createStardustTrail } from '../utils/particleEffects';
 import BottomNav from './BottomNav';
 import ConversationStarters from './ConversationStarters';
