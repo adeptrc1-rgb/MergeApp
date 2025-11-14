@@ -175,8 +175,8 @@ export default function Messages({ user }) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <Sparkles className="w-12 h-12 text-purple-400 animate-spin mx-auto mb-4" />
-          <p className="text-white/60 text-lg">Loading messages...</p>
+          <Sparkles className="w-12 h-12 animate-spin mx-auto mb-4" style={{ color: '#3B82F6' }} />
+          <p className="text-lg" style={{ color: '#A3A3A3' }}>Loading messages...</p>
         </div>
       </div>
     );
