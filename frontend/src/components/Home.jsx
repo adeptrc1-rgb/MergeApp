@@ -703,7 +703,7 @@ export default function Home({ user }) {
                     <button
                       onClick={(e) => { 
                         e.stopPropagation();
-                        handleShowMore(currentMatch, compatibility); 
+                        handleShowMore(); 
                       }}
                       className="flex items-center gap-1 transition-colors touch-manipulation"
                       style={{ color: '#A3A3A3', pointerEvents: 'auto' }}
