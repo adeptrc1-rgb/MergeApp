@@ -79,21 +79,10 @@ export default function CompatibilityInsights({
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
-          <Sparkles className="w-3 h-3" style={{ color: '#3B82F6' }} />
-          Why You Might Connect
-        </h3>
-        <button
-          onClick={handleRefresh}
-          disabled={loading}
-          className="text-xs flex items-center gap-1 disabled:opacity-50 transition-all hover:scale-105"
-          style={{ color: '#3B82F6' }}
-        >
-          <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
-          Refresh
-        </button>
-      </div>
+      <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
+        <Sparkles className="w-3 h-3" style={{ color: '#3B82F6' }} />
+        Why You Might Connect
+      </h3>
 
       <div className="space-y-3">
         {insights.map((insight, index) => (
