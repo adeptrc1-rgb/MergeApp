@@ -48,8 +48,10 @@ export default function AstroChat({ user, logout }) {
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   useEffect(() => {
-    loadMatches();
-  }, []);
+    if (!isTestStarters) {
+      loadMatches();
+    }
+  }, [isTestStarters]);
 
   useEffect(() => {
     if (selectedMatch) {
