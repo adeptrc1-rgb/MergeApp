@@ -189,8 +189,236 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
-      {/* Clean background - no stars or mystical elements */}
+    <div 
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: '#0A0A0A' }}
+    >
+      {/* Animated Card Container */}
+      <div 
+        className="w-full max-w-md"
+        style={{
+          animation: 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+      >
+        <div 
+          className="rounded-xl p-8 sm:p-10"
+          style={{
+            backgroundColor: '#171717',
+            border: '1px solid #404040',
+            boxShadow: '0 20px 60px rgba(59, 130, 246, 0.15)'
+          }}
+        >
+          {/* Logo with Breathing Animation */}
+          <div 
+            className="flex justify-center mb-3"
+            style={{
+              animation: 'breathe 4s ease-in-out infinite'
+            }}
+          >
+            <MergeLogo size="lg" color="#FAFAFA" />
+          </div>
+
+          {/* Tagline */}
+          <p 
+            className="text-center text-sm mb-12"
+            style={{ color: '#A3A3A3', letterSpacing: '0.5px' }}
+          >
+            Design Your Connection
+          </p>
+
+          {/* Form Section */}
+          <form onSubmit={(e) => { e.preventDefault(); handleTestLogin(); }} className="space-y-6">
+            {/* Phone Number Input */}
+            {step === 'phone' && (
+              <div>
+                <label 
+                  htmlFor="phone"
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: '#FAFAFA' }}
+                >
+                  Phone Number
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  placeholder="(555) 123-4567"
+                  className="w-full px-4 py-3 rounded-lg transition-all outline-none"
+                  style={{
+                    backgroundColor: '#171717',
+                    border: '1px solid #404040',
+                    color: '#FAFAFA'
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.border = '2px solid #3B82F6';
+                    e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.border = '1px solid #404040';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                />
+              </div>
+            )}
+
+            {/* Primary CTA Button */}
+            <button
+              type="button"
+              onClick={handleTestLogin}
+              disabled={loading}
+              className="w-full py-3.5 px-6 rounded-lg font-medium transition-all"
+              style={{
+                backgroundColor: loading ? '#525252' : '#3B82F6',
+                color: '#FFFFFF',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                boxShadow: loading ? 'none' : '0 4px 12px rgba(59, 130, 246, 0.4)'
+              }}
+              onMouseEnter={(e) => {
+                if (!loading) {
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 8px 20px rgba(59, 130, 246, 0.5)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!loading) {
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.4)';
+                }
+              }}
+            >
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="animate-spin">⏳</span>
+                  Connecting...
+                </span>
+              ) : (
+                'Continue'
+              )}
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="relative my-8">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full" style={{ borderTop: '1px solid #404040' }}></div>
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span 
+                className="px-4"
+                style={{ backgroundColor: '#171717', color: '#A3A3A3' }}
+              >
+                or continue with
+              </span>
+            </div>
+          </div>
+
+          {/* Social Login Buttons */}
+          <div className="space-y-3">
+            {/* Test Login Button */}
+            <button
+              onClick={handleTestLogin}
+              disabled={loading}
+              className="w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2"
+              style={{
+                backgroundColor: '#262626',
+                border: '1px solid #404040',
+                color: '#FAFAFA',
+                cursor: loading ? 'not-allowed' : 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                if (!loading) {
+                  e.target.style.backgroundColor = '#2d2d2d';
+                  e.target.style.transform = 'translateY(-1px)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!loading) {
+                  e.target.style.backgroundColor = '#262626';
+                  e.target.style.transform = 'translateY(0)';
+                }
+              }}
+            >
+              <span>🧪</span>
+              <span>Test Login</span>
+            </button>
+
+            {/* Google Login */}
+            <button
+              onClick={handleGoogleLogin}
+              disabled={loading}
+              className="w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2"
+              style={{
+                backgroundColor: '#262626',
+                border: '1px solid #404040',
+                color: '#FAFAFA',
+                cursor: loading ? 'not-allowed' : 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                if (!loading) {
+                  e.target.style.backgroundColor = '#2d2d2d';
+                  e.target.style.transform = 'translateY(-1px)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!loading) {
+                  e.target.style.backgroundColor = '#262626';
+                  e.target.style.transform = 'translateY(0)';
+                }
+              }}
+            >
+              <span>G</span>
+              <span>Continue with Google</span>
+            </button>
+
+            {/* Apple Login (Placeholder) */}
+            <button
+              disabled
+              className="w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 opacity-50 cursor-not-allowed"
+              style={{
+                backgroundColor: '#262626',
+                border: '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+            >
+              <span></span>
+              <span>Continue with Apple</span>
+            </button>
+          </div>
+
+          {/* Footer */}
+          <p 
+            className="mt-8 text-xs text-center leading-relaxed"
+            style={{ color: '#525252' }}
+          >
+            By continuing, you agree to our{' '}
+            <span style={{ color: '#A3A3A3' }}>Terms & Privacy Policy</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Add Keyframe Animations */}
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes breathe {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.02);
+          }
+        }
+      `}</style>
       
       {/* Distant twinkling stars */}
       <div className="absolute inset-0 overflow-hidden">
