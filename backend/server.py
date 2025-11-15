@@ -8,6 +8,7 @@ import uuid
 from random import choices, random as randf
 from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
+import httpx
 
 load_dotenv()
 
