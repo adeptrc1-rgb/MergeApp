@@ -94,7 +94,7 @@ export default function Messages({ user }) {
           // ignore per-conversation failures
         }
       }
-      setCoinflipMap(updatedMap);
+      setCatalystMap(updatedMap);
     } catch (error) {
       console.error('Error loading conversations:', error);
     }
