@@ -495,7 +495,7 @@ export default function Profile({ user, logout }) {
               </div>
             )}
             <button 
-              onClick={() => setShowCosmicWheel(true)} 
+              onClick={() => setShowConnectionMatrix(true)} 
               disabled={!canSpin} 
               className="w-full py-3 rounded-xl font-semibold transition-all disabled:opacity-50"
               style={{ 
