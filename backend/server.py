@@ -177,6 +177,81 @@ async def test_login(body: LoginBody, response: Response):
 async def auth_me(user: User = Depends(get_current_user)):
     return user.dict()
 
+@api_router.post("/auth/session")
+async def handle_google_session(request: Request, response: Response):
+    """Handle Google OAuth session from Emergent Auth"""
+    try:
+        # Get session ID from header
+        session_id = request.headers.get('X-Session-ID')
+        
+        if not session_id:
+            raise HTTPException(status_code=400, detail="No session ID provided")
+        
+        # Verify session with Emergent Auth
+        async with httpx.AsyncClient() as client:
+            auth_response = await client.post(
+                "https://auth.emergentagent.com/verify",
+                json={"session_id": session_id},
+                timeout=10.0
+            )
+            
+            if auth_response.status_code != 200:
+                raise HTTPException(status_code=401, detail="Invalid session")
+            
+            auth_data = auth_response.json()
+            email = auth_data.get("email")
+            name = auth_data.get("name", "")
+            
+            if not email:
+                raise HTTPException(status_code=400, detail="No email in session")
+        
+        # Check if user exists
+        existing_user = await db.users.find_one({"email": email})
+        
+        if existing_user:
+            # Existing user - log them in
+            user_id = existing_user["id"]
+            needs_onboarding = not existing_user.get("profile_completed", False)
+        else:
+            # New user - create account
+            user_id = str(uuid.uuid4())
+            first_name = name.split()[0] if name else email.split('@')[0]
+            
+            new_user = {
+                "id": user_id,
+                "email": email,
+                "first_name": first_name,
+                "profile_completed": False,
+                "star_coins": 5000,
+                "photos": [],
+                "interests": [],
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }
+            
+            await db.users.insert_one(new_user)
+            needs_onboarding = True
+        
+        # Set session cookie
+        response.set_cookie(
+            key="user_id",
+            value=user_id,
+            httponly=True,
+            samesite="lax",
+            max_age=30 * 24 * 60 * 60  # 30 days
+        )
+        
+        return {
+            "success": True,
+            "needs_onboarding": needs_onboarding
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Session error: {e}")
+        raise HTTPException(status_code=500, detail="Authentication failed")
+
+
 @api_router.put("/users/me")
 async def update_user_profile(
     bio: Optional[str] = None,
