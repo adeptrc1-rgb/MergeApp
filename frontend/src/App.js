@@ -386,6 +386,28 @@ function LandingPage() {
             </button>
           </div>
 
+          {/* Preview Onboarding Button */}
+          <div className="mt-6">
+            <button
+              onClick={() => navigate('/onboarding')}
+              className="w-full py-2 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2"
+              style={{
+                backgroundColor: 'transparent',
+                border: '1px solid #3B82F6',
+                color: '#3B82F6'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'transparent';
+              }}
+            >
+              <span>👁️</span>
+              <span>Preview Onboarding</span>
+            </button>
+          </div>
+
           {/* Footer */}
           <p 
             className="mt-8 text-xs text-center leading-relaxed"
