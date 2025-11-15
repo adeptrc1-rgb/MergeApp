@@ -6,7 +6,7 @@ import requests
 import json
 
 def test_polarity_bonus():
-    base_url = "https://datamerge-dev.preview.emergentagent.com/api"
+    base_url = "https://data-connect-11.preview.emergentagent.com/api"
     
     # Step 1: Login
     print("🔐 Logging in...")
