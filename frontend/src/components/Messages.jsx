@@ -103,16 +103,16 @@ export default function Messages({ user }) {
 
   const openChat = async (matchId) => {
     const conversation = conversations.find(c => c.id === matchId);
-    const cf = coinflipMap[matchId];
+    const cf = catalystMap[matchId];
     
-    // If coinflip not set yet, trigger it with simple loading
+    // If catalyst not set yet, trigger it with simple loading
     if (!cf || !cf.set) {
       setOpeningChat(true);
       try {
         await axios.post(`${API}/matches/${matchId}/coinflip`);
-        await loadConversations(); // Reload to update coinflip status
+        await loadConversations(); // Reload to update catalyst status
       } catch (e) {
-        console.error('Coinflip error:', e);
+        console.error('Connection catalyst error:', e);
       }
       setOpeningChat(false);
     }
