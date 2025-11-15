@@ -241,7 +241,11 @@ export default function Messages({ user }) {
           ) : (
             <div className="space-y-2">
               {conversations.map((conversation) => {
-                const age = conversation.user?.birth_date ? calculateAge(conversation.user.birth_date) : '??';
+                // Safety checks for user data
+                if (!conversation.user) return null;
+                
+                const age = conversation.user?.birth_date ? calculateAge(conversation.user.birth_date) : null;
+                const displayAge = age !== null ? age : '??';
                 const cf = coinflipMap[conversation.id];
                 const youStart = cf?.set ? (cf.first_user_id === user.id || cf.winner_user_id === user.id) : null;
                 return (
@@ -253,10 +257,10 @@ export default function Messages({ user }) {
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#171717'}
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${conversation.user.photos?.[0] || 'https://via.placeholder.com/200'})` }} />
+                    <div className="w-16 h-16 rounded-2xl bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${conversation.user?.photos?.[0] || 'https://via.placeholder.com/200'})` }} />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-lg font-semibold" style={{ color: '#FAFAFA' }}>{conversation.user.first_name}, {age}</h3>
+                        <h3 className="text-lg font-semibold" style={{ color: '#FAFAFA' }}>{conversation.user?.first_name || 'User'}, {displayAge}</h3>
                         {youStart !== null && (
                           <span 
                             className="text-[11px] px-2 py-0.5 rounded-full border"
