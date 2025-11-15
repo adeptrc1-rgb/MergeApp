@@ -905,11 +905,11 @@ export default function CosmicOnboarding() {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 overflow-y-auto">
-      {/* Animated background */}
+    <div className="fixed inset-0 bg-black overflow-y-auto">
+      {/* Subtle animated background nodes */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl animate-float" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl animate-float-delayed" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
       </div>
 
       {renderProgressTracker()}
@@ -922,7 +922,14 @@ export default function CosmicOnboarding() {
           {step > 1 && (
             <button
               onClick={() => setStep(step - 1)}
-              className="flex-1 px-6 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-medium transition-all flex items-center justify-center gap-2 backdrop-blur-sm border border-white/20"
+              className="flex-1 px-6 py-4 rounded-2xl font-medium transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
+              style={{ 
+                backgroundColor: '#171717',
+                border: '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#262626'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#171717'}
             >
               <ChevronLeft className="w-5 h-5" />
               Back
@@ -933,11 +940,16 @@ export default function CosmicOnboarding() {
             <button
               onClick={() => setStep(step + 1)}
               disabled={!canContinue()}
-              className={`flex-1 px-6 py-4 rounded-2xl font-medium transition-all flex items-center justify-center gap-2 ${
-                canContinue()
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg'
-                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-              }`}
+              className="flex-1 px-6 py-4 rounded-2xl font-medium transition-all flex items-center justify-center gap-2"
+              style={canContinue() ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)'
+              } : {
+                backgroundColor: '#171717',
+                color: '#525252',
+                cursor: 'not-allowed'
+              }}
             >
               Continue
               <ChevronRight className="w-5 h-5" />
@@ -946,13 +958,18 @@ export default function CosmicOnboarding() {
             <button
               onClick={handleComplete}
               disabled={!canContinue() || loading}
-              className={`flex-1 px-6 py-4 rounded-2xl font-medium transition-all ${
-                canContinue() && !loading
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg'
-                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-              }`}
+              className="flex-1 px-6 py-4 rounded-2xl font-medium transition-all"
+              style={canContinue() && !loading ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)'
+              } : {
+                backgroundColor: '#171717',
+                color: '#525252',
+                cursor: 'not-allowed'
+              }}
             >
-              {loading ? 'Creating your cosmic profile...' : 'Complete ✨'}
+              {loading ? 'Creating your profile...' : 'Complete ✨'}
             </button>
           )}
         </div>
