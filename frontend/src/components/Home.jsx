@@ -648,13 +648,7 @@ export default function Home({ user }) {
                       return `${currentMatch.first_name}, ${age}`;
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
-                  {/* Distance */}
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-sm" style={{ color: '#A3A3A3' }}>
-                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Distance unavailable'}
-                    </span>
-                  </div>
-
+                  
                   {/* Merge Score */}
                   <div className="mb-2">
                     <button
@@ -687,6 +681,13 @@ export default function Home({ user }) {
                         }}>{compatibility}%</span> Merge Score
                       </span>
                     </button>
+                  </div>
+
+                  {/* Distance */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm" style={{ color: '#A3A3A3' }}>
+                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Distance unavailable'}
+                    </span>
                   </div>
 
                   {/* Industry */}
