@@ -126,6 +126,7 @@ function AuthProvider({ children }) {
 
 // Landing Page - Tinder Style Login
 function LandingPage() {
+  const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [step, setStep] = useState('phone'); // 'phone', 'verify', 'social'
