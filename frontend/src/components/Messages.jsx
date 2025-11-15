@@ -147,14 +147,21 @@ export default function Messages({ user }) {
   };
 
   const calculateAge = (birthDate) => {
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
+    if (!birthDate) return null;
+    try {
+      const today = new Date();
+      const birth = new Date(birthDate);
+      if (isNaN(birth.getTime())) return null;
+      let age = today.getFullYear() - birth.getFullYear();
+      const monthDiff = today.getMonth() - birth.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--;
+      }
+      return age;
+    } catch (error) {
+      console.error('Error calculating age:', error);
+      return null;
     }
-    return age;
   };
 
   const formatTime = (timestamp) => {
