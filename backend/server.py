@@ -185,26 +185,44 @@ async def handle_google_session(request: Request, response: Response):
         # Get session ID from header
         session_id = request.headers.get('X-Session-ID')
         
+        print(f"[AUTH] Received session request with ID: {session_id}")
+        
         if not session_id:
+            print("[AUTH] No session ID provided")
             raise HTTPException(status_code=400, detail="No session ID provided")
         
-        # Verify session with Emergent Auth
-        async with httpx.AsyncClient() as client:
-            auth_response = await client.post(
-                "https://auth.emergentagent.com/verify",
-                json={"session_id": session_id},
-                timeout=10.0
-            )
-            
-            if auth_response.status_code != 200:
-                raise HTTPException(status_code=401, detail="Invalid session")
-            
-            auth_data = auth_response.json()
-            email = auth_data.get("email")
-            name = auth_data.get("name", "")
-            
-            if not email:
-                raise HTTPException(status_code=400, detail="No email in session")
+        # Verify session with Emergent Auth API
+        try:
+            async with httpx.AsyncClient() as client:
+                print(f"[AUTH] Verifying session with Emergent Auth...")
+                auth_response = await client.get(
+                    f"https://auth.emergentagent.com/api/session/{session_id}",
+                    timeout=10.0
+                )
+                
+                print(f"[AUTH] Response status: {auth_response.status_code}")
+                
+                if auth_response.status_code != 200:
+                    print(f"[AUTH] Session verification failed: {auth_response.text}")
+                    raise HTTPException(status_code=401, detail="Invalid session")
+                
+                auth_data = auth_response.json()
+                print(f"[AUTH] Auth data received: {auth_data.keys() if auth_data else 'None'}")
+                
+                email = auth_data.get("email")
+                name = auth_data.get("name", "")
+                
+                if not email:
+                    print("[AUTH] No email in session response")
+                    raise HTTPException(status_code=400, detail="No email in session")
+        except httpx.TimeoutException:
+            print("[AUTH] Timeout connecting to Emergent Auth")
+            raise HTTPException(status_code=500, detail="Authentication service timeout")
+        except httpx.RequestError as e:
+            print(f"[AUTH] Request error: {e}")
+            raise HTTPException(status_code=500, detail="Authentication service error")
+        
+        print(f"[AUTH] Authenticated email: {email}")
         
         # Check if user exists
         existing_user = await db.users.find_one({"email": email})
@@ -213,6 +231,7 @@ async def handle_google_session(request: Request, response: Response):
             # Existing user - log them in
             user_id = existing_user["id"]
             needs_onboarding = not existing_user.get("profile_completed", False)
+            print(f"[AUTH] Existing user found: {user_id}, needs_onboarding: {needs_onboarding}")
         else:
             # New user - create account
             user_id = str(uuid.uuid4())
@@ -231,6 +250,7 @@ async def handle_google_session(request: Request, response: Response):
             
             await db.users.insert_one(new_user)
             needs_onboarding = True
+            print(f"[AUTH] New user created: {user_id}")
         
         # Set session cookie
         response.set_cookie(
@@ -241,6 +261,8 @@ async def handle_google_session(request: Request, response: Response):
             max_age=30 * 24 * 60 * 60  # 30 days
         )
         
+        print(f"[AUTH] Session successful, cookie set")
+        
         return {
             "success": True,
             "needs_onboarding": needs_onboarding
@@ -249,7 +271,9 @@ async def handle_google_session(request: Request, response: Response):
     except HTTPException:
         raise
     except Exception as e:
-        print(f"Session error: {e}")
+        print(f"[AUTH] Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail="Authentication failed")
 
 
