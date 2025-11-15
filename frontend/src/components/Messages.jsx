@@ -234,7 +234,7 @@ export default function Messages({ user }) {
           ) : (
             <div className="space-y-2">
               {conversations.map((conversation) => {
-                const age = calculateAge(conversation.user.birth_date);
+                const age = conversation.user?.birth_date ? calculateAge(conversation.user.birth_date) : '??';
                 const cf = coinflipMap[conversation.id];
                 const youStart = cf?.set ? (cf.first_user_id === user.id || cf.winner_user_id === user.id) : null;
                 return (
