@@ -271,7 +271,43 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
 
 @api_router.get("/matches")
 async def get_matches(user: User = Depends(get_current_user)):
-    return []
+    """Get all matches for the current user"""
+    try:
+        # Find all matches where user is either user1 or user2
+        matches_cursor = db.matches.find({
+            "$or": [
+                {"user1_id": user.id},
+                {"user2_id": user.id}
+            ]
+        })
+        matches = await matches_cursor.to_list(length=100)
+        
+        result = []
+        for match in matches:
+            # Determine the other user
+            other_user_id = match["user2_id"] if match["user1_id"] == user.id else match["user1_id"]
+            
+            # Get other user's profile
+            other_user = await db.users.find_one({"id": other_user_id})
+            
+            if other_user:
+                result.append({
+                    "id": match.get("id"),
+                    "match_id": match.get("id"),
+                    "first_name": other_user.get("first_name", "User"),
+                    "last_name": other_user.get("last_name", ""),
+                    "birth_date": other_user.get("birth_date", "1995-01-01"),
+                    "zodiac_sign": other_user.get("zodiac_sign", "Leo"),
+                    "photos": other_user.get("photos", ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80"]),
+                    "current_location": other_user.get("current_location", {"city": "Unknown"}),
+                    "compatibility_score": match.get("compatibility_score", 85),
+                    "matched_at": match.get("matched_at")
+                })
+        
+        return result
+    except Exception as e:
+        print(f"Error fetching matches: {e}")
+        return []
 
 # Trending Energies Algorithm with Responsiveness
 def calculate_trending_energy_score(user_data: dict) -> float:
