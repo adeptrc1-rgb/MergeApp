@@ -352,13 +352,16 @@ export default function CosmicOnboarding() {
   const renderIdentityStep = () => (
     <div className="space-y-6 animate-fadeIn">
       <div className="text-center mb-8">
-        <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center shadow-2xl">
-          <Sparkles className="w-10 h-10 text-white animate-pulse" />
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center shadow-2xl" style={{
+          background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+          boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)'
+        }}>
+          <Zap className="w-10 h-10 text-white animate-pulse" />
         </div>
-        <h2 className="text-4xl font-light text-white mb-3">
-          Welcome to A Sign ✨
+        <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
+          Welcome to Merge ✨
         </h2>
-        <p className="text-white/60 text-lg">Let's start your cosmic journey</p>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>Let's build your profile</p>
       </div>
 
       <div className="space-y-5">
