@@ -326,18 +326,22 @@ export default function CosmicOnboarding() {
       <div className="fixed top-8 left-0 right-0 z-50 px-6">
         <div className="max-w-md mx-auto">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Sparkles className="w-5 h-5 text-purple-400 animate-pulse" />
-            <span className="text-white font-light text-sm">
-              {completed} of {totalQuestions} cosmic sparks collected
+            <Zap className="w-5 h-5 animate-pulse" style={{ color: '#3B82F6' }} />
+            <span className="font-medium text-sm" style={{ color: '#FAFAFA' }}>
+              {completed} of {totalQuestions} questions completed
             </span>
-            <Sparkles className="w-5 h-5 text-pink-400 animate-pulse" />
+            <Zap className="w-5 h-5 animate-pulse" style={{ color: '#8B5CF6' }} />
           </div>
-          <div className="h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
+          <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#171717', border: '1px solid #262626' }}>
             <div
-              className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 transition-all duration-500 ease-out relative"
-              style={{ width: `${percentage}%` }}
+              className="h-full transition-all duration-500 ease-out relative"
+              style={{ 
+                width: `${percentage}%`,
+                background: 'linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%)',
+                boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
+              }}
             >
-              <div className="absolute inset-0 bg-white/30 animate-shimmer"></div>
+              <div className="absolute inset-0 bg-white/20 animate-shimmer"></div>
             </div>
           </div>
         </div>
