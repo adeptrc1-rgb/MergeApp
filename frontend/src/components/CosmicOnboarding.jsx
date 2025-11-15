@@ -367,13 +367,20 @@ export default function CosmicOnboarding() {
       <div className="space-y-5">
         {/* First Name */}
         <div>
-          <label className="text-sm font-light text-white/80 mb-2 block">First Name *</label>
+          <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>First Name *</label>
           <input
             type="text"
             placeholder="Enter your first name"
             value={formData.first_name}
             onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-            className="w-full h-14 px-4 border border-white/20 bg-white/5 backdrop-blur-md text-white placeholder:text-white/40 focus:border-purple-500 focus:bg-white/10 rounded-2xl transition-all text-lg outline-none"
+            className="w-full h-14 px-4 rounded-2xl transition-all text-lg outline-none"
+            style={{
+              backgroundColor: '#171717',
+              border: '1px solid #404040',
+              color: '#FAFAFA'
+            }}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#404040'}
           />
         </div>
 
