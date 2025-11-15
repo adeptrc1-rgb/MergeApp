@@ -12,8 +12,8 @@ export default function Messages({ user }) {
   const navigate = useNavigate();
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [coinflipMap, setCoinflipMap] = useState({});
-  const [coinflipToast, setCoinflipToast] = useState(null);
+  const [catalystMap, setCatalystMap] = useState({});
+  const [catalystToast, setCatalystToast] = useState(null);
   const [creating, setCreating] = useState(false);
   const [openingChat, setOpeningChat] = useState(false);
 
