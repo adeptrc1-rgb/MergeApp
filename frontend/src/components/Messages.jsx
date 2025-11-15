@@ -195,10 +195,10 @@ export default function Messages({ user }) {
       <div className="border-b bg-black flex-shrink-0 select-none" style={{ borderColor: '#262626', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
           <h2 className="text-3xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>Messages</h2>
-          {coinflipToast && (
+          {catalystToast && (
             <div className="mt-3 rounded-xl px-4 py-2 inline-flex items-center gap-2" style={{ backgroundColor: '#171717', border: '1px solid #262626', color: '#FAFAFA' }}>
               <Sparkles className="w-4 h-4" style={{ color: '#3B82F6' }} />
-              <span className="text-sm">{coinflipToast}</span>
+              <span className="text-sm">{catalystToast}</span>
             </div>
           )}
           <div className="mt-3">
