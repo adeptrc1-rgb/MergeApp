@@ -178,6 +178,35 @@
 - All state management and logic preserved
 - Animation timing kept consistent (9 seconds total)
 
+#===================================================
+# Profile Card Layout Update (2025-11-15)
+#===================================================
+
+## Change
+- Repositioned Distance and Industry fields to appear under Merge Score
+
+## New Layout Order
+1. Name, Age
+2. **Merge Score** (with colored glow)
+3. **Distance** (X miles away)
+4. **Industry/Occupation** (if available)
+5. "Show more" button
+
+## Previous Layout
+1. Name, Age
+2. Distance
+3. Merge Score
+4. Industry
+5. "Show more" button
+
+## Files Modified
+- `/app/frontend/src/components/Home.jsx`
+
+## Status
+✅ **COMPLETE** - Profile card layout updated successfully
+
+
+
 ## Files Created
 - `/app/frontend/src/components/ConnectionCatalyst.jsx`
 
