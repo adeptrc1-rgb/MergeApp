@@ -1025,23 +1025,23 @@ export default function CosmicOnboarding() {
           width: 24px;
           height: 24px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #a855f7, #ec4899);
+          background: linear-gradient(135deg, #3B82F6, #8B5CF6);
           cursor: pointer;
-          box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
           transition: all 0.3s;
         }
         .cosmic-slider::-webkit-slider-thumb:hover {
           transform: scale(1.2);
-          box-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
         }
         .cosmic-slider::-moz-range-thumb {
           width: 24px;
           height: 24px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #a855f7, #ec4899);
+          background: linear-gradient(135deg, #3B82F6, #8B5CF6);
           cursor: pointer;
           border: none;
-          box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
         }
       `}</style>
     </div>
