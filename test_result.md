@@ -279,6 +279,81 @@ Created diverse test profiles with detailed AI-generated bios and information to
 
 ✅ **COMPLETE** - Profile card layout updated successfully
 
+#===================================================
+# Onboarding UI Update - Merge Design System (2025-11-15)
+#===================================================
+
+## Scope
+- Update onboarding UI to match Merge app design (black background, blue/purple accents)
+- Ensure all onboarding answers are properly connected to profile data
+- Replace cosmic/mystical theme with data-driven Merge branding
+
+## Changes Made
+
+✅ **Background & Layout**
+- Changed from gradient purple/pink background to solid black (#000000)
+- Updated animated background orbs to subtle blue/purple (#3B82F6, #8B5CF6) with 15% opacity
+- Maintained clean, modern layout
+
+✅ **Progress Tracker**
+- Updated text: "cosmic sparks collected" → "questions completed"
+- Changed progress bar colors to Merge gradient (blue to purple)
+- Updated icons from Sparkles to Zap icons
+- Applied Merge color scheme (#3B82F6, #8B5CF6)
+
+✅ **Welcome Screen**
+- Updated title: "Welcome to A Sign ✨" → "Welcome to Merge ✨"
+- Changed subtitle: "Let's start your cosmic journey" → "Let's build your profile"
+- Updated icon container to use Merge gradient
+- Zap icon instead of Sparkles
+
+✅ **Form Inputs**
+- Background: #171717 (dark gray)
+- Borders: #404040 (medium gray)
+- Text: #FAFAFA (off-white)
+- Focus state: #3B82F6 (Intelligent Blue)
+- Removed glassmorphism effects
+
+✅ **Buttons & Navigation**
+- Back button: #171717 background with #404040 border
+- Continue button: Merge gradient (blue to purple) with glow effect
+- Disabled state: #171717 with muted text
+- All buttons use Merge color scheme
+
+✅ **Sliders**
+- Updated slider thumb gradient: blue to purple (#3B82F6 → #8B5CF6)
+- Updated glow effects to match Merge colors
+- Maintained smooth interactions
+
+## Data Connection Status
+The onboarding currently collects:
+- ✅ Identity: first_name, birth_date, birth_time, birth_location
+- ✅ MBTI: 5 personality questions → mbti_answers
+- ✅ Deal-breakers: relationship_goals, has_kids, want_kids, smoking
+- ✅ Lifestyle: 8 sliders → lifestyle_factors
+- ✅ Interests: array of selected interests
+- ✅ Nice-to-haves: religion, politics, diet, exercise → preferences
+- ✅ Photos: array of 3 photo URLs
+
+All data is saved to `/api/onboarding/complete` endpoint and properly connected to user profile.
+
+## Remaining Work
+- [ ] Update all step headers/icons to use Merge branding
+- [ ] Update selection bubbles (interests, deal-breakers) styling
+- [ ] Update lifestyle sliders background styling
+- [ ] Add occupation field collection
+- [ ] Add hometown field collection
+- [ ] Add education field collection
+- [ ] Add music preferences field collection
+
+## Files Modified
+- `/app/frontend/src/components/CosmicOnboarding.jsx`
+
+## Status
+🔄 **IN PROGRESS** - Background, progress tracker, inputs, and buttons updated. Step content styling needs completion.
+
+
+
 
 
 ## Files Created
