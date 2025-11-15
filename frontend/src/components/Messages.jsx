@@ -132,7 +132,7 @@ export default function Messages({ user }) {
         const matchId = res.data.match_id;
         await loadConversations();
         
-        // Create coinflip (backend logic still runs)
+        // Activate connection catalyst (backend logic still runs)
         await axios.post(`${API}/matches/${matchId}/coinflip`);
         
         // Navigate directly to chat
