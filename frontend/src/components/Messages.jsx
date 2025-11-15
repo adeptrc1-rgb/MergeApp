@@ -246,7 +246,7 @@ export default function Messages({ user }) {
                 
                 const age = conversation.user?.birth_date ? calculateAge(conversation.user.birth_date) : null;
                 const displayAge = age !== null ? age : '??';
-                const cf = coinflipMap[conversation.id];
+                const cf = catalystMap[conversation.id];
                 const youStart = cf?.set ? (cf.first_user_id === user.id || cf.winner_user_id === user.id) : null;
                 return (
                   <div 
