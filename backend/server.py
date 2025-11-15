@@ -193,21 +193,34 @@ async def handle_google_session(request: Request, response: Response):
         
         # Verify session with Emergent Auth API
         try:
-            async with httpx.AsyncClient() as client:
+            async with httpx.AsyncClient(follow_redirects=True) as client:
                 print(f"[AUTH] Verifying session with Emergent Auth...")
-                auth_response = await client.get(
-                    f"https://auth.emergentagent.com/api/session/{session_id}",
-                    timeout=10.0
-                )
                 
-                print(f"[AUTH] Response status: {auth_response.status_code}")
+                # Try multiple possible endpoints
+                endpoints_to_try = [
+                    f"https://auth.emergentagent.com/api/v1/session/{session_id}",
+                    f"https://auth.emergentagent.com/session/{session_id}",
+                    f"https://auth.emergentagent.com/api/session/{session_id}"
+                ]
                 
-                if auth_response.status_code != 200:
-                    print(f"[AUTH] Session verification failed: {auth_response.text}")
+                auth_data = None
+                for endpoint in endpoints_to_try:
+                    try:
+                        print(f"[AUTH] Trying endpoint: {endpoint}")
+                        auth_response = await client.get(endpoint, timeout=10.0)
+                        print(f"[AUTH] Response status: {auth_response.status_code}")
+                        
+                        if auth_response.status_code == 200:
+                            auth_data = auth_response.json()
+                            print(f"[AUTH] Auth data received: {auth_data.keys() if isinstance(auth_data, dict) else type(auth_data)}")
+                            break
+                    except Exception as e:
+                        print(f"[AUTH] Endpoint {endpoint} failed: {e}")
+                        continue
+                
+                if not auth_data:
+                    print("[AUTH] All endpoints failed")
                     raise HTTPException(status_code=401, detail="Invalid session")
-                
-                auth_data = auth_response.json()
-                print(f"[AUTH] Auth data received: {auth_data.keys() if auth_data else 'None'}")
                 
                 email = auth_data.get("email")
                 name = auth_data.get("name", "")
