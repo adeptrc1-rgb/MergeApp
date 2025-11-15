@@ -440,8 +440,20 @@ function SessionHandler() {
         setProcessing(true);
         const sessionId = sessionIdMatch[1];
         
+        // Extract email and name from hash if available
+        const emailMatch = hash.match(/email=([^&]+)/);
+        const nameMatch = hash.match(/name=([^&]+)/);
+        
+        const email = emailMatch ? decodeURIComponent(emailMatch[1]) : null;
+        const name = nameMatch ? decodeURIComponent(nameMatch[1]) : null;
+        
+        console.log('Session data:', { sessionId, email, name });
+        
         try {
-          const response = await axios.post(`${API}/auth/session`, {}, {
+          const response = await axios.post(`${API}/auth/session`, {
+            email: email,
+            name: name
+          }, {
             headers: {
               'X-Session-ID': sessionId
             },
