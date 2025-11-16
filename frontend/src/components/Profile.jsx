@@ -1144,12 +1144,21 @@ export default function Profile({ user, logout }) {
         />
       )}
       
-      {/* Spotify Connect Modal */}
+      {/* Spotify Connect Modal (Optional - for advanced users) */}
       {showSpotifyConnect && (
         <SpotifyConnect
           user={user}
           onClose={() => setShowSpotifyConnect(false)}
           onVibeSongSet={() => window.location.reload()}
+        />
+      )}
+      
+      {/* Universal Music Connect Modal */}
+      {showMusicConnect && (
+        <MusicConnect
+          user={user}
+          onClose={() => setShowMusicConnect(false)}
+          onAnthemSet={() => window.location.reload()}
         />
       )}
       
