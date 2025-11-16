@@ -497,7 +497,7 @@ export default function Home({ user }) {
       )}
 
       {/* Header */}
-      <div className="flex-shrink-0" style={{ backgroundColor: '#171717' }}>
+      <div className="flex-shrink-0" style={{ backgroundColor: '#000000', borderBottom: '1px solid #1A1A1A' }}>
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Merge wordmark */}
           <MergeLogo size="md" color="#FAFAFA" />
