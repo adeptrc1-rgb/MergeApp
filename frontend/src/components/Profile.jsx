@@ -198,10 +198,51 @@ export default function Profile({ user, logout }) {
     }
   };
 
-  const addInterest = () => {
-    if (newInterest.trim() && !editedInterests.includes(newInterest.trim())) {
-      setEditedInterests([...editedInterests, newInterest.trim()]);
+  const handleInterestInput = (e) => {
+    const value = e.target.value;
+    setNewInterest(value);
+    
+    if (value.trim().length > 0) {
+      // Filter suggestions
+      const query = value.toLowerCase();
+      const exactMatches = POPULAR_INTERESTS.filter(interest =>
+        interest.toLowerCase().includes(query) &&
+        !editedInterests.includes(interest)
+      );
+      
+      // Get popular interests not already added
+      const popularNotAdded = POPULAR_INTERESTS.filter(interest =>
+        !editedInterests.includes(interest)
+      ).slice(0, 5);
+      
+      // Combine exact matches (up to 5) with popular if no exact matches
+      const suggestions = exactMatches.length > 0 
+        ? exactMatches.slice(0, 5)
+        : popularNotAdded;
+      
+      setFilteredSuggestions(suggestions);
+      setShowSuggestions(true);
+    } else {
+      setShowSuggestions(false);
+    }
+  };
+
+  const addInterest = (interest) => {
+    const interestToAdd = interest || newInterest.trim();
+    if (interestToAdd && !editedInterests.includes(interestToAdd)) {
+      setEditedInterests([...editedInterests, interestToAdd]);
       setNewInterest('');
+      setShowSuggestions(false);
+      setFilteredSuggestions([]);
+    }
+  };
+
+  const handleInterestKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addInterest();
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
     }
   };
 
