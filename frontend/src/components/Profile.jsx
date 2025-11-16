@@ -17,6 +17,19 @@ import '../styles/tarotCard.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Popular interests for autocomplete
+const POPULAR_INTERESTS = [
+  'Yoga', 'Hiking', 'Photography', 'Travel', 'Music', 'Cooking',
+  'Reading', 'Gaming', 'Fitness', 'Art', 'Dancing', 'Movies',
+  'Sports', 'Foodie', 'Technology', 'Science', 'Nature', 'Animals',
+  'Wine Tasting', 'Coffee', 'Meditation', 'Running', 'Cycling',
+  'Swimming', 'Camping', 'Beach', 'Mountains', 'Fashion', 'Writing',
+  'Painting', 'Drawing', 'Theater', 'Concerts', 'Festivals',
+  'Comedy', 'Podcasts', 'Volunteering', 'Politics', 'History',
+  'Philosophy', 'Psychology', 'Astrology', 'Spirituality', 'Wellness',
+  'Vegan', 'Vegetarian', 'Baking', 'Gardening', 'DIY', 'Crafts'
+];
+
 // Map zodiac sign to unicode symbol
 const zodiacSymbol = (sign) => {
   if (!sign) return '✧';
