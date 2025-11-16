@@ -156,6 +156,8 @@ export default function Home({ user }) {
   const loadMatches = async () => {
     try {
       const response = await axios.get(`${API}/users/potential-matches`);
+      console.log('[DEBUG] Loaded matches:', response.data);
+      console.log('[DEBUG] First match has vibe_song:', response.data[0]?.vibe_song);
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
