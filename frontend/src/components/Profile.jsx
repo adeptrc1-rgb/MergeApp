@@ -51,6 +51,8 @@ export default function Profile({ user, logout }) {
   const [editedBio, setEditedBio] = useState('');
   const [editedInterests, setEditedInterests] = useState([]);
   const [newInterest, setNewInterest] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   // Basic info editing
   const [editedName, setEditedName] = useState('');
   const [editedIndustry, setEditedIndustry] = useState('');
