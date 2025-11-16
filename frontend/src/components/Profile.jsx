@@ -363,41 +363,31 @@ export default function Profile({ user, logout }) {
                   Preview Card
                 </button>
               </div>
+              
+              {/* User Info */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <h2 className="text-xl md:text-4xl font-light text-white leading-tight">{user.first_name}, {age}</h2>
-                  </div>
-                  <button
-                    onClick={isEditingProfile ? saveProfileEdits : startEditingProfile}
-                    className="text-purple-400 hover:text-purple-300 text-xs md:text-sm flex items-center gap-1 transition-colors flex-shrink-0 ml-2"
-                  >
-                    {isEditingProfile ? (
-                      <>
-                        <Star className="w-4 h-4" />
-                        <span className="hidden md:inline">Save</span>
-                      </>
-                    ) : (
-                      <>
-                        <Settings className="w-4 h-4" />
-                        <span className="hidden md:inline">Edit</span>
-                      </>
-                    )}
-                  </button>
+                {/* Name & Age - Large, Bold */}
+                <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">{user.first_name}, {age}</h1>
+                
+                {/* Zodiac & Coins - Smaller, lighter */}
+                <div className="flex items-center gap-2 text-white/70 text-sm mb-1">
+                  <span className="flex items-center gap-1.5">
+                    <span>{user.zodiac_sign}</span>
+                  </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <Coins className="w-3.5 h-3.5 text-yellow-400" />
+                    <span className="text-white/80">{user.star_coins || 0}</span>
+                  </span>
                 </div>
                 
-                <div className="flex items-center gap-3 text-white/60 mb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white text-xs md:text-sm">
-                      {zodiacSymbol(user.zodiac_sign)}
-                    </div>
-                    <span className="text-xs md:text-lg">{user.zodiac_sign}</span>
-                  </div>
-                  
-                  {/* Coin Balance */}
-                  <div className="flex items-center gap-1.5 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 px-2 md:px-3 py-1 rounded-full border border-yellow-500/30">
-                    <Coins className="w-3 h-3 md:w-4 md:h-4 text-yellow-400" />
-                    <span className="text-xs md:text-sm font-medium text-yellow-300">{user.star_coins || 0}</span>
+                {/* Industry - Same small font */}
+                {!isEditingProfile && user.industry && (
+                  <p className="text-sm text-white/60">Industry: {user.industry}</p>
+                )}
+                {!isEditingProfile && user.location && (
+                  <p className="text-sm text-white/60">{user.location}</p>
+                )}
                   </div>
                 </div>
 
