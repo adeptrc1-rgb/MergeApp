@@ -319,13 +319,15 @@ export default function Profile({ user, logout }) {
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
-        <div className="max-w-4xl mx-auto px-6 py-6">
-          {/* Profile Header */}
-          <div className="bg-white/5 rounded-2xl p-4 md:p-8 border border-white/10 mb-6">
-            <div className="flex flex-row items-start gap-4 md:gap-6">
+        <div className="max-w-4xl mx-auto px-4 py-4 md:px-6 md:py-6 space-y-4">
+          
+          {/* PROFILE HEADER CARD */}
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10 relative">
+            <div className="flex items-start gap-6">
+              {/* Profile Picture */}
               <div className="relative flex-shrink-0">
                 <div
-                  className="w-20 h-20 md:w-32 md:h-32 rounded-2xl bg-cover bg-center border-2 border-white/20 bg-gradient-to-br from-purple-500/20 to-pink-500/20"
+                  className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-cover bg-center border-3 border-white/20 shadow-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20"
                   style={{ backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'none' }}
                 >
                   {!user.photos?.[0] && (
@@ -335,7 +337,15 @@ export default function Profile({ user, logout }) {
                   )}
                 </div>
                 
-                {/* Photo Edit Button - Top Right Corner */}
+                {/* Streak Badge Overlay */}
+                {streakStatus && streakStatus.current_streak > 0 && (
+                  <div className="absolute -bottom-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full border-2 border-black flex items-center gap-1">
+                    <Flame className="w-3 h-3" />
+                    {streakStatus.current_streak}
+                  </div>
+                )}
+                
+                {/* Photo Edit Button */}
                 <button
                   onClick={() => setShowPhotoEditor(true)}
                   className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white p-2 rounded-full hover:scale-110 transition-all shadow-lg border border-purple-300/30"
