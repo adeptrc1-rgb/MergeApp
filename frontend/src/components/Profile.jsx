@@ -10,6 +10,7 @@ import TarotStreakCard from './TarotStreakCard';
 import MergeLogo from './MergeLogo';
 import PhotoEditorModal from './PhotoEditorModal';
 import SpotifyConnect from './SpotifyConnect';
+import MusicConnect from './MusicConnect';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 import '../styles/tarotCard.css';
 
