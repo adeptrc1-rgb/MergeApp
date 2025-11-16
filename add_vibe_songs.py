@@ -7,44 +7,32 @@ async def add_vibe_songs():
     client = AsyncIOMotorClient(MONGO_URL)
     db = client['dating_app']
     
-    # Example vibe song structure
-    # Note: These are placeholder URLs - will need real Spotify/Apple Music integration
-    example_song = {
-        'title': 'Levitating',
-        'artist': 'Dua Lipa',
-        'preview_url': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',  # Placeholder preview
-        'album_art': 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=300&q=80'
+    # Check current users
+    users = await db.users.find({}).to_list(length=None)
+    print(f'Found {len(users)} users in database\n')
+    
+    for user in users:
+        has_vibe = 'vibe_song' in user
+        print(f'{user.get("first_name", "Unknown")}: has vibe_song = {has_vibe}')
+    
+    # Universal vibe song for all users
+    universal_song = {
+        'title': 'Blinding Lights',
+        'artist': 'The Weeknd',
+        'preview_url': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        'album_art': 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&q=80'
     }
     
-    # Update test user (Star) with vibe song
-    result = await db.users.update_one(
-        {'first_name': 'Star'},
-        {'$set': {'vibe_song': example_song}}
+    # Update ALL users with vibe song
+    result = await db.users.update_many(
+        {},
+        {'$set': {'vibe_song': universal_song}}
     )
     
-    if result.modified_count > 0:
-        print('✓ Added vibe song for Star')
-    else:
-        print('✗ Could not update Star (user not found or no changes)')
-    
-    # Update Emma if exists
-    emma_song = {
-        'title': 'Electric Feel',
-        'artist': 'MGMT',
-        'preview_url': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-        'album_art': 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&q=80'
-    }
-    
-    result2 = await db.users.update_one(
-        {'first_name': 'Emma'},
-        {'$set': {'vibe_song': emma_song}}
-    )
-    
-    if result2.modified_count > 0:
-        print('✓ Added vibe song for Emma')
+    print(f'\n✓ Updated {result.modified_count} users with vibe song')
+    print('All profiles now have "My Vibe" section!')
     
     client.close()
-    print('\nVibe songs added! Ready to test the player.')
 
 if __name__ == "__main__":
     asyncio.run(add_vibe_songs())
