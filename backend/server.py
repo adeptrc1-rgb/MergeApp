@@ -1,5 +1,6 @@
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, Response, Request, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any, List
 from datetime import datetime, timedelta, timezone, date
@@ -12,6 +13,9 @@ import httpx
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+import base64
 
 load_dotenv()
 
