@@ -396,11 +396,14 @@ export default function Profile({ user, logout }) {
               {/* Profile Picture */}
               <div className="relative flex-shrink-0">
                 <div
-                  className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-cover bg-center border-3 border-white/20 shadow-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20"
-                  style={{ backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'none' }}
+                  className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-cover bg-center border-4 border-white shadow-2xl"
+                  style={{ 
+                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #8A4FFF 100%)',
+                    boxShadow: '0 8px 24px rgba(108, 99, 255, 0.25)'
+                  }}
                 >
                   {!user.photos?.[0] && (
-                    <div className="w-full h-full flex items-center justify-center text-white text-3xl font-light">
+                    <div className="w-full h-full flex items-center justify-center text-white text-3xl font-bold">
                       {user.first_name?.[0] || 'U'}
                     </div>
                   )}
@@ -408,16 +411,16 @@ export default function Profile({ user, logout }) {
                 
                 {/* Streak Badge Overlay */}
                 {streakStatus && streakStatus.current_streak > 0 && (
-                  <div className="absolute -bottom-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full border-2 border-black flex items-center gap-1">
-                    <Flame className="w-3 h-3" />
-                    {streakStatus.current_streak}
+                  <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 border-2 border-white">
+                    <span>🔥</span>
+                    <span>Day {streakStatus.current_streak}/21</span>
                   </div>
                 )}
                 
                 {/* Photo Edit Button */}
                 <button
                   onClick={() => setShowPhotoEditor(true)}
-                  className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white p-2 rounded-full hover:scale-110 transition-all shadow-lg border border-purple-300/30"
+                  className="absolute -top-2 -right-2 bg-white text-[#6C63FF] p-2 rounded-full hover:scale-110 transition-all shadow-lg border-2 border-purple-100"
                   title="Edit Photos"
                 >
                   <Camera className="w-4 h-4" />
