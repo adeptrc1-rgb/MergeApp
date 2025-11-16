@@ -588,40 +588,7 @@ export default function Profile({ user, logout }) {
                       </button>
                     </div>
                   </div>
-                )}
-
-                {/* Display current info when not editing */}
-                {!isEditingProfile && (user.industry || user.job_title || user.location) && (
-                  <div className="mb-3 space-y-1">
-                    {user.job_title && (
-                      <div className="text-white/70 text-xs md:text-sm">
-                        <span className="text-white/50">Job:</span> {user.job_title}
-                      </div>
-                    )}
-                    {user.industry && (
-                      <div className="text-white/70 text-xs md:text-sm">
-                        <span className="text-white/50">Industry:</span> {user.industry}
-                      </div>
-                    )}
-                    {user.location && (
-                      <div className="text-white/70 text-xs md:text-sm">
-                        <span className="text-white/50">Location:</span> {user.location}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Interests and Bio sections moved to separate cards above */}
-
-                {user.angel_number && (
-                  <div className="inline-flex items-center gap-1.5 md:gap-2 bg-white/10 px-2 py-1 md:px-4 md:py-2 rounded-full mt-2">
-                    <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-purple-400" />
-                    <span className="text-white/80 text-[11px] md:text-sm">Angel Number: {user.angel_number}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
+          )}
 
           {/* Aura Lab Entry Point */}
           <button
