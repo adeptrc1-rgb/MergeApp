@@ -16,7 +16,7 @@ app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
 # CORS
-preview_origin = os.environ.get("PREVIEW_ORIGIN", "https://data-connect-11.preview.emergentagent.com")
+preview_origin = os.environ.get("PREVIEW_ORIGIN", "https://dataintelligence.preview.emergentagent.com")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[preview_origin, "http://localhost:3000", "https://localhost:3000"],
