@@ -412,6 +412,111 @@ async def update_user_profile(
     
     return {"success": True, "message": "Profile updated successfully"}
 
+
+# Photo Upload Endpoint
+@api_router.post("/users/photos/upload")
+async def upload_photo(
+    file: UploadFile = File(...),
+    user: User = Depends(get_current_user)
+):
+    """
+    Upload a photo to Cloudinary and return the URL
+    """
+    try:
+        # Read file content
+        contents = await file.read()
+        
+        # Upload to Cloudinary with transformation for optimization
+        upload_result = cloudinary.uploader.upload(
+            contents,
+            folder=f"merge_dating/{user.id}",
+            transformation=[
+                {'width': 1000, 'height': 1000, 'crop': 'limit'},
+                {'quality': 'auto:good'},
+                {'fetch_format': 'auto'}
+            ],
+            resource_type="image"
+        )
+        
+        # Return secure URL
+        return {
+            "success": True,
+            "url": upload_result['secure_url'],
+            "public_id": upload_result['public_id']
+        }
+    
+    except Exception as e:
+        print(f"[PHOTO_UPLOAD] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Photo upload failed: {str(e)}")
+
+
+# Update User Photos
+@api_router.put("/users/photos")
+async def update_user_photos(
+    request: Request,
+    user: User = Depends(get_current_user)
+):
+    """
+    Update user's photo array with reordering/deletion
+    """
+    try:
+        body = await request.json()
+        photos = body.get("photos", [])
+        
+        # Validate photos array (max 6 photos)
+        if not isinstance(photos, list):
+            raise HTTPException(status_code=400, detail="Photos must be an array")
+        
+        if len(photos) > 6:
+            raise HTTPException(status_code=400, detail="Maximum 6 photos allowed")
+        
+        # Update user photos in database
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {"photos": photos}}
+        )
+        
+        return {
+            "success": True,
+            "message": "Photos updated successfully",
+            "photos": photos
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[PHOTO_UPDATE] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to update photos: {str(e)}")
+
+
+# Delete Photo from Cloudinary
+@api_router.delete("/users/photos/{public_id:path}")
+async def delete_photo(
+    public_id: str,
+    user: User = Depends(get_current_user)
+):
+    """
+    Delete a photo from Cloudinary
+    """
+    try:
+        # Delete from Cloudinary
+        result = cloudinary.uploader.destroy(public_id)
+        
+        return {
+            "success": True,
+            "message": "Photo deleted successfully",
+            "result": result
+        }
+    
+    except Exception as e:
+        print(f"[PHOTO_DELETE] Error: {e}")
+        # Don't fail if cloudinary delete fails - photo might already be gone
+        return {
+            "success": True,
+            "message": "Photo removed from profile"
+        }
+
+
 # Horoscope
 @api_router.get("/horoscope/today")
 async def horoscope_today(user: User = Depends(get_current_user)):
