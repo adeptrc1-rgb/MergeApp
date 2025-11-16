@@ -404,15 +404,25 @@ async def complete_onboarding(request: Request, response: Response):
 
 @api_router.put("/users/me")
 async def update_user_profile(
-    bio: Optional[str] = None,
-    interests: Optional[list] = None,
+    request: Request,
     user: User = Depends(get_current_user)
 ):
+    """
+    Update user profile with various fields
+    """
+    body = await request.json()
+    
+    # Define allowed fields for update
+    allowed_fields = [
+        'bio', 'interests', 'first_name', 'industry', 
+        'job_title', 'location', 'hometown', 'education',
+        'show_age', 'show_distance', 'discovery_enabled'
+    ]
+    
     update_data = {}
-    if bio is not None:
-        update_data["bio"] = bio
-    if interests is not None:
-        update_data["interests"] = interests
+    for field in allowed_fields:
+        if field in body:
+            update_data[field] = body[field]
     
     if update_data:
         await db.users.update_one(
