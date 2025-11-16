@@ -1142,6 +1142,15 @@ export default function Profile({ user, logout }) {
         />
       )}
       
+      {/* Spotify Connect Modal */}
+      {showSpotifyConnect && (
+        <SpotifyConnect
+          user={user}
+          onClose={() => setShowSpotifyConnect(false)}
+          onVibeSongSet={() => window.location.reload()}
+        />
+      )}
+      
       <style>{`
         @keyframes shimmer {
           0%, 100% { background-position: 0% 50%; }
