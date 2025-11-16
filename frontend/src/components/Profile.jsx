@@ -512,18 +512,18 @@ export default function Profile({ user, logout }) {
                     onKeyDown={handleInterestKeyDown}
                     onFocus={() => newInterest && setShowSuggestions(true)}
                     onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                    placeholder="+ Add interests..."
-                    className="w-full bg-white/5 border border-white/20 rounded-full px-6 py-3 text-white text-sm focus:outline-none focus:border-purple-400 placeholder-white/40"
+                    placeholder="+ Add an interest..."
+                    className="w-full bg-purple-50/50 border-2 border-purple-100 rounded-full px-6 py-3 text-gray-800 text-sm focus:outline-none focus:border-[#6C63FF] placeholder-gray-400 transition-all"
                   />
                   
                   {/* Autocomplete Dropdown */}
                   {showSuggestions && filteredSuggestions.length > 0 && (
-                    <div className="absolute top-full left-0 right-0 mt-2 bg-[#1a1a1a] border border-white/20 rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto">
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl z-50 max-h-60 overflow-y-auto">
                       {filteredSuggestions.map((suggestion, idx) => (
                         <button
                           key={idx}
                           onClick={() => addInterest(suggestion)}
-                          className="w-full text-left px-4 py-3 text-white/80 hover:bg-white/10 transition-colors text-sm border-b border-white/5 last:border-b-0"
+                          className="w-full text-left px-5 py-3 text-gray-700 hover:bg-purple-50 transition-colors text-sm border-b border-gray-100 last:border-b-0 font-medium"
                         >
                           {suggestion}
                         </button>
@@ -533,7 +533,7 @@ export default function Profile({ user, logout }) {
                       {newInterest.trim() && !filteredSuggestions.includes(newInterest.trim()) && (
                         <button
                           onClick={() => addInterest()}
-                          className="w-full text-left px-4 py-3 text-purple-400 hover:bg-white/10 transition-colors text-sm italic flex items-center gap-2"
+                          className="w-full text-left px-5 py-3 text-[#6C63FF] hover:bg-purple-50 transition-colors text-sm italic flex items-center gap-2 font-medium"
                         >
                           <Sparkles className="w-3 h-3" />
                           Create "{newInterest.trim()}"
