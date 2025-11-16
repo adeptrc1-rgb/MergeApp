@@ -192,7 +192,7 @@ export default function Messages({ user }) {
   return (
     <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="border-b bg-black flex-shrink-0 select-none" style={{ borderColor: '#262626', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
+      <div className="border-b bg-black flex-shrink-0 select-none" style={{ borderColor: '#1A1A1A', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
           <h2 className="text-3xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>Messages</h2>
           {catalystToast && (
