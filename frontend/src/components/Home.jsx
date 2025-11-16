@@ -733,7 +733,7 @@ export default function Home({ user }) {
                   >
                     <div className="space-y-0 pt-2 pb-12">
                       {/* No data fallback */}
-                      {!currentMatch.bio && (!currentMatch.interests || currentMatch.interests.length === 0) && !currentMatch.deal_breakers?.relationship_goals && !currentMatch.lifestyle_factors && !currentMatch.preferences?.music && (
+                      {!currentMatch.bio && !currentMatch.vibe_song && (!currentMatch.interests || currentMatch.interests.length === 0) && !currentMatch.deal_breakers?.relationship_goals && !currentMatch.lifestyle_factors && (
                         <div className="text-center py-4">
                           <p className="text-white/50 text-sm italic">No additional profile information available</p>
                         </div>
