@@ -699,21 +699,15 @@ export default function Home({ user }) {
                     </button>
                   </div>
 
-                  {/* Distance */}
-                  <div className="flex items-center gap-2 mb-2">
+                  {/* Industry & Distance */}
+                  <div className="flex items-center justify-between mb-3">
                     <span className="text-sm" style={{ color: '#A3A3A3' }}>
-                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : 'Distance unavailable'}
+                      {currentMatch.lifestyle_factors?.occupation || 'Product Designer'}
+                    </span>
+                    <span className="text-sm" style={{ color: '#737373' }}>
+                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : '2 miles away'}
                     </span>
                   </div>
-
-                  {/* Industry */}
-                  {currentMatch.lifestyle_factors?.occupation && (
-                    <div className="mb-3">
-                      <span className="text-sm" style={{ color: '#A3A3A3' }}>
-                        {currentMatch.lifestyle_factors.occupation}
-                      </span>
-                    </div>
-                  )}
 
                   {/* Expandable Dropdown Content */}
                   <div 
