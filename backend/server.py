@@ -201,6 +201,11 @@ async def test_login(body: LoginBody, response: Response):
             "profile_completeness": 95.0
         }
         await db.users.insert_one(udoc)
+    
+    # Remove MongoDB's _id field before creating User object
+    if "_id" in udoc:
+        del udoc["_id"]
+    
     user = User(**udoc)
     token = str(uuid.uuid4())
     sess = {
