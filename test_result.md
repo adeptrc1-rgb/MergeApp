@@ -405,6 +405,99 @@ The frontend was calling `/api/auth/session` endpoint with X-Session-ID header f
 
 
 
+
+#===================================================
+# Streamlined Onboarding Flow - AMI Focused (2025-11-16)
+#===================================================
+
+## Objective
+Redesigned onboarding to collect minimum viable data for maximum matching intelligence. Every question contributes to the Adaptive Match Index (AMI).
+
+## New Structure
+
+**Total:** 18 core questions + 3 photos (~5-7 minutes)
+**Previous:** 28 questions (~8-10 minutes)
+
+**Flow:** Identity → Personality → Lifestyle & Values → Communication → Photos
+
+### Step 1: Identity & The Essentials (3 Questions)
+- First name
+- Birth date (for age + astrological sun sign)
+- Hometown (conversation starter)
+
+### Step 2: Core Personality Architecture (8 Questions)
+**Part A: The Big 3 Scenarios** (Binary choices)
+- Social energy source: Time with others vs Time alone (E/I)
+- Information processing: Concrete facts vs Patterns & possibilities (S/N)
+- Decision making: Logical consistency vs Personal values (T/F)
+
+**Part B: 5 Dimension Sliders** (1-5 scale)
+- Energy: Quiet & Reflective ↔ Social & Expressive
+- Information: Practical & Detailed ↔ Imaginative & Big-Picture
+- Decisions: Logical & Analytical ↔ Empathetic & Compassionate
+- Planning: Structured & Decisive ↔ Flexible & Adaptable
+- Expression: Private & Reserved ↔ Open & Expressive
+
+### Step 3: Lifestyle & Relationship Deal-Breakers (4 Questions)
+- Relationship goals (long-term, short-term, friends first, etc.)
+- Kids preference (want someday, don't want, have kids, not sure)
+- Top 3 passions/interests (from 18 options)
+- Social energy level slider (Homebody ↔ Social Butterfly)
+
+### Step 4: Communication & Connection Style (3 Questions)
+- Conflict handling style (talk immediately, need space, avoid)
+- Love language (words/quality time, acts/touch, balanced mix)
+- Texting style (quick & frequent, thoughtful, varies)
+
+### Step 5: Photos (3 Uploads)
+- Upload 3 photos with visual identity
+
+## Data Structure
+
+**Intelligent scoring feeds the algorithm:**
+```javascript
+{
+  identity: { name, birth_date, hometown },
+  personality: {
+    mbti_type: "ENFP", // Calculated from scenarios + sliders
+    dimension_scores: { E: 85, N: 70, F: 90, P: 80 },
+    behavioral_traits: { energy: 4, information: 3, decisions: 2, planning: 4, expression: 1 }
+  },
+  lifestyle: {
+    relationship_goal: "long_term",
+    kids_preference: "want_someday",
+    top_interests: ["hiking", "music", "cooking"],
+    social_energy: 2
+  },
+  communication: {
+    conflict_style: "need_space",
+    love_language: "balanced",
+    texting_style: "thoughtful"
+  }
+}
+```
+
+## Improvements Over Old Flow
+
+✅ **Reduced from 28 to 18 questions** (36% fewer)
+✅ **Faster completion** (~5-7 min vs ~8-10 min)
+✅ **Every question contributes to AMI** (no filler)
+✅ **Better personality assessment** (scenarios + sliders)
+✅ **Communication style added** (critical for compatibility)
+✅ **Streamlined interest selection** (top 3 vs all interests)
+✅ **Removed optional fields** that didn't add matching value
+✅ **Sequential flow** (not randomized - better UX)
+
+## Files Created
+- `/app/frontend/src/components/MergeOnboarding.jsx` - New streamlined onboarding
+
+## Files Modified
+- `/app/frontend/src/App.js` - Updated to use MergeOnboarding
+
+## Status
+✅ **COMPLETE** - Streamlined 18-question onboarding live and functional
+
+
 ## Files Modified
 - `/app/frontend/src/components/CosmicOnboarding.jsx`
 
