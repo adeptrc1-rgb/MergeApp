@@ -699,11 +699,15 @@ export default function Home({ user }) {
                     </button>
                   </div>
 
-                  {/* Industry & Distance */}
-                  <div className="flex items-center justify-between mb-3">
+                  {/* Industry */}
+                  <div className="mb-1">
                     <span className="text-sm" style={{ color: '#A3A3A3' }}>
                       {currentMatch.lifestyle_factors?.occupation || 'Product Designer'}
                     </span>
+                  </div>
+                  
+                  {/* Distance */}
+                  <div className="mb-3">
                     <span className="text-sm" style={{ color: '#737373' }}>
                       {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : '2 miles away'}
                     </span>
