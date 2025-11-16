@@ -1,29 +1,71 @@
 import React from 'react';
-import { Home as HomeIcon, Sparkles, MessageCircle, Users, Star, ShoppingBag } from 'lucide-react';
+import { Zap, Network, MessageSquare, User } from 'lucide-react';
 
-// Shared Bottom Navigation (16px icons, consistent sizing)
+// Shared Bottom Navigation - Merge Theme
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: HomeIcon, label: 'Home', path: '/home' },
-    { id: 'discover', icon: Sparkles, label: 'Discover', path: '/discover' },
-    { id: 'messages', icon: MessageCircle, label: 'Messages', path: '/messages' },
-    { id: 'profile', icon: Star, label: 'Profile', path: '/profile' },
+    { id: 'home', icon: Zap, label: 'Discover', path: '/home' },
+    { id: 'discover', icon: Network, label: 'Matrix', path: '/discover' },
+    { id: 'messages', icon: MessageSquare, label: 'Chats', path: '/messages' },
+    { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
   ];
+  
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 pb-safe z-40 select-none" style={{ WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
-      <div className="flex items-center justify-around px-2 py-2">
-        {items.map(({ id, icon: Icon, label, path }) => (
-          <button
-            key={id}
-            onClick={() => navigate(path)}
-            className={`flex flex-col items-center gap-0.5 transition-colors ${
-              currentTab === id ? 'text-white' : 'text-white/40 hover:text-white/60'
-            }`}
-          >
-            <Icon className="w-4 h-4" />
-            <span className="text-[10px] leading-none mt-1">{label}</span>
-          </button>
-        ))}
+    <div 
+      className="fixed bottom-0 left-0 right-0 bg-black pb-safe z-40 select-none" 
+      style={{ 
+        WebkitTapHighlightColor: 'transparent', 
+        WebkitTouchCallout: 'none', 
+        userSelect: 'none',
+        borderTop: '1px solid #262626'
+      }}
+    >
+      <div className="flex items-center justify-around px-4 py-3">
+        {items.map(({ id, icon: Icon, label, path }) => {
+          const isActive = currentTab === id;
+          return (
+            <button
+              key={id}
+              onClick={() => navigate(path)}
+              className="flex flex-col items-center gap-1 transition-all relative"
+              style={{
+                minWidth: '60px',
+                padding: '4px 8px'
+              }}
+            >
+              {/* Icon with gradient background when active */}
+              <div 
+                className="relative p-2 rounded-xl transition-all"
+                style={isActive ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)'
+                } : {
+                  background: 'transparent'
+                }}
+              >
+                <Icon 
+                  className="w-5 h-5 transition-all" 
+                  style={{ 
+                    color: isActive ? '#FFFFFF' : '#737373',
+                    strokeWidth: isActive ? 2.5 : 2
+                  }} 
+                />
+              </div>
+              
+              {/* Label */}
+              <span 
+                className="text-xs font-medium transition-all"
+                style={{ 
+                  color: isActive ? '#FAFAFA' : '#737373',
+                  fontSize: '11px',
+                  letterSpacing: '0.02em'
+                }}
+              >
+                {label}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
