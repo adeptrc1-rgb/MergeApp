@@ -76,6 +76,16 @@ class User(BaseModel):
     bio: Optional[str] = None
     interests: Optional[List[str]] = []
     profile_completed: bool = False
+    # Profile details
+    industry: Optional[str] = None
+    job_title: Optional[str] = None
+    location: Optional[str] = None
+    hometown: Optional[str] = None
+    education: Optional[str] = None
+    # Discovery settings
+    show_age: bool = True
+    show_distance: bool = True
+    discovery_enabled: bool = True
     mbti_scores: Optional[Dict[str, float]] = None
     personality_type: Optional[str] = None
     lifestyle_factors: Optional[Dict[str, int]] = None
