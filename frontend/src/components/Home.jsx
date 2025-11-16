@@ -652,8 +652,8 @@ export default function Home({ user }) {
                     })() || `${currentMatch.first_name}, ${age}`}
                   </h2>
                   
-                  {/* Merge Score */}
-                  <div className="mb-2">
+                  {/* Merge Score & Show More */}
+                  <div className="mb-2 flex items-center gap-3">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -683,6 +683,19 @@ export default function Home({ user }) {
                                  '#A3A3A3'
                         }}>{compatibility}%</span> Merge Score
                       </span>
+                    </button>
+                    
+                    {/* Show More toggle - right next to Merge Score */}
+                    <button
+                      onClick={(e) => { 
+                        e.stopPropagation();
+                        handleShowMore(); 
+                      }}
+                      className="flex items-center gap-1 transition-colors touch-manipulation"
+                      style={{ color: '#A3A3A3', pointerEvents: 'auto' }}
+                    >
+                      <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
+                      {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
                     </button>
                   </div>
 
