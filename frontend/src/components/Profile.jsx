@@ -323,6 +323,19 @@ export default function Profile({ user, logout }) {
           
           {/* PROFILE HEADER CARD */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10 relative">
+            {/* Discreet Edit Button - Top Right */}
+            <button
+              onClick={isEditingProfile ? saveProfileEdits : startEditingProfile}
+              className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg"
+              title={isEditingProfile ? "Save Changes" : "Edit Profile"}
+            >
+              {isEditingProfile ? (
+                <Check className="w-5 h-5" />
+              ) : (
+                <Settings className="w-5 h-5" />
+              )}
+            </button>
+            
             <div className="flex items-start gap-6">
               {/* Profile Picture */}
               <div className="relative flex-shrink-0">
