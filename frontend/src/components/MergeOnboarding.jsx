@@ -1,0 +1,880 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Zap, ChevronRight, ChevronLeft, Upload, Heart, MessageCircle, User } from 'lucide-react';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
+
+// Interest options for multi-select
+const INTEREST_OPTIONS = [
+  'Hiking', 'Cooking', 'Music', 'Art', 'Fitness', 'Travel',
+  'Gaming', 'Reading', 'Photography', 'Dancing', 'Sports', 'Movies',
+  'Coffee', 'Wine', 'Tech', 'Fashion', 'Volunteering', 'Pets'
+];
+
+export default function MergeOnboarding() {
+  const navigate = useNavigate();
+  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const totalSteps = 5;
+  const totalQuestions = 18;
+
+  const [formData, setFormData] = useState({
+    // Step 1: Identity
+    first_name: '',
+    birth_date: '',
+    hometown: '',
+
+    // Step 2: Personality - Scenarios
+    social_energy_source: '', // 'extroversion' or 'introversion'
+    information_processing: '', // 'sensing' or 'intuition'
+    decision_making: '', // 'thinking' or 'feeling'
+
+    // Step 2: Personality - Sliders
+    mbti_sliders: {
+      energy: 3,
+      information: 3,
+      decision: 3,
+      planning: 3,
+      expression: 3
+    },
+
+    // Step 3: Lifestyle
+    relationship_goal: '',
+    kids_preference: '',
+    top_interests: [],
+    social_energy_level: 3,
+
+    // Step 4: Communication
+    conflict_style: '',
+    love_language: '',
+    texting_style: '',
+
+    // Step 5: Photos
+    photos: [null, null, null]
+  });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
+  const getCompletedQuestions = () => {
+    let count = 0;
+    if (step > 1) count += 3; // Identity
+    if (step > 2) count += 8; // Personality
+    if (step > 3) count += 4; // Lifestyle
+    if (step > 4) count += 3; // Communication
+    if (step > 5) count += formData.photos.filter(p => p).length; // Photos
+    return count;
+  };
+
+  const canContinue = () => {
+    switch (step) {
+      case 1:
+        return formData.first_name && formData.birth_date && formData.hometown;
+      case 2:
+        return formData.social_energy_source && 
+               formData.information_processing && 
+               formData.decision_making;
+      case 3:
+        return formData.relationship_goal && 
+               formData.kids_preference && 
+               formData.top_interests.length >= 3;
+      case 4:
+        return formData.conflict_style && 
+               formData.love_language && 
+               formData.texting_style;
+      case 5:
+        return formData.photos.filter(p => p).length >= 3;
+      default:
+        return false;
+    }
+  };
+
+  const handlePhotoUpload = (event, index) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Photo size must be less than 5MB');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const newPhotos = [...formData.photos];
+      newPhotos[index] = reader.result;
+      setFormData({ ...formData, photos: newPhotos });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleComplete = async () => {
+    setLoading(true);
+    try {
+      // Calculate MBTI from scenarios and sliders
+      const mbti = calculateMBTI();
+      
+      const profileData = {
+        first_name: formData.first_name,
+        birth_date: formData.birth_date,
+        hometown: formData.hometown,
+        
+        // Personality
+        personality_type: mbti,
+        mbti_scores: {
+          E: formData.social_energy_source === 'extroversion' ? formData.mbti_sliders.energy * 20 : (5 - formData.mbti_sliders.energy) * 20,
+          N: formData.information_processing === 'intuition' ? formData.mbti_sliders.information * 20 : (5 - formData.mbti_sliders.information) * 20,
+          F: formData.decision_making === 'feeling' ? formData.mbti_sliders.decision * 20 : (5 - formData.mbti_sliders.decision) * 20,
+          P: formData.mbti_sliders.planning * 20
+        },
+        
+        // Lifestyle
+        deal_breakers: {
+          relationship_goals: formData.relationship_goal,
+          want_kids: formData.kids_preference
+        },
+        interests: formData.top_interests,
+        lifestyle_factors: {
+          social_energy: formData.social_energy_level,
+          occupation: '' // Will be added later
+        },
+        
+        // Communication
+        preferences: {
+          conflict_style: formData.conflict_style,
+          love_language: formData.love_language,
+          texting_style: formData.texting_style
+        },
+        
+        // Photos
+        photos: formData.photos.filter(p => p),
+        profile_completed: true
+      };
+
+      await axios.post(`${API}/onboarding/complete`, profileData, {
+        withCredentials: true
+      });
+
+      navigate('/home');
+    } catch (error) {
+      console.error('Error completing onboarding:', error);
+      alert('Failed to complete profile. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const calculateMBTI = () => {
+    const e_i = formData.social_energy_source === 'extroversion' ? 'E' : 'I';
+    const s_n = formData.information_processing === 'intuition' ? 'N' : 'S';
+    const t_f = formData.decision_making === 'feeling' ? 'F' : 'T';
+    const j_p = formData.mbti_sliders.planning >= 3 ? 'J' : 'P';
+    return `${e_i}${s_n}${t_f}${j_p}`;
+  };
+
+  const renderProgressTracker = () => {
+    const completed = getCompletedQuestions();
+    const percentage = (completed / totalQuestions) * 100;
+
+    return (
+      <div className="fixed top-8 left-0 right-0 z-50 px-6">
+        <div className="max-w-md mx-auto">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Zap className="w-5 h-5 animate-pulse" style={{ color: '#3B82F6' }} />
+            <span className="font-medium text-sm" style={{ color: '#FAFAFA' }}>
+              {completed} of {totalQuestions} questions completed
+            </span>
+          </div>
+          <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: '#171717', border: '1px solid #262626' }}>
+            <div
+              className="h-full transition-all duration-500 ease-out"
+              style={{ 
+                width: `${percentage}%`,
+                background: 'linear-gradient(90deg, #3B82F6 0%, #8B5CF6 100%)',
+                boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderStep1 = () => (
+    <div className="space-y-6 animate-fadeIn">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{
+          background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+          boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)'
+        }}>
+          <User className="w-10 h-10 text-white" />
+        </div>
+        <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
+          Identity & The Essentials
+        </h2>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>Let's start with the basics</p>
+      </div>
+
+      <div className="space-y-5">
+        {/* First Name */}
+        <div>
+          <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>What's your first name?</label>
+          <input
+            type="text"
+            value={formData.first_name}
+            onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+            className="w-full px-5 py-4 rounded-xl focus:outline-none transition-all"
+            style={{
+              backgroundColor: '#171717',
+              border: '1px solid #404040',
+              color: '#FAFAFA'
+            }}
+            placeholder="Your first name"
+            onFocus={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#404040'}
+          />
+        </div>
+
+        {/* Birth Date */}
+        <div>
+          <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>When were you born?</label>
+          <p className="text-xs mb-2" style={{ color: '#737373' }}>Helps us find astrologically aligned matches</p>
+          <input
+            type="date"
+            value={formData.birth_date}
+            onChange={(e) => setFormData({ ...formData, birth_date: e.target.value })}
+            className="w-full px-5 py-4 rounded-xl focus:outline-none transition-all"
+            style={{
+              backgroundColor: '#171717',
+              border: '1px solid #404040',
+              color: '#FAFAFA'
+            }}
+            onFocus={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#404040'}
+          />
+        </div>
+
+        {/* Hometown */}
+        <div>
+          <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>Where did you grow up?</label>
+          <p className="text-xs mb-2" style={{ color: '#737373' }}>A great way to break the ice</p>
+          <input
+            type="text"
+            value={formData.hometown}
+            onChange={(e) => setFormData({ ...formData, hometown: e.target.value })}
+            className="w-full px-5 py-4 rounded-xl focus:outline-none transition-all"
+            style={{
+              backgroundColor: '#171717',
+              border: '1px solid #404040',
+              color: '#FAFAFA'
+            }}
+            placeholder="City, State/Country"
+            onFocus={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.currentTarget.style.borderColor = '#404040'}
+          />
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderStep2 = () => (
+    <div className="space-y-6 animate-fadeIn">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{
+          background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+          boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)'
+        }}>
+          <Zap className="w-10 h-10 text-white" />
+        </div>
+        <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
+          Core Personality
+        </h2>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>Which feels more naturally like you?</p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Part A: The Big 3 Scenarios */}
+        <div className="space-y-5">
+          {/* Scenario 1: Social Energy */}
+          <div>
+            <p className="text-sm mb-3" style={{ color: '#FAFAFA' }}>Your social energy typically comes from:</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => setFormData({ ...formData, social_energy_source: 'extroversion' })}
+                className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+                style={formData.social_energy_source === 'extroversion' ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                Time with others
+              </button>
+              <button
+                onClick={() => setFormData({ ...formData, social_energy_source: 'introversion' })}
+                className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+                style={formData.social_energy_source === 'introversion' ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                Time alone
+              </button>
+            </div>
+          </div>
+
+          {/* Scenario 2: Information Processing */}
+          <div>
+            <p className="text-sm mb-3" style={{ color: '#FAFAFA' }}>You're more convinced by:</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => setFormData({ ...formData, information_processing: 'sensing' })}
+                className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+                style={formData.information_processing === 'sensing' ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                Concrete facts
+              </button>
+              <button
+                onClick={() => setFormData({ ...formData, information_processing: 'intuition' })}
+                className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+                style={formData.information_processing === 'intuition' ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                Patterns & possibilities
+              </button>
+            </div>
+          </div>
+
+          {/* Scenario 3: Decision Making */}
+          <div>
+            <p className="text-sm mb-3" style={{ color: '#FAFAFA' }}>When deciding, you prioritize:</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => setFormData({ ...formData, decision_making: 'thinking' })}
+                className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+                style={formData.decision_making === 'thinking' ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                Logical consistency
+              </button>
+              <button
+                onClick={() => setFormData({ ...formData, decision_making: 'feeling' })}
+                className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+                style={formData.decision_making === 'feeling' ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                Personal values
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Part B: 5 Sliders */}
+        <div className="pt-6" style={{ borderTop: '1px solid #262626' }}>
+          <p className="text-sm mb-4" style={{ color: '#A3A3A3' }}>Rate yourself from 1 to 5:</p>
+          
+          {[
+            { key: 'energy', left: 'Quiet & Reflective', right: 'Social & Expressive' },
+            { key: 'information', left: 'Practical & Detailed', right: 'Imaginative & Big-Picture' },
+            { key: 'decision', left: 'Logical & Analytical', right: 'Empathetic & Compassionate' },
+            { key: 'planning', left: 'Structured & Decisive', right: 'Flexible & Adaptable' },
+            { key: 'expression', left: 'Private & Reserved', right: 'Open & Expressive' }
+          ].map((slider) => (
+            <div key={slider.key} className="mb-6">
+              <div className="flex justify-between text-xs mb-2" style={{ color: '#737373' }}>
+                <span>{slider.left}</span>
+                <span>{slider.right}</span>
+              </div>
+              <input
+                type="range"
+                min="1"
+                max="5"
+                value={formData.mbti_sliders[slider.key]}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  mbti_sliders: { ...formData.mbti_sliders, [slider.key]: parseInt(e.target.value) }
+                })}
+                className="w-full slider-merge"
+                style={{
+                  height: '6px',
+                  backgroundColor: '#262626',
+                  borderRadius: '10px',
+                  outline: 'none',
+                  cursor: 'pointer'
+                }}
+              />
+              <div className="flex justify-between text-xs mt-1" style={{ color: '#525252' }}>
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <span key={num}>{num}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderStep3 = () => (
+    <div className="space-y-6 animate-fadeIn">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{
+          background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+          boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)'
+        }}>
+          <Heart className="w-10 h-10 text-white" />
+        </div>
+        <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
+          Lifestyle & Values
+        </h2>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>Your relationship essentials</p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Relationship Goal */}
+        <div>
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>What are you looking for?</label>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { value: 'long_term', label: 'Long-term relationship' },
+              { value: 'long_term_open', label: 'Long-term, open to short' },
+              { value: 'short_term', label: 'Short-term fun' },
+              { value: 'friends_first', label: 'Friends and see what happens' }
+            ].map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setFormData({ ...formData, relationship_goal: option.value })}
+                className="px-4 py-3 rounded-xl transition-all text-sm"
+                style={formData.relationship_goal === option.value ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Kids */}
+        <div>
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>What's your stance on kids?</label>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { value: 'want_someday', label: 'Want someday' },
+              { value: 'dont_want', label: "Don't want" },
+              { value: 'have_and_want_more', label: 'Have kids, want more' },
+              { value: 'have_and_done', label: "Have kids, don't want more" },
+              { value: 'not_sure', label: 'Not sure' }
+            ].map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setFormData({ ...formData, kids_preference: option.value })}
+                className="px-4 py-3 rounded-xl transition-all text-sm"
+                style={formData.kids_preference === option.value ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Top 3 Interests */}
+        <div>
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>Choose your top 3 passions:</label>
+          <div className="flex flex-wrap gap-2">
+            {INTEREST_OPTIONS.map((interest) => {
+              const isSelected = formData.top_interests.includes(interest);
+              return (
+                <button
+                  key={interest}
+                  onClick={() => {
+                    if (isSelected) {
+                      setFormData({
+                        ...formData,
+                        top_interests: formData.top_interests.filter(i => i !== interest)
+                      });
+                    } else if (formData.top_interests.length < 3) {
+                      setFormData({
+                        ...formData,
+                        top_interests: [...formData.top_interests, interest]
+                      });
+                    }
+                  }}
+                  className="px-4 py-2 rounded-full transition-all text-sm"
+                  style={isSelected ? {
+                    background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                    color: '#FFFFFF',
+                    border: '1px solid transparent'
+                  } : {
+                    backgroundColor: '#171717',
+                    border: '1px solid #404040',
+                    color: '#A3A3A3'
+                  }}
+                  disabled={!isSelected && formData.top_interests.length >= 3}
+                >
+                  {interest}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-xs mt-2" style={{ color: '#737373' }}>
+            Selected: {formData.top_interests.length}/3
+          </p>
+        </div>
+
+        {/* Social Energy Level */}
+        <div>
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>Your typical social energy level is:</label>
+          <div className="flex justify-between text-xs mb-2" style={{ color: '#737373' }}>
+            <span>Homebody</span>
+            <span>Social Butterfly</span>
+          </div>
+          <input
+            type="range"
+            min="1"
+            max="5"
+            value={formData.social_energy_level}
+            onChange={(e) => setFormData({ ...formData, social_energy_level: parseInt(e.target.value) })}
+            className="w-full slider-merge"
+            style={{
+              height: '6px',
+              backgroundColor: '#262626',
+              borderRadius: '10px',
+              outline: 'none',
+              cursor: 'pointer'
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderStep4 = () => (
+    <div className="space-y-6 animate-fadeIn">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{
+          background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+          boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)'
+        }}>
+          <MessageCircle className="w-10 h-10 text-white" />
+        </div>
+        <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
+          Communication Style
+        </h2>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>How you connect matters</p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Conflict Style */}
+        <div>
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>How do you handle disagreement?</label>
+          <div className="space-y-2">
+            {[
+              { value: 'talk_immediately', label: 'Talk it out immediately and directly' },
+              { value: 'need_space', label: 'Need space to process, then discuss' },
+              { value: 'avoid_conflict', label: 'Prefer to avoid conflict and move on' }
+            ].map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setFormData({ ...formData, conflict_style: option.value })}
+                className="w-full px-4 py-3 rounded-xl transition-all text-sm text-left"
+                style={formData.conflict_style === option.value ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Love Language */}
+        <div>
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>How do you prefer to give and receive affection?</label>
+          <div className="space-y-2">
+            {[
+              { value: 'words_quality', label: 'Words of affirmation and quality time' },
+              { value: 'acts_touch', label: 'Acts of service and physical touch' },
+              { value: 'balanced', label: 'A balanced mix of all' }
+            ].map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setFormData({ ...formData, love_language: option.value })}
+                className="w-full px-4 py-3 rounded-xl transition-all text-sm text-left"
+                style={formData.love_language === option.value ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Texting Style */}
+        <div>
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>Your typical texting style is:</label>
+          <div className="space-y-2">
+            {[
+              { value: 'quick_frequent', label: 'Quick and frequent throughout the day' },
+              { value: 'thoughtful', label: 'Slower, more thoughtful replies' },
+              { value: 'varies', label: "It varies, but I'm a good communicator" }
+            ].map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setFormData({ ...formData, texting_style: option.value })}
+                className="w-full px-4 py-3 rounded-xl transition-all text-sm text-left"
+                style={formData.texting_style === option.value ? {
+                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                  color: '#FFFFFF',
+                  border: '1px solid transparent'
+                } : {
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  color: '#A3A3A3'
+                }}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderStep5 = () => (
+    <div className="space-y-6 animate-fadeIn">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{
+          background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+          boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)'
+        }}>
+          <Upload className="w-10 h-10 text-white" />
+        </div>
+        <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
+          Upload 3 Photos
+        </h2>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>Show us your spark. Let your personality shine through.</p>
+      </div>
+
+      <div className="grid grid-cols-3 gap-4">
+        {[0, 1, 2].map((index) => (
+          <div key={index} className="aspect-square">
+            <input
+              type="file"
+              id={`photo-${index}`}
+              accept="image/*"
+              onChange={(e) => handlePhotoUpload(e, index)}
+              className="hidden"
+            />
+            <label
+              htmlFor={`photo-${index}`}
+              className="block w-full h-full rounded-xl cursor-pointer transition-all"
+              style={{
+                backgroundColor: '#171717',
+                border: '2px dashed #404040',
+                backgroundImage: formData.photos[index] ? `url(${formData.photos[index]})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              {!formData.photos[index] && (
+                <div className="w-full h-full flex flex-col items-center justify-center">
+                  <Upload className="w-8 h-8 mb-2" style={{ color: '#737373' }} />
+                  <span className="text-xs" style={{ color: '#737373' }}>Upload</span>
+                </div>
+              )}
+            </label>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs text-center" style={{ color: '#737373' }}>
+        Max 5MB per photo • {formData.photos.filter(p => p).length}/3 uploaded
+      </p>
+    </div>
+  );
+
+  const renderCurrentStep = () => {
+    switch (step) {
+      case 1: return renderStep1();
+      case 2: return renderStep2();
+      case 3: return renderStep3();
+      case 4: return renderStep4();
+      case 5: return renderStep5();
+      default: return null;
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black overflow-y-auto">
+      {/* Subtle animated background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+      </div>
+
+      {renderProgressTracker()}
+
+      <div className="relative z-10 container mx-auto px-6 pt-32 pb-32 max-w-2xl">
+        {renderCurrentStep()}
+
+        {/* Navigation */}
+        <div className="flex gap-4 mt-12">
+          {step > 1 && (
+            <button
+              onClick={() => setStep(step - 1)}
+              className="flex-1 px-6 py-4 rounded-2xl font-medium transition-all flex items-center justify-center gap-2"
+              style={{ 
+                backgroundColor: '#171717',
+                border: '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#262626'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#171717'}
+            >
+              <ChevronLeft className="w-5 h-5" />
+              Back
+            </button>
+          )}
+
+          {step < totalSteps ? (
+            <button
+              onClick={() => setStep(step + 1)}
+              disabled={!canContinue()}
+              className="flex-1 px-6 py-4 rounded-2xl font-medium transition-all flex items-center justify-center gap-2"
+              style={canContinue() ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)'
+              } : {
+                backgroundColor: '#171717',
+                color: '#525252',
+                cursor: 'not-allowed'
+              }}
+            >
+              Continue
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          ) : (
+            <button
+              onClick={handleComplete}
+              disabled={!canContinue() || loading}
+              className="flex-1 px-6 py-4 rounded-2xl font-medium transition-all"
+              style={canContinue() && !loading ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)'
+              } : {
+                backgroundColor: '#171717',
+                color: '#525252',
+                cursor: 'not-allowed'
+              }}
+            >
+              {loading ? 'Creating your profile...' : 'Complete ✨'}
+            </button>
+          )}
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+        
+        .slider-merge::-webkit-slider-thumb {
+          appearance: none;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+          cursor: pointer;
+          box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+          transition: all 0.3s;
+        }
+        .slider-merge::-webkit-slider-thumb:hover {
+          transform: scale(1.2);
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+        }
+        .slider-merge::-moz-range-thumb {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+        }
+      `}</style>
+    </div>
+  );
+}
