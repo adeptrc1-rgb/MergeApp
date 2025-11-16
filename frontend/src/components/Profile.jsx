@@ -303,6 +303,16 @@ export default function Profile({ user, logout }) {
                     </div>
                   )}
                 </div>
+                
+                {/* Photo Edit Button - Top Right Corner */}
+                <button
+                  onClick={() => setShowPhotoEditor(true)}
+                  className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white p-2 rounded-full hover:scale-110 transition-all shadow-lg border border-purple-300/30"
+                  title="Edit Photos"
+                >
+                  <Camera className="w-4 h-4" />
+                </button>
+                
                 {/* Preview Button - Hidden on mobile, shown on desktop */}
                 <button
                   onClick={() => setShowPreviewModal(true)}
