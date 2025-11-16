@@ -42,6 +42,7 @@ export default function Profile({ user, logout }) {
   const [showStreakClaim, setShowStreakClaim] = useState(false);
   const [claimingStreak, setClaimingStreak] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [showPhotoEditor, setShowPhotoEditor] = useState(false);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editedBio, setEditedBio] = useState('');
   const [editedInterests, setEditedInterests] = useState([]);
