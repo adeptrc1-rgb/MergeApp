@@ -234,7 +234,7 @@ export default function Profile({ user, logout }) {
   return (
     <div className="h-screen bg-black flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="border-b border-white/10 bg-black flex-shrink-0">
+      <div className="flex-shrink-0" style={{ backgroundColor: '#000000', borderBottom: '1px solid #1A1A1A' }}>
         <div className="max-w-4xl mx-auto px-4 py-2">
           <div className="flex items-center justify-between mb-4">
             <MergeLogo size="md" color="#FFFFFF" />
