@@ -163,6 +163,11 @@ async def get_current_user(request: Request) -> User:
     udoc = await db.users.find_one({"id": sess["user_id"]})
     if not udoc:
         raise HTTPException(status_code=404, detail="User not found")
+    
+    # Remove MongoDB's _id field before creating User object
+    if "_id" in udoc:
+        del udoc["_id"]
+    
     return User(**udoc)
 
 # Auth endpoints
