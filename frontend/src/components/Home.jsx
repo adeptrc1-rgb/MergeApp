@@ -737,6 +737,17 @@ export default function Home({ user }) {
                         </div>
                       )}
 
+                      {/* My Vibe - Song Player */}
+                      {currentMatch.vibe_song && (
+                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
+                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-3 flex items-center gap-2">
+                            <Music className="w-4 h-4" />
+                            My Vibe
+                          </h3>
+                          <VibePlayer song={currentMatch.vibe_song} />
+                        </div>
+                      )}
+
                       {/* Bio */}
                       {currentMatch.bio && (
                         <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
