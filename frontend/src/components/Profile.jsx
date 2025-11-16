@@ -401,11 +401,84 @@ export default function Profile({ user, logout }) {
                 {!isEditingProfile && user.location && (
                   <p className="text-sm text-white/60">{user.location}</p>
                 )}
-                  </div>
-                </div>
+              </div>
+            </div>
+          </div>
 
-                {/* Basic Info Section */}
-                {isEditingProfile && (
+          {/* INTERESTS CARD */}
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+            <h2 className="text-white/80 text-xs uppercase tracking-wider font-medium mb-4">INTERESTS</h2>
+            {isEditingProfile ? (
+              <div>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {editedInterests.map((interest, i) => (
+                    <span 
+                      key={i} 
+                      className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm text-white flex items-center gap-2 hover:bg-white/15 transition-colors"
+                    >
+                      {interest}
+                      <button
+                        onClick={() => removeInterest(interest)}
+                        className="text-red-400 hover:text-red-300 text-lg"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={newInterest}
+                    onChange={(e) => setNewInterest(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && addInterest()}
+                    placeholder="Add interest..."
+                    className="flex-1 bg-white/5 border border-white/20 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
+                  />
+                  <button
+                    onClick={addInterest}
+                    className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg text-sm transition-colors"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {user.interests && user.interests.length > 0 ? (
+                  user.interests.map((interest, i) => (
+                    <span key={i} className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm text-white">
+                      {interest}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-white/40 text-sm italic">No interests added yet</span>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* ABOUT ME CARD */}
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+            <h2 className="text-white/80 text-xs uppercase tracking-wider font-medium mb-4">ABOUT ME</h2>
+            {isEditingProfile ? (
+              <textarea
+                value={editedBio}
+                onChange={(e) => setEditedBio(e.target.value)}
+                placeholder="Tell others about yourself..."
+                maxLength={500}
+                rows={5}
+                className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 resize-none"
+              />
+            ) : (
+              <p className="text-white/80 text-sm leading-relaxed whitespace-pre-line">
+                {user.bio || <span className="text-white/40 italic">No bio added yet</span>}
+              </p>
+            )}
+          </div>
+
+          {/* BASIC INFO EDITING SECTION */}
+          {isEditingProfile && (
                   <div className="mb-4 space-y-3 p-3 bg-white/5 rounded-lg border border-white/10">
                     <h3 className="text-white/80 text-xs uppercase tracking-wide mb-2">Basic Information</h3>
                     
