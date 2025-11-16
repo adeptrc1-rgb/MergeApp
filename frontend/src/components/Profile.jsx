@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award, Gift, Clock, RotateCcw, Coins, Eye, Flame, Trophy, ChevronRight } from 'lucide-react';
+import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award, Gift, Clock, RotateCcw, Coins, Eye, Flame, Trophy, ChevronRight, Camera } from 'lucide-react';
 import ConnectionMatrix from './ConnectionMatrix';
 import BottomNav from './BottomNav';
 import ConstellationIcon from './ConstellationIcon';
 import PremiumSkinRenderer from './PremiumSkinRenderer';
 import TarotStreakCard from './TarotStreakCard';
 import MergeLogo from './MergeLogo';
+import PhotoEditorModal from './PhotoEditorModal';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 import '../styles/tarotCard.css';
 
