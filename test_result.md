@@ -544,6 +544,81 @@ User → Frontend (18 questions) → Backend (/api/onboarding/complete) → Mong
 - `/app/frontend/src/components/MergeOnboarding.jsx` - Updated data submission
 
 ## Files Created
+
+#===================================================
+# Navigation Icons Updated - Merge Theme (2025-11-16)
+#===================================================
+
+## Objective
+Update bottom navigation symbols to match Merge's data-driven, intelligent aesthetic
+
+## Changes Made
+
+### New Icons (Lucide React)
+1. **Discover (Home)** - `Zap` icon (lightning bolt)
+   - Represents energy, matches, spark
+   - Replaces generic Home icon
+
+2. **Matrix (Discover)** - `Network` icon (connected nodes)
+   - Represents Connection Matrix feature
+   - Data visualization theme
+   - Replaces Sparkles icon
+
+3. **Chats (Messages)** - `MessageSquare` icon (speech bubble)
+   - Clean, modern chat icon
+   - Replaces MessageCircle
+
+4. **Profile** - `User` icon (person silhouette)
+   - Simple, clean profile representation
+   - Replaces Star icon
+
+### Visual Updates
+
+**Active State:**
+- Blue-purple gradient background pill (#3B82F6 → #8B5CF6)
+- Glowing shadow effect (rgba(59, 130, 246, 0.4))
+- White icon color
+- Thicker stroke weight (2.5)
+
+**Inactive State:**
+- Transparent background
+- Gray icon color (#737373)
+- Normal stroke weight (2)
+- Subtle hover effect
+
+**Layout:**
+- Larger icons (20x20px vs 16x16px)
+- More padding around icons
+- Better touch targets for mobile
+- Consistent spacing
+
+### Design Philosophy
+- **Data-driven:** Network icon for Matrix
+- **Intelligent:** Zap for smart matching
+- **Clean & Modern:** Simple geometric shapes
+- **Merge Brand:** Blue-purple gradient
+- **Professional:** Removed playful/cosmic elements
+
+## Files Modified
+- `/app/frontend/src/components/BottomNav.jsx`
+
+## Visual Comparison
+
+**Old Navigation:**
+- Home, Sparkles, MessageCircle, Star
+- Simple text labels with generic icons
+- Minimal styling
+
+**New Navigation:**
+- Zap, Network, MessageSquare, User
+- Gradient backgrounds on active tabs
+- Glow effects
+- Modern, cohesive design
+
+## Status
+✅ **COMPLETE** - Navigation symbols updated to match Merge theme
+
+
 - `/app/ONBOARDING_FLOW.md` - Complete integration documentation
 
 ## Status
