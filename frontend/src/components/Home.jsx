@@ -700,12 +700,9 @@ export default function Home({ user }) {
                   </div>
 
                   {/* Industry & Distance */}
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="mb-3 mt-3">
                     <span className="text-sm" style={{ color: '#A3A3A3' }}>
-                      {currentMatch.lifestyle_factors?.occupation || 'Product Designer'}
-                    </span>
-                    <span className="text-sm" style={{ color: '#737373' }}>
-                      {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : '2 miles away'}
+                      {currentMatch.lifestyle_factors?.occupation || 'Technology'} • {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : '5 miles away'}
                     </span>
                   </div>
 
