@@ -47,6 +47,15 @@ export default function Profile({ user, logout }) {
   const [editedBio, setEditedBio] = useState('');
   const [editedInterests, setEditedInterests] = useState([]);
   const [newInterest, setNewInterest] = useState('');
+  // Basic info editing
+  const [editedName, setEditedName] = useState('');
+  const [editedIndustry, setEditedIndustry] = useState('');
+  const [editedJobTitle, setEditedJobTitle] = useState('');
+  const [editedLocation, setEditedLocation] = useState('');
+  // Discovery settings
+  const [showAge, setShowAge] = useState(true);
+  const [showDistance, setShowDistance] = useState(true);
+  const [discoveryEnabled, setDiscoveryEnabled] = useState(true);
   const location = window.location;
 
   useEffect(() => {
