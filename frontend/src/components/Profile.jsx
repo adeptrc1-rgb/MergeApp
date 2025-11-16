@@ -475,23 +475,32 @@ export default function Profile({ user, logout }) {
             </div>
             {isEditingProfile ? (
               <div>
-                {/* Current Interests as Chips */}
+                {/* Current Interests as Chips with Dynamic Hues */}
                 <div className="flex flex-wrap gap-2 mb-3">
-                  {editedInterests.map((interest, i) => (
-                    <span 
-                      key={i} 
-                      className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 text-sm text-white flex items-center gap-2 hover:bg-purple-500/30 transition-all animate-fadeIn"
-                    >
-                      {interest}
-                      <button
-                        onClick={() => removeInterest(interest)}
-                        className="text-red-400 hover:text-red-300 text-lg leading-none"
-                        title="Remove"
+                  {editedInterests.map((interest, i) => {
+                    const hue = (i * 60) % 360; // Distribute hues across color wheel
+                    return (
+                      <span 
+                        key={i} 
+                        className="px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all animate-fadeIn shadow-sm"
+                        style={{
+                          background: `hsl(${hue}, 80%, 95%)`,
+                          color: `hsl(${hue}, 60%, 40%)`,
+                          border: `1.5px solid hsl(${hue}, 60%, 85%)`
+                        }}
                       >
-                        ×
-                      </button>
-                    </span>
-                  ))}
+                        {interest}
+                        <button
+                          onClick={() => removeInterest(interest)}
+                          className="hover:scale-110 transition-transform text-lg leading-none opacity-60 hover:opacity-100"
+                          title="Remove"
+                          style={{ color: `hsl(${hue}, 60%, 40%)` }}
+                        >
+                          ×
+                        </button>
+                      </span>
+                    );
+                  })}
                 </div>
                 
                 {/* Smart Input with Autocomplete */}
