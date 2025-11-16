@@ -15,6 +15,7 @@ import { format } from 'date-fns';
 import EnhancedOnboarding from './components/EnhancedOnboarding';
 import InteractiveOnboarding from './components/InteractiveOnboarding';
 import CosmicOnboarding from './components/CosmicOnboarding';
+import MergeOnboarding from './components/MergeOnboarding';
 import TestOnboarding from './components/TestOnboarding';
 import EnhancedDashboard from './components/EnhancedDashboard';
 import ModernDashboard from './components/ModernDashboard';
