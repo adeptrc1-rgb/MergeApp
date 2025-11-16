@@ -124,6 +124,10 @@ export default function MergeOnboarding() {
         
         // Personality
         personality_type: mbti,
+        social_energy_source: formData.social_energy_source,
+        information_processing: formData.information_processing,
+        decision_making: formData.decision_making,
+        mbti_sliders: formData.mbti_sliders,
         mbti_scores: {
           E: formData.social_energy_source === 'extroversion' ? formData.mbti_sliders.energy * 20 : (5 - formData.mbti_sliders.energy) * 20,
           N: formData.information_processing === 'intuition' ? formData.mbti_sliders.information * 20 : (5 - formData.mbti_sliders.information) * 20,
@@ -154,14 +158,20 @@ export default function MergeOnboarding() {
         profile_completed: true
       };
 
-      await axios.post(`${API}/onboarding/complete`, profileData, {
+      console.log('Submitting onboarding data:', profileData);
+
+      const response = await axios.post(`${API}/onboarding/complete`, profileData, {
         withCredentials: true
       });
 
+      console.log('Onboarding complete:', response.data);
+
+      // Redirect to home
       navigate('/home');
     } catch (error) {
       console.error('Error completing onboarding:', error);
-      alert('Failed to complete profile. Please try again.');
+      const errorMessage = error.response?.data?.detail || error.message || 'Failed to complete profile';
+      alert(`Failed to complete profile: ${errorMessage}`);
     } finally {
       setLoading(false);
     }
