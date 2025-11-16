@@ -139,6 +139,19 @@ export default function Profile({ user, logout }) {
     }
   };
 
+  const handlePhotosUpdate = async (photos) => {
+    try {
+      await axios.put(`${API}/users/photos`, {
+        photos: photos
+      });
+      // Reload the page to get updated data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error updating photos:', error);
+      alert('Failed to update photos. Please try again.');
+    }
+  };
+
   const addInterest = () => {
     if (newInterest.trim() && !editedInterests.includes(newInterest.trim())) {
       setEditedInterests([...editedInterests, newInterest.trim()]);
