@@ -86,6 +86,12 @@ class User(BaseModel):
     show_age: bool = True
     show_distance: bool = True
     discovery_enabled: bool = True
+    # Spotify integration
+    spotify_connected: bool = False
+    spotify_access_token: Optional[str] = None
+    spotify_refresh_token: Optional[str] = None
+    spotify_token_expires: Optional[str] = None
+    vibe_song: Optional[Dict[str, Any]] = None  # {track_name, artist, preview_url, album_art, spotify_uri}
     mbti_scores: Optional[Dict[str, float]] = None
     personality_type: Optional[str] = None
     lifestyle_factors: Optional[Dict[str, int]] = None
