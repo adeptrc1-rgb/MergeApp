@@ -5,6 +5,7 @@ import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, XCircle, 
 import ConstellationIcon from './ConstellationIcon';
 import BottomNav from './BottomNav';
 import PremiumSkinRenderer from './PremiumSkinRenderer';
+import VibePlayer from './VibePlayer';
 import AnimatedProfileText from './AnimatedProfileText';
 import LightEffectRenderer from './LightEffectRenderer';
 import { 
