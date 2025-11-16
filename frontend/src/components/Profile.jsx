@@ -1252,6 +1252,13 @@ export default function Profile({ user, logout }) {
           0%, 100% { opacity: 0.7; }
           50% { opacity: 1; }
         }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
       `}</style>
     </div>
   );
