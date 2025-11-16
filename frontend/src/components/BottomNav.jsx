@@ -18,7 +18,6 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
         backgroundColor: '#000000',
-        borderTop: '1px solid #1A1A1A',
         paddingBottom: 'env(safe-area-inset-bottom)'
       }}
     >
