@@ -382,7 +382,7 @@ export default function Profile({ user, logout }) {
             {/* Discreet Edit Button - Top Right */}
             <button
               onClick={isEditingProfile ? saveProfileEdits : startEditingProfile}
-              className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg"
+              className="absolute top-4 right-4 text-gray-400 hover:text-[#6C63FF] transition-colors p-2 hover:bg-purple-50 rounded-lg"
               title={isEditingProfile ? "Save Changes" : "Edit Profile"}
             >
               {isEditingProfile ? (
