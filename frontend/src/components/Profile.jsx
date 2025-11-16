@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award, Gift, Clock, RotateCcw, Coins, Eye, Flame, Trophy, ChevronRight, Camera, Music } from 'lucide-react';
+import { Star, Settings, LogOut, Sparkles, Users, Home, Zap, Heart, MessageCircle, Award, Gift, Clock, RotateCcw, Coins, Eye, Flame, Trophy, ChevronRight, Camera, Music, Check } from 'lucide-react';
 import ConnectionMatrix from './ConnectionMatrix';
 import BottomNav from './BottomNav';
 import ConstellationIcon from './ConstellationIcon';
