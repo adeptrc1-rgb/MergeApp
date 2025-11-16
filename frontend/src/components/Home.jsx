@@ -837,14 +837,6 @@ export default function Home({ user }) {
                         </div>
                       )}
 
-                      {/* Music */}
-                      {currentMatch.preferences?.music && (
-                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Music</h3>
-                          <p className="text-white/90 text-sm">{currentMatch.preferences.music}</p>
-                        </div>
-                      )}
-
                       {/* AI Compatibility Insights */}
                       <div className="py-4" style={{ backgroundColor: '#1F1F1F', borderRadius: '8px', marginTop: '8px' }}>
                         <CompatibilityInsights
