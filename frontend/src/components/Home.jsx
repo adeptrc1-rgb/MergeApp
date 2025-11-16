@@ -715,21 +715,6 @@ export default function Home({ user }) {
                     </div>
                   )}
 
-                  {/* Show More toggle */}
-                  <div className="mb-3">
-                    <button
-                      onClick={(e) => { 
-                        e.stopPropagation();
-                        handleShowMore(); 
-                      }}
-                      className="flex items-center gap-1 transition-colors touch-manipulation"
-                      style={{ color: '#A3A3A3', pointerEvents: 'auto' }}
-                    >
-                      <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
-                      {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
-                    </button>
-                  </div>
-
                   {/* Expandable Dropdown Content */}
                   <div 
                     className={`custom-scrollbar transition-all duration-300 ease-in-out ${showDropdown ? 'max-h-[60vh] opacity-100' : 'max-h-0 opacity-0'}`}
