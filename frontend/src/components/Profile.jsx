@@ -577,6 +577,16 @@ export default function Profile({ user, logout }) {
                         <span className="text-white/70 text-sm">Allow others to discover my profile</span>
                       </label>
                     </div>
+                    
+                    {/* Cancel Button */}
+                    <div className="pt-3 border-t border-white/10">
+                      <button
+                        onClick={cancelEditingProfile}
+                        className="text-white/60 hover:text-white text-sm transition-colors"
+                      >
+                        Cancel Changes
+                      </button>
+                    </div>
                   </div>
                 )}
 
