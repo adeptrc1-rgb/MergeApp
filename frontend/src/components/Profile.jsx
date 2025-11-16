@@ -946,6 +946,15 @@ export default function Profile({ user, logout }) {
         </div>
       )}
       
+      {/* Photo Editor Modal */}
+      {showPhotoEditor && (
+        <PhotoEditorModal
+          currentPhotos={user.photos || []}
+          onSave={handlePhotosUpdate}
+          onClose={() => setShowPhotoEditor(false)}
+        />
+      )}
+      
       <style>{`
         @keyframes shimmer {
           0%, 100% { background-position: 0% 50%; }
