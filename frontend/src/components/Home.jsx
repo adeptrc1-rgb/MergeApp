@@ -738,7 +738,7 @@ export default function Home({ user }) {
                       )}
 
                       {/* My Vibe - Song Player */}
-                      {currentMatch.vibe_song && (
+                      {currentMatch.vibe_song && currentMatch.vibe_song.preview_url && (
                         <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
                           <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-3 flex items-center gap-2">
                             <Music className="w-4 h-4" />
