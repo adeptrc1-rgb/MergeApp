@@ -387,6 +387,130 @@ export default function Profile({ user, logout }) {
                   </div>
                 </div>
 
+                {/* Basic Info Section */}
+                {isEditingProfile && (
+                  <div className="mb-4 space-y-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                    <h3 className="text-white/80 text-xs uppercase tracking-wide mb-2">Basic Information</h3>
+                    
+                    {/* Name */}
+                    <div>
+                      <label className="text-white/60 text-xs mb-1 block">Display Name</label>
+                      <input
+                        type="text"
+                        value={editedName}
+                        onChange={(e) => setEditedName(e.target.value)}
+                        placeholder="Your name"
+                        className="w-full bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
+                      />
+                    </div>
+
+                    {/* Industry */}
+                    <div>
+                      <label className="text-white/60 text-xs mb-1 block">Industry</label>
+                      <select
+                        value={editedIndustry}
+                        onChange={(e) => setEditedIndustry(e.target.value)}
+                        className="w-full bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
+                      >
+                        <option value="">Select Industry</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Education">Education</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Design">Design</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Retail">Retail</option>
+                        <option value="Manufacturing">Manufacturing</option>
+                        <option value="Real Estate">Real Estate</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    {/* Job Title */}
+                    <div>
+                      <label className="text-white/60 text-xs mb-1 block">Job Title</label>
+                      <input
+                        type="text"
+                        value={editedJobTitle}
+                        onChange={(e) => setEditedJobTitle(e.target.value)}
+                        placeholder="What you do"
+                        className="w-full bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
+                      />
+                    </div>
+
+                    {/* Location */}
+                    <div>
+                      <label className="text-white/60 text-xs mb-1 block">Location</label>
+                      <input
+                        type="text"
+                        value={editedLocation}
+                        onChange={(e) => setEditedLocation(e.target.value)}
+                        placeholder="City, State"
+                        className="w-full bg-white/5 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
+                      />
+                    </div>
+
+                    {/* Discovery Settings */}
+                    <div className="pt-2 border-t border-white/10">
+                      <h4 className="text-white/80 text-xs uppercase tracking-wide mb-2">Discovery Settings</h4>
+                      
+                      <label className="flex items-center gap-2 mb-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={showAge}
+                          onChange={(e) => setShowAge(e.target.checked)}
+                          className="w-4 h-4 accent-purple-500"
+                        />
+                        <span className="text-white/70 text-sm">Show my age to others</span>
+                      </label>
+                      
+                      <label className="flex items-center gap-2 mb-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={showDistance}
+                          onChange={(e) => setShowDistance(e.target.checked)}
+                          className="w-4 h-4 accent-purple-500"
+                        />
+                        <span className="text-white/70 text-sm">Show my distance to others</span>
+                      </label>
+                      
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={discoveryEnabled}
+                          onChange={(e) => setDiscoveryEnabled(e.target.checked)}
+                          className="w-4 h-4 accent-purple-500"
+                        />
+                        <span className="text-white/70 text-sm">Allow others to discover my profile</span>
+                      </label>
+                    </div>
+                  </div>
+                )}
+
+                {/* Display current info when not editing */}
+                {!isEditingProfile && (user.industry || user.job_title || user.location) && (
+                  <div className="mb-3 space-y-1">
+                    {user.job_title && (
+                      <div className="text-white/70 text-xs md:text-sm">
+                        <span className="text-white/50">Job:</span> {user.job_title}
+                      </div>
+                    )}
+                    {user.industry && (
+                      <div className="text-white/70 text-xs md:text-sm">
+                        <span className="text-white/50">Industry:</span> {user.industry}
+                      </div>
+                    )}
+                    {user.location && (
+                      <div className="text-white/70 text-xs md:text-sm">
+                        <span className="text-white/50">Location:</span> {user.location}
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Interests */}
                 <div className="mb-2">
                   <h3 className="text-white/80 text-[11px] md:text-xs uppercase tracking-wide mb-1">Interests</h3>
