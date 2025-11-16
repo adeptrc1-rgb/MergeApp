@@ -81,6 +81,8 @@ def normalize_dt(val: Any) -> Optional[datetime]:
 
 # Models
 class User(BaseModel):
+    model_config = {"extra": "allow"}  # Allow extra fields for backward compatibility
+    
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     email: Optional[str] = None
     first_name: Optional[str] = None
@@ -97,7 +99,7 @@ class User(BaseModel):
     industry: Optional[str] = None
     job_title: Optional[str] = None
     location: Optional[str] = None
-    hometown: Optional[str] = None
+    hometown: Optional[Any] = None  # Can be string or dict for backward compatibility
     education: Optional[str] = None
     # Discovery settings
     show_age: bool = True
