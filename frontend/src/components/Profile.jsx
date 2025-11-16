@@ -630,6 +630,40 @@ export default function Profile({ user, logout }) {
             </div>
           </button>
 
+          {/* Spotify - My Vibe Song */}
+          <button
+            onClick={() => setShowSpotifyConnect(true)}
+            className="w-full bg-gradient-to-r from-green-500/10 to-green-600/10 hover:from-green-500/20 hover:to-green-600/20 rounded-2xl p-6 border border-green-500/30 hover:border-green-500/50 mb-6 transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-green-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Music className="w-7 h-7 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xl font-medium text-white mb-1 flex items-center gap-2">
+                    My Vibe Song
+                    <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                  </h3>
+                  <p className="text-white/60 text-sm">
+                    {user.spotify_connected ? 
+                      (user.vibe_song ? `${user.vibe_song.track_name} - ${user.vibe_song.artist}` : 'Choose your anthem') : 
+                      'Connect Spotify to add your vibe'
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              {/* Status Badge */}
+              {user.spotify_connected && (
+                <div className="flex items-center gap-2 bg-green-500/20 px-4 py-2 rounded-full border border-green-500/30">
+                  <Music className="w-4 h-4 text-green-400" />
+                  <span className="text-green-300 font-medium text-sm">Connected</span>
+                </div>
+              )}
+            </div>
+          </button>
+
           {/* Connection Matrix */}
           <div className="rounded-2xl p-6 mb-6" style={{ backgroundColor: '#0A0A0A', border: '1px solid #3B82F6' }}>
             <div className="flex items-center justify-between mb-4">
