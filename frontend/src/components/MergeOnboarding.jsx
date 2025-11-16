@@ -851,6 +851,21 @@ export default function MergeOnboarding() {
         }
         .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
         
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #171717;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(135deg, #2563EB, #7C3AED);
+        }
+        
         .slider-merge::-webkit-slider-thumb {
           appearance: none;
           width: 24px;
