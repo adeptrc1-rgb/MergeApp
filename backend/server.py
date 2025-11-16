@@ -266,6 +266,121 @@ async def handle_google_session(request: Request, response: Response):
         raise HTTPException(status_code=500, detail="Authentication failed")
 
 
+@api_router.post("/onboarding/complete")
+async def complete_onboarding(request: Request, response: Response):
+    """Complete user onboarding and create full profile"""
+    try:
+        # Get user_id from cookie
+        user_id = request.cookies.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        # Get onboarding data from request
+        data = await request.json()
+        
+        print(f"[ONBOARDING] Completing profile for user: {user_id}")
+        print(f"[ONBOARDING] Data received: {data.keys()}")
+        
+        # Find user
+        user = await db.users.find_one({"id": user_id})
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Calculate age from birth_date
+        from datetime import datetime, date
+        birth_date_str = data.get('birth_date')
+        age = None
+        zodiac_sign = None
+        
+        if birth_date_str:
+            birth_date = datetime.strptime(birth_date_str, '%Y-%m-%d').date()
+            today = date.today()
+            age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+            
+            # Calculate zodiac sign
+            zodiac_signs = [
+                ((1, 20), (2, 18), 'Aquarius'), ((2, 19), (3, 20), 'Pisces'),
+                ((3, 21), (4, 19), 'Aries'), ((4, 20), (5, 20), 'Taurus'),
+                ((5, 21), (6, 20), 'Gemini'), ((6, 21), (7, 22), 'Cancer'),
+                ((7, 23), (8, 22), 'Leo'), ((8, 23), (9, 22), 'Virgo'),
+                ((9, 23), (10, 22), 'Libra'), ((10, 23), (11, 21), 'Scorpio'),
+                ((11, 22), (12, 21), 'Sagittarius'), ((12, 22), (1, 19), 'Capricorn')
+            ]
+            
+            for start, end, sign in zodiac_signs:
+                if (birth_date.month == start[0] and birth_date.day >= start[1]) or \
+                   (birth_date.month == end[0] and birth_date.day <= end[1]):
+                    zodiac_sign = sign
+                    break
+        
+        # Prepare update data
+        update_data = {
+            "first_name": data.get('first_name'),
+            "birth_date": birth_date_str,
+            "age": age,
+            "zodiac_sign": zodiac_sign,
+            "hometown": data.get('hometown'),
+            
+            # Personality
+            "personality_type": data.get('personality_type'),
+            "mbti_scores": data.get('mbti_scores', {}),
+            "mbti_answers": {
+                "social_energy_source": data.get('social_energy_source'),
+                "information_processing": data.get('information_processing'),
+                "decision_making": data.get('decision_making'),
+                "sliders": data.get('mbti_sliders', {})
+            },
+            
+            # Lifestyle & Deal-breakers
+            "deal_breakers": data.get('deal_breakers', {}),
+            "interests": data.get('interests', []),
+            "lifestyle_factors": {
+                "social_energy": data.get('lifestyle_factors', {}).get('social_energy', 3),
+                "occupation": data.get('lifestyle_factors', {}).get('occupation', '')
+            },
+            
+            # Communication preferences
+            "preferences": data.get('preferences', {}),
+            
+            # Photos
+            "photos": data.get('photos', []),
+            
+            # Mark profile as completed
+            "profile_completed": True,
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        }
+        
+        # Remove None values
+        update_data = {k: v for k, v in update_data.items() if v is not None}
+        
+        # Update user in database
+        result = await db.users.update_one(
+            {"id": user_id},
+            {"$set": update_data}
+        )
+        
+        if result.modified_count == 0:
+            print("[ONBOARDING] Warning: No documents modified")
+        
+        print(f"[ONBOARDING] Profile completed successfully for {user_id}")
+        
+        return {
+            "success": True,
+            "message": "Profile completed successfully",
+            "user_id": user_id
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[ONBOARDING] Error: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Failed to complete onboarding: {str(e)}")
+
+
+
 @api_router.put("/users/me")
 async def update_user_profile(
     bio: Optional[str] = None,
