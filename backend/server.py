@@ -27,6 +27,19 @@ cloudinary.config(
     secure=True
 )
 
+# Spotify Configuration
+SPOTIFY_CLIENT_ID = os.environ.get("SPOTIFY_CLIENT_ID")
+SPOTIFY_CLIENT_SECRET = os.environ.get("SPOTIFY_CLIENT_SECRET")
+SPOTIFY_REDIRECT_URI = os.environ.get("SPOTIFY_REDIRECT_URI")
+
+def get_spotify_oauth():
+    return SpotifyOAuth(
+        client_id=SPOTIFY_CLIENT_ID,
+        client_secret=SPOTIFY_CLIENT_SECRET,
+        redirect_uri=SPOTIFY_REDIRECT_URI,
+        scope="user-read-private user-read-email user-top-read"
+    )
+
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 
