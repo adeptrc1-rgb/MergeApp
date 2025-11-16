@@ -735,8 +735,7 @@ async def disconnect_spotify(user: User = Depends(get_current_user)):
                 "spotify_connected": False,
                 "spotify_access_token": None,
                 "spotify_refresh_token": None,
-                "spotify_token_expires": None,
-                "vibe_song": None
+                "spotify_token_expires": None
             }}
         )
         
@@ -748,6 +747,108 @@ async def disconnect_spotify(user: User = Depends(get_current_user)):
     except Exception as e:
         print(f"[SPOTIFY_DISCONNECT] Error: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to disconnect Spotify: {str(e)}")
+
+
+# ================== UNIVERSAL MUSIC SEARCH (DEEZER API) ==================
+
+@api_router.get("/music/search")
+async def universal_music_search(q: str, limit: int = 20):
+    """
+    Universal music search using Deezer API (works globally, no auth required)
+    """
+    try:
+        import requests
+        
+        # Deezer API - free, no authentication needed, available globally
+        response = requests.get(
+            "https://api.deezer.com/search",
+            params={"q": q, "limit": limit},
+            timeout=10
+        )
+        
+        if response.status_code != 200:
+            raise HTTPException(status_code=500, detail="Music search service unavailable")
+        
+        data = response.json()
+        tracks = []
+        
+        for item in data.get("data", []):
+            tracks.append({
+                "id": str(item.get("id")),
+                "title": item.get("title"),
+                "artist": item.get("artist", {}).get("name"),
+                "album": item.get("album", {}).get("title"),
+                "album_art": item.get("album", {}).get("cover_medium"),
+                "preview_url": item.get("preview"),  # 30-second preview
+                "duration": item.get("duration"),
+                "source": "deezer"
+            })
+        
+        return {"tracks": tracks}
+    
+    except requests.RequestException as e:
+        print(f"[MUSIC_SEARCH] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Music search failed: {str(e)}")
+    except Exception as e:
+        print(f"[MUSIC_SEARCH] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
+
+
+@api_router.post("/music/set-anthem")
+async def set_music_anthem(request: Request, user: User = Depends(get_current_user)):
+    """
+    Set user's music anthem (works for all users, no Spotify required)
+    """
+    try:
+        body = await request.json()
+        anthem = body.get("anthem")
+        
+        if not anthem or not isinstance(anthem, dict):
+            raise HTTPException(status_code=400, detail="anthem is required and must be an object")
+        
+        # Validate anthem structure
+        required_fields = ["title", "artist"]
+        if not all(field in anthem for field in required_fields):
+            raise HTTPException(status_code=400, detail="anthem must include title and artist")
+        
+        # Update user's vibe song (now anthem)
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {"vibe_song": anthem}}
+        )
+        
+        return {
+            "success": True,
+            "message": "Music anthem set successfully",
+            "anthem": anthem
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[SET_ANTHEM] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to set anthem: {str(e)}")
+
+
+@api_router.delete("/music/remove-anthem")
+async def remove_music_anthem(user: User = Depends(get_current_user)):
+    """
+    Remove user's music anthem
+    """
+    try:
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {"vibe_song": None}}
+        )
+        
+        return {
+            "success": True,
+            "message": "Music anthem removed successfully"
+        }
+    
+    except Exception as e:
+        print(f"[REMOVE_ANTHEM] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to remove anthem: {str(e)}")
 
 
 # Horoscope
