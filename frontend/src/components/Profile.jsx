@@ -124,6 +124,13 @@ export default function Profile({ user, logout }) {
   const startEditingProfile = () => {
     setEditedBio(user.bio || '');
     setEditedInterests(user.interests || []);
+    setEditedName(user.first_name || '');
+    setEditedIndustry(user.industry || '');
+    setEditedJobTitle(user.job_title || '');
+    setEditedLocation(user.location || '');
+    setShowAge(user.show_age !== false); // default true
+    setShowDistance(user.show_distance !== false); // default true
+    setDiscoveryEnabled(user.discovery_enabled !== false); // default true
     setIsEditingProfile(true);
   };
 
@@ -132,13 +139,24 @@ export default function Profile({ user, logout }) {
     setEditedBio('');
     setEditedInterests([]);
     setNewInterest('');
+    setEditedName('');
+    setEditedIndustry('');
+    setEditedJobTitle('');
+    setEditedLocation('');
   };
 
   const saveProfileEdits = async () => {
     try {
       await axios.put(`${API}/users/me`, {
         bio: editedBio,
-        interests: editedInterests
+        interests: editedInterests,
+        first_name: editedName,
+        industry: editedIndustry,
+        job_title: editedJobTitle,
+        location: editedLocation,
+        show_age: showAge,
+        show_distance: showDistance,
+        discovery_enabled: discoveryEnabled
       });
       // Reload the page to get updated data
       window.location.reload();
