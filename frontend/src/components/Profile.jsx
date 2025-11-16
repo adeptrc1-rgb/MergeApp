@@ -553,32 +553,6 @@ export default function Profile({ user, logout }) {
               </>
             )}
           </div>
-          
-          {/* Keep the old button for now but hide it */}
-          {isEditingProfile && (
-            <div className="hidden">
-              <button
-                onClick={() => addInterest()}
-                    className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg text-sm transition-colors"
-                  >
-                    Add
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-wrap gap-2">
-                {user.interests && user.interests.length > 0 ? (
-                  user.interests.map((interest, i) => (
-                    <span key={i} className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm text-white">
-                      {interest}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-white/40 text-sm italic">No interests added yet</span>
-                )}
-              </div>
-            )}
-          </div>
 
           {/* ABOUT ME CARD */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
