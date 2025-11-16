@@ -560,6 +560,184 @@ async def delete_photo(
         }
 
 
+# ================== SPOTIFY INTEGRATION ==================
+
+@api_router.get("/spotify/auth-url")
+async def get_spotify_auth_url(user: User = Depends(get_current_user)):
+    """
+    Get Spotify OAuth authorization URL
+    """
+    try:
+        sp_oauth = get_spotify_oauth()
+        auth_url = sp_oauth.get_authorize_url()
+        return {"auth_url": auth_url}
+    except Exception as e:
+        print(f"[SPOTIFY_AUTH] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate auth URL: {str(e)}")
+
+
+@api_router.get("/spotify/callback")
+async def spotify_callback(code: str, request: Request):
+    """
+    Handle Spotify OAuth callback
+    """
+    try:
+        # Get user from session
+        session_token = request.cookies.get(COOKIE_NAME)
+        if not session_token:
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        session_doc = await db.sessions.find_one({"token": session_token})
+        if not session_doc:
+            raise HTTPException(status_code=401, detail="Invalid session")
+        
+        user_id = session_doc["user_id"]
+        
+        # Exchange code for tokens
+        sp_oauth = get_spotify_oauth()
+        token_info = sp_oauth.get_access_token(code)
+        
+        # Update user with Spotify tokens
+        await db.users.update_one(
+            {"id": user_id},
+            {"$set": {
+                "spotify_connected": True,
+                "spotify_access_token": token_info["access_token"],
+                "spotify_refresh_token": token_info["refresh_token"],
+                "spotify_token_expires": token_info["expires_at"]
+            }}
+        )
+        
+        # Redirect back to profile page
+        return RedirectResponse(url="/profile?spotify=connected")
+    
+    except Exception as e:
+        print(f"[SPOTIFY_CALLBACK] Error: {e}")
+        return RedirectResponse(url="/profile?spotify=error")
+
+
+@api_router.get("/spotify/search")
+async def spotify_search(q: str, user: User = Depends(get_current_user)):
+    """
+    Search for songs on Spotify
+    """
+    if not user.spotify_connected or not user.spotify_access_token:
+        raise HTTPException(status_code=400, detail="Spotify not connected")
+    
+    try:
+        sp = spotipy.Spotify(auth=user.spotify_access_token)
+        results = sp.search(q=q, limit=20, type='track')
+        
+        tracks = []
+        for item in results['tracks']['items']:
+            tracks.append({
+                "id": item['id'],
+                "name": item['name'],
+                "artist": ", ".join([artist['name'] for artist in item['artists']]),
+                "album": item['album']['name'],
+                "album_art": item['album']['images'][0]['url'] if item['album']['images'] else None,
+                "preview_url": item['preview_url'],
+                "spotify_uri": item['uri'],
+                "duration_ms": item['duration_ms']
+            })
+        
+        return {"tracks": tracks}
+    
+    except Exception as e:
+        print(f"[SPOTIFY_SEARCH] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}")
+
+
+@api_router.get("/spotify/top-tracks")
+async def get_top_tracks(user: User = Depends(get_current_user)):
+    """
+    Get user's top tracks from Spotify
+    """
+    if not user.spotify_connected or not user.spotify_access_token:
+        raise HTTPException(status_code=400, detail="Spotify not connected")
+    
+    try:
+        sp = spotipy.Spotify(auth=user.spotify_access_token)
+        results = sp.current_user_top_tracks(limit=20, time_range='medium_term')
+        
+        tracks = []
+        for item in results['items']:
+            tracks.append({
+                "id": item['id'],
+                "name": item['name'],
+                "artist": ", ".join([artist['name'] for artist in item['artists']]),
+                "album": item['album']['name'],
+                "album_art": item['album']['images'][0]['url'] if item['album']['images'] else None,
+                "preview_url": item['preview_url'],
+                "spotify_uri": item['uri'],
+                "duration_ms": item['duration_ms']
+            })
+        
+        return {"tracks": tracks}
+    
+    except Exception as e:
+        print(f"[SPOTIFY_TOP_TRACKS] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get top tracks: {str(e)}")
+
+
+@api_router.post("/spotify/set-vibe-song")
+async def set_vibe_song(request: Request, user: User = Depends(get_current_user)):
+    """
+    Set user's vibe song
+    """
+    try:
+        body = await request.json()
+        vibe_song = body.get("vibe_song")
+        
+        if not vibe_song:
+            raise HTTPException(status_code=400, detail="vibe_song is required")
+        
+        # Update user's vibe song
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {"vibe_song": vibe_song}}
+        )
+        
+        return {
+            "success": True,
+            "message": "Vibe song updated successfully",
+            "vibe_song": vibe_song
+        }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[SET_VIBE_SONG] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to set vibe song: {str(e)}")
+
+
+@api_router.delete("/spotify/disconnect")
+async def disconnect_spotify(user: User = Depends(get_current_user)):
+    """
+    Disconnect Spotify account
+    """
+    try:
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": {
+                "spotify_connected": False,
+                "spotify_access_token": None,
+                "spotify_refresh_token": None,
+                "spotify_token_expires": None,
+                "vibe_song": None
+            }}
+        )
+        
+        return {
+            "success": True,
+            "message": "Spotify disconnected successfully"
+        }
+    
+    except Exception as e:
+        print(f"[SPOTIFY_DISCONNECT] Error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to disconnect Spotify: {str(e)}")
+
+
 # Horoscope
 @api_router.get("/horoscope/today")
 async def horoscope_today(user: User = Depends(get_current_user)):
