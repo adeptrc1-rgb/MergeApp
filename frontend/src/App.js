@@ -75,6 +75,7 @@ function AuthProvider({ children }) {
 
   const login = async (email = 'testuser@asign.com') => {
     try {
+      console.log('[LOGIN] Sending request to:', `${API}/auth/test-login`);
       const response = await fetch(`${API}/auth/test-login`, {
         method: 'POST',
         headers: {
@@ -84,19 +85,27 @@ function AuthProvider({ children }) {
         body: JSON.stringify({ email })
       });
 
+      console.log('[LOGIN] Response status:', response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log('[LOGIN] Response data:', data);
         if (data.success) {
+          console.log('[LOGIN] Success! Setting user and checking auth...');
           // Wait for cookie to be set, then check auth
           setTimeout(async () => {
             await checkAuth();
           }, 500);
           return true;
+        } else {
+          console.log('[LOGIN] Success flag was false');
         }
+      } else {
+        console.log('[LOGIN] Response not OK:', response.status, response.statusText);
       }
       return false;
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('[LOGIN] Login error:', error);
       return false;
     }
   };
