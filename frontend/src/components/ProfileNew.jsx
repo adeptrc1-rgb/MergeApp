@@ -161,7 +161,19 @@ export default function Profile({ user, logout }) {
   const profileCompletion = calculateProfileCompletion();
 
   return (
-    <div className="fixed inset-0 overflow-y-auto pb-24" style={{ background: '#0a0a0a' }}>
+    <div 
+      className="fixed inset-0 overflow-y-auto pb-24" 
+      style={{ 
+        background: '#0a0a0a',
+        scrollbarWidth: 'none', /* Firefox */
+        msOverflowStyle: 'none' /* IE and Edge */
+      }}
+    >
+      <style>{`
+        .fixed.inset-0.overflow-y-auto::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, Opera */
+        }
+      `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
         {/* Logo */}
