@@ -25,7 +25,7 @@ import Discover from './components/Discover';
 import Home from './components/Home';
 import Messages from './components/Messages';
 import Connections from './components/Connections';
-import Profile from './components/Profile';
+import Profile from './components/ProfileNew';
 import Settings from './components/Settings';
 import Store from './components/Store';
 import TestPage from './components/TestPage';
