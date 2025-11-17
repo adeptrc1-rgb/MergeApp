@@ -134,7 +134,10 @@ export default function EditProfileModal({ user, onSave, onClose }) {
             <div className="space-y-3">
               <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Photos</h3>
               <button
-                onClick={() => setShowPhotoEditor(true)}
+                onClick={() => {
+                  console.log('[EDIT PROFILE] Photo manager clicked');
+                  alert('Photo management requires backend connection. Available after full authentication.');
+                }}
                 className="w-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 border border-purple-400/30 rounded-xl p-4 flex items-center justify-between group transition-all"
               >
                 <div className="flex items-center gap-3">
