@@ -214,10 +214,10 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
         <div className="text-center mb-6">
           <div className="text-4xl mb-3">🔷</div>
           <h2 className="text-2xl font-bold mb-2" style={{ color: '#FAFAFA' }}>
-            CONNECTION MATRIX
+            MERGE WHEEL
           </h2>
           <p className="text-sm" style={{ color: '#A3A3A3' }}>
-            Analyze your compatibility patterns
+            Spin to earn rewards and boosts
           </p>
         </div>
 
