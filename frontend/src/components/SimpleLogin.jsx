@@ -29,11 +29,15 @@ export default function SimpleLogin({ onLoginSuccess }) {
       console.log('[TEST LOGIN] Response received:', response.status);
 
       const data = await response.json();
+      console.log('[TEST LOGIN] Response data:', data);
 
       if (data.success) {
+        console.log('[TEST LOGIN] Success! Has user:', !!data.user);
         if (data.user) {
           setMessage('Authentication successful');
+          console.log('[TEST LOGIN] Redirecting to /home in 500ms...');
           setTimeout(() => {
+            console.log('[TEST LOGIN] Executing redirect now');
             window.location.replace('/home');
           }, 500);
           return;
