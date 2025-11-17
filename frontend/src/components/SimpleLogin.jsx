@@ -61,11 +61,12 @@ export default function SimpleLogin({ onLoginSuccess }) {
         }
         setLoading(false);
       } else {
+        console.log('[TEST LOGIN] data.success was false');
         setError('Login failed');
         setLoading(false);
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('[TEST LOGIN] Error:', error);
       setError('Connection error');
       setLoading(false);
     }
