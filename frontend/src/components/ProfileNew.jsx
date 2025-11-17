@@ -157,7 +157,7 @@ export default function Profile({ user, logout }) {
     return Math.round((completed / total) * 100);
   };
 
-  const age = calculateAge(user.birth_date);
+  const age = user.birth_date ? calculateAge(user.birth_date) : null;
   const profileCompletion = calculateProfileCompletion();
 
   return (
