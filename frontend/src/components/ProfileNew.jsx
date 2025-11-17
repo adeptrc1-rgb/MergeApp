@@ -27,6 +27,18 @@ export default function Profile({ user, logout }) {
   const [cooldownCountdown, setCooldownCountdown] = useState('');
   const [cooldownProgress, setCooldownProgress] = useState(0);
 
+  // Safety check: if user is not loaded yet, show loading state
+  if (!user) {
+    return (
+      <div className="h-screen flex items-center justify-center" style={{ background: '#0a0a0a' }}>
+        <div className="text-white text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
+          <p>Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
+
   useEffect(() => {
     checkDailySpinStatus();
     calculateTimeRemaining();
