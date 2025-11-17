@@ -342,6 +342,39 @@ export default function Profile({ user, logout }) {
             <MergeLogo size="md" color="#FFFFFF" />
           </div>
           <h2 className="text-3xl font-light text-white">Profile</h2>
+          
+          {/* Connection Matrix Progress Bar */}
+          <div 
+            className="mt-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-lg p-3 border border-purple-400/20 cursor-pointer hover:border-purple-400/40 transition-all group"
+            onClick={() => setShowConnectionMatrix(true)}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Sparkles className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-white text-sm font-medium">Connection Matrix</span>
+              </div>
+              {canSpin && (
+                <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1.5 rounded-full animate-pulse font-bold shadow-lg">
+                  Free Spin Today!
+                </div>
+              )}
+            </div>
+            <div className="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+              <div 
+                className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 h-1.5 rounded-full transition-all duration-500 ease-out relative"
+                style={{ width: `${cooldownProgress}%` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+              </div>
+            </div>
+            {!canSpin && wheelStatus && (
+              <div className="mt-2 text-xs text-white/50 text-center">
+                Next spin in {cooldownCountdown}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
