@@ -151,73 +151,42 @@ function LandingPage() {
     window.location.href = `https://auth.emergentagent.com/?redirect=${redirectUrl}`;
   };
 
-  const { login, setUser, setNeedsOnboarding: setNeedsOnboardingContext } = React.useContext(AuthContext);
+  const { setUser, setNeedsOnboarding: setNeedsOnboardingContext } = React.useContext(AuthContext);
 
-  const handleTestLogin = async () => {
-    console.log('[HANDLE TEST LOGIN] Button clicked, starting login...');
-    setLoading(true);
-    try {
-      console.log('[HANDLE TEST LOGIN] Sending test login request...');
-      
-      const response = await fetch(`${API}/auth/test-login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ email: 'testuser@asign.com' })
-      });
-
-      console.log('[HANDLE TEST LOGIN] Response status:', response.status);
-      
-      if (response.ok) {
-        const data = await response.json();
-        console.log('[HANDLE TEST LOGIN] Response data:', data);
-        
-        if (data.success) {
-          console.log('[HANDLE TEST LOGIN] Login successful! Fetching user data...');
-          
-          // Wait a moment for cookie to be set, then fetch user data
-          await new Promise(resolve => setTimeout(resolve, 500));
-          
-          // Fetch user data directly
-          const userResponse = await fetch(`${API}/auth/me`, {
-            credentials: 'include'
-          });
-          
-          if (userResponse.ok) {
-            const userData = await userResponse.json();
-            console.log('[HANDLE TEST LOGIN] User data fetched:', userData);
-            setUser(userData);
-            setNeedsOnboardingContext(userData.needs_onboarding || false);
-            setLoading(false);
-            
-            // Navigate to appropriate page
-            if (userData.needs_onboarding) {
-              navigate('/onboarding');
-            } else {
-              navigate('/home');
-            }
-          } else {
-            console.error('[HANDLE TEST LOGIN] Failed to fetch user data:', userResponse.status);
-            alert('Login succeeded but failed to fetch user data. Please refresh the page.');
-            setLoading(false);
-          }
-        } else {
-          console.log('[HANDLE TEST LOGIN] Success flag was false');
-          alert('Test login failed. Please try again.');
-          setLoading(false);
-        }
-      } else {
-        console.log('[HANDLE TEST LOGIN] Response not OK:', response.status);
-        alert('Test login failed. Please try again.');
-        setLoading(false);
+  const handleTestLogin = () => {
+    console.log('[TEST LOGIN] Setting mock user for testing...');
+    
+    // Mock user data for testing the interface
+    const mockUser = {
+      id: 'test-user-123',
+      email: 'testuser@asign.com',
+      first_name: 'Test',
+      last_name: 'User',
+      birth_date: '1995-06-15',
+      zodiac_sign: 'Leo',
+      photos: ['https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=800&q=80'],
+      bio: 'Test user for interface testing',
+      interests: ['music', 'coffee', 'travel'],
+      industry: 'Technology',
+      job_title: 'Software Engineer',
+      location: 'San Francisco, CA',
+      profile_completed: true,
+      star_coins: 5000,
+      super_likes: 5,
+      profile_boosts: 2,
+      direct_messages: 10,
+      is_premium: false,
+      vibe_song: {
+        title: 'Test Song',
+        artist: 'Test Artist',
+        preview_url: null
       }
-    } catch (error) {
-      console.error('[HANDLE TEST LOGIN] Error caught:', error);
-      alert(`Test login failed: ${error.message}`);
-      setLoading(false);
-    }
+    };
+    
+    setUser(mockUser);
+    setNeedsOnboardingContext(false);
+    navigate('/home');
+    console.log('[TEST LOGIN] Mock user set, navigating to /home');
   };
 
   const handlePhoneSubmit = async () => {
