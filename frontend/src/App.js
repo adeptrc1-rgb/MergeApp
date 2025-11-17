@@ -111,7 +111,10 @@ function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    checkAuth();
+    // Only check auth on initial load, not when navigating
+    if (!user) {
+      checkAuth();
+    }
   }, []);
 
   const logout = async () => {
