@@ -377,9 +377,9 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
               </button>
             ) : (
               <div className="text-center py-4 rounded-xl" style={{ backgroundColor: '#171717', border: '1px solid #262626' }}>
-                <p className="mb-2" style={{ color: '#FAFAFA' }}>Connection Matrix Activated!</p>
+                <p className="mb-2" style={{ color: '#FAFAFA' }}>Merge Wheel Activated!</p>
                 <p className="text-sm" style={{ color: '#A3A3A3' }}>
-                  Next analysis in {formatTimeRemaining(matrixStatus?.time_until_next_spin || 0)}
+                  Next spin in {formatTimeRemaining(matrixStatus?.time_until_next_spin || 0)}
                 </p>
               </div>
             )}
