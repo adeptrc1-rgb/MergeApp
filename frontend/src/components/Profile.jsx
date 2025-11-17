@@ -495,19 +495,18 @@ export default function Profile({ user, logout }) {
                     return (
                       <span 
                         key={i} 
-                        className="px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all animate-fadeIn shadow-sm"
+                        className="px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all animate-fadeIn"
                         style={{
-                          background: `hsl(${hue}, 80%, 95%)`,
-                          color: `hsl(${hue}, 60%, 40%)`,
-                          border: `1.5px solid hsl(${hue}, 60%, 85%)`
+                          background: `hsla(${hue}, 70%, 50%, 0.15)`,
+                          color: `hsl(${hue}, 80%, 75%)`,
+                          border: `1px solid hsla(${hue}, 70%, 50%, 0.3)`
                         }}
                       >
                         {interest}
                         <button
                           onClick={() => removeInterest(interest)}
-                          className="hover:scale-110 transition-transform text-lg leading-none opacity-60 hover:opacity-100"
+                          className="hover:scale-110 transition-transform text-lg leading-none opacity-70 hover:opacity-100"
                           title="Remove"
-                          style={{ color: `hsl(${hue}, 60%, 40%)` }}
                         >
                           ×
                         </button>
