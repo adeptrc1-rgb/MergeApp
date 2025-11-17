@@ -18,7 +18,11 @@ export default function SimpleLogin({ onLoginSuccess }) {
     try {
       const response = await fetch(`${API}/auth/test-login`, {
         method: 'POST',
-        credentials: 'include'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email: 'testuser@asign.com' })
       });
 
       const data = await response.json();
