@@ -82,6 +82,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
   };
 
   const handleSave = async () => {
+    console.log('[EDIT PROFILE] Save button clicked');
     setSaving(true);
     try {
       await onSave({
@@ -95,8 +96,11 @@ export default function EditProfileModal({ user, onSave, onClose }) {
         show_distance: showDistance,
         discovery_enabled: discoveryEnabled
       });
+      console.log('[EDIT PROFILE] Save completed successfully');
+      onClose(); // Close the modal after successful save
     } catch (error) {
-      console.error('Save error:', error);
+      console.error('[EDIT PROFILE] Save error:', error);
+      alert('Error saving profile. Please try again.');
     } finally {
       setSaving(false);
     }
