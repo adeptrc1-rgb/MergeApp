@@ -81,8 +81,8 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
       setMatrixStatus(response.data);
       setLoading(false);
     } catch (err) {
-      console.error('Error fetching matrix status:', err);
-      setError('Unable to load Connection Matrix');
+      console.error('Error fetching wheel status:', err);
+      setError('Unable to load Merge Wheel');
       setLoading(false);
     }
   };
