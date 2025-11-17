@@ -769,15 +769,15 @@ export default function Profile({ user, logout }) {
             </div>
           </button>
 
-          {/* Connection Matrix */}
+          {/* Merge Wheel */}
           <div className="rounded-2xl p-6 mb-6" style={{ backgroundColor: '#0A0A0A', border: '1px solid #3B82F6' }}>
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-xl font-semibold mb-2 flex items-center gap-2" style={{ color: '#FAFAFA' }}>
                   <Gift className="w-5 h-5" style={{ color: '#3B82F6' }} />
-                  Connection Matrix
+                  Merge Wheel
                 </h3>
-                <p className="text-sm" style={{ color: '#A3A3A3' }}>Analyze patterns for rewards</p>
+                <p className="text-sm" style={{ color: '#A3A3A3' }}>Spin for rewards and boosts</p>
               </div>
               <Sparkles className="w-8 h-8 text-purple-400 cosmic-pulse-icon" />
             </div>
