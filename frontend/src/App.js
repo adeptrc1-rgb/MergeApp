@@ -151,7 +151,7 @@ function LandingPage() {
     window.location.href = `https://auth.emergentagent.com/?redirect=${redirectUrl}`;
   };
 
-  const { login } = React.useContext(AuthContext);
+  const { login, setUser, setNeedsOnboarding: setNeedsOnboardingContext } = React.useContext(AuthContext);
 
   const handleTestLogin = async () => {
     console.log('[HANDLE TEST LOGIN] Button clicked, starting login...');
