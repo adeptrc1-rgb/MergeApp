@@ -225,7 +225,7 @@ async def test_login(body: LoginBody, response: Response):
         max_age=7*24*60*60,
         httponly=True,
         secure=SECURE_COOKIES,
-        samesite="none",
+        samesite="lax",
         path="/"
     )
     return {"success": True, "user": user.dict(), "needs_onboarding": not user.profile_completed}
