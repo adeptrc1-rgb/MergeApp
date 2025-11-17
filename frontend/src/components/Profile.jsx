@@ -477,11 +477,11 @@ export default function Profile({ user, logout }) {
           </div>
 
           {/* INTERESTS CARD */}
-          <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-xl" style={{ boxShadow: '0 4px 20px rgba(108, 99, 255, 0.08)' }}>
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-[#1A1A1A] text-xs uppercase tracking-wider font-bold">INTERESTS</h2>
+              <h2 className="text-white/80 text-xs uppercase tracking-wider font-medium">INTERESTS</h2>
               {!isEditingProfile && user.interests && user.interests.length > 0 && (
-                <span className="px-2 py-1 bg-purple-100 text-[#6C63FF] rounded-full text-xs font-bold">
+                <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-bold">
                   {user.interests.length}
                 </span>
               )}
