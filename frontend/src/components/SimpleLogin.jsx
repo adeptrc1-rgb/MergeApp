@@ -11,11 +11,13 @@ export default function SimpleLogin({ onLoginSuccess }) {
   const [error, setError] = useState('');
 
   const handleTestLogin = async () => {
+    console.log('[TEST LOGIN] Button clicked!');
     setLoading(true);
     setMessage('');
     setError('');
     
     try {
+      console.log('[TEST LOGIN] Making request to:', `${API}/auth/test-login`);
       const response = await fetch(`${API}/auth/test-login`, {
         method: 'POST',
         headers: {
@@ -24,6 +26,7 @@ export default function SimpleLogin({ onLoginSuccess }) {
         credentials: 'include',
         body: JSON.stringify({ email: 'testuser@asign.com' })
       });
+      console.log('[TEST LOGIN] Response received:', response.status);
 
       const data = await response.json();
 
