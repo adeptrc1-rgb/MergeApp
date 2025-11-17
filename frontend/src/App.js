@@ -189,7 +189,7 @@ function LandingPage() {
             const userData = await userResponse.json();
             console.log('[HANDLE TEST LOGIN] User data fetched:', userData);
             setUser(userData);
-            setNeedsOnboarding(userData.needs_onboarding || false);
+            setNeedsOnboardingContext(userData.needs_onboarding || false);
             setLoading(false);
             
             // Navigate to appropriate page
