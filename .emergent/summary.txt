@@ -1,84 +1,94 @@
 <analysis>
-The trajectory chronicles an extensive and highly iterative development cycle for a dating application, transitioning from an astrology-themed app (Cosme) to a data-driven platform (Merge). The process was driven by a continuous stream of specific user requests, resulting in significant architectural and UI/UX changes.
+The trajectory details an iterative and user-driven development process for the Merge dating application. The initial task was to provide an overview of the  component. This quickly evolved into a series of major feature implementations and UI/UX redesigns based on explicit user requests.
 
-Key development phases include:
-1.  **Initial Recovery:** The first task was to fix a critical syntax error in , which had left the application in a non-renderable state after a failed login page redesign.
-2.  **UI/UX Overhaul:** The application underwent a complete rebranding. This included multiple logo redesigns, a new color scheme (black/blue/white), and a new typography system. The core profile card () was refactored numerous times to remove, add, and rearrange elements like Cosmic Insights, Trust Score, Industry, and a new Background section.
-3.  **Feature Implementation & Refactoring:**
-    *   **AI Conversation Starters:** This feature was removed from the profile card and re-implemented within the messaging interface (). This required a complete rebranding of the chat UI and an extensive, multi-layered debugging process to fix both UI inconsistencies and functional bugs, culminating in fixing a broken backend endpoint ().
-    *   **AI Compatibility Insights:** A new feature was built to provide AI-generated insights (), including a new backend endpoint and a corresponding frontend component ().
-    *   **Connection Matrix:** The Cosmic Wheel feature was completely rebranded into the Connection Matrix with a new data-visualization theme.
+Key features added include a Cloudinary-based photo upload and management system, editable basic profile information (name, industry, job title), and a universal My Vibe music feature powered by the Deezer API, which replaced a more restrictive Spotify-only implementation.
 
-The trajectory ends mid-debug. After fixing the backend to return real match data, a new frontend error surfaced: a  in  because the  function was not safely handling potentially undefined  data. The immediate task is to resolve this crash.
+Significant effort was dedicated to debugging a critical login issue caused by a data schema mismatch between MongoDB and Pydantic models, which was successfully resolved by making the backend models more flexible and correctly handling MongoDB's .
 
-The user's primary language is English. Future responses should be in English.
+The  component underwent multiple complete overhauls. It was first restructured into a modern, card-based layout. It was then re-themed to a light Cosmic Serenity design, and finally reverted to a sophisticated dark theme to match the rest of the application, as per user feedback. The Connection Matrix feature was rebranded to Merge Wheel, moved to the profile header, and restyled multiple times to be more techy and align with the app's theme.
+
+A persistent, critical bug is the Merge Wheel modal auto-opening on app load, blocking all UI interaction and testing. The most recent action was removing a duplicate Merge Wheel section from the profile page. The user's primary language is English; future responses should be in English.
 </analysis>
 
 <product_requirements>
-The product, Merge, is a premium, data-driven dating application designed to facilitate intelligent connections. It has evolved from a mystical theme to a sophisticated, tech-forward platform.
+The product, Merge, is a data-driven, premium dating application focused on intelligent connections. It features a sophisticated dark theme aesthetic with a black background and blue/purple/pink accents.
 
-**Core Features & Branding:**
-*   **Aesthetic:** The app uses a minimalist design with a pure black background, white text, and Intelligent Blue & Confident Purple as primary accent colors.
-*   **Profile Cards ():** This is the main user interaction point. The layout is structured as: Name/Age, Distance (X miles away), Merge Score, and Industry. An expandable Show more section reveals more details in a specific order: About (Bio), Background (Hometown, Education), Interests, Relationship Goals, Lifestyle, Music, and finally the AI-powered Why You Might Connect insights.
-*   **AI-Powered Features:**
-    1.  **Compatibility Insights:** An AI system analyzes two profiles and generates personalized insights on why users might connect, displayed within the profile card.
-    2.  **Conversation Starters:** To break the ice, AI-generated suggestions are presented in the chat interface for new matches or stalled conversations.
-*   **Connection Matrix ():** A gamified feature, rebranded from Cosmic Wheel, that allows users to analyze connection patterns to earn rewards, using a data-visualization and network-node aesthetic.
-*   **Messaging ():** The chat interface is fully integrated with the Merge brand's clean, dark theme and is the home for the AI Conversation Starters.
+**Core Features Implemented:**
+-   **Profile Tab:** A central dashboard for user identity. It has undergone multiple redesigns to improve visual hierarchy and user experience. It displays user info, editable interests (with a smart-autocomplete input), and an About Me section.
+-   **Photo Management:** Users can upload, change, and manage their profile photos via a . Photos are stored on Cloudinary.
+-   **My Vibe (Universal Music):** A universal song search feature powered by the Deezer API allows all users to add a vibe song to their profile, complete with a 30-second preview player. This replaced a Spotify-only implementation to ensure global accessibility.
+-   **Merge Wheel (Gamified Feature):** Rebranded from Connection Matrix, this is a daily spin-the-wheel game to earn rewards. It has been moved to the profile header and styled with a sophisticated, techy data-visualization aesthetic.
+
+The application aims for a modern, clean, and interactive user experience, taking inspiration from leading dating apps while maintaining a unique, tech-forward identity.
 </product_requirements>
 
 <key_technical_concepts>
 - **Frameworks**: React (frontend), FastAPI (backend).
 - **Database**: MongoDB.
-- **Styling**: Tailwind CSS for utility-first styling, supplemented with custom CSS files (, , ) for complex animations, custom scrollbars, and global styles.
-- **State Management**: Primarily component-level state using React's  and  hooks.
-- **API Integration**:  for frontend REST API calls. The backend integrates with an AI service (likely OpenAI via ) to power the compatibility and conversation starter features.
+- **Styling**: Tailwind CSS, inline styles, and custom CSS for animations.
+- **API Integration**:  for frontend-backend communication.
+- **External Services**:
+    - **Cloudinary**: For image storage and management.
+    - **Deezer API**: For universal, authentication-free song search.
+- **Backend**: Pydantic for data validation, handling schema evolution and MongoDB  serialization issues.
 </key_technical_concepts>
 
 <code_architecture>
 The application follows a standard monorepo structure with a React frontend and a FastAPI backend.
 
 
+-   ****: The core of the backend. It was heavily modified to add:
+    -   Cloudinary configuration and endpoints for photo upload/deletion ().
+    -   Spotify integration endpoints (now potentially supplementary).
+    -   Deezer API endpoints for universal music search ().
+    -   Updates to the  endpoint to allow editing of new profile fields (, , ).
+    -   Critical bug fixes in  and  to handle MongoDB  and schema differences between old and new user data, preventing Pydantic validation errors.
 
--   ****
-    -   **Importance:** This is the most critical UI component, displaying the swipeable profile cards. It has been the subject of the most frequent and extensive modifications.
-    -   **Summary of Changes:** Underwent numerous layout and content changes, including the removal of AI starters and Trust Score, the addition of Industry and a Background section, the relocation and redesign of compatibility insights, and the implementation of UI polish like dividers and custom scrollbars.
+-   ****: The most frequently and extensively modified file. It serves as the user's main profile screen.
+    -   **Summary:** This component has been completely restructured multiple times to align with evolving UI/UX requirements. It integrates photo editing, basic info editing, and a smart interest-picker with autocomplete. It also manages the state and UI for various modals (, , ).
+    -   **Changes:**
+        -   Implemented a section-based, card-style layout.
+        -   Integrated a Merge Wheel component into the header, replacing a 21-day streak feature. The styling of this wheel was iteratively updated to be more techy and theme-compliant.
+        -   Added a smart interest-picker with a searchable dropdown.
+        -   The entire theme was switched from a light Cosmic Serenity concept to a dark theme to match the rest of the app.
+        -   A duplicate Merge Wheel section was removed.
 
--   ****
-    -   **Importance:** The main chat interface component.
-    -   **Summary of Changes:** Was completely rebranded from an old purple cosmic theme to the new black/blue Merge theme. It was refactored to integrate the new  component. It was the focus of a major debugging effort to fix a test-starter feature, which involved multiple incorrect attempts before the root cause was found.
+-   ** (New File)**:
+    -   **Summary:** A new modal component created to handle all photo management tasks: uploading new photos, reordering, and deleting existing ones. It communicates with the Cloudinary-backed endpoints on the server.
 
--   ****
-    -   **Importance:** Displays the list of user conversations/matches. Contains the developer button to test AI conversation starters.
-    -   **Summary of Changes:** This component was also rebranded to match the Merge theme. **It is the source of the current application crash**, with a  in its  function.
+-   ** (New File)**:
+    -   **Summary:** A new modal component that provides a universal music search interface. It uses the backend's Deezer API endpoint to search for songs and allows the user to select one as their vibe song. It was created to ensure 100% user access to the music feature.
 
--   ****
-    -   **Importance:** The user's own profile screen.
-    -   **Summary of Changes:** The Cosmic Wheel feature was removed and replaced with the new  component, including updates to all related text and state management logic.
+-   ****:
+    -   **Summary:** This component contains the logic and UI for the spin-wheel mini-game.
+    -   **Changes:** The text content was rebranded from Connection Matrix to Merge Wheel to align with the new branding.
 
--   **, , **
-    -   **Importance:** These are all new components created to implement user-requested features.
-    -   **Summary of Changes:** Created from scratch.  provides a data-viz themed reward system.  displays AI-generated compatibility notes.  provides ice-breakers in the chat UI.
-
--   ****
-    -   **Importance:** The single file containing all backend API logic.
-    -   **Summary of Changes:** Several new endpoints were added to support new features, including  for AI insights and endpoints for conversation starters. Crucially, the  endpoint was fixed to return actual data from the database instead of an empty array, which directly led to the current frontend crash.
+-   ** (New File)**:
+    -   **Summary:** A utility script created to populate the MongoDB database with test  data for multiple users, which was necessary for testing the My Vibe feature on the home screen profile cards.
 </code_architecture>
 
 <pending_tasks>
-- **Fix AI Conversation Starters:** The immediate task is to fix the crash in the  component that prevents the AI Conversation Starters from being tested.
-- **Original Unaddressed Tasks:** A list of initial tasks, including Google Login debugging, SMS verification, S3 photo storage, and Playwright test fixes, remains outstanding and has not been worked on.
-- **Backend for Merge Score Breakdown:** The backend logic for the detailed Merge Score breakdown was mentioned as a pending task but has not been implemented.
+- **CRITICAL BUG:** Fix the recurring issue where the Merge Wheel modal automatically opens on app load, blocking all UI interaction and preventing testing.
+- **Profile Features:** Implement the remaining user-requested profile enhancements:
+    - Location & Discovery Settings.
+    - Social Media connections (e.g., Instagram).
+    - An improved, section-based edit/save flow.
+- **Spotify Integration Polish:** Fully integrate Spotify as an optional enhancement for browsing user libraries, supplementing the primary Deezer search.
 </pending_tasks>
 
 <current_work>
-The most recent work was focused on fixing the Test AI Conversation Starters feature. The previous engineer went through an extensive debugging process, ultimately discovering that the feature failed because the backend endpoint  was returning an empty array, causing the chat screen to show 0 active connections.
+The AI engineer was in the final stages of a major UI/UX overhaul of the  tab. The user requested to remove a duplicate Merge Wheel section that was appearing below the My Vibe area. This was the last action taken.
 
-The engineer fixed this by modifying the  endpoint in  to fetch and return actual match data from the database. However, this fix introduced a new, critical bug on the frontend.
+This task was part of a larger effort to redesign the profile page to match a sophisticated, dark, techy aesthetic. This redesign involved:
+1.  Re-theming all new components (header, interest cards, about me) to a dark mode.
+2.  Removing the 21-Day Streak feature from the header.
+3.  Moving the Merge Wheel into the header as a compact, data-visualization-style progress bar.
+4.  Rebranding all instances of Connection Matrix to Merge Wheel.
+5.  Iteratively refining the colors and icons of the Merge Wheel to match the application's theme.
 
-The application now crashes immediately upon navigating to the messages page. The error is a  originating from the  component. This happens because the  function within that component is attempting to process the newly available user data from the backend but is not safely handling cases where a user object or its  property might be missing or . The app is currently in a broken state due to this uncaught exception. The last action was identifying this new error.
+The implementation of these UI changes is complete. However, all attempts to visually verify the final result have been blocked by a persistent bug causing the Merge Wheel modal to auto-open on page load, obscuring the underlying content. The last screenshot taken was to confirm the duplicate wheel was gone, but the modal was still present.
 </current_work>
 
 <optional_next_step>
-Add a safety check to the  function in  to prevent the app from crashing. This involves ensuring  and  exist before attempting to access them.
+Take a screenshot to verify the duplicate Merge Wheel has been removed and the profile page renders correctly without the redundant section.
 </optional_next_step>
