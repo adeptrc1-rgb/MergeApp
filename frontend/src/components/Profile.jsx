@@ -343,37 +343,119 @@ export default function Profile({ user, logout }) {
           </div>
           <h2 className="text-3xl font-light text-white">Profile</h2>
           
-          {/* Merge Wheel Progress Bar */}
+          {/* Merge Wheel - Sophisticated Tech Design */}
           <div 
-            className="mt-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg p-3 border border-blue-400/20 cursor-pointer hover:border-blue-400/40 transition-all group"
+            className="mt-4 relative overflow-hidden rounded-xl cursor-pointer group transition-all duration-300 hover:scale-[1.02]"
             onClick={() => setShowConnectionMatrix(true)}
+            style={{
+              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%)',
+              border: '1px solid rgba(59, 130, 246, 0.3)',
+              boxShadow: '0 0 20px rgba(59, 130, 246, 0.1)'
+            }}
           >
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                  <Zap className="w-4 h-4 text-white" />
+            {/* Tech Grid Background */}
+            <div className="absolute inset-0 opacity-20" style={{
+              backgroundImage: `
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '20px 20px'
+            }} />
+            
+            {/* Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-cyan-400/5 to-blue-500/0 group-hover:via-cyan-400/10 transition-all duration-500" />
+            
+            <div className="relative p-4">
+              {/* Header Row */}
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  {/* Sophisticated Icon */}
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-all duration-300" style={{
+                      border: '1px solid rgba(59, 130, 246, 0.5)'
+                    }}>
+                      <Zap className="w-5 h-5 text-white" />
+                    </div>
+                    {/* Pulse Ring */}
+                    {canSpin && (
+                      <div className="absolute inset-0 rounded-lg border-2 border-cyan-400 animate-ping opacity-75" />
+                    )}
+                  </div>
+                  
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-white font-semibold tracking-wide">MERGE WHEEL</span>
+                      <div className="w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />
+                    </div>
+                    <div className="text-xs text-blue-300/80 font-mono">AI-Powered Reward System</div>
+                  </div>
                 </div>
-                <span className="text-white text-sm font-medium">Merge Wheel</span>
+                
+                {/* Status Badge */}
+                {canSpin && (
+                  <div className="relative">
+                    <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs px-4 py-2 rounded-lg font-bold shadow-lg flex items-center gap-2 animate-pulse">
+                      <div className="w-2 h-2 rounded-full bg-white" />
+                      <span>READY TO SPIN</span>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg blur-md opacity-50" />
+                  </div>
+                )}
               </div>
-              {canSpin && (
-                <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs px-3 py-1.5 rounded-full animate-pulse font-bold shadow-lg">
-                  Free Spin Today!
+              
+              {/* Advanced Progress Bar */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-cyan-300/80 font-mono">Progress</span>
+                  <span className="text-white font-bold">{Math.round(cooldownProgress)}%</span>
                 </div>
-              )}
-            </div>
-            <div className="w-full bg-gray-800/50 rounded-full h-1.5 overflow-hidden">
-              <div 
-                className="bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-600 h-1.5 rounded-full transition-all duration-500 ease-out relative"
-                style={{ width: `${cooldownProgress}%` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                
+                <div className="relative h-2 rounded-full overflow-hidden" style={{
+                  background: 'rgba(31, 41, 55, 0.5)',
+                  border: '1px solid rgba(59, 130, 246, 0.2)'
+                }}>
+                  {/* Progress Fill with Segments */}
+                  <div 
+                    className="absolute inset-y-0 left-0 rounded-full transition-all duration-500 ease-out"
+                    style={{ 
+                      width: `${cooldownProgress}%`,
+                      background: 'linear-gradient(90deg, #3B82F6 0%, #06B6D4 50%, #3B82F6 100%)',
+                      boxShadow: '0 0 10px rgba(59, 130, 246, 0.5)'
+                    }}
+                  >
+                    {/* Animated Shimmer */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                  </div>
+                  
+                  {/* Segment Markers */}
+                  <div className="absolute inset-0 flex">
+                    {[25, 50, 75].map(mark => (
+                      <div key={mark} className="flex-1 border-r border-white/10" />
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Status Text */}
+                {!canSpin && wheelStatus && (
+                  <div className="flex items-center justify-between text-xs pt-1">
+                    <span className="text-gray-400 font-mono">Next availability</span>
+                    <span className="text-cyan-400 font-bold font-mono">{cooldownCountdown}</span>
+                  </div>
+                )}
+              </div>
+              
+              {/* Tech Details */}
+              <div className="flex items-center gap-4 mt-3 pt-3 border-t border-blue-400/10">
+                <div className="flex items-center gap-1.5 text-xs">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                  <span className="text-gray-400 font-mono">System Active</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs">
+                  <ChevronRight className="w-3 h-3 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                  <span className="text-blue-400 font-mono group-hover:text-cyan-400 transition-colors">Launch Wheel</span>
+                </div>
               </div>
             </div>
-            {!canSpin && wheelStatus && (
-              <div className="mt-2 text-xs text-gray-400 text-center">
-                Next spin in {cooldownCountdown}
-              </div>
-            )}
           </div>
         </div>
       </div>
