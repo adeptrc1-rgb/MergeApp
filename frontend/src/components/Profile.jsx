@@ -564,11 +564,11 @@ export default function Profile({ user, logout }) {
                       return (
                         <span 
                           key={i} 
-                          className="px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition-all shadow-sm"
+                          className="px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition-all"
                           style={{
-                            background: `hsl(${hue}, 80%, 95%)`,
-                            color: `hsl(${hue}, 60%, 40%)`,
-                            border: `1.5px solid hsl(${hue}, 60%, 85%)`
+                            background: `hsla(${hue}, 70%, 50%, 0.15)`,
+                            color: `hsl(${hue}, 80%, 75%)`,
+                            border: `1px solid hsla(${hue}, 70%, 50%, 0.3)`
                           }}
                         >
                           {interest}
@@ -578,11 +578,11 @@ export default function Profile({ user, logout }) {
                   </div>
                 ) : (
                   <div className="text-center py-10">
-                    <Sparkles className="w-12 h-12 text-purple-200 mx-auto mb-3" />
-                    <p className="text-gray-500 text-sm mb-3">Add interests to show what you love!</p>
+                    <Sparkles className="w-12 h-12 text-white/20 mx-auto mb-3" />
+                    <p className="text-white/40 text-sm mb-3">Add interests to show what you love!</p>
                     <button
                       onClick={startEditingProfile}
-                      className="px-6 py-2 bg-gradient-to-r from-[#6C63FF] to-[#8A4FFF] text-white rounded-full text-sm font-medium hover:scale-105 transition-transform shadow-lg"
+                      className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full text-sm font-medium hover:scale-105 transition-transform shadow-lg"
                     >
                       + Add Interests
                     </button>
@@ -593,8 +593,8 @@ export default function Profile({ user, logout }) {
           </div>
 
           {/* ABOUT ME CARD */}
-          <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-xl" style={{ boxShadow: '0 4px 20px rgba(108, 99, 255, 0.08)' }}>
-            <h2 className="text-[#1A1A1A] text-xs uppercase tracking-wider font-bold mb-4">ABOUT ME</h2>
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10 backdrop-blur-sm">
+            <h2 className="text-white/80 text-xs uppercase tracking-wider font-medium mb-4">ABOUT ME</h2>
             {isEditingProfile ? (
               <textarea
                 value={editedBio}
