@@ -373,7 +373,7 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
                 onMouseEnter={(e) => !analyzing && (e.currentTarget.style.backgroundColor = '#2563EB')}
                 onMouseLeave={(e) => !analyzing && (e.currentTarget.style.backgroundColor = '#3B82F6')}
               >
-                {analyzing ? 'Analyzing...' : 'Analyze Connections'}
+                {analyzing ? 'Spinning...' : 'Spin the Wheel'}
               </button>
             ) : (
               <div className="text-center py-4 rounded-xl" style={{ backgroundColor: '#171717', border: '1px solid #262626' }}>
