@@ -458,27 +458,6 @@ export default function Profile({ user, logout }) {
                 )}
               </div>
             </div>
-            
-            {/* Connection Matrix - Elegant Integration */}
-            <div className="mt-6 pt-6 border-t border-white/10">
-              <button
-                onClick={() => setShowConnectionMatrix(true)}
-                className="w-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30 rounded-xl p-4 border border-purple-400/30 transition-all group"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Sparkles className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-left">
-                      <h3 className="text-white font-medium text-base">Connection Matrix</h3>
-                      <p className="text-white/60 text-xs">Analyze patterns & earn rewards</p>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
-                </div>
-              </button>
-            </div>
           </div>
 
           {/* INTERESTS CARD */}
