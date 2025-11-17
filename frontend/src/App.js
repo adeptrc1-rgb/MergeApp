@@ -154,20 +154,59 @@ function LandingPage() {
     console.log('[HANDLE TEST LOGIN] Button clicked, starting login...');
     setLoading(true);
     try {
-      console.log('[HANDLE TEST LOGIN] Calling login function...');
+      console.log('[HANDLE TEST LOGIN] Sending test login request...');
       
-      const success = await login();
+      const response = await fetch(`${API}/auth/test-login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email: 'testuser@asign.com' })
+      });
+
+      console.log('[HANDLE TEST LOGIN] Response status:', response.status);
       
-      console.log('[HANDLE TEST LOGIN] Login result:', success);
-      
-      if (success) {
-        console.log('[HANDLE TEST LOGIN] Login successful! Redirecting in 1 second...');
-        setTimeout(() => {
-          console.log('[HANDLE TEST LOGIN] Redirecting now to /profile?openWheel=1');
-          window.location.href = '/profile?openWheel=1';
-        }, 1000);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('[HANDLE TEST LOGIN] Response data:', data);
+        
+        if (data.success) {
+          console.log('[HANDLE TEST LOGIN] Login successful! Fetching user data...');
+          
+          // Wait a moment for cookie to be set, then fetch user data
+          await new Promise(resolve => setTimeout(resolve, 500));
+          
+          // Fetch user data directly
+          const userResponse = await fetch(`${API}/auth/me`, {
+            credentials: 'include'
+          });
+          
+          if (userResponse.ok) {
+            const userData = await userResponse.json();
+            console.log('[HANDLE TEST LOGIN] User data fetched:', userData);
+            setUser(userData);
+            setNeedsOnboarding(userData.needs_onboarding || false);
+            setLoading(false);
+            
+            // Navigate to appropriate page
+            if (userData.needs_onboarding) {
+              navigate('/onboarding');
+            } else {
+              navigate('/home');
+            }
+          } else {
+            console.error('[HANDLE TEST LOGIN] Failed to fetch user data:', userResponse.status);
+            alert('Login succeeded but failed to fetch user data. Please refresh the page.');
+            setLoading(false);
+          }
+        } else {
+          console.log('[HANDLE TEST LOGIN] Success flag was false');
+          alert('Test login failed. Please try again.');
+          setLoading(false);
+        }
       } else {
-        console.log('[HANDLE TEST LOGIN] Login failed, showing alert');
+        console.log('[HANDLE TEST LOGIN] Response not OK:', response.status);
         alert('Test login failed. Please try again.');
         setLoading(false);
       }
