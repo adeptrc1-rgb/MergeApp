@@ -161,7 +161,7 @@ export default function Profile({ user, logout }) {
   const profileCompletion = calculateProfileCompletion();
 
   return (
-    <div className="min-h-screen pb-24" style={{ background: '#0a0a0a' }}>
+    <div className="w-full pb-24" style={{ background: '#0a0a0a', minHeight: '100vh', overflowY: 'auto' }}>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
         {/* Logo */}
