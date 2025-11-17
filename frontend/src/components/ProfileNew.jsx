@@ -242,7 +242,7 @@ export default function Profile({ user, logout }) {
               className="absolute inset-0 m-2 rounded-full bg-cover bg-center"
               style={{ 
                 backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #a78bfa 0%, #ec4899 100%)',
-                border: '2px solid #0a0a0a'
+                border: '2px solid #000000'
               }}
             >
               {!user.photos?.[0] && (
