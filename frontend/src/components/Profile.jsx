@@ -851,64 +851,6 @@ export default function Profile({ user, logout }) {
             </div>
           </button>
 
-          {/* Merge Wheel */}
-          <div className="rounded-2xl p-6 mb-6" style={{ backgroundColor: '#0A0A0A', border: '1px solid #3B82F6' }}>
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-xl font-semibold mb-2 flex items-center gap-2" style={{ color: '#FAFAFA' }}>
-                  <Gift className="w-5 h-5" style={{ color: '#3B82F6' }} />
-                  Merge Wheel
-                </h3>
-                <p className="text-sm" style={{ color: '#A3A3A3' }}>Spin for rewards and boosts</p>
-              </div>
-              <Sparkles className="w-8 h-8 text-purple-400 cosmic-pulse-icon" />
-            </div>
-            {wheelStatus && (
-              <div className="space-y-3 mb-4">
-                {!canSpin && cooldownCountdown && (
-                  <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                        <span className="text-white/80 text-sm">Next spin available</span>
-                      </div>
-                      <span className="text-purple-200 font-medium">{cooldownCountdown}</span>
-                    </div>
-                    <div className="w-full bg-white/5 rounded-full h-1 mt-3">
-                      <div className="bg-gradient-to-r from-purple-400 to-pink-400 h-1 rounded-full transition-all duration-500 ease-out" style={{ width: `${cooldownProgress}%` }}></div>
-                    </div>
-                  </div>
-                )}
-                <div className="grid grid-cols-2 gap-3">
-                  {wheelStatus.spin_streak > 0 && (
-                    <div className="bg-white/5 border border-orange-400/20 rounded-lg p-3">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
-                          <span className="text-white text-xs font-bold">{wheelStatus.spin_streak}</span>
-                        </div>
-                        <span className="text-orange-200 text-sm font-medium">Day Streak</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-            <button 
-              onClick={() => setShowConnectionMatrix(true)} 
-              disabled={!canSpin} 
-              className="w-full py-3 rounded-xl font-semibold transition-all disabled:opacity-50"
-              style={{ 
-                backgroundColor: canSpin ? '#3B82F6' : '#171717',
-                color: canSpin ? '#FAFAFA' : '#737373',
-                border: canSpin ? '1px solid #3B82F6' : '1px solid #262626'
-              }}
-              onMouseEnter={(e) => canSpin && (e.currentTarget.style.backgroundColor = '#2563EB')}
-              onMouseLeave={(e) => canSpin && (e.currentTarget.style.backgroundColor = '#3B82F6')}
-            >
-              {canSpin ? '🔷 Analyze Now' : `⏳ Next analysis: ${cooldownCountdown || 'Soon'}`}
-            </button>
-          </div>
-
           {/* Rewards Piggy Bank */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10 mb-6">
             <h3 className="text-xl font-light text-white mb-6 flex items-center gap-2">
