@@ -161,115 +161,116 @@ export default function Profile({ user, logout }) {
   const profileCompletion = calculateProfileCompletion();
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden" style={{ background: '#0a0a0a' }}>
-      <div className="flex-shrink-0" style={{ background: '#0a0a0a' }}>
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between mb-6">
-            <MergeLogo size="md" color="#FFFFFF" />
-          </div>
-
-          <div className="flex flex-col items-center mb-4">
-            <div className="relative mb-4">
-              <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="54"
-                  fill="none"
-                  stroke="rgba(255, 255, 255, 0.1)"
-                  strokeWidth="4"
-                />
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="54"
-                  fill="none"
-                  stroke="url(#gradient)"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeDasharray={`${2 * Math.PI * 54}`}
-                  strokeDashoffset={`${2 * Math.PI * 54 * (1 - profileCompletion / 100)}`}
-                  style={{ transition: 'stroke-dashoffset 0.5s ease' }}
-                />
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#a855f7" />
-                    <stop offset="100%" stopColor="#ec4899" />
-                  </linearGradient>
-                </defs>
-              </svg>
-              
-              <div
-                className="absolute inset-0 m-2 rounded-full bg-cover bg-center"
-                style={{ 
-                  backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #a78bfa 0%, #ec4899 100%)',
-                  border: '2px solid #0a0a0a'
-                }}
-              >
-                {!user.photos?.[0] && (
-                  <div className="w-full h-full flex items-center justify-center text-white text-3xl font-light">
-                    {user.first_name?.[0] || 'U'}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="text-center mb-2">
-              <h1 className="text-2xl font-semibold text-white flex items-center justify-center gap-2">
-                {user.first_name}
-                <Check className="w-5 h-5 text-blue-400" />
-              </h1>
-            </div>
-
-            <div className="text-sm text-white/60 mb-4">
-              {profileCompletion}% Complete
-            </div>
-
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="px-8 py-2.5 bg-white/10 hover:bg-white/15 text-white rounded-full font-medium transition-all border border-white/20"
-            >
-              Edit Profile
-            </button>
-          </div>
-
-          <div className="flex items-center justify-center gap-8 border-b border-white/10 pb-2">
-            <button
-              onClick={() => setActiveTab('get-more')}
-              className={`text-sm font-medium transition-all pb-2 ${
-                activeTab === 'get-more'
-                  ? 'text-white border-b-2 border-white'
-                  : 'text-white/50 hover:text-white/70'
-              }`}
-            >
-              Get More
-            </button>
-            <button
-              onClick={() => setActiveTab('safety')}
-              className={`text-sm font-medium transition-all pb-2 ${
-                activeTab === 'safety'
-                  ? 'text-white border-b-2 border-white'
-                  : 'text-white/50 hover:text-white/70'
-              }`}
-            >
-              Safety
-            </button>
-            <button
-              onClick={() => setActiveTab('my-merge')}
-              className={`text-sm font-medium transition-all pb-2 ${
-                activeTab === 'my-merge'
-                  ? 'text-white border-b-2 border-white'
-                  : 'text-white/50 hover:text-white/70'
-              }`}
-            >
-              My Merge
-            </button>
-          </div>
+    <div className="min-h-screen pb-24" style={{ background: '#0a0a0a' }}>
+      {/* Single Scrollable Container */}
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        {/* Logo */}
+        <div className="flex items-center justify-between mb-6">
+          <MergeLogo size="md" color="#FFFFFF" />
         </div>
-      </div>
 
-      <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch' }}>
-        <div className="max-w-4xl mx-auto px-4 py-6 space-y-4">
+        {/* Profile Header */}
+        <div className="flex flex-col items-center mb-4">
+          <div className="relative mb-4">
+            <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
+              <circle
+                cx="60"
+                cy="60"
+                r="54"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.1)"
+                strokeWidth="4"
+              />
+              <circle
+                cx="60"
+                cy="60"
+                r="54"
+                fill="none"
+                stroke="url(#gradient)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeDasharray={`${2 * Math.PI * 54}`}
+                strokeDashoffset={`${2 * Math.PI * 54 * (1 - profileCompletion / 100)}`}
+                style={{ transition: 'stroke-dashoffset 0.5s ease' }}
+              />
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#a855f7" />
+                  <stop offset="100%" stopColor="#ec4899" />
+                </linearGradient>
+              </defs>
+            </svg>
+            
+            <div
+              className="absolute inset-0 m-2 rounded-full bg-cover bg-center"
+              style={{ 
+                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #a78bfa 0%, #ec4899 100%)',
+                border: '2px solid #0a0a0a'
+              }}
+            >
+              {!user.photos?.[0] && (
+                <div className="w-full h-full flex items-center justify-center text-white text-3xl font-light">
+                  {user.first_name?.[0] || 'U'}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="text-center mb-2">
+            <h1 className="text-2xl font-semibold text-white flex items-center justify-center gap-2">
+              {user.first_name}
+              <Check className="w-5 h-5 text-blue-400" />
+            </h1>
+          </div>
+
+          <div className="text-sm text-white/60 mb-4">
+            {profileCompletion}% Complete
+          </div>
+
+          <button
+            onClick={() => setShowEditProfile(true)}
+            className="px-8 py-2.5 bg-white/10 hover:bg-white/15 text-white rounded-full font-medium transition-all border border-white/20"
+          >
+            Edit Profile
+          </button>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="flex items-center justify-center gap-8 border-b border-white/10 pb-2 mb-6">
+          <button
+            onClick={() => setActiveTab('get-more')}
+            className={`text-sm font-medium transition-all pb-2 ${
+              activeTab === 'get-more'
+                ? 'text-white border-b-2 border-white'
+                : 'text-white/50 hover:text-white/70'
+            }`}
+          >
+            Get More
+          </button>
+          <button
+            onClick={() => setActiveTab('safety')}
+            className={`text-sm font-medium transition-all pb-2 ${
+              activeTab === 'safety'
+                ? 'text-white border-b-2 border-white'
+                : 'text-white/50 hover:text-white/70'
+            }`}
+          >
+            Safety
+          </button>
+          <button
+            onClick={() => setActiveTab('my-merge')}
+            className={`text-sm font-medium transition-all pb-2 ${
+              activeTab === 'my-merge'
+                ? 'text-white border-b-2 border-white'
+                : 'text-white/50 hover:text-white/70'
+            }`}
+          >
+            My Merge
+          </button>
+        </div>
+
+        {/* Tab Content */}
+        <div className="space-y-4">
           
           {activeTab === 'get-more' && (
             <>
