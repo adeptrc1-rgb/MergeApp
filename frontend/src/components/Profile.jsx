@@ -602,11 +602,11 @@ export default function Profile({ user, logout }) {
                 placeholder="Tell others about yourself..."
                 maxLength={500}
                 rows={5}
-                className="w-full bg-purple-50/50 border-2 border-purple-100 rounded-2xl px-5 py-4 text-gray-800 text-sm focus:outline-none focus:border-[#6C63FF] resize-none transition-all"
+                className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 resize-none transition-all"
               />
             ) : (
-              <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
-                {user.bio || <span className="text-gray-400 italic">No bio added yet</span>}
+              <p className="text-white/80 text-sm leading-relaxed whitespace-pre-line">
+                {user.bio || <span className="text-white/40 italic">No bio added yet</span>}
               </p>
             )}
           </div>
