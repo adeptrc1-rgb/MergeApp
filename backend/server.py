@@ -148,6 +148,7 @@ class Session(BaseModel):
 # Auth helper
 async def get_current_user(request: Request) -> User:
     token = request.cookies.get(COOKIE_NAME)
+    print(f"[AUTH DEBUG] Cookie name: {COOKIE_NAME}, Token: {token}, All cookies: {request.cookies}")
     if not token:
         raise HTTPException(status_code=401, detail="Not authenticated")
     sess = await db.sessions.find_one({"token": token})
