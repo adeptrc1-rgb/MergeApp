@@ -430,25 +430,26 @@ export default function Profile({ user, logout }) {
               {/* User Info */}
               <div className="flex-1 min-w-0">
                 {/* Name & Age - Large, Bold */}
-                <h1 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-3">{user.first_name}, {age}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">{user.first_name}, {age}</h1>
                 
                 {/* Zodiac & Coins - Smaller, lighter */}
-                <div className="flex items-center gap-3 text-sm mb-2">
-                  <span className="px-3 py-1 bg-gradient-to-r from-purple-50 to-pink-50 text-[#6C63FF] rounded-full font-medium border border-purple-100">
+                <div className="flex items-center gap-2 text-sm mb-2">
+                  <span className="text-white/70 flex items-center gap-1">
                     {zodiacSymbol(user.zodiac_sign)} {user.zodiac_sign}
                   </span>
-                  <span className="px-3 py-1 bg-gradient-to-r from-yellow-50 to-orange-50 text-orange-600 rounded-full font-bold border border-orange-100 flex items-center gap-1">
-                    <Coins className="w-3.5 h-3.5" />
+                  <span className="text-white/50">•</span>
+                  <span className="text-white/70 flex items-center gap-1">
+                    <Coins className="w-3.5 h-3.5 text-yellow-400" />
                     {user.star_coins || 0}
                   </span>
                 </div>
                 
                 {/* Industry - Same small font */}
                 {!isEditingProfile && user.industry && (
-                  <p className="text-sm text-gray-600 font-medium">{user.industry}</p>
+                  <p className="text-sm text-white/60">{user.industry}</p>
                 )}
                 {!isEditingProfile && user.location && (
-                  <p className="text-sm text-gray-500">{user.location}</p>
+                  <p className="text-sm text-white/50">{user.location}</p>
                 )}
               </div>
             </div>
