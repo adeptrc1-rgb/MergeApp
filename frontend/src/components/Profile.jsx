@@ -894,7 +894,7 @@ export default function Profile({ user, logout }) {
             </div>
 
             {/* Helper text */}
-            <p className="text-xs mt-4" style={{ color: '#525252' }}>Items you've purchased or earned from the Connection Matrix live here.</p>
+            <p className="text-xs mt-4" style={{ color: '#525252' }}>Items you've purchased or earned from the Merge Wheel live here.</p>
           </div>
 
           {/* Stats */}
