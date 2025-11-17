@@ -151,23 +151,28 @@ function LandingPage() {
   const { login } = React.useContext(AuthContext);
 
   const handleTestLogin = async () => {
+    console.log('[HANDLE TEST LOGIN] Button clicked, starting login...');
     setLoading(true);
     try {
-      console.log('Starting test login...');
+      console.log('[HANDLE TEST LOGIN] Calling login function...');
       
       const success = await login();
       
+      console.log('[HANDLE TEST LOGIN] Login result:', success);
+      
       if (success) {
-        console.log('Login successful! Redirecting...');
+        console.log('[HANDLE TEST LOGIN] Login successful! Redirecting in 1 second...');
         setTimeout(() => {
+          console.log('[HANDLE TEST LOGIN] Redirecting now to /profile?openWheel=1');
           window.location.href = '/profile?openWheel=1';
         }, 1000);
       } else {
+        console.log('[HANDLE TEST LOGIN] Login failed, showing alert');
         alert('Test login failed. Please try again.');
         setLoading(false);
       }
     } catch (error) {
-      console.error('Test login error:', error);
+      console.error('[HANDLE TEST LOGIN] Error caught:', error);
       alert(`Test login failed: ${error.message}`);
       setLoading(false);
     }
