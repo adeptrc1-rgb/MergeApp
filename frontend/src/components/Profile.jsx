@@ -374,11 +374,11 @@ export default function Profile({ user, logout }) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto pb-24 cosmic-theme" style={{ WebkitOverflowScrolling: 'touch', background: 'linear-gradient(180deg, #0F1C2D 0%, #1a2332 50%, #F5F7FA 100%)' }}>
+      <div className="flex-1 overflow-y-auto pb-24" style={{ WebkitOverflowScrolling: 'touch', background: '#000000' }}>
         <div className="max-w-4xl mx-auto px-4 py-4 md:px-6 md:py-6 space-y-4">
           
           {/* PROFILE HEADER CARD */}
-          <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-8 border border-white/20 relative shadow-xl" style={{ boxShadow: '0 4px 20px rgba(108, 99, 255, 0.08)' }}>
+          <div className="bg-white/5 rounded-2xl p-6 border border-white/10 relative backdrop-blur-sm">
             {/* Discreet Edit Button - Top Right */}
             <button
               onClick={isEditingProfile ? saveProfileEdits : startEditingProfile}
