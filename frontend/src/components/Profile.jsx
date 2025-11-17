@@ -342,34 +342,6 @@ export default function Profile({ user, logout }) {
             <MergeLogo size="md" color="#FFFFFF" />
           </div>
           <h2 className="text-3xl font-light text-white">Profile</h2>
-          
-          {/* 21-Day Streak Progress Bar */}
-          {streakStatus && (
-            <div 
-              className="mt-3 bg-gradient-to-r from-orange-500/10 to-red-500/10 rounded-lg p-3 border border-orange-400/20 cursor-pointer hover:border-orange-400/40 transition-all"
-              onClick={() => setShowStreakClaim(true)}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <Flame className="w-4 h-4 text-orange-400" />
-                  <span className="text-white text-sm font-medium">Daily Streak: Day {streakStatus.current_streak}/21</span>
-                </div>
-                {streakStatus.can_claim && (
-                  <div className="bg-orange-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
-                    Claim!
-                  </div>
-                )}
-              </div>
-              <div className="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
-                <div 
-                  className="bg-gradient-to-r from-orange-400 to-red-500 h-1.5 rounded-full transition-all duration-500 ease-out relative"
-                  style={{ width: `${(streakStatus.current_streak / 21) * 100}%` }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
