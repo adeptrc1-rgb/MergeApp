@@ -337,6 +337,115 @@ export default function EditProfileModal({ user, onSave, onClose }) {
               </button>
             </div>
 
+            {/* Lifestyle */}
+            <div className="space-y-3">
+              <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Lifestyle</h3>
+              
+              <div className="space-y-3">
+                {/* Workout */}
+                <div>
+                  <label className="text-white/60 text-xs mb-1 block">Workout</label>
+                  <select
+                    value={workout}
+                    onChange={(e) => setWorkout(e.target.value)}
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  >
+                    <option value="">Select</option>
+                    <option value="everyday">Everyday</option>
+                    <option value="often">Often</option>
+                    <option value="sometimes">Sometimes</option>
+                    <option value="never">Never</option>
+                  </select>
+                </div>
+
+                {/* Drinking */}
+                <div>
+                  <label className="text-white/60 text-xs mb-1 block">Drinking</label>
+                  <select
+                    value={drinking}
+                    onChange={(e) => setDrinking(e.target.value)}
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  >
+                    <option value="">Select</option>
+                    <option value="not_for_me">Not for me</option>
+                    <option value="sober">Sober</option>
+                    <option value="sober_curious">Sober curious</option>
+                    <option value="on_special_occasions">On special occasions</option>
+                    <option value="socially_on_weekends">Socially on weekends</option>
+                    <option value="most_nights">Most nights</option>
+                  </select>
+                </div>
+
+                {/* Smoking */}
+                <div>
+                  <label className="text-white/60 text-xs mb-1 block">Smoking</label>
+                  <select
+                    value={smoking}
+                    onChange={(e) => setSmoking(e.target.value)}
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  >
+                    <option value="">Select</option>
+                    <option value="social_smoker">Social smoker</option>
+                    <option value="smoker_when_drinking">Smoker when drinking</option>
+                    <option value="non_smoker">Non-smoker</option>
+                    <option value="smoker">Smoker</option>
+                    <option value="trying_to_quit">Trying to quit</option>
+                  </select>
+                </div>
+
+                {/* Marijuana */}
+                <div>
+                  <label className="text-white/60 text-xs mb-1 block">Marijuana</label>
+                  <select
+                    value={marijuana}
+                    onChange={(e) => setMarijuana(e.target.value)}
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  >
+                    <option value="">Select</option>
+                    <option value="never">Never</option>
+                    <option value="sometimes">Sometimes</option>
+                    <option value="often">Often</option>
+                  </select>
+                </div>
+
+                {/* Dietary Preference */}
+                <div>
+                  <label className="text-white/60 text-xs mb-1 block">Dietary Preference</label>
+                  <select
+                    value={dietaryPreference}
+                    onChange={(e) => setDietaryPreference(e.target.value)}
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  >
+                    <option value="">Select</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="pescatarian">Pescatarian</option>
+                    <option value="kosher">Kosher</option>
+                    <option value="halal">Halal</option>
+                    <option value="carnivore">Carnivore</option>
+                    <option value="omnivore">Omnivore</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                {/* Social Media */}
+                <div>
+                  <label className="text-white/60 text-xs mb-1 block">Social Media</label>
+                  <select
+                    value={socialMedia}
+                    onChange={(e) => setSocialMedia(e.target.value)}
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  >
+                    <option value="">Select</option>
+                    <option value="social_media_influencer">Social media influencer</option>
+                    <option value="active_user">Active user</option>
+                    <option value="off_the_grid">Off the grid</option>
+                    <option value="passive_scroller">Passive scroller</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Footer */}
