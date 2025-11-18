@@ -337,41 +337,6 @@ export default function EditProfileModal({ user, onSave, onClose }) {
               </button>
             </div>
 
-            {/* Control My Visibility */}
-            <div className="space-y-3">
-              <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control My Visibility</h3>
-              
-              <div className="space-y-2">
-                <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
-                  <input
-                    type="radio"
-                    name="visibility"
-                    checked={visibilityMode === 'standard'}
-                    onChange={() => setVisibilityMode('standard')}
-                    className="mt-0.5 w-4 h-4 accent-purple-500"
-                  />
-                  <div className="flex-1">
-                    <div className="text-white text-sm font-medium">Standard</div>
-                    <div className="text-white/50 text-xs">Discoverable in card stack</div>
-                  </div>
-                </label>
-                
-                <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
-                  <input
-                    type="radio"
-                    name="visibility"
-                    checked={visibilityMode === 'incognito'}
-                    onChange={() => setVisibilityMode('incognito')}
-                    className="mt-0.5 w-4 h-4 accent-purple-500"
-                  />
-                  <div className="flex-1">
-                    <div className="text-white text-sm font-medium">Incognito</div>
-                    <div className="text-white/50 text-xs">Discoverable only by people you Like</div>
-                  </div>
-                </label>
-              </div>
-            </div>
-
             {/* Lifestyle */}
             <div className="space-y-3">
               <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Lifestyle</h3>
