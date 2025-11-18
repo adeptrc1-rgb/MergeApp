@@ -169,12 +169,21 @@ export default function Home({ user }) {
           age: 28,
           zodiac_sign: 'Pisces',
           photos: ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'],
-          bio: 'Dreamer, artist, and stargazer. Looking for cosmic connections.',
-          interests: ['Art', 'Music', 'Astrology', 'Photography'],
+          bio: 'Dreamer, artist, and stargazer. Looking for cosmic connections. I believe in the universe\'s timing and creating meaningful moments.',
+          interests: ['Art', 'Music', 'Astrology', 'Photography', 'Painting', 'Stargazing'],
           industry: 'Creative Arts',
           job_title: 'Illustrator',
           location: 'Brooklyn, NY',
           compatibility_score: 89,
+          current_location: { city: 'Brooklyn, NY' },
+          education: { college: 'Rhode Island School of Design' },
+          deal_breakers: { relationship_goals: 'long_term_relationship' },
+          lifestyle_factors: {
+            occupation: 'Creative Arts',
+            fitness_health: 3,
+            social_habits: 4,
+            travel_frequency: 5
+          },
           vibe_song: {
             title: 'Cosmic Girl',
             artist: 'Jamiroquai',
