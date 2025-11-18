@@ -120,30 +120,7 @@ export default function CompatibilityInsights({
     setSummary(summaryText);
   };
 
-  if (loading && insights.length === 0) {
-    return (
-      <div className="space-y-2">
-        <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium flex items-center gap-1">
-          <Sparkles className="w-3 h-3 animate-pulse" />
-          Why You Might Connect
-        </h3>
-        <div className="space-y-2">
-          {[1, 2, 3].map((i) => (
-            <div
-              key={i}
-              className="rounded-lg p-3 animate-pulse"
-              style={{ backgroundColor: '#171717', border: '1px solid #404040' }}
-            >
-              <div className="h-4 bg-white/10 rounded mb-2 w-3/4"></div>
-              <div className="h-3 bg-white/10 rounded w-full"></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (error || insights.length === 0) {
+  if (insights.length === 0) {
     return null;
   }
 
