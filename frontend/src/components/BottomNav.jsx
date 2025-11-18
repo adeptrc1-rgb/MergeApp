@@ -16,7 +16,7 @@ const HomeIcon = ({ style }) => (
 // Shared Bottom Navigation - Merge Theme (Ultra Compact)
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: MergeIcon, label: 'Discover', path: '/home' },
+    { id: 'home', icon: HomeIcon, label: 'Discover', path: '/home' },
     { id: 'discover', icon: Network, label: 'Matrix', path: '/discover' },
     { id: 'messages', icon: MessageSquare, label: 'Chats', path: '/messages' },
     { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
