@@ -1,8 +1,8 @@
 import React from 'react';
 import { Network, MessageSquare, User } from 'lucide-react';
 
-// Custom Home Icon Component (Flame)
-const HomeIcon = ({ style }) => (
+// Custom Home Icon Component (Flame Icon Image)
+const FlameHomeIcon = ({ style }) => (
   <img 
     src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/k7bsh7b6_IMG_4419.jpeg"
     alt="Home"
@@ -16,7 +16,7 @@ const HomeIcon = ({ style }) => (
 // Shared Bottom Navigation - Merge Theme (Ultra Compact)
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: HomeIcon, label: 'Discover', path: '/home' },
+    { id: 'home', icon: FlameHomeIcon, label: 'Discover', path: '/home' },
     { id: 'discover', icon: Network, label: 'Matrix', path: '/discover' },
     { id: 'messages', icon: MessageSquare, label: 'Chats', path: '/messages' },
     { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
