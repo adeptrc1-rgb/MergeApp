@@ -107,7 +107,8 @@ export default function EditProfileModal({ user, onSave, onClose }) {
           marijuana,
           dietary_preference: dietaryPreference,
           social_media: socialMedia
-        }
+        },
+        visibility_mode: visibilityMode
       });
       console.log('[EDIT PROFILE] Save completed successfully');
       onClose(); // Close the modal after successful save
