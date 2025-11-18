@@ -634,7 +634,6 @@ function SettingsModal({ user, onSave, onClose }) {
         show_age: showAge,
         show_distance: showDistance,
         discovery_enabled: discoveryEnabled,
-        visibility_mode: visibilityMode,
         photo_verified_chat: photoVerifiedChat,
         read_receipts: readReceipts,
         show_on_merge: showOnMerge
