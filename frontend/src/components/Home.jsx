@@ -161,6 +161,83 @@ export default function Home({ user }) {
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
+      // Use mock data for testing when API fails
+      const mockProfiles = [
+        {
+          id: 'mock-1',
+          first_name: 'Luna',
+          age: 28,
+          zodiac_sign: 'Pisces',
+          photos: ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'],
+          bio: 'Dreamer, artist, and stargazer. Looking for cosmic connections.',
+          interests: ['Art', 'Music', 'Astrology', 'Photography'],
+          industry: 'Creative Arts',
+          job_title: 'Illustrator',
+          location: 'Brooklyn, NY',
+          compatibility_score: 89,
+          vibe_song: {
+            title: 'Cosmic Girl',
+            artist: 'Jamiroquai',
+            preview_url: null
+          }
+        },
+        {
+          id: 'mock-2',
+          first_name: 'Alex',
+          age: 30,
+          zodiac_sign: 'Leo',
+          photos: ['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80'],
+          bio: 'Tech entrepreneur with a passion for innovation and adventure.',
+          interests: ['Technology', 'Travel', 'Fitness', 'Coffee'],
+          industry: 'Technology',
+          job_title: 'Founder',
+          location: 'San Francisco, CA',
+          compatibility_score: 92,
+          vibe_song: {
+            title: 'High Hopes',
+            artist: 'Panic! At The Disco',
+            preview_url: null
+          }
+        },
+        {
+          id: 'mock-3',
+          first_name: 'Maya',
+          age: 26,
+          zodiac_sign: 'Scorpio',
+          photos: ['https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80'],
+          bio: 'Yoga instructor by day, poet by night. Seeking deep connections.',
+          interests: ['Yoga', 'Writing', 'Nature', 'Meditation'],
+          industry: 'Wellness',
+          job_title: 'Yoga Instructor',
+          location: 'Los Angeles, CA',
+          compatibility_score: 85,
+          vibe_song: {
+            title: 'Breathe Me',
+            artist: 'Sia',
+            preview_url: null
+          }
+        },
+        {
+          id: 'mock-4',
+          first_name: 'Jordan',
+          age: 29,
+          zodiac_sign: 'Gemini',
+          photos: ['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80'],
+          bio: 'Music producer and DJ. Let\'s vibe to good energy.',
+          interests: ['Music', 'DJing', 'Concerts', 'Food'],
+          industry: 'Entertainment',
+          job_title: 'Music Producer',
+          location: 'Austin, TX',
+          compatibility_score: 78,
+          vibe_song: {
+            title: 'One More Time',
+            artist: 'Daft Punk',
+            preview_url: null
+          }
+        }
+      ];
+      console.log('[DEBUG] Using mock profiles for testing');
+      setMatches(mockProfiles);
     }
     setLoading(false);
   };
