@@ -88,10 +88,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
         job_title: editedJobTitle,
         location: editedLocation,
         bio: editedBio,
-        interests: editedInterests,
-        show_age: showAge,
-        show_distance: showDistance,
-        discovery_enabled: discoveryEnabled
+        interests: editedInterests
       });
       console.log('[EDIT PROFILE] Save completed successfully');
       onClose(); // Close the modal after successful save
