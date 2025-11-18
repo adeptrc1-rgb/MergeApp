@@ -28,6 +28,14 @@ export default function EditProfileModal({ user, onSave, onClose }) {
   const [showPhotoEditor, setShowPhotoEditor] = useState(false);
   const [showMusicConnect, setShowMusicConnect] = useState(false);
   const [saving, setSaving] = useState(false);
+  
+  // Lifestyle choices
+  const [workout, setWorkout] = useState(user.lifestyle?.workout || '');
+  const [drinking, setDrinking] = useState(user.lifestyle?.drinking || '');
+  const [smoking, setSmoking] = useState(user.lifestyle?.smoking || '');
+  const [marijuana, setMarijuana] = useState(user.lifestyle?.marijuana || '');
+  const [dietaryPreference, setDietaryPreference] = useState(user.lifestyle?.dietary_preference || '');
+  const [socialMedia, setSocialMedia] = useState(user.lifestyle?.social_media || '');
 
   const handleInterestInput = (e) => {
     const value = e.target.value;
