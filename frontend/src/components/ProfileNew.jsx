@@ -21,6 +21,7 @@ export default function Profile({ user, logout }) {
   const [activeTab, setActiveTab] = useState('get-more');
   const [showConnectionMatrix, setShowConnectionMatrix] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [canSpin, setCanSpin] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState({});
   const [wheelStatus, setWheelStatus] = useState(null);
