@@ -4,7 +4,7 @@ import { Network, MessageSquare, User } from 'lucide-react';
 // Custom Merge Logo Icon Component
 const MergeIcon = ({ style }) => (
   <img 
-    src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/dx361xgg_IMG_4406.jpeg"
+    src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/gii12w2i_IMG_4408.jpeg"
     alt="Merge"
     style={{
       ...style,
