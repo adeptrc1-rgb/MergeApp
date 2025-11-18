@@ -22,7 +22,7 @@ const MergeLogo = ({
 
   return (
     <img 
-      src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/gii12w2i_IMG_4408.jpeg"
+      src="https://customer-assets.emergentagent.com/job_datemerge/artifacts/9bji59s7_122fed07-08be-4993-9208-7eed705ccacb.png"
       alt="Merge"
       className={className}
       style={{
