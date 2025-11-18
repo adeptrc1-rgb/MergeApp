@@ -685,6 +685,101 @@ function SettingsModal({ user, onSave, onClose }) {
 
         {/* Content */}
         <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+          {/* Age Preferences */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Age Preferences</h3>
+            <div className="space-y-4 p-4 rounded-lg border border-white/10 bg-white/5">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex-1">
+                  <label className="text-white text-sm font-medium">Min Age</label>
+                  <input
+                    type="number"
+                    min="18"
+                    max="99"
+                    value={ageMin}
+                    onChange={(e) => setAgeMin(Math.max(18, Math.min(99, parseInt(e.target.value) || 18)))}
+                    className="w-full mt-1 bg-black/40 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="text-white text-sm font-medium">Max Age</label>
+                  <input
+                    type="number"
+                    min="18"
+                    max="99"
+                    value={ageMax}
+                    onChange={(e) => setAgeMax(Math.max(18, Math.min(99, parseInt(e.target.value) || 99)))}
+                    className="w-full mt-1 bg-black/40 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                  />
+                </div>
+              </div>
+              <div className="text-white/50 text-xs">
+                Looking for people aged {ageMin} to {ageMax}
+              </div>
+            </div>
+          </div>
+
+          {/* Distance Preferences */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Distance Preferences</h3>
+            <div className="space-y-3 p-4 rounded-lg border border-white/10 bg-white/5">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-white text-sm font-medium">Maximum Distance</label>
+                  <span className="text-purple-400 text-sm font-medium">{maxDistance} mi</span>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="100"
+                  value={maxDistance}
+                  onChange={(e) => setMaxDistance(parseInt(e.target.value))}
+                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                  style={{
+                    background: `linear-gradient(to right, #a855f7 0%, #a855f7 ${maxDistance}%, rgba(255,255,255,0.1) ${maxDistance}%, rgba(255,255,255,0.1) 100%)`
+                  }}
+                />
+              </div>
+              <div className="text-white/50 text-xs">
+                Show me people within {maxDistance} miles
+              </div>
+            </div>
+          </div>
+
+          {/* Control Who Sees You */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control Who Sees You</h3>
+            <div className="space-y-2">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+                <input
+                  type="radio"
+                  name="showMeMode"
+                  checked={showMeMode === 'balanced'}
+                  onChange={() => setShowMeMode('balanced')}
+                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                />
+                <div className="flex-1">
+                  <div className="text-white text-sm font-medium">Balanced Recommendations</div>
+                  <div className="text-white/50 text-xs">Show me to people based on compatibility</div>
+                </div>
+              </label>
+              
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+                <input
+                  type="radio"
+                  name="showMeMode"
+                  checked={showMeMode === 'recently_active'}
+                  onChange={() => setShowMeMode('recently_active')}
+                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                />
+                <div className="flex-1">
+                  <div className="text-white text-sm font-medium">Recently Active</div>
+                  <div className="text-white/50 text-xs">Prioritize showing me to active users</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
           {/* Control My Visibility */}
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control My Visibility</h3>
