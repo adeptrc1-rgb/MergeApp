@@ -622,7 +622,6 @@ function SettingsModal({ user, onSave, onClose }) {
   const [showAge, setShowAge] = useState(user.show_age !== false);
   const [showDistance, setShowDistance] = useState(user.show_distance !== false);
   const [discoveryEnabled, setDiscoveryEnabled] = useState(user.discovery_enabled !== false);
-  const [visibilityMode, setVisibilityMode] = useState(user.visibility_mode || 'standard');
   const [photoVerifiedChat, setPhotoVerifiedChat] = useState(user.photo_verified_chat || false);
   const [readReceipts, setReadReceipts] = useState(user.read_receipts !== false);
   const [showOnMerge, setShowOnMerge] = useState(user.show_on_merge !== false);
