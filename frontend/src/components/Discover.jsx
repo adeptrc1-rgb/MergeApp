@@ -214,7 +214,7 @@ export default function Discover({ user }) {
         <div className="max-w-4xl mx-auto px-4 py-2">
           <div className="flex items-center justify-between mb-2">
             <img 
-              src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/z39ztw1i_122fed07-08be-4993-9208-7eed705ccacb.png" 
+              src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/dx361xgg_IMG_4406.jpeg" 
               alt="Merge" 
               className="h-10 w-auto"
               style={{ objectFit: 'contain' }}
