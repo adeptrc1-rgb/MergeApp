@@ -8,66 +8,116 @@ const API = `${API_BASE}/api`;
 axios.defaults.withCredentials = true;
 
 export default function CompatibilityInsights({ 
-  currentUserId, 
-  otherUserId, 
+  currentUser, 
+  otherUser, 
   context = "profile_view",
   depth = "standard" 
 }) {
   const [insights, setInsights] = useState([]);
   const [summary, setSummary] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [cached, setCached] = useState(false);
 
   useEffect(() => {
-    if (currentUserId && otherUserId) {
-      loadInsights();
+    if (currentUser && otherUser) {
+      calculateLocalInsights();
     }
-  }, [currentUserId, otherUserId, context]);
+  }, [currentUser, otherUser]);
 
-  const loadInsights = async () => {
-    setLoading(true);
-    setError(null);
+  const calculateLocalInsights = () => {
+    const calculatedInsights = [];
     
-    try {
-      const response = await axios.post(`${API}/analyze-compatibility`, {
-        user_a_id: currentUserId,
-        user_b_id: otherUserId,
-        context: context,
-        depth: depth
+    // 1. Shared Interests Analysis
+    const currentInterests = currentUser.interests || [];
+    const otherInterests = otherUser.interests || [];
+    const sharedInterests = currentInterests.filter(i => 
+      otherInterests.some(oi => oi.toLowerCase() === i.toLowerCase())
+    );
+    
+    if (sharedInterests.length > 0) {
+      calculatedInsights.push({
+        icon: '🎯',
+        title: 'Shared Interests',
+        description: `You both enjoy ${sharedInterests.slice(0, 3).join(', ')}${sharedInterests.length > 3 ? ' and more' : ''}. Great conversation starters!`
       });
-      
-      if (response.data.success) {
-        setInsights(response.data.insights || []);
-        setSummary(response.data.summary || '');
-        setCached(response.data.cached || false);
-      }
-    } catch (err) {
-      console.error('Error loading compatibility insights:', err);
-      // Use mock insights for testing when API fails
-      const mockInsights = [
-        {
-          category: "Shared Interests",
-          insight: "You both enjoy creative pursuits and exploring new experiences together.",
-          confidence: 0.85
-        },
-        {
-          category: "Lifestyle Match",
-          insight: "Your social energy and activity levels are well-aligned for quality time together.",
-          confidence: 0.78
-        },
-        {
-          category: "Value Alignment",
-          insight: "Similar priorities around personal growth and meaningful connections.",
-          confidence: 0.82
-        }
-      ];
-      setInsights(mockInsights);
-      setSummary("Your profiles show promising compatibility across multiple dimensions, with particularly strong alignment in lifestyle preferences and shared interests.");
-      setError(null);
-    } finally {
-      setLoading(false);
     }
+    
+    // 2. Lifestyle Compatibility
+    const userLifestyle = currentUser.lifestyle_factors || {};
+    const otherLifestyle = otherUser.lifestyle_factors || {};
+    
+    const fitnessMatch = userLifestyle.fitness_health && otherLifestyle.fitness_health ? 
+      Math.abs(userLifestyle.fitness_health - otherLifestyle.fitness_health) <= 2 : false;
+    const socialMatch = userLifestyle.social_energy && otherLifestyle.social_energy ?
+      Math.abs(userLifestyle.social_energy - otherLifestyle.social_energy) <= 2 : false;
+    
+    if (fitnessMatch || socialMatch) {
+      const matches = [];
+      if (fitnessMatch) matches.push('fitness levels');
+      if (socialMatch) matches.push('social energy');
+      
+      calculatedInsights.push({
+        icon: '⚡',
+        title: 'Lifestyle Alignment',
+        description: `Your ${matches.join(' and ')} are well-aligned, making it easy to enjoy activities together.`
+      });
+    }
+    
+    // 3. Adventure Compatibility
+    const travelDiff = userLifestyle.travel_adventure && otherLifestyle.travel_adventure ?
+      Math.abs(userLifestyle.travel_adventure - otherLifestyle.travel_adventure) : 5;
+    
+    if (travelDiff <= 1) {
+      calculatedInsights.push({
+        icon: '✈️',
+        title: 'Adventure Seekers',
+        description: 'You share similar appetites for exploration and new experiences.'
+      });
+    }
+    
+    // 4. Career/Industry Alignment
+    if (currentUser.industry && otherUser.industry) {
+      if (currentUser.industry === otherUser.industry) {
+        calculatedInsights.push({
+          icon: '💼',
+          title: 'Career Connection',
+          description: `You're both in ${currentUser.industry}, which means shared understanding of professional challenges and wins.`
+        });
+      }
+    }
+    
+    // 5. Relationship Goals
+    const currentGoals = currentUser.deal_breakers?.relationship_goals;
+    const otherGoals = otherUser.deal_breakers?.relationship_goals;
+    
+    if (currentGoals && otherGoals) {
+      const seriousGoals = ['long_term_relationship', 'serious_dating', 'long_term_partner'];
+      const casualGoals = ['casual_dating', 'friends_first'];
+      
+      const bothSerious = seriousGoals.includes(currentGoals) && seriousGoals.includes(otherGoals);
+      const bothCasual = casualGoals.includes(currentGoals) && casualGoals.includes(otherGoals);
+      
+      if (bothSerious || bothCasual) {
+        calculatedInsights.push({
+          icon: '💫',
+          title: 'Aligned Intentions',
+          description: 'You\'re looking for similar connection types, which helps set clear expectations.'
+        });
+      }
+    }
+    
+    // Generate summary
+    let summaryText = '';
+    if (calculatedInsights.length >= 4) {
+      summaryText = 'Highly compatible across multiple dimensions';
+    } else if (calculatedInsights.length >= 2) {
+      summaryText = 'Promising compatibility with strong alignment in key areas';
+    } else if (calculatedInsights.length === 1) {
+      summaryText = 'Some compatibility - explore to learn more';
+    } else {
+      summaryText = 'Different profiles can lead to interesting conversations';
+    }
+    
+    setInsights(calculatedInsights);
+    setSummary(summaryText);
   };
 
   if (loading && insights.length === 0) {
