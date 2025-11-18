@@ -978,8 +978,8 @@ export default function Home({ user }) {
                       {/* AI Compatibility Insights */}
                       <div className="py-4" style={{ backgroundColor: '#1F1F1F', borderRadius: '8px', marginTop: '8px' }}>
                         <CompatibilityInsights
-                          currentUserId={user.id}
-                          otherUserId={currentMatch.id}
+                          currentUser={user}
+                          otherUser={currentMatch}
                           context="profile_view"
                           depth="standard"
                         />
