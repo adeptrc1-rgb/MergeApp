@@ -181,8 +181,9 @@ export default function Home({ user }) {
           lifestyle_factors: {
             occupation: 'Creative Arts',
             fitness_health: 3,
-            social_habits: 4,
-            travel_frequency: 5
+            social_energy: 4,
+            travel_adventure: 5,
+            family_future: 3
           },
           vibe_song: {
             title: 'Cosmic Girl',
