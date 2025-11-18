@@ -1,10 +1,22 @@
 import React from 'react';
-import { Zap, Network, MessageSquare, User } from 'lucide-react';
+import { Network, MessageSquare, User } from 'lucide-react';
+
+// Custom Merge Logo Icon Component
+const MergeIcon = ({ style }) => (
+  <img 
+    src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/z39ztw1i_122fed07-08be-4993-9208-7eed705ccacb.png"
+    alt="Merge"
+    style={{
+      ...style,
+      objectFit: 'contain'
+    }}
+  />
+);
 
 // Shared Bottom Navigation - Merge Theme (Ultra Compact)
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: Zap, label: 'Discover', path: '/home' },
+    { id: 'home', icon: MergeIcon, label: 'Discover', path: '/home' },
     { id: 'discover', icon: Network, label: 'Matrix', path: '/discover' },
     { id: 'messages', icon: MessageSquare, label: 'Chats', path: '/messages' },
     { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
