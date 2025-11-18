@@ -604,6 +604,128 @@ export default function Profile({ user, logout }) {
           onClose={() => setShowEditProfile(false)}
         />
       )}
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <SettingsModal
+          user={user}
+          onSave={handleProfileSave}
+          onClose={() => setShowSettings(false)}
+        />
+      )}
+    </div>
+  );
+}
+
+// Settings Modal Component
+function SettingsModal({ user, onSave, onClose }) {
+  const [showAge, setShowAge] = useState(user.show_age !== false);
+  const [showDistance, setShowDistance] = useState(user.show_distance !== false);
+  const [discoveryEnabled, setDiscoveryEnabled] = useState(user.discovery_enabled !== false);
+  const [saving, setSaving] = useState(false);
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await onSave({
+        show_age: showAge,
+        show_distance: showDistance,
+        discovery_enabled: discoveryEnabled
+      });
+      onClose();
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      alert('Error saving settings. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div 
+      className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div 
+        className="relative bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="border-b border-white/10 p-6 flex items-center justify-between">
+          <h2 className="text-xl font-light text-white flex items-center gap-2">
+            <Settings className="w-5 h-5" />
+            Settings
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-white/60 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg"
+          >
+            <ChevronRight className="w-6 h-6 rotate-90" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 space-y-1">
+          <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium mb-4">Privacy & Discovery</h3>
+          
+          <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+            <input
+              type="checkbox"
+              checked={showAge}
+              onChange={(e) => setShowAge(e.target.checked)}
+              className="w-5 h-5 accent-purple-500"
+            />
+            <div className="flex-1">
+              <div className="text-white text-sm font-medium">Show my age</div>
+              <div className="text-white/50 text-xs">Display your age to other users</div>
+            </div>
+          </label>
+          
+          <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+            <input
+              type="checkbox"
+              checked={showDistance}
+              onChange={(e) => setShowDistance(e.target.checked)}
+              className="w-5 h-5 accent-purple-500"
+            />
+            <div className="flex-1">
+              <div className="text-white text-sm font-medium">Show my distance</div>
+              <div className="text-white/50 text-xs">Display distance from other users</div>
+            </div>
+          </label>
+          
+          <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+            <input
+              type="checkbox"
+              checked={discoveryEnabled}
+              onChange={(e) => setDiscoveryEnabled(e.target.checked)}
+              className="w-5 h-5 accent-purple-500"
+            />
+            <div className="flex-1">
+              <div className="text-white text-sm font-medium">Enable discovery</div>
+              <div className="text-white/50 text-xs">Allow others to find your profile</div>
+            </div>
+          </label>
+        </div>
+
+        {/* Footer */}
+        <div className="border-t border-white/10 p-6 flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 bg-white/5 text-white/80 hover:bg-white/10 border border-white/10 rounded-xl py-3 font-medium transition-all"
+            disabled={saving}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl py-3 font-medium hover:scale-105 transition-all shadow-lg"
+            disabled={saving}
+          >
+            {saving ? 'Saving...' : 'Save'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
