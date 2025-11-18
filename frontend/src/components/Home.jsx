@@ -802,7 +802,9 @@ export default function Home({ user }) {
                       overflowX: 'hidden',
                       pointerEvents: 'auto',
                       scrollbarWidth: 'thin',
-                      scrollbarColor: 'rgba(255, 255, 255, 0.3) transparent'
+                      scrollbarColor: 'rgba(255, 255, 255, 0.3) transparent',
+                      height: showDropdown ? '450px' : '0px',
+                      maxHeight: showDropdown ? '60vh' : '0px'
                     }}
                   >
                     <div className="space-y-0 pt-2 pb-12">
