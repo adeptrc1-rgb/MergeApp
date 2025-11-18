@@ -798,13 +798,14 @@ export default function Home({ user }) {
                     style={{
                       WebkitOverflowScrolling: 'touch',
                       overscrollBehavior: 'contain',
-                      overflowY: showDropdown ? 'scroll' : 'hidden',
+                      overflowY: showDropdown ? 'auto' : 'hidden',
                       overflowX: 'hidden',
                       pointerEvents: 'auto',
                       scrollbarWidth: 'thin',
-                      scrollbarColor: 'rgba(255, 255, 255, 0.3) transparent',
+                      scrollbarColor: 'rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.1)',
                       height: showDropdown ? '450px' : '0px',
-                      maxHeight: showDropdown ? '60vh' : '0px'
+                      maxHeight: showDropdown ? '55vh' : '0px',
+                      touchAction: 'pan-y'
                     }}
                   >
                     <div className="space-y-0 pt-2 pb-12">
