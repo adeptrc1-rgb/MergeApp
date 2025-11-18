@@ -633,7 +633,7 @@ export default function Home({ user }) {
               onTouchStart={!showDropdown ? handleDragStart : undefined}
               onTouchMove={!showDropdown ? handleDragMove : undefined}
               onTouchEnd={!showDropdown ? handleDragEnd : undefined}
-              className={`relative bg-white/5 rounded-2xl overflow-hidden border border-white/10 cursor-grab active:cursor-grabbing w-full transition-all duration-500 ${
+              className={`relative bg-white/5 rounded-2xl ${showDropdown ? 'overflow-visible' : 'overflow-hidden'} border border-white/10 ${showDropdown ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'} w-full transition-all duration-500 ${
                 swipeDirection === 'right' ? 'translate-x-full rotate-12' :
                 swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
                 swipeDirection === 'up' ? '-translate-y-full scale-110' :
