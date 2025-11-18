@@ -265,8 +265,9 @@ export default function Home({ user }) {
           lifestyle_factors: {
             occupation: 'Entertainment',
             fitness_health: 3,
-            social_habits: 5,
-            travel_frequency: 4
+            social_energy: 5,
+            travel_adventure: 4,
+            family_future: 2
           },
           vibe_song: {
             title: 'One More Time',
