@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Camera, Music, Sparkles } from 'lucide-react';
+import { X, Camera, Music, Sparkles, Lock } from 'lucide-react';
 import PhotoEditorModal from './PhotoEditorModal';
 import MusicConnect from './MusicConnect';
 
