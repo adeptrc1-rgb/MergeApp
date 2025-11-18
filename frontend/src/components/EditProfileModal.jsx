@@ -25,9 +25,6 @@ export default function EditProfileModal({ user, onSave, onClose }) {
   const [newInterest, setNewInterest] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const [showAge, setShowAge] = useState(user.show_age !== false);
-  const [showDistance, setShowDistance] = useState(user.show_distance !== false);
-  const [discoveryEnabled, setDiscoveryEnabled] = useState(user.discovery_enabled !== false);
   const [showPhotoEditor, setShowPhotoEditor] = useState(false);
   const [showMusicConnect, setShowMusicConnect] = useState(false);
   const [saving, setSaving] = useState(false);
