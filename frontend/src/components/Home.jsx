@@ -250,12 +250,21 @@ export default function Home({ user }) {
           age: 29,
           zodiac_sign: 'Gemini',
           photos: ['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80'],
-          bio: 'Music producer and DJ. Let\'s vibe to good energy.',
-          interests: ['Music', 'DJing', 'Concerts', 'Food'],
+          bio: 'Music producer and DJ. Let\'s vibe to good energy. Live music is my love language. Always looking for the next adventure and great food spots.',
+          interests: ['Music', 'DJing', 'Concerts', 'Food', 'Vinyl Records', 'Travel'],
           industry: 'Entertainment',
           job_title: 'Music Producer',
           location: 'Austin, TX',
           compatibility_score: 78,
+          current_location: { city: 'Austin, TX' },
+          education: { college: 'Berklee College of Music' },
+          deal_breakers: { relationship_goals: 'casual_dating' },
+          lifestyle_factors: {
+            occupation: 'Entertainment',
+            fitness_health: 3,
+            social_habits: 5,
+            travel_frequency: 4
+          },
           vibe_song: {
             title: 'One More Time',
             artist: 'Daft Punk',
