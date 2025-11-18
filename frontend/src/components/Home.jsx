@@ -209,8 +209,9 @@ export default function Home({ user }) {
           lifestyle_factors: {
             occupation: 'Technology',
             fitness_health: 5,
-            social_habits: 4,
-            travel_frequency: 5
+            social_energy: 4,
+            travel_adventure: 5,
+            family_future: 4
           },
           vibe_song: {
             title: 'High Hopes',
