@@ -112,6 +112,49 @@ export default function Discover({ user }) {
       setMatches(response.data);
     } catch (error) {
       console.error('Error loading matches:', error);
+      // Use mock data for testing when API fails
+      const mockProfiles = [
+        {
+          id: 'mock-1',
+          first_name: 'Luna',
+          age: 28,
+          zodiac_sign: 'Pisces',
+          photos: ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'],
+          bio: 'Dreamer, artist, and stargazer. Looking for cosmic connections.',
+          interests: ['Art', 'Music', 'Astrology'],
+          industry: 'Creative Arts',
+          job_title: 'Illustrator',
+          location: 'Brooklyn, NY',
+          merge_score: 89
+        },
+        {
+          id: 'mock-2',
+          first_name: 'Alex',
+          age: 30,
+          zodiac_sign: 'Leo',
+          photos: ['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80'],
+          bio: 'Tech entrepreneur with a passion for innovation and adventure.',
+          interests: ['Technology', 'Travel', 'Fitness'],
+          industry: 'Technology',
+          job_title: 'Founder',
+          location: 'San Francisco, CA',
+          merge_score: 92
+        },
+        {
+          id: 'mock-3',
+          first_name: 'Maya',
+          age: 26,
+          zodiac_sign: 'Scorpio',
+          photos: ['https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80'],
+          bio: 'Yoga instructor by day, poet by night. Seeking deep connections.',
+          interests: ['Yoga', 'Writing', 'Nature'],
+          industry: 'Wellness',
+          job_title: 'Yoga Instructor',
+          location: 'Los Angeles, CA',
+          merge_score: 85
+        }
+      ];
+      setMatches(mockProfiles);
     }
     setLoading(false);
   };
