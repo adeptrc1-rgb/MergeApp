@@ -744,31 +744,39 @@ function SettingsModal({ user, onSave, onClose }) {
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Profile Display</h3>
             
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
-              <input
-                type="checkbox"
-                checked={showAge}
-                onChange={(e) => setShowAge(e.target.checked)}
-                className="w-5 h-5 accent-purple-500"
-              />
-              <div className="flex-1">
-                <div className="text-white text-sm font-medium">Show my age</div>
-                <div className="text-white/50 text-xs">Display your age to other users</div>
+            {/* Show my age - Premium */}
+            <div className="relative p-4 rounded-lg border border-white/10 bg-white/5 opacity-60">
+              <div className="flex items-center gap-3">
+                <Lock className="w-5 h-5 text-purple-400" />
+                <div className="flex-1">
+                  <div className="text-white text-sm font-medium flex items-center gap-2">
+                    Show my age
+                    <span className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-0.5 rounded-full font-bold">
+                      PREMIUM
+                    </span>
+                  </div>
+                  <div className="text-white/50 text-xs">Control age visibility with Premium</div>
+                </div>
               </div>
-            </label>
+              <div className="absolute inset-0 cursor-not-allowed"></div>
+            </div>
             
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
-              <input
-                type="checkbox"
-                checked={showDistance}
-                onChange={(e) => setShowDistance(e.target.checked)}
-                className="w-5 h-5 accent-purple-500"
-              />
-              <div className="flex-1">
-                <div className="text-white text-sm font-medium">Show my distance</div>
-                <div className="text-white/50 text-xs">Display distance from other users</div>
+            {/* Show my distance - Premium */}
+            <div className="relative p-4 rounded-lg border border-white/10 bg-white/5 opacity-60">
+              <div className="flex items-center gap-3">
+                <Lock className="w-5 h-5 text-purple-400" />
+                <div className="flex-1">
+                  <div className="text-white text-sm font-medium flex items-center gap-2">
+                    Show my distance
+                    <span className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-0.5 rounded-full font-bold">
+                      PREMIUM
+                    </span>
+                  </div>
+                  <div className="text-white/50 text-xs">Control distance visibility with Premium</div>
+                </div>
               </div>
-            </label>
+              <div className="absolute inset-0 cursor-not-allowed"></div>
+            </div>
           </div>
 
           {/* Messaging Controls */}
