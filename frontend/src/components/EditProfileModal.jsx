@@ -36,6 +36,10 @@ export default function EditProfileModal({ user, onSave, onClose }) {
   const [marijuana, setMarijuana] = useState(user.lifestyle?.marijuana || '');
   const [dietaryPreference, setDietaryPreference] = useState(user.lifestyle?.dietary_preference || '');
   const [socialMedia, setSocialMedia] = useState(user.lifestyle?.social_media || '');
+  
+  // Profile Display (premium features - not editable)
+  const [showAge] = useState(user.show_age !== false);
+  const [showDistance] = useState(user.show_distance !== false);
 
   const handleInterestInput = (e) => {
     const value = e.target.value;
