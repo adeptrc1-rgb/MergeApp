@@ -237,8 +237,9 @@ export default function Home({ user }) {
           lifestyle_factors: {
             occupation: 'Wellness',
             fitness_health: 5,
-            social_habits: 3,
-            travel_frequency: 3
+            social_energy: 3,
+            travel_adventure: 3,
+            family_future: 5
           },
           vibe_song: {
             title: 'Breathe Me',
