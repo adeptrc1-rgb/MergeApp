@@ -787,25 +787,33 @@ export default function Home({ user }) {
                   <div 
                     className={`custom-scrollbar transition-all duration-300 ease-in-out ${showDropdown ? 'opacity-100' : 'max-h-0 opacity-0'}`}
                     onWheel={(e) => {
-                      e.stopPropagation();
                       // Allow scrolling within this container
+                      e.stopPropagation();
+                    }}
+                    onTouchStart={(e) => {
+                      // Allow touch scrolling to start
+                      e.stopPropagation();
                     }}
                     onTouchMove={(e) => {
-                      e.stopPropagation();
                       // Allow touch scrolling
+                      e.stopPropagation();
                     }}
-                    onScroll={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => {
+                      // Prevent card drag when interacting with scroll area
+                      e.stopPropagation();
+                    }}
                     style={{
                       WebkitOverflowScrolling: 'touch',
                       overscrollBehavior: 'contain',
-                      overflowY: showDropdown ? 'auto' : 'hidden',
+                      overflowY: showDropdown ? 'scroll' : 'hidden',
                       overflowX: 'hidden',
-                      pointerEvents: 'auto',
+                      pointerEvents: showDropdown ? 'auto' : 'none',
                       scrollbarWidth: 'thin',
-                      scrollbarColor: 'rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.1)',
-                      height: showDropdown ? '450px' : '0px',
-                      maxHeight: showDropdown ? '55vh' : '0px',
-                      touchAction: 'pan-y'
+                      scrollbarColor: 'rgba(139, 92, 246, 0.6) rgba(255, 255, 255, 0.1)',
+                      height: showDropdown ? '500px' : '0px',
+                      maxHeight: '60vh',
+                      touchAction: 'pan-y',
+                      cursor: 'default'
                     }}
                   >
                     <div className="space-y-0 pt-2 pb-12">
