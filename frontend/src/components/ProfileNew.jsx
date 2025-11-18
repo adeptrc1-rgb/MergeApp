@@ -626,6 +626,13 @@ function SettingsModal({ user, onSave, onClose }) {
   const [photoVerifiedChat, setPhotoVerifiedChat] = useState(user.photo_verified_chat || false);
   const [readReceipts, setReadReceipts] = useState(user.read_receipts !== false);
   const [showOnMerge, setShowOnMerge] = useState(user.show_on_merge !== false);
+  
+  // New preference states
+  const [ageMin, setAgeMin] = useState(user.age_preference_min || 18);
+  const [ageMax, setAgeMax] = useState(user.age_preference_max || 99);
+  const [maxDistance, setMaxDistance] = useState(user.max_distance || 50);
+  const [showMeMode, setShowMeMode] = useState(user.show_me_mode || 'balanced');
+  
   const [saving, setSaving] = useState(false);
 
   const handleSave = async () => {
