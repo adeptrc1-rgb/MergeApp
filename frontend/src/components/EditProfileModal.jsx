@@ -327,49 +327,6 @@ export default function EditProfileModal({ user, onSave, onClose }) {
               </button>
             </div>
 
-            {/* Discovery Settings */}
-            <div className="space-y-3">
-              <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Privacy & Discovery</h3>
-              
-              <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-white/5 transition-all">
-                <input
-                  type="checkbox"
-                  checked={showAge}
-                  onChange={(e) => setShowAge(e.target.checked)}
-                  className="w-5 h-5 accent-purple-500"
-                />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Show my age</div>
-                  <div className="text-white/50 text-xs">Display your age to other users</div>
-                </div>
-              </label>
-              
-              <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-white/5 transition-all">
-                <input
-                  type="checkbox"
-                  checked={showDistance}
-                  onChange={(e) => setShowDistance(e.target.checked)}
-                  className="w-5 h-5 accent-purple-500"
-                />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Show my distance</div>
-                  <div className="text-white/50 text-xs">Display distance from other users</div>
-                </div>
-              </label>
-              
-              <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-white/5 transition-all">
-                <input
-                  type="checkbox"
-                  checked={discoveryEnabled}
-                  onChange={(e) => setDiscoveryEnabled(e.target.checked)}
-                  className="w-5 h-5 accent-purple-500"
-                />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Enable discovery</div>
-                  <div className="text-white/50 text-xs">Allow others to find your profile</div>
-                </div>
-              </label>
-            </div>
           </div>
 
           {/* Footer */}
