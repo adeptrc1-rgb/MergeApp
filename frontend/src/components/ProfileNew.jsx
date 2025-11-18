@@ -645,7 +645,11 @@ function SettingsModal({ user, onSave, onClose }) {
         visibility_mode: visibilityMode,
         photo_verified_chat: photoVerifiedChat,
         read_receipts: readReceipts,
-        show_on_merge: showOnMerge
+        show_on_merge: showOnMerge,
+        age_preference_min: ageMin,
+        age_preference_max: ageMax,
+        max_distance: maxDistance,
+        show_me_mode: showMeMode
       });
       onClose();
     } catch (error) {
