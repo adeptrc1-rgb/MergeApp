@@ -786,15 +786,23 @@ export default function Home({ user }) {
                   {/* Expandable Dropdown Content */}
                   <div 
                     className={`custom-scrollbar transition-all duration-300 ease-in-out ${showDropdown ? 'max-h-[60vh] opacity-100' : 'max-h-0 opacity-0'}`}
-                    onWheel={(e) => e.stopPropagation()}
-                    onTouchMove={(e) => e.stopPropagation()}
+                    onWheel={(e) => {
+                      e.stopPropagation();
+                      // Allow scrolling within this container
+                    }}
+                    onTouchMove={(e) => {
+                      e.stopPropagation();
+                      // Allow touch scrolling
+                    }}
                     onScroll={(e) => e.stopPropagation()}
                     style={{
                       WebkitOverflowScrolling: 'touch',
                       overscrollBehavior: 'contain',
-                      overflowY: showDropdown ? 'auto' : 'hidden',
+                      overflowY: showDropdown ? 'scroll' : 'hidden',
                       overflowX: 'hidden',
-                      pointerEvents: 'auto'
+                      pointerEvents: 'auto',
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: 'rgba(255, 255, 255, 0.3) transparent'
                     }}
                   >
                     <div className="space-y-0 pt-2 pb-12">
