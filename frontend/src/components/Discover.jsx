@@ -213,7 +213,12 @@ export default function Discover({ user }) {
       <div className="border-b border-white/10 bg-black flex-shrink-0 select-none" style={{ WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
         <div className="max-w-4xl mx-auto px-4 py-2">
           <div className="flex items-center justify-between mb-2">
-            <img src="/asign-logo.png" alt="A Sign" className="h-8" />
+            <img 
+              src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/z39ztw1i_122fed07-08be-4993-9208-7eed705ccacb.png" 
+              alt="Merge" 
+              className="h-10 w-auto"
+              style={{ objectFit: 'contain' }}
+            />
             <div className="flex items-center gap-2">
               {/* Dev Season Toggle */}
               {(() => {
