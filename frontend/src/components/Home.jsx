@@ -196,12 +196,21 @@ export default function Home({ user }) {
           age: 30,
           zodiac_sign: 'Leo',
           photos: ['https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80'],
-          bio: 'Tech entrepreneur with a passion for innovation and adventure.',
-          interests: ['Technology', 'Travel', 'Fitness', 'Coffee'],
+          bio: 'Tech entrepreneur with a passion for innovation and adventure. Building products that make a difference. Always up for trying new restaurants and exploring hidden gems.',
+          interests: ['Technology', 'Travel', 'Fitness', 'Coffee', 'Hiking', 'Startups'],
           industry: 'Technology',
           job_title: 'Founder',
           location: 'San Francisco, CA',
           compatibility_score: 92,
+          current_location: { city: 'San Francisco, CA' },
+          education: { college: 'Stanford University' },
+          deal_breakers: { relationship_goals: 'serious_dating' },
+          lifestyle_factors: {
+            occupation: 'Technology',
+            fitness_health: 5,
+            social_habits: 4,
+            travel_frequency: 5
+          },
           vibe_song: {
             title: 'High Hopes',
             artist: 'Panic! At The Disco',
