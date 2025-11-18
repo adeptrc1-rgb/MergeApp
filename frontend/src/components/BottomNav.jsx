@@ -1,11 +1,11 @@
 import React from 'react';
 import { Network, MessageSquare, User } from 'lucide-react';
 
-// Custom Merge Logo Icon Component
-const MergeIcon = ({ style }) => (
+// Custom Home Icon Component (Flame)
+const HomeIcon = ({ style }) => (
   <img 
-    src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/gii12w2i_IMG_4408.jpeg"
-    alt="Merge"
+    src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/k7bsh7b6_IMG_4419.jpeg"
+    alt="Home"
     style={{
       ...style,
       objectFit: 'contain'
