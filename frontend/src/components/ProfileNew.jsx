@@ -673,47 +673,139 @@ function SettingsModal({ user, onSave, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-1">
-          <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium mb-4">Privacy & Discovery</h3>
-          
-          <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
-            <input
-              type="checkbox"
-              checked={showAge}
-              onChange={(e) => setShowAge(e.target.checked)}
-              className="w-5 h-5 accent-purple-500"
-            />
-            <div className="flex-1">
-              <div className="text-white text-sm font-medium">Show my age</div>
-              <div className="text-white/50 text-xs">Display your age to other users</div>
+        <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+          {/* Control My Visibility */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control My Visibility</h3>
+            
+            <div className="space-y-2">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+                <input
+                  type="radio"
+                  name="visibility"
+                  checked={visibilityMode === 'standard'}
+                  onChange={() => setVisibilityMode('standard')}
+                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                />
+                <div className="flex-1">
+                  <div className="text-white text-sm font-medium">Standard</div>
+                  <div className="text-white/50 text-xs">Discoverable in card stack</div>
+                </div>
+              </label>
+              
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+                <input
+                  type="radio"
+                  name="visibility"
+                  checked={visibilityMode === 'incognito'}
+                  onChange={() => setVisibilityMode('incognito')}
+                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                />
+                <div className="flex-1">
+                  <div className="text-white text-sm font-medium">Incognito</div>
+                  <div className="text-white/50 text-xs">Discoverable only by people you Like</div>
+                </div>
+              </label>
             </div>
-          </label>
-          
-          <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
-            <input
-              type="checkbox"
-              checked={showDistance}
-              onChange={(e) => setShowDistance(e.target.checked)}
-              className="w-5 h-5 accent-purple-500"
-            />
-            <div className="flex-1">
-              <div className="text-white text-sm font-medium">Show my distance</div>
-              <div className="text-white/50 text-xs">Display distance from other users</div>
-            </div>
-          </label>
-          
-          <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
-            <input
-              type="checkbox"
-              checked={discoveryEnabled}
-              onChange={(e) => setDiscoveryEnabled(e.target.checked)}
-              className="w-5 h-5 accent-purple-500"
-            />
-            <div className="flex-1">
-              <div className="text-white text-sm font-medium">Enable discovery</div>
-              <div className="text-white/50 text-xs">Allow others to find your profile</div>
-            </div>
-          </label>
+          </div>
+
+          {/* Discovery Settings */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Discovery</h3>
+            
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+              <input
+                type="checkbox"
+                checked={discoveryEnabled}
+                onChange={(e) => setDiscoveryEnabled(e.target.checked)}
+                className="w-5 h-5 accent-purple-500"
+              />
+              <div className="flex-1">
+                <div className="text-white text-sm font-medium">Enable Discovery</div>
+                <div className="text-white/50 text-xs">Allow others to find your profile</div>
+              </div>
+            </label>
+
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+              <input
+                type="checkbox"
+                checked={showOnMerge}
+                onChange={(e) => setShowOnMerge(e.target.checked)}
+                className="w-5 h-5 accent-purple-500"
+              />
+              <div className="flex-1">
+                <div className="text-white text-sm font-medium">Show me on Merge</div>
+                <div className="text-white/50 text-xs">Control if your profile appears in the stack</div>
+              </div>
+            </label>
+          </div>
+
+          {/* Profile Display */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Profile Display</h3>
+            
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+              <input
+                type="checkbox"
+                checked={showAge}
+                onChange={(e) => setShowAge(e.target.checked)}
+                className="w-5 h-5 accent-purple-500"
+              />
+              <div className="flex-1">
+                <div className="text-white text-sm font-medium">Show my age</div>
+                <div className="text-white/50 text-xs">Display your age to other users</div>
+              </div>
+            </label>
+            
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+              <input
+                type="checkbox"
+                checked={showDistance}
+                onChange={(e) => setShowDistance(e.target.checked)}
+                className="w-5 h-5 accent-purple-500"
+              />
+              <div className="flex-1">
+                <div className="text-white text-sm font-medium">Show my distance</div>
+                <div className="text-white/50 text-xs">Display distance from other users</div>
+              </div>
+            </label>
+          </div>
+
+          {/* Messaging Controls */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control Who Messages You</h3>
+            
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+              <input
+                type="checkbox"
+                checked={photoVerifiedChat}
+                onChange={(e) => setPhotoVerifiedChat(e.target.checked)}
+                className="w-5 h-5 accent-purple-500"
+              />
+              <div className="flex-1">
+                <div className="text-white text-sm font-medium">Photo Verified Chat</div>
+                <div className="text-white/50 text-xs">Only receive messages from photo verified members</div>
+              </div>
+            </label>
+          </div>
+
+          {/* Chat Settings */}
+          <div className="space-y-3">
+            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Chat Settings</h3>
+            
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+              <input
+                type="checkbox"
+                checked={readReceipts}
+                onChange={(e) => setReadReceipts(e.target.checked)}
+                className="w-5 h-5 accent-purple-500"
+              />
+              <div className="flex-1">
+                <div className="text-white text-sm font-medium">Read Receipts</div>
+                <div className="text-white/50 text-xs">Let matches know when you've read their messages</div>
+              </div>
+            </label>
+          </div>
         </div>
 
         {/* Footer */}
