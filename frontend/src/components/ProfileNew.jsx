@@ -202,9 +202,15 @@ export default function Profile({ user, logout }) {
       `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
-        {/* Logo */}
+        {/* Logo & Settings */}
         <div className="flex items-center justify-between mb-6">
           <MergeLogo size="md" color="#FFFFFF" />
+          <button
+            onClick={() => setShowSettings(true)}
+            className="p-2 hover:bg-white/10 rounded-full transition-all"
+          >
+            <Settings className="w-6 h-6 text-white/70 hover:text-white" />
+          </button>
         </div>
 
         {/* Profile Header */}
