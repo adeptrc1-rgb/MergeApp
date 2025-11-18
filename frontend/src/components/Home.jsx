@@ -223,12 +223,21 @@ export default function Home({ user }) {
           age: 26,
           zodiac_sign: 'Scorpio',
           photos: ['https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80'],
-          bio: 'Yoga instructor by day, poet by night. Seeking deep connections.',
-          interests: ['Yoga', 'Writing', 'Nature', 'Meditation'],
+          bio: 'Yoga instructor by day, poet by night. Seeking deep connections and authentic conversations. I believe in mindfulness, growth, and living with intention.',
+          interests: ['Yoga', 'Writing', 'Nature', 'Meditation', 'Poetry', 'Wellness'],
           industry: 'Wellness',
           job_title: 'Yoga Instructor',
           location: 'Los Angeles, CA',
           compatibility_score: 85,
+          current_location: { city: 'Los Angeles, CA' },
+          education: { school: 'Yoga Alliance Certified' },
+          deal_breakers: { relationship_goals: 'long_term_partner' },
+          lifestyle_factors: {
+            occupation: 'Wellness',
+            fitness_health: 5,
+            social_habits: 3,
+            travel_frequency: 3
+          },
           vibe_song: {
             title: 'Breathe Me',
             artist: 'Sia',
