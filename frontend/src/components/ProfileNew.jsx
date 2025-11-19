@@ -339,12 +339,11 @@ export default function Profile({ user, logout }) {
                 className="w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between transition-all group"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-                    <Zap className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
+                    <span className="text-2xl">⚡</span>
                   </div>
                   <div className="text-left">
-                    <h4 className="text-white font-medium mb-0.5">Boost</h4>
-                    <p className="text-white/60 text-sm">Get seen by 11x more people</p>
+                    <h4 className="text-white font-medium mb-0.5">Get seen by 11x more people</h4>
                   </div>
                 </div>
                 <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all" />
@@ -355,12 +354,11 @@ export default function Profile({ user, logout }) {
                 className="w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between transition-all group"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)' }}>
+                    <span className="text-2xl">💫</span>
                   </div>
                   <div className="text-left">
-                    <h4 className="text-white font-medium mb-0.5">Super Likes</h4>
-                    <p className="text-white/60 text-sm">2x as likely to lead to a match</p>
+                    <h4 className="text-white font-medium mb-0.5">2x as likely to lead to a match</h4>
                   </div>
                 </div>
                 <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all" />
@@ -371,17 +369,16 @@ export default function Profile({ user, logout }) {
                 className="w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between transition-all group"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
-                    <Sparkles className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)' }}>
+                    <span className="text-2xl">🔮</span>
                   </div>
                   <div className="text-left">
-                    <h4 className="text-white font-medium mb-0.5">Aura Lab</h4>
-                    <p className="text-white/60 text-sm">Browse enhancements & customizations</p>
+                    <h4 className="text-white font-medium mb-0.5">Browse enhancements & customizations</h4>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="bg-white/10 px-3 py-1 rounded-full flex items-center gap-1.5">
-                    <Coins className="w-3.5 h-3.5 text-yellow-400" />
+                    <span className="text-lg">⭐</span>
                     <span className="text-white text-sm font-medium">{user.star_coins || 0}</span>
                   </div>
                   <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all" />
