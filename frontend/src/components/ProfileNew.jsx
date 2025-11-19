@@ -409,6 +409,59 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
+        {/* Quick Action Blocks */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          {/* Super Liked Block */}
+          <button
+            onClick={() => navigate('/store')}
+            className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)' }}>
+                <Heart className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-2xl font-semibold text-white mb-1">0</div>
+              <div className="text-xs text-white/50 mb-2">Super Liked</div>
+              <div className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+                GET MORE
+              </div>
+            </div>
+          </button>
+
+          {/* Merge Pulse Block */}
+          <button
+            onClick={() => navigate('/store')}
+            className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
+                <Zap className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-sm font-medium text-white mb-1">Merge</div>
+              <div className="text-xs text-white/50 mb-2">Pulse</div>
+              <div className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+                GET MORE
+              </div>
+            </div>
+          </button>
+
+          {/* Auras Block */}
+          <button
+            onClick={() => navigate('/store')}
+            className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)' }}>
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-sm font-medium text-white mb-3">Auras</div>
+              <div className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+                EXPLORE
+              </div>
+            </div>
+          </button>
+        </div>
+
         {/* Merge Features - Sophisticated Treatment */}
         <div className="space-y-2 mb-6">
           {/* Merge Wheel */}
