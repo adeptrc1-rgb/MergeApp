@@ -519,20 +519,6 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Premium Upsell - Discreet */}
-        <div className="bg-[#0A0A0A] rounded-xl p-5 border border-white/10 mb-6">
-          <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-3">
-            Merge Premium
-          </div>
-          <h4 className="text-white font-medium mb-2">Enhanced Experience</h4>
-          <p className="text-white/60 text-sm mb-4">
-            Unlimited likes, advanced filters, and profile analytics
-          </p>
-          <button className="w-full py-2.5 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg text-white text-sm font-medium transition-all">
-            Learn More
-          </button>
-        </div>
-
         {/* Account Actions */}
         <div className="space-y-2">
           <button
