@@ -410,19 +410,19 @@ export default function Profile({ user, logout }) {
         </div>
 
         {/* Quick Action Blocks */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="grid grid-cols-3 gap-2 mb-3">
           {/* Super Liked Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)' }}>
-                <Heart className="w-6 h-6 text-white" />
+              <div className="w-8 h-8 rounded-full flex items-center justify-center mb-2" style={{ background: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)' }}>
+                <Heart className="w-4 h-4 text-white" />
               </div>
-              <div className="text-2xl font-semibold text-white mb-1">0</div>
-              <div className="text-xs text-white/50 mb-2">Super Liked</div>
-              <div className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+              <div className="text-lg font-semibold text-white mb-0.5">0</div>
+              <div className="text-[10px] text-white/50 mb-1.5">Super Liked</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
                 GET MORE
               </div>
             </div>
@@ -431,15 +431,15 @@ export default function Profile({ user, logout }) {
           {/* Merge Pulse Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
-                <Zap className="w-6 h-6 text-white" />
+              <div className="w-8 h-8 rounded-full flex items-center justify-center mb-2" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
+                <Zap className="w-4 h-4 text-white" />
               </div>
-              <div className="text-sm font-medium text-white mb-1">Merge</div>
-              <div className="text-xs text-white/50 mb-2">Pulse</div>
-              <div className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+              <div className="text-xs font-medium text-white mb-0.5">Merge</div>
+              <div className="text-[10px] text-white/50 mb-1.5">Pulse</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
                 GET MORE
               </div>
             </div>
@@ -448,17 +448,31 @@ export default function Profile({ user, logout }) {
           {/* Auras Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)' }}>
-                <Sparkles className="w-6 h-6 text-white" />
+              <div className="w-8 h-8 rounded-full flex items-center justify-center mb-2" style={{ background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)' }}>
+                <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <div className="text-sm font-medium text-white mb-3">Auras</div>
-              <div className="text-xs font-medium px-3 py-1 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+              <div className="text-xs font-medium text-white mb-2">Auras</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
                 EXPLORE
               </div>
             </div>
+          </button>
+        </div>
+
+        {/* Premium Upsell - Discreet */}
+        <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 mb-6">
+          <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-2">
+            Merge Premium
+          </div>
+          <h4 className="text-white font-medium text-sm mb-1">Enhanced Experience</h4>
+          <p className="text-white/60 text-xs mb-3">
+            Unlimited likes, advanced filters, and profile analytics
+          </p>
+          <button className="w-full py-2 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg text-white text-xs font-medium transition-all">
+            Learn More
           </button>
         </div>
 
