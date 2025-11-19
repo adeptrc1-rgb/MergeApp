@@ -544,22 +544,96 @@ export default function Profile({ user, logout }) {
           </button>
 
           <div className="bg-[#0A0A0A] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
-            <>
-              <div className="rounded-2xl p-6 border relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)', borderColor: 'rgba(108, 99, 255, 0.3)' }}>
-                <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(108, 99, 255, 0.2)' }} />
-                <div className="relative z-10">
-                  <div className="text-4xl mb-4">✨</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    Here's what comes with your subscription
-                  </h3>
-                  <p className="text-white/70 text-sm mb-4">
-                    Unlock unlimited potential and stand out from the crowd
-                  </p>
-                  <button className="px-6 py-2 bg-white text-black rounded-full font-medium hover:scale-105 transition-transform">
-                    Check it out
-                  </button>
-                </div>
+            <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
+              <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
+              Your Rewards
+            </h3>
+            
+            {/* Empty State */}
+            {!user.profile_boosts && !user.super_likes && !user.direct_messages && !user.star_coins ? (
+              <div className="text-center py-8">
+                <div className="text-5xl mb-3">🎁</div>
+                <h4 className="text-white font-medium mb-2">No active rewards</h4>
+                <p className="text-white/60 text-sm mb-4">Use the Merge Wheel to earn boosts and Super Likes</p>
+                <button 
+                  onClick={() => setShowConnectionMatrix(true)}
+                  className="px-6 py-2 text-white rounded-full font-medium transition-all hover:scale-105"
+                  style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}
+                >
+                  Spin Now
+                </button>
               </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="text-2xl mb-2" style={{ color: '#6C63FF' }}>⚡</div>
+                <div className="text-2xl font-light text-white">{user.profile_boosts || 0}</div>
+                <div className="text-xs text-white/50">Boosts</div>
+                {timeRemaining.boosts && (
+                  <div className="flex items-center gap-1 text-xs mt-1" style={{ color: '#FFE66D' }}>
+                    <Clock className="w-3 h-3" />
+                    <span>{timeRemaining.boosts}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="text-2xl mb-2" style={{ color: '#4ECDC4' }}>💫</div>
+                <div className="text-2xl font-light text-white">{user.super_likes || 0}</div>
+                <div className="text-xs text-white/50">Super Likes</div>
+                {timeRemaining.super_likes && (
+                  <div className="flex items-center gap-1 text-xs mt-1" style={{ color: '#FFE66D' }}>
+                    <Clock className="w-3 h-3" />
+                    <span>{timeRemaining.super_likes}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="text-2xl mb-2" style={{ color: '#667EEA' }}>💬</div>
+                <div className="text-2xl font-light text-white">{user.direct_messages || 0}</div>
+                <div className="text-xs text-white/50">DMs</div>
+                {timeRemaining.dms && (
+                  <div className="flex items-center gap-1 text-xs mt-1" style={{ color: '#FFE66D' }}>
+                    <Clock className="w-3 h-3" />
+                    <span>{timeRemaining.dms}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <div className="text-2xl mb-2" style={{ color: '#FFD700' }}>⭐</div>
+                <div className="text-2xl font-light text-white">{user.star_coins || 0}</div>
+                <div className="text-xs text-white/50">Star Coins</div>
+              </div>
+              </div>
+            )}
+          </div>
+
+          <div className="bg-[#0A0A0A] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
+            <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
+              <Trophy className="w-5 h-5" style={{ color: '#FFD700' }} />
+              Your Stats
+            </h3>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center py-2 border-b border-white/5">
+                <span className="text-white/60 text-sm">Total Matches</span>
+                <span className="text-white text-lg font-light">{user.total_matches || 0}</span>
+              </div>
+              <div className="flex justify-between items-center py-2">
+                <span className="text-white/60 text-sm">Profile Completion</span>
+                <span className="text-white text-lg font-light">{profileCompletion}%</span>
+              </div>
+            </div>
+          </div>
+
+          <button 
+            onClick={logout} 
+            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
+          >
+            <LogOut className="w-5 h-5" />
+            <span>Logout</span>
+          </button>
 
               <button
                 onClick={() => navigate('/store')}
