@@ -201,6 +201,88 @@ export default function Profile({ user, logout }) {
           display: none;
         }
 
+        /* Circuit Background Animation */
+        @keyframes circuitFlow {
+          0% { background-position: 0 0; }
+          100% { background-position: 50px 50px; }
+        }
+
+        .circuit-background {
+          position: absolute;
+          inset: 0;
+          background: 
+            linear-gradient(90deg, transparent 50%, rgba(46, 134, 171, 0.03) 50%),
+            linear-gradient(transparent 50%, rgba(108, 99, 255, 0.03) 50%);
+          background-size: 50px 50px;
+          animation: circuitFlow 20s linear infinite;
+          pointer-events: none;
+        }
+
+        /* Neural Ring Animation */
+        @keyframes neuralPulse {
+          0%, 100% { 
+            transform: scale(1);
+            opacity: 0.6;
+          }
+          50% { 
+            transform: scale(1.1);
+            opacity: 1;
+          }
+        }
+
+        .neural-ring {
+          animation: neuralPulse 3s ease-in-out infinite;
+        }
+
+        /* Status Pulse */
+        @keyframes statusPulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+
+        .status-pulse {
+          animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        /* Glow Pulse */
+        @keyframes glowPulse {
+          0%, 100% { 
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+          }
+          50% { 
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+          }
+        }
+
+        /* Quantum Button Shimmer */
+        @keyframes shimmer {
+          0% { left: -100%; }
+          100% { left: 100%; }
+        }
+
+        .quantum-shimmer::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+          animation: shimmer 3s infinite;
+        }
+
+        /* Energy Wave Animation */
+        @keyframes energyWave {
+          0% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          100% {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+
         /* Micro-interactions & Animations */
         .feature-card-enhanced {
           transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
