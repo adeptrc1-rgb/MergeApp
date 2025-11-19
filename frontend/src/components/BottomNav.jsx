@@ -48,21 +48,37 @@ export default function BottomNav({ currentTab, navigate }) {
             <button
               key={id}
               onClick={() => navigate(path)}
-              className="flex flex-col items-center transition-all"
+              className="flex flex-col items-center transition-all duration-300 ease-out"
               style={{
                 minWidth: '64px',
-                padding: '8px',
-                borderRadius: '12px',
-                backgroundColor: isActive ? 'rgba(255, 255, 255, 0.05)' : 'transparent'
+                padding: '10px',
+                borderRadius: '16px',
+                backgroundColor: isActive ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                transform: isActive ? 'scale(1.05)' : 'scale(1)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
+                  e.currentTarget.style.transform = 'scale(1.02)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }
               }}
             >
               <Icon 
-                className="transition-all" 
+                className="transition-all duration-300" 
                 style={{ 
-                  width: '22px',
-                  height: '22px',
-                  color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)',
-                  strokeWidth: isActive ? 2 : 1.5
+                  width: '24px',
+                  height: '24px',
+                  color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.4)',
+                  strokeWidth: isActive ? 2 : 1.5,
+                  filter: isActive ? 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))' : 'none',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                 }} 
               />
             </button>
