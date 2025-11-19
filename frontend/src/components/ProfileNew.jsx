@@ -455,22 +455,24 @@ export default function Profile({ user, logout }) {
             <>
               <button
                 onClick={() => setShowConnectionMatrix(true)}
-                className="w-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 border border-blue-400/30 rounded-2xl p-6 transition-all group relative overflow-hidden"
+                className="w-full rounded-2xl p-6 transition-all group relative overflow-hidden border"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.2) 0%, rgba(102, 126, 234, 0.2) 100%)',
+                  borderColor: 'rgba(108, 99, 255, 0.3)'
+                }}
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl" />
+                <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(108, 99, 255, 0.2)' }} />
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                        <Zap className="w-6 h-6 text-white" />
-                      </div>
+                      <span className="text-3xl">🎯</span>
                       <div className="text-left">
                         <h3 className="text-lg font-semibold text-white">Merge Wheel</h3>
                         <p className="text-white/60 text-sm">Daily rewards & bonuses</p>
                       </div>
                     </div>
                     {canSpin && (
-                      <div className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xs px-3 py-1.5 rounded-full font-bold">
+                      <div className="text-white text-xs px-3 py-1.5 rounded-full font-bold" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
                         READY
                       </div>
                     )}
@@ -478,7 +480,7 @@ export default function Profile({ user, logout }) {
                   
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-cyan-300/80 font-mono">Progress</span>
+                      <span className="text-white/60 font-mono">Progress</span>
                       <span className="text-white font-bold">{Math.round(cooldownProgress)}%</span>
                     </div>
                     
@@ -487,7 +489,7 @@ export default function Profile({ user, logout }) {
                         className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
                         style={{ 
                           width: `${cooldownProgress}%`,
-                          background: 'linear-gradient(90deg, #3B82F6 0%, #06B6D4 100%)'
+                          background: 'linear-gradient(90deg, #6C63FF 0%, #667EEA 100%)'
                         }}
                       />
                     </div>
@@ -495,7 +497,7 @@ export default function Profile({ user, logout }) {
                     {!canSpin && wheelStatus && (
                       <div className="flex items-center justify-between text-xs pt-1">
                         <span className="text-white/50">Next spin</span>
-                        <span className="text-cyan-400 font-bold">{cooldownCountdown}</span>
+                        <span className="font-bold" style={{ color: '#6C63FF' }}>{cooldownCountdown}</span>
                       </div>
                     )}
                   </div>
