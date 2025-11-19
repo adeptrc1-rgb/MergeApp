@@ -508,6 +508,40 @@ export default function Profile({ user, logout }) {
           <p className="text-white/60 text-xs">Complete your profile to unlock matrix features ({profileCompletion}% complete)</p>
         </div>
 
+        {/* Tab Navigation */}
+        <div className="flex items-center justify-center gap-8 border-b border-white/10 pb-2 mb-6">
+          <button
+            onClick={() => setActiveTab('get-more')}
+            className={`text-sm font-medium transition-all pb-2 ${
+              activeTab === 'get-more'
+                ? 'text-white border-b-2 border-white'
+                : 'text-white/50 hover:text-white/70'
+            }`}
+          >
+            Rewards
+          </button>
+          <button
+            onClick={() => setActiveTab('safety')}
+            className={`text-sm font-medium transition-all pb-2 ${
+              activeTab === 'safety'
+                ? 'text-white border-b-2 border-white'
+                : 'text-white/50 hover:text-white/70'
+            }`}
+          >
+            Safety
+          </button>
+          <button
+            onClick={() => setActiveTab('my-merge')}
+            className={`text-sm font-medium transition-all pb-2 ${
+              activeTab === 'my-merge'
+                ? 'text-white border-b-2 border-white'
+                : 'text-white/50 hover:text-white/70'
+            }`}
+          >
+            Account
+          </button>
+        </div>
+
         {/* Tab Content */}
         <div className="space-y-4">
           
