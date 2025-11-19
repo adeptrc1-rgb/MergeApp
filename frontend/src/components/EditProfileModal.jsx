@@ -321,11 +321,11 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   console.log('[EDIT PROFILE] Music connect clicked');
                   alert('Music selection requires backend connection. Available after full authentication.');
                 }}
-                className="w-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 border border-purple-400/30 rounded-xl p-4 flex items-center justify-between group transition-all"
+                className="w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-4 flex items-center justify-between group transition-all"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
-                    <Music className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-white/10 border border-white/20">
+                    <Music className="w-6 h-6" style={{ color: '#4ECDC4' }} />
                   </div>
                   <div className="text-left">
                     <div className="text-white font-medium">Vibe Song</div>
