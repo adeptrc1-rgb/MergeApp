@@ -344,158 +344,86 @@ export default function Profile({ user, logout }) {
       `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
-        {/* Logo & Settings */}
+        {/* Top Bar */}
         <div className="flex items-center justify-between mb-6">
           <MergeLogo size="md" color="#FFFFFF" />
           <button
             onClick={() => setShowSettings(true)}
             className="p-2 hover:bg-white/10 rounded-full transition-all"
           >
-            <Settings className="w-6 h-6 text-white/70 hover:text-white" />
+            <span className="text-xl">⚙️</span>
           </button>
         </div>
 
-        {/* Profile Header */}
-        <div className="flex flex-col items-center mb-4">
-          <div className="relative mb-4">
-            <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
-              <circle
-                cx="60"
-                cy="60"
-                r="54"
-                fill="none"
-                stroke="rgba(255, 255, 255, 0.1)"
-                strokeWidth="4"
-              />
-              <circle
-                cx="60"
-                cy="60"
-                r="54"
-                fill="none"
-                stroke="url(#gradient)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeDasharray={`${2 * Math.PI * 54}`}
-                strokeDashoffset={`${2 * Math.PI * 54 * (1 - profileCompletion / 100)}`}
-                style={{ transition: 'stroke-dashoffset 0.5s ease' }}
-              />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#a855f7" />
-                  <stop offset="100%" stopColor="#ec4899" />
-                </linearGradient>
-              </defs>
-            </svg>
-            
+        {/* Profile Card (Tinder-style) */}
+        <div className="relative rounded-3xl overflow-hidden mb-6 feature-card-enhanced">
+          {/* Profile Image */}
+          <div className="relative h-96">
             <div
-              className="absolute inset-0 m-2 rounded-full bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ 
-                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #a78bfa 0%, #ec4899 100%)',
-                border: '2px solid #000000'
+                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)'
               }}
             >
               {!user.photos?.[0] && (
-                <div className="w-full h-full flex items-center justify-center text-white text-3xl font-light">
+                <div className="w-full h-full flex items-center justify-center text-white text-6xl font-light">
                   {user.first_name?.[0] || 'U'}
                 </div>
               )}
             </div>
-          </div>
-
-          <div className="text-center mb-2">
-            <h1 className="text-2xl font-semibold text-white flex items-center justify-center gap-2">
-              {user.first_name}
-              <Check className="w-5 h-5 text-blue-400" />
-            </h1>
-          </div>
-
-          {/* Smart Progress Indicator */}
-          <div className="w-full max-w-sm mb-4">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-premium">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-white text-sm font-medium">Complete your profile</h4>
-                <span className="text-white/80 text-sm font-semibold">{profileCompletion}%</span>
+            
+            {/* Photo Count Badge */}
+            {user.photos && user.photos.length > 1 && (
+              <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-sm font-medium">
+                +{user.photos.length - 1}
               </div>
-              
-              <div className="space-y-2">
-                <div className="completion-step flex items-center gap-2 text-xs">
-                  <span className={user.photos && user.photos.length > 0 ? 'text-[#4ECDC4]' : 'text-white/40'}>
-                    {user.photos && user.photos.length > 0 ? '✓' : '○'}
-                  </span>
-                  <span className={user.photos && user.photos.length > 0 ? 'text-white/80 line-through' : 'text-white/60'}>
-                    Add 3+ photos
-                  </span>
-                </div>
-                
-                <div className="completion-step flex items-center gap-2 text-xs">
-                  <span className={user.bio ? 'text-[#4ECDC4]' : 'text-white/40'}>
-                    {user.bio ? '✓' : '○'}
-                  </span>
-                  <span className={user.bio ? 'text-white/80 line-through' : 'text-white/60'}>
-                    Write your bio
-                  </span>
-                </div>
-                
-                <div className="completion-step flex items-center gap-2 text-xs">
-                  <span className={user.interests && user.interests.length > 0 ? 'text-[#4ECDC4]' : 'text-white/40'}>
-                    {user.interests && user.interests.length > 0 ? '✓' : '○'}
-                  </span>
-                  <span className={user.interests && user.interests.length > 0 ? 'text-white/80 line-through' : 'text-white/60'}>
-                    Add interests
-                  </span>
-                </div>
-                
-                <div className="completion-step flex items-center gap-2 text-xs">
-                  <span className={user.vibe_song ? 'text-[#4ECDC4]' : 'text-white/40'}>
-                    {user.vibe_song ? '✓' : '○'}
-                  </span>
-                  <span className={user.vibe_song ? 'text-white/80 line-through' : 'text-white/60'}>
-                    Add your vibe
-                  </span>
+            )}
+            
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            
+            {/* Profile Info */}
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <div className="flex items-end justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h1 className="text-3xl font-semibold text-white">
+                      {user.first_name}{age ? `, ${age}` : ''}
+                    </h1>
+                    <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#4ECDC4' }}>
+                      <span className="text-white text-sm font-bold">✓</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 text-white/80 text-sm">
+                    <span className="flex items-center gap-1">
+                      📍 {user.location || '5 miles away'}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      🟢 Recently active
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <button
-            onClick={() => setShowEditProfile(true)}
-            className="px-8 py-2.5 bg-white/10 hover:bg-white/15 text-white rounded-full font-medium transition-all border border-white/20 hover:scale-105"
-          >
-            Edit Profile
-          </button>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex items-center justify-center gap-8 border-b border-white/10 pb-2 mb-6">
+        {/* Action Buttons */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
           <button
-            onClick={() => setActiveTab('get-more')}
-            className={`text-sm font-medium transition-all pb-2 ${
-              activeTab === 'get-more'
-                ? 'text-white border-b-2 border-white'
-                : 'text-white/50 hover:text-white/70'
-            }`}
+            onClick={() => setShowEditProfile(true)}
+            className="py-3 px-4 rounded-2xl font-medium text-white transition-all hover:scale-105 feature-card-enhanced"
+            style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}
           >
-            Get More
+            <span className="mr-2">✏️</span>
+            Edit Profile
           </button>
           <button
-            onClick={() => setActiveTab('safety')}
-            className={`text-sm font-medium transition-all pb-2 ${
-              activeTab === 'safety'
-                ? 'text-white border-b-2 border-white'
-                : 'text-white/50 hover:text-white/70'
-            }`}
+            onClick={() => setShowSettings(true)}
+            className="py-3 px-4 bg-white/10 border border-white/20 rounded-2xl font-medium text-white transition-all hover:bg-white/15 feature-card-enhanced"
           >
-            Safety
-          </button>
-          <button
-            onClick={() => setActiveTab('my-merge')}
-            className={`text-sm font-medium transition-all pb-2 ${
-              activeTab === 'my-merge'
-                ? 'text-white border-b-2 border-white'
-                : 'text-white/50 hover:text-white/70'
-            }`}
-          >
-            My Merge
+            <span className="mr-2">⚙️</span>
+            Settings
           </button>
         </div>
 
