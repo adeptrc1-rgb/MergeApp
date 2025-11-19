@@ -11,7 +11,7 @@ const MHomeIcon = ({ className, style }) => (
       alignItems: 'center',
       justifyContent: 'center',
       fontWeight: 'bold',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
+      fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
     }}
   >
     M
