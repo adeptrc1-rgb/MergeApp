@@ -399,118 +399,126 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Merge Wheel Prominent Placement */}
-        <button
-          onClick={() => setShowConnectionMatrix(true)}
-          className="w-full rounded-2xl p-6 transition-all group relative overflow-hidden border mb-6 feature-card-enhanced"
-          style={{ 
-            background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)',
-            borderColor: 'rgba(108, 99, 255, 0.3)'
-          }}
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
-          <div className="relative z-10 flex items-center gap-4">
-            <div className="text-5xl">🎯</div>
-            <div className="flex-1 text-left">
-              <h3 className="text-xl font-semibold text-white mb-1">
-                {canSpin ? 'Merge Wheel Ready!' : 'Merge Wheel'}
-              </h3>
-              <p className="text-white/80 text-sm">
-                {canSpin ? 'Spin to claim your daily rewards' : 'Daily rewards & bonuses'}
-              </p>
+        {/* Profile Sections */}
+        <div className="space-y-2 mb-6">
+          {/* About Section */}
+          <div className="bg-[#0A0A0A] rounded-xl p-5 border border-white/10">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-white font-medium">About Me</h3>
+              <button
+                onClick={() => setShowEditProfile(true)}
+                className="text-white/50 text-sm hover:text-white transition-all"
+              >
+                Edit
+              </button>
             </div>
-            {canSpin && (
-              <div className="text-white text-sm px-4 py-2 rounded-full font-bold bg-white/20 pulse-animation">
-                SPIN NOW
+            <p className="text-white/70 text-sm leading-relaxed">
+              {user.bio || 'Adventure seeker with a passion for life. Love exploring new places and meeting interesting people. Always up for spontaneous trips and new experiences!'}
+            </p>
+          </div>
+
+          {/* Lifestyle Section */}
+          <div className="bg-[#0A0A0A] rounded-xl p-5 border border-white/10">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-white font-medium">Lifestyle</h3>
+              <button
+                onClick={() => setShowEditProfile(true)}
+                className="text-white/50 text-sm hover:text-white transition-all"
+              >
+                Edit
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <div className="bg-[#1A1A1A] border border-white/10 px-4 py-2 rounded-full text-white/70 text-sm">
+                🏃‍♀️ {user.exercise || 'Very Active'}
               </div>
-            )}
+              <div className="bg-[#1A1A1A] border border-white/10 px-4 py-2 rounded-full text-white/70 text-sm">
+                🎉 {user.social_style || 'Social'}
+              </div>
+              <div className="bg-[#1A1A1A] border border-white/10 px-4 py-2 rounded-full text-white/70 text-sm">
+                ✈️ Travel Often
+              </div>
+              <div className="bg-[#1A1A1A] border border-white/10 px-4 py-2 rounded-full text-white/70 text-sm">
+                👨‍👩‍👧‍👦 Family-Oriented
+              </div>
+            </div>
           </div>
-        </button>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-premium">
-            <div className="text-2xl mb-1">💫</div>
-            <div className="text-2xl font-semibold text-white mb-1">{user.super_likes || 0}</div>
-            <div className="text-xs text-white/50">Super Likes</div>
-          </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-premium">
-            <div className="text-2xl mb-1">⚡</div>
-            <div className="text-2xl font-semibold text-white mb-1">{user.profile_boosts || 0}</div>
-            <div className="text-xs text-white/50">Boosts</div>
-          </div>
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-premium">
-            <div className="text-2xl mb-1">⭐</div>
-            <div className="text-2xl font-semibold text-white mb-1">{user.star_coins || 0}</div>
-            <div className="text-xs text-white/50">Coins</div>
+          {/* Interests Section */}
+          <div className="bg-[#0A0A0A] rounded-xl p-5 border border-white/10">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-white font-medium">Interests</h3>
+              <button
+                onClick={() => setShowEditProfile(true)}
+                className="text-white/50 text-sm hover:text-white transition-all"
+              >
+                Edit
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {(user.interests || ['Yoga', 'Hiking', 'Photography', 'Travel', 'Music', 'Cooking']).map((interest, idx) => (
+                <div key={idx} className="bg-[#1A1A1A] border border-white/10 px-4 py-2 rounded-full text-white/70 text-sm">
+                  {interest}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Aura Lab Preview */}
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-6 backdrop-blur-premium">
-          <h4 className="text-white font-medium mb-3 flex items-center gap-2">
-            <span className="text-xl">🔮</span>
-            My Aura
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            <span className="px-3 py-1.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
-              Adventurous
-            </span>
-            <span className="px-3 py-1.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)' }}>
-              Creative
-            </span>
-            <span className="px-3 py-1.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)' }}>
-              Ambitious
-            </span>
-          </div>
-        </div>
-
-        {/* Connection Matrix Progress */}
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-6 backdrop-blur-premium">
-          <h4 className="text-white font-medium mb-3">Connection Matrix</h4>
-          <div className="relative h-2 rounded-full overflow-hidden bg-white/10 mb-2">
-            <div 
-              className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
-              style={{ 
-                width: `${profileCompletion}%`,
-                background: 'linear-gradient(90deg, #6C63FF 0%, #4ECDC4 100%)'
-              }}
-            />
-          </div>
-          <p className="text-white/60 text-xs">Complete your profile to unlock matrix features ({profileCompletion}% complete)</p>
-        </div>
-
-        {/* Tab Navigation */}
-        <div className="flex items-center justify-center gap-8 border-b border-white/10 pb-2 mb-6">
+        {/* Merge Features - Sophisticated Treatment */}
+        <div className="space-y-2 mb-6">
+          {/* Merge Wheel */}
           <button
-            onClick={() => setActiveTab('get-more')}
-            className={`text-sm font-medium transition-all pb-2 ${
-              activeTab === 'get-more'
-                ? 'text-white border-b-2 border-white'
-                : 'text-white/50 hover:text-white/70'
-            }`}
+            onClick={() => setShowConnectionMatrix(true)}
+            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
           >
-            Rewards
+            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#6C63FF' }}>
+              <Zap className="w-5 h-5" />
+            </div>
+            <div className="flex-1 text-left">
+              <h4 className="text-white font-medium text-sm mb-0.5">Merge Wheel</h4>
+              <p className="text-white/50 text-xs">
+                {canSpin ? 'Your daily spin is ready' : 'Come back later for rewards'}
+              </p>
+              {canSpin && (
+                <div className="mt-1">
+                  <span className="bg-white/10 text-white/80 text-xs px-2 py-0.5 rounded-full">Ready to spin</span>
+                </div>
+              )}
+            </div>
+            <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
-          <button
-            onClick={() => setActiveTab('safety')}
-            className={`text-sm font-medium transition-all pb-2 ${
-              activeTab === 'safety'
-                ? 'text-white border-b-2 border-white'
-                : 'text-white/50 hover:text-white/70'
-            }`}
-          >
-            Safety
-          </button>
-          <button
-            onClick={() => setActiveTab('my-merge')}
-            className={`text-sm font-medium transition-all pb-2 ${
-              activeTab === 'my-merge'
-                ? 'text-white border-b-2 border-white'
-                : 'text-white/50 hover:text-white/70'
-            }`}
-          >
-            Account
+
+          {/* Profile Energy */}
+          <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#4ECDC4' }}>
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div className="flex-1">
+              <h4 className="text-white font-medium text-sm mb-0.5">Profile Energy</h4>
+              <p className="text-white/50 text-xs mb-2">Your profile is radiating positive energy</p>
+              <div className="flex gap-1.5">
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
+                <div className="w-2 h-2 rounded-full bg-white/10" />
+                <div className="w-2 h-2 rounded-full bg-white/10" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Premium Upsell - Discreet */}
+        <div className="bg-[#0A0A0A] rounded-xl p-5 border border-white/10 mb-6">
+          <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-3">
+            Merge Premium
+          </div>
+          <h4 className="text-white font-medium mb-2">Enhanced Experience</h4>
+          <p className="text-white/60 text-sm mb-4">
+            Unlimited likes, advanced filters, and profile analytics
+          </p>
+          <button className="w-full py-2.5 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg text-white text-sm font-medium transition-all">
+            Learn More
           </button>
         </div>
 
