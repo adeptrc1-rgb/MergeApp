@@ -427,6 +427,87 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
+        {/* Merge Wheel Prominent Placement */}
+        <button
+          onClick={() => setShowConnectionMatrix(true)}
+          className="w-full rounded-2xl p-6 transition-all group relative overflow-hidden border mb-6 feature-card-enhanced"
+          style={{ 
+            background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)',
+            borderColor: 'rgba(108, 99, 255, 0.3)'
+          }}
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+          <div className="relative z-10 flex items-center gap-4">
+            <div className="text-5xl">🎯</div>
+            <div className="flex-1 text-left">
+              <h3 className="text-xl font-semibold text-white mb-1">
+                {canSpin ? 'Merge Wheel Ready!' : 'Merge Wheel'}
+              </h3>
+              <p className="text-white/80 text-sm">
+                {canSpin ? 'Spin to claim your daily rewards' : 'Daily rewards & bonuses'}
+              </p>
+            </div>
+            {canSpin && (
+              <div className="text-white text-sm px-4 py-2 rounded-full font-bold bg-white/20 pulse-animation">
+                SPIN NOW
+              </div>
+            )}
+          </div>
+        </button>
+
+        {/* Quick Stats */}
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-premium">
+            <div className="text-2xl mb-1">💫</div>
+            <div className="text-2xl font-semibold text-white mb-1">{user.super_likes || 0}</div>
+            <div className="text-xs text-white/50">Super Likes</div>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-premium">
+            <div className="text-2xl mb-1">⚡</div>
+            <div className="text-2xl font-semibold text-white mb-1">{user.profile_boosts || 0}</div>
+            <div className="text-xs text-white/50">Boosts</div>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-premium">
+            <div className="text-2xl mb-1">⭐</div>
+            <div className="text-2xl font-semibold text-white mb-1">{user.star_coins || 0}</div>
+            <div className="text-xs text-white/50">Coins</div>
+          </div>
+        </div>
+
+        {/* Aura Lab Preview */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-6 backdrop-blur-premium">
+          <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+            <span className="text-xl">🔮</span>
+            My Aura
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            <span className="px-3 py-1.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
+              Adventurous
+            </span>
+            <span className="px-3 py-1.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)' }}>
+              Creative
+            </span>
+            <span className="px-3 py-1.5 rounded-full text-white text-sm font-medium" style={{ background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)' }}>
+              Ambitious
+            </span>
+          </div>
+        </div>
+
+        {/* Connection Matrix Progress */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-6 backdrop-blur-premium">
+          <h4 className="text-white font-medium mb-3">Connection Matrix</h4>
+          <div className="relative h-2 rounded-full overflow-hidden bg-white/10 mb-2">
+            <div 
+              className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
+              style={{ 
+                width: `${profileCompletion}%`,
+                background: 'linear-gradient(90deg, #6C63FF 0%, #4ECDC4 100%)'
+              }}
+            />
+          </div>
+          <p className="text-white/60 text-xs">Complete your profile to unlock matrix features ({profileCompletion}% complete)</p>
+        </div>
+
         {/* Tab Content */}
         <div className="space-y-4">
           
