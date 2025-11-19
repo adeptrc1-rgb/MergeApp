@@ -409,13 +409,57 @@ export default function Profile({ user, logout }) {
             </h1>
           </div>
 
-          <div className="text-sm text-white/60 mb-4">
-            {profileCompletion}% Complete
+          {/* Smart Progress Indicator */}
+          <div className="w-full max-w-sm mb-4">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-premium">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-white text-sm font-medium">Complete your profile</h4>
+                <span className="text-white/80 text-sm font-semibold">{profileCompletion}%</span>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="completion-step flex items-center gap-2 text-xs">
+                  <span className={user.photos && user.photos.length > 0 ? 'text-[#4ECDC4]' : 'text-white/40'}>
+                    {user.photos && user.photos.length > 0 ? '✓' : '○'}
+                  </span>
+                  <span className={user.photos && user.photos.length > 0 ? 'text-white/80 line-through' : 'text-white/60'}>
+                    Add 3+ photos
+                  </span>
+                </div>
+                
+                <div className="completion-step flex items-center gap-2 text-xs">
+                  <span className={user.bio ? 'text-[#4ECDC4]' : 'text-white/40'}>
+                    {user.bio ? '✓' : '○'}
+                  </span>
+                  <span className={user.bio ? 'text-white/80 line-through' : 'text-white/60'}>
+                    Write your bio
+                  </span>
+                </div>
+                
+                <div className="completion-step flex items-center gap-2 text-xs">
+                  <span className={user.interests && user.interests.length > 0 ? 'text-[#4ECDC4]' : 'text-white/40'}>
+                    {user.interests && user.interests.length > 0 ? '✓' : '○'}
+                  </span>
+                  <span className={user.interests && user.interests.length > 0 ? 'text-white/80 line-through' : 'text-white/60'}>
+                    Add interests
+                  </span>
+                </div>
+                
+                <div className="completion-step flex items-center gap-2 text-xs">
+                  <span className={user.vibe_song ? 'text-[#4ECDC4]' : 'text-white/40'}>
+                    {user.vibe_song ? '✓' : '○'}
+                  </span>
+                  <span className={user.vibe_song ? 'text-white/80 line-through' : 'text-white/60'}>
+                    Add your vibe
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <button
             onClick={() => setShowEditProfile(true)}
-            className="px-8 py-2.5 bg-white/10 hover:bg-white/15 text-white rounded-full font-medium transition-all border border-white/20"
+            className="px-8 py-2.5 bg-white/10 hover:bg-white/15 text-white rounded-full font-medium transition-all border border-white/20 hover:scale-105"
           >
             Edit Profile
           </button>
