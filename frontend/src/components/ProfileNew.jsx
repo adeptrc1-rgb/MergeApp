@@ -690,12 +690,28 @@ export default function Profile({ user, logout }) {
                 </div>
               </button>
 
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-premium">
                 <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
                   <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
                   Your Rewards
                 </h3>
-                <div className="grid grid-cols-2 gap-3">
+                
+                {/* Empty State */}
+                {!user.profile_boosts && !user.super_likes && !user.direct_messages && !user.star_coins ? (
+                  <div className="text-center py-8">
+                    <div className="text-5xl mb-3">🎁</div>
+                    <h4 className="text-white font-medium mb-2">No active rewards</h4>
+                    <p className="text-white/60 text-sm mb-4">Use the Merge Wheel to earn boosts and Super Likes</p>
+                    <button 
+                      onClick={() => setShowConnectionMatrix(true)}
+                      className="px-6 py-2 text-white rounded-full font-medium transition-all hover:scale-105"
+                      style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}
+                    >
+                      Spin Now
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                     <div className="text-2xl mb-2" style={{ color: '#6C63FF' }}>⚡</div>
                     <div className="text-2xl font-light text-white">{user.profile_boosts || 0}</div>
