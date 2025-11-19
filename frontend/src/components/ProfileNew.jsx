@@ -556,7 +556,7 @@ export default function Profile({ user, logout }) {
 
               <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
                 <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-yellow-400" />
+                  <Trophy className="w-5 h-5" style={{ color: '#FFD700' }} />
                   Your Stats
                 </h3>
                 <div className="space-y-3">
