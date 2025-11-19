@@ -1500,11 +1500,11 @@ STORE_ITEMS = [
         "effect": {"type": "aurora", "colors": ["#0066cc", "#ffd700", "#22c55e", "#ef4444"], "intensity": "awareness"}
     },
     
-    # Premium Skins - Overlay-based themes (no borders/frames)
+    # Premium Auras - Overlay-based themes (no borders/frames)
     {
-        "id": "skin_galaxy",
-        "name": "Cosmic Galaxy",
-        "type": "skin",
+        "id": "aura_galaxy",
+        "name": "Galaxy Aura",
+        "type": "aura",
         "price": 1200,
         "description": "Semi-transparent star sparkles and nebula overlays on your photo",
         "effect": {
