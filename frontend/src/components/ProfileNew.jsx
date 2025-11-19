@@ -402,8 +402,64 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
+        {/* Three Action Buttons */}
+        <div className="grid grid-cols-3 gap-4 px-4 mb-6">
+          <button
+            onClick={() => setShowSettings(true)}
+            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-[#171717] border border-[#404040] hover:bg-[#1E1E1E] transition-all"
+            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
+          >
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+              <Settings className="w-6 h-6 text-white/70" />
+            </div>
+            <span className="text-white/80 text-xs font-medium">SETTINGS</span>
+          </button>
+
+          <button
+            onClick={() => setShowEditProfile(true)}
+            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gradient-to-br from-[#FF4458] to-[#FF6B7A] hover:from-[#FF5566] hover:to-[#FF7788] transition-all shadow-lg"
+          >
+            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+              <Camera className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-white text-xs font-medium">ADD MEDIA</span>
+          </button>
+
+          <button
+            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-[#171717] border border-[#404040] hover:bg-[#1E1E1E] transition-all"
+            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
+          >
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+              <Shield className="w-6 h-6 text-white/70" />
+            </div>
+            <span className="text-white/80 text-xs font-medium">SAFETY</span>
+          </button>
+        </div>
+
+        {/* Interactive Profile Completion */}
+        <button
+          onClick={() => setShowEditProfile(true)}
+          className="mx-4 mb-6 p-5 rounded-2xl bg-[#171717] border border-[#404040] hover:bg-[#1E1E1E] transition-all"
+          style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-white font-semibold text-base">Complete Your Profile</h3>
+            <div className="text-[#6C63FF] font-bold text-lg">{profileCompletion}%</div>
+          </div>
+          <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden mb-3">
+            <div 
+              className="h-full rounded-full transition-all duration-500"
+              style={{ 
+                width: `${profileCompletion}%`,
+                background: 'linear-gradient(90deg, #6C63FF 0%, #4ECDC4 100%)'
+              }}
+            />
+          </div>
+          <p className="text-white/60 text-sm">Add more details to stand out and get better matches</p>
+        </button>
+
         {/* Quick Action Blocks */}
-        <div className="grid grid-cols-3 gap-2 mb-3">
+        <div className="grid grid-cols-3 gap-2 px-4 mb-3">
           {/* Super Liked Block */}
           <button
             onClick={() => navigate('/store')}
