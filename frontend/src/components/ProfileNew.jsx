@@ -590,7 +590,7 @@ export default function Profile({ user, logout }) {
             <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
-          <div className="bg-[#171717] rounded-xl p-6 border border-[#404040] backdrop-blur-premium">
+          <div className="bg-[#171717] rounded-xl p-6 border border-[#404040] backdrop-blur-premium" style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}>
             <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
               <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
               Your Rewards
