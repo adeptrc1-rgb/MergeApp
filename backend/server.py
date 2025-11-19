@@ -1678,7 +1678,7 @@ async def activate_item(body: ActivateBody, user: User = Depends(get_current_use
     
     # If item_id is None, deactivate the item type
     if body.item_id is None:
-        field = "active_light" if body.item_type == "light" else "active_skin"
+        field = "active_light" if body.item_type == "light" else "active_aura"
         await db.users.update_one(
             {"id": user.id},
             {"$set": {field: None}}
