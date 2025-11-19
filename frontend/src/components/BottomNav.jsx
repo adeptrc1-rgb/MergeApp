@@ -17,7 +17,7 @@ const FlameHomeIcon = ({ style }) => (
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
     { id: 'home', icon: FlameHomeIcon, label: 'Discover', path: '/home' },
-    { id: 'discover', icon: MergeDiscoverIcon, label: 'Matrix', path: '/discover' },
+    { id: 'discover', icon: Network, label: 'Matrix', path: '/discover' },
     { id: 'messages', icon: MessageSquare, label: 'Chats', path: '/messages' },
     { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
   ];
