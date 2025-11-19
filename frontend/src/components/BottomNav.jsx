@@ -48,31 +48,18 @@ export default function BottomNav({ currentTab, navigate }) {
               className="flex flex-col items-center transition-all"
               style={{
                 minWidth: '48px',
-                padding: '0'
+                padding: '4px'
               }}
             >
-              {/* Icon with gradient background when active */}
-              <div 
-                className="relative rounded-lg transition-all"
-                style={isActive ? {
-                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
-                  boxShadow: '0 2px 6px rgba(59, 130, 246, 0.25)',
-                  padding: '4px'
-                } : {
-                  background: 'transparent',
-                  padding: '4px'
-                }}
-              >
-                <Icon 
-                  className="transition-all" 
-                  style={{ 
-                    width: '18px',
-                    height: '18px',
-                    color: isActive ? '#FFFFFF' : '#666666',
-                    strokeWidth: isActive ? 2.5 : 2
-                  }} 
-                />
-              </div>
+              <Icon 
+                className="transition-all" 
+                style={{ 
+                  width: '18px',
+                  height: '18px',
+                  color: isActive ? '#FFFFFF' : '#666666',
+                  strokeWidth: isActive ? 2.5 : 2
+                }} 
+              />
             </button>
           );
         })}
