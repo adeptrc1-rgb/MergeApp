@@ -68,19 +68,6 @@ export default function BottomNav({ currentTab, navigate }) {
                   }} 
                 />
               </div>
-              
-              {/* Label */}
-              <span 
-                className="font-medium transition-all"
-                style={{ 
-                  color: isActive ? '#FAFAFA' : '#666666',
-                  fontSize: '9px',
-                  letterSpacing: '0.01em',
-                  marginTop: '2px'
-                }}
-              >
-                {label}
-              </span>
             </button>
           );
         })}
