@@ -1699,7 +1699,7 @@ async def activate_item(body: ActivateBody, user: User = Depends(get_current_use
         raise HTTPException(status_code=400, detail="Item type mismatch")
     
     # Activate the item
-    field = "active_light" if body.item_type == "light" else "active_skin"
+    field = "active_light" if body.item_type == "light" else "active_aura"
     await db.users.update_one(
         {"id": user.id},
         {"$set": {field: body.item_id}}
