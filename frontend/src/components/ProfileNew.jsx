@@ -629,12 +629,11 @@ export default function Profile({ user, logout }) {
 
           <button 
             onClick={logout} 
-            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all"
+            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all mt-4"
           >
             <LogOut className="w-5 h-5" />
             <span>Logout</span>
           </button>
-
         </div>
       </div>
 
