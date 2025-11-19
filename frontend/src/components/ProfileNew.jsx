@@ -522,10 +522,28 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
-        {/* Tab Content */}
-        <div className="space-y-4">
-          
-          {activeTab === 'get-more' && (
+        {/* Account Actions */}
+        <div className="space-y-2">
+          <button
+            onClick={() => setShowSettings(true)}
+            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all"
+          >
+            <div className="flex items-center gap-3">
+              <Settings className="w-5 h-5 text-white/60" />
+              <span className="text-white font-medium text-sm">Settings & Preferences</span>
+            </div>
+            <ChevronRight className="w-5 h-5 text-white/30" />
+          </button>
+
+          <button className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all">
+            <div className="flex items-center gap-3">
+              <Shield className="w-5 h-5 text-white/60" />
+              <span className="text-white font-medium text-sm">Safety & Privacy</span>
+            </div>
+            <ChevronRight className="w-5 h-5 text-white/30" />
+          </button>
+
+          <div className="bg-[#0A0A0A] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
             <>
               <div className="rounded-2xl p-6 border relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)', borderColor: 'rgba(108, 99, 255, 0.3)' }}>
                 <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(108, 99, 255, 0.2)' }} />
