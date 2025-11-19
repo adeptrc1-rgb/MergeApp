@@ -1,6 +1,6 @@
 /**
  * Merge Logo Component
- * Displays the Merge "M" logo image
+ * Displays the word "Merge"
  */
 
 import React from 'react';
@@ -8,29 +8,31 @@ import React from 'react';
 const MergeLogo = ({ 
   className = '', 
   size = 'md',
-  color = '#FFFFFF' // Not used for image, kept for backward compatibility
+  color = '#FFFFFF'
 }) => {
-  // Size configurations for image height
+  // Size configurations for font size
   const sizes = {
-    sm: '24px',
-    md: '32px',
-    lg: '40px',
-    xl: '48px'
+    sm: '18px',
+    md: '24px',
+    lg: '32px',
+    xl: '40px'
   };
 
-  const height = sizes[size] || sizes.md;
+  const fontSize = sizes[size] || sizes.md;
 
   return (
-    <img 
-      src="https://customer-assets.emergentagent.com/job_datemerge/artifacts/9bji59s7_122fed07-08be-4993-9208-7eed705ccacb.png"
-      alt="Merge"
+    <div
       className={className}
       style={{
-        height: height,
-        width: 'auto',
-        objectFit: 'contain'
+        fontSize: fontSize,
+        fontWeight: '600',
+        fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+        color: color,
+        letterSpacing: '-0.02em'
       }}
-    />
+    >
+      Merge
+    </div>
   );
 };
 
