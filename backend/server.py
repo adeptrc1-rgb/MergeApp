@@ -1621,7 +1621,7 @@ async def get_user_inventory(user: User = Depends(get_current_user)):
     return {
         "owned_items": udoc.get("owned_items", []),
         "active_light": udoc.get("active_light"),
-        "active_skin": udoc.get("active_skin"),
+        "active_aura": udoc.get("active_aura"),
         "star_coins": udoc.get("star_coins", 0)
     }
 
