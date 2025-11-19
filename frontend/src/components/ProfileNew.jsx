@@ -344,62 +344,56 @@ export default function Profile({ user, logout }) {
       `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
-        {/* Top Navigation Bar */}
-        <div className="flex items-center justify-between p-4 mb-4">
-          <button className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all">
-            <span className="text-[#FF4458] text-xl">🔥</span>
+        {/* Top Status Bar */}
+        <div className="flex items-center justify-between p-4">
+          <button className="w-8 h-8 flex items-center justify-center">
+            <span className="text-[#FF4458] text-xl">👤</span>
           </button>
-          <MergeLogo size="md" color="#FFFFFF" />
           <button
             onClick={() => setShowSettings(true)}
-            className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all"
+            className="w-8 h-8 flex items-center justify-center"
           >
             <Settings className="w-5 h-5 text-white/60" />
           </button>
         </div>
 
-        {/* Large Profile Photo */}
-        <div className="px-4 mb-6">
+        {/* Large Circular Profile Photo */}
+        <div className="flex flex-col items-center px-8 py-6">
           <button
             onClick={() => setShowEditProfile(true)}
-            className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden group"
-            style={{ boxShadow: '0 8px 24px rgba(59, 130, 246, 0.12)' }}
+            className="relative mb-6 group"
           >
             <div
-              className="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-105"
+              className="w-64 h-64 rounded-full bg-cover bg-center border-4 border-[#404040] relative overflow-hidden"
               style={{ 
-                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)',
-                transitionDuration: '300ms'
+                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : '#2A2A2A'
               }}
             >
               {!user.photos?.[0] && (
-                <div className="w-full h-full flex items-center justify-center text-white text-6xl font-light">
-                  {user.first_name?.[0] || 'U'}
+                <div className="w-full h-full flex items-center justify-center bg-[#2A2A2A]">
+                  <span className="text-[#666] text-7xl">👤</span>
                 </div>
               )}
             </div>
             
             {/* Edit Pencil Icon */}
-            <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+            <div className="absolute top-2 right-2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
               </svg>
             </div>
-
-            {/* Gradient Overlay at Bottom */}
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent" />
-            
-            {/* Name and Info at Bottom */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <h1 className="text-3xl font-bold text-white mb-1">
-                {user.first_name}{age ? `, ${age}` : ''}
-              </h1>
-              <p className="text-white/90 text-base">
-                {user.job_title || 'Professional'} · {user.industry || 'Technology'}
-              </p>
-            </div>
           </button>
+
+          {/* Name and Info Centered Below Photo */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-white mb-1">
+              {user.first_name}{age ? `, ${age}` : ''}
+            </h1>
+            <p className="text-white/60 text-lg">
+              {user.job_title || user.location || 'Stanford University'}
+            </p>
+          </div>
         </div>
 
         {/* Three Action Buttons */}
