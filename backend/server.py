@@ -1667,7 +1667,7 @@ async def purchase_item(body: PurchaseBody, user: User = Depends(get_current_use
 
 class ActivateBody(BaseModel):
     item_id: Optional[str] = None
-    item_type: str  # "light" or "skin"
+    item_type: str  # "light" or "aura"
 
 @api_router.post("/store/activate")
 async def activate_item(body: ActivateBody, user: User = Depends(get_current_user)):
