@@ -178,7 +178,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   value={editedName}
                   onChange={(e) => setEditedName(e.target.value)}
                   placeholder="Your name"
-                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                 />
               </div>
 
@@ -187,7 +187,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                 <select
                   value={editedIndustry}
                   onChange={(e) => setEditedIndustry(e.target.value)}
-                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                 >
                   <option value="">Select Industry</option>
                   <option value="Technology">Technology</option>
@@ -213,7 +213,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   value={editedJobTitle}
                   onChange={(e) => setEditedJobTitle(e.target.value)}
                   placeholder="What you do"
-                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                 />
               </div>
 
@@ -224,7 +224,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   value={editedLocation}
                   onChange={(e) => setEditedLocation(e.target.value)}
                   placeholder="City, State"
-                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                  className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                 />
               </div>
             </div>
@@ -352,7 +352,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <select
                     value={workout}
                     onChange={(e) => setWorkout(e.target.value)}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                   >
                     <option value="">Select</option>
                     <option value="everyday">Everyday</option>
@@ -368,7 +368,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <select
                     value={drinking}
                     onChange={(e) => setDrinking(e.target.value)}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                   >
                     <option value="">Select</option>
                     <option value="not_for_me">Not for me</option>
@@ -386,7 +386,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <select
                     value={smoking}
                     onChange={(e) => setSmoking(e.target.value)}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                   >
                     <option value="">Select</option>
                     <option value="social_smoker">Social smoker</option>
@@ -403,7 +403,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <select
                     value={marijuana}
                     onChange={(e) => setMarijuana(e.target.value)}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                   >
                     <option value="">Select</option>
                     <option value="never">Never</option>
@@ -418,7 +418,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <select
                     value={dietaryPreference}
                     onChange={(e) => setDietaryPreference(e.target.value)}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                   >
                     <option value="">Select</option>
                     <option value="vegan">Vegan</option>
@@ -438,7 +438,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <select
                     value={socialMedia}
                     onChange={(e) => setSocialMedia(e.target.value)}
-                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-purple-400 transition-all"
+                    className="w-full bg-white/5 border border-white/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-white/40 transition-all"
                   >
                     <option value="">Select</option>
                     <option value="social_media_influencer">Social media influencer</option>
