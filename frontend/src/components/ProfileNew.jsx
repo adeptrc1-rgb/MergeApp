@@ -534,6 +534,7 @@ export default function Profile({ user, logout }) {
           <button
             onClick={() => navigate('/store')}
             className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] hover:bg-[#1E1E1E] transition-all"
+            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#667EEA' }}>
