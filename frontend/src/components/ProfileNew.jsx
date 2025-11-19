@@ -600,26 +600,26 @@ export default function Profile({ user, logout }) {
                 </ul>
               </div>
 
-              <button className="w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between transition-all group">
+              <button className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center justify-between group feature-card-enhanced backdrop-blur-premium">
                 <div className="flex items-center gap-4">
-                  <Lock className="w-5 h-5 text-white/60" />
+                  <Lock className="w-5 h-5 text-white/60 icon-transition" />
                   <div className="text-left">
                     <h4 className="text-white font-medium mb-0.5">Privacy Settings</h4>
                     <p className="text-white/60 text-sm">Control who sees your profile</p>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 transition-all" />
+                <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all" />
               </button>
 
-              <button className="w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between transition-all group">
+              <button className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center justify-between group feature-card-enhanced backdrop-blur-premium">
                 <div className="flex items-center gap-4">
-                  <Eye className="w-5 h-5 text-white/60" />
+                  <Eye className="w-5 h-5 text-white/60 icon-transition" />
                   <div className="text-left">
                     <h4 className="text-white font-medium mb-0.5">Blocked Users</h4>
                     <p className="text-white/60 text-sm">Manage your blocked list</p>
                   </div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 transition-all" />
+                <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all" />
               </button>
 
               <div className="rounded-2xl p-5 border" style={{ backgroundColor: '#2A0B0B', borderColor: '#FF6B6B' }}>
