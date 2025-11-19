@@ -502,8 +502,9 @@ export default function EditProfileModal({ user, onSave, onClose }) {
             </button>
             <button
               onClick={handleSave}
-              className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl py-3 font-medium hover:scale-105 transition-all shadow-lg"
               disabled={saving}
+              className="flex-1 text-white rounded-xl py-3 font-medium hover:scale-105 transition-all shadow-lg"
+              style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}
             >
               {saving ? 'Saving...' : 'Save Changes'}
             </button>
