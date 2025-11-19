@@ -196,8 +196,150 @@ export default function Profile({ user, logout }) {
       }}
     >
       <style>{`
+        /* Scrollbar hiding */
         .fixed.inset-0.overflow-y-auto::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Opera */
+          display: none;
+        }
+
+        /* Micro-interactions & Animations */
+        .feature-card-enhanced {
+          transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .feature-card-enhanced:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(108, 99, 255, 0.15);
+        }
+
+        .feature-card-enhanced:active {
+          transform: translateY(0);
+        }
+
+        /* Progress ring animation */
+        @keyframes progress-ring {
+          from { stroke-dashoffset: 339.292; }
+          to { stroke-dashoffset: 0; }
+        }
+
+        /* Pulse animation for ready state */
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+
+        .pulse-animation {
+          animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Card hover glow effect */
+        .card-glow {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .card-glow::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+        }
+
+        .card-glow:hover::after {
+          opacity: 1;
+        }
+
+        /* Premium gradient border effect */
+        .premium-border {
+          position: relative;
+          background: rgba(0, 0, 0, 0.8);
+          border-radius: 16px;
+        }
+
+        .premium-border::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 17px;
+          padding: 1px;
+          background: linear-gradient(135deg, #6C63FF, #4ECDC4);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+        }
+
+        /* Smooth icon transitions */
+        .icon-transition {
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .icon-transition:hover {
+          transform: scale(1.1);
+        }
+
+        /* Completion step animations */
+        .completion-step {
+          opacity: 0;
+          transform: translateX(-10px);
+          animation: slideIn 0.3s ease forwards;
+        }
+
+        .completion-step:nth-child(1) { animation-delay: 0.1s; }
+        .completion-step:nth-child(2) { animation-delay: 0.2s; }
+        .completion-step:nth-child(3) { animation-delay: 0.3s; }
+        .completion-step:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideIn {
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        /* Accessibility: Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+          *,
+          *::before,
+          *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+
+        /* Accessibility: High contrast mode */
+        @media (prefers-contrast: high) {
+          .feature-card-enhanced {
+            border: 2px solid #FFFFFF !important;
+          }
+        }
+
+        /* Enhanced backdrop blur */
+        .backdrop-blur-premium {
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Shimmer loading effect */
+        @keyframes shimmer {
+          0% { background-position: -1000px 0; }
+          100% { background-position: 1000px 0; }
+        }
+
+        .skeleton-loader {
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            rgba(255, 255, 255, 0.05) 100%
+          );
+          background-size: 1000px 100%;
+          animation: shimmer 2s infinite;
         }
       `}</style>
       {/* Single Scrollable Container */}
