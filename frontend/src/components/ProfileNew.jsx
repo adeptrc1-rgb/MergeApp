@@ -523,18 +523,34 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
-        {/* Premium Upsell - Discreet */}
-        <div className="bg-[#171717] rounded-xl p-4 border border-[#404040] mb-6" style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}>
-          <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-2">
-            Merge Premium
+        {/* Merge Premium - Prominent Upsell */}
+        <div className="mx-4 mb-6 rounded-3xl overflow-hidden" style={{ 
+          background: 'linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%)',
+          boxShadow: '0 8px 24px rgba(108, 99, 255, 0.25)'
+        }}>
+          <div className="p-6 text-center">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <Sparkles className="w-5 h-5 text-white" />
+              <h2 className="text-2xl font-bold text-white">Get Merge Premium</h2>
+            </div>
+            <p className="text-white/90 text-base mb-4">
+              See who Likes You & more!
+            </p>
+            
+            {/* Feature Dots/Indicators */}
+            <div className="flex justify-center gap-2 mb-4">
+              <div className="w-2 h-2 rounded-full bg-white"></div>
+              <div className="w-2 h-2 rounded-full bg-white/40"></div>
+              <div className="w-2 h-2 rounded-full bg-white/40"></div>
+            </div>
+
+            <button 
+              onClick={() => navigate('/store')}
+              className="w-full py-4 bg-white text-[#6C63FF] rounded-2xl font-bold text-base hover:scale-105 transition-transform shadow-lg"
+            >
+              GET MERGE PREMIUM
+            </button>
           </div>
-          <h4 className="text-white font-medium text-sm mb-1">Enhanced Experience</h4>
-          <p className="text-white/60 text-xs mb-3">
-            Unlimited likes, advanced filters, and profile analytics
-          </p>
-          <button className="w-full py-2 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg text-white text-xs font-medium transition-all">
-            Learn More
-          </button>
         </div>
 
         {/* Merge Features - Sophisticated Treatment */}
