@@ -1313,7 +1313,7 @@ STREAK_REWARDS = [
     {"day": 2, "type": "multiplier", "amount": 1.05, "duration_hours": 24, "tier": "bronze", "label": "1.05× Multiplier (24h)"},
     {"day": 3, "type": "utility", "item": "redo", "amount": 1, "tier": "silver", "milestone": True, "label": "1 Redo"},
     {"day": 4, "type": "coins", "amount": 15, "tier": "bronze", "label": "15 Star Coins"},
-    {"day": 5, "type": "cosmetic", "item": "basic_skin", "tier": "silver", "label": "Basic Profile Frame"},
+    {"day": 5, "type": "cosmetic", "item": "basic_aura", "tier": "silver", "label": "Basic Profile Aura"},
     {"day": 6, "type": "utility", "item": "super_like", "amount": 1, "tier": "bronze", "label": "1 Super Like"},
     {"day": 7, "type": "boost", "duration_minutes": 15, "tier": "gold", "milestone": True, "label": "Profile Boost (15 min)"},
     {"day": 8, "type": "multiplier", "amount": 1.1, "duration_hours": 24, "tier": "bronze", "label": "1.10× Multiplier (24h)"},
