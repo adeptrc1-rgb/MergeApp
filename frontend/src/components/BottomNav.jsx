@@ -1,23 +1,11 @@
 import React from 'react';
-import { MessageSquare, User } from 'lucide-react';
+import { Network, MessageSquare, User } from 'lucide-react';
 
 // Custom Home Icon Component (Flame Icon Image)
 const FlameHomeIcon = ({ style }) => (
   <img 
     src="https://customer-assets.emergentagent.com/job_merge-wheel/artifacts/k7bsh7b6_IMG_4419.jpeg"
     alt="Home"
-    style={{
-      ...style,
-      objectFit: 'contain'
-    }}
-  />
-);
-
-// Custom Discover Icon Component (Merge Logo)
-const MergeDiscoverIcon = ({ style }) => (
-  <img 
-    src="https://customer-assets.emergentagent.com/job_datemerge/artifacts/7x8ch3ib_Merge.png"
-    alt="Discover"
     style={{
       ...style,
       objectFit: 'contain'
