@@ -318,12 +318,10 @@ export default function Profile({ user, logout }) {
           
           {activeTab === 'get-more' && (
             <>
-              <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-6 border border-purple-400/30 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl" />
+              <div className="rounded-2xl p-6 border relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)', borderColor: 'rgba(108, 99, 255, 0.3)' }}>
+                <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(108, 99, 255, 0.2)' }} />
                 <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center mb-4">
-                    <Sparkles className="w-6 h-6 text-white" />
-                  </div>
+                  <div className="text-4xl mb-4">✨</div>
                   <h3 className="text-xl font-semibold text-white mb-2">
                     Here's what comes with your subscription
                   </h3>
