@@ -682,57 +682,6 @@ export default function Profile({ user, logout }) {
 
           {activeTab === 'my-merge' && (
             <>
-              <button
-                onClick={() => setShowConnectionMatrix(true)}
-                className="w-full rounded-2xl p-6 transition-all group relative overflow-hidden border"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.2) 0%, rgba(102, 126, 234, 0.2) 100%)',
-                  borderColor: 'rgba(108, 99, 255, 0.3)'
-                }}
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(108, 99, 255, 0.2)' }} />
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl">🎯</span>
-                      <div className="text-left">
-                        <h3 className="text-lg font-semibold text-white">Merge Wheel</h3>
-                        <p className="text-white/60 text-sm">Daily rewards & bonuses</p>
-                      </div>
-                    </div>
-                    {canSpin && (
-                      <div className="text-white text-xs px-3 py-1.5 rounded-full font-bold pulse-animation" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
-                        READY
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-white/60 font-mono">Progress</span>
-                      <span className="text-white font-bold">{Math.round(cooldownProgress)}%</span>
-                    </div>
-                    
-                    <div className="relative h-2 rounded-full overflow-hidden bg-white/10">
-                      <div 
-                        className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
-                        style={{ 
-                          width: `${cooldownProgress}%`,
-                          background: 'linear-gradient(90deg, #6C63FF 0%, #667EEA 100%)'
-                        }}
-                      />
-                    </div>
-                    
-                    {!canSpin && wheelStatus && (
-                      <div className="flex items-center justify-between text-xs pt-1">
-                        <span className="text-white/50">Next spin</span>
-                        <span className="font-bold" style={{ color: '#6C63FF' }}>{cooldownCountdown}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </button>
-
               <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-premium">
                 <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
                   <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
