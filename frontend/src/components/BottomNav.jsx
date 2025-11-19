@@ -34,12 +34,14 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        backgroundColor: '#000000',
-        borderTop: '1px solid #666666',
+        backgroundColor: 'rgba(0, 0, 0, 0.95)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
         paddingBottom: 'env(safe-area-inset-bottom)'
       }}
     >
-      <div className="flex items-center justify-around" style={{ padding: '8px 4px' }}>
+      <div className="flex items-center justify-around" style={{ padding: '16px 8px' }}>
         {items.map(({ id, icon: Icon, label, path }) => {
           const isActive = currentTab === id;
           return (
@@ -48,17 +50,19 @@ export default function BottomNav({ currentTab, navigate }) {
               onClick={() => navigate(path)}
               className="flex flex-col items-center transition-all"
               style={{
-                minWidth: '48px',
-                padding: '4px'
+                minWidth: '64px',
+                padding: '8px',
+                borderRadius: '12px',
+                backgroundColor: isActive ? 'rgba(255, 255, 255, 0.05)' : 'transparent'
               }}
             >
               <Icon 
                 className="transition-all" 
                 style={{ 
-                  width: '18px',
-                  height: '18px',
-                  color: isActive ? '#FFFFFF' : '#666666',
-                  strokeWidth: isActive ? 2.5 : 2
+                  width: '22px',
+                  height: '22px',
+                  color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)',
+                  strokeWidth: isActive ? 2 : 1.5
                 }} 
               />
             </button>
