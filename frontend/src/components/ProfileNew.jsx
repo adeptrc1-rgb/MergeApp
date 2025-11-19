@@ -417,14 +417,11 @@ export default function Profile({ user, logout }) {
             className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{ 
-                background: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)',
-                boxShadow: '0 4px 12px rgba(78, 205, 196, 0.3)'
-              }}>
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
                 <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent)',
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
                 }} />
-                <Heart className="w-4 h-4 text-white relative z-10" strokeWidth={2.5} />
+                <Heart className="w-4 h-4 relative z-10" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
               </div>
               <div className="text-lg font-semibold text-white mb-0.5">0</div>
               <div className="text-[10px] text-white/50 mb-1.5">Super Liked</div>
@@ -440,14 +437,11 @@ export default function Profile({ user, logout }) {
             className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{ 
-                background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)',
-                boxShadow: '0 4px 12px rgba(108, 99, 255, 0.3)'
-              }}>
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
                 <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent)',
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
                 }} />
-                <Zap className="w-4 h-4 text-white relative z-10" strokeWidth={2.5} />
+                <Zap className="w-4 h-4 relative z-10" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
               </div>
               <div className="text-xs font-medium text-white mb-0.5">Merge</div>
               <div className="text-[10px] text-white/50 mb-1.5">Pulse</div>
@@ -463,14 +457,11 @@ export default function Profile({ user, logout }) {
             className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{ 
-                background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)',
-                boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
-              }}>
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
                 <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent)',
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
                 }} />
-                <Sparkles className="w-4 h-4 text-white relative z-10" strokeWidth={2.5} />
+                <Sparkles className="w-4 h-4 relative z-10" style={{ color: '#667EEA' }} strokeWidth={2.5} />
               </div>
               <div className="text-xs font-medium text-white mb-2">Auras</div>
               <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
