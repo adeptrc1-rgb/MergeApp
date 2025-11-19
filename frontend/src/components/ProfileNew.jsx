@@ -344,87 +344,59 @@ export default function Profile({ user, logout }) {
       `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
-        {/* Top Bar */}
-        <div className="flex items-center justify-between mb-6">
-          <MergeLogo size="md" color="#FFFFFF" />
-          <button
-            onClick={() => setShowSettings(true)}
-            className="p-2 hover:bg-white/10 rounded-full transition-all"
-          >
-            <span className="text-xl">⚙️</span>
-          </button>
-        </div>
-
-        {/* Profile Card (Tinder-style) */}
-        <div className="relative rounded-3xl overflow-hidden mb-6 feature-card-enhanced">
-          {/* Profile Image */}
-          <div className="relative h-96">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ 
-                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)'
-              }}
+        {/* Clean Header */}
+        <div className="pb-6 border-b border-white/10 mb-6">
+          {/* Top Bar */}
+          <div className="flex items-center justify-between mb-6">
+            <MergeLogo size="md" color="#FFFFFF" />
+            <button
+              onClick={() => setShowSettings(true)}
+              className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all"
             >
-              {!user.photos?.[0] && (
-                <div className="w-full h-full flex items-center justify-center text-white text-6xl font-light">
-                  {user.first_name?.[0] || 'U'}
-                </div>
-              )}
-            </div>
-            
-            {/* Photo Count Badge */}
-            {user.photos && user.photos.length > 1 && (
-              <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-sm font-medium">
-                +{user.photos.length - 1}
-              </div>
-            )}
-            
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            
-            {/* Profile Info */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="flex items-end justify-between">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <h1 className="text-3xl font-semibold text-white">
-                      {user.first_name}{age ? `, ${age}` : ''}
-                    </h1>
-                    <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#4ECDC4' }}>
-                      <span className="text-white text-sm font-bold">✓</span>
+              <Settings className="w-5 h-5 text-white/60" />
+            </button>
+          </div>
+
+          {/* Elegant Profile Summary */}
+          <div className="flex items-start gap-4">
+            {/* Avatar Section */}
+            <div className="relative">
+              <div className="relative">
+                <div
+                  className="w-20 h-20 rounded-full bg-cover bg-center border border-white/20"
+                  style={{ 
+                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)'
+                  }}
+                >
+                  {!user.photos?.[0] && (
+                    <div className="w-full h-full flex items-center justify-center text-white text-xl font-light">
+                      {user.first_name?.[0] || 'U'}
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4 text-white/80 text-sm">
-                    <span className="flex items-center gap-1">
-                      📍 {user.location || '5 miles away'}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      🟢 Recently active
-                    </span>
-                  </div>
+                  )}
                 </div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-black" style={{ backgroundColor: '#4ECDC4' }} />
+              </div>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white/10 border border-white/20 px-2 py-0.5 rounded-full text-xs text-white font-medium">
+                {profileCompletion}%
+              </div>
+            </div>
+
+            {/* Profile Meta */}
+            <div className="flex-1">
+              <h1 className="text-2xl font-semibold text-white mb-1">
+                {user.first_name}{age ? `, ${age}` : ''}
+              </h1>
+              <p className="text-white/70 text-sm mb-2">
+                {user.job_title || 'Professional'} · {user.industry || 'Technology'}
+              </p>
+              <div className="flex items-center gap-1.5 text-white/50 text-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+                </svg>
+                <span>5 miles away · {user.location || 'New York'}</span>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <button
-            onClick={() => setShowEditProfile(true)}
-            className="py-3 px-4 rounded-2xl font-medium text-white transition-all hover:scale-105 feature-card-enhanced"
-            style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}
-          >
-            <span className="mr-2">✏️</span>
-            Edit Profile
-          </button>
-          <button
-            onClick={() => setShowSettings(true)}
-            className="py-3 px-4 bg-white/10 border border-white/20 rounded-2xl font-medium text-white transition-all hover:bg-white/15 feature-card-enhanced"
-          >
-            <span className="mr-2">⚙️</span>
-            Settings
-          </button>
         </div>
 
         {/* Merge Wheel Prominent Placement */}
