@@ -635,20 +635,7 @@ export default function Profile({ user, logout }) {
             <span>Logout</span>
           </button>
 
-              <button
-                onClick={() => navigate('/store')}
-                className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center justify-between group feature-card-enhanced card-glow backdrop-blur-premium"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center icon-transition" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
-                    <span className="text-2xl">⚡</span>
-                  </div>
-                  <div className="text-left">
-                    <h4 className="text-white font-medium mb-0.5">Get seen by 11x more people</h4>
-                  </div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all" />
-              </button>
+        </div>
 
               <button
                 onClick={() => navigate('/store')}
