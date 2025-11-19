@@ -1535,9 +1535,9 @@ STORE_ITEMS = [
         }
     },
     {
-        "id": "skin_zodiac",
+        "id": "aura_zodiac",
         "name": "Zodiac Mystique",
-        "type": "skin",
+        "type": "aura",
         "price": 1500,
         "description": "Faint constellation patterns and zodiac symbols over your photo",
         "effect": {
