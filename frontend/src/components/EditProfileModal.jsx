@@ -461,7 +461,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <div className="flex-1">
                     <div className="text-white text-sm font-medium flex items-center gap-2">
                       Show my age
-                      <span className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-0.5 rounded-full font-bold">
+                      <span className="text-xs text-white px-2 py-0.5 rounded-full font-bold" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
                         PREMIUM
                       </span>
                     </div>
@@ -478,7 +478,7 @@ export default function EditProfileModal({ user, onSave, onClose }) {
                   <div className="flex-1">
                     <div className="text-white text-sm font-medium flex items-center gap-2">
                       Show my distance
-                      <span className="text-xs bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-0.5 rounded-full font-bold">
+                      <span className="text-xs text-white px-2 py-0.5 rounded-full font-bold" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
                         PREMIUM
                       </span>
                     </div>
