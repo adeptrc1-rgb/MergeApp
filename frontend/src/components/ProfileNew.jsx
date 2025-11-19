@@ -457,6 +457,7 @@ export default function Profile({ user, logout }) {
           <button
             onClick={() => navigate('/store')}
             className="bg-[#171717] rounded-lg p-3 border border-[#404040] hover:bg-[#1E1E1E] transition-all group"
+            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
           >
             <div className="flex flex-col items-center text-center">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
