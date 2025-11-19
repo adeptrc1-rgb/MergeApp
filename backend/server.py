@@ -1325,7 +1325,7 @@ STREAK_REWARDS = [
     {"day": 14, "type": "boost", "duration_minutes": 30, "tier": "gold", "milestone": True, "label": "Profile Boost (30 min)"},
     {"day": 15, "type": "multiplier", "amount": 1.15, "duration_hours": 24, "tier": "silver", "label": "1.15× Multiplier (24h)"},
     {"day": 16, "type": "coins", "amount": 30, "tier": "bronze", "label": "30 Star Coins"},
-    {"day": 17, "type": "cosmetic", "item": "rare_skin", "tier": "silver", "label": "Rare Premium Skin"},
+    {"day": 17, "type": "cosmetic", "item": "rare_aura", "tier": "silver", "label": "Rare Premium Aura"},
     {"day": 18, "type": "utility", "item": "super_like", "amount": 1, "tier": "bronze", "label": "1 Super Like"},
     {"day": 19, "type": "coins", "amount": 35, "tier": "bronze", "label": "35 Star Coins"},
     {"day": 20, "type": "utility", "item": "dm_token", "amount": 1, "tier": "silver", "label": "1 Direct Message Token"},
