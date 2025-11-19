@@ -414,7 +414,7 @@ export default function Profile({ user, logout }) {
           {/* Super Liked Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#171717] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
@@ -434,7 +434,7 @@ export default function Profile({ user, logout }) {
           {/* Merge Pulse Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#171717] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
@@ -454,7 +454,7 @@ export default function Profile({ user, logout }) {
           {/* Auras Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#171717] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
@@ -472,7 +472,7 @@ export default function Profile({ user, logout }) {
         </div>
 
         {/* Premium Upsell - Discreet */}
-        <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 mb-6">
+        <div className="bg-[#171717] rounded-xl p-4 border border-white/10 mb-6">
           <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-2">
             Merge Premium
           </div>
@@ -490,7 +490,7 @@ export default function Profile({ user, logout }) {
           {/* Merge Wheel */}
           <button
             onClick={() => setShowConnectionMatrix(true)}
-            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
+            className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
           >
             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#6C63FF' }}>
               <Zap className="w-5 h-5" />
@@ -510,7 +510,7 @@ export default function Profile({ user, logout }) {
           </button>
 
           {/* Profile Energy */}
-          <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4">
+          <div className="bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center gap-4">
             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#4ECDC4' }}>
               <Sparkles className="w-5 h-5" />
             </div>
@@ -530,7 +530,7 @@ export default function Profile({ user, logout }) {
           {/* Aura Lab - Auras */}
           <button
             onClick={() => navigate('/store')}
-            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all"
+            className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all"
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#667EEA' }}>
@@ -568,7 +568,7 @@ export default function Profile({ user, logout }) {
         <div className="space-y-2">
           <button
             onClick={() => setShowSettings(true)}
-            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all"
+            className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all"
           >
             <div className="flex items-center gap-3">
               <Settings className="w-5 h-5 text-white/60" />
@@ -577,7 +577,7 @@ export default function Profile({ user, logout }) {
             <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
-          <button className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all">
+          <button className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all">
             <div className="flex items-center gap-3">
               <Shield className="w-5 h-5 text-white/60" />
               <span className="text-white font-medium text-sm">Safety & Privacy</span>
@@ -585,7 +585,7 @@ export default function Profile({ user, logout }) {
             <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
-          <div className="bg-[#0A0A0A] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
+          <div className="bg-[#171717] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
             <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
               <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
               Your Rewards
