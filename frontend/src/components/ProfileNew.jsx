@@ -554,23 +554,6 @@ export default function Profile({ user, logout }) {
             )}
           </div>
 
-          <div className="bg-[#0A0A0A] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
-            <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
-              <Trophy className="w-5 h-5" style={{ color: '#FFD700' }} />
-              Your Stats
-            </h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center py-2 border-b border-white/5">
-                <span className="text-white/60 text-sm">Total Matches</span>
-                <span className="text-white text-lg font-light">{user.total_matches || 0}</span>
-              </div>
-              <div className="flex justify-between items-center py-2">
-                <span className="text-white/60 text-sm">Profile Completion</span>
-                <span className="text-white text-lg font-light">{profileCompletion}%</span>
-              </div>
-            </div>
-          </div>
-
           <button 
             onClick={logout} 
             className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all mt-4"
