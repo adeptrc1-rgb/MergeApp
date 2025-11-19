@@ -428,109 +428,19 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
-        {/* Interactive Profile Completion */}
-        <button
-          onClick={() => setShowEditProfile(true)}
-          className="mx-4 mb-6 p-5 rounded-2xl bg-[#171717] border border-[#404040] hover:bg-[#1E1E1E] transition-all"
-          style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
-        >
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-white font-semibold text-base">Complete Your Profile</h3>
-            <div className="text-[#6C63FF] font-bold text-lg">{profileCompletion}%</div>
-          </div>
-          <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden mb-3">
-            <div 
-              className="h-full rounded-full transition-all duration-500"
-              style={{ 
-                width: `${profileCompletion}%`,
-                background: 'linear-gradient(90deg, #6C63FF 0%, #4ECDC4 100%)'
-              }}
-            />
-          </div>
-          <p className="text-white/60 text-sm">Add more details to stand out and get better matches</p>
-        </button>
-
-        {/* Quick Action Blocks */}
-        <div className="grid grid-cols-3 gap-2 px-4 mb-3">
-          {/* Super Liked Block */}
-          <button
-            onClick={() => navigate('/store')}
-            className="bg-[#171717] rounded-lg p-3 border border-[#404040] hover:bg-[#1E1E1E] transition-all group"
-            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
-          >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
-                <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
-                }} />
-                <Heart className="w-4 h-4 relative z-10" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
-              </div>
-              <div className="text-lg font-semibold text-white mb-0.5">0</div>
-              <div className="text-[10px] text-white/50 mb-1.5">Super Likes</div>
-              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
-                GET MORE
-              </div>
-            </div>
-          </button>
-
-          {/* Merge Pulse Block */}
-          <button
-            onClick={() => navigate('/store')}
-            className="bg-[#171717] rounded-lg p-3 border border-[#404040] hover:bg-[#1E1E1E] transition-all group"
-            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
-          >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
-                <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
-                }} />
-                <Zap className="w-4 h-4 relative z-10" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
-              </div>
-              <div className="text-xs font-medium text-white mb-0.5">Merge</div>
-              <div className="text-[10px] text-white/50 mb-1.5">Pulse</div>
-              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
-                GET MORE
-              </div>
-            </div>
-          </button>
-
-          {/* Auras Block */}
-          <button
-            onClick={() => navigate('/store')}
-            className="bg-[#171717] rounded-lg p-3 border border-[#404040] hover:bg-[#1E1E1E] transition-all group"
-            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
-          >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
-                <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
-                }} />
-                <Sparkles className="w-4 h-4 relative z-10" style={{ color: '#667EEA' }} strokeWidth={2.5} />
-              </div>
-              <div className="text-xs font-medium text-white mb-2">Auras</div>
-              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
-                EXPLORE
-              </div>
-            </div>
-          </button>
-        </div>
-
         {/* Merge Premium - Prominent Upsell */}
-        <div className="mx-4 mb-6 rounded-3xl overflow-hidden" style={{ 
+        <div className="mx-8 mb-8 rounded-2xl overflow-hidden" style={{ 
           background: 'linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%)',
-          boxShadow: '0 8px 24px rgba(108, 99, 255, 0.25)'
+          boxShadow: '0 8px 20px rgba(108, 99, 255, 0.3)'
         }}>
-          <div className="p-6 text-center">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <Sparkles className="w-5 h-5 text-white" />
-              <h2 className="text-2xl font-bold text-white">Get Merge Premium</h2>
-            </div>
-            <p className="text-white/90 text-base mb-4">
+          <div className="p-8 text-center">
+            <h2 className="text-2xl font-bold text-white mb-2">Get Merge Premium</h2>
+            <p className="text-white/95 text-base mb-6">
               See who Likes You & more!
             </p>
             
-            {/* Feature Dots/Indicators */}
-            <div className="flex justify-center gap-2 mb-4">
+            {/* Feature Dots */}
+            <div className="flex justify-center gap-2 mb-6">
               <div className="w-2 h-2 rounded-full bg-white"></div>
               <div className="w-2 h-2 rounded-full bg-white/40"></div>
               <div className="w-2 h-2 rounded-full bg-white/40"></div>
@@ -538,7 +448,8 @@ export default function Profile({ user, logout }) {
 
             <button 
               onClick={() => navigate('/store')}
-              className="w-full py-4 bg-white text-[#6C63FF] rounded-2xl font-bold text-base hover:scale-105 transition-transform shadow-lg"
+              className="w-full py-4 bg-white rounded-full font-bold text-base hover:scale-105 transition-transform"
+              style={{ color: '#6C63FF' }}
             >
               GET MERGE PREMIUM
             </button>
