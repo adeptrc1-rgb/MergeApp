@@ -4,7 +4,7 @@ import axios from 'axios';
 import { 
   Shield, Zap, Gift, Award, LogOut, Sparkles, 
   ChevronRight, Check, Lock, Eye, EyeOff, Heart,
-  MessageCircle, RotateCcw, Coins, Clock, Trophy, Flame, Settings, Camera
+  MessageCircle, RotateCcw, Coins, Clock, Trophy, Flame, Settings
 } from 'lucide-react';
 import ConnectionMatrix from './ConnectionMatrix';
 import BottomNav from './BottomNav';
@@ -190,7 +190,7 @@ export default function Profile({ user, logout }) {
     <div 
       className="fixed inset-0 overflow-y-auto pb-24" 
       style={{ 
-        background: '#0A0A0A',
+        background: '#000000',
         scrollbarWidth: 'none', /* Firefox */
         msOverflowStyle: 'none' /* IE and Edge */
       }}
@@ -199,88 +199,6 @@ export default function Profile({ user, logout }) {
         /* Scrollbar hiding */
         .fixed.inset-0.overflow-y-auto::-webkit-scrollbar {
           display: none;
-        }
-
-        /* Circuit Background Animation */
-        @keyframes circuitFlow {
-          0% { background-position: 0 0; }
-          100% { background-position: 50px 50px; }
-        }
-
-        .circuit-background {
-          position: absolute;
-          inset: 0;
-          background: 
-            linear-gradient(90deg, transparent 50%, rgba(46, 134, 171, 0.03) 50%),
-            linear-gradient(transparent 50%, rgba(108, 99, 255, 0.03) 50%);
-          background-size: 50px 50px;
-          animation: circuitFlow 20s linear infinite;
-          pointer-events: none;
-        }
-
-        /* Neural Ring Animation */
-        @keyframes neuralPulse {
-          0%, 100% { 
-            transform: scale(1);
-            opacity: 0.6;
-          }
-          50% { 
-            transform: scale(1.1);
-            opacity: 1;
-          }
-        }
-
-        .neural-ring {
-          animation: neuralPulse 3s ease-in-out infinite;
-        }
-
-        /* Status Pulse */
-        @keyframes statusPulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-
-        .status-pulse {
-          animation: statusPulse 2s ease-in-out infinite;
-        }
-
-        /* Glow Pulse */
-        @keyframes glowPulse {
-          0%, 100% { 
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
-          }
-          50% { 
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
-          }
-        }
-
-        /* Quantum Button Shimmer */
-        @keyframes shimmer {
-          0% { left: -100%; }
-          100% { left: 100%; }
-        }
-
-        .quantum-shimmer::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
-          animation: shimmer 3s infinite;
-        }
-
-        /* Energy Wave Animation */
-        @keyframes energyWave {
-          0% {
-            transform: scale(1);
-            opacity: 0.8;
-          }
-          100% {
-            transform: scale(2);
-            opacity: 0;
-          }
         }
 
         /* Micro-interactions & Animations */
@@ -426,138 +344,145 @@ export default function Profile({ user, logout }) {
       `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
-        {/* Cyber-Organic Header */}
-        <div className="relative overflow-hidden pb-8">
-          {/* Circuit Background */}
-          <div className="circuit-background" />
-          
-          {/* Header Content */}
-          <div className="relative z-10">
-            {/* Minimal Top Bar */}
-            <div className="flex items-center justify-between p-4 mb-6">
-              <div className="text-white font-semibold text-lg tracking-wider">MERGE</div>
-              <button
-                onClick={() => setShowSettings(true)}
-                className="relative w-10 h-10 rounded-full border border-[#6C63FF]/30 flex items-center justify-center hover:border-[#6C63FF] transition-all"
-                style={{ background: 'rgba(108, 99, 255, 0.1)' }}
-              >
-                <div className="w-2 h-2 rounded-full bg-[#00F3FF] status-pulse" />
-              </button>
-            </div>
+        {/* Clean Header */}
+        <div className="pb-6 border-b border-white/10 mb-4">
+          {/* Top Bar */}
+          <div className="flex items-center justify-between mb-6">
+            <MergeLogo size="md" color="#FFFFFF" />
+            <button
+              onClick={() => setShowSettings(true)}
+              className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all"
+            >
+              <Settings className="w-5 h-5 text-white/60" />
+            </button>
+          </div>
 
-            {/* Bio-Organic Avatar */}
-            <div className="flex flex-col items-center px-8">
-              <button
-                onClick={() => setShowEditProfile(true)}
-                className="relative mb-4 group"
-              >
-                {/* Neural Ring */}
-                <div className="absolute inset-0 rounded-full border-2 border-[#6C63FF]/30 neural-ring" style={{ padding: '8px' }} />
-                
-                {/* Avatar Container */}
+          {/* Elegant Profile Summary */}
+          <div className="flex items-start gap-4">
+            {/* Avatar Section - Clickable */}
+            <button
+              onClick={() => setShowEditProfile(true)}
+              className="relative group cursor-pointer"
+            >
+              <div className="relative">
                 <div
-                  className="w-40 h-40 rounded-full bg-cover bg-center relative overflow-hidden"
+                  className="w-20 h-20 rounded-full bg-cover bg-center border border-white/20 transition-all group-hover:border-white/40"
                   style={{ 
-                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #2E86AB 100%)',
-                    border: '3px solid rgba(0, 243, 255, 0.3)'
+                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)'
                   }}
                 >
                   {!user.photos?.[0] && (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-white/30 text-5xl">🧠</span>
+                    <div className="w-full h-full flex items-center justify-center text-white text-xl font-light">
+                      {user.first_name?.[0] || 'U'}
                     </div>
                   )}
+                  {/* Edit overlay */}
+                  <div className="absolute inset-0 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="text-white text-xs">Edit</span>
+                  </div>
                 </div>
-
-                {/* Connection Node */}
-                <div className="absolute bottom-2 right-2 w-6 h-6 rounded-full border-2 border-black flex items-center justify-center" style={{ backgroundColor: '#4ECDC4' }}>
-                  <div className="w-2 h-2 rounded-full bg-white" />
-                </div>
-              </button>
-
-              {/* Avatar Status */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-2 h-2 rounded-full bg-[#4ECDC4] status-pulse" />
-                <span className="text-[#4ECDC4] text-sm font-medium">Optimal Connection</span>
+                <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-black" style={{ backgroundColor: '#4ECDC4' }} />
               </div>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white/10 border border-white/20 px-2 py-0.5 rounded-full text-xs text-white font-medium">
+                {profileCompletion}%
+              </div>
+            </button>
 
-              {/* Tech-Infused User Info */}
-              <h1 className="text-3xl font-bold text-white mb-3" style={{ textShadow: '0 0 20px rgba(108, 99, 255, 0.5)' }}>
+            {/* Profile Meta - Clickable */}
+            <button
+              onClick={() => setShowEditProfile(true)}
+              className="flex-1 text-left group"
+            >
+              <h1 className="text-2xl font-semibold text-white mb-1 group-hover:text-white/90 transition-colors">
                 {user.first_name}{age ? `, ${age}` : ''}
               </h1>
-              <div className="flex flex-wrap gap-2 justify-center">
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white border border-[#6C63FF]/30" style={{ background: 'rgba(108, 99, 255, 0.1)' }}>
-                  {user.job_title || 'Art Director'}
-                </span>
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white border border-[#2E86AB]/30" style={{ background: 'rgba(46, 134, 171, 0.1)' }}>
-                  {user.industry || 'Technology'}
-                </span>
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white border border-[#4ECDC4]/30" style={{ background: 'rgba(78, 205, 196, 0.1)' }}>
-                  5mi
-                </span>
+              <p className="text-white/70 text-sm mb-2 group-hover:text-white/80 transition-colors">
+                {user.job_title || 'Professional'} · {user.industry || 'Technology'}
+              </p>
+              <div className="flex items-center gap-1.5 text-white/50 text-sm group-hover:text-white/60 transition-colors">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+                </svg>
+                <span>5 miles away · {user.location || 'New York'}</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Three Action Buttons */}
-        <div className="grid grid-cols-3 gap-6 px-12 mb-12">
-          <button
-            onClick={() => setShowSettings(true)}
-            className="flex flex-col items-center gap-3"
-          >
-            <div className="w-16 h-16 rounded-full bg-white/5 border border-[#404040] flex items-center justify-center hover:bg-white/10 transition-all">
-              <Settings className="w-7 h-7 text-white/70" />
-            </div>
-            <span className="text-white/60 text-xs font-semibold tracking-wide">SETTINGS</span>
-          </button>
-
-          <button
-            onClick={() => setShowEditProfile(true)}
-            className="flex flex-col items-center gap-3"
-          >
-            <div className="w-16 h-16 rounded-full bg-white/5 border border-[#404040] flex items-center justify-center hover:bg-white/10 transition-all">
-              <Camera className="w-7 h-7 text-white/70" />
-            </div>
-            <span className="text-white/60 text-xs font-semibold tracking-wide">ADD MEDIA</span>
-          </button>
-
-          <button
-            className="flex flex-col items-center gap-3"
-          >
-            <div className="w-16 h-16 rounded-full bg-white/5 border border-[#404040] flex items-center justify-center hover:bg-white/10 transition-all">
-              <Shield className="w-7 h-7 text-white/70" />
-            </div>
-            <span className="text-white/60 text-xs font-semibold tracking-wide">SAFETY</span>
-          </button>
-        </div>
-
-        {/* Merge Premium - Prominent Upsell */}
-        <div className="mx-8 mb-8 rounded-2xl overflow-hidden" style={{ 
-          background: 'linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%)',
-          boxShadow: '0 8px 20px rgba(108, 99, 255, 0.3)'
-        }}>
-          <div className="p-8 text-center">
-            <h2 className="text-2xl font-bold text-white mb-2">Get Merge Premium</h2>
-            <p className="text-white/95 text-base mb-6">
-              See who Likes You & more!
-            </p>
-            
-            {/* Feature Dots */}
-            <div className="flex justify-center gap-2 mb-6">
-              <div className="w-2 h-2 rounded-full bg-white"></div>
-              <div className="w-2 h-2 rounded-full bg-white/40"></div>
-              <div className="w-2 h-2 rounded-full bg-white/40"></div>
-            </div>
-
-            <button 
-              onClick={() => navigate('/store')}
-              className="w-full py-4 bg-white rounded-full font-bold text-base hover:scale-105 transition-transform"
-              style={{ color: '#6C63FF' }}
-            >
-              GET MERGE PREMIUM
             </button>
           </div>
+        </div>
+
+        {/* Quick Action Blocks */}
+        <div className="grid grid-cols-3 gap-2 mb-3">
+          {/* Super Liked Block */}
+          <button
+            onClick={() => navigate('/store')}
+            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
+                <div className="absolute inset-0 rounded-full" style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
+                }} />
+                <Heart className="w-4 h-4 relative z-10" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
+              </div>
+              <div className="text-lg font-semibold text-white mb-0.5">0</div>
+              <div className="text-[10px] text-white/50 mb-1.5">Super Likes</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+                GET MORE
+              </div>
+            </div>
+          </button>
+
+          {/* Merge Pulse Block */}
+          <button
+            onClick={() => navigate('/store')}
+            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
+                <div className="absolute inset-0 rounded-full" style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
+                }} />
+                <Zap className="w-4 h-4 relative z-10" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
+              </div>
+              <div className="text-xs font-medium text-white mb-0.5">Merge</div>
+              <div className="text-[10px] text-white/50 mb-1.5">Pulse</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+                GET MORE
+              </div>
+            </div>
+          </button>
+
+          {/* Auras Block */}
+          <button
+            onClick={() => navigate('/store')}
+            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
+                <div className="absolute inset-0 rounded-full" style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
+                }} />
+                <Sparkles className="w-4 h-4 relative z-10" style={{ color: '#667EEA' }} strokeWidth={2.5} />
+              </div>
+              <div className="text-xs font-medium text-white mb-2">Auras</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+                EXPLORE
+              </div>
+            </div>
+          </button>
+        </div>
+
+        {/* Premium Upsell - Discreet */}
+        <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 mb-6">
+          <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-2">
+            Merge Premium
+          </div>
+          <h4 className="text-white font-medium text-sm mb-1">Enhanced Experience</h4>
+          <p className="text-white/60 text-xs mb-3">
+            Unlimited likes, advanced filters, and profile analytics
+          </p>
+          <button className="w-full py-2 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg text-white text-xs font-medium transition-all">
+            Learn More
+          </button>
         </div>
 
         {/* Merge Features - Sophisticated Treatment */}
@@ -565,8 +490,7 @@ export default function Profile({ user, logout }) {
           {/* Merge Wheel */}
           <button
             onClick={() => setShowConnectionMatrix(true)}
-            className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center gap-4 hover:bg-[#1E1E1E] transition-all"
-            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
+            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
           >
             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#6C63FF' }}>
               <Zap className="w-5 h-5" />
@@ -586,7 +510,7 @@ export default function Profile({ user, logout }) {
           </button>
 
           {/* Profile Energy */}
-          <div className="bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center gap-4" style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}>
+          <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4">
             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#4ECDC4' }}>
               <Sparkles className="w-5 h-5" />
             </div>
@@ -602,50 +526,13 @@ export default function Profile({ user, logout }) {
               </div>
             </div>
           </div>
-
-          {/* Aura Lab - Auras */}
-          <button
-            onClick={() => navigate('/store')}
-            className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] hover:bg-[#1E1E1E] transition-all"
-            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#667EEA' }}>
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div className="flex-1 text-left">
-                <h4 className="text-white font-medium text-sm mb-0.5">Aura Lab</h4>
-                <p className="text-white/50 text-xs">Customize your profile with premium Auras</p>
-              </div>
-              <ChevronRight className="w-5 h-5 text-white/30" />
-            </div>
-            {/* Preview Auras */}
-            <div className="flex gap-2 mt-3 overflow-x-auto">
-              <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden">
-                <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 50%, #8B5CF6 0%, #3B0764 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px] font-medium">Galaxy</div>
-              </div>
-              <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden">
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #FCA5A5 0%, #FBBF24 50%, #A78BFA 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center text-white/80 text-[10px] font-medium">Pastel</div>
-              </div>
-              <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black" />
-                <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 50%, #00F5FF 0%, transparent 70%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px] font-medium">Neon</div>
-              </div>
-              <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden bg-gradient-to-br from-blue-900 to-purple-900">
-                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px] font-medium">Zodiac</div>
-              </div>
-            </div>
-          </button>
         </div>
 
         {/* Account Actions */}
         <div className="space-y-2">
           <button
             onClick={() => setShowSettings(true)}
-            className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center justify-between hover:bg-[#1E1E1E] transition-all"
+            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all"
           >
             <div className="flex items-center gap-3">
               <Settings className="w-5 h-5 text-white/60" />
@@ -654,7 +541,7 @@ export default function Profile({ user, logout }) {
             <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
-          <button className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center justify-between hover:bg-[#1E1E1E] transition-all">
+          <button className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all">
             <div className="flex items-center gap-3">
               <Shield className="w-5 h-5 text-white/60" />
               <span className="text-white font-medium text-sm">Safety & Privacy</span>
@@ -662,7 +549,7 @@ export default function Profile({ user, logout }) {
             <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
-          <div className="bg-[#171717] rounded-xl p-6 border border-[#404040] backdrop-blur-premium" style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}>
+          <div className="bg-[#0A0A0A] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
             <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
               <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
               Your Rewards
@@ -684,7 +571,7 @@ export default function Profile({ user, logout }) {
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <div className="text-2xl mb-2" style={{ color: '#6C63FF' }}>⚡</div>
                 <div className="text-2xl font-light text-white">{user.profile_boosts || 0}</div>
                 <div className="text-xs text-white/50">Boosts</div>
@@ -696,7 +583,7 @@ export default function Profile({ user, logout }) {
                 )}
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <div className="text-2xl mb-2" style={{ color: '#4ECDC4' }}>💫</div>
                 <div className="text-2xl font-light text-white">{user.super_likes || 0}</div>
                 <div className="text-xs text-white/50">Super Likes</div>
@@ -708,7 +595,7 @@ export default function Profile({ user, logout }) {
                 )}
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <div className="text-2xl mb-2" style={{ color: '#667EEA' }}>💬</div>
                 <div className="text-2xl font-light text-white">{user.direct_messages || 0}</div>
                 <div className="text-xs text-white/50">DMs</div>
@@ -720,7 +607,7 @@ export default function Profile({ user, logout }) {
                 )}
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <div className="text-2xl mb-2" style={{ color: '#FFD700' }}>⭐</div>
                 <div className="text-2xl font-light text-white">{user.star_coins || 0}</div>
                 <div className="text-xs text-white/50">Star Coins</div>
@@ -731,7 +618,7 @@ export default function Profile({ user, logout }) {
 
           <button 
             onClick={logout} 
-            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-[#404040] rounded-xl py-4 flex items-center justify-center gap-2 transition-all mt-4"
+            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all mt-4"
           >
             <LogOut className="w-5 h-5" />
             <span>Logout</span>
@@ -818,11 +705,11 @@ function SettingsModal({ user, onSave, onClose }) {
       onClick={onClose}
     >
       <div 
-        className="relative bg-[#0a0a0a] border border-[#404040] rounded-2xl max-w-md w-full"
+        className="relative bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="border-b border-[#404040] p-6 flex items-center justify-between">
+        <div className="border-b border-white/10 p-6 flex items-center justify-between">
           <h2 className="text-xl font-light text-white flex items-center gap-2">
             <Settings className="w-5 h-5" />
             Settings
@@ -840,7 +727,7 @@ function SettingsModal({ user, onSave, onClose }) {
           {/* Age Preferences */}
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Age Preferences</h3>
-            <div className="space-y-4 p-4 rounded-lg border border-[#404040] bg-white/5">
+            <div className="space-y-4 p-4 rounded-lg border border-white/10 bg-white/5">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex-1">
                   <label className="text-white text-sm font-medium">Min Age</label>
@@ -874,7 +761,7 @@ function SettingsModal({ user, onSave, onClose }) {
           {/* Distance Preferences */}
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Distance Preferences</h3>
-            <div className="space-y-3 p-4 rounded-lg border border-[#404040] bg-white/5">
+            <div className="space-y-3 p-4 rounded-lg border border-white/10 bg-white/5">
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="text-white text-sm font-medium">Maximum Distance</label>
@@ -902,7 +789,7 @@ function SettingsModal({ user, onSave, onClose }) {
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control Who Sees You</h3>
             <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
                 <input
                   type="radio"
                   name="showMeMode"
@@ -916,7 +803,7 @@ function SettingsModal({ user, onSave, onClose }) {
                 </div>
               </label>
               
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
                 <input
                   type="radio"
                   name="showMeMode"
@@ -937,7 +824,7 @@ function SettingsModal({ user, onSave, onClose }) {
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control My Visibility</h3>
             
             <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
                 <input
                   type="radio"
                   name="visibility"
@@ -951,7 +838,7 @@ function SettingsModal({ user, onSave, onClose }) {
                 </div>
               </label>
               
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
                 <input
                   type="radio"
                   name="visibility"
@@ -1036,10 +923,10 @@ function SettingsModal({ user, onSave, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="border-t border-[#404040] p-6 flex gap-3">
+        <div className="border-t border-white/10 p-6 flex gap-3">
           <button
             onClick={onClose}
-            className="flex-1 bg-white/5 text-white/80 hover:bg-white/10 border border-[#404040] rounded-xl py-3 font-medium transition-all"
+            className="flex-1 bg-white/5 text-white/80 hover:bg-white/10 border border-white/10 rounded-xl py-3 font-medium transition-all"
             disabled={saving}
           >
             Cancel
