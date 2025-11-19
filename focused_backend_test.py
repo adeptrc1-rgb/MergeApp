@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 
 class ASignBackendTester:
-    def __init__(self, base_url="https://datemerge.preview.emergentagent.com"):
+    def __init__(self, base_url="https://dating-ui-merge.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_cookies = None
