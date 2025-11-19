@@ -424,7 +424,7 @@ export default function Profile({ user, logout }) {
                 <Heart className="w-4 h-4 relative z-10" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
               </div>
               <div className="text-lg font-semibold text-white mb-0.5">0</div>
-              <div className="text-[10px] text-white/50 mb-1.5">Super Liked</div>
+              <div className="text-[10px] text-white/50 mb-1.5">Super Likes</div>
               <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
                 GET MORE
               </div>
