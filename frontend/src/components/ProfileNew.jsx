@@ -636,10 +636,6 @@ export default function Profile({ user, logout }) {
           </button>
 
         </div>
-
-      </div>
-
-        </div>
       </div>
 
       <BottomNav currentTab="profile" navigate={navigate} />
