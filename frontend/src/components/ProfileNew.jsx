@@ -397,36 +397,34 @@ export default function Profile({ user, logout }) {
         </div>
 
         {/* Three Action Buttons */}
-        <div className="grid grid-cols-3 gap-4 px-4 mb-6">
+        <div className="grid grid-cols-3 gap-6 px-12 mb-12">
           <button
             onClick={() => setShowSettings(true)}
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-[#171717] border border-[#404040] hover:bg-[#1E1E1E] transition-all"
-            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
+            className="flex flex-col items-center gap-3"
           >
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-              <Settings className="w-6 h-6 text-white/70" />
+            <div className="w-16 h-16 rounded-full bg-white/5 border border-[#404040] flex items-center justify-center hover:bg-white/10 transition-all">
+              <Settings className="w-7 h-7 text-white/70" />
             </div>
-            <span className="text-white/80 text-xs font-medium">SETTINGS</span>
+            <span className="text-white/60 text-xs font-semibold tracking-wide">SETTINGS</span>
           </button>
 
           <button
             onClick={() => setShowEditProfile(true)}
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-gradient-to-br from-[#FF4458] to-[#FF6B7A] hover:from-[#FF5566] hover:to-[#FF7788] transition-all shadow-lg"
+            className="flex flex-col items-center gap-3"
           >
-            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-              <Camera className="w-6 h-6 text-white" />
+            <div className="w-16 h-16 rounded-full bg-white/5 border border-[#404040] flex items-center justify-center hover:bg-white/10 transition-all">
+              <Camera className="w-7 h-7 text-white/70" />
             </div>
-            <span className="text-white text-xs font-medium">ADD MEDIA</span>
+            <span className="text-white/60 text-xs font-semibold tracking-wide">ADD MEDIA</span>
           </button>
 
           <button
-            className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-[#171717] border border-[#404040] hover:bg-[#1E1E1E] transition-all"
-            style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}
+            className="flex flex-col items-center gap-3"
           >
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-              <Shield className="w-6 h-6 text-white/70" />
+            <div className="w-16 h-16 rounded-full bg-white/5 border border-[#404040] flex items-center justify-center hover:bg-white/10 transition-all">
+              <Shield className="w-7 h-7 text-white/70" />
             </div>
-            <span className="text-white/80 text-xs font-medium">SAFETY</span>
+            <span className="text-white/60 text-xs font-semibold tracking-wide">SAFETY</span>
           </button>
         </div>
 
