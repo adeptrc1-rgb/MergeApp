@@ -527,7 +527,7 @@ export default function Profile({ user, logout }) {
             </div>
           </div>
 
-          {/* Aura Lab - Skins */}
+          {/* Aura Lab - Auras */}
           <button
             onClick={() => navigate('/store')}
             className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all"
@@ -538,27 +538,27 @@ export default function Profile({ user, logout }) {
               </div>
               <div className="flex-1 text-left">
                 <h4 className="text-white font-medium text-sm mb-0.5">Aura Lab</h4>
-                <p className="text-white/50 text-xs">Customize your profile with premium skins</p>
+                <p className="text-white/50 text-xs">Customize your profile with premium Auras</p>
               </div>
               <ChevronRight className="w-5 h-5 text-white/30" />
             </div>
-            {/* Preview skins */}
+            {/* Preview Auras */}
             <div className="flex gap-2 mt-3 overflow-x-auto">
               <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden">
                 <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 50%, #8B5CF6 0%, #3B0764 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px]">Galaxy</div>
+                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px] font-medium">Galaxy</div>
               </div>
               <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden">
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #FCA5A5 0%, #FBBF24 50%, #A78BFA 100%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center text-white/80 text-[10px]">Pastel</div>
+                <div className="absolute inset-0 flex items-center justify-center text-white/80 text-[10px] font-medium">Pastel</div>
               </div>
               <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black" />
                 <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 50%, #00F5FF 0%, transparent 70%)' }} />
-                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px]">Neon</div>
+                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px] font-medium">Neon</div>
               </div>
               <div className="flex-shrink-0 w-16 h-16 rounded-lg border border-white/20 relative overflow-hidden bg-gradient-to-br from-blue-900 to-purple-900">
-                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px]">Zodiac</div>
+                <div className="absolute inset-0 flex items-center justify-center text-white/60 text-[10px] font-medium">Zodiac</div>
               </div>
             </div>
           </button>
