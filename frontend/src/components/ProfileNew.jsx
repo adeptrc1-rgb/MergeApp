@@ -345,7 +345,7 @@ export default function Profile({ user, logout }) {
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
         {/* Clean Header */}
-        <div className="pb-6 border-b border-white/10 mb-6">
+        <div className="pb-6 border-b border-white/10 mb-4">
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6">
             <MergeLogo size="md" color="#FFFFFF" />
