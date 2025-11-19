@@ -344,69 +344,62 @@ export default function Profile({ user, logout }) {
       `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
-        {/* Clean Header */}
-        <div className="pb-6 mb-4" style={{ borderBottom: '1px solid #404040' }}>
-          {/* Top Bar */}
-          <div className="flex items-center justify-between mb-6">
-            <MergeLogo size="md" color="#FFFFFF" />
-            <button
-              onClick={() => setShowSettings(true)}
-              className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all"
-            >
-              <Settings className="w-5 h-5 text-white/60" />
-            </button>
-          </div>
+        {/* Top Navigation Bar */}
+        <div className="flex items-center justify-between p-4 mb-4">
+          <button className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all">
+            <span className="text-[#FF4458] text-xl">🔥</span>
+          </button>
+          <MergeLogo size="md" color="#FFFFFF" />
+          <button
+            onClick={() => setShowSettings(true)}
+            className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all"
+          >
+            <Settings className="w-5 h-5 text-white/60" />
+          </button>
+        </div>
 
-          {/* Elegant Profile Summary */}
-          <div className="flex items-start gap-4">
-            {/* Avatar Section - Clickable */}
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="relative group cursor-pointer"
+        {/* Large Profile Photo */}
+        <div className="px-4 mb-6">
+          <button
+            onClick={() => setShowEditProfile(true)}
+            className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden group"
+            style={{ boxShadow: '0 8px 24px rgba(59, 130, 246, 0.12)' }}
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-105"
+              style={{ 
+                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)',
+                transitionDuration: '300ms'
+              }}
             >
-              <div className="relative">
-                <div
-                  className="w-20 h-20 rounded-full bg-cover bg-center border border-white/20 transition-all group-hover:border-white/40"
-                  style={{ 
-                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)'
-                  }}
-                >
-                  {!user.photos?.[0] && (
-                    <div className="w-full h-full flex items-center justify-center text-white text-xl font-light">
-                      {user.first_name?.[0] || 'U'}
-                    </div>
-                  )}
-                  {/* Edit overlay */}
-                  <div className="absolute inset-0 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="text-white text-xs">Edit</span>
-                  </div>
+              {!user.photos?.[0] && (
+                <div className="w-full h-full flex items-center justify-center text-white text-6xl font-light">
+                  {user.first_name?.[0] || 'U'}
                 </div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-black" style={{ backgroundColor: '#4ECDC4' }} />
-              </div>
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white/10 border border-white/20 px-2 py-0.5 rounded-full text-xs text-white font-medium">
-                {profileCompletion}%
-              </div>
-            </button>
+              )}
+            </div>
+            
+            {/* Edit Pencil Icon */}
+            <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </div>
 
-            {/* Profile Meta - Clickable */}
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="flex-1 text-left group"
-            >
-              <h1 className="text-2xl font-semibold text-white mb-1 group-hover:text-white/90 transition-colors">
+            {/* Gradient Overlay at Bottom */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent" />
+            
+            {/* Name and Info at Bottom */}
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <h1 className="text-3xl font-bold text-white mb-1">
                 {user.first_name}{age ? `, ${age}` : ''}
               </h1>
-              <p className="text-white/70 text-sm mb-2 group-hover:text-white/80 transition-colors">
+              <p className="text-white/90 text-base">
                 {user.job_title || 'Professional'} · {user.industry || 'Technology'}
               </p>
-              <div className="flex items-center gap-1.5 text-white/50 text-sm group-hover:text-white/60 transition-colors">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
-                </svg>
-                <span>5 miles away · {user.location || 'New York'}</span>
-              </div>
-            </button>
-          </div>
+            </div>
+          </button>
         </div>
 
         {/* Quick Action Blocks */}
