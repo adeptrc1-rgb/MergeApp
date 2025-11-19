@@ -1552,9 +1552,9 @@ STORE_ITEMS = [
         }
     },
     {
-        "id": "skin_neon",
+        "id": "aura_neon",
         "name": "Neon Nights",
-        "type": "skin",
+        "type": "aura",
         "price": 1300,
         "description": "Dark overlay with glowing neon accents and floating icons",
         "effect": {
