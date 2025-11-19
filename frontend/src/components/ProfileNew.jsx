@@ -475,7 +475,7 @@ export default function Profile({ user, logout }) {
         </div>
 
         {/* Premium Upsell - Discreet */}
-        <div className="bg-[#171717] rounded-xl p-4 border border-[#404040] mb-6">
+        <div className="bg-[#171717] rounded-xl p-4 border border-[#404040] mb-6" style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.08)' }}>
           <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-2">
             Merge Premium
           </div>
