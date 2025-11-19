@@ -506,16 +506,16 @@ export default function Profile({ user, logout }) {
 
               <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
                 <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-purple-400" />
+                  <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
                   Your Rewards
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <Zap className="w-5 h-5 text-purple-400 mb-2" />
+                    <div className="text-2xl mb-2" style={{ color: '#6C63FF' }}>⚡</div>
                     <div className="text-2xl font-light text-white">{user.profile_boosts || 0}</div>
                     <div className="text-xs text-white/50">Boosts</div>
                     {timeRemaining.boosts && (
-                      <div className="flex items-center gap-1 text-xs text-orange-400 mt-1">
+                      <div className="flex items-center gap-1 text-xs mt-1" style={{ color: '#FFE66D' }}>
                         <Clock className="w-3 h-3" />
                         <span>{timeRemaining.boosts}</span>
                       </div>
@@ -523,11 +523,11 @@ export default function Profile({ user, logout }) {
                   </div>
 
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <Heart className="w-5 h-5 text-pink-400 mb-2" />
+                    <div className="text-2xl mb-2" style={{ color: '#4ECDC4' }}>💫</div>
                     <div className="text-2xl font-light text-white">{user.super_likes || 0}</div>
                     <div className="text-xs text-white/50">Super Likes</div>
                     {timeRemaining.super_likes && (
-                      <div className="flex items-center gap-1 text-xs text-orange-400 mt-1">
+                      <div className="flex items-center gap-1 text-xs mt-1" style={{ color: '#FFE66D' }}>
                         <Clock className="w-3 h-3" />
                         <span>{timeRemaining.super_likes}</span>
                       </div>
@@ -535,11 +535,11 @@ export default function Profile({ user, logout }) {
                   </div>
 
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <MessageCircle className="w-5 h-5 text-blue-400 mb-2" />
+                    <div className="text-2xl mb-2" style={{ color: '#667EEA' }}>💬</div>
                     <div className="text-2xl font-light text-white">{user.direct_messages || 0}</div>
                     <div className="text-xs text-white/50">DMs</div>
                     {timeRemaining.dms && (
-                      <div className="flex items-center gap-1 text-xs text-orange-400 mt-1">
+                      <div className="flex items-center gap-1 text-xs mt-1" style={{ color: '#FFE66D' }}>
                         <Clock className="w-3 h-3" />
                         <span>{timeRemaining.dms}</span>
                       </div>
@@ -547,9 +547,9 @@ export default function Profile({ user, logout }) {
                   </div>
 
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <Coins className="w-5 h-5 text-yellow-400 mb-2" />
+                    <div className="text-2xl mb-2" style={{ color: '#FFD700' }}>⭐</div>
                     <div className="text-2xl font-light text-white">{user.star_coins || 0}</div>
-                    <div className="text-xs text-white/50">Coins</div>
+                    <div className="text-xs text-white/50">Star Coins</div>
                   </div>
                 </div>
               </div>
