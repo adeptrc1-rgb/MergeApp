@@ -414,7 +414,7 @@ export default function Profile({ user, logout }) {
           {/* Super Liked Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#171717] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#171717] rounded-lg p-3 border border-[#404040] hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
@@ -434,7 +434,7 @@ export default function Profile({ user, logout }) {
           {/* Merge Pulse Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#171717] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#171717] rounded-lg p-3 border border-[#404040] hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
@@ -454,7 +454,7 @@ export default function Profile({ user, logout }) {
           {/* Auras Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#171717] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="bg-[#171717] rounded-lg p-3 border border-[#404040] hover:bg-[#1A1A1A] transition-all group"
           >
             <div className="flex flex-col items-center text-center">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
@@ -472,7 +472,7 @@ export default function Profile({ user, logout }) {
         </div>
 
         {/* Premium Upsell - Discreet */}
-        <div className="bg-[#171717] rounded-xl p-4 border border-white/10 mb-6">
+        <div className="bg-[#171717] rounded-xl p-4 border border-[#404040] mb-6">
           <div className="inline-block bg-white/10 px-2 py-0.5 rounded text-white/80 text-xs font-medium mb-2">
             Merge Premium
           </div>
@@ -490,7 +490,7 @@ export default function Profile({ user, logout }) {
           {/* Merge Wheel */}
           <button
             onClick={() => setShowConnectionMatrix(true)}
-            className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
+            className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
           >
             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#6C63FF' }}>
               <Zap className="w-5 h-5" />
@@ -510,7 +510,7 @@ export default function Profile({ user, logout }) {
           </button>
 
           {/* Profile Energy */}
-          <div className="bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center gap-4">
+          <div className="bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center gap-4">
             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#4ECDC4' }}>
               <Sparkles className="w-5 h-5" />
             </div>
@@ -530,7 +530,7 @@ export default function Profile({ user, logout }) {
           {/* Aura Lab - Auras */}
           <button
             onClick={() => navigate('/store')}
-            className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 hover:bg-[#1A1A1A] transition-all"
+            className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] hover:bg-[#1A1A1A] transition-all"
           >
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#667EEA' }}>
@@ -568,7 +568,7 @@ export default function Profile({ user, logout }) {
         <div className="space-y-2">
           <button
             onClick={() => setShowSettings(true)}
-            className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all"
+            className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center justify-between hover:bg-[#1A1A1A] transition-all"
           >
             <div className="flex items-center gap-3">
               <Settings className="w-5 h-5 text-white/60" />
@@ -577,7 +577,7 @@ export default function Profile({ user, logout }) {
             <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
-          <button className="w-full bg-[#171717] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all">
+          <button className="w-full bg-[#171717] rounded-xl p-4 border border-[#404040] flex items-center justify-between hover:bg-[#1A1A1A] transition-all">
             <div className="flex items-center gap-3">
               <Shield className="w-5 h-5 text-white/60" />
               <span className="text-white font-medium text-sm">Safety & Privacy</span>
@@ -585,7 +585,7 @@ export default function Profile({ user, logout }) {
             <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
-          <div className="bg-[#171717] rounded-xl p-6 border border-white/10 backdrop-blur-premium">
+          <div className="bg-[#171717] rounded-xl p-6 border border-[#404040] backdrop-blur-premium">
             <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
               <Award className="w-5 h-5" style={{ color: '#6C63FF' }} />
               Your Rewards
@@ -607,7 +607,7 @@ export default function Profile({ user, logout }) {
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
                 <div className="text-2xl mb-2" style={{ color: '#6C63FF' }}>⚡</div>
                 <div className="text-2xl font-light text-white">{user.profile_boosts || 0}</div>
                 <div className="text-xs text-white/50">Boosts</div>
@@ -619,7 +619,7 @@ export default function Profile({ user, logout }) {
                 )}
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
                 <div className="text-2xl mb-2" style={{ color: '#4ECDC4' }}>💫</div>
                 <div className="text-2xl font-light text-white">{user.super_likes || 0}</div>
                 <div className="text-xs text-white/50">Super Likes</div>
@@ -631,7 +631,7 @@ export default function Profile({ user, logout }) {
                 )}
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
                 <div className="text-2xl mb-2" style={{ color: '#667EEA' }}>💬</div>
                 <div className="text-2xl font-light text-white">{user.direct_messages || 0}</div>
                 <div className="text-xs text-white/50">DMs</div>
@@ -643,7 +643,7 @@ export default function Profile({ user, logout }) {
                 )}
               </div>
 
-              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+              <div className="bg-white/5 rounded-xl p-4 border border-[#404040]">
                 <div className="text-2xl mb-2" style={{ color: '#FFD700' }}>⭐</div>
                 <div className="text-2xl font-light text-white">{user.star_coins || 0}</div>
                 <div className="text-xs text-white/50">Star Coins</div>
@@ -654,7 +654,7 @@ export default function Profile({ user, logout }) {
 
           <button 
             onClick={logout} 
-            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all mt-4"
+            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-[#404040] rounded-xl py-4 flex items-center justify-center gap-2 transition-all mt-4"
           >
             <LogOut className="w-5 h-5" />
             <span>Logout</span>
@@ -741,11 +741,11 @@ function SettingsModal({ user, onSave, onClose }) {
       onClick={onClose}
     >
       <div 
-        className="relative bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full"
+        className="relative bg-[#0a0a0a] border border-[#404040] rounded-2xl max-w-md w-full"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="border-b border-white/10 p-6 flex items-center justify-between">
+        <div className="border-b border-[#404040] p-6 flex items-center justify-between">
           <h2 className="text-xl font-light text-white flex items-center gap-2">
             <Settings className="w-5 h-5" />
             Settings
@@ -763,7 +763,7 @@ function SettingsModal({ user, onSave, onClose }) {
           {/* Age Preferences */}
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Age Preferences</h3>
-            <div className="space-y-4 p-4 rounded-lg border border-white/10 bg-white/5">
+            <div className="space-y-4 p-4 rounded-lg border border-[#404040] bg-white/5">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex-1">
                   <label className="text-white text-sm font-medium">Min Age</label>
@@ -797,7 +797,7 @@ function SettingsModal({ user, onSave, onClose }) {
           {/* Distance Preferences */}
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Distance Preferences</h3>
-            <div className="space-y-3 p-4 rounded-lg border border-white/10 bg-white/5">
+            <div className="space-y-3 p-4 rounded-lg border border-[#404040] bg-white/5">
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="text-white text-sm font-medium">Maximum Distance</label>
@@ -825,7 +825,7 @@ function SettingsModal({ user, onSave, onClose }) {
           <div className="space-y-3">
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control Who Sees You</h3>
             <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
                 <input
                   type="radio"
                   name="showMeMode"
@@ -839,7 +839,7 @@ function SettingsModal({ user, onSave, onClose }) {
                 </div>
               </label>
               
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
                 <input
                   type="radio"
                   name="showMeMode"
@@ -860,7 +860,7 @@ function SettingsModal({ user, onSave, onClose }) {
             <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control My Visibility</h3>
             
             <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
                 <input
                   type="radio"
                   name="visibility"
@@ -874,7 +874,7 @@ function SettingsModal({ user, onSave, onClose }) {
                 </div>
               </label>
               
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-[#404040]">
                 <input
                   type="radio"
                   name="visibility"
@@ -959,10 +959,10 @@ function SettingsModal({ user, onSave, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="border-t border-white/10 p-6 flex gap-3">
+        <div className="border-t border-[#404040] p-6 flex gap-3">
           <button
             onClick={onClose}
-            className="flex-1 bg-white/5 text-white/80 hover:bg-white/10 border border-white/10 rounded-xl py-3 font-medium transition-all"
+            className="flex-1 bg-white/5 text-white/80 hover:bg-white/10 border border-[#404040] rounded-xl py-3 font-medium transition-all"
             disabled={saving}
           >
             Cancel
