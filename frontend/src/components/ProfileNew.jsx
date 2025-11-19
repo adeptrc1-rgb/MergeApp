@@ -753,11 +753,11 @@ export default function Profile({ user, logout }) {
                     <div className="text-2xl font-light text-white">{user.star_coins || 0}</div>
                     <div className="text-xs text-white/50">Star Coins</div>
                   </div>
-                </div>
+                  </div>
                 )}
               </div>
 
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-premium">
                 <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
                   <Trophy className="w-5 h-5" style={{ color: '#FFD700' }} />
                   Your Stats
