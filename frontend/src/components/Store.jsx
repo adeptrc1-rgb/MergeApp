@@ -145,15 +145,15 @@ export default function Store({ user }) {
               Lights
             </button>
             <button
-              onClick={() => setActiveTab('skins')}
+              onClick={() => setActiveTab('auras')}
               className={`flex-1 px-4 py-2 rounded-lg transition-all ${
-                activeTab === 'skins'
+                activeTab === 'auras'
                   ? 'bg-[#2563EB] border border-[#2563EB] text-white'
                   : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
               }`}
             >
               <Flame className="w-4 h-4 inline mr-2" />
-              Skins
+              Auras
             </button>
           </div>
         </div>
