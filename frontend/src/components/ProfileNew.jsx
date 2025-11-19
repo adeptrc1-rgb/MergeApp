@@ -436,15 +436,15 @@ export default function Profile({ user, logout }) {
                 <ChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/70 transition-all" />
               </button>
 
-              <div className="bg-rose-500/10 border border-rose-500/30 rounded-2xl p-5">
+              <div className="rounded-2xl p-5 border" style={{ backgroundColor: '#2A0B0B', borderColor: '#FF6B6B' }}>
                 <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-rose-400" />
+                  <span className="text-xl" style={{ color: '#FF6B6B' }}>🛡️</span>
                   Report an Issue
                 </h4>
                 <p className="text-white/60 text-sm mb-3">
-                  If you've experienced harassment or feel unsafe, please let us know.
+                  Found something concerning? Let us know immediately.
                 </p>
-                <button className="px-5 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg font-medium transition-all">
+                <button className="px-5 py-2 text-white rounded-lg font-medium transition-all hover:opacity-90" style={{ backgroundColor: '#FF6B6B' }}>
                   Report
                 </button>
               </div>
