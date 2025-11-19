@@ -658,7 +658,7 @@ export default function Profile({ user, logout }) {
                       </div>
                     </div>
                     {canSpin && (
-                      <div className="text-white text-xs px-3 py-1.5 rounded-full font-bold" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
+                      <div className="text-white text-xs px-3 py-1.5 rounded-full font-bold pulse-animation" style={{ background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' }}>
                         READY
                       </div>
                     )}
