@@ -1330,7 +1330,7 @@ STREAK_REWARDS = [
     {"day": 19, "type": "coins", "amount": 35, "tier": "bronze", "label": "35 Star Coins"},
     {"day": 20, "type": "utility", "item": "dm_token", "amount": 1, "tier": "silver", "label": "1 Direct Message Token"},
     {"day": 21, "type": "legendary", "tier": "gold", "milestone": True, "label": "Legendary Bundle", 
-     "bundle": {"premium_skin": 1, "boost": 2, "multiplier": {"amount": 1.25, "duration_hours": 48}}}
+     "bundle": {"premium_aura": 1, "boost": 2, "multiplier": {"amount": 1.25, "duration_hours": 48}}}
 ]
 
 @api_router.get("/streaks/status")
