@@ -1569,9 +1569,9 @@ STORE_ITEMS = [
         }
     },
     {
-        "id": "skin_pride_spectrum",
+        "id": "aura_pride_spectrum",
         "name": "Pride Spectrum",
-        "type": "skin",
+        "type": "aura",
         "price": 1100,
         "description": "Your name and zodiac shimmer with vibrant LGBTQ+ rainbow colors",
         "effect": {
