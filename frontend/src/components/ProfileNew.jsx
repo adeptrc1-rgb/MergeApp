@@ -426,55 +426,77 @@ export default function Profile({ user, logout }) {
       `}</style>
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6">
-        {/* Top Status Bar */}
-        <div className="flex items-center justify-between p-4">
-          <button className="w-8 h-8 flex items-center justify-center">
-            <span className="text-[#FF4458] text-xl">👤</span>
-          </button>
-          <button
-            onClick={() => setShowSettings(true)}
-            className="w-8 h-8 flex items-center justify-center"
-          >
-            <Settings className="w-5 h-5 text-white/60" />
-          </button>
-        </div>
+        {/* Cyber-Organic Header */}
+        <div className="relative overflow-hidden pb-8">
+          {/* Circuit Background */}
+          <div className="circuit-background" />
+          
+          {/* Header Content */}
+          <div className="relative z-10">
+            {/* Minimal Top Bar */}
+            <div className="flex items-center justify-between p-4 mb-6">
+              <div className="text-white font-semibold text-lg tracking-wider">MERGE</div>
+              <button
+                onClick={() => setShowSettings(true)}
+                className="relative w-10 h-10 rounded-full border border-[#6C63FF]/30 flex items-center justify-center hover:border-[#6C63FF] transition-all"
+                style={{ background: 'rgba(108, 99, 255, 0.1)' }}
+              >
+                <div className="w-2 h-2 rounded-full bg-[#00F3FF] status-pulse" />
+              </button>
+            </div>
 
-        {/* Large Circular Profile Photo */}
-        <div className="flex flex-col items-center px-8 py-6">
-          <button
-            onClick={() => setShowEditProfile(true)}
-            className="relative mb-6 group"
-          >
-            <div
-              className="w-64 h-64 rounded-full bg-cover bg-center border-4 border-[#404040] relative overflow-hidden"
-              style={{ 
-                backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : '#2A2A2A'
-              }}
-            >
-              {!user.photos?.[0] && (
-                <div className="w-full h-full flex items-center justify-center bg-[#2A2A2A]">
-                  <span className="text-[#666] text-7xl">👤</span>
+            {/* Bio-Organic Avatar */}
+            <div className="flex flex-col items-center px-8">
+              <button
+                onClick={() => setShowEditProfile(true)}
+                className="relative mb-4 group"
+              >
+                {/* Neural Ring */}
+                <div className="absolute inset-0 rounded-full border-2 border-[#6C63FF]/30 neural-ring" style={{ padding: '8px' }} />
+                
+                {/* Avatar Container */}
+                <div
+                  className="w-40 h-40 rounded-full bg-cover bg-center relative overflow-hidden"
+                  style={{ 
+                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #2E86AB 100%)',
+                    border: '3px solid rgba(0, 243, 255, 0.3)'
+                  }}
+                >
+                  {!user.photos?.[0] && (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-white/30 text-5xl">🧠</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            
-            {/* Edit Pencil Icon */}
-            <div className="absolute top-2 right-2 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-              </svg>
-            </div>
-          </button>
 
-          {/* Name and Info Centered Below Photo */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-1">
-              {user.first_name}{age ? `, ${age}` : ''}
-            </h1>
-            <p className="text-white/60 text-lg">
-              {user.job_title || user.location || 'Stanford University'}
-            </p>
+                {/* Connection Node */}
+                <div className="absolute bottom-2 right-2 w-6 h-6 rounded-full border-2 border-black flex items-center justify-center" style={{ backgroundColor: '#4ECDC4' }}>
+                  <div className="w-2 h-2 rounded-full bg-white" />
+                </div>
+              </button>
+
+              {/* Avatar Status */}
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-2 rounded-full bg-[#4ECDC4] status-pulse" />
+                <span className="text-[#4ECDC4] text-sm font-medium">Optimal Connection</span>
+              </div>
+
+              {/* Tech-Infused User Info */}
+              <h1 className="text-3xl font-bold text-white mb-3" style={{ textShadow: '0 0 20px rgba(108, 99, 255, 0.5)' }}>
+                {user.first_name}{age ? `, ${age}` : ''}
+              </h1>
+              <div className="flex flex-wrap gap-2 justify-center">
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white border border-[#6C63FF]/30" style={{ background: 'rgba(108, 99, 255, 0.1)' }}>
+                  {user.job_title || 'Art Director'}
+                </span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white border border-[#2E86AB]/30" style={{ background: 'rgba(46, 134, 171, 0.1)' }}>
+                  {user.industry || 'Technology'}
+                </span>
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white border border-[#4ECDC4]/30" style={{ background: 'rgba(78, 205, 196, 0.1)' }}>
+                  5mi
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
