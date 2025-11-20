@@ -196,9 +196,53 @@ export default function Profile({ user, logout }) {
       }}
     >
       <style>{`
+        /* Tech Color Palette Variables */
+        :root {
+          --tech-primary: #6C63FF;
+          --tech-secondary: #2E86AB;
+          --tech-accent: #4ECDC4;
+          --tech-glow: #00F3FF;
+          
+          --neural-active: #6C63FF;
+          --neural-inactive: rgba(108, 99, 255, 0.3);
+          --neural-glow: rgba(0, 243, 255, 0.1);
+          
+          --bg-deep: #000000;
+          --bg-surface: #0A0A0A;
+          --bg-elevated: #1A1A1A;
+        }
+
         /* Scrollbar hiding */
         .fixed.inset-0.overflow-y-auto::-webkit-scrollbar {
           display: none;
+        }
+
+        /* Circuit Background Animation */
+        .circuit-background {
+          position: absolute;
+          inset: 0;
+          background: 
+            linear-gradient(90deg, transparent 50%, rgba(46, 134, 171, 0.03) 50%),
+            linear-gradient(transparent 50%, rgba(108, 99, 255, 0.03) 50%);
+          background-size: 50px 50px;
+          animation: circuitFlow 20s linear infinite;
+          pointer-events: none;
+        }
+
+        @keyframes circuitFlow {
+          0% { background-position: 0 0; }
+          100% { background-position: 50px 50px; }
+        }
+
+        @keyframes pulseGlow {
+          0%, 100% { 
+            opacity: 1;
+            box-shadow: 0 0 5px var(--tech-glow);
+          }
+          50% { 
+            opacity: 0.6;
+            box-shadow: 0 0 10px var(--tech-glow);
+          }
         }
 
         /* Micro-interactions & Animations */
