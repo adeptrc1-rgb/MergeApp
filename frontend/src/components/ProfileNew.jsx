@@ -718,11 +718,17 @@ export default function Profile({ user, logout }) {
       <BottomNav currentTab="profile" navigate={navigate} />
 
       {showConnectionMatrix && (
-        <ConnectionMatrix 
-          isOpen={showConnectionMatrix} 
-          onClose={() => setShowConnectionMatrix(false)} 
-          onRewardClaimed={handleRewardClaimed} 
-        />
+        <>
+          {console.log('[PROFILE] Rendering ConnectionMatrix, showConnectionMatrix=', showConnectionMatrix)}
+          <ConnectionMatrix 
+            isOpen={showConnectionMatrix} 
+            onClose={() => {
+              console.log('[PROFILE] Closing modal...');
+              setShowConnectionMatrix(false);
+            }} 
+            onRewardClaimed={handleRewardClaimed} 
+          />
+        </>
       )}
 
       {showEditProfile && (
