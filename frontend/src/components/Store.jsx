@@ -87,7 +87,9 @@ export default function Store({ user }) {
 
   const isOwned = (itemId) => inventory.owned_items.includes(itemId);
   const isActive = (itemId, itemType) => {
-    return itemType === 'light' ? inventory.active_light === itemId : inventory.active_skin === itemId;
+    if (itemType === 'light') return inventory.active_light === itemId;
+    if (itemType === 'aura') return inventory.active_skin === itemId;
+    return inventory.active_skin === itemId;
   };
 
   const filteredItems = items.filter(item => item.type === activeTab.slice(0, -1));
