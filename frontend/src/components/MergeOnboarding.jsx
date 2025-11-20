@@ -690,47 +690,115 @@ export default function MergeOnboarding() {
       </div>
 
       <div className="space-y-6">
-        {/* Top 3 Interests */}
+        {/* Top 3 Interests - Autocomplete */}
         <div>
-          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>Choose your top 3 passions:</label>
-          <div className="flex flex-wrap gap-2">
-            {INTEREST_OPTIONS.map((interest) => {
-              const isSelected = formData.top_interests.includes(interest);
-              return (
-                <button
+          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>Type your top 3 passions:</label>
+          
+          {/* Selected Interests Display */}
+          {formData.top_interests.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-3">
+              {formData.top_interests.map((interest) => (
+                <div
                   key={interest}
-                  onClick={() => {
-                    if (isSelected) {
+                  className="px-4 py-2 rounded-full transition-all text-sm flex items-center gap-2"
+                  style={{
+                    background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                    color: '#FFFFFF'
+                  }}
+                >
+                  <span>{interest}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
                       setFormData({
                         ...formData,
                         top_interests: formData.top_interests.filter(i => i !== interest)
                       });
-                    } else if (formData.top_interests.length < 3) {
-                      setFormData({
-                        ...formData,
-                        top_interests: [...formData.top_interests, interest]
-                      });
-                    }
-                  }}
-                  className="px-4 py-2 rounded-full transition-all text-sm"
-                  style={isSelected ? {
-                    background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
-                    color: '#FFFFFF',
-                    border: '1px solid transparent'
-                  } : {
-                    backgroundColor: '#171717',
-                    border: '1px solid #404040',
-                    color: '#A3A3A3'
-                  }}
-                  disabled={!isSelected && formData.top_interests.length >= 3}
-                >
-                  {interest}
-                </button>
-              );
-            })}
+                    }}
+                    className="hover:opacity-70"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Search Input */}
+          <div className="relative">
+            <input
+              type="text"
+              value={interestSearch}
+              onChange={(e) => {
+                setInterestSearch(e.target.value);
+                setShowInterestSuggestions(e.target.value.length > 0);
+              }}
+              onFocus={() => setShowInterestSuggestions(interestSearch.length > 0)}
+              placeholder="Start typing... (e.g., hiking, music, cooking)"
+              className="w-full px-5 py-4 rounded-xl focus:outline-none transition-all"
+              style={{
+                backgroundColor: '#171717',
+                border: '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+              onFocusCapture={(e) => e.currentTarget.style.borderColor = '#3B82F6'}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = '#404040';
+                setTimeout(() => setShowInterestSuggestions(false), 200);
+              }}
+              disabled={formData.top_interests.length >= 3}
+            />
+
+            {/* Autocomplete Suggestions */}
+            {showInterestSuggestions && (
+              <div 
+                className="absolute w-full mt-2 rounded-xl overflow-hidden shadow-lg z-10"
+                style={{
+                  backgroundColor: '#171717',
+                  border: '1px solid #404040',
+                  maxHeight: '200px',
+                  overflowY: 'auto'
+                }}
+              >
+                {INTEREST_OPTIONS
+                  .filter(interest => 
+                    interest.toLowerCase().includes(interestSearch.toLowerCase()) &&
+                    !formData.top_interests.includes(interest)
+                  )
+                  .map((interest) => (
+                    <button
+                      key={interest}
+                      type="button"
+                      onClick={() => {
+                        if (formData.top_interests.length < 3) {
+                          setFormData({
+                            ...formData,
+                            top_interests: [...formData.top_interests, interest]
+                          });
+                          setInterestSearch('');
+                          setShowInterestSuggestions(false);
+                        }
+                      }}
+                      className="w-full px-4 py-3 text-left text-sm transition-all hover:bg-white/10"
+                      style={{ color: '#FAFAFA' }}
+                    >
+                      {interest}
+                    </button>
+                  ))}
+                {INTEREST_OPTIONS.filter(interest => 
+                  interest.toLowerCase().includes(interestSearch.toLowerCase()) &&
+                  !formData.top_interests.includes(interest)
+                ).length === 0 && (
+                  <div className="px-4 py-3 text-sm" style={{ color: '#737373' }}>
+                    No matches found
+                  </div>
+                )}
+              </div>
+            )}
           </div>
+
           <p className="text-xs mt-2" style={{ color: '#737373' }}>
-            Selected: {formData.top_interests.length}/3
+            Selected: {formData.top_interests.length}/3 {formData.top_interests.length >= 3 && '✓ Complete'}
           </p>
         </div>
 
