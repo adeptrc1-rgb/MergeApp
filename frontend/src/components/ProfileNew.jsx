@@ -565,9 +565,10 @@ export default function Profile({ user, logout }) {
           {/* Merge Pulse Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="quantum-btn p-3 group"
           >
-            <div className="flex flex-col items-center text-center">
+            <div className="btn-glow"></div>
+            <div className="flex flex-col items-center text-center relative z-10">
               <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
                 <div className="absolute inset-0 rounded-full" style={{
                   background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
