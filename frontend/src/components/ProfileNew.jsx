@@ -529,22 +529,42 @@ export default function Profile({ user, logout }) {
         </div>
 
         {/* Quick Action Blocks */}
-        <div className="grid grid-cols-3 gap-2 mb-3">
+        <div className="grid grid-cols-3 gap-3 mb-3">
           {/* Super Liked Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="rounded-xl p-3 transition-all group relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
+              border: '1px solid rgba(78, 205, 196, 0.15)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(78, 205, 196, 0.08) 0%, rgba(10, 10, 10, 0.9) 100%)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(78, 205, 196, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)';
+            }}
           >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
-                <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
-                }} />
-                <Heart className="w-4 h-4 relative z-10" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
+              background: 'radial-gradient(circle at top right, rgba(78, 205, 196, 0.1), transparent 60%)'
+            }}></div>
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{
+                background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.15) 0%, rgba(78, 205, 196, 0.05) 100%)',
+                border: '1px solid rgba(78, 205, 196, 0.3)',
+                boxShadow: '0 0 20px rgba(78, 205, 196, 0.1)'
+              }}>
+                <Heart className="w-5 h-5" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
               </div>
               <div className="text-lg font-semibold text-white mb-0.5">0</div>
-              <div className="text-[10px] text-white/50 mb-1.5">Super Likes</div>
-              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+              <div className="text-[10px] text-white/60 mb-1.5 font-medium">Super Likes</div>
+              <div className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all" style={{
+                background: 'rgba(78, 205, 196, 0.15)',
+                border: '1px solid rgba(78, 205, 196, 0.2)'
+              }}>
                 GET MORE
               </div>
             </div>
@@ -553,18 +573,38 @@ export default function Profile({ user, logout }) {
           {/* Merge Pulse Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="rounded-xl p-3 transition-all group relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
+              border: '1px solid rgba(108, 99, 255, 0.15)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(108, 99, 255, 0.08) 0%, rgba(10, 10, 10, 0.9) 100%)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(108, 99, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)';
+            }}
           >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
-                <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
-                }} />
-                <Zap className="w-4 h-4 relative z-10" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
+              background: 'radial-gradient(circle at top right, rgba(108, 99, 255, 0.1), transparent 60%)'
+            }}></div>
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{
+                background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.15) 0%, rgba(108, 99, 255, 0.05) 100%)',
+                border: '1px solid rgba(108, 99, 255, 0.3)',
+                boxShadow: '0 0 20px rgba(108, 99, 255, 0.1)'
+              }}>
+                <Zap className="w-5 h-5" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
               </div>
-              <div className="text-xs font-medium text-white mb-0.5">Merge</div>
-              <div className="text-[10px] text-white/50 mb-1.5">Pulse</div>
-              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+              <div className="text-xs font-semibold text-white mb-0.5">Merge</div>
+              <div className="text-[10px] text-white/60 mb-1.5 font-medium">Pulse</div>
+              <div className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all" style={{
+                background: 'rgba(108, 99, 255, 0.15)',
+                border: '1px solid rgba(108, 99, 255, 0.2)'
+              }}>
                 GET MORE
               </div>
             </div>
@@ -573,17 +613,37 @@ export default function Profile({ user, logout }) {
           {/* Auras Block */}
           <button
             onClick={() => navigate('/store')}
-            className="bg-[#0A0A0A] rounded-lg p-3 border border-white/10 hover:bg-[#1A1A1A] transition-all group"
+            className="rounded-xl p-3 transition-all group relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
+              border: '1px solid rgba(102, 126, 234, 0.15)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(10, 10, 10, 0.9) 100%)';
+              e.currentTarget.style.boxShadow = '0 6px 16px rgba(102, 126, 234, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)';
+            }}
           >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
-                <div className="absolute inset-0 rounded-full" style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
-                }} />
-                <Sparkles className="w-4 h-4 relative z-10" style={{ color: '#667EEA' }} strokeWidth={2.5} />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
+              background: 'radial-gradient(circle at top right, rgba(102, 126, 234, 0.1), transparent 60%)'
+            }}></div>
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{
+                background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(102, 126, 234, 0.05) 100%)',
+                border: '1px solid rgba(102, 126, 234, 0.3)',
+                boxShadow: '0 0 20px rgba(102, 126, 234, 0.1)'
+              }}>
+                <Sparkles className="w-5 h-5" style={{ color: '#667EEA' }} strokeWidth={2.5} />
               </div>
-              <div className="text-xs font-medium text-white mb-2">Auras</div>
-              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
+              <div className="text-xs font-semibold text-white mb-2">Auras</div>
+              <div className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all" style={{
+                background: 'rgba(102, 126, 234, 0.15)',
+                border: '1px solid rgba(102, 126, 234, 0.2)'
+              }}>
                 EXPLORE
               </div>
             </div>
