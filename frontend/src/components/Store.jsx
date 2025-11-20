@@ -124,10 +124,7 @@ export default function Store({ user }) {
       <div className="border-b border-white/10 flex-shrink-0 sticky top-0 z-10" style={{ background: '#000000' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <ShoppingBag className="w-8 h-8" style={{ color: '#6C63FF' }} />
-              <h1 className="text-3xl font-medium">Merge MarketPlace</h1>
-            </div>
+            <h1 className="text-3xl font-light text-white">MarketPlace</h1>
             <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
               <Star className="w-5 h-5" style={{ color: '#FFD700' }} />
               <span className="text-xl font-medium text-white">{inventory.star_coins}</span>
