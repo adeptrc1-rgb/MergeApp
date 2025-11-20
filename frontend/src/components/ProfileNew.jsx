@@ -688,10 +688,7 @@ export default function Profile({ user, logout }) {
         <div className="space-y-2 mb-6">
           {/* Merge Wheel */}
           <button
-            onClick={() => {
-              console.log('[PROFILE] Opening Merge Wheel modal...');
-              setShowConnectionMatrix(true);
-            }}
+            onClick={() => setShowConnectionMatrix(true)}
             className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
           >
             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#6C63FF' }}>
