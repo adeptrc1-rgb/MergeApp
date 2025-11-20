@@ -196,6 +196,12 @@ export default function Discover({ user }) {
 
   return (
     <div className="h-screen bg-black flex flex-col overflow-hidden">
+      {/* Subtle animated background - matching onboarding */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+      </div>
+
       {/* Daily Horoscope Ticker */}
       {todayHoroscope && (
         <div className="bg-black border-b border-white/10">
