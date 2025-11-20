@@ -64,9 +64,9 @@ export default function MergeOnboarding() {
 
   const getCompletedQuestions = () => {
     let count = 0;
-    if (step > 1) count += 3; // Identity
+    if (step > 1) count += 6; // Essentials & Intent
     if (step > 2) count += 8; // Personality
-    if (step > 3) count += 4; // Lifestyle
+    if (step > 3) count += 2; // Lifestyle & Interests
     if (step > 4) count += 3; // Communication
     if (step > 5) count += formData.photos.filter(p => p).length; // Photos
     return count;
