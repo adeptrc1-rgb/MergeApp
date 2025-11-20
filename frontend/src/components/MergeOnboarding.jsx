@@ -223,7 +223,7 @@ export default function MergeOnboarding() {
           <User className="w-10 h-10 text-white" />
         </div>
         <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
-          Identity & The Essentials
+          The Essentials
         </h2>
         <p className="text-lg" style={{ color: '#A3A3A3' }}>Let's start with the basics</p>
       </div>
