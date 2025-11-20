@@ -13,7 +13,7 @@ export default function Store({ user }) {
   const [items, setItems] = useState([]);
   const [inventory, setInventory] = useState({ owned_items: [], active_light: null, active_skin: null, star_coins: 0 });
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('lights'); // 'lights' or 'auras'
+  const [activeTab, setActiveTab] = useState('lights'); // 'lights' or 'skins'
   const [purchasing, setPurchasing] = useState(null);
   const [message, setMessage] = useState(null);
 
