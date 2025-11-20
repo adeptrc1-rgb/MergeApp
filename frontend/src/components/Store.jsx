@@ -171,11 +171,15 @@ export default function Store({ user }) {
             return (
               <div
                 key={item.id}
-                className={`relative bg-white/5 rounded-2xl border overflow-hidden transition-all ${
+                className={`relative rounded-2xl border overflow-hidden transition-all ${
                   active
-                    ? 'border-[#2563EB] shadow-[0_0_20px_rgba(37,99,235,0.4)]'
+                    ? 'border-white/30'
                     : 'border-white/10 hover:border-white/20'
                 }`}
+                style={{ 
+                  background: active ? 'rgba(108, 99, 255, 0.1)' : '#0A0A0A',
+                  boxShadow: active ? '0 0 20px rgba(108, 99, 255, 0.4)' : 'none'
+                }}
               >
                 {/* Preview Area */}
                 <div className="h-48 relative overflow-hidden">
