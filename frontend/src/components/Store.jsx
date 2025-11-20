@@ -27,6 +27,12 @@ export default function Store({ user }) {
         axios.get(`${API}/store/items`),
         axios.get(`${API}/store/inventory`)
       ]);
+      console.log('[STORE] Loaded items:', itemsRes.data);
+      console.log('[STORE] Items by type:', {
+        lights: itemsRes.data?.filter(i => i.type === 'light').length,
+        skins: itemsRes.data?.filter(i => i.type === 'skin').length,
+        auras: itemsRes.data?.filter(i => i.type === 'aura').length
+      });
       setItems(itemsRes.data || []);
       setInventory(inventoryRes.data || { owned_items: [], active_light: null, active_skin: null, star_coins: 0 });
     } catch (error) {
