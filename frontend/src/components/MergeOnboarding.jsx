@@ -268,6 +268,57 @@ export default function MergeOnboarding() {
           />
         </div>
 
+        {/* Gender Identity */}
+        <div>
+          <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>How do you identify?</label>
+          <div className="grid grid-cols-3 gap-3">
+            {/* Man */}
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, gender_identity: 'man' })}
+              className="p-4 rounded-xl transition-all flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: formData.gender_identity === 'man' ? '#3B82F6' : '#171717',
+                border: formData.gender_identity === 'man' ? '2px solid #3B82F6' : '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+            >
+              <div className="text-2xl">♂</div>
+              <span className="text-sm font-medium">Man</span>
+            </button>
+
+            {/* Woman */}
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, gender_identity: 'woman' })}
+              className="p-4 rounded-xl transition-all flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: formData.gender_identity === 'woman' ? '#3B82F6' : '#171717',
+                border: formData.gender_identity === 'woman' ? '2px solid #3B82F6' : '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+            >
+              <div className="text-2xl">♀</div>
+              <span className="text-sm font-medium">Woman</span>
+            </button>
+
+            {/* Non-binary */}
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, gender_identity: 'non-binary' })}
+              className="p-4 rounded-xl transition-all flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: formData.gender_identity === 'non-binary' ? '#3B82F6' : '#171717',
+                border: formData.gender_identity === 'non-binary' ? '2px solid #3B82F6' : '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+            >
+              <div className="text-2xl">⚧</div>
+              <span className="text-sm font-medium">Non-binary</span>
+            </button>
+          </div>
+        </div>
+
         {/* Hometown */}
         <div>
           <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>Where did you grow up?</label>
