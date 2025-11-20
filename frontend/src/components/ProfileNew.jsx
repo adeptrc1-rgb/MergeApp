@@ -674,74 +674,45 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Merge Features - Colorful Cards */}
-        <div className="space-y-3 mb-4">
-          {/* Merge Wheel - Purple Theme */}
+        {/* Merge Features - Sophisticated Treatment */}
+        <div className="space-y-2 mb-6">
+          {/* Merge Wheel */}
           <button
             onClick={() => setShowConnectionMatrix(true)}
-            className="w-full p-4 flex items-center gap-4 rounded-xl transition-all hover:scale-[1.02]"
-            style={{
-              background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.12) 0%, rgba(108, 99, 255, 0.05) 100%)',
-              border: '1px solid rgba(108, 99, 255, 0.3)',
-              boxShadow: '0 4px 12px rgba(108, 99, 255, 0.1)'
-            }}
+            className="quantum-btn w-full p-4 flex items-center gap-4"
           >
-            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ 
-              background: 'rgba(108, 99, 255, 0.2)',
-              border: '2px solid rgba(108, 99, 255, 0.4)',
-              boxShadow: '0 0 16px rgba(108, 99, 255, 0.3)'
-            }}>
-              <Zap className="w-6 h-6" style={{ color: '#6C63FF' }} />
+            <div className="btn-glow"></div>
+            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center relative z-10" style={{ color: '#6C63FF' }}>
+              <Zap className="w-5 h-5" />
             </div>
-            <div className="flex-1 text-left">
-              <h4 className="text-white font-bold text-sm mb-1">Merge Wheel</h4>
-              <p className="text-white/60 text-xs">
+            <div className="flex-1 text-left relative z-10">
+              <h4 className="text-white font-medium text-sm mb-0.5">Merge Wheel</h4>
+              <p className="text-white/50 text-xs">
                 {canSpin ? 'Your daily spin is ready' : 'Come back later for rewards'}
               </p>
               {canSpin && (
-                <div className="mt-1.5">
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-full" style={{
-                    background: 'rgba(78, 205, 196, 0.2)',
-                    color: '#4ECDC4',
-                    border: '1px solid rgba(78, 205, 196, 0.3)'
-                  }}>READY TO SPIN</span>
+                <div className="mt-1">
+                  <span className="bg-white/10 text-white/80 text-xs px-2 py-0.5 rounded-full">Ready to spin</span>
                 </div>
               )}
             </div>
-            <ChevronRight className="w-5 h-5" style={{ color: '#6C63FF' }} />
+            <ChevronRight className="w-5 h-5 text-white/30 relative z-10" />
           </button>
 
-          {/* Profile Energy - Cyan Theme */}
-          <div className="rounded-xl p-4 flex items-center gap-4" style={{
-            background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.12) 0%, rgba(78, 205, 196, 0.05) 100%)',
-            border: '1px solid rgba(78, 205, 196, 0.3)',
-            boxShadow: '0 4px 12px rgba(78, 205, 196, 0.1)'
-          }}>
-            <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ 
-              background: 'rgba(78, 205, 196, 0.2)',
-              border: '2px solid rgba(78, 205, 196, 0.4)',
-              boxShadow: '0 0 16px rgba(78, 205, 196, 0.3)'
-            }}>
-              <Sparkles className="w-6 h-6" style={{ color: '#4ECDC4' }} />
+          {/* Profile Energy */}
+          <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#4ECDC4' }}>
+              <Sparkles className="w-5 h-5" />
             </div>
             <div className="flex-1">
-              <h4 className="text-white font-bold text-sm mb-1">Profile Energy</h4>
-              <p className="text-white/60 text-xs mb-2">Your profile is radiating positive energy</p>
+              <h4 className="text-white font-medium text-sm mb-0.5">Profile Energy</h4>
+              <p className="text-white/50 text-xs mb-2">Your profile is radiating positive energy</p>
               <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full" style={{ 
-                  backgroundColor: '#4ECDC4',
-                  boxShadow: '0 0 6px rgba(78, 205, 196, 0.6)'
-                }} />
-                <div className="w-2.5 h-2.5 rounded-full" style={{ 
-                  backgroundColor: '#4ECDC4',
-                  boxShadow: '0 0 6px rgba(78, 205, 196, 0.6)'
-                }} />
-                <div className="w-2.5 h-2.5 rounded-full" style={{ 
-                  backgroundColor: '#4ECDC4',
-                  boxShadow: '0 0 6px rgba(78, 205, 196, 0.6)'
-                }} />
-                <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
+                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
+                <div className="w-2 h-2 rounded-full bg-white/10" />
+                <div className="w-2 h-2 rounded-full bg-white/10" />
               </div>
             </div>
           </div>
