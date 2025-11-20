@@ -1504,7 +1504,7 @@ STORE_ITEMS = [
     {
         "id": "aura_galaxy",
         "name": "Galaxy Aura",
-        "type": "aura",
+        "type": "skin",
         "price": 1200,
         "description": "Semi-transparent star sparkles and nebula overlays on your photo",
         "effect": {
