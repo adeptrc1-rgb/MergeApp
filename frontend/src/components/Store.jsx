@@ -106,7 +106,7 @@ export default function Store({ user }) {
         </div>
         <div className="text-center relative z-10">
           <div className="animate-spin w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4" style={{ borderColor: '#6C63FF', borderTopColor: 'transparent' }} />
-          <p className="text-white/60">Loading MarketPlace...</p>
+          <p className="text-white/60">Loading Marketplace...</p>
         </div>
       </div>
     );
