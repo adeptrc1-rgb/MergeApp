@@ -94,10 +94,10 @@ export default function Store({ user }) {
 
   if (loading) {
     return (
-      <div className="h-screen bg-black text-white flex items-center justify-center">
+      <div className="h-screen text-white flex items-center justify-center" style={{ background: '#0A0A0A' }}>
         <div className="text-center">
-          <div className="animate-spin w-12 h-12 border-4 border-[#2563EB] border-t-transparent rounded-full mx-auto mb-4" />
-          <p className="text-white/60">Loading Aura Lab...</p>
+          <div className="animate-spin w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4" style={{ borderColor: '#6C63FF', borderTopColor: 'transparent' }} />
+          <p className="text-white/60">Loading Merge MarketPlace...</p>
         </div>
       </div>
     );
