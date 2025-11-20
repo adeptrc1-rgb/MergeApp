@@ -85,7 +85,11 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
       setLoading(false);
     } catch (err) {
       console.error('Error fetching wheel status:', err);
-      setError('Unable to load Merge Wheel');
+      if (err.response?.status === 401) {
+        setError('Please log in to use the Merge Wheel');
+      } else {
+        setError(err.response?.data?.detail || 'Unable to load Merge Wheel');
+      }
       setLoading(false);
     }
   };
