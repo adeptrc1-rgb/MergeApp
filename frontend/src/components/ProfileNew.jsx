@@ -356,6 +356,88 @@ export default function Profile({ user, logout }) {
           }
         }
 
+        /* Quantum Buttons */
+        .quantum-btn {
+          position: relative;
+          background: var(--bg-elevated);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          color: white;
+          transition: all 0.3s ease;
+          overflow: hidden;
+        }
+
+        .quantum-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+          transition: left 0.5s ease;
+        }
+
+        .quantum-btn:hover::before {
+          left: 100%;
+        }
+
+        .btn-glow {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 0;
+          height: 0;
+          background: radial-gradient(circle, var(--tech-glow) 0%, transparent 70%);
+          transition: all 0.3s ease;
+          pointer-events: none;
+        }
+
+        .quantum-btn:hover .btn-glow {
+          width: 200%;
+          height: 200%;
+        }
+
+        /* Neural Navigation */
+        .neural-nav {
+          display: flex;
+          background: var(--bg-surface);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 16px;
+          padding: 8px;
+          margin: 20px;
+        }
+
+        .nav-item {
+          flex: 1;
+          text-align: center;
+          padding: 12px;
+          border-radius: 12px;
+          transition: all 0.3s ease;
+          position: relative;
+        }
+
+        .nav-item.active {
+          background: rgba(108, 99, 255, 0.1);
+          border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .nav-indicator {
+          width: 4px;
+          height: 4px;
+          background: var(--tech-glow);
+          border-radius: 50%;
+          margin: 4px auto 0;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .nav-item.active .nav-indicator {
+          opacity: 1;
+          animation: pulseGlow 2s infinite;
+        }
+
         /* Accessibility: High contrast mode */
         @media (prefers-contrast: high) {
           .feature-card-enhanced {
