@@ -569,9 +569,56 @@ export default function MergeOnboarding() {
           </div>
         </div>
 
-        {/* Part B: 5 Sliders */}
+        {/* Part B: 5 Orb Sliders */}
         <div className="pt-6" style={{ borderTop: '1px solid #262626' }}>
-          <p className="text-sm mb-4" style={{ color: '#A3A3A3' }}>Rate yourself from 1 to 5:</p>
+          <p className="text-sm mb-4" style={{ color: '#A3A3A3' }}>Tap the orbs that resonate with you:</p>
+          
+          <style>{`
+            @keyframes orbPulse {
+              0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+              }
+              50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+              }
+            }
+            
+            @keyframes orbGlow {
+              0%, 100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(139, 92, 246, 0.4);
+              }
+              50% {
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.9), 0 0 60px rgba(139, 92, 246, 0.6);
+              }
+            }
+
+            .orb-inactive {
+              background: #262626;
+              border: 2px solid #404040;
+              transition: all 0.3s ease;
+            }
+
+            .orb-inactive:hover {
+              background: #333333;
+              border-color: #525252;
+              transform: scale(1.05);
+            }
+
+            .orb-active {
+              background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+              animation: orbPulse 2s ease-in-out infinite;
+              border: 2px solid transparent;
+            }
+
+            .orb-selected {
+              background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+              animation: orbGlow 1.5s ease-in-out infinite;
+              border: 2px solid rgba(255, 255, 255, 0.3);
+              transform: scale(1.15);
+            }
+          `}</style>
           
           {[
             { key: 'energy', left: 'Quiet & Reflective', right: 'Social & Expressive' },
@@ -580,33 +627,43 @@ export default function MergeOnboarding() {
             { key: 'planning', left: 'Structured & Decisive', right: 'Flexible & Adaptable' },
             { key: 'expression', left: 'Private & Reserved', right: 'Open & Expressive' }
           ].map((slider) => (
-            <div key={slider.key} className="mb-6">
-              <div className="flex justify-between text-xs mb-2" style={{ color: '#737373' }}>
+            <div key={slider.key} className="mb-8">
+              <div className="flex justify-between text-xs mb-3" style={{ color: '#737373' }}>
                 <span>{slider.left}</span>
                 <span>{slider.right}</span>
               </div>
-              <input
-                type="range"
-                min="1"
-                max="5"
-                value={formData.mbti_sliders[slider.key]}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  mbti_sliders: { ...formData.mbti_sliders, [slider.key]: parseInt(e.target.value) }
+              
+              {/* Orb Selection */}
+              <div className="flex justify-between items-center px-2">
+                {[1, 2, 3, 4, 5].map((value) => {
+                  const isSelected = formData.mbti_sliders[slider.key] === value;
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setFormData({
+                        ...formData,
+                        mbti_sliders: { ...formData.mbti_sliders, [slider.key]: value }
+                      })}
+                      className={isSelected ? 'orb-selected' : 'orb-inactive'}
+                      style={{
+                        width: isSelected ? '48px' : '40px',
+                        height: isSelected ? '48px' : '40px',
+                        borderRadius: '50%',
+                        cursor: 'pointer',
+                        position: 'relative',
+                        transition: 'all 0.3s ease'
+                      }}
+                    >
+                      <span className="text-xs font-medium" style={{ 
+                        color: isSelected ? '#FFFFFF' : '#737373',
+                        fontWeight: isSelected ? 'bold' : 'normal'
+                      }}>
+                        {value}
+                      </span>
+                    </button>
+                  );
                 })}
-                className="w-full slider-merge"
-                style={{
-                  height: '6px',
-                  backgroundColor: '#262626',
-                  borderRadius: '10px',
-                  outline: 'none',
-                  cursor: 'pointer'
-                }}
-              />
-              <div className="flex justify-between text-xs mt-1" style={{ color: '#525252' }}>
-                {[1, 2, 3, 4, 5].map((num) => (
-                  <span key={num}>{num}</span>
-                ))}
               </div>
             </div>
           ))}
