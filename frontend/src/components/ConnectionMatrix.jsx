@@ -147,7 +147,13 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
       clearInterval(progressInterval);
       clearInterval(nodeInterval);
       console.error('Error analyzing connections:', err);
-      setError(err.response?.data?.detail || 'Analysis failed');
+      if (err.response?.status === 401) {
+        setError('Session expired. Please log in again');
+      } else if (err.response?.status === 400) {
+        setError(err.response?.data?.detail || 'No spins remaining today');
+      } else {
+        setError(err.response?.data?.detail || 'Analysis failed');
+      }
       setAnalyzing(false);
     }
   };
