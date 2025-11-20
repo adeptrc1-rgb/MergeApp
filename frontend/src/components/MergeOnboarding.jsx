@@ -631,67 +631,6 @@ export default function MergeOnboarding() {
       </div>
 
       <div className="space-y-6">
-        {/* Relationship Goal */}
-        <div>
-          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>What are you looking for?</label>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { value: 'long_term', label: 'Long-term relationship' },
-              { value: 'long_term_open', label: 'Long-term, open to short' },
-              { value: 'short_term', label: 'Short-term fun' },
-              { value: 'friends_first', label: 'Friends and see what happens' }
-            ].map((option) => (
-              <button
-                key={option.value}
-                onClick={() => setFormData({ ...formData, relationship_goal: option.value })}
-                className="px-4 py-3 rounded-xl transition-all text-sm"
-                style={formData.relationship_goal === option.value ? {
-                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
-                  color: '#FFFFFF',
-                  border: '1px solid transparent'
-                } : {
-                  backgroundColor: '#171717',
-                  border: '1px solid #404040',
-                  color: '#A3A3A3'
-                }}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Kids */}
-        <div>
-          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>What's your stance on kids?</label>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { value: 'want_someday', label: 'Want someday' },
-              { value: 'dont_want', label: "Don't want" },
-              { value: 'have_and_want_more', label: 'Have kids, want more' },
-              { value: 'have_and_done', label: "Have kids, don't want more" },
-              { value: 'not_sure', label: 'Not sure' }
-            ].map((option) => (
-              <button
-                key={option.value}
-                onClick={() => setFormData({ ...formData, kids_preference: option.value })}
-                className="px-4 py-3 rounded-xl transition-all text-sm"
-                style={formData.kids_preference === option.value ? {
-                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
-                  color: '#FFFFFF',
-                  border: '1px solid transparent'
-                } : {
-                  backgroundColor: '#171717',
-                  border: '1px solid #404040',
-                  color: '#A3A3A3'
-                }}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Top 3 Interests */}
         <div>
           <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>Choose your top 3 passions:</label>
