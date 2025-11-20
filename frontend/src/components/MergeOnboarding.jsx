@@ -19,7 +19,7 @@ export default function MergeOnboarding() {
   const [loading, setLoading] = useState(false);
 
   const totalSteps = 5;
-  const totalQuestions = 18;
+  const totalQuestions = 20;
 
   const [formData, setFormData] = useState({
     // Step 1: Identity
