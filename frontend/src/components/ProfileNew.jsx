@@ -539,87 +539,65 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Quick Action Blocks - Color Coded */}
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          {/* Super Liked Block - Cyan Theme */}
+        {/* Quick Action Blocks */}
+        <div className="grid grid-cols-3 gap-2 mb-3">
+          {/* Super Liked Block */}
           <button
             onClick={() => navigate('/store')}
-            className="rounded-xl p-3 group transition-all hover:scale-105"
-            style={{
-              background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.15) 0%, rgba(78, 205, 196, 0.05) 100%)',
-              border: '1px solid rgba(78, 205, 196, 0.3)',
-              boxShadow: '0 4px 12px rgba(78, 205, 196, 0.1)'
-            }}
+            className="quantum-btn p-3 group"
           >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-12 h-12 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{
-                background: 'rgba(78, 205, 196, 0.2)',
-                border: '2px solid rgba(78, 205, 196, 0.4)'
-              }}>
-                <Heart className="w-5 h-5" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
+            <div className="btn-glow"></div>
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
+                <div className="absolute inset-0 rounded-full" style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
+                }} />
+                <Heart className="w-4 h-4 relative z-10" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
               </div>
-              <div className="text-xl font-bold mb-0.5" style={{ color: '#4ECDC4' }}>0</div>
-              <div className="text-[10px] text-white/60 mb-1.5 font-medium">Super Likes</div>
-              <div className="text-[9px] font-semibold px-2.5 py-1 rounded-full text-white" style={{
-                background: 'rgba(78, 205, 196, 0.2)',
-                border: '1px solid rgba(78, 205, 196, 0.3)'
-              }}>
+              <div className="text-lg font-semibold text-white mb-0.5">0</div>
+              <div className="text-[10px] text-white/50 mb-1.5">Super Likes</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
                 GET MORE
               </div>
             </div>
           </button>
 
-          {/* Merge Pulse Block - Purple Theme */}
+          {/* Merge Pulse Block */}
           <button
             onClick={() => navigate('/store')}
-            className="rounded-xl p-3 group transition-all hover:scale-105"
-            style={{
-              background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.15) 0%, rgba(108, 99, 255, 0.05) 100%)',
-              border: '1px solid rgba(108, 99, 255, 0.3)',
-              boxShadow: '0 4px 12px rgba(108, 99, 255, 0.1)'
-            }}
+            className="quantum-btn p-3 group"
           >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-12 h-12 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{
-                background: 'rgba(108, 99, 255, 0.2)',
-                border: '2px solid rgba(108, 99, 255, 0.4)'
-              }}>
-                <Zap className="w-5 h-5" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
+            <div className="btn-glow"></div>
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
+                <div className="absolute inset-0 rounded-full" style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
+                }} />
+                <Zap className="w-4 h-4 relative z-10" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
               </div>
-              <div className="text-xs font-bold mb-0.5" style={{ color: '#6C63FF' }}>Merge</div>
-              <div className="text-[10px] text-white/60 mb-1.5 font-medium">Pulse</div>
-              <div className="text-[9px] font-semibold px-2.5 py-1 rounded-full text-white" style={{
-                background: 'rgba(108, 99, 255, 0.2)',
-                border: '1px solid rgba(108, 99, 255, 0.3)'
-              }}>
+              <div className="text-xs font-medium text-white mb-0.5">Merge</div>
+              <div className="text-[10px] text-white/50 mb-1.5">Pulse</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
                 GET MORE
               </div>
             </div>
           </button>
 
-          {/* Auras Block - Violet Theme */}
+          {/* Auras Block */}
           <button
             onClick={() => navigate('/store')}
-            className="rounded-xl p-3 group transition-all hover:scale-105"
-            style={{
-              background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(102, 126, 234, 0.05) 100%)',
-              border: '1px solid rgba(102, 126, 234, 0.3)',
-              boxShadow: '0 4px 12px rgba(102, 126, 234, 0.1)'
-            }}
+            className="quantum-btn p-3 group"
           >
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-12 h-12 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{
-                background: 'rgba(102, 126, 234, 0.2)',
-                border: '2px solid rgba(102, 126, 234, 0.4)'
-              }}>
-                <Sparkles className="w-5 h-5" style={{ color: '#667EEA' }} strokeWidth={2.5} />
+            <div className="btn-glow"></div>
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div className="relative w-10 h-10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform bg-white/10 border border-white/20">
+                <div className="absolute inset-0 rounded-full" style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent)',
+                }} />
+                <Sparkles className="w-4 h-4 relative z-10" style={{ color: '#667EEA' }} strokeWidth={2.5} />
               </div>
-              <div className="text-xs font-bold mb-0.5" style={{ color: '#667EEA' }}>Auras</div>
-              <div className="text-[10px] text-white/60 mb-1.5 font-medium">&nbsp;</div>
-              <div className="text-[9px] font-semibold px-2.5 py-1 rounded-full text-white" style={{
-                background: 'rgba(102, 126, 234, 0.2)',
-                border: '1px solid rgba(102, 126, 234, 0.3)'
-              }}>
+              <div className="text-xs font-medium text-white mb-2">Auras</div>
+              <div className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white/70 group-hover:bg-white/20 transition-all">
                 EXPLORE
               </div>
             </div>
