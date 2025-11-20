@@ -320,6 +320,75 @@ export default function MergeOnboarding() {
           </div>
         </div>
 
+        {/* Interested In */}
+        <div>
+          <label className="block text-sm mb-1" style={{ color: '#A3A3A3' }}>Who Would You Like to Connect With?</label>
+          <p className="text-xs mb-3" style={{ color: '#737373' }}>
+            We'll show you profiles that match your preferences. <span style={{ fontSize: '10px' }}>(You can pick more than one)</span>
+          </p>
+          <div className="grid grid-cols-3 gap-3">
+            {/* Men */}
+            <button
+              type="button"
+              onClick={() => {
+                const interested = formData.interested_in.includes('men')
+                  ? formData.interested_in.filter(g => g !== 'men')
+                  : [...formData.interested_in, 'men'];
+                setFormData({ ...formData, interested_in: interested });
+              }}
+              className="p-4 rounded-xl transition-all flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: formData.interested_in.includes('men') ? '#3B82F6' : '#171717',
+                border: formData.interested_in.includes('men') ? '2px solid #3B82F6' : '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+            >
+              <div className="text-2xl">♂</div>
+              <span className="text-sm font-medium">Men</span>
+            </button>
+
+            {/* Women */}
+            <button
+              type="button"
+              onClick={() => {
+                const interested = formData.interested_in.includes('women')
+                  ? formData.interested_in.filter(g => g !== 'women')
+                  : [...formData.interested_in, 'women'];
+                setFormData({ ...formData, interested_in: interested });
+              }}
+              className="p-4 rounded-xl transition-all flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: formData.interested_in.includes('women') ? '#3B82F6' : '#171717',
+                border: formData.interested_in.includes('women') ? '2px solid #3B82F6' : '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+            >
+              <div className="text-2xl">♀</div>
+              <span className="text-sm font-medium">Women</span>
+            </button>
+
+            {/* Non-binary */}
+            <button
+              type="button"
+              onClick={() => {
+                const interested = formData.interested_in.includes('non-binary')
+                  ? formData.interested_in.filter(g => g !== 'non-binary')
+                  : [...formData.interested_in, 'non-binary'];
+                setFormData({ ...formData, interested_in: interested });
+              }}
+              className="p-4 rounded-xl transition-all flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: formData.interested_in.includes('non-binary') ? '#3B82F6' : '#171717',
+                border: formData.interested_in.includes('non-binary') ? '2px solid #3B82F6' : '1px solid #404040',
+                color: '#FAFAFA'
+              }}
+            >
+              <div className="text-2xl">⚧</div>
+              <span className="text-sm font-medium">Non-binary</span>
+            </button>
+          </div>
+        </div>
+
         {/* Hometown */}
         <div>
           <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>Where did you grow up?</label>
