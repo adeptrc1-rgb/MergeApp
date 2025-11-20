@@ -123,10 +123,10 @@ export default function Store({ user }) {
           {/* Message Toast */}
           {message && (
             <div className={`mb-3 px-4 py-2 rounded-lg inline-flex items-center gap-2 ${
-              message.type === 'success' ? 'bg-green-500/20 border border-green-500/30 text-green-300' :
+              message.type === 'success' ? 'bg-white/10 border border-white/20 text-white' :
               'bg-red-500/20 border border-red-500/30 text-red-300'
             }`}>
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-4 h-4" style={{ color: message.type === 'success' ? '#4ECDC4' : '#EF4444' }} />
               <span className="text-sm">{message.text}</span>
             </div>
           )}
