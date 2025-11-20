@@ -153,40 +153,27 @@ function LandingPage() {
 
   const { setUser, setNeedsOnboarding: setNeedsOnboardingContext } = React.useContext(AuthContext);
 
-  const handleTestLogin = () => {
-    console.log('[TEST LOGIN] Setting mock user for testing...');
+  const { login } = React.useContext(AuthContext);
+
+  const handleTestLogin = async () => {
+    console.log('[TEST LOGIN] Calling backend test-login...');
+    setLoading(true);
     
-    // Mock user data for testing the interface
-    const mockUser = {
-      id: 'test-user-123',
-      email: 'testuser@asign.com',
-      first_name: 'Test',
-      last_name: 'User',
-      birth_date: '1995-06-15',
-      zodiac_sign: 'Leo',
-      photos: ['https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=800&q=80'],
-      bio: 'Test user for interface testing',
-      interests: ['music', 'coffee', 'travel'],
-      industry: 'Technology',
-      job_title: 'Software Engineer',
-      location: 'San Francisco, CA',
-      profile_completed: true,
-      star_coins: 5000,
-      super_likes: 5,
-      profile_boosts: 2,
-      direct_messages: 10,
-      is_premium: false,
-      vibe_song: {
-        title: 'Test Song',
-        artist: 'Test Artist',
-        preview_url: null
+    try {
+      const success = await login('test@example.com');
+      if (success) {
+        console.log('[TEST LOGIN] Login successful, navigating to /home');
+        navigate('/home');
+      } else {
+        console.log('[TEST LOGIN] Login failed');
+        alert('Login failed. Please try again.');
       }
-    };
+    } catch (error) {
+      console.error('[TEST LOGIN] Error:', error);
+      alert('Login error. Please try again.');
+    }
     
-    setUser(mockUser);
-    setNeedsOnboardingContext(false);
-    navigate('/home');
-    console.log('[TEST LOGIN] Mock user set, navigating to /home');
+    setLoading(false);
   };
 
   const handlePhoneSubmit = async () => {
