@@ -75,21 +75,17 @@ export default function MergeOnboarding() {
   const canContinue = () => {
     switch (step) {
       case 1:
-        return formData.first_name && formData.birth_date && formData.hometown;
+        return formData.first_name && formData.birth_date && formData.relationship_goal && formData.hometown;
       case 2:
         return formData.social_energy_source && 
                formData.information_processing && 
                formData.decision_making;
       case 3:
-        return formData.relationship_goal && 
-               formData.kids_preference && 
-               formData.top_interests.length >= 3;
+        return formData.top_interests.length > 0;
       case 4:
-        return formData.conflict_style && 
-               formData.love_language && 
-               formData.texting_style;
+        return formData.conflict_style && formData.love_language && formData.texting_style;
       case 5:
-        return formData.photos.filter(p => p).length >= 3;
+        return formData.photos.filter(p => p).length >= 1;
       default:
         return false;
     }
