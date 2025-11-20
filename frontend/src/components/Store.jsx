@@ -137,9 +137,10 @@ export default function Store({ user }) {
               onClick={() => setActiveTab('lights')}
               className={`flex-1 px-4 py-2 rounded-lg transition-all ${
                 activeTab === 'lights'
-                  ? 'bg-[#2563EB] border border-[#2563EB] text-white'
+                  ? 'text-white'
                   : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
               }`}
+              style={activeTab === 'lights' ? { background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' } : {}}
             >
               <Zap className="w-4 h-4 inline mr-2" />
               Lights
@@ -148,9 +149,10 @@ export default function Store({ user }) {
               onClick={() => setActiveTab('auras')}
               className={`flex-1 px-4 py-2 rounded-lg transition-all ${
                 activeTab === 'auras'
-                  ? 'bg-[#2563EB] border border-[#2563EB] text-white'
+                  ? 'text-white'
                   : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
               }`}
+              style={activeTab === 'auras' ? { background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' } : {}}
             >
               <Flame className="w-4 h-4 inline mr-2" />
               Auras
