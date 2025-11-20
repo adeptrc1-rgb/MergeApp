@@ -487,55 +487,69 @@ export default function Profile({ user, logout }) {
             </button>
           </div>
 
-          {/* Elegant Profile Summary */}
-          <div className="flex items-start gap-4">
-            {/* Avatar Section - Clickable */}
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="relative group cursor-pointer"
-            >
-              <div className="relative">
-                <div
-                  className="w-20 h-20 rounded-full bg-cover bg-center border border-white/20 transition-all group-hover:border-white/40"
-                  style={{ 
-                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)'
-                  }}
-                >
-                  {!user.photos?.[0] && (
-                    <div className="w-full h-full flex items-center justify-center text-white text-xl font-light">
-                      {user.first_name?.[0] || 'U'}
+          {/* Elegant Profile Summary with Color Card */}
+          <div className="rounded-2xl p-4 mb-4" style={{ 
+            background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%)',
+            border: '1px solid rgba(108, 99, 255, 0.2)'
+          }}>
+            <div className="flex items-start gap-4">
+              {/* Avatar Section - Clickable */}
+              <button
+                onClick={() => setShowEditProfile(true)}
+                className="relative group cursor-pointer"
+              >
+                <div className="relative">
+                  <div
+                    className="w-20 h-20 rounded-full bg-cover bg-center border-2 transition-all"
+                    style={{ 
+                      backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)',
+                      borderColor: '#6C63FF',
+                      boxShadow: '0 0 20px rgba(108, 99, 255, 0.3)'
+                    }}
+                  >
+                    {!user.photos?.[0] && (
+                      <div className="w-full h-full flex items-center justify-center text-white text-xl font-light">
+                        {user.first_name?.[0] || 'U'}
+                      </div>
+                    )}
+                    {/* Edit overlay */}
+                    <div className="absolute inset-0 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="text-white text-xs">Edit</span>
                     </div>
-                  )}
-                  {/* Edit overlay */}
-                  <div className="absolute inset-0 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="text-white text-xs">Edit</span>
                   </div>
+                  <div className="absolute bottom-0 right-0 w-5 h-5 rounded-full border-2" style={{ 
+                    backgroundColor: '#4ECDC4',
+                    borderColor: '#0A0A0A',
+                    boxShadow: '0 0 10px rgba(78, 205, 196, 0.5)'
+                  }} />
                 </div>
-                <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-black" style={{ backgroundColor: '#4ECDC4' }} />
-              </div>
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white/10 border border-white/20 px-2 py-0.5 rounded-full text-xs text-white font-medium">
-                {profileCompletion}%
-              </div>
-            </button>
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 px-2.5 py-1 rounded-full text-xs text-white font-semibold" style={{
+                  background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)',
+                  boxShadow: '0 4px 12px rgba(108, 99, 255, 0.4)'
+                }}>
+                  {profileCompletion}%
+                </div>
+              </button>
 
-            {/* Profile Meta - Clickable */}
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="flex-1 text-left group"
-            >
-              <h1 className="text-2xl font-semibold text-white mb-1 group-hover:text-white/90 transition-colors">
-                {user.first_name}{age ? `, ${age}` : ''}
-              </h1>
-              <p className="text-white/70 text-sm mb-2 group-hover:text-white/80 transition-colors">
-                {user.job_title || 'Professional'} · {user.industry || 'Technology'}
-              </p>
-              <div className="flex items-center gap-1.5 text-white/50 text-sm group-hover:text-white/60 transition-colors">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
-                </svg>
-                <span>5 miles away · {user.location || 'New York'}</span>
-              </div>
-            </button>
+              {/* Profile Meta - Clickable */}
+              <button
+                onClick={() => setShowEditProfile(true)}
+                className="flex-1 text-left group"
+              >
+                <h1 className="text-2xl font-bold text-white mb-1.5 group-hover:text-white/90 transition-colors">
+                  {user.first_name}{age ? `, ${age}` : ''}
+                </h1>
+                <p className="text-sm mb-2 font-medium" style={{ color: '#4ECDC4' }}>
+                  {user.job_title || 'Professional'} · {user.industry || 'Technology'}
+                </p>
+                <div className="flex items-center gap-1.5 text-white/60 text-sm">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#6C63FF">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+                  </svg>
+                  <span>5 miles away · {user.location || 'New York'}</span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
