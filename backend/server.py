@@ -1520,7 +1520,7 @@ STORE_ITEMS = [
     {
         "id": "aura_pastel",
         "name": "Pastel Dreams",
-        "type": "aura",
+        "type": "skin",
         "price": 1000,
         "description": "Soft gradient overlay with gentle floating particles",
         "effect": {
