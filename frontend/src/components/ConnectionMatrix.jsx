@@ -194,12 +194,17 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
     return names[reward?.type] || reward?.type || 'Reward';
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    console.log('[CONNECTIONMATRIX] Modal is closed (isOpen=false)');
+    return null;
+  }
+
+  console.log('[CONNECTIONMATRIX] Rendering modal, loading=', loading, 'error=', error, 'matrixStatus=', matrixStatus);
 
   return (
     <div 
-      className="fixed inset-0 flex items-center justify-center z-50 p-4"
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}
+      className="fixed inset-0 flex items-center justify-center p-4"
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)', zIndex: 9999 }}
       onClick={onClose}
     >
       <div 
