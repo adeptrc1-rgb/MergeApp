@@ -64,7 +64,7 @@ db = client[DB_NAME]
 
 # Constants
 COOKIE_NAME = "session_token"
-SECURE_COOKIES = False  # Set to False for local development
+SECURE_COOKIES = True  # Required for SameSite=None
 
 def now_utc() -> datetime:
     return datetime.now(timezone.utc)
