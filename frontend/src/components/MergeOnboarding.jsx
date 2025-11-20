@@ -8,10 +8,51 @@ const API = `${BACKEND_URL}/api`;
 
 // Interest options for multi-select
 const INTEREST_OPTIONS = [
-  'Hiking', 'Cooking', 'Music', 'Art', 'Fitness', 'Travel',
-  'Gaming', 'Reading', 'Photography', 'Dancing', 'Sports', 'Movies',
-  'Coffee', 'Wine', 'Tech', 'Fashion', 'Volunteering', 'Pets'
-];
+  // Outdoor & Adventure
+  'Hiking', 'Camping', 'Rock Climbing', 'Surfing', 'Skiing', 'Snowboarding', 'Kayaking', 'Cycling',
+  
+  // Food & Drink
+  'Cooking', 'Baking', 'Coffee', 'Wine', 'Craft Beer', 'Food Tours', 'Veganism', 'Mixology',
+  
+  // Arts & Creativity
+  'Music', 'Art', 'Photography', 'Painting', 'Drawing', 'Pottery', 'Crafts', 'Writing', 'Poetry',
+  
+  // Performing Arts
+  'Dancing', 'Theater', 'Singing', 'Stand-up Comedy', 'Improv',
+  
+  // Fitness & Wellness
+  'Fitness', 'Yoga', 'Pilates', 'Meditation', 'Running', 'Weightlifting', 'CrossFit', 'Boxing', 'Martial Arts',
+  
+  // Entertainment
+  'Gaming', 'Movies', 'TV Shows', 'Anime', 'Board Games', 'Escape Rooms', 'Concerts', 'Festivals',
+  
+  // Intellectual & Learning
+  'Reading', 'Podcasts', 'Documentaries', 'Science', 'History', 'Philosophy', 'Astronomy', 'Languages',
+  
+  // Social & Community
+  'Volunteering', 'Activism', 'Environmentalism', 'Networking', 'Public Speaking',
+  
+  // Travel & Culture
+  'Travel', 'Backpacking', 'Road Trips', 'Museums', 'Architecture', 'Cultural Events',
+  
+  // Tech & Innovation
+  'Tech', 'Coding', 'Startups', 'Crypto', 'AI', 'Robotics', 'DIY Projects',
+  
+  // Style & Fashion
+  'Fashion', 'Streetwear', 'Vintage Shopping', 'Thrifting', 'Makeup', 'Skincare',
+  
+  // Animals & Nature
+  'Pets', 'Dogs', 'Cats', 'Gardening', 'Plants', 'Bird Watching', 'Wildlife',
+  
+  // Sports & Competition
+  'Sports', 'Basketball', 'Soccer', 'Football', 'Tennis', 'Golf', 'Baseball', 'Hockey',
+  
+  // Music Genres & Instruments
+  'Live Music', 'DJing', 'Guitar', 'Piano', 'Drums', 'Electronic Music', 'Indie Music', 'Jazz', 'Hip Hop', 'Rock',
+  
+  // Other Hobbies
+  'Cars', 'Motorcycles', 'Vintage Collecting', 'Antiques', 'Sneakers', 'Comics', 'Magic Tricks', 'Astrology', 'Tarot'
+].sort();
 
 export default function MergeOnboarding() {
   const navigate = useNavigate();
