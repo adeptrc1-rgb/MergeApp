@@ -99,8 +99,11 @@ export default function Store({ user }) {
   const filteredItems = items.filter(item => {
     // 'lights' tab shows 'light' type, 'skins' tab shows 'skin' type
     const targetType = activeTab.slice(0, -1); // removes the 's' from 'lights' or 'skins'
+    console.log('[STORE] Filtering - activeTab:', activeTab, 'targetType:', targetType, 'item.type:', item.type);
     return item.type === targetType;
   });
+  
+  console.log('[STORE] Filtered items for', activeTab, ':', filteredItems.length);
 
   if (loading) {
     return (
