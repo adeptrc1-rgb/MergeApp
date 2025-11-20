@@ -98,8 +98,13 @@ export default function Store({ user }) {
 
   if (loading) {
     return (
-      <div className="h-screen text-white flex items-center justify-center" style={{ background: '#0A0A0A' }}>
-        <div className="text-center">
+      <div className="h-screen text-white flex items-center justify-center" style={{ background: '#000000' }}>
+        {/* Subtle animated background - matching onboarding */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+        </div>
+        <div className="text-center relative z-10">
           <div className="animate-spin w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4" style={{ borderColor: '#6C63FF', borderTopColor: 'transparent' }} />
           <p className="text-white/60">Loading Merge MarketPlace...</p>
         </div>
@@ -108,7 +113,13 @@ export default function Store({ user }) {
   }
 
   return (
-    <div className="h-screen text-white flex flex-col overflow-hidden" style={{ background: '#0A0A0A' }}>
+    <div className="h-screen text-white flex flex-col overflow-hidden" style={{ background: '#000000' }}>
+      {/* Subtle animated background - matching onboarding */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+      </div>
+
       {/* Header */}
       <div className="border-b border-white/10 flex-shrink-0 sticky top-0 z-10" style={{ background: '#000000' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
