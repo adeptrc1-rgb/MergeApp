@@ -461,9 +461,6 @@ export default function Profile({ user, logout }) {
         }
       `}</style>
 
-      {/* Circuit Background */}
-      <div className="circuit-background"></div>
-
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6 relative z-10">
         {/* Clean Header */}
