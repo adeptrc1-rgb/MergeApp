@@ -194,12 +194,7 @@ export default function ConnectionMatrix({ isOpen, onClose, onRewardClaimed }) {
     return names[reward?.type] || reward?.type || 'Reward';
   };
 
-  if (!isOpen) {
-    console.log('[CONNECTIONMATRIX] Modal is closed (isOpen=false)');
-    return null;
-  }
-
-  console.log('[CONNECTIONMATRIX] Rendering modal, loading=', loading, 'error=', error, 'matrixStatus=', matrixStatus);
+  if (!isOpen) return null;
 
   return (
     <div 
