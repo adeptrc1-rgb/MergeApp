@@ -642,7 +642,10 @@ export default function Profile({ user, logout }) {
         <div className="space-y-2 mb-6">
           {/* Merge Wheel */}
           <button
-            onClick={() => setShowConnectionMatrix(true)}
+            onClick={() => {
+              console.log('[PROFILE] Opening Merge Wheel modal...');
+              setShowConnectionMatrix(true);
+            }}
             className="quantum-btn w-full p-4 flex items-center gap-4"
           >
             <div className="btn-glow"></div>
