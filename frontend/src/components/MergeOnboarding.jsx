@@ -17,6 +17,8 @@ export default function MergeOnboarding() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [interestSearch, setInterestSearch] = useState('');
+  const [showInterestSuggestions, setShowInterestSuggestions] = useState(false);
 
   const totalSteps = 5;
   const totalQuestions = 20;
