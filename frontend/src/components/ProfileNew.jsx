@@ -468,8 +468,12 @@ export default function Profile({ user, logout }) {
           animation: shimmer 2s infinite;
         }
       `}</style>
+
+      {/* Circuit Background */}
+      <div className="circuit-background"></div>
+
       {/* Single Scrollable Container */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="max-w-4xl mx-auto px-4 py-6 relative z-10">
         {/* Clean Header */}
         <div className="pb-6 border-b border-white/10 mb-4">
           {/* Top Bar */}
