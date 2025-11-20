@@ -625,9 +625,9 @@ export default function MergeOnboarding() {
           <Heart className="w-10 h-10 text-white" />
         </div>
         <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
-          Lifestyle & Values
+          Lifestyle & Interests
         </h2>
-        <p className="text-lg" style={{ color: '#A3A3A3' }}>Your relationship essentials</p>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>What brings you joy</p>
       </div>
 
       <div className="space-y-6">
