@@ -646,13 +646,12 @@ export default function Profile({ user, logout }) {
               console.log('[PROFILE] Opening Merge Wheel modal...');
               setShowConnectionMatrix(true);
             }}
-            className="quantum-btn w-full p-4 flex items-center gap-4"
+            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
           >
-            <div className="btn-glow"></div>
-            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center relative z-10" style={{ color: '#6C63FF' }}>
+            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#6C63FF' }}>
               <Zap className="w-5 h-5" />
             </div>
-            <div className="flex-1 text-left relative z-10">
+            <div className="flex-1 text-left">
               <h4 className="text-white font-medium text-sm mb-0.5">Merge Wheel</h4>
               <p className="text-white/50 text-xs">
                 {canSpin ? 'Your daily spin is ready' : 'Come back later for rewards'}
@@ -663,7 +662,7 @@ export default function Profile({ user, logout }) {
                 </div>
               )}
             </div>
-            <ChevronRight className="w-5 h-5 text-white/30 relative z-10" />
+            <ChevronRight className="w-5 h-5 text-white/30" />
           </button>
 
           {/* Profile Energy */}
