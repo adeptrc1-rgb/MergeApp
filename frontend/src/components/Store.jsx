@@ -92,7 +92,11 @@ export default function Store({ user }) {
     return inventory.active_skin === itemId;
   };
 
-  const filteredItems = items.filter(item => item.type === activeTab.slice(0, -1));
+  const filteredItems = items.filter(item => {
+    // 'lights' tab shows 'light' type, 'skins' tab shows 'skin' type
+    const targetType = activeTab.slice(0, -1); // removes the 's' from 'lights' or 'skins'
+    return item.type === targetType;
+  });
 
   if (loading) {
     return (
