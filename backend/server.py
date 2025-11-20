@@ -1589,7 +1589,7 @@ STORE_ITEMS = [
     {
         "id": "aura_autism_spectrum",
         "name": "Autism Spectrum",
-        "type": "aura",
+        "type": "skin",
         "price": 1100,
         "description": "Your name and zodiac shine with autism awareness colors",
         "effect": {
