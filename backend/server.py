@@ -130,7 +130,7 @@ class User(BaseModel):
     is_premium: bool = False
     owned_items: Optional[List[str]] = []
     active_light: Optional[str] = None
-    active_aura: Optional[str] = None
+    active_skin: Optional[str] = None
     current_streak: int = 0
     last_login_date: Optional[str] = None
     streak_saver_count: int = 0
