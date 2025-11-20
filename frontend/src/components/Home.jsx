@@ -780,20 +780,21 @@ export default function Home({ user }) {
                     <div 
                       className="flex items-center justify-center rounded-full flex-shrink-0"
                       style={{
-                        width: '28px',
-                        height: '28px',
-                        background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
-                        boxShadow: '0 0 15px rgba(59, 130, 246, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3)'
+                        width: '20px',
+                        height: '20px',
+                        background: 'linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%)',
+                        boxShadow: '0 0 8px rgba(59, 130, 246, 0.3)',
+                        border: '1.5px solid rgba(255, 255, 255, 0.2)'
                       }}
                       title="Photo Verified"
                     >
                       <svg 
-                        width="16" 
-                        height="16" 
+                        width="11" 
+                        height="11" 
                         viewBox="0 0 24 24" 
                         fill="none" 
                         stroke="white" 
-                        strokeWidth="3" 
+                        strokeWidth="3.5" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
                       >
