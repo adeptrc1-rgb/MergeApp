@@ -226,23 +226,6 @@ export default function Profile({ user, logout }) {
           display: none;
         }
 
-        /* Circuit Background Animation */
-        .circuit-background {
-          position: absolute;
-          inset: 0;
-          background: 
-            linear-gradient(90deg, transparent 50%, rgba(46, 134, 171, 0.03) 50%),
-            linear-gradient(transparent 50%, rgba(108, 99, 255, 0.03) 50%);
-          background-size: 50px 50px;
-          animation: circuitFlow 20s linear infinite;
-          pointer-events: none;
-        }
-
-        @keyframes circuitFlow {
-          0% { background-position: 0 0; }
-          100% { background-position: 50px 50px; }
-        }
-
         @keyframes pulseGlow {
           0%, 100% { 
             opacity: 1;
