@@ -52,12 +52,15 @@ export default function Profile({ user, logout }) {
 
   const checkDailySpinStatus = async () => {
     try {
-      const response = await axios.get(`${API}/rewards/cosmic-wheel-status`);
+      const response = await axios.get(`${API}/rewards/cosmic-wheel-status`, { withCredentials: true });
       setWheelStatus(response.data);
       setCanSpin(response.data.can_spin);
       updateCooldownCountdown(response.data);
     } catch (error) {
       console.error('Error checking spin status:', error);
+      // Set default state if auth fails
+      setWheelStatus({ can_spin: false, cooldown_hours: 0 });
+      setCanSpin(false);
     }
   };
 
