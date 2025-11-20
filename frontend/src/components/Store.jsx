@@ -104,19 +104,19 @@ export default function Store({ user }) {
   }
 
   return (
-    <div className="h-screen bg-black text-white flex flex-col overflow-hidden">
+    <div className="h-screen text-white flex flex-col overflow-hidden" style={{ background: '#0A0A0A' }}>
       {/* Header */}
-      <div className="border-b border-white/10 bg-black/50 backdrop-blur-md flex-shrink-0 sticky top-0 z-10">
+      <div className="border-b border-white/10 flex-shrink-0 sticky top-0 z-10" style={{ background: '#000000' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <ShoppingBag className="w-8 h-8 text-[#2563EB]" />
-              <h1 className="text-3xl font-medium">Aura Lab</h1>
+              <ShoppingBag className="w-8 h-8" style={{ color: '#6C63FF' }} />
+              <h1 className="text-3xl font-medium">Merge MarketPlace</h1>
             </div>
-            <div className="flex items-center gap-2 bg-[#F4F4F5] px-4 py-2 rounded-full border border-[#E4E4E7]">
-              <Star className="w-5 h-5 text-[#2563EB]" />
-              <span className="text-xl font-medium text-[#3F3F46]">{inventory.star_coins}</span>
-              <span className="text-sm text-[#A1A1AA]">coins</span>
+            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+              <Star className="w-5 h-5" style={{ color: '#FFD700' }} />
+              <span className="text-xl font-medium text-white">{inventory.star_coins}</span>
+              <span className="text-sm text-white/60">coins</span>
             </div>
           </div>
 
