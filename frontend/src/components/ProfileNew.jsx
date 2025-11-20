@@ -4,7 +4,7 @@ import axios from 'axios';
 import { 
   Shield, Zap, Gift, Award, LogOut, Sparkles, 
   ChevronRight, Check, Lock, Eye, EyeOff, Heart,
-  MessageCircle, RotateCcw, Coins, Clock, Trophy, Flame, Settings
+  MessageCircle, RotateCcw, Coins, Clock, Trophy, Flame, Settings, Star, Camera
 } from 'lucide-react';
 import ConnectionMatrix from './ConnectionMatrix';
 import BottomNav from './BottomNav';
