@@ -203,7 +203,7 @@ export default function Store({ user }) {
                       />
                     </div>
                   )}
-                  {(item.type === 'skin' || item.type === 'aura') && (
+                  {item.type === 'skin' && (
                     <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
                       {/* Show sample profile with animated text */}
                       <div className="text-center">
