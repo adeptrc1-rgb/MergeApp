@@ -303,7 +303,8 @@ async def handle_google_session(request: Request, response: Response):
             key="user_id",
             value=user_id,
             httponly=True,
-            samesite="lax",
+            secure=SECURE_COOKIES,
+            samesite="none",
             max_age=30 * 24 * 60 * 60  # 30 days
         )
         
