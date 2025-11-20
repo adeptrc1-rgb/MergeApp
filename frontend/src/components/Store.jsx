@@ -269,9 +269,10 @@ export default function Store({ user }) {
                       disabled={purchasing === item.id || inventory.star_coins < item.price}
                       className={`w-full py-2 rounded-lg font-medium flex items-center justify-center gap-2 transition-all ${
                         inventory.star_coins >= item.price
-                          ? 'bg-[#2563EB] hover:bg-[#1d4ed8] hover:scale-105'
+                          ? 'hover:scale-105'
                           : 'bg-white/10 cursor-not-allowed'
                       }`}
+                      style={inventory.star_coins >= item.price ? { background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' } : {}}
                     >
                       {purchasing === item.id ? (
                         <>
