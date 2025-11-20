@@ -758,22 +758,49 @@ export default function Home({ user }) {
               {/* Bottom info + dropdown */}
               <div className="absolute bottom-0 left-0 right-0 z-30" style={{ pointerEvents: 'auto', color: '#FAFAFA' }}>
                 <div className={`px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`} style={{ background: 'linear-gradient(to top, #0A0A0A, rgba(10, 10, 10, 0.95), transparent)' }}>
-                  <h2 className="text-4xl font-light mb-2" style={{ color: '#FAFAFA' }}>
-                    {userInventory?.active_skin && (() => {
-                      const activeSkin = storeItems.find(item => item.id === userInventory.active_skin);
-                      if (activeSkin?.effect?.nameAnimation) {
-                        return (
-                          <AnimatedProfileText 
-                            animationType={activeSkin.effect.nameAnimation}
-                            glowColor={activeSkin.effect.textGlow}
-                          >
-                            {currentMatch.first_name}, {age}
-                          </AnimatedProfileText>
-                        );
-                      }
-                      return `${currentMatch.first_name}, ${age}`;
-                    })() || `${currentMatch.first_name}, ${age}`}
-                  </h2>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h2 className="text-4xl font-light" style={{ color: '#FAFAFA' }}>
+                      {userInventory?.active_skin && (() => {
+                        const activeSkin = storeItems.find(item => item.id === userInventory.active_skin);
+                        if (activeSkin?.effect?.nameAnimation) {
+                          return (
+                            <AnimatedProfileText 
+                              animationType={activeSkin.effect.nameAnimation}
+                              glowColor={activeSkin.effect.textGlow}
+                            >
+                              {currentMatch.first_name}, {age}
+                            </AnimatedProfileText>
+                          );
+                        }
+                        return `${currentMatch.first_name}, ${age}`;
+                      })() || `${currentMatch.first_name}, ${age}`}
+                    </h2>
+                    
+                    {/* Photo Verification Badge */}
+                    <div 
+                      className="flex items-center justify-center rounded-full flex-shrink-0"
+                      style={{
+                        width: '28px',
+                        height: '28px',
+                        background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+                        boxShadow: '0 0 15px rgba(59, 130, 246, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3)'
+                      }}
+                      title="Photo Verified"
+                    >
+                      <svg 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="white" 
+                        strokeWidth="3" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </div>
+                  </div>
                   
                   {/* Merge Score & Show More */}
                   <div className="mb-2 flex items-center gap-3">
