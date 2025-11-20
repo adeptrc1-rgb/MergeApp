@@ -5,6 +5,9 @@ import axios from 'axios';
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api`;
 
+// Configure axios for this component
+axios.defaults.withCredentials = true;
+
 // Tier colors for data-driven feedback
 const TIER_COLORS = {
   common: 'from-gray-400 to-gray-600',
