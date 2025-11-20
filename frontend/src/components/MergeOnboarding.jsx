@@ -26,6 +26,7 @@ export default function MergeOnboarding() {
     first_name: '',
     birth_date: '',
     gender_identity: '',
+    interested_in: [],
     hometown: '',
 
     // Step 2: Personality - Scenarios
