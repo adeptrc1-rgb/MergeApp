@@ -235,7 +235,21 @@ export default function Store({ user }) {
                               WebkitTextFillColor: 'transparent',
                               animation: 'text-shimmer 5s linear infinite'
                             }),
-                            ...(item.effect.nameAnimation === 'neon_pulse' && { animation: 'text-neon 2s ease-in-out infinite' })
+                            ...(item.effect.nameAnimation === 'neon_pulse' && { animation: 'text-neon 2s ease-in-out infinite' }),
+                            ...(item.effect.nameAnimation === 'rainbow_gradient' && { 
+                              background: `linear-gradient(90deg, ${item.effect.gradientColors?.join(', ')})`,
+                              backgroundSize: '200% auto',
+                              WebkitBackgroundClip: 'text',
+                              WebkitTextFillColor: 'transparent',
+                              animation: 'text-gradient 4s linear infinite'
+                            }),
+                            ...(item.effect.nameAnimation === 'autism_gradient' && { 
+                              background: `linear-gradient(90deg, ${item.effect.gradientColors?.join(', ')})`,
+                              backgroundSize: '200% auto',
+                              WebkitBackgroundClip: 'text',
+                              WebkitTextFillColor: 'transparent',
+                              animation: 'text-gradient 4s linear infinite'
+                            })
                           }}
                         >
                           Name
