@@ -973,6 +973,8 @@ async def get_matches(user: User = Depends(get_current_user)):
         return result
     except Exception as e:
         print(f"Error fetching matches: {e}")
+        return []
+
 # === TRUST SCORE HELPERS ===
 
 def calculate_enhanced_trust_score(user_data: dict) -> float:
