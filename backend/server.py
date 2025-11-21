@@ -1690,7 +1690,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_libra",
-        "name": "♎ Libra",
+        "name": "Libra",
         "type": "skin",
         "price": 1200,
         "description": "Balanced Harmony - Two colors flowing in perfect sync",
