@@ -1756,7 +1756,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_pisces",
-        "name": "♓ Pisces",
+        "name": "Pisces",
         "type": "skin",
         "price": 1200,
         "description": "Ocean Dream - Flowing water-like animation",
