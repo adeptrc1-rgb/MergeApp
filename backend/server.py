@@ -496,6 +496,40 @@ async def update_user_profile(
 
 
 class PhotoVerificationUpdate(BaseModel):
+
+
+class AdminPhotoVerificationUpdate(BaseModel):
+    user_id: str
+    is_verified: bool = True
+
+
+@api_router.post("/admin/users/photo-verification")
+async def admin_update_photo_verification_status(
+    body: AdminPhotoVerificationUpdate,
+    request: Request
+):
+    """Admin-only endpoint to set any user's photo verification status.
+
+    Secured via X-Admin-Secret header matching ADMIN_API_KEY env var.
+    Intended for internal moderation tools (no third-party verifier).
+    """
+    # Require admin secret
+    require_admin(request)
+
+    result = await db.users.update_one(
+        {"id": body.user_id},
+        {"$set": {"is_photo_verified": body.is_verified}}
+    )
+
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return {
+        "success": True,
+        "user_id": body.user_id,
+        "is_photo_verified": body.is_verified
+    }
+
     is_verified: bool = True
 
 
