@@ -1353,6 +1353,8 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/test" element={<TestPage />} />
+        {/* Internal moderator tool - not linked from main nav */}
+        <Route path="/admin/moderator" element={<AdminModeratorPanel />} />
             <Route path="/login" element={<LoginApp />} />
             <Route path="/session" element={<SessionHandler />} />
             <Route path="/onboarding" element={<MergeOnboarding />} />
