@@ -1716,7 +1716,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_sagittarius",
-        "name": "♐ Sagittarius",
+        "name": "Sagittarius",
         "type": "skin",
         "price": 1200,
         "description": "Arrow Trail - Motion lines like a shooting arrow",
