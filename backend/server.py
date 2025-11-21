@@ -144,6 +144,24 @@ class LoginBody(BaseModel):
 
 class Session(BaseModel):
     token: str
+
+# Admin config (for simple admin-only endpoints)
+ADMIN_API_KEY = os.environ.get("ADMIN_API_KEY")
+
+
+def require_admin(request: Request):
+    """Simple admin check using X-Admin-Secret header and ADMIN_API_KEY env.
+
+    This is intentionally minimal for internal tools. If ADMIN_API_KEY is not set
+    or the header doesn't match, a 403 is returned.
+    """
+    if not ADMIN_API_KEY:
+        raise HTTPException(status_code=403, detail="Admin API key not configured")
+    header_key = request.headers.get("X-Admin-Secret")
+    if not header_key or header_key != ADMIN_API_KEY:
+        raise HTTPException(status_code=403, detail="Admin access required")
+
+
     user_id: str
     expires_at: str
 
