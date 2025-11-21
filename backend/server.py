@@ -533,8 +533,6 @@ async def admin_update_photo_verification_status(
         "is_photo_verified": body.is_verified
     }
 
-    is_verified: bool = True
-
 
 @api_router.post("/users/me/photo-verification")
 async def update_photo_verification_status(
