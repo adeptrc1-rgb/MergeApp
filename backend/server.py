@@ -1697,6 +1697,7 @@ STORE_ITEMS = [
             "type": "virgo",
             "gradientColors": ["#96CEB4", "#FFF8E1"],
             "animation": "geometric_pattern",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#96CEB4"
         }
     },
@@ -1710,6 +1711,7 @@ STORE_ITEMS = [
             "type": "libra",
             "gradientColors": ["#FF9A8B", "#87CEEB"],
             "animation": "symmetrical_flow",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#FF9A8B"
         }
     },
@@ -1723,6 +1725,7 @@ STORE_ITEMS = [
             "type": "scorpio",
             "gradientColors": ["#B71C1C", "#2D3748"],
             "animation": "mystic_shimmer",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#B71C1C"
         }
     },
