@@ -494,8 +494,11 @@ async def update_user_profile(
             {"$set": update_data}
         )
 
+    return {"success": True, "message": "Profile updated successfully"}
+
 
 class PhotoVerificationUpdate(BaseModel):
+    is_verified: bool = True
 
 
 class AdminPhotoVerificationUpdate(BaseModel):
