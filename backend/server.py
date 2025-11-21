@@ -1742,7 +1742,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_aquarius",
-        "name": "♒ Aquarius",
+        "name": "Aquarius",
         "type": "skin",
         "price": 1200,
         "description": "Future Pulse - Digital glitch and data stream effects",
