@@ -1650,7 +1650,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_cancer",
-        "name": "♋ Cancer",
+        "name": "Cancer",
         "type": "skin",
         "price": 1200,
         "description": "Lunar Tide - Gentle wave-like washing motion",
