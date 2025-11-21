@@ -1799,6 +1799,7 @@ STORE_ITEMS = [
             "gradientColors": ["#667EEA", "#6C63FF", "#8A4FFF"],
             "particles": {"type": "stars", "count": 50, "twinkle": True},
             "animation": "color_rotation",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#8A4FFF"
         }
     },
@@ -1812,6 +1813,7 @@ STORE_ITEMS = [
             "type": "solar_eclipse",
             "gradientColors": ["#2D3748", "#FFD700"],
             "animation": "corona_pulse",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#FFD700"
         }
     }
