@@ -1663,7 +1663,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_leo",
-        "name": "♌ Leo",
+        "name": "Leo",
         "type": "skin",
         "price": 1200,
         "description": "Solar Flare - Radiant sunburst with ray effects",
