@@ -1609,7 +1609,7 @@ STORE_ITEMS = [
     # Zodiac Sign Auras
     {
         "id": "aura_aries",
-        "name": "♈ Aries",
+        "name": "Aries",
         "type": "skin",
         "price": 1200,
         "description": "Blazing Trail - Animated ember particles and spark effects",
