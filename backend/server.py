@@ -192,7 +192,7 @@ async def test_login(body: LoginBody, response: Response):
             "bio": "Test user",
             "interests": ["music", "coffee"],
             "profile_completed": True,
-            "star_coins": 5000,
+            "star_coins": 50000,
             "super_likes": 5,
             "profile_boosts": 2,
             "direct_messages": 10,
@@ -288,7 +288,7 @@ async def handle_google_session(request: Request, response: Response):
                 "email": email,
                 "first_name": first_name,
                 "profile_completed": False,
-                "star_coins": 5000,
+                "star_coins": 50000,
                 "photos": [],
                 "interests": [],
                 "created_at": datetime.now(timezone.utc).isoformat()
