@@ -475,6 +475,31 @@ async def update_user_profile(
             {"id": user.id},
             {"$set": update_data}
         )
+
+
+class PhotoVerificationUpdate(BaseModel):
+    is_verified: bool = True
+
+
+@api_router.post("/users/me/photo-verification")
+async def update_photo_verification_status(
+    body: PhotoVerificationUpdate,
+    user: User = Depends(get_current_user)
+):
+    """Manually update the current user's photo verification status.
+
+    Designed for manual review flows: once a moderator/admin has confirmed
+    the user's photos, the client can call this to flip the flag.
+    """
+    await db.users.update_one(
+        {"id": user.id},
+        {"$set": {"is_photo_verified": body.is_verified}}
+    )
+    return {
+        "success": True,
+        "is_photo_verified": body.is_verified
+    }
+
     
     return {"success": True, "message": "Profile updated successfully"}
 
