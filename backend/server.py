@@ -1018,9 +1018,9 @@ def calculate_trending_energy_score(user_data: dict) -> float:
     compatibility_resonance = min(avg_compatibility * 1.1, 100)  # 10% boost, capped at 100
     
     # 3. Behavior & Trust Score (20% weight)
-    trust_score = user_data.get("trust_score", 85.0)
-    
-    behavior_trust_score = trust_score
+    # Use enhanced trust score with photo verification multiplier and caps
+    enhanced_trust_score = calculate_enhanced_trust_score(user_data)
+    behavior_trust_score = enhanced_trust_score
     
     # 4. Recency & Activity (15% weight)
     last_active_days = user_data.get("last_active_days", 7)
