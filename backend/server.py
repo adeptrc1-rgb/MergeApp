@@ -1623,7 +1623,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_taurus",
-        "name": "♉ Taurus",
+        "name": "Taurus",
         "type": "skin",
         "price": 1200,
         "description": "Grounded Glow - Subtle earth-toned pulse with leaf particles",
