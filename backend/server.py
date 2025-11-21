@@ -131,6 +131,8 @@ class User(BaseModel):
     owned_items: Optional[List[str]] = []
     active_light: Optional[str] = None
     active_skin: Optional[str] = None
+    # Photo verification status
+    is_photo_verified: bool = False
     current_streak: int = 0
     last_login_date: Optional[str] = None
     streak_saver_count: int = 0
