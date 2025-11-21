@@ -1668,6 +1668,7 @@ STORE_ITEMS = [
             "type": "cancer",
             "gradientColors": ["#E8EAF0", "#4A90E2"],
             "animation": "horizontal_wave",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#4A90E2"
         }
     },
