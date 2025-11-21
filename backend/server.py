@@ -1739,6 +1739,7 @@ STORE_ITEMS = [
             "type": "sagittarius",
             "gradientColors": ["#6C63FF", "#FFE66D"],
             "animation": "directional_flow",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#FFE66D"
         }
     },
@@ -1752,6 +1753,7 @@ STORE_ITEMS = [
             "type": "capricorn",
             "gradientColors": ["#666666", "#CD7F32"],
             "animation": "stable_shift",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#CD7F32"
         }
     },
@@ -1766,6 +1768,7 @@ STORE_ITEMS = [
             "gradientColors": ["#00A8E8", "#B0BEC5"],
             "particles": {"type": "data_stream", "count": 15, "digital": True},
             "animation": "glitch_pulse",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#00A8E8"
         }
     },
@@ -1779,6 +1782,7 @@ STORE_ITEMS = [
             "type": "pisces",
             "gradientColors": ["#4ECDC4", "#A56CD0"],
             "animation": "vertical_wave",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#A56CD0"
         }
     },
