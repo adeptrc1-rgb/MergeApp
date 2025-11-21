@@ -931,7 +931,8 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "preferences": u.get("preferences", {}),
             "education": u.get("education", {"college": "UCLA"}),
             "vibe_song": u.get("vibe_song"),
-            "trustScore": u.get("trust_score", 75)
+            "trustScore": u.get("trust_score", 75),
+            "is_photo_verified": u.get("is_photo_verified", False)
         })
     return result
 
