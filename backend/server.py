@@ -973,6 +973,26 @@ async def get_matches(user: User = Depends(get_current_user)):
         return result
     except Exception as e:
         print(f"Error fetching matches: {e}")
+# === TRUST SCORE HELPERS ===
+
+def calculate_enhanced_trust_score(user_data: dict) -> float:
+    """Apply photo verification multiplier and caps to foundational trust score.
+
+    - Foundational trust: existing user_data["trust_score"] (0-100)
+    - If photo verified: 1.5x multiplier, capped at 100
+    - If NOT verified: hard cap at 75
+    """
+    foundational_trust = float(user_data.get("trust_score", 70.0))
+    is_photo_verified = bool(user_data.get("is_photo_verified") or user_data.get("photo_verified"))
+
+    if is_photo_verified:
+        enhanced = foundational_trust * 1.5
+        return min(enhanced, 100.0)
+    # Unverified users: cap at 75
+    return min(foundational_trust, 75.0)
+
+
+
         return []
 
 # Trending Energies Algorithm with Responsiveness
