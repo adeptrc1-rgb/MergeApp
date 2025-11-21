@@ -1683,6 +1683,7 @@ STORE_ITEMS = [
             "gradientColors": ["#FFD700", "#8A4FFF"],
             "particles": {"type": "rays", "count": 12, "radial": True},
             "animation": "pulsing_outward",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#FFD700"
         }
     },
