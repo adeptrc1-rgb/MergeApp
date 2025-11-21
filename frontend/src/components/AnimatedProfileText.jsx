@@ -110,5 +110,22 @@ export default function AnimatedProfileText({ children, animationType, glowColor
     );
   }
 
+  // Zodiac gradient animation (uses glowColor for gradient)
+  if (animationType === 'zodiac_gradient' && glowColor) {
+    return (
+      <span 
+        className={`${className}`}
+        style={{
+          color: glowColor,
+          textShadow: `0 0 20px ${glowColor}, 0 0 40px ${glowColor}, 0 2px 4px rgba(0,0,0,0.3)`,
+          filter: `drop-shadow(0 0 10px ${glowColor})`,
+          animation: 'text-pulse 3s ease-in-out infinite'
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
+
   return <span className={className}>{children}</span>;
 }
