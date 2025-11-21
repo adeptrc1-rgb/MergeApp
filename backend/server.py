@@ -1785,7 +1785,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_solar_eclipse",
-        "name": "🌑 Solar Eclipse",
+        "name": "Solar Eclipse",
         "type": "skin",
         "price": 2000,
         "description": "Corona Glow - Golden rim lighting on dark background (Premium)",
