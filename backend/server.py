@@ -994,9 +994,6 @@ def calculate_enhanced_trust_score(user_data: dict) -> float:
     return min(foundational_trust, 75.0)
 
 
-
-        return []
-
 # Trending Energies Algorithm with Responsiveness
 def calculate_trending_energy_score(user_data: dict) -> float:
     """
