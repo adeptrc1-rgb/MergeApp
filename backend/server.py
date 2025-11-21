@@ -1604,6 +1604,197 @@ STORE_ITEMS = [
             "badgeFloat": True,
             "puzzleGlow": True
         }
+    },
+    
+    # Zodiac Sign Auras
+    {
+        "id": "aura_aries",
+        "name": "♈ Aries",
+        "type": "skin",
+        "price": 1200,
+        "description": "Blazing Trail - Animated ember particles and spark effects",
+        "effect": {
+            "type": "aries",
+            "gradientColors": ["#FF6B6B", "#FFD166"],
+            "particles": {"type": "embers", "count": 30, "spark": True},
+            "animation": "pulsing_sparks",
+            "textGlow": "#FFD166"
+        }
+    },
+    {
+        "id": "aura_taurus",
+        "name": "♉ Taurus",
+        "type": "skin",
+        "price": 1200,
+        "description": "Grounded Glow - Subtle earth-toned pulse with leaf particles",
+        "effect": {
+            "type": "taurus",
+            "gradientColors": ["#4ECDC4", "#A1887F"],
+            "particles": {"type": "leaves", "count": 20, "float": True},
+            "animation": "heartbeat_pulse",
+            "textGlow": "#4ECDC4"
+        }
+    },
+    {
+        "id": "aura_gemini",
+        "name": "♊ Gemini",
+        "type": "skin",
+        "price": 1200,
+        "description": "Twin Pulse - Two colors alternating in rhythmic pattern",
+        "effect": {
+            "type": "gemini",
+            "gradientColors": ["#667EEA", "#C0C0C0"],
+            "animation": "alternating_glow",
+            "textGlow": "#667EEA"
+        }
+    },
+    {
+        "id": "aura_cancer",
+        "name": "♋ Cancer",
+        "type": "skin",
+        "price": 1200,
+        "description": "Lunar Tide - Gentle wave-like washing motion",
+        "effect": {
+            "type": "cancer",
+            "gradientColors": ["#E8EAF0", "#4A90E2"],
+            "animation": "horizontal_wave",
+            "textGlow": "#4A90E2"
+        }
+    },
+    {
+        "id": "aura_leo",
+        "name": "♌ Leo",
+        "type": "skin",
+        "price": 1200,
+        "description": "Solar Flare - Radiant sunburst with ray effects",
+        "effect": {
+            "type": "leo",
+            "gradientColors": ["#FFD700", "#8A4FFF"],
+            "particles": {"type": "rays", "count": 12, "radial": True},
+            "animation": "pulsing_outward",
+            "textGlow": "#FFD700"
+        }
+    },
+    {
+        "id": "aura_virgo",
+        "name": "♍ Virgo",
+        "type": "skin",
+        "price": 1200,
+        "description": "Precision Glow - Clean geometric pattern overlay",
+        "effect": {
+            "type": "virgo",
+            "gradientColors": ["#96CEB4", "#FFF8E1"],
+            "animation": "geometric_pattern",
+            "textGlow": "#96CEB4"
+        }
+    },
+    {
+        "id": "aura_libra",
+        "name": "♎ Libra",
+        "type": "skin",
+        "price": 1200,
+        "description": "Balanced Harmony - Two colors flowing in perfect sync",
+        "effect": {
+            "type": "libra",
+            "gradientColors": ["#FF9A8B", "#87CEEB"],
+            "animation": "symmetrical_flow",
+            "textGlow": "#FF9A8B"
+        }
+    },
+    {
+        "id": "aura_scorpio",
+        "name": "♏ Scorpio",
+        "type": "skin",
+        "price": 1200,
+        "description": "Mystic Veil - Dark shimmer with crimson accents",
+        "effect": {
+            "type": "scorpio",
+            "gradientColors": ["#B71C1C", "#2D3748"],
+            "animation": "mystic_shimmer",
+            "textGlow": "#B71C1C"
+        }
+    },
+    {
+        "id": "aura_sagittarius",
+        "name": "♐ Sagittarius",
+        "type": "skin",
+        "price": 1200,
+        "description": "Arrow Trail - Motion lines like a shooting arrow",
+        "effect": {
+            "type": "sagittarius",
+            "gradientColors": ["#6C63FF", "#FFE66D"],
+            "animation": "directional_flow",
+            "textGlow": "#FFE66D"
+        }
+    },
+    {
+        "id": "aura_capricorn",
+        "name": "♑ Capricorn",
+        "type": "skin",
+        "price": 1200,
+        "description": "Stone Foundation - Solid geometric block patterns",
+        "effect": {
+            "type": "capricorn",
+            "gradientColors": ["#666666", "#CD7F32"],
+            "animation": "stable_shift",
+            "textGlow": "#CD7F32"
+        }
+    },
+    {
+        "id": "aura_aquarius",
+        "name": "♒ Aquarius",
+        "type": "skin",
+        "price": 1200,
+        "description": "Future Pulse - Digital glitch and data stream effects",
+        "effect": {
+            "type": "aquarius",
+            "gradientColors": ["#00A8E8", "#B0BEC5"],
+            "particles": {"type": "data_stream", "count": 15, "digital": True},
+            "animation": "glitch_pulse",
+            "textGlow": "#00A8E8"
+        }
+    },
+    {
+        "id": "aura_pisces",
+        "name": "♓ Pisces",
+        "type": "skin",
+        "price": 1200,
+        "description": "Ocean Dream - Flowing water-like animation",
+        "effect": {
+            "type": "pisces",
+            "gradientColors": ["#4ECDC4", "#A56CD0"],
+            "animation": "vertical_wave",
+            "textGlow": "#A56CD0"
+        }
+    },
+    
+    # Premium Cosmic Auras
+    {
+        "id": "aura_galactic_nebula",
+        "name": "💫 Galactic Nebula",
+        "type": "skin",
+        "price": 2000,
+        "description": "Starfield - Twinkling star particles on rotating gradient (Premium)",
+        "effect": {
+            "type": "galactic_nebula",
+            "gradientColors": ["#667EEA", "#6C63FF", "#8A4FFF"],
+            "particles": {"type": "stars", "count": 50, "twinkle": True},
+            "animation": "color_rotation",
+            "textGlow": "#8A4FFF"
+        }
+    },
+    {
+        "id": "aura_solar_eclipse",
+        "name": "🌑 Solar Eclipse",
+        "type": "skin",
+        "price": 2000,
+        "description": "Corona Glow - Golden rim lighting on dark background (Premium)",
+        "effect": {
+            "type": "solar_eclipse",
+            "gradientColors": ["#2D3748", "#FFD700"],
+            "animation": "corona_pulse",
+            "textGlow": "#FFD700"
+        }
     }
 ]
 
