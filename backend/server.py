@@ -1677,7 +1677,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_virgo",
-        "name": "♍ Virgo",
+        "name": "Virgo",
         "type": "skin",
         "price": 1200,
         "description": "Precision Glow - Clean geometric pattern overlay",
