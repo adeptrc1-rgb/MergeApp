@@ -240,15 +240,6 @@ export default function Store({ user }) {
                         >
                           Name
                         </div>
-                        <div 
-                          className="text-2xl"
-                          style={{
-                            color: item.effect.textGlow || '#ffffff',
-                            filter: `drop-shadow(0 0 8px ${item.effect.textGlow})`,
-                          }}
-                        >
-                          ♈
-                        </div>
                       </div>
                     </div>
                   )}
