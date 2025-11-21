@@ -1654,6 +1654,7 @@ STORE_ITEMS = [
             "type": "gemini",
             "gradientColors": ["#667EEA", "#C0C0C0"],
             "animation": "alternating_glow",
+            "nameAnimation": "zodiac_gradient",
             "textGlow": "#667EEA"
         }
     },
