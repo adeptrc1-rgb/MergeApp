@@ -1771,7 +1771,7 @@ STORE_ITEMS = [
     # Premium Cosmic Auras
     {
         "id": "aura_galactic_nebula",
-        "name": "💫 Galactic Nebula",
+        "name": "Galactic Nebula",
         "type": "skin",
         "price": 2000,
         "description": "Starfield - Twinkling star particles on rotating gradient (Premium)",
