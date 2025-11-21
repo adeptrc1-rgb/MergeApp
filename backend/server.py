@@ -1703,7 +1703,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_scorpio",
-        "name": "♏ Scorpio",
+        "name": "Scorpio",
         "type": "skin",
         "price": 1200,
         "description": "Mystic Veil - Dark shimmer with crimson accents",
