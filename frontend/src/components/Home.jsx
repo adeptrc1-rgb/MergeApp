@@ -671,9 +671,7 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center pt-8 md:pt-12 px-4 pb-32 md:pb-20 relative overflow-hidden" style={{ backgroundColor: '#000000' }}>
-        {/* Pure Black background */}
-        
+      <div className="flex-1 flex flex-col items-center pt-8 md:pt-12 px-4 pb-32 md:pb-20 relative overflow-hidden">
         <div className="w-full max-w-md relative flex flex-col space-y-4" style={{ zIndex: 10 }}>
           <div 
             className="w-full"
