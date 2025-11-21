@@ -1637,7 +1637,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_gemini",
-        "name": "♊ Gemini",
+        "name": "Gemini",
         "type": "skin",
         "price": 1200,
         "description": "Twin Pulse - Two colors alternating in rhythmic pattern",
