@@ -1729,7 +1729,7 @@ STORE_ITEMS = [
     },
     {
         "id": "aura_capricorn",
-        "name": "♑ Capricorn",
+        "name": "Capricorn",
         "type": "skin",
         "price": 1200,
         "description": "Stone Foundation - Solid geometric block patterns",
