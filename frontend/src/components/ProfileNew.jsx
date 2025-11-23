@@ -524,7 +524,10 @@ export default function Profile({ user, logout }) {
                   borderRadius: '16px',
                   padding: '2px 8px',
                   color: 'var(--profile-text-primary)'
-            </button>
+                }}
+              >
+                {profileCompletion}% Complete
+              </div>
           </div>
 
           {/* Trust Meter */}
