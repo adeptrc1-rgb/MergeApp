@@ -673,36 +673,37 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
-        {/* Premium Upsell - Gold Theme */}
-        <div className="rounded-2xl p-4 mb-4 relative overflow-hidden group hover:scale-[1.02] transition-all cursor-pointer" style={{
-          background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%)',
-          border: '1px solid rgba(255, 215, 0, 0.3)',
-          boxShadow: '0 4px 16px rgba(255, 215, 0, 0.1)'
-        }}>
-          <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-            <div className="w-full h-full" style={{
-              background: 'radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%)'
-            }} />
-          </div>
+        {/* Premium Upsell */}
+        <div
+          className="p-4 mb-4 relative overflow-hidden"
+          style={{
+            backgroundColor: 'var(--profile-card)',
+            borderRadius: '12px'
+          }}
+        >
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold mb-2" style={{
-              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-              color: '#000',
-              boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)'
-            }}>
-              <Star className="w-3 h-3" />
-              MERGE PREMIUM
-            </div>
-            <h4 className="text-white font-bold text-base mb-1.5">Enhanced Experience</h4>
-            <p className="text-white/70 text-xs mb-3">
-              Unlimited likes, advanced filters, and profile analytics
+            <h3
+              className="mb-1.5"
+              style={{ fontSize: '22px', fontWeight: 600, color: 'var(--profile-text-primary)' }}
+            >
+              Merge Premium
+            </h3>
+            <p
+              className="mb-3"
+              style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
+            >
+              Unlock unlimited likes, advanced filters, and profile analytics.
             </p>
-            <button className="w-full py-2.5 rounded-lg text-white text-xs font-bold transition-all hover:scale-105" style={{
-              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-              boxShadow: '0 4px 12px rgba(255, 215, 0, 0.3)',
-              color: '#000'
-            }}>
-              Upgrade Now
+            <button
+              className="w-full text-sm font-medium"
+              style={{
+                borderRadius: '16px',
+                padding: '10px 0',
+                backgroundColor: 'var(--profile-accent)',
+                color: '#FFFFFF'
+              }}
+            >
+              Upgrade
             </button>
           </div>
         </div>
