@@ -466,11 +466,11 @@ export default function Profile({ user, logout }) {
               Profile Management
             </h1>
             <button
-              onClick={() => setShowSettings(true)}
-              className="w-10 h-10 flex items-center justify-center rounded-[16px] transition-all"
-              style={{ backgroundColor: 'rgba(255,255,255,0.04)' }}
+              onClick={() => setShowEditProfile(true)}
+              className="text-sm font-medium transition-all"
+              style={{ color: '#00D9FF' }}
             >
-              <Settings className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
+              Edit
             </button>
           </div>
 
