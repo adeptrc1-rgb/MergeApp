@@ -534,64 +534,7 @@ export default function Profile({ user, logout }) {
           {/* Trust Meter (removed for classic layout) */}
         </div>
 
-        {/* Quick Actions 2x2 Grid */}
-        <div className="grid grid-cols-2 gap-3 mb-6 mt-4">
-          <button
-            onClick={() => navigate('/store')}
-            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
-            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
-          >
-            <div
-              className="flex items-center justify-center mb-2"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
-            >
-              <Heart className="w-6 h-6" style={{ color: '#00D9FF' }} />
-            </div>
-            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Super Likes</span>
-          </button>
-
-          <button
-            onClick={() => navigate('/discover')}
-            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
-            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
-          >
-            <div
-              className="flex items-center justify-center mb-2"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
-            >
-              <Zap className="w-6 h-6" style={{ color: '#00D9FF' }} />
-            </div>
-            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Boosts</span>
-          </button>
-
-          <button
-            onClick={() => navigate('/store')}
-            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
-            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
-          >
-            <div
-              className="flex items-center justify-center mb-2"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
-            >
-              <Sparkles className="w-6 h-6" style={{ color: '#00D9FF' }} />
-            </div>
-            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Auras</span>
-          </button>
-
-          <button
-            onClick={() => setShowConnectionMatrix(true)}
-            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
-            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
-          >
-            <div
-              className="flex items-center justify-center mb-2"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
-            >
-              <Trophy className="w-6 h-6" style={{ color: '#00D9FF' }} />
-            </div>
-            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Merge Wheel</span>
-          </button>
-        </div>
+        {/* Quick Actions 2x2 Grid (reverted to original 3-box layout below) */}
 
         {/* Duplicate content removed - 2x2 grid is now properly implemented above */}
 
