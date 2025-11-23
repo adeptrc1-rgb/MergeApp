@@ -119,7 +119,8 @@ export default function MergeOnboarding() {
   const canContinue = () => {
     switch (step) {
       case 1:
-        return formData.first_name && formData.birth_date && formData.relationship_goal && formData.hometown;
+        // Step 1: only require core identity fields to move forward
+        return formData.first_name && formData.birth_date && formData.hometown;
       case 2:
         return formData.social_energy_source && 
                formData.information_processing && 
