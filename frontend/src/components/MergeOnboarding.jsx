@@ -191,11 +191,12 @@ export default function MergeOnboarding() {
           occupation: '' // Will be added later
         },
         
-        // Communication
+        // Communication & Weekend
         preferences: {
           conflict_style: formData.conflict_style,
           love_language: formData.love_language,
-          texting_style: formData.texting_style
+          texting_style: formData.texting_style,
+          ideal_weekend: formData.ideal_weekend
         },
         
         // Photos
