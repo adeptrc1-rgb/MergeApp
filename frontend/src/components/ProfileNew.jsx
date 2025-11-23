@@ -574,15 +574,13 @@ export default function Profile({ user, logout }) {
               background: 'radial-gradient(circle at top right, rgba(78, 205, 196, 0.1), transparent 60%)'
             }}></div>
             <div className="flex flex-col items-center text-center relative z-10">
-              <div className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform" style={{
-                background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.15) 0%, rgba(78, 205, 196, 0.05) 100%)',
-                border: '1px solid rgba(78, 205, 196, 0.3)',
-                boxShadow: '0 0 20px rgba(78, 205, 196, 0.1)'
+              <div className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2" style={{
+                backgroundColor: 'rgba(255,255,255,0.04)'
               }}>
-                <Heart className="w-5 h-5" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
+                <Heart className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2.0} />
               </div>
-              <div className="text-lg font-semibold text-white mb-0.5">0</div>
-              <div className="text-[10px] text-white/60 mb-1.5 font-medium">Super Likes</div>
+              <div className="text-[17px] font-semibold mb-0.5" style={{ color: 'var(--profile-text-primary)' }}>0</div>
+              <div className="text-[13px] mb-1.5" style={{ color: 'var(--profile-text-secondary)' }}>Super Likes</div>
               <div className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all" style={{
                 background: 'rgba(78, 205, 196, 0.15)',
                 border: '1px solid rgba(78, 205, 196, 0.2)'
