@@ -1076,6 +1076,31 @@ async def get_matches(user: User = Depends(get_current_user)):
         return result
     except Exception as e:
         print(f"Error fetching matches: {e}")
+
+
+def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
+    """Calculate structured compatibility bonuses based on profile signals.
+
+    v1 implementation:
+    - +15 if connection_style (deal_breakers) matches
+    - +15 if ideal_weekend (preferences) matches
+    """
+    bonus = 0.0
+
+    # Connection style bonus
+    a_style = (user_a.get("deal_breakers") or {}).get("connection_style")
+    b_style = (user_b.get("deal_breakers") or {}).get("connection_style")
+    if a_style and b_style and a_style == b_style:
+        bonus += 15.0
+
+    # Ideal weekend bonus
+    a_weekend = (user_a.get("preferences") or {}).get("ideal_weekend")
+    b_weekend = (user_b.get("preferences") or {}).get("ideal_weekend")
+    if a_weekend and b_weekend and a_weekend == b_weekend:
+        bonus += 15.0
+
+    return bonus
+
         return []
 
 # === TRUST SCORE HELPERS ===
