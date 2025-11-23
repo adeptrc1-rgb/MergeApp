@@ -428,22 +428,22 @@ export default function MergeOnboarding() {
           </div>
         </div>
 
-        {/* Relationship Goal */}
+        {/* Connection Style */}
         <div>
-          <label className="block text-sm mb-3" style={{ color: '#A3A3A3' }}>What are you looking for?</label>
+          <label className="block text-sm mb-3" style={{ color: '#A3A3A3' }}>I build connections through...</label>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { value: 'long_term', label: 'Long-term relationship' },
-              { value: 'long_term_open', label: 'Long-term, open to short' },
-              { value: 'short_term', label: 'Short-term fun' },
-              { value: 'friends_first', label: 'Friends and see what happens' }
+              { value: 'shared_experiences', label: 'Shared experiences and living in the moment' },
+              { value: 'meaningful_conversations', label: 'Meaningful conversations that last for hours' },
+              { value: 'common_values', label: 'Finding common values and life goals' },
+              { value: 'balanced_approach', label: 'A balance of fun and deep talks' }
             ].map((option) => (
               <button
                 key={option.value}
                 type="button"
-                onClick={() => setFormData({ ...formData, relationship_goal: option.value })}
+                onClick={() => setFormData({ ...formData, connection_style: option.value })}
                 className="px-4 py-3 rounded-xl transition-all text-sm"
-                style={formData.relationship_goal === option.value ? {
+                style={formData.connection_style === option.value ? {
                   background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
                   color: '#FFFFFF',
                   border: '1px solid transparent'
