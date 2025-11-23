@@ -660,11 +660,14 @@ export default function Profile({ user, logout }) {
                 <Sparkles className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2.0} />
               </div>
               <div className="text-[17px] font-semibold mb-2" style={{ color: 'var(--profile-text-primary)' }}>Auras</div>
-              <div className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all" style={{
-                background: 'rgba(102, 126, 234, 0.15)',
-                border: '1px solid rgba(102, 126, 234, 0.2)'
-              }}>
-                EXPLORE
+              <div
+                className="text-[13px] font-medium px-3 py-1 rounded-[16px] mt-1"
+                style={{
+                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
+                  color: 'var(--profile-accent)'
+                }}
+              >
+                Explore
               </div>
             </div>
           </button>
