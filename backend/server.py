@@ -1037,10 +1037,6 @@ async def get_matches(user: User = Depends(get_current_user)):
             
             # Get other user's profile
             other_user = await db.users.find_one({"id": other_user_id})
-            
-
-
-def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
     """Calculate structured compatibility bonuses based on profile signals.
 
     v1 implementation:
