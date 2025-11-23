@@ -766,34 +766,40 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
-        {/* Premium Upsell */}
+        {/* Membership Status */}
         <div
           className="p-4 mb-4 relative overflow-hidden"
           style={{
-            backgroundColor: 'var(--profile-card)',
-            borderRadius: '12px'
+            borderRadius: '12px',
+            border: '2px solid #00D9FF',
+            backgroundColor: 'transparent'
           }}
         >
-          <div className="relative z-10">
-            <h3
-              className="mb-1.5"
-              style={{ fontSize: '22px', fontWeight: 600, color: 'var(--profile-text-primary)' }}
-            >
-              Merge Premium
-            </h3>
-            <p
-              className="mb-3"
-              style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
-            >
-              Unlock unlimited likes, advanced filters, and profile analytics.
-            </p>
+          <div className="relative z-10 flex items-center justify-between gap-3 flex-wrap">
+            <div>
+              <div
+                className="inline-flex items-center px-3 py-1 rounded-full mb-2"
+                style={{ backgroundColor: '#00D9FF' }}
+              >
+                <span
+                  style={{ fontSize: '13px', fontWeight: 600, color: '#000000' }}
+                >
+                  Merge Elite
+                </span>
+              </div>
+              <p
+                style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
+              >
+                Get priority placement, enhanced trust, and deeper insights.
+              </p>
+            </div>
             <button
-              className="w-full text-sm font-medium"
+              className="text-sm font-medium"
               style={{
                 borderRadius: '16px',
-                padding: '10px 0',
-                backgroundColor: 'var(--profile-accent)',
-                color: '#FFFFFF'
+                padding: '10px 16px',
+                backgroundColor: '#00D9FF',
+                color: '#000000'
               }}
             >
               Upgrade
