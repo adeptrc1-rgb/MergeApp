@@ -596,11 +596,10 @@ export default function Profile({ user, logout }) {
           {/* Merge Pulse Block */}
           <button
             onClick={() => navigate('/store')}
-            className="rounded-xl p-3 transition-all group relative overflow-hidden"
+            className="rounded-[12px] p-3 transition-all group relative overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
-              border: '1px solid rgba(108, 99, 255, 0.15)',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+              backgroundColor: 'var(--profile-card)',
+              borderRadius: '12px'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'linear-gradient(135deg, rgba(108, 99, 255, 0.08) 0%, rgba(10, 10, 10, 0.9) 100%)';
