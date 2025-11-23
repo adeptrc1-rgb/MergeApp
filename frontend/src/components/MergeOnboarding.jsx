@@ -128,8 +128,7 @@ export default function MergeOnboarding() {
       case 3:
         return formData.connection_style && formData.top_interests.length > 0;
       case 4:
-        return formData.ideal_weekend &&
-               formData.conflict_style && 
+        return formData.conflict_style && 
                formData.love_language && 
                formData.texting_style;
       case 5:
