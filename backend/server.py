@@ -1038,6 +1038,31 @@ async def get_matches(user: User = Depends(get_current_user)):
             # Get other user's profile
             other_user = await db.users.find_one({"id": other_user_id})
             
+
+
+def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
+    """Calculate structured compatibility bonuses based on profile signals.
+
+    v1 implementation:
+    - +15 if connection_style (deal_breakers) matches
+    - +15 if ideal_weekend (preferences) matches
+    """
+    bonus = 0.0
+
+    # Connection style bonus
+    a_style = (user_a.get("deal_breakers") or {}).get("connection_style")
+    b_style = (user_b.get("deal_breakers") or {}).get("connection_style")
+    if a_style and b_style and a_style == b_style:
+        bonus += 15.0
+
+    # Ideal weekend bonus
+    a_weekend = (user_a.get("preferences") or {}).get("ideal_weekend")
+    b_weekend = (user_b.get("preferences") or {}).get("ideal_weekend")
+    if a_weekend and b_weekend and a_weekend == b_weekend:
+        bonus += 15.0
+
+    return bonus
+
             if other_user:
                 result.append({
                     "id": match.get("id"),
