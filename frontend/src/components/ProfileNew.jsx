@@ -193,7 +193,7 @@ export default function Profile({ user, logout }) {
     <div 
       className="fixed inset-0 overflow-y-auto pb-24" 
       style={{ 
-        background: '#000000',
+        background: '#0F0B1F',
         scrollbarWidth: 'none', /* Firefox */
         msOverflowStyle: 'none' /* IE and Edge */
       }}
