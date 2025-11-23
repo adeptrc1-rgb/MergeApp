@@ -610,6 +610,63 @@ export default function Profile({ user, logout }) {
               background: 'radial-gradient(circle at top right, rgba(78, 205, 196, 0.1), transparent 60%)'
             }}></div>
             <div className="flex flex-col items-center text-center relative z-10">
+          {/* Quick Actions 2x2 Grid */}
+          <button
+            onClick={() => navigate('/store')}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
+            >
+              <Heart className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Super Likes</span>
+          </button>
+
+          <button
+            onClick={() => navigate('/discover')}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
+            >
+              <Zap className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Boosts</span>
+          </button>
+
+          <button
+            onClick={() => navigate('/store')}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
+            >
+              <Sparkles className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Auras</span>
+          </button>
+
+          <button
+            onClick={() => setShowConnectionMatrix(true)}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
+            >
+              <Trophy className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Merge Wheel</span>
+          </button>
+
               <div className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2" style={{
                 backgroundColor: 'rgba(255,255,255,0.04)'
               }}>
