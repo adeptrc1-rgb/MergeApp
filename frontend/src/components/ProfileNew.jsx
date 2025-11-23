@@ -561,13 +561,13 @@ export default function Profile({ user, logout }) {
             onClick={() => navigate('/store')}
             className="rounded-xl p-3 transition-all group relative overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
-              border: '1px solid rgba(78, 205, 196, 0.15)',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.16)',
+              boxShadow: 'none'
             }}
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              background: 'radial-gradient(circle at top right, rgba(78, 205, 196, 0.1), transparent 60%)'
+              background: 'transparent'
             }} />
             <div className="flex flex-col items-center text-center relative z-10">
               <div
