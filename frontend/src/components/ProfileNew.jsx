@@ -205,20 +205,15 @@ export default function Profile({ user, logout }) {
       </div>
 
       <style>{`
-        /* Tech Color Palette Variables */
+        /* Profile Management Design Tokens */
         :root {
-          --tech-primary: #6C63FF;
-          --tech-secondary: #2E86AB;
-          --tech-accent: #4ECDC4;
-          --tech-glow: #00F3FF;
-          
-          --neural-active: #6C63FF;
-          --neural-inactive: rgba(108, 99, 255, 0.3);
-          --neural-glow: rgba(0, 243, 255, 0.1);
-          
-          --bg-deep: #000000;
-          --bg-surface: #0A0A0A;
-          --bg-elevated: #1A1A1A;
+          --profile-bg: #0F0B1F;
+          --profile-card: #1A1734;
+          --profile-radius: 12px;
+          --profile-text-primary: #F5F5F5;
+          --profile-text-secondary: #A5A3C3;
+          --profile-accent: #6A5AE0;
+          --profile-success: #4CAF50;
         }
 
         /* Scrollbar hiding */
