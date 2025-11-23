@@ -621,11 +621,14 @@ export default function Profile({ user, logout }) {
               </div>
               <div className="text-[17px] font-semibold mb-0.5" style={{ color: 'var(--profile-text-primary)' }}>Merge</div>
               <div className="text-[13px] mb-1.5" style={{ color: 'var(--profile-text-secondary)' }}>Pulse</div>
-              <div className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all" style={{
-                background: 'rgba(108, 99, 255, 0.15)',
-                border: '1px solid rgba(108, 99, 255, 0.2)'
-              }}>
-                GET MORE
+              <div
+                className="text-[13px] font-medium px-3 py-1 rounded-[16px] mt-1"
+                style={{
+                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
+                  color: 'var(--profile-accent)'
+                }}
+              >
+                Get More
               </div>
             </div>
           </button>
