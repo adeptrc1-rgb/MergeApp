@@ -535,9 +535,121 @@ export default function Profile({ user, logout }) {
           {/* Trust Meter (removed for classic layout) */}
         </div>
 
-        {/* Quick Actions 2x2 Grid (reverted to original 3-box layout below) */}
+        {/* Quick Action Blocks - 3 horizontal cards */}
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          {/* Super Likes */}
+          <button
+            onClick={() => navigate('/store')}
+            className="rounded-xl p-3 transition-all group relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
+              border: '1px solid rgba(78, 205, 196, 0.15)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+            }}
+          >
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
+              background: 'radial-gradient(circle at top right, rgba(78, 205, 196, 0.1), transparent 60%)'
+            }} />
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div
+                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.15) 0%, rgba(78, 205, 196, 0.05) 100%)',
+                  border: '1px solid rgba(78, 205, 196, 0.3)',
+                  boxShadow: '0 0 20px rgba(78, 205, 196, 0.1)'
+                }}
+              >
+                <Heart className="w-5 h-5" style={{ color: '#4ECDC4' }} strokeWidth={2.5} />
+              </div>
+              <div className="text-lg font-semibold text-white mb-0.5">0</div>
+              <div className="text-[10px] text-white/60 mb-1.5 font-medium">Super Likes</div>
+              <div
+                className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all"
+                style={{
+                  background: 'rgba(78, 205, 196, 0.15)',
+                  border: '1px solid rgba(78, 205, 196, 0.2)'
+                }}
+              >
+                GET MORE
+              </div>
+            </div>
+          </button>
 
-        {/* Duplicate content removed - 2x2 grid is now properly implemented above */}
+          {/* Merge Pulse */}
+          <button
+            onClick={() => navigate('/store')}
+            className="rounded-xl p-3 transition-all group relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
+              border: '1px solid rgba(108, 99, 255, 0.15)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+            }}
+          >
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
+              background: 'radial-gradient(circle at top right, rgba(108, 99, 255, 0.1), transparent 60%)'
+            }} />
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div
+                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.15) 0%, rgba(108, 99, 255, 0.05) 100%)',
+                  border: '1px solid rgba(108, 99, 255, 0.3)',
+                  boxShadow: '0 0 20px rgba(108, 99, 255, 0.1)'
+                }}
+              >
+                <Zap className="w-5 h-5" style={{ color: '#6C63FF' }} strokeWidth={2.5} />
+              </div>
+              <div className="text-xs font-semibold text-white mb-0.5">Merge</div>
+              <div className="text-[10px] text-white/60 mb-1.5 font-medium">Pulse</div>
+              <div
+                className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all"
+                style={{
+                  background: 'rgba(108, 99, 255, 0.15)',
+                  border: '1px solid rgba(108, 99, 255, 0.2)'
+                }}
+              >
+                GET MORE
+              </div>
+            </div>
+          </button>
+
+          {/* Auras */}
+          <button
+            onClick={() => navigate('/store')}
+            className="rounded-xl p-3 transition-all group relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%)',
+              border: '1px solid rgba(102, 126, 234, 0.15)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+            }}
+          >
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
+              background: 'radial-gradient(circle at top right, rgba(102, 126, 234, 0.1), transparent 60%)'
+            }} />
+            <div className="flex flex-col items-center text-center relative z-10">
+              <div
+                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(102, 126, 234, 0.05) 100%)',
+                  border: '1px solid rgba(102, 126, 234, 0.3)',
+                  boxShadow: '0 0 20px rgba(102, 126, 234, 0.1)'
+                }}
+              >
+                <Sparkles className="w-5 h-5" style={{ color: '#667EEA' }} strokeWidth={2.5} />
+              </div>
+              <div className="text-xs font-semibold text-white mb-2">Auras</div>
+              <div
+                className="text-[9px] font-semibold px-2.5 py-0.5 rounded-full text-white/80 group-hover:text-white transition-all"
+                style={{
+                  background: 'rgba(102, 126, 234, 0.15)',
+                  border: '1px solid rgba(102, 126, 234, 0.2)'
+                }}
+              >
+                EXPLORE
+              </div>
+            </div>
+          </button>
+        </div>
 
         {/* Premium Upsell - Gold Theme */}
         <div className="rounded-2xl p-4 mb-4 relative overflow-hidden group hover:scale-[1.02] transition-all cursor-pointer" style={{
