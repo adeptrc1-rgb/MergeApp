@@ -1037,7 +1037,27 @@ async def get_matches(user: User = Depends(get_current_user)):
             
             # Get other user's profile
             other_user = await db.users.find_one({"id": other_user_id})
-    """Calculate structured compatibility bonuses based on profile signals.
+            if other_user:
+                result.append({
+                    "id": match.get("id"),
+                    "match_id": match.get("id"),
+                    "first_name": other_user.get("first_name", "User"),
+                    "last_name": other_user.get("last_name", ""),
+                    "birth_date": other_user.get("birth_date", "1995-01-01"),
+                    "zodiac_sign": other_user.get("zodiac_sign", "Leo"),
+                    "photos": other_user.get("photos", ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80"]),
+                    "current_location": other_user.get("current_location", {"city": "Unknown"}),
+                    "compatibility_score": match.get("compatibility_score", 85),
+                    "matched_at": match.get("matched_at")
+                })
+        
+        return result
+    except Exception as e:
+        print(f"Error fetching matches: {e}")
+        return []
+
+
+def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
 
     v1 implementation:
     - +15 if connection_style (deal_breakers) matches
