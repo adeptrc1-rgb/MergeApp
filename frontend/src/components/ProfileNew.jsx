@@ -814,9 +814,9 @@ export default function Profile({ user, logout }) {
           >
             <div
               className="flex items-center justify-center"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.04)' }}
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
             >
-              <Zap className="w-6 h-6" style={{ color: 'var(--profile-accent)' }} />
+              <Zap className="w-6 h-6" style={{ color: '#00D9FF' }} />
             </div>
             <div className="flex-1 text-left">
               <h3
