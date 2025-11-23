@@ -528,6 +528,7 @@ export default function Profile({ user, logout }) {
               >
                 {profileCompletion}% Complete
               </div>
+            </button>
           </div>
 
           {/* Trust Meter */}
