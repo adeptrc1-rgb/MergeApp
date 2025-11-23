@@ -535,13 +535,13 @@ export default function Profile({ user, logout }) {
               onClick={() => setShowEditProfile(true)}
               className="flex-1 text-left group"
             >
-              <h1 className="text-2xl font-semibold text-white mb-1 group-hover:text-white/90 transition-colors">
+              <h2 className="mb-1" style={{ fontSize: '22px', fontWeight: 600, color: 'var(--profile-text-primary)' }}>
                 {user.first_name}{age ? `, ${age}` : ''}
-              </h1>
-              <p className="text-white/70 text-sm mb-2 group-hover:text-white/80 transition-colors">
+              </h2>
+              <p className="mb-2" style={{ fontSize: '17px', color: 'var(--profile-text-secondary)' }}>
                 {user.job_title || 'Professional'} · {user.industry || 'Technology'}
               </p>
-              <div className="flex items-center gap-1.5 text-white/50 text-sm group-hover:text-white/60 transition-colors">
+              <div className="flex items-center gap-1.5" style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
                 </svg>
