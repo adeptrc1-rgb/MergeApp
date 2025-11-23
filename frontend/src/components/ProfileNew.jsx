@@ -489,13 +489,18 @@ export default function Profile({ user, logout }) {
             >
               <div className="relative">
                 <div
-                  className="w-20 h-20 rounded-full bg-cover bg-center border border-white/20 transition-all group-hover:border-white/40"
+                  className="w-20 h-20 rounded-full bg-cover bg-center border transition-all group-hover:border-[var(--profile-accent)]"
                   style={{ 
-                    backgroundImage: user.photos?.[0] ? `url(${user.photos[0]})` : 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)'
+                    borderColor: 'rgba(255,255,255,0.12)',
+                    backgroundImage: user.photos?.[0]
+                      ? `url(${user.photos[0]})`
+                      : 'linear-gradient(135deg, #6A5AE0 0%, #8B5CF6 100%)'
                   }}
                 >
                   {!user.photos?.[0] && (
-                    <div className="w-full h-full flex items-center justify-center text-white text-xl font-light">
+                    <div className="w-full h-full flex items-center justify-center text-xl font-light"
+                      style={{ color: 'var(--profile-text-primary)' }}
+                    >
                       {user.first_name?.[0] || 'U'}
                     </div>
                   )}
