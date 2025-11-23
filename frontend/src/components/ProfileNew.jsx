@@ -783,29 +783,40 @@ export default function Profile({ user, logout }) {
         <div className="space-y-2">
           <button
             onClick={() => setShowSettings(true)}
-            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all"
+            className="w-full flex items-center justify-between p-4"
+            style={{ backgroundColor: 'var(--profile-card)', borderRadius: '12px' }}
           >
             <div className="flex items-center gap-3">
-              <Settings className="w-5 h-5 text-white/60" />
-              <span className="text-white font-medium text-sm">Settings & Preferences</span>
+              <Settings className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
+              <span style={{ fontSize: '17px', color: 'var(--profile-text-primary)' }}>Settings & Preferences</span>
             </div>
-            <ChevronRight className="w-5 h-5 text-white/30" />
+            <ChevronRight className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
           </button>
 
-          <button className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center justify-between hover:bg-[#1A1A1A] transition-all">
+          <button
+            className="w-full flex items-center justify-between p-4"
+            style={{ backgroundColor: 'var(--profile-card)', borderRadius: '12px' }}
+          >
             <div className="flex items-center gap-3">
-              <Shield className="w-5 h-5 text-white/60" />
-              <span className="text-white font-medium text-sm">Safety & Privacy</span>
+              <Shield className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
+              <span style={{ fontSize: '17px', color: 'var(--profile-text-primary)' }}>Safety & Privacy</span>
             </div>
-            <ChevronRight className="w-5 h-5 text-white/30" />
+            <ChevronRight className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
           </button>
 
           <button 
             onClick={logout} 
-            className="w-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/10 rounded-xl py-4 flex items-center justify-center gap-2 transition-all mt-4"
+            className="w-full flex items-center justify-center gap-2 mt-4"
+            style={{
+              backgroundColor: 'transparent',
+              borderRadius: '16px',
+              padding: '12px 0',
+              color: 'var(--profile-text-secondary)',
+              border: '1px solid rgba(165, 163, 195, 0.4)'
+            }}
           >
             <LogOut className="w-5 h-5" />
-            <span>Logout</span>
+            <span style={{ fontSize: '15px' }}>Logout</span>
           </button>
         </div>
       </div>
