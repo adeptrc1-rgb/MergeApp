@@ -531,34 +531,7 @@ export default function Profile({ user, logout }) {
             </button>
           </div>
 
-          {/* Trust Meter */}
-          <div className="mt-4">
-            <div className="flex items-center justify-between mb-1">
-              <span style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}>Trust Level</span>
-              <span style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}>
-                {Math.round((user.trust_score ?? user.trustScore ?? 75))}%
-              </span>
-            </div>
-            <div
-              style={{
-                width: '100%',
-                height: '4px',
-                borderRadius: '999px',
-                backgroundColor: 'rgba(255,255,255,0.2)',
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  width: `${Math.max(0, Math.min(100, user.trust_score ?? user.trustScore ?? 75))}%`,
-                  height: '100%',
-                  borderRadius: '999px',
-                  backgroundColor: '#00D9FF',
-                }}
-              />
-            </div>
-          </div>
-
+          {/* Trust Meter (removed for classic layout) */}
         </div>
 
         {/* Quick Actions 2x2 Grid */}
