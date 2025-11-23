@@ -588,7 +588,7 @@ export default function Profile({ user, logout }) {
         </div>
 
         {/* Quick Action Blocks */}
-        <div className="grid grid-cols-3 gap-3 mb-3">
+        {/* Legacy quick actions replaced by 2x2 control grid below */}
           {/* Super Liked Block */}
           <button
             onClick={() => navigate('/store')}
