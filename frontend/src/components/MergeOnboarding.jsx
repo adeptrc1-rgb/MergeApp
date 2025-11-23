@@ -178,7 +178,7 @@ export default function MergeOnboarding() {
         
         // Lifestyle
         deal_breakers: {
-          relationship_goals: formData.relationship_goal,
+          connection_style: formData.connection_style,
           want_kids: formData.kids_preference
         },
         interests: formData.top_interests,
