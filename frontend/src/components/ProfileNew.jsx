@@ -517,17 +517,36 @@ export default function Profile({ user, logout }) {
                     backgroundColor: 'var(--profile-success)'
                   }}
                 />
+                <div
+                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-medium"
+                  style={{
+                    backgroundColor: 'rgba(106, 90, 224, 0.2)',
+                    borderRadius: '16px',
+                    padding: '2px 8px',
+                    color: 'var(--profile-text-primary)'
+                  }}
+                >
+                  {profileCompletion}% Complete
+                </div>
               </div>
-              <div
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-medium"
-                style={{
-                  backgroundColor: 'rgba(106, 90, 224, 0.2)',
-                  borderRadius: '16px',
-                  padding: '2px 8px',
-                  color: 'var(--profile-text-primary)'
-                }}
-              >
-                {profileCompletion}% Complete
+            </button>
+
+            {/* Profile Meta - Clickable */}
+            <button
+              onClick={() => setShowEditProfile(true)}
+              className="flex-1 text-left group"
+            >
+              <h2 className="mb-1" style={{ fontSize: '22px', fontWeight: 600, color: 'var(--profile-text-primary)' }}>
+                {user.first_name}{age ? `, ${age}` : ''}
+              </h2>
+              <p className="mb-2" style={{ fontSize: '17px', color: 'var(--profile-text-secondary)' }}>
+                {user.job_title || 'Professional'} · {user.industry || 'Technology'}
+              </p>
+              <div className="flex items-center gap-1.5" style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+                </svg>
+                <span>5 miles away · {user.location || 'New York'}</span>
               </div>
             </button>
           </div>
