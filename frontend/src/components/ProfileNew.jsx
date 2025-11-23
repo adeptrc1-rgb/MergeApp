@@ -517,8 +517,16 @@ export default function Profile({ user, logout }) {
                   }}
                 />
               </div>
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-white/10 border border-white/20 px-2 py-0.5 rounded-full text-xs text-white font-medium">
-                {profileCompletion}%
+              <div
+                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-medium"
+                style={{
+                  backgroundColor: 'rgba(106, 90, 224, 0.2)',
+                  borderRadius: '16px',
+                  padding: '2px 8px',
+                  color: 'var(--profile-text-primary)'
+                }}
+              >
+                {profileCompletion}% Complete
               </div>
             </button>
 
