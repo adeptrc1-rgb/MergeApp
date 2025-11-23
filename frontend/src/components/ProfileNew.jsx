@@ -462,19 +462,16 @@ export default function Profile({ user, logout }) {
 
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6 relative z-10">
-        {/* Header */}
-        <div className="pb-6 mb-4">
+        {/* Clean Header */}
+        <div className="pb-6 border-b border-white/10 mb-4">
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-[22px] font-semibold" style={{ color: 'var(--profile-text-primary)' }}>
-              Profile Management
-            </h1>
+            <MergeLogo size="md" color="#FFFFFF" />
             <button
-              onClick={() => setShowEditProfile(true)}
-              className="text-sm font-medium transition-all"
-              style={{ color: '#00D9FF' }}
+              onClick={() => setShowSettings(true)}
+              className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all"
             >
-              Edit
+              <Settings className="w-5 h-5 text-white/60" />
             </button>
           </div>
 
