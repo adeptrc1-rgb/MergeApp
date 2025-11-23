@@ -708,38 +708,66 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Merge Features - Sophisticated Treatment */}
-        <div className="space-y-2 mb-6">
+        {/* Merge Features */}
+        <div className="space-y-3 mb-6">
           {/* Merge Wheel */}
           <button
             onClick={() => setShowConnectionMatrix(true)}
-            className="w-full bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4 hover:bg-[#1A1A1A] transition-all"
+            className="w-full flex items-center gap-4 p-4"
+            style={{
+              backgroundColor: 'var(--profile-card)',
+              borderRadius: '12px'
+            }}
           >
-            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#6C63FF' }}>
-              <Zap className="w-5 h-5" />
+            <div
+              className="flex items-center justify-center"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.04)' }}
+            >
+              <Zap className="w-6 h-6" style={{ color: 'var(--profile-accent)' }} />
             </div>
             <div className="flex-1 text-left">
-              <h4 className="text-white font-medium text-sm mb-0.5">Merge Wheel</h4>
-              <p className="text-white/50 text-xs">
-                {canSpin ? 'Your daily spin is ready' : 'Come back later for rewards'}
+              <h3
+                className="mb-0.5"
+                style={{ fontSize: '17px', fontWeight: 500, color: 'var(--profile-text-primary)' }}
+              >
+                Merge Wheel
+              </h3>
+              <p
+                style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
+              >
+                {canSpin ? 'Your daily spin is ready.' : 'Come back later for new rewards.'}
               </p>
-              {canSpin && (
-                <div className="mt-1">
-                  <span className="bg-white/10 text-white/80 text-xs px-2 py-0.5 rounded-full">Ready to spin</span>
-                </div>
-              )}
             </div>
-            <ChevronRight className="w-5 h-5 text-white/30" />
+            <ChevronRight className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
           </button>
 
           {/* Profile Energy */}
-          <div className="bg-[#0A0A0A] rounded-xl p-4 border border-white/10 flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center" style={{ color: '#4ECDC4' }}>
-              <Sparkles className="w-5 h-5" />
+          <div
+            className="flex items-center gap-4 p-4"
+            style={{
+              backgroundColor: 'var(--profile-card)',
+              borderRadius: '12px'
+            }}
+          >
+            <div
+              className="flex items-center justify-center"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.04)' }}
+            >
+              <Sparkles className="w-6 h-6" style={{ color: 'var(--profile-accent)' }} />
             </div>
             <div className="flex-1">
-              <h4 className="text-white font-medium text-sm mb-0.5">Profile Energy</h4>
-              <p className="text-white/50 text-xs mb-2">Your profile is radiating positive energy</p>
+              <h3
+                className="mb-0.5"
+                style={{ fontSize: '17px', fontWeight: 500, color: 'var(--profile-text-primary)' }}
+              >
+                Profile Energy
+              </h3>
+              <p
+                className="mb-2"
+                style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
+              >
+                Your profile is radiating positive energy.
+              </p>
               <div className="flex gap-1.5">
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
