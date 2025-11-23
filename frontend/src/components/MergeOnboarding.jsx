@@ -87,7 +87,7 @@ export default function MergeOnboarding() {
     },
 
     // Step 3: Lifestyle
-    relationship_goal: '',
+    connection_style: '',
     kids_preference: '',
     top_interests: [],
     social_energy_level: 3,
