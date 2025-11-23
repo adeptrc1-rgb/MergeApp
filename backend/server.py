@@ -2509,8 +2509,8 @@ def build_compatibility_prompt(user_a, user_b, context, depth):
     user_a_lifestyle = user_a.get("lifestyle_factors", {})
     user_b_lifestyle = user_b.get("lifestyle_factors", {})
     
-    user_a_goals = user_a.get("deal_breakers", {}).get("relationship_goals", "not specified")
-    user_b_goals = user_b.get("deal_breakers", {}).get("relationship_goals", "not specified")
+    user_a_goals = user_a.get("deal_breakers", {}).get("connection_style", "not specified")
+    user_b_goals = user_b.get("deal_breakers", {}).get("connection_style", "not specified")
     
     user_a_music = user_a.get("preferences", {}).get("music", "not specified")
     user_b_music = user_b.get("preferences", {}).get("music", "not specified")
