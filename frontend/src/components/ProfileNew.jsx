@@ -561,34 +561,63 @@ export default function Profile({ user, logout }) {
 
         </div>
 
-        {/* Quick Actions */}
+        {/* Quick Actions 2x2 Grid */}
         <div className="grid grid-cols-2 gap-3 mb-6 mt-4">
-
-                }}
-              >
-                {profileCompletion}% Complete
-              </div>
-            </button>
-
-            {/* Profile Meta - Clickable */}
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="flex-1 text-left group"
+          <button
+            onClick={() => navigate('/store')}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
             >
-              <h2 className="mb-1" style={{ fontSize: '22px', fontWeight: 600, color: 'var(--profile-text-primary)' }}>
-                {user.first_name}{age ? `, ${age}` : ''}
-              </h2>
-              <p className="mb-2" style={{ fontSize: '17px', color: 'var(--profile-text-secondary)' }}>
-                {user.job_title || 'Professional'} · {user.industry || 'Technology'}
-              </p>
-              <div className="flex items-center gap-1.5" style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
-                </svg>
-                <span>5 miles away · {user.location || 'New York'}</span>
-              </div>
-            </button>
-          </div>
+              <Heart className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Super Likes</span>
+          </button>
+
+          <button
+            onClick={() => navigate('/discover')}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
+            >
+              <Zap className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Boosts</span>
+          </button>
+
+          <button
+            onClick={() => navigate('/store')}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
+            >
+              <Sparkles className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Auras</span>
+          </button>
+
+          <button
+            onClick={() => setShowConnectionMatrix(true)}
+            className="flex flex-col items-center justify-center py-4 rounded-[12px] transition-all"
+            style={{ backgroundColor: 'rgba(0,217,255,0.15)' }}
+          >
+            <div
+              className="flex items-center justify-center mb-2"
+              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
+            >
+              <Trophy className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            </div>
+            <span style={{ fontSize: '17px', color: '#FFFFFF' }}>Merge Wheel</span>
+          </button>
         </div>
 
         {/* Quick Action Blocks */}
