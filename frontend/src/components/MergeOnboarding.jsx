@@ -92,7 +92,8 @@ export default function MergeOnboarding() {
     top_interests: [],
     social_energy_level: 3,
 
-    // Step 4: Communication
+    // Step 4: Weekend & Communication
+    ideal_weekend: '',
     conflict_style: '',
     love_language: '',
     texting_style: '',
