@@ -1258,13 +1258,13 @@ export default function Home({ user }) {
             </div>
 
             {/* Trust Level Footer */}
-            <div className="pt-4" style={{ borderTop: '1px solid #404040' }}>
+            <div className="pt-4" style={{ borderTop: '1px solid var(--border-default)' }}>
               <div className="flex items-center justify-between">
-                <span className="text-sm" style={{ color: '#A3A3A3' }}>Trust Level</span>
+                <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Trust Level</span>
                 <span className="text-sm font-medium" style={{ 
-                  color: (currentMatch.trustScore || 0) >= 90 ? '#3B82F6' : 
-                         (currentMatch.trustScore || 0) >= 75 ? '#F59E0B' : 
-                         '#A3A3A3'
+                  color: (currentMatch.trustScore || 0) >= 90 ? 'var(--accent-primary)' : 
+                         (currentMatch.trustScore || 0) >= 75 ? 'var(--warning)' : 
+                         'var(--text-secondary)'
                 }}>
                   {
                     (currentMatch.trustScore || 0) >= 90 ? 'Reliable' :
