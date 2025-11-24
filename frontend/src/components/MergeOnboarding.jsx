@@ -876,6 +876,77 @@ export default function MergeOnboarding() {
                 key={option.value}
                 onClick={() => setFormData({ ...formData, love_language: option.value })}
                 className="w-full px-4 py-3 rounded-xl transition-all text-sm text-left"
+        {/* Social Energy - How do you recharge */}
+        <div>
+          <p className="text-sm mb-3" style={{ color: '#FAFAFA' }}>How do you recharge your social energy?</p>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, social_energy_source: 'mostly_alone' })}
+              className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+              style={formData.social_energy_source === 'mostly_alone' ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                border: '1px solid transparent'
+              } : {
+                backgroundColor: '#171717',
+                border: '1px solid #404040',
+                color: '#A3A3A3'
+              }}
+            >
+              Mostly through quiet time alone
+            </button>
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, social_energy_source: 'mostly_people' })}
+              className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
+              style={formData.social_energy_source === 'mostly_people' ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                border: '1px solid transparent'
+              } : {
+                backgroundColor: '#171717',
+                border: '1px solid #404040',
+                color: '#A3A3A3'
+              }}
+            >
+              Mostly through time with others
+            </button>
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, social_energy_source: 'balanced_mix' })}
+              className="px-4 py-3 rounded-xl transition-all text-sm font-medium col-span-2"
+              style={formData.social_energy_source === 'balanced_mix' ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                border: '1px solid transparent'
+              } : {
+                backgroundColor: '#171717',
+                border: '1px solid #404040',
+                color: '#A3A3A3'
+              }}
+            >
+              A balanced mix of both
+            </button>
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, social_energy_source: 'depends_mood' })}
+              className="px-4 py-3 rounded-xl transition-all text-sm font-medium col-span-2"
+              style={formData.social_energy_source === 'depends_mood' ? {
+                background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
+                color: '#FFFFFF',
+                border: '1px solid transparent'
+              } : {
+                backgroundColor: '#171717',
+                border: '1px solid #404040',
+                color: '#A3A3A3'
+              }}
+            >
+              It really depends on my mood
+            </button>
+          </div>
+        </div>
+
                 style={formData.love_language === option.value ? {
                   background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
                   color: '#FFFFFF',
