@@ -674,19 +674,19 @@ export default function Profile({ user, logout }) {
 
         {/* Elite Upsell */}
         <div
-          className="rounded-2xl p-4 mb-4 relative overflow-hidden group transition-all cursor-pointer"
+          className="rounded-2xl p-4 mb-4 relative overflow-hidden group transition-all cursor-pointer backdrop-blur-premium"
           style={{
-            backgroundColor: 'rgba(15, 11, 31, 0.85)',
-            border: '1px solid rgba(106, 90, 224, 0.6)',
+            backgroundColor: 'rgba(8, 9, 16, 0.78)',
+            border: '1px solid rgba(148, 163, 184, 0.45)',
             boxShadow: '0 18px 45px rgba(0, 0, 0, 0.65)'
           }}
         >
-          <div className="absolute top-0 right-0 w-32 h-32 opacity-20">
+          <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
             <div
               className="w-full h-full"
               style={{
                 background:
-                  'radial-gradient(circle at top right, rgba(106, 90, 224, 0.75) 0%, transparent 65%)'
+                  'radial-gradient(circle at top right, rgba(148, 163, 184, 0.55) 0%, transparent 65%)'
               }}
             />
           </div>
