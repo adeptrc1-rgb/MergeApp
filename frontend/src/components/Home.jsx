@@ -923,14 +923,14 @@ export default function Home({ user }) {
                       {/* No data fallback */}
                       {!currentMatch.bio && !currentMatch.vibe_song && (!currentMatch.interests || currentMatch.interests.length === 0) && !currentMatch.deal_breakers?.relationship_goals && !currentMatch.lifestyle_factors && (
                         <div className="text-center py-4">
-                          <p className="text-white/50 text-sm italic">No additional profile information available</p>
+                          <p className="text-sm italic" style={{ color: 'var(--text-tertiary)' }}>No additional profile information available</p>
                         </div>
                       )}
 
                       {/* My Vibe - Song Player */}
                       {currentMatch?.vibe_song && (
-                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-3 flex items-center gap-2">
+                        <div className="py-4 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                          <h3 className="text-xs uppercase tracking-wider font-medium mb-3 flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
                             <Music className="w-4 h-4" />
                             My Vibe
                           </h3>
@@ -940,9 +940,9 @@ export default function Home({ user }) {
 
                       {/* Bio */}
                       {currentMatch.bio && (
-                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">About</h3>
-                          <p className="text-white/90 text-sm leading-relaxed">{currentMatch.bio}</p>
+                        <div className="py-4 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                          <h3 className="text-xs uppercase tracking-wider font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>About</h3>
+                          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{currentMatch.bio}</p>
                         </div>
                       )}
 
