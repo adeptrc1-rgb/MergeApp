@@ -406,11 +406,11 @@ function LandingPage() {
               className="w-full py-2 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2"
               style={{
                 backgroundColor: 'transparent',
-                border: '1px solid #3B82F6',
-                color: '#3B82F6'
+                border: '1px solid var(--accent-primary)',
+                color: 'var(--accent-primary)'
               }}
               onMouseEnter={(e) => {
-                e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                e.target.style.backgroundColor = 'var(--accent-subtle)';
               }}
               onMouseLeave={(e) => {
                 e.target.style.backgroundColor = 'transparent';
@@ -424,10 +424,10 @@ function LandingPage() {
           {/* Footer */}
           <p 
             className="mt-8 text-xs text-center leading-relaxed"
-            style={{ color: '#525252' }}
+            style={{ color: 'var(--text-muted)' }}
           >
             By continuing, you agree to our{' '}
-            <span style={{ color: '#A3A3A3' }}>Terms & Privacy Policy</span>
+            <span style={{ color: 'var(--text-secondary)' }}>Terms & Privacy Policy</span>
           </p>
         </div>
       </div>
