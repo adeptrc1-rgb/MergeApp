@@ -1039,7 +1039,7 @@ export default function Home({ user }) {
                       )}
 
                       {/* AI Compatibility Insights */}
-                      <div className="py-4" style={{ backgroundColor: '#1F1F1F', borderRadius: '8px', marginTop: '8px' }}>
+                      <div className="py-4" style={{ backgroundColor: 'var(--bg-tertiary)', borderRadius: '8px', marginTop: '8px' }}>
                         <CompatibilityInsights
                           currentUser={user}
                           otherUser={currentMatch}
