@@ -1140,19 +1140,19 @@ export default function Home({ user }) {
       {showScoreBreakdown && currentMatch && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}
+          style={{ backgroundColor: 'var(--overlay-darker)' }}
           onClick={() => setShowScoreBreakdown(false)}
         >
           <div 
             className="relative w-full max-w-md rounded-2xl p-6 animate-fade-in-up"
-            style={{ backgroundColor: '#171717', border: '1px solid #404040' }}
+            style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-default)' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setShowScoreBreakdown(false)}
               className="absolute top-4 right-4 transition-opacity hover:opacity-70"
-              style={{ color: '#A3A3A3' }}
+              style={{ color: 'var(--text-secondary)' }}
             >
               <X className="w-5 h-5" />
             </button>
@@ -1160,14 +1160,11 @@ export default function Home({ user }) {
             {/* Header */}
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-1" style={{ 
-                color: compatibility >= 95 ? '#00FFFF' :
-                       compatibility >= 85 ? '#8B5CF6' :
-                       compatibility >= 75 ? '#3B82F6' :
-                       '#FAFAFA'
+                color: compatibility >= 75 ? 'var(--accent-primary)' : 'var(--text-primary)'
               }}>
                 Merge Score: {compatibility}%
               </h2>
-              <p className="text-sm" style={{ color: '#A3A3A3' }}>Why you mesh</p>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Why you mesh</p>
             </div>
 
             {/* Breakdown */}
