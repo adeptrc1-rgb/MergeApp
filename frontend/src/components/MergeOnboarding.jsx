@@ -90,7 +90,7 @@ export default function MergeOnboarding() {
     connection_style: '',
     kids_preference: '',
     top_interests: [],
-    social_energy_level: 3,
+    // social_energy_level removed from lifestyle step
 
     // Step 4: Weekend & Communication
     ideal_weekend: '',
