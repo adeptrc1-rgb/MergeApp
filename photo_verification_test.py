@@ -5,7 +5,7 @@ from datetime import datetime
 import time
 
 class PhotoVerificationTester:
-    def __init__(self, base_url="https://merge-dating-1.preview.emergentagent.com"):
+    def __init__(self, base_url="https://datapp-overhaul.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_cookies = None

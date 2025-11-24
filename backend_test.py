@@ -5,7 +5,7 @@ from datetime import datetime, date
 import time
 
 class AstrologyDatingAPITester:
-    def __init__(self, base_url="https://merge-dating-1.preview.emergentagent.com"):
+    def __init__(self, base_url="https://datapp-overhaul.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_token = None
@@ -454,7 +454,7 @@ class AstrologyDatingAPITester:
         print("\n🔍 Testing CORS Preflight for /auth/test-login...")
         try:
             headers = {
-                'Origin': 'https://merge-dating-1.preview.emergentagent.com',
+                'Origin': 'https://datapp-overhaul.preview.emergentagent.com',
                 'Access-Control-Request-Method': 'POST',
                 'Access-Control-Request-Headers': 'Content-Type'
             }
@@ -485,7 +485,7 @@ class AstrologyDatingAPITester:
         print("\n🔍 Testing CORS Preflight for /users/liked-me...")
         try:
             headers = {
-                'Origin': 'https://merge-dating-1.preview.emergentagent.com',
+                'Origin': 'https://datapp-overhaul.preview.emergentagent.com',
                 'Access-Control-Request-Method': 'GET',
                 'Access-Control-Request-Headers': 'Content-Type,Authorization'
             }
@@ -1100,7 +1100,7 @@ class AstrologyDatingAPITester:
         print("\n🔍 Testing CORS preflight for /auth/test-login...")
         try:
             headers = {
-                'Origin': 'https://merge-dating-1.preview.emergentagent.com',
+                'Origin': 'https://datapp-overhaul.preview.emergentagent.com',
                 'Access-Control-Request-Method': 'POST',
                 'Access-Control-Request-Headers': 'Content-Type'
             }
