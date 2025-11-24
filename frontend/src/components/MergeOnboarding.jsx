@@ -464,37 +464,6 @@ export default function MergeOnboarding() {
           </div>
         </div>
 
-        {/* Ideal Weekend */}
-        <div>
-          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>My ideal weekend involves...</label>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { value: 'spontaneous_adventures', label: 'Spontaneous adventures and meeting new people' },
-              { value: 'deep_conversations',     label: 'Deep conversations with close friends' },
-              { value: 'intentional_plans',      label: "Trying that new restaurant I've been saving for a special occasion" },
-              { value: 'mixed_social',           label: 'A mix of social time and cozy alone time' }
-            ].map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                onClick={() => setFormData({ ...formData, ideal_weekend: option.value })}
-                className="px-4 py-3 rounded-xl transition-all text-sm text-left"
-                style={formData.ideal_weekend === option.value ? {
-                  background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
-                  color: '#FFFFFF',
-                  border: '1px solid transparent'
-                } : {
-                  backgroundColor: '#171717',
-                  border: '1px solid #404040',
-                  color: '#A3A3A3'
-                }}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Hometown */}
         <div>
           <label className="block text-sm mb-2" style={{ color: '#A3A3A3' }}>Where did you grow up?</label>
