@@ -1229,7 +1229,8 @@ async def get_trending_users(user: User = Depends(get_current_user)):
                 "bio": u.get("bio", ""),
                 "interests": u.get("interests", []),
                 "trending_energy_score": energy_score,
-                "compatibility_score": randf() * 30 + 70
+                # Use compatibility_resonance proxy as compatibility score on trending cards
+                "compatibility_score": u.get("avg_match_compatibility", 75.0)
             })
     
     # Sort by energy score (highest first) and return top 20
