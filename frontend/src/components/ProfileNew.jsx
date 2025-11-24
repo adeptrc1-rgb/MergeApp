@@ -211,12 +211,12 @@ export default function Profile({ user, logout }) {
       <style>{`
         /* Profile Management Design Tokens */
         :root {
-          --profile-bg: #0F0B1F;
-          --profile-card: #1A1734;
+          --profile-bg: #050709;
+          --profile-card: rgba(15, 17, 32, 0.85);
           --profile-radius: 12px;
-          --profile-text-primary: #F5F5F5;
-          --profile-text-secondary: #A5A3C3;
-          --profile-accent: #6A5AE0;
+          --profile-text-primary: #F9FAFB;
+          --profile-text-secondary: #9CA3AF;
+          --profile-accent: #E5E7EB;
           --profile-success: #4CAF50;
         }
 
