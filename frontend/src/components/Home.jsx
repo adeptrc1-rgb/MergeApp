@@ -912,7 +912,7 @@ export default function Home({ user }) {
                       overflowX: 'hidden',
                       pointerEvents: showDropdown ? 'auto' : 'none',
                       scrollbarWidth: 'thin',
-                      scrollbarColor: 'rgba(139, 92, 246, 0.6) rgba(255, 255, 255, 0.1)',
+                      scrollbarColor: 'var(--accent-primary) var(--border-subtle)',
                       height: showDropdown ? '500px' : '0px',
                       maxHeight: '60vh',
                       touchAction: 'pan-y',
