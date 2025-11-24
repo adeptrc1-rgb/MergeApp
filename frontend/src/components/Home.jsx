@@ -948,19 +948,19 @@ export default function Home({ user }) {
 
                       {/* Background */}
                       {(currentMatch.current_location?.city || currentMatch.education?.college || currentMatch.education?.school || currentMatch.education) && (
-                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Background</h3>
+                        <div className="py-4 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                          <h3 className="text-xs uppercase tracking-wider font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Background</h3>
                           <div className="space-y-1.5">
                             {currentMatch.current_location?.city && (
                               <div className="flex items-start gap-2">
-                                <span className="text-white/60 text-sm font-medium" style={{ minWidth: '90px' }}>From:</span>
-                                <span className="text-white/90 text-sm flex-1">{currentMatch.current_location.city}</span>
+                                <span className="text-sm font-medium" style={{ minWidth: '90px', color: 'var(--text-secondary)' }}>From:</span>
+                                <span className="text-sm flex-1" style={{ color: 'var(--text-primary)' }}>{currentMatch.current_location.city}</span>
                               </div>
                             )}
                             {(currentMatch.education?.college || currentMatch.education?.school || (typeof currentMatch.education === 'string' && currentMatch.education)) && (
                               <div className="flex items-start gap-2">
-                                <span className="text-white/60 text-sm font-medium" style={{ minWidth: '90px' }}>Education:</span>
-                                <span className="text-white/90 text-sm flex-1">
+                                <span className="text-sm font-medium" style={{ minWidth: '90px', color: 'var(--text-secondary)' }}>Education:</span>
+                                <span className="text-sm flex-1" style={{ color: 'var(--text-primary)' }}>
                                   {currentMatch.education?.college || currentMatch.education?.school || currentMatch.education}
                                 </span>
                               </div>
@@ -971,11 +971,11 @@ export default function Home({ user }) {
 
                       {/* Interests */}
                       {currentMatch.interests && currentMatch.interests.length > 0 && (
-                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Interests</h3>
+                        <div className="py-4 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                          <h3 className="text-xs uppercase tracking-wider font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Interests</h3>
                           <div className="flex flex-wrap gap-2">
                             {currentMatch.interests.map((interest, idx) => (
-                              <span key={idx} className="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-xs text-white/90">{interest}</span>
+                              <span key={idx} className="px-3 py-1 backdrop-blur-sm rounded-full text-xs" style={{ backgroundColor: 'var(--surface-hover)', border: '1px solid var(--border-default)', color: 'var(--text-primary)' }}>{interest}</span>
                             ))}
                           </div>
                         </div>
@@ -983,53 +983,53 @@ export default function Home({ user }) {
 
                       {/* Relationship Goals */}
                       {currentMatch.deal_breakers?.relationship_goals && (
-                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Looking For</h3>
-                          <p className="text-white/90 text-sm">{currentMatch.deal_breakers.relationship_goals.replace(/_/g, ' ')}</p>
+                        <div className="py-4 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                          <h3 className="text-xs uppercase tracking-wider font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Looking For</h3>
+                          <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{currentMatch.deal_breakers.relationship_goals.replace(/_/g, ' ')}</p>
                         </div>
                       )}
 
                       {/* Lifestyle */}
                       {currentMatch.lifestyle_factors && (
-                        <div className="py-4 border-b" style={{ borderColor: '#262626' }}>
-                          <h3 className="text-white/60 text-xs uppercase tracking-wider font-medium mb-2">Lifestyle</h3>
+                        <div className="py-4 border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+                          <h3 className="text-xs uppercase tracking-wider font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>Lifestyle</h3>
                           <div className="grid grid-cols-2 gap-2 text-xs">
                             {currentMatch.lifestyle_factors.fitness_health && (
-                              <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
-                                <span className="text-white/80">Fitness</span>
+                              <div className="flex items-center justify-between rounded-lg px-3 py-2" style={{ backgroundColor: 'var(--surface-hover)' }}>
+                                <span style={{ color: 'var(--text-primary)' }}>Fitness</span>
                                 <div className="flex gap-1">
                                   {[...Array(5)].map((_, i) => (
-                                    <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.fitness_health ? 'bg-purple-400' : 'bg-white/20'}`}></div>
+                                    <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: i < currentMatch.lifestyle_factors.fitness_health ? 'var(--accent-primary)' : 'var(--border-default)' }}></div>
                                   ))}
                                 </div>
                               </div>
                             )}
                             {currentMatch.lifestyle_factors.social_energy && (
-                              <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
-                                <span className="text-white/80">Social</span>
+                              <div className="flex items-center justify-between rounded-lg px-3 py-2" style={{ backgroundColor: 'var(--surface-hover)' }}>
+                                <span style={{ color: 'var(--text-primary)' }}>Social</span>
                                 <div className="flex gap-1">
                                   {[...Array(5)].map((_, i) => (
-                                    <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.social_energy ? 'bg-pink-400' : 'bg-white/20'}`}></div>
+                                    <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: i < currentMatch.lifestyle_factors.social_energy ? 'var(--accent-primary)' : 'var(--border-default)' }}></div>
                                   ))}
                                 </div>
                               </div>
                             )}
                             {currentMatch.lifestyle_factors.travel_adventure && (
-                              <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
-                                <span className="text-white/80">Travel</span>
+                              <div className="flex items-center justify-between rounded-lg px-3 py-2" style={{ backgroundColor: 'var(--surface-hover)' }}>
+                                <span style={{ color: 'var(--text-primary)' }}>Travel</span>
                                 <div className="flex gap-1">
                                   {[...Array(5)].map((_, i) => (
-                                    <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.travel_adventure ? 'bg-cyan-400' : 'bg-white/20'}`}></div>
+                                    <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: i < currentMatch.lifestyle_factors.travel_adventure ? 'var(--accent-primary)' : 'var(--border-default)' }}></div>
                                   ))}
                                 </div>
                               </div>
                             )}
                             {currentMatch.lifestyle_factors.family_future && (
-                              <div className="flex items-center justify-between bg-white/10 rounded-lg px-3 py-2">
-                                <span className="text-white/80">Family</span>
+                              <div className="flex items-center justify-between rounded-lg px-3 py-2" style={{ backgroundColor: 'var(--surface-hover)' }}>
+                                <span style={{ color: 'var(--text-primary)' }}>Family</span>
                                 <div className="flex gap-1">
                                   {[...Array(5)].map((_, i) => (
-                                    <div key={i} className={`w-1.5 h-1.5 rounded-full ${i < currentMatch.lifestyle_factors.family_future ? 'bg-rose-400' : 'bg-white/20'}`}></div>
+                                    <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: i < currentMatch.lifestyle_factors.family_future ? 'var(--accent-primary)' : 'var(--border-default)' }}></div>
                                   ))}
                                 </div>
                               </div>
