@@ -881,7 +881,7 @@ export default function Home({ user }) {
 
                   {/* Industry & Distance */}
                   <div className="mb-3 mt-3">
-                    <span className="text-sm" style={{ color: '#A3A3A3' }}>
+                    <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                       {currentMatch.lifestyle_factors?.occupation || 'Technology'} • {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : '5 miles away'}
                     </span>
                   </div>
