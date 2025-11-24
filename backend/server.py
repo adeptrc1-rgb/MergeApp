@@ -1089,7 +1089,6 @@ def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
 
     return bonus
 
-        return []
 
 # === TRUST SCORE HELPERS ===
 
