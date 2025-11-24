@@ -850,7 +850,6 @@ export default function MergeOnboarding() {
 
         {/* Social Energy Level */}
         <div>
-          <label className="block text-sm mb-3" style={{ color: '#FAFAFA' }}>Your typical social energy level is:</label>
           <div className="flex justify-between text-xs mb-2" style={{ color: '#737373' }}>
             <span>Homebody</span>
             <span>Social Butterfly</span>
