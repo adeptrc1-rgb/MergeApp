@@ -259,16 +259,16 @@ function LandingPage() {
                   placeholder="(555) 123-4567"
                   className="w-full px-4 py-3 rounded-lg transition-all outline-none"
                   style={{
-                    backgroundColor: '#171717',
-                    border: '1px solid #404040',
-                    color: '#FAFAFA'
+                    backgroundColor: 'var(--surface-default)',
+                    border: '1px solid var(--border-default)',
+                    color: 'var(--text-primary)'
                   }}
                   onFocus={(e) => {
-                    e.target.style.border = '2px solid #3B82F6';
-                    e.target.style.boxShadow = '0 0 0 3px rgba(59, 130, 246, 0.1)';
+                    e.target.style.border = '2px solid var(--accent-primary)';
+                    e.target.style.boxShadow = '0 0 0 3px var(--accent-subtle)';
                   }}
                   onBlur={(e) => {
-                    e.target.style.border = '1px solid #404040';
+                    e.target.style.border = '1px solid var(--border-default)';
                     e.target.style.boxShadow = 'none';
                   }}
                 />
