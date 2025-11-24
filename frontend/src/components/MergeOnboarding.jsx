@@ -852,7 +852,7 @@ export default function MergeOnboarding() {
             <button
               type="button"
               onClick={() => setFormData({ ...formData, social_energy_source: 'balanced_mix' })}
-              className="px-4 py-3 rounded-xl transition-all text-sm font-medium col-span-2"
+              className="px-4 py-3 rounded-xl transition-all text-sm font-medium"
               style={formData.social_energy_source === 'balanced_mix' ? {
                 background: 'linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)',
                 color: '#FFFFFF',
