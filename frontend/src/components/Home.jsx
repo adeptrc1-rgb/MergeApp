@@ -850,26 +850,17 @@ export default function Home({ user }) {
                       }}
                       className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full cursor-pointer transition-all hover:scale-105"
                       style={{ 
-                        backgroundColor: '#171717', 
-                        border: '1px solid #404040',
-                        boxShadow: compatibility >= 95 ? '0 0 15px #00FFFF, 0 0 30px rgba(0, 255, 255, 0.3)' :
-                                   compatibility >= 85 ? '0 0 15px #8B5CF6, 0 0 30px rgba(139, 92, 246, 0.3)' :
-                                   compatibility >= 75 ? '0 0 15px #3B82F6, 0 0 30px rgba(59, 130, 246, 0.3)' :
-                                   'none'
+                        backgroundColor: 'var(--surface-default)', 
+                        border: '1px solid var(--border-default)',
+                        boxShadow: compatibility >= 75 ? 'var(--shadow-accent)' : 'none'
                       }}
                     >
                       <Zap className="w-3.5 h-3.5" style={{ 
-                        color: compatibility >= 95 ? '#00FFFF' :
-                               compatibility >= 85 ? '#8B5CF6' :
-                               compatibility >= 75 ? '#3B82F6' :
-                               '#A3A3A3'
+                        color: compatibility >= 75 ? 'var(--accent-primary)' : 'var(--text-secondary)'
                       }} />
-                      <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>
+                      <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
                         <span style={{ 
-                          color: compatibility >= 95 ? '#00FFFF' :
-                                 compatibility >= 85 ? '#8B5CF6' :
-                                 compatibility >= 75 ? '#3B82F6' :
-                                 '#A3A3A3'
+                          color: compatibility >= 75 ? 'var(--accent-primary)' : 'var(--text-secondary)'
                         }}>{compatibility}%</span> Merge Score
                       </span>
                     </button>
