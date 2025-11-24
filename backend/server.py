@@ -1067,47 +1067,6 @@ async def get_matches(user: User = Depends(get_current_user)):
 
 
 def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
-
-    v1 implementation:
-    - +15 if connection_style (deal_breakers) matches
-    - +15 if ideal_weekend (preferences) matches
-    """
-    bonus = 0.0
-
-    # Connection style bonus
-    a_style = (user_a.get("deal_breakers") or {}).get("connection_style")
-    b_style = (user_b.get("deal_breakers") or {}).get("connection_style")
-    if a_style and b_style and a_style == b_style:
-        bonus += 15.0
-
-    # Ideal weekend bonus
-    a_weekend = (user_a.get("preferences") or {}).get("ideal_weekend")
-    b_weekend = (user_b.get("preferences") or {}).get("ideal_weekend")
-    if a_weekend and b_weekend and a_weekend == b_weekend:
-        bonus += 15.0
-
-    return bonus
-
-            if other_user:
-                result.append({
-                    "id": match.get("id"),
-                    "match_id": match.get("id"),
-                    "first_name": other_user.get("first_name", "User"),
-                    "last_name": other_user.get("last_name", ""),
-                    "birth_date": other_user.get("birth_date", "1995-01-01"),
-                    "zodiac_sign": other_user.get("zodiac_sign", "Leo"),
-                    "photos": other_user.get("photos", ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80"]),
-                    "current_location": other_user.get("current_location", {"city": "Unknown"}),
-                    "compatibility_score": match.get("compatibility_score", 85),
-                    "matched_at": match.get("matched_at")
-                })
-        
-        return result
-    except Exception as e:
-        print(f"Error fetching matches: {e}")
-
-
-def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
     """Calculate structured compatibility bonuses based on profile signals.
 
     v1 implementation:
