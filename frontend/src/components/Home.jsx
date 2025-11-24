@@ -535,16 +535,16 @@ export default function Home({ user }) {
 
   if (loading) {
     return (
-      <div className="h-screen bg-black flex flex-col overflow-hidden relative">
-        {/* Subtle animated background - matching rest of app */}
+      <div className="h-screen flex flex-col overflow-hidden relative" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        {/* Subtle animated background - single blue accent */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
         </div>
         <div className="flex-1 flex items-center justify-center overflow-hidden relative z-10">
           <div className="text-center">
-            <Sparkles className="w-12 h-12 text-purple-400 animate-spin mx-auto mb-4" />
-            <p className="text-white/60 text-lg">Finding your cosmic matches...</p>
+            <Sparkles className="w-12 h-12 animate-spin mx-auto mb-4" style={{ color: 'var(--accent-primary)' }} />
+            <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>Finding your cosmic matches...</p>
           </div>
         </div>
       </div>
