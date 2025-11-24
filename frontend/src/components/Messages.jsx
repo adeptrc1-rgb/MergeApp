@@ -232,14 +232,20 @@ export default function Messages({ user }) {
           {conversations.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-6">💬</div>
-              <h3 className="text-2xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>No messages yet</h3>
-              <p className="mb-8" style={{ color: '#525252' }}>Start swiping to make connections!</p>
+              <h3 className="text-2xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>No messages yet</h3>
+              <p className="mb-8" style={{ color: 'var(--text-muted)' }}>Start swiping to make connections!</p>
               <button 
                 onClick={() => navigate('/home')} 
                 className="px-8 py-3 rounded-full font-medium transition-all"
-                style={{ backgroundColor: '#3B82F6', color: '#FAFAFA' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
+                style={{ backgroundColor: 'var(--accent-primary)', color: '#FFFFFF' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--accent-hover)';
+                  e.currentTarget.style.boxShadow = 'var(--shadow-accent)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--accent-primary)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
                 Start Swiping
               </button>
@@ -260,38 +266,38 @@ export default function Messages({ user }) {
                     onClick={() => openChat(conversation.id)} 
                     className="flex items-center gap-4 p-4 rounded-2xl transition-all cursor-pointer group"
                     style={{ backgroundColor: 'transparent' }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#171717'}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   >
                     <div className="w-16 h-16 rounded-2xl bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${conversation.user?.photos?.[0] || 'https://via.placeholder.com/200'})` }} />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-lg font-semibold" style={{ color: '#FAFAFA' }}>{conversation.user?.first_name || 'User'}, {displayAge}</h3>
+                        <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>{conversation.user?.first_name || 'User'}, {displayAge}</h3>
                         {youStart !== null && (
                           <span 
                             className="text-[11px] px-2 py-0.5 rounded-full border"
                             style={{ 
-                              borderColor: youStart ? '#22C55E40' : '#40404040', 
-                              color: youStart ? '#22C55E' : '#737373'
+                              borderColor: youStart ? 'rgba(34, 197, 94, 0.25)' : 'var(--border-subtle)', 
+                              color: youStart ? 'var(--success)' : 'var(--text-tertiary)'
                             }}
                           >
                             {youStart ? 'You start' : 'They start'}
                           </span>
                         )}
                       </div>
-                      <p className="text-sm truncate" style={{ color: '#737373' }}>{conversation.lastMessage}</p>
+                      <p className="text-sm truncate" style={{ color: 'var(--text-tertiary)' }}>{conversation.lastMessage}</p>
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                      <span className="text-xs" style={{ color: '#525252' }}>{formatTime(conversation.lastMessageTime)}</span>
+                      <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{formatTime(conversation.lastMessageTime)}</span>
                       {conversation.unreadCount > 0 && (
                         <div 
                           className="text-xs rounded-full w-5 h-5 flex items-center justify-center"
-                          style={{ backgroundColor: '#3B82F6', color: '#FAFAFA' }}
+                          style={{ backgroundColor: 'var(--accent-primary)', color: '#FFFFFF' }}
                         >
                           {conversation.unreadCount}
                         </div>
                       )}
-                      <Send className="w-5 h-5 transition-colors" style={{ color: '#525252' }} />
+                      <Send className="w-5 h-5 transition-colors" style={{ color: 'var(--text-muted)' }} />
                     </div>
                   </div>
                 );
