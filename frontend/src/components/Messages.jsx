@@ -180,30 +180,30 @@ export default function Messages({ user }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <div className="text-center">
-          <Sparkles className="w-12 h-12 animate-spin mx-auto mb-4" style={{ color: '#3B82F6' }} />
-          <p className="text-lg" style={{ color: '#A3A3A3' }}>Loading messages...</p>
+          <Sparkles className="w-12 h-12 animate-spin mx-auto mb-4" style={{ color: 'var(--accent-primary)' }} />
+          <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>Loading messages...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen bg-black flex flex-col overflow-hidden">
-      {/* Subtle animated background - matching onboarding */}
+    <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      {/* Subtle animated background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
       </div>
 
       {/* Header */}
-      <div className="bg-black flex-shrink-0 select-none" style={{ WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
+      <div className="flex-shrink-0 select-none" style={{ backgroundColor: 'var(--bg-primary)', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <h2 className="text-3xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>Messages</h2>
+          <h2 className="text-3xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Messages</h2>
           {catalystToast && (
-            <div className="mt-3 rounded-xl px-4 py-2 inline-flex items-center gap-2" style={{ backgroundColor: '#171717', border: '1px solid #262626', color: '#FAFAFA' }}>
-              <Sparkles className="w-4 h-4" style={{ color: '#3B82F6' }} />
+            <div className="mt-3 rounded-xl px-4 py-2 inline-flex items-center gap-2" style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-subtle)', color: 'var(--text-primary)' }}>
+              <Sparkles className="w-4 h-4" style={{ color: 'var(--accent-primary)' }} />
               <span className="text-sm">{catalystToast}</span>
             </div>
           )}
@@ -213,11 +213,11 @@ export default function Messages({ user }) {
               disabled={creating} 
               className="px-4 py-2 rounded-full text-sm flex items-center gap-2 transition-all"
               style={{ 
-                backgroundColor: '#3B82F6', 
-                color: '#FAFAFA'
+                backgroundColor: 'var(--accent-primary)', 
+                color: '#FFFFFF'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--accent-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--accent-primary)'}
             >
               <Sparkles className="w-4 h-4" />
               {creating ? 'Creating…' : 'Test AI Conversation Starters'}
