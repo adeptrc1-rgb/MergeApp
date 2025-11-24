@@ -1233,9 +1233,9 @@ export default function Home({ user }) {
                         return "You both care about shared values and long-term life goals, which is a strong signal for future alignment.";
                       }
                       if (style === 'balanced_approach') {
-                        return "Youre both looking for a healthy mix of fun and depth, which is a strong foundation for the future.";
+                        return "You're both looking for a healthy mix of fun and depth, which is a strong foundation for the future.";
                       }
-                      return "Youre both looking for meaningful connections.";
+                      return "You're both looking for meaningful connections.";
                     })()}
                   </p>
                 </div>
