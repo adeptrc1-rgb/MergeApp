@@ -204,7 +204,7 @@ function LandingPage() {
   return (
     <div 
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
-      style={{ backgroundColor: '#0A0A0A' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       {/* Animated Card Container */}
       <div 
@@ -216,9 +216,9 @@ function LandingPage() {
         <div 
           className="rounded-xl p-8 sm:p-10"
           style={{
-            backgroundColor: '#171717',
-            border: '1px solid #404040',
-            boxShadow: '0 20px 60px rgba(59, 130, 246, 0.15)'
+            backgroundColor: 'var(--surface-default)',
+            border: '1px solid var(--border-default)',
+            boxShadow: 'var(--shadow-accent)'
           }}
         >
           {/* Logo with Breathing Animation */}
@@ -228,13 +228,13 @@ function LandingPage() {
               animation: 'breathe 4s ease-in-out infinite'
             }}
           >
-            <MergeLogo size="lg" color="#FAFAFA" />
+            <MergeLogo size="lg" color="var(--text-primary)" />
           </div>
 
           {/* Tagline */}
           <p 
             className="text-center text-sm mb-12"
-            style={{ color: '#A3A3A3', letterSpacing: '0.5px' }}
+            style={{ color: 'var(--text-secondary)', letterSpacing: '0.5px' }}
           >
             Design Your Connection
           </p>
