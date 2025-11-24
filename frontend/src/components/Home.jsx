@@ -553,14 +553,14 @@ export default function Home({ user }) {
 
   if (!currentMatch) {
     return (
-      <div className="h-screen bg-black flex flex-col overflow-hidden relative">
-        {/* Subtle animated background - matching rest of app */}
+      <div className="h-screen flex flex-col overflow-hidden relative" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        {/* Subtle animated background */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
         </div>
 
-        <div className="border-b border-white/10 bg-black/80 flex-shrink-0 relative z-10">
+        <div className="flex-shrink-0 relative z-10" style={{ borderBottom: '1px solid var(--border-subtle)', backgroundColor: 'var(--bg-primary)' }}>
           <div className="max-w-4xl mx-auto px-6 py-4">
             {/* Header intentionally minimal in empty state */}
           </div>
@@ -569,11 +569,20 @@ export default function Home({ user }) {
         <div className="flex-1 flex items-center justify-center p-4 overflow-hidden relative z-10">
           <div className="text-center max-w-md">
             <div className="text-6xl mb-6">✨</div>
-            <h3 className="text-2xl font-light text-white mb-3">No more profiles</h3>
-            <p className="text-white/40 mb-8">Check back later for more connections</p>
+            <h3 className="text-2xl font-light mb-3" style={{ color: 'var(--text-primary)' }}>No more profiles</h3>
+            <p className="mb-8" style={{ color: 'var(--text-tertiary)' }}>Check back later for more connections</p>
             <button
               onClick={() => navigate('/connections')}
-              className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all font-medium"
+              className="px-8 py-3 rounded-full font-medium transition-all"
+              style={{ backgroundColor: 'var(--accent-primary)', color: '#FFFFFF' }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'var(--accent-hover)';
+                e.target.style.boxShadow = 'var(--shadow-accent)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'var(--accent-primary)';
+                e.target.style.boxShadow = 'none';
+              }}
             >
               View Connections
             </button>
