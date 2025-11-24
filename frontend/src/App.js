@@ -334,20 +334,20 @@ function LandingPage() {
               disabled={loading}
               className="w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2"
               style={{
-                backgroundColor: '#262626',
-                border: '1px solid #404040',
-                color: '#FAFAFA',
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-primary)',
                 cursor: loading ? 'not-allowed' : 'pointer'
               }}
               onMouseEnter={(e) => {
                 if (!loading) {
-                  e.target.style.backgroundColor = '#2d2d2d';
+                  e.target.style.backgroundColor = 'var(--surface-active)';
                   e.target.style.transform = 'translateY(-1px)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (!loading) {
-                  e.target.style.backgroundColor = '#262626';
+                  e.target.style.backgroundColor = 'var(--bg-elevated)';
                   e.target.style.transform = 'translateY(0)';
                 }
               }}
@@ -362,20 +362,20 @@ function LandingPage() {
               disabled={loading}
               className="w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2"
               style={{
-                backgroundColor: '#262626',
-                border: '1px solid #404040',
-                color: '#FAFAFA',
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-primary)',
                 cursor: loading ? 'not-allowed' : 'pointer'
               }}
               onMouseEnter={(e) => {
                 if (!loading) {
-                  e.target.style.backgroundColor = '#2d2d2d';
+                  e.target.style.backgroundColor = 'var(--surface-active)';
                   e.target.style.transform = 'translateY(-1px)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (!loading) {
-                  e.target.style.backgroundColor = '#262626';
+                  e.target.style.backgroundColor = 'var(--bg-elevated)';
                   e.target.style.transform = 'translateY(0)';
                 }
               }}
@@ -389,9 +389,9 @@ function LandingPage() {
               disabled
               className="w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 opacity-50 cursor-not-allowed"
               style={{
-                backgroundColor: '#262626',
-                border: '1px solid #404040',
-                color: '#FAFAFA'
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-primary)'
               }}
             >
               <span></span>
