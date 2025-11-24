@@ -574,7 +574,8 @@ export default function Profile({ user, logout }) {
               <div
                 className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.06)'
+                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
+                  border: '1px solid rgba(148, 163, 184, 0.35)'
                 }}
               >
                 <Heart className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
@@ -611,7 +612,8 @@ export default function Profile({ user, logout }) {
               <div
                 className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.06)'
+                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
+                  border: '1px solid rgba(148, 163, 184, 0.35)'
                 }}
               >
                 <Zap className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
@@ -648,7 +650,8 @@ export default function Profile({ user, logout }) {
               <div
                 className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
                 style={{
-                  backgroundColor: 'rgba(255,255,255,0.06)'
+                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
+                  border: '1px solid rgba(148, 163, 184, 0.35)'
                 }}
               >
                 <Sparkles className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
