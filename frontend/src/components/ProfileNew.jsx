@@ -477,10 +477,11 @@ export default function Profile({ user, logout }) {
 
           {/* Profile Summary */}
           <div
-            className="flex items-start gap-4 p-4"
+            className="flex items-start gap-4 p-4 backdrop-blur-premium"
             style={{
-              backgroundColor: 'var(--profile-card)',
-              borderRadius: '12px'
+              backgroundColor: 'rgba(8, 9, 16, 0.68)',
+              borderRadius: '16px',
+              border: '1px solid rgba(148, 163, 184, 0.35)'
             }}
           >
             {/* Avatar Section - Clickable */}
