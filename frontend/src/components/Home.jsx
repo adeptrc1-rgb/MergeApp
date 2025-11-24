@@ -1172,16 +1172,16 @@ export default function Home({ user }) {
               {/* Lifestyle Sync */}
               <div className="flex gap-3">
                 <div className="flex-shrink-0 mt-0.5">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
-                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--success)' }}>
+                    <span className="text-xs" style={{ color: 'var(--text-primary)' }}>✓</span>
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Lifestyle Sync</span>
-                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>88%</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Lifestyle Sync</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--accent-primary)' }}>88%</span>
                   </div>
-                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     {currentMatch.interests ? `You both enjoy ${currentMatch.interests.slice(0, 2).join(', ')}` : 'Shared interests create connection'}
                   </p>
                 </div>
@@ -1190,16 +1190,16 @@ export default function Home({ user }) {
               {/* Conversation Flow */}
               <div className="flex gap-3">
                 <div className="flex-shrink-0 mt-0.5">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
-                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--success)' }}>
+                    <span className="text-xs" style={{ color: 'var(--text-primary)' }}>✓</span>
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Conversation Flow</span>
-                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>90%</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Conversation Flow</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--accent-primary)' }}>90%</span>
                   </div>
-                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Your communication styles complement each other
                   </p>
                 </div>
@@ -1208,16 +1208,16 @@ export default function Home({ user }) {
               {/* Emotional Rhythm */}
               <div className="flex gap-3">
                 <div className="flex-shrink-0 mt-0.5">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
-                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--success)' }}>
+                    <span className="text-xs" style={{ color: 'var(--text-primary)' }}>✓</span>
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Emotional Rhythm</span>
-                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>95%</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Emotional Rhythm</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--accent-primary)' }}>95%</span>
                   </div>
-                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     Natural emotional understanding and connection
                   </p>
                 </div>
@@ -1226,16 +1226,16 @@ export default function Home({ user }) {
               {/* Future Alignment */}
               <div className="flex gap-3">
                 <div className="flex-shrink-0 mt-0.5">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: '#10B981' }}>
-                    <span className="text-xs" style={{ color: '#FAFAFA' }}>✓</span>
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--success)' }}>
+                    <span className="text-xs" style={{ color: 'var(--text-primary)' }}>✓</span>
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium" style={{ color: '#FAFAFA' }}>Future Alignment</span>
-                    <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>95%</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Future Alignment</span>
+                    <span className="text-sm font-medium" style={{ color: 'var(--accent-primary)' }}>95%</span>
                   </div>
-                  <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                     {(() => {
                       const style = (currentMatch.deal_breakers && currentMatch.deal_breakers.connection_style) || null;
                       if (style === 'shared_experiences') {
