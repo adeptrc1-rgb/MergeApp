@@ -878,28 +878,7 @@ export default function MergeOnboarding() {
           </p>
         </div>
 
-        {/* Social Energy Level */}
-        <div>
-          <div className="flex justify-between text-xs mb-2" style={{ color: '#737373' }}>
-            <span>Homebody</span>
-            <span>Social Butterfly</span>
-          </div>
-          <input
-            type="range"
-            min="1"
-            max="5"
-            value={formData.social_energy_level}
-            onChange={(e) => setFormData({ ...formData, social_energy_level: parseInt(e.target.value) })}
-            className="w-full slider-merge"
-            style={{
-              height: '6px',
-              backgroundColor: '#262626',
-              borderRadius: '10px',
-              outline: 'none',
-              cursor: 'pointer'
-            }}
-          />
-        </div>
+        {/* Social Energy Level removed per design update */}
       </div>
     </div>
   );
