@@ -668,36 +668,62 @@ export default function Profile({ user, logout }) {
           </button>
         </div>
 
-        {/* Premium Upsell - Gold Theme */}
-        <div className="rounded-2xl p-4 mb-4 relative overflow-hidden group hover:scale-[1.02] transition-all cursor-pointer" style={{
-          background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%)',
-          border: '1px solid rgba(255, 215, 0, 0.3)',
-          boxShadow: '0 4px 16px rgba(255, 215, 0, 0.1)'
-        }}>
-          <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-            <div className="w-full h-full" style={{
-              background: 'radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%)'
-            }} />
+        {/* Elite Upsell */}
+        <div
+          className="rounded-2xl p-4 mb-4 relative overflow-hidden group transition-all cursor-pointer"
+          style={{
+            backgroundColor: 'rgba(15, 11, 31, 0.85)',
+            border: '1px solid rgba(106, 90, 224, 0.6)',
+            boxShadow: '0 18px 45px rgba(0, 0, 0, 0.65)'
+          }}
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 opacity-20">
+            <div
+              className="w-full h-full"
+              style={{
+                background:
+                  'radial-gradient(circle at top right, rgba(106, 90, 224, 0.75) 0%, transparent 65%)'
+              }}
+            />
           </div>
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold mb-2" style={{
-              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-              color: '#000',
-              boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)'
-            }}>
-              <Star className="w-3 h-3" />
-              MERGE PREMIUM
+          <div className="relative z-10 flex items-center justify-between gap-3 flex-wrap">
+            <div>
+              <div
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold mb-2"
+                style={{
+                  background:
+                    'linear-gradient(135deg, rgba(106, 90, 224, 0.16) 0%, rgba(139, 92, 246, 0.32) 100%)',
+                  color: '#E5E7EB',
+                  border: '1px solid rgba(129, 140, 248, 0.5)'
+                }}
+              >
+                <Star className="w-3 h-3" />
+                MERGE ELITE
+              </div>
+              <h4
+                className="mb-1.5"
+                style={{ fontSize: '15px', fontWeight: 600, color: 'var(--profile-text-primary)' }}
+              >
+                Priority, polish, and deeper insights
+              </h4>
+              <p
+                style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}
+              >
+                Stand out in the stack, unlock advanced filters, and see richer compatibility insights.
+              </p>
             </div>
-            <h4 className="text-white font-bold text-base mb-1.5">Enhanced Experience</h4>
-            <p className="text-white/70 text-xs mb-3">
-              Unlimited likes, advanced filters, and profile analytics
-            </p>
-            <button className="w-full py-2.5 rounded-lg text-white text-xs font-bold transition-all hover:scale-105" style={{
-              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
-              boxShadow: '0 4px 12px rgba(255, 215, 0, 0.3)',
-              color: '#000'
-            }}>
-              Upgrade Now
+            <button
+              className="text-sm font-medium"
+              style={{
+                borderRadius: '999px',
+                padding: '8px 18px',
+                background:
+                  'linear-gradient(135deg, rgba(106, 90, 224, 0.9) 0%, rgba(139, 92, 246, 1) 100%)',
+                color: '#F9FAFB',
+                boxShadow: '0 10px 25px rgba(129, 140, 248, 0.55)'
+              }}
+            >
+              Upgrade to Elite
             </button>
           </div>
         </div>
