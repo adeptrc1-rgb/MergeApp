@@ -598,11 +598,11 @@ export default function Home({ user }) {
   const compatibility = Math.round(currentMatch.compatibility_score || Math.floor(Math.random() * 30) + 70);
 
   return (
-    <div className="h-screen bg-black flex flex-col overflow-hidden">
-      {/* Subtle animated background - matching onboarding */}
+    <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      {/* Subtle animated background - single blue accent */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
       </div>
 
       {/* Horoscope Modal */}
