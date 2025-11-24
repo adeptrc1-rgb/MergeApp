@@ -282,21 +282,21 @@ function LandingPage() {
               disabled={loading}
               className="w-full py-3.5 px-6 rounded-lg font-medium transition-all"
               style={{
-                backgroundColor: loading ? '#525252' : '#3B82F6',
+                backgroundColor: loading ? 'var(--text-muted)' : 'var(--accent-primary)',
                 color: '#FFFFFF',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                boxShadow: loading ? 'none' : '0 4px 12px rgba(59, 130, 246, 0.4)'
+                boxShadow: loading ? 'none' : 'var(--shadow-accent)'
               }}
               onMouseEnter={(e) => {
                 if (!loading) {
                   e.target.style.transform = 'translateY(-2px)';
-                  e.target.style.boxShadow = '0 8px 20px rgba(59, 130, 246, 0.5)';
+                  e.target.style.boxShadow = 'var(--shadow-accent-strong)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (!loading) {
                   e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.4)';
+                  e.target.style.boxShadow = 'var(--shadow-accent)';
                 }
               }}
             >
