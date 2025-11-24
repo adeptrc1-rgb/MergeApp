@@ -642,10 +642,10 @@ export default function Home({ user }) {
       )}
 
       {/* Header */}
-      <div className="flex-shrink-0" style={{ backgroundColor: '#000000' }}>
+      <div className="flex-shrink-0" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Merge wordmark */}
-          <MergeLogo size="md" color="#FAFAFA" />
+          <MergeLogo size="md" color="var(--text-primary)" />
           
           {/* Messages icon on the right - Elegant design */}
           <button
@@ -653,18 +653,32 @@ export default function Home({ user }) {
             className="relative group"
             title="Messages"
           >
-            {/* Elegant container with gradient border */}
-            <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-2.5 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group-hover:scale-105">
-              <MessageCircle className="w-5 h-5 text-white/90 group-hover:text-white transition-colors" />
+            {/* Elegant container */}
+            <div 
+              className="relative backdrop-blur-sm rounded-xl p-2.5 transition-all duration-300 group-hover:scale-105"
+              style={{
+                backgroundColor: 'var(--surface-default)',
+                border: '1px solid var(--border-subtle)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                e.currentTarget.style.borderColor = 'var(--border-default)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--surface-default)';
+                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+              }}
+            >
+              <MessageCircle className="w-5 h-5 transition-colors" style={{ color: 'var(--text-primary)' }} />
               
               {/* Elegant notification badge */}
               {unreadCount > 0 && (
                 <div className="absolute -top-1.5 -right-1.5">
                   {/* Glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-md opacity-60 animate-pulse" />
+                  <div className="absolute inset-0 rounded-full blur-md opacity-60 animate-pulse" style={{ backgroundColor: 'var(--error)' }} />
                   
                   {/* Badge */}
-                  <div className="relative bg-gradient-to-r from-red-500 to-pink-600 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center border border-red-400/50 shadow-lg">
+                  <div className="relative text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg" style={{ backgroundColor: 'var(--error)', border: '1px solid rgba(239, 68, 68, 0.5)' }}>
                     {unreadCount > 9 ? '9+' : unreadCount}
                   </div>
                 </div>
@@ -672,7 +686,7 @@ export default function Home({ user }) {
               
               {/* Subtle shine effect on hover */}
               <div className="absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent)' }} />
               </div>
             </div>
           </button>
