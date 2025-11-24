@@ -885,9 +885,9 @@ export default function MergeOnboarding() {
           <MessageCircle className="w-10 h-10 text-white" />
         </div>
         <h2 className="text-4xl font-semibold mb-3" style={{ color: '#FAFAFA' }}>
-          Weekend & Communication
+          Communication
         </h2>
-        <p className="text-lg" style={{ color: '#A3A3A3' }}>How you spend your time and how you connect</p>
+        <p className="text-lg" style={{ color: '#A3A3A3' }}>How you express yourself and handle conflict</p>
       </div>
 
       <div className="space-y-6">
