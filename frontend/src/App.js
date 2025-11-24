@@ -314,12 +314,12 @@ function LandingPage() {
           {/* Divider */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full" style={{ borderTop: '1px solid #404040' }}></div>
+              <div className="w-full" style={{ borderTop: '1px solid var(--border-default)' }}></div>
             </div>
             <div className="relative flex justify-center text-xs">
               <span 
                 className="px-4"
-                style={{ backgroundColor: '#171717', color: '#A3A3A3' }}
+                style={{ backgroundColor: 'var(--surface-default)', color: 'var(--text-secondary)' }}
               >
                 or continue with
               </span>
