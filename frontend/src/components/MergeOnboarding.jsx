@@ -122,8 +122,8 @@ export default function MergeOnboarding() {
         // Step 1: only require core identity fields to move forward
         return formData.first_name && formData.birth_date && formData.hometown;
       case 2:
-        return formData.social_energy_source && 
-               formData.information_processing && 
+        // Core personality step: require only the two scenario choices
+        return formData.information_processing && 
                formData.decision_making;
       case 3:
         return formData.connection_style && formData.top_interests.length > 0;
