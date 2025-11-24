@@ -1221,7 +1221,22 @@ export default function Home({ user }) {
                     <span className="text-sm font-medium" style={{ color: '#3B82F6' }}>95%</span>
                   </div>
                   <p className="text-xs leading-relaxed" style={{ color: '#A3A3A3' }}>
-                    {currentMatch.relationship_goal || 'You\'re both looking for meaningful connections'}
+                    {(() => {
+                      const style = (currentMatch.deal_breakers && currentMatch.deal_breakers.connection_style) || null;
+                      if (style === 'shared_experiences') {
+                        return "You both prioritize shared experiences and living in the moment.";
+                      }
+                      if (style === 'meaningful_conversations') {
+                        return "You both build connections through meaningful conversations that can last for hours.";
+                      }
+                      if (style === 'common_values') {
+                        return "You both care about shared values and long-term life goals, which is a strong signal for future alignment.";
+                      }
+                      if (style === 'balanced_approach') {
+                        return "Youre both looking for a healthy mix of fun and depth, which is a strong foundation for the future.";
+                      }
+                      return "Youre both looking for meaningful connections.";
+                    })()}
                   </p>
                 </div>
               </div>
