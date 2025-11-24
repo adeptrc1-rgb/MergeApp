@@ -208,9 +208,17 @@ async def test_login(body: LoginBody, response: Response):
             "first_name": "Test",
             "last_name": "User",
             "zodiac_sign": "Leo",
-        "connection_style": {"type": "string", "nullable": True},
-        "ideal_weekend": {"type": "string", "nullable": True},
-
+            # Match real onboarding structure for testing
+            "deal_breakers": {
+                "connection_style": "balanced_approach",
+                "want_kids": "someday"
+            },
+            "preferences": {
+                "ideal_weekend": "mixed_social",
+                "conflict_style": "talk_it_out",
+                "love_language": "quality_time",
+                "texting_style": "quick_check_ins"
+            },
             "photos": ["https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=800&q=80"],
             "bio": "Test user",
             "interests": ["music", "coffee"],
