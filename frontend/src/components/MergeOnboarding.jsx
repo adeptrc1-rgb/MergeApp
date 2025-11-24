@@ -187,7 +187,7 @@ export default function MergeOnboarding() {
         },
         interests: formData.top_interests,
         lifestyle_factors: {
-          social_energy: formData.social_energy_level,
+          // social_energy removed from lifestyle step per design update
           occupation: '' // Will be added later
         },
         
