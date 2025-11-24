@@ -872,7 +872,7 @@ export default function Home({ user }) {
                         handleShowMore(); 
                       }}
                       className="flex items-center gap-1 transition-colors touch-manipulation"
-                      style={{ color: '#A3A3A3', pointerEvents: 'auto' }}
+                      style={{ color: 'var(--text-secondary)', pointerEvents: 'auto' }}
                     >
                       <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
                       {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
