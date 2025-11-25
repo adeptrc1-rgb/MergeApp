@@ -98,47 +98,48 @@ export default function Store({ user }) {
 
   if (loading) {
     return (
-      <div className="h-screen text-white flex items-center justify-center" style={{ background: '#000000' }}>
-        {/* Subtle animated background - matching onboarding */}
+      <div className="h-screen flex items-center justify-center" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+        {/* Subtle animated background */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
         </div>
         <div className="text-center relative z-10">
-          <div className="animate-spin w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4" style={{ borderColor: '#6C63FF', borderTopColor: 'transparent' }} />
-          <p className="text-white/60">Loading Marketplace...</p>
+          <div className="animate-spin w-12 h-12 border-4 border-t-transparent rounded-full mx-auto mb-4" style={{ borderColor: 'var(--accent-primary)', borderTopColor: 'transparent' }} />
+          <p style={{ color: 'var(--text-secondary)' }}>Loading Marketplace...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen text-white flex flex-col overflow-hidden" style={{ background: '#000000' }}>
-      {/* Subtle animated background - matching onboarding */}
+    <div className="h-screen flex flex-col overflow-hidden" style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+      {/* Subtle animated background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
       </div>
 
       {/* Header */}
-      <div className="border-b border-white/10 flex-shrink-0 sticky top-0 z-10" style={{ background: '#000000' }}>
+      <div className="flex-shrink-0 sticky top-0 z-10" style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-light text-white">Marketplace</h1>
-            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+            <h1 className="text-3xl font-light" style={{ color: 'var(--text-primary)' }}>Marketplace</h1>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-default)' }}>
               <Star className="w-5 h-5" style={{ color: '#FFD700' }} />
-              <span className="text-xl font-medium text-white">{inventory.star_coins}</span>
-              <span className="text-sm text-white/60">coins</span>
+              <span className="text-xl font-medium" style={{ color: 'var(--text-primary)' }}>{inventory.star_coins}</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>coins</span>
             </div>
           </div>
 
           {/* Message Toast */}
           {message && (
-            <div className={`mb-3 px-4 py-2 rounded-lg inline-flex items-center gap-2 ${
-              message.type === 'success' ? 'bg-white/10 border border-white/20 text-white' :
-              'bg-red-500/20 border border-red-500/30 text-red-300'
-            }`}>
-              <Sparkles className="w-4 h-4" style={{ color: message.type === 'success' ? '#4ECDC4' : '#EF4444' }} />
+            <div className="mb-3 px-4 py-2 rounded-lg inline-flex items-center gap-2" style={{
+              backgroundColor: message.type === 'success' ? 'var(--surface-default)' : 'rgba(239, 68, 68, 0.2)',
+              border: message.type === 'success' ? '1px solid var(--border-default)' : '1px solid rgba(239, 68, 68, 0.3)',
+              color: message.type === 'success' ? 'var(--text-primary)' : '#FCA5A5'
+            }}>
+              <Sparkles className="w-4 h-4" style={{ color: message.type === 'success' ? 'var(--accent-primary)' : 'var(--error)' }} />
               <span className="text-sm">{message.text}</span>
             </div>
           )}
@@ -147,24 +148,44 @@ export default function Store({ user }) {
           <div className="flex gap-2">
             <button
               onClick={() => setActiveTab('lights')}
-              className={`flex-1 px-4 py-2 rounded-lg transition-all ${
-                activeTab === 'lights'
-                  ? 'text-white'
-                  : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
-              }`}
-              style={activeTab === 'lights' ? { background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' } : {}}
+              className="flex-1 px-4 py-2 rounded-lg transition-all"
+              style={{
+                background: activeTab === 'lights' ? 'var(--accent-primary)' : 'var(--surface-default)',
+                border: activeTab === 'lights' ? 'none' : '1px solid var(--border-subtle)',
+                color: activeTab === 'lights' ? '#FFFFFF' : 'var(--text-secondary)'
+              }}
+              onMouseEnter={(e) => {
+                if (activeTab !== 'lights') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeTab !== 'lights') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-default)';
+                }
+              }}
             >
               <Zap className="w-4 h-4 inline mr-2" />
               Lights
             </button>
             <button
               onClick={() => setActiveTab('skins')}
-              className={`flex-1 px-4 py-2 rounded-lg transition-all ${
-                activeTab === 'skins'
-                  ? 'text-white'
-                  : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
-              }`}
-              style={activeTab === 'skins' ? { background: 'linear-gradient(135deg, #6C63FF 0%, #667EEA 100%)' } : {}}
+              className="flex-1 px-4 py-2 rounded-lg transition-all"
+              style={{
+                background: activeTab === 'skins' ? 'var(--accent-primary)' : 'var(--surface-default)',
+                border: activeTab === 'skins' ? 'none' : '1px solid var(--border-subtle)',
+                color: activeTab === 'skins' ? '#FFFFFF' : 'var(--text-secondary)'
+              }}
+              onMouseEnter={(e) => {
+                if (activeTab !== 'skins') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeTab !== 'skins') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-default)';
+                }
+              }}
             >
               <Flame className="w-4 h-4 inline mr-2" />
               Auras
