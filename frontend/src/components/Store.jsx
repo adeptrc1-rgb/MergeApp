@@ -204,14 +204,17 @@ export default function Store({ user }) {
             return (
               <div
                 key={item.id}
-                className={`relative rounded-2xl border overflow-hidden transition-all ${
-                  active
-                    ? 'border-white/30'
-                    : 'border-white/10 hover:border-white/20'
-                }`}
+                className="relative rounded-2xl border overflow-hidden transition-all"
                 style={{ 
-                  background: active ? 'rgba(108, 99, 255, 0.1)' : '#0A0A0A',
-                  boxShadow: active ? '0 0 20px rgba(108, 99, 255, 0.4)' : 'none'
+                  background: active ? 'var(--surface-hover)' : 'var(--surface-default)',
+                  borderColor: active ? 'var(--accent-primary)' : 'var(--border-subtle)',
+                  boxShadow: active ? 'var(--shadow-accent)' : 'none'
+                }}
+                onMouseEnter={(e) => {
+                  if (!active) e.currentTarget.style.borderColor = 'var(--border-default)';
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) e.currentTarget.style.borderColor = 'var(--border-subtle)';
                 }}
               >
                 {/* Preview Area */}
