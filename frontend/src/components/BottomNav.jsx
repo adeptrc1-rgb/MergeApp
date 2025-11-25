@@ -18,69 +18,61 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        backgroundColor: 'rgba(23, 23, 23, 0.98)',
+        backgroundColor: '#000000',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
-        borderTop: '1px solid var(--border-subtle)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
         paddingBottom: 'env(safe-area-inset-bottom)',
-        boxShadow: '0 -1px 8px rgba(0, 0, 0, 0.4)'
+        boxShadow: '0 -2px 12px rgba(0, 0, 0, 0.6)'
       }}
     >
-      <div className="flex items-center justify-around max-w-md mx-auto" style={{ padding: '6px 20px', height: '48px' }}>
-        {items.map(({ id, icon: Icon, path }) => {
+      <div className="flex items-center justify-around mx-auto" style={{ padding: '8px 16px', minHeight: '44px', maxWidth: '600px' }}>
+        {items.map(({ id, icon: Icon, label, path }) => {
           const isActive = currentTab === id;
           return (
             <button
               key={id}
               onClick={() => navigate(path)}
-              className="flex items-center justify-center transition-all duration-200 ease-out relative"
+              className="flex flex-col items-center justify-center gap-1 transition-all duration-200 ease-out relative"
               style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                backgroundColor: isActive ? 'var(--surface-hover)' : 'transparent',
+                minWidth: '44px',
+                minHeight: '44px',
+                padding: '4px 8px',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.backgroundColor = 'var(--surface-default)';
                   e.currentTarget.style.transform = 'scale(1.05)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.backgroundColor = 'transparent';
                   e.currentTarget.style.transform = 'scale(1)';
                 }
               }}
             >
-              {/* Active indicator dot */}
-              {isActive && (
-                <div 
-                  style={{
-                    position: 'absolute',
-                    top: '1px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: '3px',
-                    height: '3px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--accent-primary)',
-                    boxShadow: '0 0 6px var(--accent-primary)'
-                  }}
-                />
-              )}
-              
               <Icon 
                 className="transition-all duration-200" 
                 style={{ 
-                  width: '19px',
-                  height: '19px',
-                  color: isActive ? 'var(--accent-primary)' : 'var(--text-muted)',
-                  strokeWidth: isActive ? 2.5 : 1.8,
-                  transition: 'all 0.2s ease'
+                  width: '22px',
+                  height: '22px',
+                  color: isActive ? '#00D9FF' : '#FFFFFF',
+                  strokeWidth: isActive ? 2.5 : 2,
+                  fill: isActive ? '#00D9FF' : 'none',
+                  transition: 'all 0.2s ease',
+                  filter: isActive ? 'drop-shadow(0 0 8px rgba(0, 217, 255, 0.6))' : 'none'
                 }} 
               />
+              <span 
+                className="text-[10px] font-medium transition-all duration-200"
+                style={{
+                  color: isActive ? '#00D9FF' : '#FFFFFF',
+                  opacity: isActive ? 1 : 0.6,
+                  letterSpacing: '0.3px'
+                }}
+              >
+                {label}
+              </span>
             </button>
           );
         })}
