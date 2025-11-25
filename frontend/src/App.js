@@ -23,6 +23,7 @@ import AstroMatchDashboard from './components/AstroMatchDashboard';
 import AstroChat from './components/AstroChat';
 import Discover from './components/Discover';
 import Home from './components/Home';
+import Likes from './components/Likes';
 import Messages from './components/Messages';
 import Connections from './components/Connections';
 import Profile from './components/ProfileNew';
