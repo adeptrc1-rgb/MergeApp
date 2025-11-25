@@ -724,8 +724,8 @@ export default function Home({ user }) {
                 border: '1px solid var(--border-subtle)'
               }}
               style={{
-                height: showDropdown ? '80vh' : '62vh',
-                maxHeight: showDropdown ? '750px' : '560px',
+                height: showDropdown ? '78vh' : '72vh',
+                maxHeight: showDropdown ? '720px' : '680px',
                 transform: isDragging 
                   ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                   : swipeDirection ? undefined : 'translate(0, 0)',
