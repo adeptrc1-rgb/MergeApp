@@ -18,13 +18,13 @@ const MHomeIcon = ({ className, style }) => (
   </div>
 );
 
-// Shared Bottom Navigation - Sophisticated Merge Theme
+// Shared Bottom Navigation - Minimal & Modern
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: MHomeIcon, label: 'Home', path: '/home' },
-    { id: 'discover', icon: Network, label: 'Discover', path: '/discover' },
-    { id: 'messages', icon: MessageSquare, label: 'Messages', path: '/messages' },
-    { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
+    { id: 'home', icon: MHomeIcon, path: '/home' },
+    { id: 'discover', icon: Network, path: '/discover' },
+    { id: 'messages', icon: MessageSquare, path: '/messages' },
+    { id: 'profile', icon: User, path: '/profile' },
   ];
   
   return (
@@ -34,94 +34,69 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        backgroundColor: 'rgba(23, 23, 23, 0.95)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderTop: '1px solid var(--border-default)',
+        backgroundColor: 'rgba(23, 23, 23, 0.98)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderTop: '1px solid var(--border-subtle)',
         paddingBottom: 'env(safe-area-inset-bottom)',
-        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.5)'
+        boxShadow: '0 -1px 8px rgba(0, 0, 0, 0.4)'
       }}
     >
-      <div className="flex items-center justify-around max-w-4xl mx-auto" style={{ padding: '12px 16px' }}>
-        {items.map(({ id, icon: Icon, label, path }) => {
+      <div className="flex items-center justify-around max-w-md mx-auto" style={{ padding: '10px 24px', height: '56px' }}>
+        {items.map(({ id, icon: Icon, path }) => {
           const isActive = currentTab === id;
           return (
             <button
               key={id}
               onClick={() => navigate(path)}
-              className="flex flex-col items-center gap-1 transition-all duration-300 ease-out relative"
+              className="flex items-center justify-center transition-all duration-200 ease-out relative"
               style={{
-                minWidth: '64px',
-                padding: '8px 12px',
-                borderRadius: '16px',
-                backgroundColor: 'transparent',
-                transition: 'all 0.3s ease',
-                transform: isActive ? 'translateY(-2px)' : 'translateY(0)'
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                backgroundColor: isActive ? 'var(--surface-hover)' : 'transparent',
+                transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
                   e.currentTarget.style.backgroundColor = 'var(--surface-default)';
-                  e.currentTarget.style.transform = 'translateY(-1px)';
+                  e.currentTarget.style.transform = 'scale(1.05)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
                   e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.transform = 'scale(1)';
                 }
               }}
             >
-              {/* Active indicator line at top */}
+              {/* Active indicator dot */}
               {isActive && (
                 <div 
                   style={{
                     position: 'absolute',
-                    top: '-12px',
+                    top: '2px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    width: '32px',
-                    height: '3px',
-                    borderRadius: '0 0 3px 3px',
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '50%',
                     backgroundColor: 'var(--accent-primary)',
-                    boxShadow: '0 2px 8px var(--accent-glow)'
+                    boxShadow: '0 0 8px var(--accent-primary)'
                   }}
                 />
               )}
               
-              {/* Icon container with glow effect for active */}
-              <div 
-                style={{
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <Icon 
-                  className="transition-all duration-300" 
-                  style={{ 
-                    width: '22px',
-                    height: '22px',
-                    color: isActive ? 'var(--accent-primary)' : 'var(--text-tertiary)',
-                    strokeWidth: isActive ? 2.5 : 2,
-                    transition: 'all 0.3s ease',
-                    filter: isActive ? 'drop-shadow(0 0 6px var(--accent-glow))' : 'none'
-                  }} 
-                />
-              </div>
-              
-              {/* Label */}
-              <span 
-                style={{
-                  fontSize: '11px',
-                  fontWeight: isActive ? 600 : 500,
-                  color: isActive ? 'var(--accent-primary)' : 'var(--text-tertiary)',
-                  transition: 'all 0.3s ease',
-                  letterSpacing: '0.3px'
-                }}
-              >
-                {label}
-              </span>
+              <Icon 
+                className="transition-all duration-200" 
+                style={{ 
+                  width: '20px',
+                  height: '20px',
+                  color: isActive ? 'var(--accent-primary)' : 'var(--text-muted)',
+                  strokeWidth: isActive ? 2.5 : 1.8,
+                  transition: 'all 0.2s ease'
+                }} 
+              />
             </button>
           );
         })}
