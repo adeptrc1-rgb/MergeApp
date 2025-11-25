@@ -345,7 +345,7 @@ export default function Discover({ user }) {
               <div className="space-y-6">
                 {trendingUsers.map((match) => {
                   const age = calculateAge(match.birth_date);
-                  const compatibility = Math.round(match.compatibility_score || Math.floor(Math.random() * 30) + 70);
+                  const compatibility = Math.round(match.compatibility_score || 75);
                   const energyScore = match.trending_energy_score || 0;
                   return (
                     <div
