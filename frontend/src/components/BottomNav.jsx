@@ -26,18 +26,17 @@ export default function BottomNav({ currentTab, navigate }) {
         boxShadow: '0 -2px 12px rgba(0, 0, 0, 0.6)'
       }}
     >
-      <div className="flex items-center justify-around mx-auto" style={{ padding: '8px 16px', minHeight: '44px', maxWidth: '600px' }}>
+      <div className="flex items-center justify-around mx-auto" style={{ padding: '4px 12px', height: '52px', maxWidth: '500px' }}>
         {items.map(({ id, icon: Icon, label, path }) => {
           const isActive = currentTab === id;
           return (
             <button
               key={id}
               onClick={() => navigate(path)}
-              className="flex flex-col items-center justify-center gap-1 transition-all duration-200 ease-out relative"
+              className="flex flex-col items-center justify-center gap-0.5 transition-all duration-200 ease-out"
               style={{
-                minWidth: '44px',
-                minHeight: '44px',
-                padding: '4px 8px',
+                minWidth: '52px',
+                padding: '4px 6px',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
@@ -54,21 +53,21 @@ export default function BottomNav({ currentTab, navigate }) {
               <Icon 
                 className="transition-all duration-200" 
                 style={{ 
-                  width: '22px',
-                  height: '22px',
+                  width: '20px',
+                  height: '20px',
                   color: isActive ? '#00D9FF' : '#FFFFFF',
                   strokeWidth: isActive ? 2.5 : 2,
                   fill: isActive ? '#00D9FF' : 'none',
                   transition: 'all 0.2s ease',
-                  filter: isActive ? 'drop-shadow(0 0 8px rgba(0, 217, 255, 0.6))' : 'none'
+                  filter: isActive ? 'drop-shadow(0 0 6px rgba(0, 217, 255, 0.5))' : 'none'
                 }} 
               />
               <span 
-                className="text-[10px] font-medium transition-all duration-200"
+                className="text-[9px] font-medium transition-all duration-200"
                 style={{
                   color: isActive ? '#00D9FF' : '#FFFFFF',
                   opacity: isActive ? 1 : 0.6,
-                  letterSpacing: '0.3px'
+                  letterSpacing: '0.2px'
                 }}
               >
                 {label}
