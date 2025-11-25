@@ -42,7 +42,7 @@ export default function BottomNav({ currentTab, navigate }) {
         boxShadow: '0 -1px 8px rgba(0, 0, 0, 0.4)'
       }}
     >
-      <div className="flex items-center justify-around max-w-md mx-auto" style={{ padding: '10px 24px', height: '56px' }}>
+      <div className="flex items-center justify-around max-w-md mx-auto" style={{ padding: '6px 20px', height: '48px' }}>
         {items.map(({ id, icon: Icon, path }) => {
           const isActive = currentTab === id;
           return (
@@ -51,8 +51,8 @@ export default function BottomNav({ currentTab, navigate }) {
               onClick={() => navigate(path)}
               className="flex items-center justify-center transition-all duration-200 ease-out relative"
               style={{
-                width: '48px',
-                height: '48px',
+                width: '40px',
+                height: '40px',
                 borderRadius: '50%',
                 backgroundColor: isActive ? 'var(--surface-hover)' : 'transparent',
                 transition: 'all 0.2s ease'
@@ -75,14 +75,14 @@ export default function BottomNav({ currentTab, navigate }) {
                 <div 
                   style={{
                     position: 'absolute',
-                    top: '2px',
+                    top: '1px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    width: '4px',
-                    height: '4px',
+                    width: '3px',
+                    height: '3px',
                     borderRadius: '50%',
                     backgroundColor: 'var(--accent-primary)',
-                    boxShadow: '0 0 8px var(--accent-primary)'
+                    boxShadow: '0 0 6px var(--accent-primary)'
                   }}
                 />
               )}
@@ -90,8 +90,8 @@ export default function BottomNav({ currentTab, navigate }) {
               <Icon 
                 className="transition-all duration-200" 
                 style={{ 
-                  width: '20px',
-                  height: '20px',
+                  width: '19px',
+                  height: '19px',
                   color: isActive ? 'var(--accent-primary)' : 'var(--text-muted)',
                   strokeWidth: isActive ? 2.5 : 1.8,
                   transition: 'all 0.2s ease'
