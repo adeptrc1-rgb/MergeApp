@@ -595,7 +595,7 @@ export default function Home({ user }) {
   }
 
   const age = currentMatch.birth_date ? calculateAge(currentMatch.birth_date) : 25;
-  const compatibility = Math.round(currentMatch.compatibility_score || Math.floor(Math.random() * 30) + 70);
+  const compatibility = Math.round(currentMatch.compatibility_score || 75);
 
   return (
     <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
