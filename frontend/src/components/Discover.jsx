@@ -185,29 +185,29 @@ export default function Discover({ user }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <div className="text-center">
-          <Sparkles className="w-12 h-12 text-purple-400 animate-spin mx-auto mb-4" />
-          <p className="text-white/60 text-lg">Finding your cosmic matches...</p>
+          <Sparkles className="w-12 h-12 animate-spin mx-auto mb-4" style={{ color: 'var(--accent-primary)' }} />
+          <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>Finding your cosmic matches...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen bg-black flex flex-col overflow-hidden">
-      {/* Subtle animated background - matching onboarding */}
+    <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      {/* Subtle animated background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
+        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
       </div>
 
       {/* Daily Horoscope Ticker */}
       {todayHoroscope && (
-        <div className="bg-black border-b border-white/10">
+        <div style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-subtle)' }}>
           <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-center animate-fadeIn">
             <div className="text-center">
-              <p className="text-white/80 text-sm font-light tracking-wide">
+              <p className="text-sm font-light tracking-wide" style={{ color: 'var(--text-primary)' }}>
                 {todayHoroscope.message_short || todayHoroscope.message}
               </p>
             </div>
@@ -216,7 +216,7 @@ export default function Discover({ user }) {
       )}
 
       {/* Header */}
-      <div className="border-b border-white/10 bg-black flex-shrink-0 select-none" style={{ WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
+      <div className="flex-shrink-0 select-none" style={{ borderBottom: '1px solid var(--border-subtle)', backgroundColor: 'var(--bg-primary)', WebkitTapHighlightColor: 'transparent', WebkitTouchCallout: 'none', userSelect: 'none' }}>
         <div className="max-w-4xl mx-auto px-4 py-2">
           <div className="flex items-center justify-end mb-2">
             <div className="flex items-center gap-2">
@@ -228,31 +228,55 @@ export default function Discover({ user }) {
                   <DevSeasonToggle />
                 ) : null;
               })()}
-              <button className="text-white/60 hover:text-white">
+              <button style={{ color: 'var(--text-secondary)' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}>
                 <Sparkles className="w-5 h-5" />
               </button>
             </div>
           </div>
-          <h2 className="text-3xl font-light text-white mb-3">Discover</h2>
+          <h2 className="text-3xl font-light mb-3" style={{ color: 'var(--text-primary)' }}>Discover</h2>
           {/* Filter Tabs */}
           <div className="flex gap-4">
             <button
               onClick={() => setActiveFilter('compatible')}
-              className={`px-6 py-2 rounded-full text-sm transition-all ${
-                activeFilter === 'compatible'
-                  ? 'bg-white text-black font-medium'
-                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
-              }`}
+              className="px-6 py-2 rounded-full text-sm transition-all font-medium"
+              style={{
+                backgroundColor: activeFilter === 'compatible' ? 'var(--accent-primary)' : 'var(--surface-default)',
+                color: activeFilter === 'compatible' ? '#FFFFFF' : 'var(--text-secondary)'
+              }}
+              onMouseEnter={(e) => {
+                if (activeFilter !== 'compatible') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeFilter !== 'compatible') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-default)';
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                }
+              }}
             >
               Compatible Today
             </button>
             <button
               onClick={() => setActiveFilter('trending')}
-              className={`px-6 py-2 rounded-full text-sm transition-all ${
-                activeFilter === 'trending'
-                  ? 'bg-white text-black font-medium'
-                  : 'bg-white/10 text-white/60 hover:text-white hover:bg-white/20'
-              }`}
+              className="px-6 py-2 rounded-full text-sm transition-all font-medium"
+              style={{
+                backgroundColor: activeFilter === 'trending' ? 'var(--accent-primary)' : 'var(--surface-default)',
+                color: activeFilter === 'trending' ? '#FFFFFF' : 'var(--text-secondary)'
+              }}
+              onMouseEnter={(e) => {
+                if (activeFilter !== 'trending') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeFilter !== 'trending') {
+                  e.currentTarget.style.backgroundColor = 'var(--surface-default)';
+                  e.currentTarget.style.color = 'var(--text-secondary)';
+                }
+              }}
             >
               Trending Energies
             </button>
