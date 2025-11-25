@@ -1206,10 +1206,10 @@ def calculate_pair_compatibility(user_a: dict, user_b: dict) -> float:
         else:
             emotional_score += 3.0
     
-    # === 4. LIFESTYLE COMPATIBILITY (20 points max) ===
+    # === 4. LIFESTYLE COMPATIBILITY (25 points max) ===
     lifestyle_score = 0.0
     
-    # Interests overlap (0-10 points)
+    # Interests overlap (0-12 points)
     a_interests = set(user_a.get("interests") or [])
     b_interests = set(user_b.get("interests") or [])
     if a_interests and b_interests:
@@ -1217,18 +1217,18 @@ def calculate_pair_compatibility(user_a: dict, user_b: dict) -> float:
         total_unique = len(a_interests | b_interests)
         if total_unique > 0:
             overlap_ratio = overlap / min(len(a_interests), len(b_interests))
-            lifestyle_score += min(overlap_ratio * 10.0, 10.0)
+            lifestyle_score += min(overlap_ratio * 12.0, 12.0)
     
-    # Ideal weekend match (0-10 points)
+    # Ideal weekend match (0-13 points)
     a_weekend = (user_a.get("preferences") or {}).get("ideal_weekend")
     b_weekend = (user_b.get("preferences") or {}).get("ideal_weekend")
     if a_weekend and b_weekend:
         if a_weekend == b_weekend:
-            lifestyle_score += 10.0
+            lifestyle_score += 13.0
         elif "mixed" in [a_weekend, b_weekend]:
-            lifestyle_score += 7.0
+            lifestyle_score += 9.0
         else:
-            lifestyle_score += 4.0
+            lifestyle_score += 5.0
     
     # === CALCULATE FINAL SCORE ===
     total_score = personality_score + values_score + emotional_score + lifestyle_score
