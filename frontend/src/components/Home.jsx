@@ -700,8 +700,8 @@ export default function Home({ user }) {
             className="w-full"
             style={{ 
               perspective: '1000px',
-              height: showDropdown ? '78vh' : '62vh',
-              maxHeight: showDropdown ? '720px' : '560px'
+              height: showDropdown ? '78vh' : '72vh',
+              maxHeight: showDropdown ? '720px' : '680px'
             }}
           >
             <div 
