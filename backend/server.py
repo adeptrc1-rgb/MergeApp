@@ -1143,19 +1143,20 @@ def calculate_pair_compatibility(user_a: dict, user_b: dict) -> float:
             # 3.75 points per shared trait
             personality_score += (shared_traits / 4.0) * 15.0
     
-    # === 2. VALUES ALIGNMENT (30 points max) ===
+    # === 2. VALUES ALIGNMENT (25 points max) ===
     values_score = 0.0
     
-    # Connection style match (0-10 points) - CRITICAL
+    # Connection style match (0-15 points) - CRITICAL
+    # This captures relationship intentions and connection preferences
     a_style = (user_a.get("deal_breakers") or {}).get("connection_style")
     b_style = (user_b.get("deal_breakers") or {}).get("connection_style")
     if a_style and b_style:
         if a_style == b_style:
-            values_score += 10.0
+            values_score += 15.0  # Increased from 10
         elif "balanced" in [a_style, b_style]:
-            values_score += 6.0  # Balanced works with anyone
+            values_score += 9.0  # Increased from 6 - Balanced works with anyone
         else:
-            values_score += 3.0  # Different but not incompatible
+            values_score += 4.0  # Increased from 3 - Different but not incompatible
     
     # Kids preference match (0-10 points) - DEALBREAKER potential
     a_kids = (user_a.get("deal_breakers") or {}).get("want_kids")
@@ -1167,17 +1168,6 @@ def calculate_pair_compatibility(user_a: dict, user_b: dict) -> float:
             values_score += 6.0  # Flexible matches
         else:
             values_score += 2.0  # Potential incompatibility
-    
-    # Relationship goals match (0-10 points)
-    a_goals = (user_a.get("deal_breakers") or {}).get("relationship_goals")
-    b_goals = (user_b.get("deal_breakers") or {}).get("relationship_goals")
-    if a_goals and b_goals:
-        if a_goals == b_goals:
-            values_score += 10.0
-        elif "see_where_it_goes" in [a_goals, b_goals]:
-            values_score += 6.0  # Flexible
-        else:
-            values_score += 3.0
     
     # === 3. EMOTIONAL RHYTHM (25 points max) ===
     emotional_score = 0.0
