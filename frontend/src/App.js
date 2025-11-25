@@ -1325,6 +1325,11 @@ function MessagesWrapper() {
   return <Messages user={user} logout={logout} />;
 }
 
+function LikesWrapper() {
+  const { user, logout } = React.useContext(AuthContext);
+  return <Likes user={user} logout={logout} />;
+}
+
 function ConnectionsWrapper() {
   const { user, logout } = React.useContext(AuthContext);
   return <Connections user={user} logout={logout} />;
