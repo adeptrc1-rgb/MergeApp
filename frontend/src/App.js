@@ -1398,6 +1398,14 @@ function App() {
               } 
             />
             <Route 
+              path="/likes" 
+              element={
+                <ProtectedRoute>
+                  <LikesWrapper />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
               path="/messages" 
               element={
                 <ProtectedRoute>
