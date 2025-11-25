@@ -1103,9 +1103,12 @@ def calculate_pair_compatibility(user_a: dict, user_b: dict) -> float:
     
     Multi-factor algorithm:
     - Personality Alignment (25%): MBTI, social energy compatibility
-    - Values Alignment (30%): Connection style, life goals, kids, relationship goals
+    - Values Alignment (25%): Connection style (15 pts), kids preference (10 pts)
     - Emotional Rhythm (25%): Conflict style, love language, texting style
-    - Lifestyle Compatibility (20%): Interests overlap, ideal weekend match
+    - Lifestyle Compatibility (25%): Interests overlap, ideal weekend match
+    
+    Connection style now carries higher weight (15%) as it inherently captures
+    relationship intentions and connection preferences.
     
     Returns: Float between 0-100
     """
