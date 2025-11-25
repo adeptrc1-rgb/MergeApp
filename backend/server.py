@@ -1090,6 +1090,155 @@ def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
     return bonus
 
 
+def calculate_pair_compatibility(user_a: dict, user_b: dict) -> float:
+    """
+    Calculate real pairwise compatibility score between two users (0-100).
+    
+    Multi-factor algorithm:
+    - Personality Alignment (25%): MBTI, social energy compatibility
+    - Values Alignment (30%): Connection style, life goals, kids, relationship goals
+    - Emotional Rhythm (25%): Conflict style, love language, texting style
+    - Lifestyle Compatibility (20%): Interests overlap, ideal weekend match
+    
+    Returns: Float between 0-100
+    """
+    
+    # === 1. PERSONALITY ALIGNMENT (25 points max) ===
+    personality_score = 0.0
+    
+    # Social energy compatibility (0-10 points)
+    a_social = (user_a.get("deal_breakers") or {}).get("social_energy_source")
+    b_social = (user_b.get("deal_breakers") or {}).get("social_energy_source")
+    if a_social and b_social:
+        # Exact match: 10 points, Adjacent compatibility: 6 points, Opposite: 3 points
+        if a_social == b_social:
+            personality_score += 10.0
+        elif (a_social == "mostly_people" and b_social == "balanced") or \
+             (a_social == "balanced" and b_social == "mostly_people") or \
+             (a_social == "mostly_alone" and b_social == "balanced") or \
+             (a_social == "balanced" and b_social == "mostly_alone"):
+            personality_score += 6.0
+        else:  # Opposite extremes can still work
+            personality_score += 3.0
+    
+    # Personality type similarity (0-15 points)
+    a_personality = user_a.get("personality_type")
+    b_personality = user_b.get("personality_type")
+    if a_personality and b_personality:
+        # Same type: 15 points
+        if a_personality == b_personality:
+            personality_score += 15.0
+        else:
+            # Partial matches based on MBTI dimensions
+            a_traits = set(a_personality)
+            b_traits = set(b_personality)
+            shared_traits = len(a_traits & b_traits)
+            # 3.75 points per shared trait
+            personality_score += (shared_traits / 4.0) * 15.0
+    
+    # === 2. VALUES ALIGNMENT (30 points max) ===
+    values_score = 0.0
+    
+    # Connection style match (0-10 points) - CRITICAL
+    a_style = (user_a.get("deal_breakers") or {}).get("connection_style")
+    b_style = (user_b.get("deal_breakers") or {}).get("connection_style")
+    if a_style and b_style:
+        if a_style == b_style:
+            values_score += 10.0
+        elif "balanced" in [a_style, b_style]:
+            values_score += 6.0  # Balanced works with anyone
+        else:
+            values_score += 3.0  # Different but not incompatible
+    
+    # Kids preference match (0-10 points) - DEALBREAKER potential
+    a_kids = (user_a.get("deal_breakers") or {}).get("want_kids")
+    b_kids = (user_b.get("deal_breakers") or {}).get("want_kids")
+    if a_kids and b_kids:
+        if a_kids == b_kids:
+            values_score += 10.0
+        elif "open" in [a_kids, b_kids] or "someday" in [a_kids, b_kids]:
+            values_score += 6.0  # Flexible matches
+        else:
+            values_score += 2.0  # Potential incompatibility
+    
+    # Relationship goals match (0-10 points)
+    a_goals = (user_a.get("deal_breakers") or {}).get("relationship_goals")
+    b_goals = (user_b.get("deal_breakers") or {}).get("relationship_goals")
+    if a_goals and b_goals:
+        if a_goals == b_goals:
+            values_score += 10.0
+        elif "see_where_it_goes" in [a_goals, b_goals]:
+            values_score += 6.0  # Flexible
+        else:
+            values_score += 3.0
+    
+    # === 3. EMOTIONAL RHYTHM (25 points max) ===
+    emotional_score = 0.0
+    
+    # Conflict style compatibility (0-10 points)
+    a_conflict = (user_a.get("preferences") or {}).get("conflict_style")
+    b_conflict = (user_b.get("preferences") or {}).get("conflict_style")
+    if a_conflict and b_conflict:
+        if a_conflict == b_conflict:
+            emotional_score += 10.0
+        elif a_conflict == "talk_it_out" or b_conflict == "talk_it_out":
+            emotional_score += 7.0  # Talk it out works with most styles
+        else:
+            emotional_score += 4.0
+    
+    # Love language compatibility (0-8 points)
+    a_love = (user_a.get("preferences") or {}).get("love_language")
+    b_love = (user_b.get("preferences") or {}).get("love_language")
+    if a_love and b_love:
+        if a_love == b_love:
+            emotional_score += 8.0
+        else:
+            emotional_score += 5.0  # Different love languages can complement
+    
+    # Texting style match (0-7 points)
+    a_text = (user_a.get("preferences") or {}).get("texting_style")
+    b_text = (user_b.get("preferences") or {}).get("texting_style")
+    if a_text and b_text:
+        if a_text == b_text:
+            emotional_score += 7.0
+        elif "balanced" in [a_text, b_text] or "quick_check_ins" in [a_text, b_text]:
+            emotional_score += 5.0
+        else:
+            emotional_score += 3.0
+    
+    # === 4. LIFESTYLE COMPATIBILITY (20 points max) ===
+    lifestyle_score = 0.0
+    
+    # Interests overlap (0-10 points)
+    a_interests = set(user_a.get("interests") or [])
+    b_interests = set(user_b.get("interests") or [])
+    if a_interests and b_interests:
+        overlap = len(a_interests & b_interests)
+        total_unique = len(a_interests | b_interests)
+        if total_unique > 0:
+            overlap_ratio = overlap / min(len(a_interests), len(b_interests))
+            lifestyle_score += min(overlap_ratio * 10.0, 10.0)
+    
+    # Ideal weekend match (0-10 points)
+    a_weekend = (user_a.get("preferences") or {}).get("ideal_weekend")
+    b_weekend = (user_b.get("preferences") or {}).get("ideal_weekend")
+    if a_weekend and b_weekend:
+        if a_weekend == b_weekend:
+            lifestyle_score += 10.0
+        elif "mixed" in [a_weekend, b_weekend]:
+            lifestyle_score += 7.0
+        else:
+            lifestyle_score += 4.0
+    
+    # === CALCULATE FINAL SCORE ===
+    total_score = personality_score + values_score + emotional_score + lifestyle_score
+    
+    # Ensure score is between 0-100
+    final_score = max(0.0, min(100.0, total_score))
+    
+    return round(final_score, 1)
+
+
 # === TRUST SCORE HELPERS ===
 
 def calculate_enhanced_trust_score(user_data: dict) -> float:
