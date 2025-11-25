@@ -292,8 +292,8 @@ export default function Discover({ user }) {
             matches.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-6">✨</div>
-                <h3 className="text-2xl font-light text-white mb-3">No matches yet</h3>
-                <p className="text-white/40">Check back later for more cosmic connections</p>
+                <h3 className="text-2xl font-light mb-3" style={{ color: 'var(--text-primary)' }}>No matches yet</h3>
+                <p style={{ color: 'var(--text-tertiary)' }}>Check back later for more cosmic connections</p>
               </div>
             ) : (
               <div className="space-y-6">
@@ -304,7 +304,10 @@ export default function Discover({ user }) {
                     <div
                       key={match.id}
                       onClick={() => handleProfileClick(match)}
-                      className="flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
+                      className="flex items-center gap-6 p-4 rounded-2xl transition-all cursor-pointer group"
+                      style={{ backgroundColor: 'transparent' }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
                       {/* Profile Photo */}
                       <div
@@ -313,15 +316,15 @@ export default function Discover({ user }) {
                       />
                       {/* Profile Info */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-2xl font-light text-white mb-1">
+                        <h3 className="text-2xl font-light mb-1" style={{ color: 'var(--text-primary)' }}>
                           {match.first_name} {match.last_name || 'Owens'}
                         </h3>
-                        <div className="flex items-center gap-3 text-white/60 text-sm">
+                        <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
                           <span>{compatibility}% Merge Score</span>
                         </div>
                       </div>
                       {/* Arrow Icon */}
-                      <div className="text-white/40 group-hover:text-white/60 transition-colors">
+                      <div className="transition-colors" style={{ color: 'var(--text-tertiary)' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-secondary)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-tertiary)'}>
                         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
                         </svg>
@@ -335,8 +338,8 @@ export default function Discover({ user }) {
             trendingUsers.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-6">⚡</div>
-                <h3 className="text-2xl font-light text-white mb-3">No trending energies yet</h3>
-                <p className="text-white/40">Active and engaged users will appear here</p>
+                <h3 className="text-2xl font-light mb-3" style={{ color: 'var(--text-primary)' }}>No trending energies yet</h3>
+                <p style={{ color: 'var(--text-tertiary)' }}>Active and engaged users will appear here</p>
               </div>
             ) : (
               <div className="space-y-6">
@@ -348,24 +351,27 @@ export default function Discover({ user }) {
                     <div
                       key={match.id}
                       onClick={() => handleProfileClick(match)}
-                      className="relative flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all cursor-pointer group"
+                      className="relative flex items-center gap-6 p-4 rounded-2xl transition-all cursor-pointer group"
+                      style={{ backgroundColor: 'transparent' }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
                       {/* Trending Badge */}
-                      <div className="absolute top-2 right-2 flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30">
-                        <Zap className="w-3 h-3 text-yellow-400" />
-                        <span className="text-xs font-medium text-yellow-400">{energyScore.toFixed(0)}% Energy</span>
+                      <div className="absolute top-2 right-2 flex items-center gap-1 px-3 py-1 rounded-full" style={{ backgroundColor: 'var(--accent-subtle)', border: '1px solid var(--accent-primary)' }}>
+                        <Zap className="w-3 h-3" style={{ color: 'var(--accent-primary)' }} />
+                        <span className="text-xs font-medium" style={{ color: 'var(--accent-primary)' }}>{energyScore.toFixed(0)}% Energy</span>
                       </div>
                       {/* Profile Photo */}
                       <div
-                        className="w-24 h-24 rounded-2xl bg-cover bg-center flex-shrink-0 ring-2 ring-yellow-400/30"
-                        style={{ backgroundImage: `url(${match.photos?.[0] || 'https://via.placeholder.com/200'})` }}
+                        className="w-24 h-24 rounded-2xl bg-cover bg-center flex-shrink-0"
+                        style={{ backgroundImage: `url(${match.photos?.[0] || 'https://via.placeholder.com/200'})`, border: '2px solid var(--accent-primary)', opacity: 0.3 }}
                       />
                       {/* Profile Info */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-2xl font-light text-white mb-1">
+                        <h3 className="text-2xl font-light mb-1" style={{ color: 'var(--text-primary)' }}>
                           {match.first_name} {match.last_name || 'Owens'}
                         </h3>
-                        <div className="flex items-center gap-3 text-white/60 text-sm">
+                        <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
                           <span>{compatibility}% Compatible</span>
                           <span>•</span>
                           <span className="flex items-center gap-1">
