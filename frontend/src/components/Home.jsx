@@ -643,9 +643,9 @@ export default function Home({ user }) {
 
       {/* Header */}
       <div className="flex-shrink-0" style={{ backgroundColor: 'var(--bg-primary)' }}>
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between">
           {/* Merge wordmark */}
-          <MergeLogo size="md" color="var(--text-primary)" />
+          <MergeLogo size="sm" color="var(--text-primary)" />
           
           {/* Messages icon on the right - Elegant design */}
           <button
@@ -655,7 +655,7 @@ export default function Home({ user }) {
           >
             {/* Elegant container */}
             <div 
-              className="relative backdrop-blur-sm rounded-xl p-2.5 transition-all duration-300 group-hover:scale-105"
+              className="relative backdrop-blur-sm rounded-lg p-2 transition-all duration-300 group-hover:scale-105"
               style={{
                 backgroundColor: 'var(--surface-default)',
                 border: '1px solid var(--border-subtle)'
@@ -669,7 +669,7 @@ export default function Home({ user }) {
                 e.currentTarget.style.borderColor = 'var(--border-subtle)';
               }}
             >
-              <MessageCircle className="w-5 h-5 transition-colors" style={{ color: 'var(--text-primary)' }} />
+              <MessageCircle className="w-4 h-4 transition-colors" style={{ color: 'var(--text-primary)' }} />
               
               {/* Elegant notification badge */}
               {unreadCount > 0 && (
