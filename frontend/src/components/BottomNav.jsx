@@ -34,12 +34,12 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        backgroundColor: 'rgba(10, 10, 10, 0.98)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        backgroundColor: 'var(--surface-glass)',
+        backdropFilter: 'var(--blur-md)',
+        WebkitBackdropFilter: 'var(--blur-md)',
+        borderTop: '1px solid var(--border-subtle)',
         paddingBottom: 'env(safe-area-inset-bottom)',
-        boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.3)'
+        boxShadow: 'var(--shadow-md)'
       }}
     >
       <div className="flex items-center justify-around" style={{ padding: '8px 4px' }}>
@@ -54,12 +54,12 @@ export default function BottomNav({ currentTab, navigate }) {
                 minWidth: '56px',
                 padding: '6px',
                 borderRadius: '12px',
-                backgroundColor: isActive ? 'rgba(255, 255, 255, 0.06)' : 'transparent',
+                backgroundColor: isActive ? 'var(--surface-hover)' : 'transparent',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
+                  e.currentTarget.style.backgroundColor = 'var(--surface-default)';
                 }
               }}
               onMouseLeave={(e) => {
@@ -73,7 +73,7 @@ export default function BottomNav({ currentTab, navigate }) {
                 style={{ 
                   width: '20px',
                   height: '20px',
-                  color: isActive ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)',
+                  color: isActive ? 'var(--text-primary)' : 'var(--text-tertiary)',
                   strokeWidth: isActive ? 2.5 : 2,
                   transition: 'all 0.2s ease'
                 }} 
