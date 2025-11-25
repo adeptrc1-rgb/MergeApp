@@ -999,9 +999,16 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
     cur = db.users.find({"id": {"$ne": user.id}})
     docs = await cur.to_list(length=100)
     
+    # Get current user data for compatibility calculation
+    current_user_doc = await db.users.find_one({"id": user.id}, {"_id": 0})
+    
     result = []
     for u in docs:
         sign = u.get("zodiac_sign", "Gemini")
+        
+        # Calculate REAL pairwise compatibility
+        compatibility = calculate_pair_compatibility(current_user_doc, u)
+        
         result.append({
             "id": u.get("id"),
             "first_name": u.get("first_name", "Star"),
@@ -1012,8 +1019,8 @@ async def potential_matches(user: User = Depends(get_current_user), force_season
             "birth_date": u.get("birth_date", "1995-01-01"),
             "photos": u.get("photos", ["https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&q=80"]),
             "current_location": u.get("current_location", {"latitude": 34.05, "longitude": -118.24, "city": "Los Angeles"}),
-            # Use compatibility_resonance as the user-level compatibility score
-            "compatibility_score": u.get("avg_match_compatibility", 75.0),
+            # NOW USING REAL COMPATIBILITY CALCULATION
+            "compatibility_score": compatibility,
             "bio": u.get("bio", "Stargazer. Coffee lover."),
             "interests": u.get("interests", ["music", "coffee"]),
             "lifestyle_factors": u.get("lifestyle_factors", {}),
