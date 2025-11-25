@@ -1,30 +1,14 @@
 import React from 'react';
-import { Network, MessageSquare, User } from 'lucide-react';
+import { Search, TrendingUp, Heart, Send, User } from 'lucide-react';
 
-// Custom Home Icon Component (Letter M)
-const MHomeIcon = ({ className, style }) => (
-  <div 
-    className={className}
-    style={{
-      ...style,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontWeight: 'bold',
-      fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
-    }}
-  >
-    M
-  </div>
-);
-
-// Shared Bottom Navigation - Minimal & Modern
+// Shared Bottom Navigation - Premium 5-Tab Layout
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: MHomeIcon, path: '/home' },
-    { id: 'discover', icon: Network, path: '/discover' },
-    { id: 'messages', icon: MessageSquare, path: '/messages' },
-    { id: 'profile', icon: User, path: '/profile' },
+    { id: 'home', icon: Search, label: 'Explore', path: '/home' },
+    { id: 'discover', icon: TrendingUp, label: 'Trending', path: '/discover' },
+    { id: 'likes', icon: Heart, label: 'Likes', path: '/likes' },
+    { id: 'messages', icon: Send, label: 'Messages', path: '/messages' },
+    { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
   ];
   
   return (
