@@ -478,7 +478,7 @@ export default function Profile({ user, logout }) {
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6 relative z-10">
         {/* Clean Header */}
-        <div className="pb-6 border-b border-white/10 mb-4">
+        <div className="pb-6 mb-4">
           {/* Top Bar */}
           <div className="flex items-center justify-between mb-6">
             <MergeLogo size="md" color="#FFFFFF" />
@@ -491,31 +491,52 @@ export default function Profile({ user, logout }) {
           </div>
 
           {/* Profile Summary */}
-          <div
-            className="flex items-start gap-4 p-4 backdrop-blur-premium"
-            style={{
-              backgroundColor: 'rgba(8, 9, 16, 0.68)',
-              borderRadius: '16px',
-              border: '1px solid rgba(148, 163, 184, 0.35)'
-            }}
-          >
-            {/* Avatar Section - Clickable */}
+          <div className="flex items-start gap-4 p-4">
+            {/* Avatar Section with Circular Progress - Clickable */}
             <button
               onClick={() => setShowEditProfile(true)}
-              className="relative group cursor-pointer"
+              className="relative group cursor-pointer flex-shrink-0"
             >
-              <div className="relative">
+              <div className="relative" style={{ width: '96px', height: '96px' }}>
+                {/* Circular Progress Bar (SVG) */}
+                <svg className="absolute inset-0" width="96" height="96" style={{ transform: 'rotate(-90deg)' }}>
+                  {/* Background circle */}
+                  <circle
+                    cx="48"
+                    cy="48"
+                    r="44"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.1)"
+                    strokeWidth="3"
+                  />
+                  {/* Progress circle */}
+                  <circle
+                    cx="48"
+                    cy="48"
+                    r="44"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeDasharray={`${2 * Math.PI * 44}`}
+                    strokeDashoffset={`${2 * Math.PI * 44 * (1 - profileCompletion / 100)}`}
+                    style={{ transition: 'stroke-dashoffset 0.5s ease' }}
+                  />
+                </svg>
+                
+                {/* Profile Photo */}
                 <div
-                  className="w-20 h-20 rounded-full bg-cover bg-center border transition-all group-hover:border-[var(--profile-accent)]"
+                  className="absolute inset-0 m-auto rounded-full bg-cover bg-center"
                   style={{ 
-                    borderColor: 'rgba(255,255,255,0.12)',
+                    width: '80px',
+                    height: '80px',
                     backgroundImage: user.photos?.[0]
                       ? `url(${user.photos[0]})`
                       : 'linear-gradient(135deg, #6A5AE0 0%, #8B5CF6 100%)'
                   }}
                 >
                   {!user.photos?.[0] && (
-                    <div className="w-full h-full flex items-center justify-center text-xl font-light"
+                    <div className="w-full h-full flex items-center justify-center text-xl font-light rounded-full"
                       style={{ color: 'var(--profile-text-primary)' }}
                     >
                       {user.first_name?.[0] || 'U'}
@@ -526,48 +547,40 @@ export default function Profile({ user, logout }) {
                     <span className="text-white text-xs">Edit</span>
                   </div>
                 </div>
+                
+                {/* Online indicator */}
                 <div
-                  className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2"
+                  className="absolute bottom-1 right-1 w-5 h-5 rounded-full border-2"
                   style={{
-                    borderColor: '#0F0B1F',
-                    backgroundColor: 'var(--profile-success)'
+                    borderColor: 'var(--bg-primary)',
+                    backgroundColor: '#4ECDC4'
                   }}
                 />
-                <div
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-medium"
-                  style={{
-                    backgroundColor: 'rgba(106, 90, 224, 0.2)',
-                    borderRadius: '16px',
-                    padding: '2px 8px',
-                    color: 'var(--profile-text-primary)'
-                  }}
-                >
-                  {profileCompletion}% Complete
-                </div>
               </div>
             </button>
 
             {/* Profile Meta - Clickable */}
             <button
               onClick={() => setShowEditProfile(true)}
-              className="flex-1 text-left group"
+              className="flex-1 text-left group pt-2"
             >
-              <h2 className="mb-1" style={{ fontSize: '22px', fontWeight: 600, color: 'var(--profile-text-primary)' }}>
+              <h2 className="mb-1" style={{ fontSize: '24px', fontWeight: 600, color: 'var(--profile-text-primary)' }}>
                 {user.first_name}{age ? `, ${age}` : ''}
               </h2>
-              <p className="mb-2" style={{ fontSize: '17px', color: 'var(--profile-text-secondary)' }}>
+              <p className="mb-2" style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}>
                 {user.job_title || 'Professional'} · {user.industry || 'Technology'}
               </p>
-              <div className="flex items-center gap-1.5" style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}>
+              <div className="flex items-center gap-1.5 mb-2" style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
                 </svg>
                 <span>5 miles away · {user.location || 'New York'}</span>
               </div>
+              <div style={{ fontSize: '12px', color: 'var(--profile-text-tertiary)' }}>
+                Profile {profileCompletion}% Complete
+              </div>
             </button>
           </div>
-
-          {/* Trust Meter (removed for classic layout) */}
         </div>
 
         {/* Quick Action Blocks - 3 horizontal cards */}
