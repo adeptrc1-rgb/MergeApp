@@ -232,258 +232,28 @@ export default function Profile({ user, logout }) {
           0% { transform: translateY(-100%); }
           100% { transform: translateY(100%); }
         }
+        
+        @keyframes scan-line {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100%); }
+        }
 
-        /* Custom scrollbar for settings modal - Cyan theme */
+        /* Custom scrollbar for settings modal - Tech theme */
         .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar {
-          width: 8px;
+          width: 6px;
         }
         
         .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar-track {
-          background: var(--surface-default);
-          border-radius: 4px;
+          background: var(--tech-charcoal);
         }
         
         .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar-thumb {
-          background: #00D9FF;
-          border-radius: 4px;
+          background: var(--tech-silver);
+          border-radius: 0;
         }
         
         .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar-thumb:hover {
-          background: #00C4E6;
-        }
-
-        @keyframes pulseGlow {
-          0%, 100% { 
-            opacity: 1;
-            box-shadow: 0 0 5px var(--tech-glow);
-          }
-          50% { 
-            opacity: 0.6;
-            box-shadow: 0 0 10px var(--tech-glow);
-          }
-        }
-
-        /* Micro-interactions & Animations */
-        .feature-card-enhanced {
-          transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-        }
-
-        .feature-card-enhanced:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(108, 99, 255, 0.15);
-        }
-
-        .feature-card-enhanced:active {
-          transform: translateY(0);
-        }
-
-        /* Progress ring animation */
-        @keyframes progress-ring {
-          from { stroke-dashoffset: 339.292; }
-          to { stroke-dashoffset: 0; }
-        }
-
-        /* Pulse animation for ready state */
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.7; }
-        }
-
-        .pulse-animation {
-          animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* Card hover glow effect */
-        .card-glow {
-          position: relative;
-          overflow: hidden;
-        }
-
-        .card-glow::after {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          pointer-events: none;
-        }
-
-        .card-glow:hover::after {
-          opacity: 1;
-        }
-
-        /* Premium gradient border effect */
-        .premium-border {
-          position: relative;
-          background: rgba(0, 0, 0, 0.8);
-          border-radius: 16px;
-        }
-
-        .premium-border::before {
-          content: '';
-          position: absolute;
-          inset: -1px;
-          border-radius: 17px;
-          padding: 1px;
-          background: linear-gradient(135deg, #6C63FF, #4ECDC4);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-        }
-
-        /* Smooth icon transitions */
-        .icon-transition {
-          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .icon-transition:hover {
-          transform: scale(1.1);
-        }
-
-        /* Completion step animations */
-        .completion-step {
-          opacity: 0;
-          transform: translateX(-10px);
-          animation: slideIn 0.3s ease forwards;
-        }
-
-        .completion-step:nth-child(1) { animation-delay: 0.1s; }
-        .completion-step:nth-child(2) { animation-delay: 0.2s; }
-        .completion-step:nth-child(3) { animation-delay: 0.3s; }
-        .completion-step:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes slideIn {
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        /* Accessibility: Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-          *,
-          *::before,
-          *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
-        }
-
-        /* Quantum Buttons */
-        .quantum-btn {
-          position: relative;
-          background: var(--bg-elevated);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
-          color: white;
-          transition: all 0.3s ease;
-          overflow: hidden;
-        }
-
-        .quantum-btn::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
-          transition: left 0.5s ease;
-        }
-
-        .quantum-btn:hover::before {
-          left: 100%;
-        }
-
-        .btn-glow {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 0;
-          height: 0;
-          background: radial-gradient(circle, var(--tech-glow) 0%, transparent 70%);
-          transition: all 0.3s ease;
-          pointer-events: none;
-        }
-
-        .quantum-btn:hover .btn-glow {
-          width: 200%;
-          height: 200%;
-        }
-
-        /* Neural Navigation */
-        .neural-nav {
-          display: flex;
-          background: var(--bg-surface);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-          border-radius: 16px;
-          padding: 8px;
-          margin: 20px;
-        }
-
-        .nav-item {
-          flex: 1;
-          text-align: center;
-          padding: 12px;
-          border-radius: 12px;
-          transition: all 0.3s ease;
-          position: relative;
-        }
-
-        .nav-item.active {
-          background: rgba(108, 99, 255, 0.1);
-          border: 1px solid rgba(108, 99, 255, 0.3);
-        }
-
-        .nav-indicator {
-          width: 4px;
-          height: 4px;
-          background: var(--tech-glow);
-          border-radius: 50%;
-          margin: 4px auto 0;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .nav-item.active .nav-indicator {
-          opacity: 1;
-          animation: pulseGlow 2s infinite;
-        }
-
-        /* Accessibility: High contrast mode */
-        @media (prefers-contrast: high) {
-          .feature-card-enhanced {
-            border: 2px solid #FFFFFF !important;
-          }
-        }
-
-        /* Enhanced backdrop blur */
-        .backdrop-blur-premium {
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-        }
-
-        /* Shimmer loading effect */
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-
-        .skeleton-loader {
-          background: linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.05) 0%,
-            rgba(255, 255, 255, 0.1) 50%,
-            rgba(255, 255, 255, 0.05) 100%
-          );
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
+          background: var(--tech-bright);
         }
       `}</style>
 
