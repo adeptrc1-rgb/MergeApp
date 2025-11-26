@@ -1062,34 +1062,42 @@ function SettingsModal({ user, onSave, onClose }) {
 
           {/* Control My Visibility */}
           <div className="space-y-3">
-            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control My Visibility</h3>
+            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Control My Visibility</h3>
             
             <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: visibilityMode === 'standard' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: visibilityMode === 'standard' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
+                onMouseEnter={(e) => visibilityMode !== 'standard' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
+                onMouseLeave={(e) => visibilityMode !== 'standard' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
+              >
                 <input
                   type="radio"
                   name="visibility"
                   checked={visibilityMode === 'standard'}
                   onChange={() => setVisibilityMode('standard')}
-                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                  className="mt-0.5 w-4 h-4"
+                  style={{ accentColor: '#00D9FF' }}
                 />
                 <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Standard</div>
-                  <div className="text-white/50 text-xs">Discoverable in card stack</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Standard</div>
+                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Discoverable in card stack</div>
                 </div>
               </label>
               
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: visibilityMode === 'incognito' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: visibilityMode === 'incognito' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
+                onMouseEnter={(e) => visibilityMode !== 'incognito' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
+                onMouseLeave={(e) => visibilityMode !== 'incognito' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
+              >
                 <input
                   type="radio"
                   name="visibility"
                   checked={visibilityMode === 'incognito'}
                   onChange={() => setVisibilityMode('incognito')}
-                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                  className="mt-0.5 w-4 h-4"
+                  style={{ accentColor: '#00D9FF' }}
                 />
                 <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Incognito</div>
-                  <div className="text-white/50 text-xs">Discoverable only by people you Like</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Incognito</div>
+                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Discoverable only by people you Like</div>
                 </div>
               </label>
             </div>
