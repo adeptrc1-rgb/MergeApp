@@ -207,20 +207,30 @@ export default function Profile({ user, logout }) {
       }} />
 
       <style>{`
-        /* Profile Management Design Tokens */
+        /* Tech-Infused Design Tokens */
         :root {
-          --profile-bg: #050709;
-          --profile-card: rgba(15, 17, 32, 0.85);
-          --profile-radius: 12px;
-          --profile-text-primary: #F9FAFB;
-          --profile-text-secondary: #9CA3AF;
-          --profile-accent: #E5E7EB;
-          --profile-success: #4CAF50;
+          --tech-black: #000000;
+          --tech-charcoal: #0A0A0A;
+          --tech-white: #FFFFFF;
+          --tech-silver: #C0C0C0;
+          --tech-bright: #E8E8E8;
+          --tech-glow: rgba(255,255,255,0.1);
+          --tech-divider: #2A2A2A;
         }
 
         /* Scrollbar hiding */
         .fixed.inset-0.overflow-y-auto::-webkit-scrollbar {
           display: none;
+        }
+        
+        @keyframes pulse-tech {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        
+        @keyframes scan-line {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100%); }
         }
 
         /* Custom scrollbar for settings modal - Cyan theme */
