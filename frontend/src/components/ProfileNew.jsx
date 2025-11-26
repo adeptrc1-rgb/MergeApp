@@ -1105,49 +1105,61 @@ function SettingsModal({ user, onSave, onClose }) {
 
           {/* Discovery Settings */}
           <div className="space-y-3">
-            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Discovery</h3>
+            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Discovery</h3>
             
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ backgroundColor: 'var(--surface-default)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
+            >
               <input
                 type="checkbox"
                 checked={discoveryEnabled}
                 onChange={(e) => setDiscoveryEnabled(e.target.checked)}
-                className="w-5 h-5 accent-purple-500"
+                className="w-5 h-5"
+                style={{ accentColor: '#00D9FF' }}
               />
               <div className="flex-1">
-                <div className="text-white text-sm font-medium">Enable Discovery</div>
-                <div className="text-white/50 text-xs">Allow others to find your profile</div>
+                <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Enable Discovery</div>
+                <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Allow others to find your profile</div>
               </div>
             </label>
 
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ backgroundColor: 'var(--surface-default)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
+            >
               <input
                 type="checkbox"
                 checked={showOnMerge}
                 onChange={(e) => setShowOnMerge(e.target.checked)}
-                className="w-5 h-5 accent-purple-500"
+                className="w-5 h-5"
+                style={{ accentColor: '#00D9FF' }}
               />
               <div className="flex-1">
-                <div className="text-white text-sm font-medium">Show me on Merge</div>
-                <div className="text-white/50 text-xs">Control if your profile appears in the stack</div>
+                <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Show me on Merge</div>
+                <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Control if your profile appears in the stack</div>
               </div>
             </label>
           </div>
 
           {/* Messaging Controls */}
           <div className="space-y-3">
-            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control Who Messages You</h3>
+            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Control Who Messages You</h3>
             
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ backgroundColor: 'var(--surface-default)' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
+            >
               <input
                 type="checkbox"
                 checked={photoVerifiedChat}
                 onChange={(e) => setPhotoVerifiedChat(e.target.checked)}
-                className="w-5 h-5 accent-purple-500"
+                className="w-5 h-5"
+                style={{ accentColor: '#00D9FF' }}
               />
               <div className="flex-1">
-                <div className="text-white text-sm font-medium">Photo Verified Chat</div>
-                <div className="text-white/50 text-xs">Only receive messages from photo verified members</div>
+                <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Photo Verified Chat</div>
+                <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Only receive messages from photo verified members</div>
               </div>
             </label>
           </div>
