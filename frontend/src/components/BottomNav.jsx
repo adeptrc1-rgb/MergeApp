@@ -39,7 +39,7 @@ export default function BottomNav({ currentTab, navigate }) {
       }}
     >
       <div className="flex items-center justify-around mx-auto" style={{ padding: '4px 12px', height: '52px', maxWidth: '500px' }}>
-        {items.map(({ id, icon: Icon, label, path }) => {
+        {items.map(({ id, icon: Icon, label, path, isCustomIcon }) => {
           const isActive = currentTab === id;
           return (
             <button
@@ -65,13 +65,14 @@ export default function BottomNav({ currentTab, navigate }) {
               <Icon 
                 className="transition-all duration-200" 
                 style={{ 
-                  width: '20px',
-                  height: '20px',
-                  color: isActive ? '#00D9FF' : '#FFFFFF',
-                  strokeWidth: isActive ? 2.5 : 2,
-                  fill: isActive ? '#00D9FF' : 'none',
+                  width: isCustomIcon ? '24px' : '20px',
+                  height: isCustomIcon ? '24px' : '20px',
+                  color: isCustomIcon ? undefined : (isActive ? '#00D9FF' : '#FFFFFF'),
+                  strokeWidth: isCustomIcon ? undefined : (isActive ? 2.5 : 2),
+                  fill: isCustomIcon ? undefined : (isActive ? '#00D9FF' : 'none'),
                   transition: 'all 0.2s ease',
-                  filter: isActive ? 'drop-shadow(0 0 6px rgba(0, 217, 255, 0.5))' : 'none'
+                  filter: isActive ? 'drop-shadow(0 0 6px rgba(0, 217, 255, 0.5))' : (isCustomIcon ? 'brightness(0) invert(1)' : 'none'),
+                  opacity: isCustomIcon && !isActive ? 0.7 : 1
                 }} 
               />
               <span 
