@@ -883,139 +883,125 @@ function SettingsModal({ user, onSave, onClose }) {
 
         {/* Content */}
         <div 
-          className="p-6 space-y-6 max-h-[70vh] overflow-y-auto"
+          className="p-5 space-y-5 max-h-[70vh] overflow-y-auto"
           style={{
             scrollbarWidth: 'thin',
-            scrollbarColor: '#00D9FF var(--surface-default)'
+            scrollbarColor: 'var(--tech-silver) var(--tech-charcoal)'
           }}
         >
           {/* Age Preferences */}
           <div className="space-y-3">
-            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Age Preferences</h3>
-            <div className="space-y-4 p-5 rounded-xl" style={{ border: '1px solid var(--border-subtle)', backgroundColor: 'var(--surface-default)' }}>
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex-1">
-                  <label className="text-sm font-medium block mb-2" style={{ color: 'var(--text-primary)' }}>Min Age</label>
-                  <input
-                    type="number"
-                    min="18"
-                    max="99"
-                    value={ageMin}
-                    onChange={(e) => setAgeMin(Math.max(18, Math.min(99, parseInt(e.target.value) || 18)))}
-                    className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-all"
-                    style={{
-                      backgroundColor: 'var(--surface-hover)',
-                      border: '1px solid var(--border-default)',
-                      color: 'var(--text-primary)'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
-                    onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="text-sm font-medium block mb-2" style={{ color: 'var(--text-primary)' }}>Max Age</label>
-                  <input
-                    type="number"
-                    min="18"
-                    max="99"
-                    value={ageMax}
-                    onChange={(e) => setAgeMax(Math.max(18, Math.min(99, parseInt(e.target.value) || 99)))}
-                    className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-all"
-                    style={{
-                      backgroundColor: 'var(--surface-hover)',
-                      border: '1px solid var(--border-default)',
-                      color: 'var(--text-primary)'
-                    }}
-                    onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
-                    onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
-                  />
-                </div>
+            <h3 style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '2px'
+            }}>
+              AGE_PREFERENCES
+            </h3>
+            <div className="flex gap-3">
+              <div className="flex-1">
+                <label className="text-xs block mb-2" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>MIN</label>
+                <input
+                  type="number"
+                  min="18"
+                  max="99"
+                  value={ageMin}
+                  onChange={(e) => setAgeMin(Math.max(18, Math.min(99, parseInt(e.target.value) || 18)))}
+                  className="w-full px-3 py-2 text-sm focus:outline-none transition-all"
+                  style={{
+                    background: 'var(--tech-black)',
+                    border: '1px solid var(--tech-divider)',
+                    borderRadius: '4px',
+                    color: 'var(--tech-white)',
+                    fontFamily: "'SF Mono', monospace"
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = 'var(--tech-bright)'}
+                  onBlur={(e) => e.target.style.borderColor = 'var(--tech-divider)'}
+                />
               </div>
-              <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                Looking for people aged {ageMin} to {ageMax}
+              <div className="flex-1">
+                <label className="text-xs block mb-2" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>MAX</label>
+                <input
+                  type="number"
+                  min="18"
+                  max="99"
+                  value={ageMax}
+                  onChange={(e) => setAgeMax(Math.max(18, Math.min(99, parseInt(e.target.value) || 99)))}
+                  className="w-full px-3 py-2 text-sm focus:outline-none transition-all"
+                  style={{
+                    background: 'var(--tech-black)',
+                    border: '1px solid var(--tech-divider)',
+                    borderRadius: '4px',
+                    color: 'var(--tech-white)',
+                    fontFamily: "'SF Mono', monospace"
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = 'var(--tech-bright)'}
+                  onBlur={(e) => e.target.style.borderColor = 'var(--tech-divider)'}
+                />
               </div>
+            </div>
+            <div className="text-xs" style={{ color: 'var(--tech-silver)', fontFamily: "'SF Mono', monospace" }}>
+              [{ageMin}-{ageMax}] YEARS
             </div>
           </div>
 
           {/* Distance Preferences */}
           <div className="space-y-3">
-            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Distance Preferences</h3>
-            <div className="space-y-4 p-5 rounded-xl" style={{ border: '1px solid var(--border-subtle)', backgroundColor: 'var(--surface-default)' }}>
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <label className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Maximum Distance</label>
-                  <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ color: '#00D9FF', backgroundColor: 'rgba(0, 217, 255, 0.15)' }}>
-                    {maxDistance} mi
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  value={maxDistance}
-                  onChange={(e) => setMaxDistance(parseInt(e.target.value))}
-                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(to right, #00D9FF 0%, #00D9FF ${maxDistance}%, var(--surface-hover) ${maxDistance}%, var(--surface-hover) 100%)`
-                  }}
-                />
+            <h3 style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '2px'
+            }}>
+              DISTANCE_PREFERENCES
+            </h3>
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-xs" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>
+                  MAXIMUM DISTANCE
+                </label>
+                <span className="text-xs px-2 py-1" style={{ 
+                  color: 'var(--tech-black)', 
+                  background: 'var(--tech-bright)',
+                  fontFamily: "'SF Mono', monospace",
+                  borderRadius: '2px'
+                }}>
+                  {maxDistance} MI
+                </span>
               </div>
-              <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                Show me people within {maxDistance} miles
-              </div>
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value={maxDistance}
+                onChange={(e) => setMaxDistance(parseInt(e.target.value))}
+                className="w-full h-1 appearance-none cursor-pointer"
+                style={{
+                  background: `linear-gradient(to right, var(--tech-bright) 0%, var(--tech-bright) ${maxDistance}%, var(--tech-divider) ${maxDistance}%, var(--tech-divider) 100%)`,
+                  borderRadius: 0
+                }}
+              />
             </div>
           </div>
 
-          {/* Control Who Sees You */}
+          {/* Visibility Mode */}
           <div className="space-y-3">
-            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Control Who Sees You</h3>
+            <h3 style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '2px'
+            }}>
+              VISIBILITY_MODE
+            </h3>
             <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: showMeMode === 'balanced' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: showMeMode === 'balanced' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
-                onMouseEnter={(e) => showMeMode !== 'balanced' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
-                onMouseLeave={(e) => showMeMode !== 'balanced' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
-              >
-                <input
-                  type="radio"
-                  name="showMeMode"
-                  checked={showMeMode === 'balanced'}
-                  onChange={() => setShowMeMode('balanced')}
-                  className="mt-0.5 w-4 h-4"
-                  style={{ accentColor: '#00D9FF' }}
-                />
-                <div className="flex-1">
-                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Balanced Recommendations</div>
-                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Show me to people based on compatibility</div>
-                </div>
-              </label>
-              
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: showMeMode === 'recently_active' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: showMeMode === 'recently_active' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
-                onMouseEnter={(e) => showMeMode !== 'recently_active' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
-                onMouseLeave={(e) => showMeMode !== 'recently_active' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
-              >
-                <input
-                  type="radio"
-                  name="showMeMode"
-                  checked={showMeMode === 'recently_active'}
-                  onChange={() => setShowMeMode('recently_active')}
-                  className="mt-0.5 w-4 h-4"
-                  style={{ accentColor: '#00D9FF' }}
-                />
-                <div className="flex-1">
-                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Recently Active</div>
-                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Prioritize showing me to active users</div>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          {/* Control My Visibility */}
-          <div className="space-y-3">
-            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Control My Visibility</h3>
-            
-            <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: visibilityMode === 'standard' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: visibilityMode === 'standard' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
-                onMouseEnter={(e) => visibilityMode !== 'standard' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
-                onMouseLeave={(e) => visibilityMode !== 'standard' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
+              <label className="flex items-start gap-3 cursor-pointer p-3 transition-all" 
+                style={{ 
+                  border: visibilityMode === 'standard' ? '1px solid var(--tech-bright)' : '1px solid var(--tech-divider)', 
+                  background: visibilityMode === 'standard' ? 'rgba(255,255,255,0.05)' : 'transparent',
+                  borderRadius: '4px'
+                }}
               >
                 <input
                   type="radio"
@@ -1023,17 +1009,24 @@ function SettingsModal({ user, onSave, onClose }) {
                   checked={visibilityMode === 'standard'}
                   onChange={() => setVisibilityMode('standard')}
                   className="mt-0.5 w-4 h-4"
-                  style={{ accentColor: '#00D9FF' }}
+                  style={{ accentColor: 'var(--tech-bright)' }}
                 />
                 <div className="flex-1">
-                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Standard</div>
-                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Discoverable in card stack</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>
+                    STANDARD
+                  </div>
+                  <div className="text-xs" style={{ color: 'var(--tech-silver)', fontFamily: "'SF Mono', monospace" }}>
+                    Discoverable in card stack
+                  </div>
                 </div>
               </label>
               
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: visibilityMode === 'incognito' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: visibilityMode === 'incognito' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
-                onMouseEnter={(e) => visibilityMode !== 'incognito' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
-                onMouseLeave={(e) => visibilityMode !== 'incognito' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
+              <label className="flex items-start gap-3 cursor-pointer p-3 transition-all" 
+                style={{ 
+                  border: visibilityMode === 'incognito' ? '1px solid var(--tech-bright)' : '1px solid var(--tech-divider)', 
+                  background: visibilityMode === 'incognito' ? 'rgba(255,255,255,0.05)' : 'transparent',
+                  borderRadius: '4px'
+                }}
               >
                 <input
                   type="radio"
@@ -1041,11 +1034,15 @@ function SettingsModal({ user, onSave, onClose }) {
                   checked={visibilityMode === 'incognito'}
                   onChange={() => setVisibilityMode('incognito')}
                   className="mt-0.5 w-4 h-4"
-                  style={{ accentColor: '#00D9FF' }}
+                  style={{ accentColor: 'var(--tech-bright)' }}
                 />
                 <div className="flex-1">
-                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Incognito</div>
-                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Discoverable only by people you Like</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>
+                    INCOGNITO
+                  </div>
+                  <div className="text-xs" style={{ color: 'var(--tech-silver)', fontFamily: "'SF Mono', monospace" }}>
+                    Only visible to liked profiles
+                  </div>
                 </div>
               </label>
             </div>
@@ -1053,112 +1050,157 @@ function SettingsModal({ user, onSave, onClose }) {
 
           {/* Discovery Settings */}
           <div className="space-y-3">
-            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Discovery</h3>
+            <h3 style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '2px'
+            }}>
+              DISCOVERY_SETTINGS
+            </h3>
             
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ backgroundColor: 'var(--surface-default)' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
+            <label className="flex items-center gap-3 cursor-pointer p-3 transition-all hover:bg-white/5" 
+              style={{ 
+                border: '1px solid var(--tech-divider)',
+                borderRadius: '4px'
+              }}
             >
               <input
                 type="checkbox"
                 checked={discoveryEnabled}
                 onChange={(e) => setDiscoveryEnabled(e.target.checked)}
-                className="w-5 h-5"
-                style={{ accentColor: '#00D9FF' }}
+                className="w-4 h-4"
+                style={{ accentColor: 'var(--tech-bright)' }}
               />
               <div className="flex-1">
-                <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Enable Discovery</div>
-                <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Allow others to find your profile</div>
+                <div className="text-sm" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>
+                  Enable Discovery
+                </div>
+                <div className="text-xs" style={{ color: 'var(--tech-silver)', fontFamily: "'SF Mono', monospace" }}>
+                  Allow others to find profile
+                </div>
               </div>
             </label>
 
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ backgroundColor: 'var(--surface-default)' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
+            <label className="flex items-center gap-3 cursor-pointer p-3 transition-all hover:bg-white/5" 
+              style={{ 
+                border: '1px solid var(--tech-divider)',
+                borderRadius: '4px'
+              }}
             >
               <input
                 type="checkbox"
                 checked={showOnMerge}
                 onChange={(e) => setShowOnMerge(e.target.checked)}
-                className="w-5 h-5"
-                style={{ accentColor: '#00D9FF' }}
+                className="w-4 h-4"
+                style={{ accentColor: 'var(--tech-bright)' }}
               />
               <div className="flex-1">
-                <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Show me on Merge</div>
-                <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Control if your profile appears in the stack</div>
-              </div>
-            </label>
-          </div>
-
-          {/* Messaging Controls */}
-          <div className="space-y-3">
-            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Control Who Messages You</h3>
-            
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ backgroundColor: 'var(--surface-default)' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-hover)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-default)'}
-            >
-              <input
-                type="checkbox"
-                checked={photoVerifiedChat}
-                onChange={(e) => setPhotoVerifiedChat(e.target.checked)}
-                className="w-5 h-5"
-                style={{ accentColor: '#00D9FF' }}
-              />
-              <div className="flex-1">
-                <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Photo Verified Chat</div>
-                <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Only receive messages from photo verified members</div>
+                <div className="text-sm" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>
+                  Show on Merge
+                </div>
+                <div className="text-xs" style={{ color: 'var(--tech-silver)', fontFamily: "'SF Mono', monospace" }}>
+                  Appear in swipe stack
+                </div>
               </div>
             </label>
           </div>
 
           {/* Chat Settings */}
           <div className="space-y-3">
-            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Chat Settings</h3>
+            <h3 style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '2px'
+            }}>
+              CHAT_PROTOCOLS
+            </h3>
             
-            <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all">
+            <label className="flex items-center gap-3 cursor-pointer p-3 transition-all hover:bg-white/5" 
+              style={{ 
+                border: '1px solid var(--tech-divider)',
+                borderRadius: '4px'
+              }}
+            >
               <input
                 type="checkbox"
                 checked={readReceipts}
                 onChange={(e) => setReadReceipts(e.target.checked)}
-                className="w-5 h-5 accent-purple-500"
+                className="w-4 h-4"
+                style={{ accentColor: 'var(--tech-bright)' }}
               />
               <div className="flex-1">
-                <div className="text-white text-sm font-medium">Read Receipts</div>
-                <div className="text-white/50 text-xs">Let matches know when you've read their messages</div>
+                <div className="text-sm" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>
+                  Read Receipts
+                </div>
+                <div className="text-xs" style={{ color: 'var(--tech-silver)', fontFamily: "'SF Mono', monospace" }}>
+                  Let matches know when read
+                </div>
+              </div>
+            </label>
+
+            <label className="flex items-center gap-3 cursor-pointer p-3 transition-all hover:bg-white/5" 
+              style={{ 
+                border: '1px solid var(--tech-divider)',
+                borderRadius: '4px'
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={photoVerifiedChat}
+                onChange={(e) => setPhotoVerifiedChat(e.target.checked)}
+                className="w-4 h-4"
+                style={{ accentColor: 'var(--tech-bright)' }}
+              />
+              <div className="flex-1">
+                <div className="text-sm" style={{ color: 'var(--tech-white)', fontFamily: "'Inter', sans-serif" }}>
+                  Photo Verified Only
+                </div>
+                <div className="text-xs" style={{ color: 'var(--tech-silver)', fontFamily: "'SF Mono', monospace" }}>
+                  Restrict to verified users
+                </div>
               </div>
             </label>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-6 flex gap-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="p-5 flex gap-3" style={{ borderTop: '1px solid var(--tech-divider)' }}>
           <button
             onClick={onClose}
-            className="flex-1 rounded-xl py-3.5 font-medium transition-all"
+            className="flex-1 py-3 transition-all hover:bg-white/5"
             style={{
-              backgroundColor: 'var(--surface-default)',
-              color: 'var(--text-secondary)',
-              border: '1px solid var(--border-default)'
+              background: 'transparent',
+              color: 'var(--tech-silver)',
+              border: '1px solid var(--tech-divider)',
+              borderRadius: '4px',
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '11px',
+              letterSpacing: '1px'
             }}
             disabled={saving}
-            onMouseEnter={(e) => !saving && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
-            onMouseLeave={(e) => !saving && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
           >
-            Cancel
+            CANCEL
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 rounded-xl py-3.5 font-medium transition-all"
+            className="flex-1 py-3 transition-all"
             style={{
-              backgroundColor: '#00D9FF',
-              color: '#000000'
+              background: 'var(--tech-bright)',
+              color: 'var(--tech-black)',
+              border: 'none',
+              borderRadius: '4px',
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '11px',
+              letterSpacing: '1px',
+              fontWeight: 600
             }}
             disabled={saving}
-            onMouseEnter={(e) => !saving && (e.currentTarget.style.transform = 'scale(1.02)')}
-            onMouseLeave={(e) => !saving && (e.currentTarget.style.transform = 'scale(1)')}
+            onMouseEnter={(e) => !saving && (e.currentTarget.style.background = 'var(--tech-white)')}
+            onMouseLeave={(e) => !saving && (e.currentTarget.style.background = 'var(--tech-bright)')}
           >
-            {saving ? 'Saving...' : 'Save Changes'}
+            {saving ? 'SAVING...' : '[ SAVE ]'}
           </button>
         </div>
       </div>
