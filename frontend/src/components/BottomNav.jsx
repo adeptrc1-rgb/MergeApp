@@ -1,10 +1,30 @@
 import React from 'react';
-import { Search, TrendingUp, Heart, Send, User } from 'lucide-react';
+import { TrendingUp, Heart, Send, User } from 'lucide-react';
+
+// Custom Merge Logo Icon Component
+const MergeLogoIcon = ({ focused, color, size = 20 }) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path
+        d="M8 12C8 14.2091 9.79086 16 12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12Z"
+        fill={focused ? color : "none"}
+        stroke={color}
+        strokeWidth={1.5}
+      />
+      <path
+        d="M12 16V19M12 8V5"
+        stroke={color}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
 
 // Shared Bottom Navigation - Premium 5-Tab Layout
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: Search, label: 'Explore', path: '/home' },
+    { id: 'home', icon: MergeLogoIcon, label: 'Explore', path: '/home', isCustom: true },
     { id: 'discover', icon: TrendingUp, label: 'Trending', path: '/discover' },
     { id: 'likes', icon: Heart, label: 'Likes', path: '/likes' },
     { id: 'messages', icon: Send, label: 'Messages', path: '/messages' },
