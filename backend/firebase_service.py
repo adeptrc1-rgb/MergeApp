@@ -81,7 +81,7 @@ async def send_push_notification(
                     badge="/logo-96.png"
                 ),
                 fcm_options=messaging.WebpushFCMOptions(
-                    link=deep_link if deep_link else "https://datapp-overhaul.preview.emergentagent.com"
+                    link=deep_link if deep_link else "https://merge-datingapp.preview.emergentagent.com"
                 )
             )
         )
@@ -122,7 +122,7 @@ async def send_horoscope_notification(
         fcm_token=fcm_token,
         title=title,
         body=horoscope_message,
-        deep_link="https://datapp-overhaul.preview.emergentagent.com/discover",
+        deep_link="https://merge-datingapp.preview.emergentagent.com/discover",
         data={
             "type": "daily_horoscope",
             "sign": zodiac_sign,

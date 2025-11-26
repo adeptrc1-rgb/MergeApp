@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 
 class RegressionTester:
-    def __init__(self, base_url="https://datapp-overhaul.preview.emergentagent.com"):
+    def __init__(self, base_url="https://merge-datingapp.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_cookies = None
