@@ -376,21 +376,36 @@ export default function Settings({ user, logout }) {
           <HoroscopeNotificationSettings user={user} />
 
           {/* Privacy & Safety */}
-          <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
-            <div className="px-6 py-4 border-b border-white/10">
-              <h2 className="text-lg font-light text-white flex items-center gap-2">
-                <Shield className="w-5 h-5 text-purple-400" />
+          <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-subtle)' }}>
+            <div className="px-6 py-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+              <h2 className="text-lg font-light flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+                <Shield className="w-5 h-5" style={{ color: '#00D9FF' }} />
                 Privacy & Safety
               </h2>
             </div>
             <div className="p-6 space-y-3">
-              <button className="w-full text-left py-3 text-white hover:text-purple-400 transition-colors">
+              <button 
+                className="w-full text-left py-3 transition-colors"
+                style={{ color: 'var(--text-primary)' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#00D9FF'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+              >
                 Block List
               </button>
-              <button className="w-full text-left py-3 text-white hover:text-purple-400 transition-colors border-t border-white/10">
+              <button 
+                className="w-full text-left py-3 transition-colors"
+                style={{ color: 'var(--text-primary)', borderTop: '1px solid var(--border-subtle)' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#00D9FF'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+              >
                 Privacy Policy
               </button>
-              <button className="w-full text-left py-3 text-white hover:text-purple-400 transition-colors border-t border-white/10">
+              <button 
+                className="w-full text-left py-3 transition-colors"
+                style={{ color: 'var(--text-primary)', borderTop: '1px solid var(--border-subtle)' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#00D9FF'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+              >
                 Terms of Service
               </button>
             </div>
@@ -399,7 +414,14 @@ export default function Settings({ user, logout }) {
           {/* Logout Button */}
           <button
             onClick={logout}
-            className="w-full bg-red-500/20 text-red-300 py-4 rounded-xl hover:bg-red-500/30 transition-all border border-red-400/30 flex items-center justify-center gap-2 font-medium"
+            className="w-full py-4 rounded-xl transition-all flex items-center justify-center gap-2 font-medium"
+            style={{
+              backgroundColor: 'rgba(239, 68, 68, 0.15)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              color: 'var(--error)'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.25)'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(239, 68, 68, 0.15)'}
           >
             <LogOut className="w-5 h-5" />
             Logout
@@ -407,8 +429,8 @@ export default function Settings({ user, logout }) {
 
           {/* App Info */}
           <div className="text-center py-4">
-            <p className="text-white/40 text-sm">A Sign v1.0</p>
-            <p className="text-white/40 text-xs mt-1">Your cosmic dating journey</p>
+            <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Merge v1.0</p>
+            <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>Your connection journey</p>
           </div>
         </div>
       </div>
