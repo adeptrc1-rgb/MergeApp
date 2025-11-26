@@ -786,7 +786,7 @@ export default function Profile({ user, logout }) {
   );
 }
 
-// Settings Modal Component
+// Settings Modal Component - Tech Theme
 function SettingsModal({ user, onSave, onClose }) {
   const [showAge, setShowAge] = useState(user.show_age !== false);
   const [showDistance, setShowDistance] = useState(user.show_distance !== false);
@@ -831,24 +831,53 @@ function SettingsModal({ user, onSave, onClose }) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ 
+        background: 'rgba(0, 0, 0, 0.95)',
+        backdropFilter: 'blur(10px)'
+      }}
       onClick={onClose}
     >
       <div 
-        className="relative bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full"
+        className="relative max-w-md w-full"
+        style={{
+          background: 'var(--tech-charcoal)',
+          border: '1px solid var(--tech-divider)',
+          borderRadius: '8px',
+          fontFamily: "'Inter', 'SF Mono', monospace"
+        }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Top accent line */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: '20px',
+          right: '20px',
+          height: '1px',
+          background: 'linear-gradient(90deg, transparent, var(--tech-bright), transparent)'
+        }} />
+
         {/* Header */}
-        <div className="border-b border-white/10 p-6 flex items-center justify-between">
-          <h2 className="text-xl font-light text-white flex items-center gap-2">
-            <Settings className="w-5 h-5" />
-            Settings
-          </h2>
+        <div className="p-5 flex items-center justify-between" style={{ borderBottom: '1px solid var(--tech-divider)' }}>
+          <div style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '11px',
+            color: 'var(--tech-bright)',
+            letterSpacing: '2px'
+          }}>
+            SYSTEM_SETTINGS
+          </div>
           <button
             onClick={onClose}
-            className="text-white/60 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-lg"
+            className="transition-colors"
+            style={{
+              color: 'var(--tech-silver)',
+              fontSize: '18px',
+              padding: '4px'
+            }}
           >
-            <ChevronRight className="w-6 h-6 rotate-90" />
+            ✕
           </button>
         </div>
 
