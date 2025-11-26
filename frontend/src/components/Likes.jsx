@@ -64,7 +64,7 @@ export default function Likes({ user }) {
       {/* Header */}
       <div className="flex-shrink-0 select-none relative z-10" style={{ borderBottom: '1px solid var(--border-subtle)', backgroundColor: 'var(--bg-primary)' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
-          <h2 className="text-3xl font-light mb-1" style={{ color: 'var(--text-primary)' }}>Merge</h2>
+          <MergeLogo size="sm" color="#FFFFFF" />
           <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
             {likes.length} {likes.length === 1 ? 'person' : 'people'} liked you
           </p>
