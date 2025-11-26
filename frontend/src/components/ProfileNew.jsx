@@ -225,6 +225,25 @@ export default function Profile({ user, logout }) {
           display: none;
         }
 
+        /* Custom scrollbar for settings modal - Cyan theme */
+        .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar-track {
+          background: var(--surface-default);
+          border-radius: 4px;
+        }
+        
+        .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar-thumb {
+          background: #00D9FF;
+          border-radius: 4px;
+        }
+        
+        .max-h-\[70vh\].overflow-y-auto::-webkit-scrollbar-thumb:hover {
+          background: #00C4E6;
+        }
+
         @keyframes pulseGlow {
           0%, 100% { 
             opacity: 1;
