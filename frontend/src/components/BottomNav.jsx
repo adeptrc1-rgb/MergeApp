@@ -1,22 +1,10 @@
 import React from 'react';
-import { TrendingUp, Heart, Send, User } from 'lucide-react';
-
-// Custom Logo Component for Home Button
-const MergeLogoIcon = ({ style }) => (
-  <img 
-    src="https://customer-assets.emergentagent.com/job_datapp-overhaul/artifacts/gpvepzd2_logo_transparent.png" 
-    alt="Merge"
-    style={{
-      ...style,
-      objectFit: 'contain'
-    }}
-  />
-);
+import { Search, TrendingUp, Heart, Send, User } from 'lucide-react';
 
 // Shared Bottom Navigation - Premium 5-Tab Layout
 export default function BottomNav({ currentTab, navigate }) {
   const items = [
-    { id: 'home', icon: MergeLogoIcon, label: 'Explore', path: '/home', isCustomIcon: true },
+    { id: 'home', icon: Search, label: 'Explore', path: '/home' },
     { id: 'discover', icon: TrendingUp, label: 'Trending', path: '/discover' },
     { id: 'likes', icon: Heart, label: 'Likes', path: '/likes' },
     { id: 'messages', icon: Send, label: 'Messages', path: '/messages' },
