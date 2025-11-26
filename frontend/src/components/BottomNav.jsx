@@ -81,13 +81,11 @@ export default function BottomNav({ currentTab, navigate }) {
               }}
             >
               {isCustom ? (
-                <div style={{ filter: isActive ? 'drop-shadow(0 0 6px rgba(0, 217, 255, 0.5))' : 'none' }}>
-                  <Icon 
-                    focused={isActive}
-                    color={isActive ? '#00D9FF' : '#FFFFFF'}
-                    size={20}
-                  />
-                </div>
+                <Icon 
+                  focused={isActive}
+                  color={isActive ? '#00D9FF' : '#FFFFFF'}
+                  size={20}
+                />
               ) : (
                 <Icon 
                   className="transition-all duration-200" 
