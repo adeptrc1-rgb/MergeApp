@@ -272,39 +272,53 @@ export default function Settings({ user, logout }) {
           </div>
 
           {/* Dating Preferences */}
-          <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
-            <div className="px-6 py-4 border-b border-white/10">
-              <h2 className="text-lg font-light text-white flex items-center gap-2">
-                <Heart className="w-5 h-5 text-purple-400" />
+          <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-subtle)' }}>
+            <div className="px-6 py-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+              <h2 className="text-lg font-light flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+                <Heart className="w-5 h-5" style={{ color: '#00D9FF' }} />
                 Dating Preferences
               </h2>
             </div>
             <div className="p-6 space-y-6">
               {/* Age Range */}
               <div>
-                <label className="text-white font-light block mb-3">Age Range</label>
+                <label className="font-light block mb-3" style={{ color: 'var(--text-primary)' }}>Age Range</label>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-white/60 text-sm block mb-2">Min Age</label>
+                    <label className="text-sm block mb-2" style={{ color: 'var(--text-secondary)' }}>Min Age</label>
                     <select
                       value={preferences.age_range_min}
                       onChange={(e) => setPreferences({...preferences, age_range_min: parseInt(e.target.value)})}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400 transition-colors"
+                      className="w-full rounded-xl px-4 py-3 focus:outline-none transition-colors"
+                      style={{
+                        backgroundColor: 'var(--surface-hover)',
+                        border: '1px solid var(--border-default)',
+                        color: 'var(--text-primary)'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
+                      onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
                     >
                       {Array.from({length: 32}, (_, i) => i + 18).map(age => (
-                        <option key={age} value={age} className="bg-black">{age}</option>
+                        <option key={age} value={age} style={{ backgroundColor: 'var(--bg-primary)' }}>{age}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="text-white/60 text-sm block mb-2">Max Age</label>
+                    <label className="text-sm block mb-2" style={{ color: 'var(--text-secondary)' }}>Max Age</label>
                     <select
                       value={preferences.age_range_max}
                       onChange={(e) => setPreferences({...preferences, age_range_max: parseInt(e.target.value)})}
-                      className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400 transition-colors"
+                      className="w-full rounded-xl px-4 py-3 focus:outline-none transition-colors"
+                      style={{
+                        backgroundColor: 'var(--surface-hover)',
+                        border: '1px solid var(--border-default)',
+                        color: 'var(--text-primary)'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
+                      onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
                     >
                       {Array.from({length: 32}, (_, i) => i + 18).map(age => (
-                        <option key={age} value={age} className="bg-black">{age}</option>
+                        <option key={age} value={age} style={{ backgroundColor: 'var(--bg-primary)' }}>{age}</option>
                       ))}
                     </select>
                   </div>
@@ -313,24 +327,31 @@ export default function Settings({ user, logout }) {
 
               {/* Distance */}
               <div>
-                <label className="text-white font-light block mb-3 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-purple-400" />
+                <label className="font-light block mb-3 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+                  <MapPin className="w-4 h-4" style={{ color: '#00D9FF' }} />
                   Maximum Distance
                 </label>
                 <select
                   value={preferences.max_distance_miles}
                   onChange={(e) => setPreferences({...preferences, max_distance_miles: parseInt(e.target.value)})}
-                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400 transition-colors"
+                  className="w-full rounded-xl px-4 py-3 focus:outline-none transition-colors"
+                  style={{
+                    backgroundColor: 'var(--surface-hover)',
+                    border: '1px solid var(--border-default)',
+                    color: 'var(--text-primary)'
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
+                  onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
                 >
-                  <option value={3} className="bg-black">Within 3 miles</option>
-                  <option value={6} className="bg-black">Within 6 miles</option>
-                  <option value={16} className="bg-black">Within 16 miles</option>
-                  <option value={31} className="bg-black">Within 31 miles</option>
-                  <option value={62} className="bg-black">Within 62 miles</option>
-                  <option value={155} className="bg-black">Within 155 miles</option>
-                  <option value={311} className="bg-black">Within 311 miles</option>
-                  <option value={621} className="bg-black">Within 621 miles</option>
-                  <option value={3107} className="bg-black">Anywhere</option>
+                  <option value={3} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 3 miles</option>
+                  <option value={6} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 6 miles</option>
+                  <option value={16} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 16 miles</option>
+                  <option value={31} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 31 miles</option>
+                  <option value={62} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 62 miles</option>
+                  <option value={155} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 155 miles</option>
+                  <option value={311} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 311 miles</option>
+                  <option value={621} style={{ backgroundColor: 'var(--bg-primary)' }}>Within 621 miles</option>
+                  <option value={3107} style={{ backgroundColor: 'var(--bg-primary)' }}>Anywhere</option>
                 </select>
               </div>
 
@@ -338,7 +359,13 @@ export default function Settings({ user, logout }) {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-4 rounded-xl hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl font-medium"
+                className="w-full py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                style={{
+                  backgroundColor: '#00D9FF',
+                  color: '#000000'
+                }}
+                onMouseEnter={(e) => !saving && (e.currentTarget.style.transform = 'scale(1.02)')}
+                onMouseLeave={(e) => !saving && (e.currentTarget.style.transform = 'scale(1)')}
               >
                 {saving ? 'Saving...' : 'Save Preferences'}
               </button>
