@@ -1,18 +1,28 @@
 import React from 'react';
 import { TrendingUp, Heart, Send, User } from 'lucide-react';
 
-// Custom Merge Logo Icon Component
+// Custom Merge Logo Icon Component with 20% breathing room
 const MergeLogoIcon = ({ focused, color, size = 20 }) => {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none"
+      style={{ padding: '2px' }}
+    >
+      {/* Center circle with breathing room - adjusted for 20% padding */}
       <path
-        d="M8 12C8 14.2091 9.79086 16 12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12Z"
+        d="M9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12Z"
         fill={focused ? color : "none"}
         stroke={color}
         strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
+      {/* Vertical connector lines - top and bottom */}
       <path
-        d="M12 16V19M12 8V5"
+        d="M12 15V18M12 9V6"
         stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
