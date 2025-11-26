@@ -1020,33 +1020,41 @@ function SettingsModal({ user, onSave, onClose }) {
 
           {/* Control Who Sees You */}
           <div className="space-y-3">
-            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Control Who Sees You</h3>
+            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Control Who Sees You</h3>
             <div className="space-y-2">
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: showMeMode === 'balanced' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: showMeMode === 'balanced' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
+                onMouseEnter={(e) => showMeMode !== 'balanced' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
+                onMouseLeave={(e) => showMeMode !== 'balanced' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
+              >
                 <input
                   type="radio"
                   name="showMeMode"
                   checked={showMeMode === 'balanced'}
                   onChange={() => setShowMeMode('balanced')}
-                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                  className="mt-0.5 w-4 h-4"
+                  style={{ accentColor: '#00D9FF' }}
                 />
                 <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Balanced Recommendations</div>
-                  <div className="text-white/50 text-xs">Show me to people based on compatibility</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Balanced Recommendations</div>
+                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Show me to people based on compatibility</div>
                 </div>
               </label>
               
-              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-all border border-white/10">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all" style={{ border: showMeMode === 'recently_active' ? '1px solid #00D9FF' : '1px solid var(--border-subtle)', backgroundColor: showMeMode === 'recently_active' ? 'rgba(0, 217, 255, 0.05)' : 'var(--surface-default)' }}
+                onMouseEnter={(e) => showMeMode !== 'recently_active' && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
+                onMouseLeave={(e) => showMeMode !== 'recently_active' && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
+              >
                 <input
                   type="radio"
                   name="showMeMode"
                   checked={showMeMode === 'recently_active'}
                   onChange={() => setShowMeMode('recently_active')}
-                  className="mt-0.5 w-4 h-4 accent-purple-500"
+                  className="mt-0.5 w-4 h-4"
+                  style={{ accentColor: '#00D9FF' }}
                 />
                 <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Recently Active</div>
-                  <div className="text-white/50 text-xs">Prioritize showing me to active users</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Recently Active</div>
+                  <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Prioritize showing me to active users</div>
                 </div>
               </label>
             </div>
