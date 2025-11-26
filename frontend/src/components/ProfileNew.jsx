@@ -259,386 +259,502 @@ export default function Profile({ user, logout }) {
 
       {/* Single Scrollable Container */}
       <div className="max-w-4xl mx-auto px-4 py-6 relative z-10">
-        {/* Clean Header */}
-        <div className="pb-6 border-b border-white/10 mb-4">
-          {/* Top Bar */}
-          <div className="flex items-center justify-between mb-6">
-            <MergeLogo size="md" color="#FFFFFF" />
-            <button
-              onClick={() => setShowSettings(true)}
-              className="w-10 h-10 flex items-center justify-center hover:bg-white/5 rounded-full transition-all"
-            >
-              <Settings className="w-5 h-5 text-white/60" />
-            </button>
+        {/* Tech Header */}
+        <div className="flex items-center justify-between mb-8 pb-4" style={{ borderBottom: '1px solid var(--tech-divider)' }}>
+          <div style={{ 
+            fontFamily: "'SF Mono', monospace", 
+            fontSize: '11px', 
+            color: 'var(--tech-silver)',
+            letterSpacing: '2px'
+          }}>
+            SYSTEM_PROFILE
           </div>
-
-          {/* Profile Summary */}
-          <div
-            className="flex items-start gap-4 p-4 backdrop-blur-premium"
-            style={{
-              backgroundColor: 'rgba(8, 9, 16, 0.68)',
-              borderRadius: '16px',
-              border: '1px solid rgba(148, 163, 184, 0.35)'
-            }}
-          >
-            {/* Avatar Section - Clickable */}
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="relative group cursor-pointer"
-            >
-              <div className="relative">
-                <div
-                  className="w-20 h-20 rounded-full bg-cover bg-center border transition-all group-hover:border-[var(--profile-accent)]"
-                  style={{ 
-                    borderColor: 'rgba(255,255,255,0.12)',
-                    backgroundImage: user.photos?.[0]
-                      ? `url(${user.photos[0]})`
-                      : 'linear-gradient(135deg, #6A5AE0 0%, #8B5CF6 100%)'
-                  }}
-                >
-                  {!user.photos?.[0] && (
-                    <div className="w-full h-full flex items-center justify-center text-xl font-light"
-                      style={{ color: 'var(--profile-text-primary)' }}
-                    >
-                      {user.first_name?.[0] || 'U'}
-                    </div>
-                  )}
-                  {/* Edit overlay */}
-                  <div className="absolute inset-0 bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="text-white text-xs">Edit</span>
-                  </div>
-                </div>
-                <div
-                  className="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2"
-                  style={{
-                    borderColor: '#0F0B1F',
-                    backgroundColor: 'var(--profile-success)'
-                  }}
-                />
-                <div
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-medium"
-                  style={{
-                    backgroundColor: 'rgba(106, 90, 224, 0.2)',
-                    borderRadius: '16px',
-                    padding: '2px 8px',
-                    color: 'var(--profile-text-primary)'
-                  }}
-                >
-                  {profileCompletion}% Complete
-                </div>
-              </div>
-            </button>
-
-            {/* Profile Meta - Clickable */}
-            <button
-              onClick={() => setShowEditProfile(true)}
-              className="flex-1 text-left group"
-            >
-              <h2 className="mb-1" style={{ fontSize: '22px', fontWeight: 600, color: 'var(--profile-text-primary)' }}>
-                {user.first_name}{age ? `, ${age}` : ''}
-              </h2>
-              <p className="mb-2" style={{ fontSize: '17px', color: 'var(--profile-text-secondary)' }}>
-                {user.job_title || 'Professional'} · {user.industry || 'Technology'}
-              </p>
-              <div className="flex items-center gap-1.5" style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/>
-                </svg>
-                <span>5 miles away · {user.location || 'New York'}</span>
-              </div>
-            </button>
-          </div>
-
-          {/* Trust Meter (removed for classic layout) */}
-        </div>
-
-        {/* Quick Action Blocks - 3 horizontal cards */}
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          {/* Super Likes */}
-          <button
-            onClick={() => navigate('/store')}
-            className="rounded-xl p-3 transition-all group relative overflow-hidden"
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.16)',
-              boxShadow: 'none'
-            }}
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              background: 'transparent'
-            }} />
-            <div className="flex flex-col items-center text-center relative z-10">
-              <div
-                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
-                  border: '1px solid rgba(148, 163, 184, 0.35)'
-                }}
-              >
-                <Heart className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
-              </div>
-              <div className="text-sm font-semibold" style={{ color: 'var(--profile-text-primary)' }}>Super Likes</div>
-              <div className="text-[11px] mt-0.5" style={{ color: 'var(--profile-text-secondary)' }}>Boost your signal</div>
-              <div
-                className="text-[11px] font-medium px-3 py-1 rounded-full mt-1"
-                style={{
-                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
-                  border: '1px solid rgba(106, 90, 224, 0.4)',
-                  color: 'var(--profile-accent)'
-                }}
-              >
-                Get More
-              </div>
-            </div>
-          </button>
-
-          {/* Merge Pulse */}
-          <button
-            onClick={() => navigate('/store')}
-            className="rounded-xl p-3 transition-all group relative overflow-hidden"
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.16)',
-              boxShadow: 'none'
-            }}
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              background: 'transparent'
-            }} />
-            <div className="flex flex-col items-center text-center relative z-10">
-              <div
-                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
-                  border: '1px solid rgba(148, 163, 184, 0.35)'
-                }}
-              >
-                <Zap className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
-              </div>
-              <div className="text-sm font-semibold" style={{ color: 'var(--profile-text-primary)' }}>Merge Pulse</div>
-              <div className="text-[11px] mt-0.5" style={{ color: 'var(--profile-text-secondary)' }}>Stay visible</div>
-              <div
-                className="text-[11px] font-medium px-3 py-1 rounded-full mt-1"
-                style={{
-                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
-                  border: '1px solid rgba(106, 90, 224, 0.4)',
-                  color: 'var(--profile-accent)'
-                }}
-              >
-                Get More
-              </div>
-            </div>
-          </button>
-
-          {/* Auras */}
-          <button
-            onClick={() => navigate('/store')}
-            className="rounded-xl p-3 transition-all group relative overflow-hidden"
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.16)',
-              boxShadow: 'none'
-            }}
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              background: 'transparent'
-            }} />
-            <div className="flex flex-col items-center text-center relative z-10">
-              <div
-                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
-                  border: '1px solid rgba(148, 163, 184, 0.35)'
-                }}
-              >
-                <Sparkles className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
-              </div>
-              <div className="text-sm font-semibold" style={{ color: 'var(--profile-text-primary)' }}>Auras</div>
-              <div className="text-[11px] mt-0.5" style={{ color: 'var(--profile-text-secondary)' }}>Signature look</div>
-              <div
-                className="text-[11px] font-medium px-3 py-1 rounded-full mt-1"
-                style={{
-                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
-                  border: '1px solid rgba(106, 90, 224, 0.4)',
-                  color: 'var(--profile-accent)'
-                }}
-              >
-                Explore
-              </div>
-            </div>
-          </button>
-        </div>
-
-        {/* Elite Upsell */}
-        <div
-          className="rounded-2xl p-4 mb-4 relative overflow-hidden group transition-all cursor-pointer backdrop-blur-premium"
-          style={{
-            backgroundColor: 'rgba(8, 9, 16, 0.78)',
-            border: '1px solid rgba(148, 163, 184, 0.45)',
-            boxShadow: '0 18px 45px rgba(0, 0, 0, 0.65)'
-          }}
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-            <div
-              className="w-full h-full"
-              style={{
-                background:
-                  'radial-gradient(circle at top right, rgba(148, 163, 184, 0.55) 0%, transparent 65%)'
-              }}
-            />
-          </div>
-          <div className="relative z-10 flex items-center justify-between gap-3 flex-wrap">
-            <div>
-              <div
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold mb-2"
-                style={{
-                  background:
-                    'linear-gradient(135deg, rgba(106, 90, 224, 0.16) 0%, rgba(139, 92, 246, 0.32) 100%)',
-                  color: '#E5E7EB',
-                  border: '1px solid rgba(129, 140, 248, 0.5)'
-                }}
-              >
-                <Star className="w-3 h-3" />
-                MERGE ELITE
-              </div>
-              <h4
-                className="mb-1.5"
-                style={{ fontSize: '15px', fontWeight: 600, color: 'var(--profile-text-primary)' }}
-              >
-                Priority, polish, and deeper insights
-              </h4>
-              <p
-                style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}
-              >
-                Stand out in the stack, unlock advanced filters, and see richer compatibility insights.
-              </p>
-            </div>
-            <button
-              className="text-sm font-medium"
-              style={{
-                borderRadius: '999px',
-                padding: '8px 18px',
-                background:
-                  'linear-gradient(135deg, rgba(106, 90, 224, 0.9) 0%, rgba(139, 92, 246, 1) 100%)',
-                color: '#F9FAFB',
-                boxShadow: '0 10px 25px rgba(129, 140, 248, 0.55)'
-              }}
-            >
-              Upgrade to Elite
-            </button>
-          </div>
-        </div>
-
-        {/* Merge Features */}
-        <div className="space-y-3 mb-6">
-          {/* Merge Wheel */}
-          <button
-            onClick={() => setShowConnectionMatrix(true)}
-            className="w-full flex items-center gap-4 p-4"
-            style={{
-              backgroundColor: 'var(--profile-card)',
-              borderRadius: '12px'
-            }}
-          >
-            <div
-              className="flex items-center justify-center"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
-            >
-              <Zap className="w-6 h-6" style={{ color: '#00D9FF' }} />
-            </div>
-            <div className="flex-1 text-left">
-              <h3
-                className="mb-0.5"
-                style={{ fontSize: '17px', fontWeight: 500, color: 'var(--profile-text-primary)' }}
-              >
-                Merge Wheel
-              </h3>
-              <p
-                style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
-              >
-                {canSpin ? 'Your daily spin is ready.' : 'Come back later for new rewards.'}
-              </p>
-            </div>
-            <ChevronRight className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
-          </button>
-
-          {/* Profile Energy */}
-          <div
-            className="flex items-center gap-4 p-4"
-            style={{
-              backgroundColor: 'var(--profile-card)',
-              borderRadius: '12px'
-            }}
-          >
-            <div
-              className="flex items-center justify-center"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
-            >
-              <Sparkles className="w-6 h-6" style={{ color: '#00D9FF' }} />
-            </div>
-            <div className="flex-1">
-              <h3
-                className="mb-0.5"
-                style={{ fontSize: '17px', fontWeight: 500, color: 'var(--profile-text-primary)' }}
-              >
-                Profile Energy
-              </h3>
-              <p
-                className="mb-2"
-                style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
-              >
-                Your profile is radiating positive energy.
-              </p>
-              <div className="flex gap-1.5">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#4ECDC4' }} />
-                <div className="w-2 h-2 rounded-full bg-white/10" />
-                <div className="w-2 h-2 rounded-full bg-white/10" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Account Actions */}
-        <div className="space-y-2">
           <button
             onClick={() => setShowSettings(true)}
-            className="w-full flex items-center justify-between p-4"
-            style={{ backgroundColor: 'var(--profile-card)', borderRadius: '12px' }}
+            className="flex items-center gap-2 px-3 py-1.5 transition-all hover:bg-white/5"
+            style={{
+              border: '1px solid var(--tech-divider)',
+              borderRadius: '4px',
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-bright)',
+              letterSpacing: '1px'
+            }}
           >
-            <div className="flex items-center gap-3">
-              <Settings className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
-              <span style={{ fontSize: '17px', color: 'var(--profile-text-primary)' }}>Settings & Preferences</span>
+            <Settings className="w-4 h-4" />
+            EDIT
+          </button>
+        </div>
+
+        {/* Profile Summary - Tech Card */}
+        <div
+          className="relative mb-6 p-5"
+          style={{
+            background: 'var(--tech-charcoal)',
+            border: '1px solid var(--tech-divider)',
+            borderRadius: '8px',
+            boxShadow: '0 0 20px var(--tech-glow)'
+          }}
+        >
+          {/* Top accent line */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, var(--tech-bright), transparent)'
+          }} />
+
+          <div className="flex items-start gap-5">
+            {/* Hexagonal Avatar */}
+            <button
+              onClick={() => setShowEditProfile(true)}
+              className="relative group cursor-pointer flex-shrink-0"
+            >
+              <div 
+                className="w-24 h-24 rounded-full bg-cover bg-center transition-all relative overflow-hidden"
+                style={{ 
+                  border: '2px solid var(--tech-divider)',
+                  backgroundImage: user.photos?.[0]
+                    ? `url(${user.photos[0]})`
+                    : 'linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%)',
+                  boxShadow: '0 0 15px var(--tech-glow)'
+                }}
+              >
+                {!user.photos?.[0] && (
+                  <div className="w-full h-full flex items-center justify-center text-2xl font-light"
+                    style={{ color: 'var(--tech-white)', fontFamily: "'SF Mono', monospace" }}
+                  >
+                    {user.first_name?.[0] || 'U'}
+                  </div>
+                )}
+                {/* Data matrix overlay */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  border: '1px solid var(--tech-bright)',
+                  borderRadius: '50%',
+                  opacity: 0,
+                  transition: 'opacity 0.3s'
+                }} className="group-hover:opacity-100" />
+              </div>
+              {/* Online indicator */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 2,
+                  right: 2,
+                  width: '12px',
+                  height: '12px',
+                  background: 'var(--tech-bright)',
+                  border: '2px solid var(--tech-black)',
+                  borderRadius: '50%',
+                  animation: 'pulse-tech 2s infinite'
+                }}
+              />
+            </button>
+
+            {/* Profile Meta */}
+            <div className="flex-1">
+              <h2 style={{ 
+                fontSize: '28px', 
+                fontWeight: 700, 
+                color: 'var(--tech-white)',
+                marginBottom: '4px',
+                fontFamily: "'Inter', sans-serif",
+                letterSpacing: '-0.5px'
+              }}>
+                {user.first_name?.toUpperCase()}{age ? `, ${age}` : ''}
+              </h2>
+              <p style={{ 
+                fontSize: '14px', 
+                color: 'var(--tech-silver)',
+                marginBottom: '8px',
+                fontFamily: "'SF Mono', monospace"
+              }}>
+                {user.job_title || 'PROFESSIONAL'} · {user.industry || 'TECHNOLOGY'}
+              </p>
+              <div className="flex items-center gap-1.5" style={{ 
+                fontSize: '12px', 
+                color: 'var(--tech-silver)',
+                fontFamily: "'SF Mono', monospace"
+              }}>
+                <span>📍</span>
+                <span>{user.location?.toUpperCase() || 'NEW YORK'} • 2.3KM</span>
+              </div>
             </div>
-            <ChevronRight className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
+          </div>
+        </div>
+
+        {/* Profile Completion - Binary Style */}
+        <div
+          className="mb-6 p-4"
+          style={{
+            background: 'var(--tech-charcoal)',
+            border: '1px solid var(--tech-divider)',
+            borderRadius: '8px'
+          }}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <span style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '11px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '1.5px'
+            }}>
+              PROFILE: {profileCompletion}% OPTIMIZED
+            </span>
+            <span style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '11px',
+              color: 'var(--tech-bright)',
+              letterSpacing: '1px'
+            }}>
+              [{profileCompletion}/100]
+            </span>
+          </div>
+          {/* Binary progress bar */}
+          <div style={{
+            width: '100%',
+            height: '4px',
+            background: 'var(--tech-divider)',
+            position: 'relative',
+            borderRadius: '0'
+          }}>
+            <div style={{
+              width: `${profileCompletion}%`,
+              height: '4px',
+              background: 'var(--tech-bright)',
+              position: 'relative',
+              transition: 'width 0.5s ease'
+            }}>
+              {/* Pulsing cursor at end */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                bottom: 0,
+                width: '2px',
+                background: 'var(--tech-white)',
+                animation: 'pulse-tech 1.5s infinite'
+              }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions - HUD Interface */}
+        <div className="mb-6 space-y-2">
+          <button
+            onClick={() => setShowEditProfile(true)}
+            className="w-full flex items-center gap-3 p-3 transition-all hover:bg-white/5"
+            style={{
+              background: 'var(--tech-charcoal)',
+              border: '1px solid var(--tech-divider)',
+              borderRadius: '8px'
+            }}
+          >
+            <span style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '1px',
+              minWidth: '40px'
+            }}>
+              [001]
+            </span>
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '14px',
+              color: 'var(--tech-white)',
+              fontWeight: 500,
+              flex: 1,
+              textAlign: 'left'
+            }}>
+              EDIT PROFILE
+            </span>
+            <ChevronRight className="w-4 h-4" style={{ color: 'var(--tech-silver)' }} />
           </button>
 
           <button
-            className="w-full flex items-center justify-between p-4"
-            style={{ backgroundColor: 'var(--profile-card)', borderRadius: '12px' }}
-          >
-            <div className="flex items-center gap-3">
-              <Shield className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
-              <span style={{ fontSize: '17px', color: 'var(--profile-text-primary)' }}>Safety & Privacy</span>
-            </div>
-            <ChevronRight className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
-          </button>
-
-          <button 
-            onClick={logout} 
-            className="w-full flex items-center justify-center gap-2 mt-4"
+            onClick={() => navigate('/store')}
+            className="w-full flex items-center gap-3 p-3 transition-all hover:bg-white/5"
             style={{
-              backgroundColor: 'transparent',
-              borderRadius: '16px',
-              padding: '12px 0',
-              color: 'var(--profile-text-secondary)',
-              border: '1px solid rgba(165, 163, 195, 0.4)'
+              background: 'var(--tech-charcoal)',
+              border: '1px solid var(--tech-divider)',
+              borderRadius: '8px'
             }}
           >
-            <LogOut className="w-5 h-5" />
-            <span style={{ fontSize: '15px' }}>Logout</span>
+            <span style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '1px',
+              minWidth: '40px'
+            }}>
+              [002]
+            </span>
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '14px',
+              color: 'var(--tech-white)',
+              fontWeight: 500,
+              flex: 1,
+              textAlign: 'left'
+            }}>
+              PROFILE EFFECTS
+            </span>
+            <ChevronRight className="w-4 h-4" style={{ color: 'var(--tech-silver)' }} />
           </button>
+
+          <button
+            className="w-full flex items-center gap-3 p-3 transition-all hover:bg-white/5"
+            style={{
+              background: 'var(--tech-charcoal)',
+              border: '1px solid var(--tech-divider)',
+              borderRadius: '8px'
+            }}
+          >
+            <span style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '1px',
+              minWidth: '40px'
+            }}>
+              [003]
+            </span>
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '14px',
+              color: 'var(--tech-white)',
+              fontWeight: 500,
+              flex: 1,
+              textAlign: 'left'
+            }}>
+              PREVIEW MODE
+            </span>
+            <ChevronRight className="w-4 h-4" style={{ color: 'var(--tech-silver)' }} />
+          </button>
+
+          <button
+            className="w-full flex items-center gap-3 p-3 transition-all hover:bg-white/5"
+            style={{
+              background: 'var(--tech-charcoal)',
+              border: '1px solid var(--tech-divider)',
+              borderRadius: '8px'
+            }}
+          >
+            <span style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '10px',
+              color: 'var(--tech-silver)',
+              letterSpacing: '1px',
+              minWidth: '40px'
+            }}>
+              [004]
+            </span>
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '14px',
+              color: 'var(--tech-white)',
+              fontWeight: 500,
+              flex: 1,
+              textAlign: 'left'
+            }}>
+              ANALYTICS
+            </span>
+            <ChevronRight className="w-4 h-4" style={{ color: 'var(--tech-silver)' }} />
+          </button>
+        </div>
+
+        {/* Merge Elite - Terminal Style */}
+        <div
+          className="mb-6 p-5 relative overflow-hidden"
+          style={{
+            background: 'var(--tech-charcoal)',
+            border: '1px solid var(--tech-divider)',
+            borderRadius: '8px',
+            boxShadow: '0 0 25px var(--tech-glow)'
+          }}
+        >
+          {/* Top border accent */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: '20px',
+            right: '20px',
+            height: '1px',
+            background: 'var(--tech-bright)'
+          }} />
+          
+          <div style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '12px',
+            color: 'var(--tech-bright)',
+            letterSpacing: '2px',
+            marginBottom: '12px'
+          }}>
+            ╭─ MERGE_ELITE ──────────────────╮
+          </div>
+          
+          <div className="space-y-2 mb-4 pl-3" style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '11px',
+            color: 'var(--tech-silver)',
+            lineHeight: '1.6'
+          }}>
+            <div>│ PRIORITY PROCESSING</div>
+            <div>│ ADVANCED MATCHING ALGORITHMS</div>
+            <div>│ REAL-TIME COMPATIBILITY DATA</div>
+          </div>
+          
+          <div style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '12px',
+            color: 'var(--tech-bright)',
+            letterSpacing: '2px',
+            marginBottom: '16px'
+          }}>
+            ╰────────────────────────────────╯
+          </div>
+          
+          <button
+            className="w-full py-3 transition-all hover:bg-white/10"
+            style={{
+              background: 'var(--tech-black)',
+              border: '1px solid var(--tech-bright)',
+              borderRadius: '4px',
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '11px',
+              color: 'var(--tech-white)',
+              letterSpacing: '2px'
+            }}
+          >
+            [ UPGRADE_NOW ]
+          </button>
+        </div>
+
+        {/* Merge Wheel Feature */}
+        <button
+          onClick={() => setShowConnectionMatrix(true)}
+          className="w-full flex items-center gap-3 p-3 mb-2 transition-all hover:bg-white/5"
+          style={{
+            background: 'var(--tech-charcoal)',
+            border: '1px solid var(--tech-divider)',
+            borderRadius: '8px'
+          }}
+        >
+          <Zap className="w-5 h-5" style={{ color: 'var(--tech-bright)' }} />
+          <div className="flex-1 text-left">
+            <div style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '14px',
+              color: 'var(--tech-white)',
+              fontWeight: 500
+            }}>
+              MERGE WHEEL
+            </div>
+            <div style={{
+              fontFamily: "'SF Mono', monospace",
+              fontSize: '11px',
+              color: 'var(--tech-silver)'
+            }}>
+              {canSpin ? 'READY TO SPIN' : 'COOLDOWN ACTIVE'}
+            </div>
+          </div>
+          <ChevronRight className="w-4 h-4" style={{ color: 'var(--tech-silver)' }} />
+        </button>
+
+        {/* System Settings - Tree Structure */}
+        <div className="mb-6">
+          <div style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '11px',
+            color: 'var(--tech-bright)',
+            letterSpacing: '2px',
+            marginBottom: '12px',
+            paddingLeft: '8px'
+          }}>
+            SYSTEM_PREFERENCES
+          </div>
+          
+          <div className="space-y-2 pl-4" style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '11px',
+            color: 'var(--tech-silver)'
+          }}>
+            <button
+              onClick={() => setShowSettings(true)}
+              className="w-full flex items-center gap-2 py-2 transition-all hover:text-white text-left"
+            >
+              <span>├─</span>
+              <span>ACCOUNT_SETTINGS</span>
+            </button>
+            
+            <button
+              className="w-full flex items-center gap-2 py-2 transition-all hover:text-white text-left"
+            >
+              <span>├─</span>
+              <span>PRIVACY_PROTOCOLS</span>
+            </button>
+            
+            <button
+              className="w-full flex items-center gap-2 py-2 transition-all hover:text-white text-left"
+            >
+              <span>├─</span>
+              <span>NOTIFICATION_SYSTEM</span>
+            </button>
+            
+            <button
+              className="w-full flex items-center gap-2 py-2 transition-all hover:text-white text-left"
+            >
+              <span>└─</span>
+              <span>INTERFACE_THEME</span>
+            </button>
+          </div>
+        </div>
+
+        {/* System Support - Tree Structure */}
+        <div className="mb-6">
+          <div style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '11px',
+            color: 'var(--tech-bright)',
+            letterSpacing: '2px',
+            marginBottom: '12px',
+            paddingLeft: '8px'
+          }}>
+            SYSTEM_SUPPORT
+          </div>
+          
+          <div className="space-y-2 pl-4 mb-6" style={{
+            fontFamily: "'SF Mono', monospace",
+            fontSize: '11px',
+            color: 'var(--tech-silver)'
+          }}>
+            <button
+              className="w-full flex items-center gap-2 py-2 transition-all hover:text-white text-left"
+            >
+              <span>├─</span>
+              <span>HELP_DATABASE</span>
+            </button>
+            
+            <button
+              className="w-full flex items-center gap-2 py-2 transition-all hover:text-white text-left"
+            >
+              <span>├─</span>
+              <span>INVITE_NETWORK</span>
+            </button>
+            
+            <button
+              onClick={logout}
+              className="w-full flex items-center gap-2 py-2 transition-all hover:text-white text-left"
+            >
+              <span>└─</span>
+              <span>LOGOUT_SYSTEM</span>
+            </button>
+          </div>
         </div>
       </div>
 
