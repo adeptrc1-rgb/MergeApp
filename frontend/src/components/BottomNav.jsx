@@ -1,35 +1,22 @@
 import React from 'react';
 import { TrendingUp, Heart, Send, User } from 'lucide-react';
 
-// Custom Merge Logo Icon Component - Based on actual logo design
+// Custom Merge Logo Icon Component - Using actual logo image
 const MergeLogoIcon = ({ focused, color, size = 20 }) => {
   return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 24 24" 
-      fill="none"
-    >
-      {/* Two interlocking circles forming infinity/merge symbol */}
-      {/* Left circle */}
-      <circle
-        cx="9"
-        cy="12"
-        r="3.5"
-        fill={focused ? color : "none"}
-        stroke={color}
-        strokeWidth={1.5}
-      />
-      {/* Right circle */}
-      <circle
-        cx="15"
-        cy="12"
-        r="3.5"
-        fill={focused ? color : "none"}
-        stroke={color}
-        strokeWidth={1.5}
-      />
-    </svg>
+    <img 
+      src="https://customer-assets.emergentagent.com/job_datapp-overhaul/artifacts/5arika4k_1b67058b-c8b7-4c56-94c3-dbae55e7728c.png"
+      alt="Merge"
+      style={{
+        width: size,
+        height: size,
+        objectFit: 'contain',
+        filter: focused 
+          ? 'brightness(0) saturate(100%) invert(71%) sepia(73%) saturate(2234%) hue-rotate(166deg) brightness(102%) contrast(101%)' // Cyan filter
+          : 'brightness(0) invert(1)', // White filter
+        transition: 'all 0.2s ease'
+      }}
+    />
   );
 };
 
