@@ -796,108 +796,55 @@ export default function Profile({ user, logout }) {
             See All Features
           </button>
         </div>
-        <div
-          className="rounded-2xl p-4 mb-4 relative overflow-hidden group transition-all cursor-pointer backdrop-blur-premium"
-          style={{
-            backgroundColor: 'rgba(8, 9, 16, 0.78)',
-            border: '1px solid rgba(148, 163, 184, 0.45)',
-            boxShadow: '0 18px 45px rgba(0, 0, 0, 0.65)'
-          }}
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-            <div
-              className="w-full h-full"
-              style={{
-                background:
-                  'radial-gradient(circle at top right, rgba(148, 163, 184, 0.55) 0%, transparent 65%)'
-              }}
-            />
-          </div>
-          <div className="relative z-10 flex items-center justify-between gap-3 flex-wrap">
-            <div>
-              <div
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold mb-2"
-                style={{
-                  background:
-                    'linear-gradient(135deg, rgba(106, 90, 224, 0.16) 0%, rgba(139, 92, 246, 0.32) 100%)',
-                  color: '#E5E7EB',
-                  border: '1px solid rgba(129, 140, 248, 0.5)'
-                }}
-              >
-                <Star className="w-3 h-3" />
-                MERGE ELITE
-              </div>
-              <h4
-                className="mb-1.5"
-                style={{ fontSize: '15px', fontWeight: 600, color: 'var(--profile-text-primary)' }}
-              >
-                Priority, polish, and deeper insights
-              </h4>
-              <p
-                style={{ fontSize: '13px', color: 'var(--profile-text-secondary)' }}
-              >
-                Stand out in the stack, unlock advanced filters, and see richer compatibility insights.
-              </p>
-            </div>
-            <button
-              className="text-sm font-medium"
-              style={{
-                borderRadius: '999px',
-                padding: '8px 18px',
-                background:
-                  'linear-gradient(135deg, rgba(106, 90, 224, 0.9) 0%, rgba(139, 92, 246, 1) 100%)',
-                color: '#F9FAFB',
-                boxShadow: '0 10px 25px rgba(129, 140, 248, 0.55)'
-              }}
-            >
-              Upgrade to Elite
-            </button>
-          </div>
-        </div>
 
-        {/* Merge Features */}
-        <div className="space-y-3 mb-6">
-          {/* Merge Wheel */}
+        {/* Account Actions - Simple List */}
+        <div className="space-y-2 mb-6">
           <button
-            onClick={() => setShowConnectionMatrix(true)}
-            className="w-full flex items-center gap-4 p-4"
+            onClick={() => setShowSettings(true)}
+            className="w-full flex items-center justify-between p-4 transition-all hover:bg-white/5"
             style={{
-              backgroundColor: 'var(--profile-card)',
-              borderRadius: '12px'
+              backgroundColor: 'rgba(255,255,255,0.05)',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.1)'
             }}
           >
-            <div
-              className="flex items-center justify-center"
-              style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
-            >
-              <Zap className="w-6 h-6" style={{ color: '#00D9FF' }} />
+            <div className="flex items-center gap-3">
+              <Settings className="w-5 h-5 text-white/60" />
+              <span className="text-white text-sm font-medium">Settings & Preferences</span>
             </div>
-            <div className="flex-1 text-left">
-              <h3
-                className="mb-0.5"
-                style={{ fontSize: '17px', fontWeight: 500, color: 'var(--profile-text-primary)' }}
-              >
-                Merge Wheel
-              </h3>
-              <p
-                style={{ fontSize: '15px', color: 'var(--profile-text-secondary)' }}
-              >
-                {canSpin ? 'Your daily spin is ready.' : 'Come back later for new rewards.'}
-              </p>
-            </div>
-            <ChevronRight className="w-6 h-6" style={{ color: 'var(--profile-text-secondary)' }} />
+            <ChevronRight className="w-5 h-5 text-white/40" />
           </button>
 
-          {/* Profile Energy */}
-          <div
-            className="flex items-center gap-4 p-4"
+          <button
+            className="w-full flex items-center justify-between p-4 transition-all hover:bg-white/5"
             style={{
-              backgroundColor: 'var(--profile-card)',
-              borderRadius: '12px'
+              backgroundColor: 'rgba(255,255,255,0.05)',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.1)'
             }}
           >
-            <div
-              className="flex items-center justify-center"
+            <div className="flex items-center gap-3">
+              <Shield className="w-5 h-5 text-white/60" />
+              <span className="text-white text-sm font-medium">Safety & Privacy</span>
+            </div>
+            <ChevronRight className="w-5 h-5 text-white/40" />
+          </button>
+
+          <button 
+            onClick={logout} 
+            className="w-full flex items-center justify-center gap-2 p-4 mt-4 transition-all hover:bg-white/5"
+            style={{
+              backgroundColor: 'transparent',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: 'white/80'
+            }}
+          >
+            <LogOut className="w-5 h-5" />
+            <span className="text-sm font-medium">Logout</span>
+          </button>
+        </div>
+      </div>
               style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(0,217,255,0.15)' }}
             >
               <Sparkles className="w-6 h-6" style={{ color: '#00D9FF' }} />
