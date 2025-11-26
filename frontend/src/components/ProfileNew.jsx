@@ -943,33 +943,47 @@ function SettingsModal({ user, onSave, onClose }) {
         <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
           {/* Age Preferences */}
           <div className="space-y-3">
-            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Age Preferences</h3>
-            <div className="space-y-4 p-4 rounded-lg border border-white/10 bg-white/5">
+            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Age Preferences</h3>
+            <div className="space-y-4 p-5 rounded-xl" style={{ border: '1px solid var(--border-subtle)', backgroundColor: 'var(--surface-default)' }}>
               <div className="flex items-center justify-between gap-4">
                 <div className="flex-1">
-                  <label className="text-white text-sm font-medium">Min Age</label>
+                  <label className="text-sm font-medium block mb-2" style={{ color: 'var(--text-primary)' }}>Min Age</label>
                   <input
                     type="number"
                     min="18"
                     max="99"
                     value={ageMin}
                     onChange={(e) => setAgeMin(Math.max(18, Math.min(99, parseInt(e.target.value) || 18)))}
-                    className="w-full mt-1 bg-black/40 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                    className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-all"
+                    style={{
+                      backgroundColor: 'var(--surface-hover)',
+                      border: '1px solid var(--border-default)',
+                      color: 'var(--text-primary)'
+                    }}
+                    onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
+                    onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="text-white text-sm font-medium">Max Age</label>
+                  <label className="text-sm font-medium block mb-2" style={{ color: 'var(--text-primary)' }}>Max Age</label>
                   <input
                     type="number"
                     min="18"
                     max="99"
                     value={ageMax}
                     onChange={(e) => setAgeMax(Math.max(18, Math.min(99, parseInt(e.target.value) || 99)))}
-                    className="w-full mt-1 bg-black/40 border border-white/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-500"
+                    className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-all"
+                    style={{
+                      backgroundColor: 'var(--surface-hover)',
+                      border: '1px solid var(--border-default)',
+                      color: 'var(--text-primary)'
+                    }}
+                    onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
+                    onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
                   />
                 </div>
               </div>
-              <div className="text-white/50 text-xs">
+              <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
                 Looking for people aged {ageMin} to {ageMax}
               </div>
             </div>
@@ -977,12 +991,14 @@ function SettingsModal({ user, onSave, onClose }) {
 
           {/* Distance Preferences */}
           <div className="space-y-3">
-            <h3 className="text-white/80 text-sm uppercase tracking-wide font-medium">Distance Preferences</h3>
-            <div className="space-y-3 p-4 rounded-lg border border-white/10 bg-white/5">
+            <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Distance Preferences</h3>
+            <div className="space-y-4 p-5 rounded-xl" style={{ border: '1px solid var(--border-subtle)', backgroundColor: 'var(--surface-default)' }}>
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-white text-sm font-medium">Maximum Distance</label>
-                  <span className="text-purple-400 text-sm font-medium">{maxDistance} mi</span>
+                <div className="flex items-center justify-between mb-3">
+                  <label className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Maximum Distance</label>
+                  <span className="text-sm font-semibold px-3 py-1 rounded-full" style={{ color: '#00D9FF', backgroundColor: 'rgba(0, 217, 255, 0.15)' }}>
+                    {maxDistance} mi
+                  </span>
                 </div>
                 <input
                   type="range"
@@ -990,13 +1006,13 @@ function SettingsModal({ user, onSave, onClose }) {
                   max="100"
                   value={maxDistance}
                   onChange={(e) => setMaxDistance(parseInt(e.target.value))}
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                  className="w-full h-2 rounded-lg appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, #a855f7 0%, #a855f7 ${maxDistance}%, rgba(255,255,255,0.1) ${maxDistance}%, rgba(255,255,255,0.1) 100%)`
+                    background: `linear-gradient(to right, #00D9FF 0%, #00D9FF ${maxDistance}%, var(--surface-hover) ${maxDistance}%, var(--surface-hover) 100%)`
                   }}
                 />
               </div>
-              <div className="text-white/50 text-xs">
+              <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
                 Show me people within {maxDistance} miles
               </div>
             </div>
