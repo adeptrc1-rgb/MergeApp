@@ -126,44 +126,59 @@ function HoroscopeNotificationSettings({ user }) {
   }
 
   return (
-    <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
-      <div className="px-6 py-4 border-b border-white/10">
-        <h2 className="text-lg font-light text-white flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-purple-400" />
+    <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-subtle)' }}>
+      <div className="px-6 py-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+        <h2 className="text-lg font-light flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+          <Sparkles className="w-5 h-5" style={{ color: '#00D9FF' }} />
           Daily Horoscope
         </h2>
       </div>
       <div className="p-6 space-y-4">
         <div className="flex items-center justify-between py-3">
           <div>
-            <p className="text-white font-light">Daily Energy Reading</p>
-            <p className="text-white/40 text-sm">Get personalized horoscope notifications</p>
+            <p className="font-light" style={{ color: 'var(--text-primary)' }}>Daily Energy Reading</p>
+            <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Get personalized horoscope notifications</p>
           </div>
           <button
             onClick={handleToggle}
             disabled={saving}
-            className={`w-12 h-6 rounded-full relative transition-all ${
-              horoscopePrefs.opt_in ? 'bg-purple-500' : 'bg-white/20'
-            } ${saving ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className="w-12 h-6 rounded-full relative transition-all"
+            style={{
+              backgroundColor: horoscopePrefs.opt_in ? '#00D9FF' : 'var(--surface-hover)',
+              opacity: saving ? 0.5 : 1,
+              cursor: saving ? 'not-allowed' : 'pointer'
+            }}
           >
-            <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${
-              horoscopePrefs.opt_in ? 'right-1' : 'left-1'
-            }`}></div>
+            <div 
+              className="absolute top-1 w-4 h-4 rounded-full transition-all"
+              style={{
+                backgroundColor: '#FFFFFF',
+                right: horoscopePrefs.opt_in ? '4px' : 'auto',
+                left: horoscopePrefs.opt_in ? 'auto' : '4px'
+              }}
+            ></div>
           </button>
         </div>
 
         {horoscopePrefs.opt_in && (
           <>
-            <div className="border-t border-white/10 pt-4">
-              <label className="text-white/80 text-sm mb-2 block">Delivery Time</label>
+            <div className="pt-4" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+              <label className="text-sm mb-2 block" style={{ color: 'var(--text-secondary)' }}>Delivery Time</label>
               <input
                 type="time"
                 value={horoscopePrefs.time}
                 onChange={(e) => handleTimeChange(e.target.value)}
-                className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-400 transition-colors"
-                style={{ colorScheme: 'dark' }}
+                className="w-full rounded-xl px-4 py-3 focus:outline-none transition-colors"
+                style={{ 
+                  backgroundColor: 'var(--surface-hover)', 
+                  border: '1px solid var(--border-default)',
+                  color: 'var(--text-primary)',
+                  colorScheme: 'dark' 
+                }}
+                onFocus={(e) => e.target.style.borderColor = '#00D9FF'}
+                onBlur={(e) => e.target.style.borderColor = 'var(--border-default)'}
               />
-              <p className="text-white/40 text-xs mt-2">
+              <p className="text-xs mt-2" style={{ color: 'var(--text-tertiary)' }}>
                 🔮 Receive your cosmic reading at {horoscopePrefs.time} daily
               </p>
             </div>
@@ -171,7 +186,14 @@ function HoroscopeNotificationSettings({ user }) {
             <button
               onClick={handleTestSend}
               disabled={testSending}
-              className="w-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 text-purple-300 py-3 rounded-xl hover:bg-purple-500/30 transition-all disabled:opacity-50 text-sm"
+              className="w-full py-3 rounded-xl transition-all disabled:opacity-50 text-sm"
+              style={{
+                backgroundColor: 'rgba(0, 217, 255, 0.15)',
+                border: '1px solid rgba(0, 217, 255, 0.3)',
+                color: '#00D9FF'
+              }}
+              onMouseEnter={(e) => !testSending && (e.currentTarget.style.backgroundColor = 'rgba(0, 217, 255, 0.25)')}
+              onMouseLeave={(e) => !testSending && (e.currentTarget.style.backgroundColor = 'rgba(0, 217, 255, 0.15)')}
             >
               {testSending ? 'Sending...' : '✨ Send Test Notification'}
             </button>
