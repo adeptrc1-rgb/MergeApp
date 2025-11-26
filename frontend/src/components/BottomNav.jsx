@@ -1,7 +1,7 @@
 import React from 'react';
 import { TrendingUp, Heart, Send, User } from 'lucide-react';
 
-// Custom Merge Logo Icon Component with 20% breathing room
+// Custom Merge Logo Icon Component - Infinity/Figure-8 interlocking design
 const MergeLogoIcon = ({ focused, color, size = 20 }) => {
   return (
     <svg 
@@ -9,23 +9,24 @@ const MergeLogoIcon = ({ focused, color, size = 20 }) => {
       height={size} 
       viewBox="0 0 24 24" 
       fill="none"
-      style={{ padding: '2px' }}
     >
-      {/* Center circle with breathing room - adjusted for 20% padding */}
+      {/* Infinity/Figure-8 interlocking shape - Merge logo */}
       <path
-        d="M9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12Z"
+        d="M7 12C7 9.79086 8.79086 8 11 8C12.3261 8 13.5 8.67157 14.25 9.66667C14.75 10.3333 15.25 10.3333 15.75 9.66667C16.5 8.67157 17.6739 8 19 8C21.2091 8 23 9.79086 23 12C23 14.2091 21.2091 16 19 16C17.6739 16 16.5 15.3284 15.75 14.3333C15.25 13.6667 14.75 13.6667 14.25 14.3333C13.5 15.3284 12.3261 16 11 16C8.79086 16 7 14.2091 7 12Z"
         fill={focused ? color : "none"}
         stroke={color}
         strokeWidth={1.5}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {/* Vertical connector lines - top and bottom */}
+      {/* Small center diamond/connection point */}
       <path
-        d="M12 15V18M12 9V6"
+        d="M14.25 10.5L15 12L14.25 13.5L13.5 12L14.25 10.5Z"
+        fill={focused ? color : "none"}
         stroke={color}
-        strokeWidth={1.5}
+        strokeWidth={1.0}
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
