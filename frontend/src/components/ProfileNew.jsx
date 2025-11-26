@@ -732,122 +732,70 @@ export default function Profile({ user, logout }) {
             display: none;
           }
         `}</style>
-          {/* Super Likes */}
-          <button
-            onClick={() => navigate('/store')}
-            className="rounded-xl p-3 transition-all group relative overflow-hidden"
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.16)',
-              boxShadow: 'none'
-            }}
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              background: 'transparent'
-            }} />
-            <div className="flex flex-col items-center text-center relative z-10">
-              <div
-                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
-                  border: '1px solid rgba(148, 163, 184, 0.35)'
-                }}
-              >
-                <Heart className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
-              </div>
-              <div className="text-sm font-semibold" style={{ color: 'var(--profile-text-primary)' }}>Super Likes</div>
-              <div className="text-[11px] mt-0.5" style={{ color: 'var(--profile-text-secondary)' }}>Boost your signal</div>
-              <div
-                className="text-[11px] font-medium px-3 py-1 rounded-full mt-1"
-                style={{
-                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
-                  border: '1px solid rgba(106, 90, 224, 0.4)',
-                  color: 'var(--profile-accent)'
-                }}
-              >
-                Get More
-              </div>
-            </div>
-          </button>
 
-          {/* Merge Pulse */}
-          <button
-            onClick={() => navigate('/store')}
-            className="rounded-xl p-3 transition-all group relative overflow-hidden"
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.16)',
-              boxShadow: 'none'
-            }}
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              background: 'transparent'
-            }} />
-            <div className="flex flex-col items-center text-center relative z-10">
-              <div
-                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
-                  border: '1px solid rgba(148, 163, 184, 0.35)'
-                }}
-              >
-                <Zap className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
+        {/* Merge Elite - Tinder Platinum Style */}
+        <div
+          className="mb-4 rounded-2xl p-5 relative overflow-hidden"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.1)'
+          }}
+        >
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)' }}>
+                <Star className="w-4 h-4 text-white" fill="white" />
               </div>
-              <div className="text-sm font-semibold" style={{ color: 'var(--profile-text-primary)' }}>Merge Pulse</div>
-              <div className="text-[11px] mt-0.5" style={{ color: 'var(--profile-text-secondary)' }}>Stay visible</div>
-              <div
-                className="text-[11px] font-medium px-3 py-1 rounded-full mt-1"
-                style={{
-                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
-                  border: '1px solid rgba(106, 90, 224, 0.4)',
-                  color: 'var(--profile-accent)'
-                }}
-              >
-                Get More
-              </div>
+              <span className="text-white font-bold text-lg">MERGE ELITE</span>
             </div>
-          </button>
+            <button
+              className="px-5 py-2 rounded-full text-sm font-semibold transition-all"
+              style={{
+                backgroundColor: 'white',
+                color: 'black'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.9)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
+            >
+              Upgrade
+            </button>
+          </div>
 
-          {/* Auras */}
-          <button
-            onClick={() => navigate('/store')}
-            className="rounded-xl p-3 transition-all group relative overflow-hidden"
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.16)',
-              boxShadow: 'none'
-            }}
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
-              background: 'transparent'
-            }} />
-            <div className="flex flex-col items-center text-center relative z-10">
-              <div
-                className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2 group-hover:scale-105 transition-transform"
-                style={{
-                  backgroundColor: 'rgba(15, 23, 42, 0.65)',
-                  border: '1px solid rgba(148, 163, 184, 0.35)'
-                }}
-              >
-                <Sparkles className="w-5 h-5" style={{ color: 'var(--profile-accent)' }} strokeWidth={2} />
+          <div className="mb-4">
+            <h3 className="text-white font-semibold text-base mb-4">What's included</h3>
+            
+            <div className="space-y-3">
+              {/* Feature Row */}
+              <div className="flex items-center justify-between">
+                <span className="text-white/80 text-sm">Priority Matching</span>
+                <div className="flex gap-12">
+                  <Lock className="w-4 h-4 text-white/30" />
+                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                </div>
               </div>
-              <div className="text-sm font-semibold" style={{ color: 'var(--profile-text-primary)' }}>Auras</div>
-              <div className="text-[11px] mt-0.5" style={{ color: 'var(--profile-text-secondary)' }}>Signature look</div>
-              <div
-                className="text-[11px] font-medium px-3 py-1 rounded-full mt-1"
-                style={{
-                  backgroundColor: 'rgba(106, 90, 224, 0.16)',
-                  border: '1px solid rgba(106, 90, 224, 0.4)',
-                  color: 'var(--profile-accent)'
-                }}
-              >
-                Explore
+              
+              <div className="flex items-center justify-between">
+                <span className="text-white/80 text-sm">Message Before Matching</span>
+                <div className="flex gap-12">
+                  <Lock className="w-4 h-4 text-white/30" />
+                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <span className="text-white/80 text-sm">See Who Likes You</span>
+                <div className="flex gap-12">
+                  <Lock className="w-4 h-4 text-white/30" />
+                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                </div>
               </div>
             </div>
+          </div>
+
+          <button className="text-white/60 text-sm hover:text-white/80 transition-colors">
+            See All Features
           </button>
         </div>
-
-        {/* Elite Upsell */}
         <div
           className="rounded-2xl p-4 mb-4 relative overflow-hidden group transition-all cursor-pointer backdrop-blur-premium"
           style={{
