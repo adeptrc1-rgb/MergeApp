@@ -593,8 +593,145 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Quick Action Blocks - 3 horizontal cards */}
-        <div className="grid grid-cols-3 gap-3 mb-4">
+        {/* Merge Wheel Promo Card - Similar to "Try Double Date" */}
+        <button
+          onClick={() => setShowConnectionMatrix(true)}
+          className="w-full flex items-center gap-4 p-4 mb-4 transition-all hover:bg-white/5"
+          style={{
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            borderRadius: '16px',
+            border: '1px solid rgba(255,255,255,0.1)'
+          }}
+        >
+          <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)' }}>
+            <Zap className="w-6 h-6 text-white" />
+          </div>
+          <div className="flex-1 text-left">
+            <h3 className="text-white font-semibold text-base mb-0.5">
+              Try Merge Wheel
+            </h3>
+            <p className="text-white/60 text-sm">
+              {canSpin ? 'Your daily spin is ready.' : 'Spin for rewards and boosts.'}
+            </p>
+          </div>
+          <ChevronRight className="w-5 h-5 text-white/40" />
+        </button>
+
+        {/* Quick Action Cards - Horizontal Scroll (Tinder Style) */}
+        <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content' }}>
+            {/* Super Likes Card */}
+            <div
+              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
+              style={{
+                width: '160px',
+                backgroundColor: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)'
+              }}
+            >
+              <button className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
+                <span className="text-white text-lg">+</span>
+              </button>
+              <div className="mb-3">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #0099CC 100%)' }}>
+                  <Heart className="w-6 h-6 text-white" fill="white" />
+                </div>
+                <div className="text-white font-bold text-lg mb-1">
+                  {user.super_likes || 0} Super Likes
+                </div>
+                <div className="text-white/60 text-xs mb-3">
+                  Boost your signal
+                </div>
+              </div>
+              <button
+                onClick={() => navigate('/store')}
+                className="w-full py-2 rounded-full text-xs font-semibold transition-all"
+                style={{
+                  background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
+                  color: 'white'
+                }}
+              >
+                GET MORE
+              </button>
+            </div>
+
+            {/* My Boosts Card */}
+            <div
+              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
+              style={{
+                width: '160px',
+                backgroundColor: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)'
+              }}
+            >
+              <button className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
+                <span className="text-white text-lg">+</span>
+              </button>
+              <div className="mb-3">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #A855F7 0%, #6C63FF 100%)' }}>
+                  <Zap className="w-6 h-6 text-white" fill="white" />
+                </div>
+                <div className="text-white font-bold text-lg mb-1">
+                  My Boosts
+                </div>
+                <div className="text-white/60 text-xs mb-3">
+                  Stay visible
+                </div>
+              </div>
+              <button
+                onClick={() => navigate('/store')}
+                className="w-full py-2 rounded-full text-xs font-semibold transition-all"
+                style={{
+                  background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
+                  color: 'white'
+                }}
+              >
+                GET MORE
+              </button>
+            </div>
+
+            {/* Auras/Effects Card */}
+            <div
+              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
+              style={{
+                width: '160px',
+                backgroundColor: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)'
+              }}
+            >
+              <button className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
+                <span className="text-white text-lg">+</span>
+              </button>
+              <div className="mb-3">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #EC4899 0%, #F97316 100%)' }}>
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-white font-bold text-lg mb-1">
+                  Auras
+                </div>
+                <div className="text-white/60 text-xs mb-3">
+                  Signature look
+                </div>
+              </div>
+              <button
+                onClick={() => navigate('/store')}
+                className="w-full py-2 rounded-full text-xs font-semibold transition-all"
+                style={{
+                  background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
+                  color: 'white'
+                }}
+              >
+                EXPLORE
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <style jsx>{`
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
           {/* Super Likes */}
           <button
             onClick={() => navigate('/store')}
