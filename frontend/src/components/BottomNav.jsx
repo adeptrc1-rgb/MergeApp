@@ -73,7 +73,7 @@ export default function BottomNav({ currentTab, navigate }) {
                 <Icon 
                   focused={isActive}
                   color={isActive ? '#00D9FF' : '#FFFFFF'}
-                  size={20}
+                  size={24}
                 />
               ) : (
                 <Icon 
