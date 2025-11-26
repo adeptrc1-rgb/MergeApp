@@ -225,26 +225,26 @@ export default function Settings({ user, logout }) {
       <div className="flex-1 overflow-y-auto pb-24">
         <div className="max-w-2xl mx-auto px-6 py-6 space-y-4">
           {/* Account Section */}
-          <div className="bg-white/5 rounded-2xl border border-white/10 overflow-hidden">
-            <div className="px-6 py-4 border-b border-white/10">
-              <h2 className="text-lg font-light text-white flex items-center gap-2">
-                <User className="w-5 h-5 text-purple-400" />
+          <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-subtle)' }}>
+            <div className="px-6 py-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+              <h2 className="text-lg font-light flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+                <User className="w-5 h-5" style={{ color: '#00D9FF' }} />
                 Account
               </h2>
             </div>
             <div className="p-6 space-y-4">
               <div className="flex items-center justify-between py-3">
                 <div>
-                  <p className="text-white font-light">{user?.first_name} {user?.last_name}</p>
-                  <p className="text-white/40 text-sm">{user?.email}</p>
+                  <p className="font-light" style={{ color: 'var(--text-primary)' }}>{user?.first_name} {user?.last_name}</p>
+                  <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>{user?.email}</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between py-3 border-t border-white/10">
+              <div className="flex items-center justify-between py-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                 <div>
-                  <p className="text-white font-light">Zodiac Sign</p>
-                  <p className="text-white/60 text-sm">{user?.zodiac_sign}</p>
+                  <p className="font-light" style={{ color: 'var(--text-primary)' }}>Zodiac Sign</p>
+                  <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{user?.zodiac_sign}</p>
                 </div>
-                <Star className="w-5 h-5 text-purple-400" />
+                <Star className="w-5 h-5" style={{ color: '#00D9FF' }} />
               </div>
             </div>
           </div>
