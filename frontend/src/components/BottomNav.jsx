@@ -2,7 +2,7 @@ import React from 'react';
 import { TrendingUp, Heart, Send, User } from 'lucide-react';
 
 // Custom Merge Logo Icon Component - Using actual logo image
-const MergeLogoIcon = ({ focused, color, size = 20 }) => {
+const MergeLogoIcon = ({ focused, color, size = 24 }) => {
   return (
     <img 
       src="https://customer-assets.emergentagent.com/job_datapp-overhaul/artifacts/5arika4k_1b67058b-c8b7-4c56-94c3-dbae55e7728c.png"
@@ -12,8 +12,8 @@ const MergeLogoIcon = ({ focused, color, size = 20 }) => {
         height: size,
         objectFit: 'contain',
         filter: focused 
-          ? 'brightness(0) saturate(100%) invert(71%) sepia(73%) saturate(2234%) hue-rotate(166deg) brightness(102%) contrast(101%)' // Cyan filter
-          : 'brightness(0) invert(1)', // White filter
+          ? 'brightness(0) saturate(100%) invert(71%) sepia(73%) saturate(2234%) hue-rotate(166deg) brightness(102%) contrast(101%) drop-shadow(0 0 0.5px #00D9FF)' // Cyan filter with slight thickness
+          : 'brightness(0) invert(1) drop-shadow(0 0 0.3px #FFFFFF)', // White filter with slight thickness
         transition: 'all 0.2s ease'
       }}
     />
