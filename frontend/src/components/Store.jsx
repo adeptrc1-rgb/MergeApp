@@ -124,7 +124,7 @@ export default function Store({ user }) {
       <div className="flex-shrink-0 sticky top-0 z-10" style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-light" style={{ color: 'var(--text-primary)' }}>Marketplace</h1>
+            <h1 className="text-3xl font-light" style={{ color: 'var(--text-primary)' }}>Merge</h1>
             <div className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ backgroundColor: 'var(--surface-default)', border: '1px solid var(--border-default)' }}>
               <Star className="w-5 h-5" style={{ color: '#FFD700' }} />
               <span className="text-xl font-medium" style={{ color: 'var(--text-primary)' }}>{inventory.star_coins}</span>
