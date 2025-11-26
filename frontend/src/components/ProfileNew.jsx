@@ -191,22 +191,20 @@ export default function Profile({ user, logout }) {
 
   return (
     <div 
-      className="fixed inset-0 overflow-y-auto pb-24 bg-black" 
+      className="fixed inset-0 overflow-y-auto pb-24" 
       style={{ 
-        scrollbarWidth: 'none', /* Firefox */
-        msOverflowStyle: 'none' /* IE and Edge */
+        background: '#000000',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        fontFamily: "'Inter', 'SF Mono', monospace"
       }}
     >
-      {/* Subtle animated background - matching onboarding */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
-      </div>
-      {/* Subtle animated background - matching onboarding */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(139, 92, 246, 0.15)' }}></div>
-      </div>
+      {/* Tech Grid Background */}
+      <div className="fixed inset-0 pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(#2A2A2A 1px, transparent 1px), linear-gradient(90deg, #2A2A2A 1px, transparent 1px)',
+        backgroundSize: '50px 50px',
+        opacity: 0.3
+      }} />
 
       <style>{`
         /* Profile Management Design Tokens */
