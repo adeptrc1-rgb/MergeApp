@@ -25,7 +25,7 @@ export default function BottomNav({ currentTab, navigate }) {
   const items = [
     { id: 'home', icon: MergeLogoIcon, label: 'Explore', path: '/home', isCustom: true },
     { id: 'discover', icon: TrendingUp, label: 'Trending', path: '/discover' },
-    { id: 'likes', icon: Heart, label: 'Likes', path: '/likes' },
+    { id: 'likes', icon: Heart, label: 'Connections', path: '/likes' },
     { id: 'messages', icon: Send, label: 'Messages', path: '/messages' },
     { id: 'profile', icon: User, label: 'Profile', path: '/profile' },
   ];
