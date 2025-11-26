@@ -1184,20 +1184,33 @@ function SettingsModal({ user, onSave, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="border-t border-white/10 p-6 flex gap-3">
+        <div className="p-6 flex gap-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
           <button
             onClick={onClose}
-            className="flex-1 bg-white/5 text-white/80 hover:bg-white/10 border border-white/10 rounded-xl py-3 font-medium transition-all"
+            className="flex-1 rounded-xl py-3.5 font-medium transition-all"
+            style={{
+              backgroundColor: 'var(--surface-default)',
+              color: 'var(--text-secondary)',
+              border: '1px solid var(--border-default)'
+            }}
             disabled={saving}
+            onMouseEnter={(e) => !saving && (e.currentTarget.style.backgroundColor = 'var(--surface-hover)')}
+            onMouseLeave={(e) => !saving && (e.currentTarget.style.backgroundColor = 'var(--surface-default)')}
           >
             Cancel
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl py-3 font-medium hover:scale-105 transition-all shadow-lg"
+            className="flex-1 rounded-xl py-3.5 font-medium transition-all"
+            style={{
+              backgroundColor: '#00D9FF',
+              color: '#000000'
+            }}
             disabled={saving}
+            onMouseEnter={(e) => !saving && (e.currentTarget.style.transform = 'scale(1.02)')}
+            onMouseLeave={(e) => !saving && (e.currentTarget.style.transform = 'scale(1)')}
           >
-            {saving ? 'Saving...' : 'Save'}
+            {saving ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
       </div>
