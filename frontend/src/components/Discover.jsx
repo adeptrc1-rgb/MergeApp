@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Heart, Info, MapPin, Briefcase, Sparkles, Star, Zap, RotateCcw, Home, Users, MessageCircle } from 'lucide-react';
 import ConstellationIcon from './ConstellationIcon';
 import BottomNav from './BottomNav';
+import MergeLogo from './MergeLogo';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api`;
