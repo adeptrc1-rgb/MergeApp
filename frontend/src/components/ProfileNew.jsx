@@ -940,7 +940,13 @@ function SettingsModal({ user, onSave, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+        <div 
+          className="p-6 space-y-6 max-h-[70vh] overflow-y-auto"
+          style={{
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#00D9FF var(--surface-default)'
+          }}
+        >
           {/* Age Preferences */}
           <div className="space-y-3">
             <h3 className="text-xs uppercase tracking-wider font-semibold" style={{ color: 'var(--text-secondary)', letterSpacing: '1.5px' }}>Age Preferences</h3>
