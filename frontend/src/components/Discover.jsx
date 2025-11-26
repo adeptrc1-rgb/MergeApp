@@ -233,7 +233,7 @@ export default function Discover({ user }) {
               </button>
             </div>
           </div>
-          <h2 className="text-3xl font-light mb-3" style={{ color: 'var(--text-primary)' }}>Discover</h2>
+          <h2 className="text-3xl font-light mb-3" style={{ color: 'var(--text-primary)' }}>Merge</h2>
           {/* Filter Tabs */}
           <div className="flex gap-4">
             <button
