@@ -741,186 +741,193 @@ export default function Profile({ user, logout }) {
               
               {/* Free Tier Card */}
               <div
-                className="flex-shrink-0 rounded-2xl p-5 relative overflow-hidden"
+                className="flex-shrink-0 rounded-2xl p-6 relative overflow-hidden"
                 style={{
                   width: 'calc(100vw - 32px)',
                   maxWidth: '380px',
-                  backgroundColor: 'rgba(255,255,255,0.05)',
+                  backgroundColor: 'rgba(10,10,10,0.8)',
                   border: '1px solid rgba(255,255,255,0.1)'
                 }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
-                      <span className="text-xl">🎯</span>
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-white font-semibold text-xl">Merge Free</h3>
+                    <div className="px-3 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: 'rgba(255,255,255,0.15)', color: 'white' }}>
+                      $0
                     </div>
-                    <span className="text-white font-bold text-lg">FREE TIER</span>
                   </div>
-                  <div className="px-3 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: 'white' }}>
-                    $0
-                  </div>
+                  <p className="text-white/50 text-sm">Basic dating features</p>
                 </div>
-
-                <h3 className="text-white/80 text-sm font-semibold mb-4">Basic Access</h3>
                 
-                <div className="space-y-3 mb-4">
+                <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-white/60 flex-shrink-0 mt-0.5" strokeWidth={2} />
-                    <div>
-                      <div className="text-white text-sm">1 Cosmic Wheel Spin</div>
-                      <div className="text-white/50 text-xs">Per 48 hours</div>
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">1 spin per 48 hours</div>
+                      <div className="text-white/40 text-xs">Access the Cosmic Wheel twice per week</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <div className="w-4 h-4 flex items-center justify-center flex-shrink-0 mt-0.5">⏰</div>
-                    <div>
-                      <div className="text-white text-sm">48h Cooldown</div>
-                      <div className="text-white/50 text-xs">After each spin</div>
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">Standard wheel rewards</div>
+                      <div className="text-white/40 text-xs">Base prizes only</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-white/60 flex-shrink-0 mt-0.5" strokeWidth={2} />
-                    <div>
-                      <div className="text-white text-sm">Standard Rewards</div>
-                      <div className="text-white/50 text-xs">Base wheel prizes</div>
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">No spin stacking</div>
+                      <div className="text-white/40 text-xs">Spins don't accumulate</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <span className="text-white/40 flex-shrink-0 mt-0.5">❌</span>
-                    <div>
-                      <div className="text-white/60 text-sm">No Spin Stacking</div>
-                      <div className="text-white/40 text-xs">Use it or lose it</div>
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">Basic features only</div>
+                      <div className="text-white/40 text-xs">Standard app access</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-white/10">
-                  <div className="text-white/50 text-xs text-center">Swipe to see Elite benefits →</div>
+                <div className="mt-6 pt-4 border-t border-white/10">
+                  <div className="text-white/40 text-xs text-center">Swipe for Elite benefits</div>
                 </div>
               </div>
 
               {/* Elite Tier Card */}
               <div
-                className="flex-shrink-0 rounded-2xl p-5 relative overflow-hidden"
+                className="flex-shrink-0 rounded-2xl p-6 relative overflow-hidden"
                 style={{
                   width: 'calc(100vw - 32px)',
                   maxWidth: '380px',
-                  background: 'linear-gradient(135deg, rgba(0,217,255,0.15) 0%, rgba(108,99,255,0.15) 100%)',
-                  border: '2px solid rgba(0,217,255,0.4)',
-                  boxShadow: '0 0 20px rgba(0,217,255,0.2)'
+                  background: 'linear-gradient(135deg, rgba(0,217,255,0.08) 0%, rgba(108,99,255,0.08) 100%)',
+                  border: '1px solid rgba(0,217,255,0.3)',
+                  boxShadow: '0 0 30px rgba(0,217,255,0.15)'
                 }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)' }}>
-                      <Star className="w-4 h-4 text-white" fill="white" />
-                    </div>
-                    <span className="text-white font-bold text-lg">💎 ELITE</span>
-                  </div>
-                  <button
-                    className="px-4 py-1.5 rounded-full text-sm font-semibold transition-all"
-                    style={{
-                      backgroundColor: 'white',
-                      color: 'black'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.9)'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
-                  >
-                    $9.99/mo
-                  </button>
-                </div>
+                {/* Subtle top accent line */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '20px',
+                  right: '20px',
+                  height: '1px',
+                  background: 'linear-gradient(90deg, transparent, #00D9FF, transparent)'
+                }} />
 
-                <h3 className="text-[#00D9FF] text-sm font-semibold mb-4">Premium Package</h3>
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-white font-semibold text-xl">Merge Elite</h3>
+                    <button
+                      className="px-4 py-1.5 rounded-full text-sm font-bold transition-all"
+                      style={{
+                        backgroundColor: 'white',
+                        color: 'black'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#00D9FF'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
+                    >
+                      $9.99/mo
+                    </button>
+                  </div>
+                  <p className="text-[#00D9FF] text-sm font-medium">Premium experience</p>
+                </div>
                 
-                <div className="space-y-3 mb-4">
+                <div className="space-y-4 mb-5">
                   <div className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <div>
-                      <div className="text-white text-sm font-medium">5 Starting Spins</div>
-                      <div className="text-white/70 text-xs">On subscription</div>
+                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-1" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">5 starting spins</div>
+                      <div className="text-white/60 text-xs">Immediate access upon subscription</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <div className="w-4 h-4 flex items-center justify-center flex-shrink-0 mt-0.5" style={{ color: '#00D9FF' }}>⏰</div>
-                    <div>
-                      <div className="text-white text-sm font-medium">12h Cooldown</div>
-                      <div className="text-[#00D9FF] text-xs font-semibold">4x faster!</div>
+                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-1" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">12-hour cooldown</div>
+                      <div className="text-[#00D9FF] text-xs font-semibold">4x faster than free tier</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <div>
-                      <div className="text-white text-sm font-medium">Stack to 5</div>
-                      <div className="text-white/70 text-xs">Accumulate spins</div>
+                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-1" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">Spins stack up to 5</div>
+                      <div className="text-white/60 text-xs">Build your spin reserve</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <div>
-                      <div className="text-white text-sm font-medium">2x Multiplier</div>
-                      <div className="text-white/70 text-xs">Double rewards</div>
+                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-1" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">2x reward multiplier</div>
+                      <div className="text-white/60 text-xs">Double all prizes from the wheel</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <div>
-                      <div className="text-white text-sm font-medium">+2 Bonus Monthly</div>
-                      <div className="text-white/70 text-xs">Every 30 days</div>
+                    <Check className="w-4 h-4 text-[#00D9FF] flex-shrink-0 mt-1" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium mb-1">+2 bonus spins monthly</div>
+                      <div className="text-white/60 text-xs">Delivered every 30 days</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-white/20 space-y-2">
-                  <div className="text-[#00D9FF] text-xs font-semibold mb-2">MORE BENEFITS</div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="flex items-center gap-1.5">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
-                      <span className="text-white/80 text-xs">Exclusive Auras</span>
+                <div className="pt-4 border-t border-white/10 mb-5">
+                  <div className="text-white/60 text-xs font-medium mb-3">Additional Benefits</div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                      <span className="text-white/80 text-sm">Exclusive Auras</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
-                      <span className="text-white/80 text-xs">See Likes</span>
+                    <div className="flex items-center gap-2">
+                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                      <span className="text-white/80 text-sm">See Who Likes You</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
-                      <span className="text-white/80 text-xs">Priority Boost</span>
+                    <div className="flex items-center gap-2">
+                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                      <span className="text-white/80 text-sm">Priority Profile Placement</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
-                      <span className="text-white/80 text-xs">Unlimited Undo</span>
+                    <div className="flex items-center gap-2">
+                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                      <span className="text-white/80 text-sm">Unlimited Rewinds</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4">
-                  <button
-                    className="w-full py-2.5 rounded-full text-sm font-semibold transition-all"
-                    style={{
-                      background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
-                      color: 'white'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                  >
-                    Upgrade to Elite
-                  </button>
-                </div>
+                <button
+                  className="w-full py-3 rounded-full text-sm font-semibold transition-all"
+                  style={{
+                    background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
+                    color: 'white',
+                    boxShadow: '0 4px 12px rgba(0,217,255,0.3)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,217,255,0.5)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,217,255,0.3)';
+                  }}
+                >
+                  Upgrade to Elite
+                </button>
               </div>
 
             </div>
           </div>
           
           {/* Scroll Indicator Dots */}
-          <div className="flex justify-center gap-2 mt-3">
-            <div className="w-2 h-2 rounded-full transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.3)' }}></div>
-            <div className="w-2 h-2 rounded-full transition-all" style={{ backgroundColor: 'rgba(0,217,255,0.5)' }}></div>
+          <div className="flex justify-center gap-1.5 mt-3">
+            <div className="w-1.5 h-1.5 rounded-full transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}></div>
+            <div className="w-1.5 h-1.5 rounded-full transition-all" style={{ backgroundColor: 'rgba(0,217,255,0.6)' }}></div>
           </div>
         </div>
 
