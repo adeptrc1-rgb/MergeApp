@@ -1577,7 +1577,7 @@ async def spin_cosmic_wheel(user: User = Depends(get_current_user)):
     spins_today += 1
     update_doc = {"spins_today": spins_today}
     if chosen["type"] != "extra_spin":
-        cooldown_hours = 48 if not is_elite else 12  # Free: 48h, Elite: 12h
+        cooldown_hours = 72 if not is_elite else 12  # Free: 72h, Elite: 12h
         update_doc["next_spin_time"] = (now + timedelta(hours=cooldown_hours)).isoformat()
     else:
         update_doc["next_spin_time"] = None
