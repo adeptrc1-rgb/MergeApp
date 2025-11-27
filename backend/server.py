@@ -2818,4 +2818,83 @@ def generate_template_insights(user_a, user_b):
         "cached": False
     }
 
+@api_router.post("/subscription/upgrade-to-elite")
+async def upgrade_to_elite(user: User = Depends(get_current_user)):
+    """
+    Upgrade user to Merge Elite subscription
+    Grants:
+    - 5 starting spins
+    - 12-hour cooldown (instead of 48 hours)
+    - Spins stack up to 5
+    - 2x reward multiplier
+    - +2 bonus spins every 30 days
+    """
+    try:
+        udoc = await db.users.find_one({"id": user.id})
+        if not udoc:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Check if already elite
+        if udoc.get("is_premium"):
+            return {"success": False, "message": "Already subscribed to Merge Elite"}
+        
+        now = now_utc()
+        
+        # Update user to elite status
+        update_data = {
+            "is_premium": True,
+            "elite_subscribed_at": now.isoformat(),
+            "elite_next_bonus_date": (now + timedelta(days=30)).isoformat(),
+            "cosmic_wheel_spins": 5,  # Grant 5 starting spins
+            "next_spin_time": None  # Clear cooldown so they can spin immediately
+        }
+        
+        await db.users.update_one(
+            {"id": user.id},
+            {"$set": update_data}
+        )
+        
+        return {
+            "success": True,
+            "message": "Successfully upgraded to Merge Elite!",
+            "spins_granted": 5
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error upgrading to elite: {e}")
+        raise HTTPException(status_code=500, detail="Failed to upgrade to elite")
+
+@api_router.get("/subscription/status")
+async def get_subscription_status(user: User = Depends(get_current_user)):
+    """
+    Get user's subscription status and benefits
+    """
+    try:
+        udoc = await db.users.find_one({"id": user.id}, {"_id": 0})
+        if not udoc:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        is_elite = udoc.get("is_premium", False)
+        spins = udoc.get("cosmic_wheel_spins", 0)
+        
+        return {
+            "is_elite": is_elite,
+            "subscription_type": "elite" if is_elite else "free",
+            "spins_available": spins,
+            "max_spins": 5 if is_elite else 1,
+            "cooldown_hours": 12 if is_elite else 48,
+            "reward_multiplier": 2 if is_elite else 1,
+            "subscribed_at": udoc.get("elite_subscribed_at"),
+            "next_bonus_date": udoc.get("elite_next_bonus_date")
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error getting subscription status: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get subscription status")
+
+
 app.include_router(api_router)
