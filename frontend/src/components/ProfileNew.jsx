@@ -758,118 +758,187 @@ export default function Profile({ user, logout }) {
           }
         `}</style>
 
-        {/* Merge Elite - Single Card */}
-        <div className="mb-4 px-4">
-          {/* Elite Tier Card - Square */}
-          <div
-            className="rounded-2xl p-6 relative overflow-hidden flex flex-col"
-            style={{
-              width: '100%',
-              aspectRatio: '1/1',
-              maxWidth: '360px',
-              margin: '0 auto',
-              background: 'linear-gradient(135deg, rgba(0,217,255,0.08) 0%, rgba(108,99,255,0.08) 100%)',
-              border: '1px solid rgba(0,217,255,0.3)',
-              boxShadow: '0 0 30px rgba(0,217,255,0.15)'
-            }}
-          >
-            {/* Subtle top accent line */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: '20px',
-              right: '20px',
-              height: '1px',
-              background: 'linear-gradient(90deg, transparent, #00D9FF, transparent)'
-            }} />
-
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-white font-semibold text-xl">Merge Elite</h3>
-              <button
-                onClick={handleUpgradeToElite}
-                disabled={upgrading}
-                className="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+        {/* Merge Elite vs Free - Swipeable Carousel */}
+        <div className="mb-4">
+          {/* Swipeable Container */}
+          <div className="overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <div className="flex gap-3 pb-2 px-4" style={{ minWidth: 'fit-content' }}>
+              
+              {/* Free Tier Card - Square */}
+              <div
+                className="flex-shrink-0 rounded-2xl p-6 relative overflow-hidden flex flex-col"
                 style={{
-                  backgroundColor: upgrading ? 'rgba(255,255,255,0.5)' : 'white',
-                  color: 'black',
-                  cursor: upgrading ? 'not-allowed' : 'pointer'
+                  width: 'calc(100vw - 32px)',
+                  height: 'calc(100vw - 32px)',
+                  maxWidth: '360px',
+                  maxHeight: '360px',
+                  backgroundColor: 'rgba(10,10,10,0.8)',
+                  border: '1px solid rgba(255,255,255,0.1)'
                 }}
-                onMouseEnter={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#00D9FF')}
-                onMouseLeave={(e) => !upgrading && (e.currentTarget.style.backgroundColor = 'white')}
               >
-                {upgrading ? 'Upgrading...' : 'Upgrade'}
-              </button>
-            </div>
-            
-            <div className="space-y-3 flex-1 overflow-y-auto scrollbar-hide-elite" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              <div className="flex items-start gap-2">
-                <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">5 starting spins</div>
+                <div className="mb-4">
+                  <h3 className="text-white font-semibold text-xl mb-2">Merge Free</h3>
+                  <p className="text-white/50 text-sm">Basic dating features</p>
                 </div>
-              </div>
-              
-              <div className="flex items-start gap-2">
-                <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">12-hour cooldown</div>
-                  <div className="text-[#00D9FF] text-xs">4x faster</div>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-2">
-                <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">Stack up to 5</div>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-2">
-                <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">2x multiplier</div>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-2">
-                <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                <div className="flex-1">
-                  <div className="text-white text-sm font-medium">+2 bonus monthly</div>
-                </div>
-              </div>
-
-              {/* Collapsible Benefits Section */}
-              <div className="pt-3 border-t border-white/10">
-                <button
-                  onClick={() => setShowEliteBenefits(!showEliteBenefits)}
-                  className="w-full flex items-center justify-between py-2 transition-colors"
-                >
-                  <span className="text-[#00D9FF] text-xs font-semibold">MORE BENEFITS</span>
-                  <ChevronRight className={`w-4 h-4 text-[#00D9FF] transition-transform ${showEliteBenefits ? 'rotate-90' : ''}`} />
-                </button>
                 
-                {showEliteBenefits && (
-                  <div className="mt-2 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
-                      <span className="text-white/80 text-xs">Exclusive Auras</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
-                      <span className="text-white/80 text-xs">See Who Likes You</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
-                      <span className="text-white/80 text-xs">Priority Placement</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
-                      <span className="text-white/80 text-xs">Unlimited Rewinds</span>
+                <div className="space-y-3 flex-1">
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">1 spin per 48 hours</div>
+                      <div className="text-white/40 text-xs">Cosmic Wheel access twice weekly</div>
                     </div>
                   </div>
-                )}
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">Standard rewards</div>
+                      <div className="text-white/40 text-xs">Base prizes only</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">No spin stacking</div>
+                      <div className="text-white/40 text-xs">Spins don't accumulate</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">Basic features</div>
+                      <div className="text-white/40 text-xs">Standard app access</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-auto pt-4 border-t border-white/10">
+                  <div className="text-white/40 text-xs text-center">Swipe for Elite →</div>
+                </div>
               </div>
+
+              {/* Elite Tier Card - Square with Dropdown */}
+              <div
+                className="flex-shrink-0 rounded-2xl p-6 relative overflow-hidden flex flex-col"
+                style={{
+                  width: 'calc(100vw - 32px)',
+                  height: 'calc(100vw - 32px)',
+                  maxWidth: '360px',
+                  maxHeight: '360px',
+                  background: 'linear-gradient(135deg, rgba(0,217,255,0.08) 0%, rgba(108,99,255,0.08) 100%)',
+                  border: '1px solid rgba(0,217,255,0.3)',
+                  boxShadow: '0 0 30px rgba(0,217,255,0.15)'
+                }}
+              >
+                {/* Subtle top accent line */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: '20px',
+                  right: '20px',
+                  height: '1px',
+                  background: 'linear-gradient(90deg, transparent, #00D9FF, transparent)'
+                }} />
+
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-white font-semibold text-xl">Merge Elite</h3>
+                  <button
+                    onClick={handleUpgradeToElite}
+                    disabled={upgrading}
+                    className="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
+                    style={{
+                      backgroundColor: upgrading ? 'rgba(255,255,255,0.5)' : 'white',
+                      color: 'black',
+                      cursor: upgrading ? 'not-allowed' : 'pointer'
+                    }}
+                    onMouseEnter={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#00D9FF')}
+                    onMouseLeave={(e) => !upgrading && (e.currentTarget.style.backgroundColor = 'white')}
+                  >
+                    {upgrading ? 'Upgrading...' : 'Upgrade'}
+                  </button>
+                </div>
+                
+                <div className="space-y-3 flex-1 overflow-y-auto scrollbar-hide-elite" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">5 starting spins</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">12-hour cooldown</div>
+                      <div className="text-[#00D9FF] text-xs">4x faster</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">Stack up to 5</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">2x multiplier</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <div className="flex-1">
+                      <div className="text-white text-sm font-medium">+2 bonus monthly</div>
+                    </div>
+                  </div>
+
+                  {/* Collapsible Benefits Section */}
+                  <div className="pt-3 border-t border-white/10">
+                    <button
+                      onClick={() => setShowEliteBenefits(!showEliteBenefits)}
+                      className="w-full flex items-center justify-between py-2 transition-colors"
+                    >
+                      <span className="text-[#00D9FF] text-xs font-semibold">MORE BENEFITS</span>
+                      <ChevronRight className={`w-4 h-4 text-[#00D9FF] transition-transform ${showEliteBenefits ? 'rotate-90' : ''}`} />
+                    </button>
+                    
+                    {showEliteBenefits && (
+                      <div className="mt-2 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <span className="text-white/80 text-xs">Exclusive Auras</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <span className="text-white/80 text-xs">See Who Likes You</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <span className="text-white/80 text-xs">Priority Placement</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <span className="text-white/80 text-xs">Unlimited Rewinds</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
             </div>
+          </div>
+          
+          {/* Scroll Indicator Dots */}
+          <div className="flex justify-center gap-1.5 mt-3">
+            <div className="w-1.5 h-1.5 rounded-full transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}></div>
+            <div className="w-1.5 h-1.5 rounded-full transition-all" style={{ backgroundColor: 'rgba(0,217,255,0.6)' }}></div>
           </div>
         </div>
 
