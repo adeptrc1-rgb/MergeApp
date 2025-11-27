@@ -56,7 +56,7 @@ export default function Home({ user }) {
   const [userInventory, setUserInventory] = useState(null);
   const [justSwiped, setJustSwiped] = useState(false);
   
-  // Merge Score breakdown modal state
+  // AMI breakdown modal state
   const [showScoreBreakdown, setShowScoreBreakdown] = useState(false);
   
   // Unread messages state
