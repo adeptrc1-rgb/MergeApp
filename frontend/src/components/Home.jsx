@@ -647,11 +647,11 @@ export default function Home({ user }) {
           {/* Merge wordmark */}
           <MergeLogo size="sm" color="var(--text-primary)" />
           
-          {/* Messages icon on the right - Elegant design */}
+          {/* Merge Pulse icon on the right - Boost profile */}
           <button
-            onClick={() => navigate('/messages')}
+            onClick={handleBoost}
             className="relative group"
-            title="Messages"
+            title="Merge Pulse - Boost Your Profile"
           >
             {/* Elegant container */}
             <div 
@@ -669,17 +669,17 @@ export default function Home({ user }) {
                 e.currentTarget.style.borderColor = 'var(--border-subtle)';
               }}
             >
-              <MessageCircle className="w-4 h-4 transition-colors" style={{ color: 'var(--text-primary)' }} />
+              <Zap className="w-4 h-4 transition-colors" style={{ color: 'var(--accent-primary)' }} fill="var(--accent-primary)" />
               
-              {/* Elegant notification badge */}
-              {unreadCount > 0 && (
+              {/* Boost count badge */}
+              {(user.profile_boosts || 0) > 0 && (
                 <div className="absolute -top-1.5 -right-1.5">
                   {/* Glow effect */}
-                  <div className="absolute inset-0 rounded-full blur-md opacity-60 animate-pulse" style={{ backgroundColor: 'var(--error)' }} />
+                  <div className="absolute inset-0 rounded-full blur-md opacity-60" style={{ backgroundColor: 'var(--accent-primary)' }} />
                   
                   {/* Badge */}
-                  <div className="relative text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg" style={{ backgroundColor: 'var(--error)', border: '1px solid rgba(239, 68, 68, 0.5)' }}>
-                    {unreadCount > 9 ? '9+' : unreadCount}
+                  <div className="relative text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg" style={{ backgroundColor: 'var(--accent-primary)', border: '1px solid rgba(0, 217, 255, 0.5)' }}>
+                    {user.profile_boosts > 9 ? '9+' : user.profile_boosts}
                   </div>
                 </div>
               )}
