@@ -1078,7 +1078,7 @@ export default function Home({ user }) {
               className={`swipe-buttons-container w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0 ${justSwiped ? 'after-swipe' : ''}`}
               style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)' }}
             >
-              {/* Undo */}
+              {/* Undo - 40px */}
               <button
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
@@ -1086,13 +1086,14 @@ export default function Home({ user }) {
                   handleUndo();
                 }}
                 disabled={swipeHistory.length === 0}
-                className="swipe-button undo rounded-full p-4 md:p-5 shadow-xl"
+                className="swipe-button undo rounded-full shadow-xl flex items-center justify-center"
                 title="Undo"
+                style={{ width: '40px', height: '40px' }}
               >
-                <RotateCcw className="w-6 h-6 md:w-7 md:h-7 text-white transition-all" strokeWidth={1.5} />
+                <RotateCcw className="w-5 h-5 text-white transition-all" strokeWidth={1.5} />
               </button>
 
-              {/* Pass */}
+              {/* Pass - 60px */}
               <button
                 ref={passButtonRef}
                 onClick={(e) => {
@@ -1100,13 +1101,14 @@ export default function Home({ user }) {
                   createStardustTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
                   handlePass();
                 }}
-                className="swipe-button pass rounded-full p-5 md:p-6 shadow-xl"
+                className="swipe-button pass rounded-full shadow-xl flex items-center justify-center"
                 title="Pass"
+                style={{ width: '60px', height: '60px' }}
               >
-                <X className="w-7 h-7 md:w-8 md:h-8 text-white transition-all" strokeWidth={1.5} />
+                <X className="w-7 h-7 text-white transition-all" strokeWidth={1.5} />
               </button>
 
-              {/* Like */}
+              {/* Like - 60px */}
               <button
                 ref={likeButtonRef}
                 onClick={(e) => {
@@ -1114,13 +1116,14 @@ export default function Home({ user }) {
                   createFloatingHearts(rect.left + rect.width / 2, rect.top, 8);
                   handleLike();
                 }}
-                className={`swipe-button like rounded-full p-5 md:p-6 shadow-xl ${compatibility >= 85 ? 'high-compatibility' : ''}`}
+                className={`swipe-button like rounded-full shadow-xl flex items-center justify-center ${compatibility >= 85 ? 'high-compatibility' : ''}`}
                 title="Like"
+                style={{ width: '60px', height: '60px' }}
               >
-                <Heart className="icon-heart w-7 h-7 md:w-8 md:h-8 text-white transition-all" strokeWidth={1.5} fill="none" />
+                <Heart className="icon-heart w-7 h-7 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
 
-              {/* Super Like */}
+              {/* Super Like - 40px */}
               <button
                 ref={superLikeButtonRef}
                 onClick={(e) => {
@@ -1128,10 +1131,11 @@ export default function Home({ user }) {
                   createStarburstEffect(rect.left + rect.width / 2, rect.top + rect.height / 2);
                   handleSuperLike();
                 }}
-                className={`swipe-button super rounded-full p-5 md:p-6 shadow-xl ${compatibility < 50 ? 'low-compatibility' : ''}`}
+                className={`swipe-button super rounded-full shadow-xl flex items-center justify-center ${compatibility < 50 ? 'low-compatibility' : ''}`}
                 title="Super Like"
+                style={{ width: '40px', height: '40px' }}
               >
-                <Star className="icon-star w-7 h-7 md:w-8 md:h-8 text-white transition-all" strokeWidth={1.5} fill="none" />
+                <Star className="icon-star w-5 h-5 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
             </div>
           )}
