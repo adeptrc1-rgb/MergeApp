@@ -753,6 +753,9 @@ export default function Profile({ user, logout }) {
           .scrollbar-hide::-webkit-scrollbar {
             display: none;
           }
+          .scrollbar-hide-elite::-webkit-scrollbar {
+            display: none;
+          }
         `}</style>
 
         {/* Merge Elite vs Free - Swipeable Carousel */}
