@@ -942,66 +942,6 @@ export default function Profile({ user, logout }) {
             display: none;
           }
         `}</style>
-              
-              {/* Free Tier Card */}
-              <div
-                className="flex-shrink-0 rounded-2xl p-6 relative overflow-hidden"
-                style={{
-                  width: 'calc(100vw - 32px)',
-                  maxWidth: '380px',
-                  backgroundColor: 'rgba(10,10,10,0.8)',
-                  border: '1px solid rgba(255,255,255,0.1)'
-                }}
-              >
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-white font-semibold text-xl">Merge Free</h3>
-                    <div className="px-3 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: 'rgba(255,255,255,0.15)', color: 'white' }}>
-                      $0
-                    </div>
-                  </div>
-                  <p className="text-white/50 text-sm">Basic dating features</p>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium mb-1">1 spin per 48 hours</div>
-                      <div className="text-white/40 text-xs">Access the Cosmic Wheel twice per week</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium mb-1">Standard wheel rewards</div>
-                      <div className="text-white/40 text-xs">Base prizes only</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium mb-1">No spin stacking</div>
-                      <div className="text-white/40 text-xs">Spins don't accumulate</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium mb-1">Basic features only</div>
-                      <div className="text-white/40 text-xs">Standard app access</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-white/10">
-                  <div className="text-white/40 text-xs text-center">Swipe for Elite benefits</div>
-                </div>
-              </div>
-
 
         {/* Account Actions - Simple List */}
         <div className="space-y-2 mb-6">
