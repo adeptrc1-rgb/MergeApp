@@ -647,46 +647,63 @@ export default function Home({ user }) {
           {/* Merge wordmark */}
           <MergeLogo size="sm" color="var(--text-primary)" />
           
-          {/* Merge Pulse icon on the right - Boost profile */}
+          {/* Merge Pulse icon on the right - Boost profile - SHINY */}
           <button
             onClick={handleBoost}
             className="relative group"
             title="Merge Pulse - Boost Your Profile"
           >
-            {/* Elegant container */}
+            {/* Shiny container with glow */}
             <div 
-              className="relative backdrop-blur-sm rounded-full p-2 transition-all duration-300 group-hover:scale-105"
+              className="relative rounded-full p-2.5 transition-all duration-300 group-hover:scale-110"
               style={{
-                backgroundColor: 'var(--surface-default)',
-                border: '1px solid var(--border-subtle)'
+                background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(108, 99, 255, 0.2) 100%)',
+                border: '2px solid var(--accent-primary)',
+                boxShadow: '0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3), inset 0 0 10px rgba(0, 217, 255, 0.2)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--surface-hover)';
-                e.currentTarget.style.borderColor = 'var(--border-default)';
+                e.currentTarget.style.boxShadow = '0 0 30px rgba(0, 217, 255, 0.8), 0 0 60px rgba(0, 217, 255, 0.5), inset 0 0 15px rgba(0, 217, 255, 0.3)';
+                e.currentTarget.style.borderColor = '#00D9FF';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--surface-default)';
-                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3), inset 0 0 10px rgba(0, 217, 255, 0.2)';
+                e.currentTarget.style.borderColor = 'var(--accent-primary)';
               }}
             >
-              <Zap className="w-4 h-4 transition-colors" style={{ color: 'var(--accent-primary)' }} fill="var(--accent-primary)" />
+              {/* Pulsing glow background */}
+              <div 
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(0, 217, 255, 0.4) 0%, transparent 70%)',
+                  animation: 'pulse 2s ease-in-out infinite'
+                }}
+              />
+              
+              <Zap className="w-5 h-5 transition-all relative z-10" style={{ color: '#00D9FF', filter: 'drop-shadow(0 0 4px rgba(0, 217, 255, 0.8))' }} fill="#00D9FF" />
               
               {/* Boost count badge */}
               {(user.profile_boosts || 0) > 0 && (
-                <div className="absolute -top-1.5 -right-1.5">
-                  {/* Glow effect */}
-                  <div className="absolute inset-0 rounded-full blur-md opacity-60" style={{ backgroundColor: 'var(--accent-primary)' }} />
+                <div className="absolute -top-1 -right-1">
+                  {/* Strong glow effect */}
+                  <div className="absolute inset-0 rounded-full blur-md opacity-80 animate-pulse" style={{ backgroundColor: '#00D9FF' }} />
                   
-                  {/* Badge */}
-                  <div className="relative text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg" style={{ backgroundColor: 'var(--accent-primary)', border: '1px solid rgba(0, 217, 255, 0.5)' }}>
+                  {/* Badge with gradient */}
+                  <div className="relative text-black text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg" style={{ 
+                    background: 'linear-gradient(135deg, #00D9FF 0%, #00B8D9 100%)', 
+                    border: '2px solid rgba(255, 255, 255, 0.8)',
+                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.8)'
+                  }}>
                     {user.profile_boosts > 9 ? '9+' : user.profile_boosts}
                   </div>
                 </div>
               )}
               
-              {/* Subtle shine effect on hover */}
+              {/* Rotating shimmer effect */}
               <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent)' }} />
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" style={{ 
+                  background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent)',
+                  transform: 'skewX(-20deg)'
+                }} />
               </div>
             </div>
           </button>
