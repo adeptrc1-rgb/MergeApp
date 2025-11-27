@@ -1109,8 +1109,8 @@ export default function Home({ user }) {
       {/* Merge Score Breakdown Modal */}
       {showScoreBreakdown && currentMatch && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ backgroundColor: 'var(--overlay-darker)' }}
+          className="fixed inset-0 flex items-center justify-center p-4"
+          style={{ backgroundColor: 'var(--overlay-darker)', zIndex: 9999 }}
           onClick={() => setShowScoreBreakdown(false)}
         >
           <div 
