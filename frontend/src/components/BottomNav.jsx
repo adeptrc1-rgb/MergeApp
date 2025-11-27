@@ -32,7 +32,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
   
   return (
     <div 
-      className="fixed bottom-0 left-0 right-0 z-40 select-none" 
+      className="fixed bottom-0 left-0 right-0 select-none" 
       style={{ 
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
@@ -40,7 +40,8 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         background: darkMode ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
         backdropFilter: darkMode ? 'blur(10px)' : 'none',
         WebkitBackdropFilter: darkMode ? 'blur(10px)' : 'none',
-        paddingBottom: 'env(safe-area-inset-bottom)'
+        paddingBottom: 'env(safe-area-inset-bottom)',
+        zIndex: 200
       }}
     >
       <div className="flex items-center justify-between mx-auto" style={{ padding: '2px 24px', height: '46px', maxWidth: '500px' }}>
