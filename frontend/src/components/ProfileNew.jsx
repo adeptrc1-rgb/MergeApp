@@ -774,12 +774,7 @@ export default function Profile({ user, logout }) {
                 }}
               >
                 <div className="mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-white font-semibold text-xl">Merge Free</h3>
-                    <div className="px-3 py-1 rounded-full text-sm font-bold" style={{ backgroundColor: 'rgba(255,255,255,0.15)', color: 'white' }}>
-                      $0
-                    </div>
-                  </div>
+                  <h3 className="text-white font-semibold text-xl mb-2">Merge Free</h3>
                   <p className="text-white/50 text-sm">Basic dating features</p>
                 </div>
                 
