@@ -800,7 +800,7 @@ export default function Home({ user }) {
 
               {/* Bottom info + dropdown */}
               <div className="absolute bottom-0 left-0 right-0 z-30" style={{ pointerEvents: 'auto', color: 'var(--text-primary)' }}>
-                <div className={`px-6 pb-6 pt-6 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`} style={{ background: 'linear-gradient(to top, var(--bg-primary), rgba(10, 10, 10, 0.95), transparent)' }}>
+                <div className={`px-6 pb-4 pt-4 relative transition-all rounded-2xl ${showDropdown ? 'pb-1' : ''}`} style={{ background: 'linear-gradient(to top, var(--bg-primary), rgba(10, 10, 10, 0.95), transparent)' }}>
                   <div className="flex items-center gap-2 mb-2">
                     <h2 className="text-4xl font-light" style={{ color: 'var(--text-primary)' }}>
                       {userInventory?.active_skin && (() => {
@@ -818,32 +818,6 @@ export default function Home({ user }) {
                         return `${currentMatch.first_name}, ${age}`;
                       })() || `${currentMatch.first_name}, ${age}`}
                     </h2>
-                    
-                    {/* Photo Verification Badge */}
-                    <div 
-                      className="flex items-center justify-center rounded-full flex-shrink-0"
-                      style={{
-                        width: '20px',
-                        height: '20px',
-                        background: 'linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%)',
-                        boxShadow: '0 0 8px rgba(59, 130, 246, 0.3)',
-                        border: '1.5px solid rgba(255, 255, 255, 0.2)'
-                      }}
-                      title="Photo Verified"
-                    >
-                      <svg 
-                        width="11" 
-                        height="11" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="white" 
-                        strokeWidth="3.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                      >
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
                   </div>
                   
                   {/* Merge Score & Show More */}
