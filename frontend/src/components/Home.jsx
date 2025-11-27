@@ -1162,7 +1162,7 @@ export default function Home({ user }) {
               <h2 className="text-2xl font-semibold mb-1" style={{ 
                 color: compatibility >= 75 ? 'var(--accent-primary)' : 'var(--text-primary)'
               }}>
-                AMI: {compatibility}
+                Merge Score: {compatibility}%
               </h2>
               <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Why you mesh</p>
             </div>
