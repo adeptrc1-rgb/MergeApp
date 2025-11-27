@@ -37,11 +37,8 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        backgroundColor: 'var(--bg-primary)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        paddingBottom: 'env(safe-area-inset-bottom)',
-        boxShadow: '0 -2px 12px rgba(0, 0, 0, 0.6)'
+        background: 'transparent',
+        paddingBottom: 'env(safe-area-inset-bottom)'
       }}
     >
       <div className="flex items-center justify-around mx-auto" style={{ padding: '4px 12px', height: '52px', maxWidth: '500px' }}>
