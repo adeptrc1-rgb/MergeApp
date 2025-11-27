@@ -650,12 +650,13 @@ export default function Home({ user }) {
           {/* Merge Pulse icon on the right - Boost profile - SHINY */}
           <button
             onClick={handleBoost}
-            className="relative group"
+            className="relative group focus:outline-none"
             title="Merge Pulse - Boost Your Profile"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
           >
             {/* Shiny container with glow */}
             <div 
-              className="relative rounded-full p-2.5 transition-all duration-300 group-hover:scale-110"
+              className="relative rounded-full p-2.5 transition-all duration-300 group-hover:scale-110 group-active:scale-105"
               style={{
                 background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(108, 99, 255, 0.2) 100%)',
                 border: '2px solid var(--accent-primary)',
