@@ -21,7 +21,7 @@ const MergeLogoIcon = ({ focused, color, size = 24 }) => {
 };
 
 // Shared Bottom Navigation - Premium 5-Tab Layout
-export default function BottomNav({ currentTab, navigate }) {
+export default function BottomNav({ currentTab, navigate, darkMode = false }) {
   const items = [
     { id: 'home', icon: MergeLogoIcon, label: 'Explore', path: '/home', isCustom: true },
     { id: 'discover', icon: TrendingUp, label: 'Trending', path: '/discover' },
@@ -37,7 +37,9 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        background: 'transparent',
+        background: darkMode ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
+        backdropFilter: darkMode ? 'blur(10px)' : 'none',
+        WebkitBackdropFilter: darkMode ? 'blur(10px)' : 'none',
         paddingBottom: 'env(safe-area-inset-bottom)'
       }}
     >
