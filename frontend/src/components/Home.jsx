@@ -655,7 +655,7 @@ export default function Home({ user }) {
           >
             {/* Elegant container */}
             <div 
-              className="relative backdrop-blur-sm rounded-lg p-2 transition-all duration-300 group-hover:scale-105"
+              className="relative backdrop-blur-sm rounded-full p-2 transition-all duration-300 group-hover:scale-105"
               style={{
                 backgroundColor: 'var(--surface-default)',
                 border: '1px solid var(--border-subtle)'
@@ -685,7 +685,7 @@ export default function Home({ user }) {
               )}
               
               {/* Subtle shine effect on hover */}
-              <div className="absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent)' }} />
               </div>
             </div>
