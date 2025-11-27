@@ -1558,22 +1558,26 @@ async def spin_cosmic_wheel(user: User = Depends(get_current_user)):
     
     chosen = choices(REWARD_TABLE, weights=[r["weight"] for r in REWARD_TABLE], k=1)[0]
     
+    # Apply 2x multiplier for elite users
+    is_elite = udoc.get("is_premium", False)
+    multiplier = 2 if is_elite else 1
+    
     inc = {}
     if chosen["type"] == "boost":
-        inc["profile_boosts"] = 1
+        inc["profile_boosts"] = 1 * multiplier
     elif chosen["type"] == "super_like":
-        inc["super_likes"] = 1
+        inc["super_likes"] = 1 * multiplier
     elif chosen["type"] == "dm":
-        inc["direct_messages"] = 1
+        inc["direct_messages"] = 1 * multiplier
     elif chosen["type"] == "star_coins":
-        inc["star_coins"] = int(chosen["amount"]) or 10
+        inc["star_coins"] = int(chosen["amount"] * multiplier) or (10 * multiplier)
     elif chosen["type"] == "cooldown_skip":
         await db.users.update_one({"id": user.id}, {"$unset": {"next_spin_time": ""}})
     
     spins_today += 1
     update_doc = {"spins_today": spins_today}
     if chosen["type"] != "extra_spin":
-        cooldown_hours = 24 if not udoc.get("is_premium") else 12
+        cooldown_hours = 48 if not is_elite else 12  # Free: 48h, Elite: 12h
         update_doc["next_spin_time"] = (now + timedelta(hours=cooldown_hours)).isoformat()
     else:
         update_doc["next_spin_time"] = None
