@@ -786,7 +786,7 @@ export default function Profile({ user, logout }) {
                     <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">1 spin per 48 hours</div>
-                      <div className="text-white/40 text-xs">Cosmic Wheel access twice weekly</div>
+                      <div className="text-white/40 text-xs">Merge Wheel access twice weekly</div>
                     </div>
                   </div>
                   
