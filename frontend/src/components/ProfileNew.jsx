@@ -923,22 +923,29 @@ export default function Profile({ user, logout }) {
                 </div>
 
                 <button
+                  onClick={handleUpgradeToElite}
+                  disabled={upgrading}
                   className="w-full py-3 rounded-full text-sm font-semibold transition-all"
                   style={{
-                    background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
+                    background: upgrading ? 'rgba(0,217,255,0.5)' : 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
                     color: 'white',
-                    boxShadow: '0 4px 12px rgba(0,217,255,0.3)'
+                    boxShadow: '0 4px 12px rgba(0,217,255,0.3)',
+                    cursor: upgrading ? 'not-allowed' : 'pointer'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.02)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,217,255,0.5)';
+                    if (!upgrading) {
+                      e.currentTarget.style.transform = 'scale(1.02)';
+                      e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,217,255,0.5)';
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,217,255,0.3)';
+                    if (!upgrading) {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,217,255,0.3)';
+                    }
                   }}
                 >
-                  Upgrade to Elite
+                  {upgrading ? 'Upgrading...' : 'Upgrade to Elite'}
                 </button>
               </div>
 
