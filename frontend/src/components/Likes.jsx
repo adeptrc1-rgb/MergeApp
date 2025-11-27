@@ -216,7 +216,7 @@ export default function Likes({ user }) {
         </div>
       </div>
 
-      <BottomNav currentTab="likes" navigate={navigate} />
+      <BottomNav currentTab="likes" navigate={navigate} darkMode={true} />
     </div>
   );
 }
