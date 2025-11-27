@@ -1115,19 +1115,6 @@ export default function Home({ user }) {
               >
                 <Star className="icon-star w-7 h-7 md:w-8 md:h-8 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
-
-              {/* Boost */}
-              <button
-                onClick={(e) => { 
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  createSparkleTrail(rect.left + rect.width / 2, rect.top + rect.height / 2, 15);
-                  handleBoost(); 
-                }}
-                className="swipe-button boost rounded-full p-4 md:p-5 shadow-xl"
-                title="Boost Profile"
-              >
-                <Zap className="icon-boost w-6 h-6 md:w-7 md:h-7 text-white transition-all" strokeWidth={1.5} fill="none" />
-              </button>
             </div>
           )}
         </div>
