@@ -1064,7 +1064,7 @@ export default function Home({ user }) {
               className={`swipe-buttons-container w-full flex items-center justify-center gap-5 px-3 z-50 ${justSwiped ? 'after-swipe' : ''}`}
               style={{ marginTop: '-40px', position: 'relative' }}
             >
-              {/* Undo - 40px */}
+              {/* Undo - 75px */}
               <button
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
@@ -1074,12 +1074,12 @@ export default function Home({ user }) {
                 disabled={swipeHistory.length === 0}
                 className="swipe-button undo rounded-full shadow-xl flex items-center justify-center"
                 title="Undo"
-                style={{ width: '40px', height: '40px' }}
+                style={{ width: '75px', height: '75px' }}
               >
-                <RotateCcw className="w-5 h-5 text-white transition-all" strokeWidth={1.5} />
+                <RotateCcw className="w-7 h-7 text-white transition-all" strokeWidth={1.5} />
               </button>
 
-              {/* Pass - 60px */}
+              {/* Pass - 75px */}
               <button
                 ref={passButtonRef}
                 onClick={(e) => {
@@ -1089,12 +1089,12 @@ export default function Home({ user }) {
                 }}
                 className="swipe-button pass rounded-full shadow-xl flex items-center justify-center"
                 title="Pass"
-                style={{ width: '60px', height: '60px' }}
+                style={{ width: '75px', height: '75px' }}
               >
-                <X className="w-7 h-7 text-white transition-all" strokeWidth={1.5} />
+                <X className="w-8 h-8 text-white transition-all" strokeWidth={1.5} />
               </button>
 
-              {/* Like - 60px */}
+              {/* Like - 75px */}
               <button
                 ref={likeButtonRef}
                 onClick={(e) => {
@@ -1104,12 +1104,12 @@ export default function Home({ user }) {
                 }}
                 className={`swipe-button like rounded-full shadow-xl flex items-center justify-center ${compatibility >= 85 ? 'high-compatibility' : ''}`}
                 title="Like"
-                style={{ width: '60px', height: '60px' }}
+                style={{ width: '75px', height: '75px' }}
               >
-                <Heart className="icon-heart w-7 h-7 text-white transition-all" strokeWidth={1.5} fill="none" />
+                <Heart className="icon-heart w-8 h-8 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
 
-              {/* Super Like - 40px */}
+              {/* Super Like - 75px */}
               <button
                 ref={superLikeButtonRef}
                 onClick={(e) => {
@@ -1119,9 +1119,9 @@ export default function Home({ user }) {
                 }}
                 className={`swipe-button super rounded-full shadow-xl flex items-center justify-center ${compatibility < 50 ? 'low-compatibility' : ''}`}
                 title="Super Like"
-                style={{ width: '40px', height: '40px' }}
+                style={{ width: '75px', height: '75px' }}
               >
-                <Star className="icon-star w-5 h-5 text-white transition-all" strokeWidth={1.5} fill="none" />
+                <Star className="icon-star w-7 h-7 text-white transition-all" strokeWidth={1.5} fill="none" />
               </button>
             </div>
           )}
