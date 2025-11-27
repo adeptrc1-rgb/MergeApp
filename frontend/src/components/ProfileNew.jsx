@@ -935,11 +935,6 @@ export default function Profile({ user, logout }) {
             </div>
           </div>
           
-          {/* Scroll Indicator Dots */}
-          <div className="flex justify-center gap-1.5 mt-3">
-            <div className="w-1.5 h-1.5 rounded-full transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.4)' }}></div>
-            <div className="w-1.5 h-1.5 rounded-full transition-all" style={{ backgroundColor: 'rgba(0,217,255,0.6)' }}></div>
-          </div>
         </div>
 
         <style jsx>{`
