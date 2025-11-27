@@ -1075,8 +1075,8 @@ export default function Home({ user }) {
           {/* Action Buttons */}
           {!showDropdown && (
             <div
-              className={`swipe-buttons-container w-full flex items-center justify-center gap-5 px-3 mt-2 z-50 fixed md:static left-0 right-0 ${justSwiped ? 'after-swipe' : ''}`}
-              style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 80px)' }}
+              className={`swipe-buttons-container w-full flex items-center justify-center gap-5 px-3 z-50 ${justSwiped ? 'after-swipe' : ''}`}
+              style={{ marginTop: '-40px', position: 'relative' }}
             >
               {/* Undo - 40px */}
               <button
