@@ -697,7 +697,7 @@ export default function Home({ user }) {
       <div className="flex-1 flex flex-col items-center pt-2 md:pt-4 md:px-4 pb-24 md:pb-20 relative overflow-hidden">
         <div className="w-full max-w-md relative flex flex-col space-y-2" style={{ zIndex: 10 }}>
           <div 
-            className="w-full px-2 md:px-0"
+            className="w-full md:px-0"
             style={{ 
               perspective: '1000px',
               height: showDropdown ? '80vh' : '76vh',
