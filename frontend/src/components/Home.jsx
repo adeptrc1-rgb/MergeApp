@@ -642,7 +642,7 @@ export default function Home({ user }) {
       )}
 
       {/* Header */}
-      <div className="flex-shrink-0 relative" style={{ backgroundColor: 'var(--bg-primary)', zIndex: 5 }}>
+      <div className="flex-shrink-0 relative" style={{ backgroundColor: 'var(--bg-primary)', zIndex: 1 }}>
         <div className="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between">
           {/* Merge wordmark */}
           <MergeLogo size="sm" color="var(--text-primary)" />
