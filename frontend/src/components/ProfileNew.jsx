@@ -28,6 +28,7 @@ export default function Profile({ user, logout }) {
   const [cooldownCountdown, setCooldownCountdown] = useState('');
   const [cooldownProgress, setCooldownProgress] = useState(0);
   const [upgrading, setUpgrading] = useState(false);
+  const [showEliteBenefits, setShowEliteBenefits] = useState(false);
 
   const handleUpgradeToElite = async () => {
     if (upgrading) return;
