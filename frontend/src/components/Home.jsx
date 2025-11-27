@@ -656,18 +656,18 @@ export default function Home({ user }) {
           >
             {/* Shiny container with glow */}
             <div 
-              className="relative rounded-full p-2.5 transition-all duration-300 group-hover:scale-110 group-active:scale-105"
+              className="relative rounded-full p-1.5 transition-all duration-300 group-hover:scale-110 group-active:scale-105"
               style={{
                 background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(108, 99, 255, 0.2) 100%)',
-                border: '2px solid var(--accent-primary)',
-                boxShadow: '0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3), inset 0 0 10px rgba(0, 217, 255, 0.2)'
+                border: '1.5px solid var(--accent-primary)',
+                boxShadow: '0 0 15px rgba(0, 217, 255, 0.5), 0 0 30px rgba(0, 217, 255, 0.3), inset 0 0 8px rgba(0, 217, 255, 0.2)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 30px rgba(0, 217, 255, 0.8), 0 0 60px rgba(0, 217, 255, 0.5), inset 0 0 15px rgba(0, 217, 255, 0.3)';
+                e.currentTarget.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.8), 0 0 50px rgba(0, 217, 255, 0.5), inset 0 0 12px rgba(0, 217, 255, 0.3)';
                 e.currentTarget.style.borderColor = '#00D9FF';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3), inset 0 0 10px rgba(0, 217, 255, 0.2)';
+                e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 217, 255, 0.5), 0 0 30px rgba(0, 217, 255, 0.3), inset 0 0 8px rgba(0, 217, 255, 0.2)';
                 e.currentTarget.style.borderColor = 'var(--accent-primary)';
               }}
             >
@@ -680,7 +680,7 @@ export default function Home({ user }) {
                 }}
               />
               
-              <Zap className="w-5 h-5 transition-all relative z-10" style={{ color: '#00D9FF', filter: 'drop-shadow(0 0 4px rgba(0, 217, 255, 0.8))' }} fill="#00D9FF" />
+              <Zap className="w-4 h-4 transition-all relative z-10" style={{ color: '#00D9FF', filter: 'drop-shadow(0 0 3px rgba(0, 217, 255, 0.8))' }} fill="#00D9FF" />
               
               {/* Boost count badge */}
               {(user.profile_boosts || 0) > 0 && (
@@ -689,10 +689,10 @@ export default function Home({ user }) {
                   <div className="absolute inset-0 rounded-full blur-md opacity-80 animate-pulse" style={{ backgroundColor: '#00D9FF' }} />
                   
                   {/* Badge with gradient */}
-                  <div className="relative text-black text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg" style={{ 
+                  <div className="relative text-black text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center shadow-lg" style={{ 
                     background: 'linear-gradient(135deg, #00D9FF 0%, #00B8D9 100%)', 
-                    border: '2px solid rgba(255, 255, 255, 0.8)',
-                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.8)'
+                    border: '1.5px solid rgba(255, 255, 255, 0.8)',
+                    boxShadow: '0 0 8px rgba(0, 217, 255, 0.8)'
                   }}>
                     {user.profile_boosts > 9 ? '9+' : user.profile_boosts}
                   </div>
