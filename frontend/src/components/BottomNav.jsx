@@ -37,10 +37,9 @@ export default function BottomNav({ currentTab, navigate }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        backgroundColor: '#000000',
+        backgroundColor: 'var(--bg-primary)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
         paddingBottom: 'env(safe-area-inset-bottom)',
         boxShadow: '0 -2px 12px rgba(0, 0, 0, 0.6)'
       }}
