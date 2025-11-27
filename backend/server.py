@@ -2888,7 +2888,7 @@ async def get_subscription_status(user: User = Depends(get_current_user)):
             "subscription_type": "elite" if is_elite else "free",
             "spins_available": spins,
             "max_spins": 5 if is_elite else 1,
-            "cooldown_hours": 12 if is_elite else 48,
+            "cooldown_hours": 12 if is_elite else 72,
             "reward_multiplier": 2 if is_elite else 1,
             "subscribed_at": udoc.get("elite_subscribed_at"),
             "next_bonus_date": udoc.get("elite_next_bonus_date")
