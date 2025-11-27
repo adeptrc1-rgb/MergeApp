@@ -654,37 +654,31 @@ export default function Home({ user }) {
             title="Merge Pulse - Boost Your Profile"
             style={{ WebkitTapHighlightColor: 'transparent' }}
           >
-            {/* Shiny container with glow */}
-            <div 
-              className="relative rounded-full p-1.5 transition-all duration-300 group-hover:scale-110 group-active:scale-105"
-              style={{
-                background: 'linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(108, 99, 255, 0.2) 100%)',
-                border: '1.5px solid var(--accent-primary)',
-                boxShadow: '0 0 15px rgba(0, 217, 255, 0.5), 0 0 30px rgba(0, 217, 255, 0.3), inset 0 0 8px rgba(0, 217, 255, 0.2)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 25px rgba(0, 217, 255, 0.8), 0 0 50px rgba(0, 217, 255, 0.5), inset 0 0 12px rgba(0, 217, 255, 0.3)';
-                e.currentTarget.style.borderColor = '#00D9FF';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 217, 255, 0.5), 0 0 30px rgba(0, 217, 255, 0.3), inset 0 0 8px rgba(0, 217, 255, 0.2)';
-                e.currentTarget.style.borderColor = 'var(--accent-primary)';
-              }}
-            >
+            {/* Shiny icon without container */}
+            <div className="relative">
               {/* Pulsing glow background */}
               <div 
-                className="absolute inset-0 rounded-full"
+                className="absolute inset-0 rounded-full blur-lg"
                 style={{
-                  background: 'radial-gradient(circle, rgba(0, 217, 255, 0.4) 0%, transparent 70%)',
-                  animation: 'pulse 2s ease-in-out infinite'
+                  background: 'radial-gradient(circle, rgba(0, 217, 255, 0.6) 0%, transparent 70%)',
+                  animation: 'pulse 2s ease-in-out infinite',
+                  transform: 'scale(1.5)'
                 }}
               />
               
-              <Zap className="w-4 h-4 transition-all relative z-10" style={{ color: '#00D9FF', filter: 'drop-shadow(0 0 3px rgba(0, 217, 255, 0.8))' }} fill="#00D9FF" />
+              <Zap 
+                className="w-6 h-6 transition-all relative z-10 group-hover:scale-110" 
+                style={{ 
+                  color: '#00D9FF', 
+                  filter: 'drop-shadow(0 0 8px rgba(0, 217, 255, 1)) drop-shadow(0 0 12px rgba(0, 217, 255, 0.6))',
+                  animation: 'pulse 2s ease-in-out infinite'
+                }} 
+                fill="#00D9FF" 
+              />
               
               {/* Boost count badge */}
               {(user.profile_boosts || 0) > 0 && (
-                <div className="absolute -top-1 -right-1">
+                <div className="absolute -top-2 -right-2">
                   {/* Strong glow effect */}
                   <div className="absolute inset-0 rounded-full blur-md opacity-80 animate-pulse" style={{ backgroundColor: '#00D9FF' }} />
                   
@@ -698,14 +692,6 @@ export default function Home({ user }) {
                   </div>
                 </div>
               )}
-              
-              {/* Rotating shimmer effect */}
-              <div className="absolute inset-0 rounded-full overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" style={{ 
-                  background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent)',
-                  transform: 'skewX(-20deg)'
-                }} />
-              </div>
             </div>
           </button>
         </div>
