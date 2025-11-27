@@ -854,7 +854,7 @@ export default function Profile({ user, logout }) {
                     onMouseEnter={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#00D9FF')}
                     onMouseLeave={(e) => !upgrading && (e.currentTarget.style.backgroundColor = 'white')}
                   >
-                    {upgrading ? 'Upgrading...' : '$9.99/mo'}
+                    {upgrading ? 'Upgrading...' : 'Upgrade'}
                   </button>
                 </div>
                 
