@@ -1136,7 +1136,7 @@ export default function Home({ user }) {
       {/* Bottom Navigation */}
       <BottomNav currentTab="home" navigate={navigate} />
 
-      {/* AMI Breakdown Modal */}
+      {/* Merge Score Breakdown Modal */}
       {showScoreBreakdown && currentMatch && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
