@@ -819,6 +819,13 @@ export default function Home({ user }) {
                       })() || `${currentMatch.first_name}, ${age}`}
                     </h2>
                   </div>
+
+                  {/* Industry & Distance - Moved between name and Merge Score */}
+                  <div className="mb-2">
+                    <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                      {currentMatch.lifestyle_factors?.occupation || 'Technology'} • {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : '5 miles away'}
+                    </span>
+                  </div>
                   
                   {/* Merge Score & Show More */}
                   <div className="mb-2 flex items-center gap-3">
@@ -856,13 +863,6 @@ export default function Home({ user }) {
                       <span className="text-sm font-light">{showDropdown ? 'Show less' : 'Show more'}</span>
                       {showDropdown ? (<ChevronUp className="w-4 h-4" />) : (<ChevronDown className="w-4 h-4" />)}
                     </button>
-                  </div>
-
-                  {/* Industry & Distance */}
-                  <div className="mb-3 mt-3">
-                    <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                      {currentMatch.lifestyle_factors?.occupation || 'Technology'} • {getDistance(currentMatch) !== null ? `${getDistance(currentMatch)} miles away` : '5 miles away'}
-                    </span>
                   </div>
 
                   {/* Expandable Dropdown Content */}
