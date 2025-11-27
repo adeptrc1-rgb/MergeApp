@@ -846,7 +846,7 @@ export default function Profile({ user, logout }) {
         </div>
       </div>
 
-      <BottomNav currentTab="profile" navigate={navigate} />
+      <BottomNav currentTab="profile" navigate={navigate} darkMode={true} />
 
       <ConnectionMatrix 
         isOpen={showConnectionMatrix} 
