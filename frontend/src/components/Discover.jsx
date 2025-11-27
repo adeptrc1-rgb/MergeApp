@@ -397,7 +397,7 @@ export default function Discover({ user }) {
       </div>
 
       {/* Bottom Navigation */}
-      <BottomNav currentTab="discover" navigate={navigate} />
+      <BottomNav currentTab="discover" navigate={navigate} darkMode={true} />
     </div>
   );
 }
