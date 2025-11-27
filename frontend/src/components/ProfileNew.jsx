@@ -27,6 +27,27 @@ export default function Profile({ user, logout }) {
   const [wheelStatus, setWheelStatus] = useState(null);
   const [cooldownCountdown, setCooldownCountdown] = useState('');
   const [cooldownProgress, setCooldownProgress] = useState(0);
+  const [upgrading, setUpgrading] = useState(false);
+
+  const handleUpgradeToElite = async () => {
+    if (upgrading) return;
+    
+    try {
+      setUpgrading(true);
+      const response = await axios.post(`${API}/subscription/upgrade-to-elite`, {}, { withCredentials: true });
+      
+      if (response.data.success) {
+        alert(`✨ ${response.data.message}\n\nYou received ${response.data.spins_granted} spins!`);
+        // Reload the page to reflect Elite status
+        window.location.reload();
+      }
+    } catch (error) {
+      const message = error.response?.data?.message || error.response?.data?.detail || 'Upgrade failed';
+      alert(message);
+    } finally {
+      setUpgrading(false);
+    }
+  };
 
   // Safety check: if user is not loaded yet, show loading state
   if (!user) {
