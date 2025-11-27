@@ -1136,7 +1136,7 @@ export default function Home({ user }) {
       {/* Bottom Navigation */}
       <BottomNav currentTab="home" navigate={navigate} />
 
-      {/* Merge Score Breakdown Modal */}
+      {/* AMI Breakdown Modal */}
       {showScoreBreakdown && currentMatch && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -1162,7 +1162,7 @@ export default function Home({ user }) {
               <h2 className="text-2xl font-semibold mb-1" style={{ 
                 color: compatibility >= 75 ? 'var(--accent-primary)' : 'var(--text-primary)'
               }}>
-                Merge Score: {compatibility}%
+                AMI: {compatibility}
               </h2>
               <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Why you mesh</p>
             </div>
