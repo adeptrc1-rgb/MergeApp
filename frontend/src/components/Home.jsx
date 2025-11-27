@@ -700,8 +700,8 @@ export default function Home({ user }) {
             className="w-full"
             style={{ 
               perspective: '1000px',
-              height: showDropdown ? '78vh' : '72vh',
-              maxHeight: showDropdown ? '720px' : '680px'
+              height: showDropdown ? '80vh' : '76vh',
+              maxHeight: showDropdown ? '800px' : '760px'
             }}
           >
             <div 
@@ -724,8 +724,8 @@ export default function Home({ user }) {
                 border: '1px solid var(--border-subtle)'
               }}
               style={{
-                height: showDropdown ? '78vh' : '72vh',
-                maxHeight: showDropdown ? '720px' : '680px',
+                height: showDropdown ? '80vh' : '76vh',
+                maxHeight: showDropdown ? '800px' : '760px',
                 transform: isDragging 
                   ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                   : swipeDirection ? undefined : 'translate(0, 0)',
