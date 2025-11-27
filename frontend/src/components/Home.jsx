@@ -841,7 +841,7 @@ export default function Home({ user }) {
                     </div>
                   </div>
                   
-                  {/* AMI & Show More */}
+                  {/* Merge Score & Show More */}
                   <div className="mb-2 flex items-center gap-3">
                     <button
                       onClick={(e) => {
@@ -861,7 +861,7 @@ export default function Home({ user }) {
                       <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
                         <span style={{ 
                           color: compatibility >= 75 ? 'var(--accent-primary)' : 'var(--text-secondary)'
-                        }}>{compatibility}</span> AMI
+                        }}>{compatibility}%</span> Merge Score
                       </span>
                     </button>
                     
