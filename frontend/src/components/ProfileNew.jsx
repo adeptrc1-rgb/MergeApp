@@ -1006,22 +1006,6 @@ export default function Profile({ user, logout }) {
         {/* Account Actions - Simple List */}
         <div className="space-y-2 mb-6">
           <button
-            onClick={() => setShowSettings(true)}
-            className="w-full flex items-center justify-between p-4 transition-all hover:bg-white/5"
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.05)',
-              borderRadius: '12px',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}
-          >
-            <div className="flex items-center gap-3">
-              <Settings className="w-5 h-5 text-white/60" />
-              <span className="text-white text-sm font-medium">Settings & Preferences</span>
-            </div>
-            <ChevronRight className="w-5 h-5 text-white/40" />
-          </button>
-
-          <button
             className="w-full flex items-center justify-between p-4 transition-all hover:bg-white/5"
             style={{
               backgroundColor: 'rgba(255,255,255,0.05)',
