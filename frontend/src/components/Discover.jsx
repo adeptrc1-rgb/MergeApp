@@ -321,7 +321,7 @@ export default function Discover({ user }) {
                           {match.first_name} {match.last_name || 'Owens'}
                         </h3>
                         <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                          <span>{compatibility} AMI</span>
+                          <span>{compatibility}% Merge Score</span>
                         </div>
                       </div>
                       {/* Arrow Icon */}

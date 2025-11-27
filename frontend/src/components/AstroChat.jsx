@@ -233,7 +233,7 @@ export default function AstroChat({ user, logout }) {
                   </p>
                   {match.compatibility_score && (
                     <p className="text-xs mt-1" style={{ color: '#3B82F6' }}>
-                      {match.compatibility_score} AMI
+                      {match.compatibility_score}% Merge Score
                     </p>
                   )}
                 </div>
@@ -279,7 +279,7 @@ export default function AstroChat({ user, logout }) {
                   {selectedMatch.compatibility_score && (
                     <div className="flex items-center gap-2 text-sm" style={{ color: '#3B82F6' }}>
                       <Star className="w-3 h-3 fill-current" />
-                      <span>{selectedMatch.compatibility_score} AMI</span>
+                      <span>{selectedMatch.compatibility_score}% Merge Score</span>
                     </div>
                   )}
                 </div>

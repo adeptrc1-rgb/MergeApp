@@ -168,7 +168,7 @@ export default function Likes({ user }) {
                         )}
                       </div>
 
-                      {/* AMI */}
+                      {/* Merge Score */}
                       <div 
                         className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-2"
                         style={{
@@ -178,7 +178,7 @@ export default function Likes({ user }) {
                       >
                         <Sparkles className="w-3 h-3" style={{ color: '#00D9FF' }} />
                         <span className="text-xs font-medium" style={{ color: '#00D9FF' }}>
-                          {compatibility} AMI
+                          {compatibility}% Match
                         </span>
                       </div>
 
