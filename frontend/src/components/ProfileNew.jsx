@@ -764,62 +764,6 @@ export default function Profile({ user, logout }) {
           <div className="overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex gap-3 pb-2 px-4" style={{ minWidth: 'fit-content' }}>
               
-              {/* Free Tier Card - Square */}
-              <div
-                className="flex-shrink-0 rounded-2xl p-6 relative overflow-hidden flex flex-col"
-                style={{
-                  width: 'calc(100vw - 32px)',
-                  height: 'calc(100vw - 32px)',
-                  maxWidth: '360px',
-                  maxHeight: '360px',
-                  backgroundColor: 'rgba(10,10,10,0.8)',
-                  border: '1px solid rgba(255,255,255,0.1)'
-                }}
-              >
-                <div className="mb-4">
-                  <h3 className="text-white font-semibold text-xl mb-2">Merge Free</h3>
-                  <p className="text-white/50 text-sm">Basic dating features</p>
-                </div>
-                
-                <div className="space-y-3 flex-1">
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium">1 spin per 48 hours</div>
-                      <div className="text-white/40 text-xs">Cosmic Wheel access twice weekly</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium">Standard rewards</div>
-                      <div className="text-white/40 text-xs">Base prizes only</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium">No spin stacking</div>
-                      <div className="text-white/40 text-xs">Spins don't accumulate</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
-                    <div className="flex-1">
-                      <div className="text-white text-sm font-medium">Basic features</div>
-                      <div className="text-white/40 text-xs">Standard app access</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-auto pt-4 border-t border-white/10">
-                  <div className="text-white/40 text-xs text-center">Swipe for Elite →</div>
-                </div>
-              </div>
-
               {/* Elite Tier Card - Square with Dropdown */}
               <div
                 className="flex-shrink-0 rounded-2xl p-6 relative overflow-hidden flex flex-col"
