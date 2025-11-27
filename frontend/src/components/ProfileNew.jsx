@@ -733,7 +733,7 @@ export default function Profile({ user, logout }) {
           }
         `}</style>
 
-        {/* Merge Elite - Tinder Platinum Style */}
+        {/* Merge Elite vs Free - Detailed Comparison */}
         <div
           className="mb-4 rounded-2xl p-5 relative overflow-hidden"
           style={{
@@ -746,7 +746,7 @@ export default function Profile({ user, logout }) {
               <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)' }}>
                 <Star className="w-4 h-4 text-white" fill="white" />
               </div>
-              <span className="text-white font-bold text-lg">MERGE ELITE</span>
+              <span className="text-white font-bold text-lg">💎 MERGE ELITE</span>
             </div>
             <button
               className="px-5 py-2 rounded-full text-sm font-semibold transition-all"
@@ -757,44 +757,85 @@ export default function Profile({ user, logout }) {
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.9)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
             >
-              Upgrade
+              $9.99/mo
             </button>
           </div>
 
-          <div className="mb-4">
-            <h3 className="text-white font-semibold text-base mb-4">What's included</h3>
-            
-            <div className="space-y-3">
-              {/* Feature Row */}
-              <div className="flex items-center justify-between">
-                <span className="text-white/80 text-sm">Priority Matching</span>
-                <div className="flex gap-12">
-                  <Lock className="w-4 h-4 text-white/30" />
-                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+          {/* Two Column Comparison */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            {/* Free Tier */}
+            <div className="p-3 rounded-xl" style={{ backgroundColor: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <div className="text-white/60 text-xs font-semibold mb-3">🎯 FREE TIER</div>
+              <div className="space-y-2 text-xs">
+                <div className="flex items-start gap-1.5">
+                  <Check className="w-3 h-3 text-white/40 flex-shrink-0 mt-0.5" strokeWidth={2} />
+                  <span className="text-white/60">1 Cosmic Wheel Spin</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <div className="text-white/40 flex-shrink-0">⏰</div>
+                  <span className="text-white/60">48h cooldown</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <Check className="w-3 h-3 text-white/40 flex-shrink-0 mt-0.5" strokeWidth={2} />
+                  <span className="text-white/60">Standard rewards</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-white/40 flex-shrink-0">❌</span>
+                  <span className="text-white/60">No spin stacking</span>
                 </div>
               </div>
-              
-              <div className="flex items-center justify-between">
-                <span className="text-white/80 text-sm">Message Before Matching</span>
-                <div className="flex gap-12">
-                  <Lock className="w-4 h-4 text-white/30" />
-                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+            </div>
+
+            {/* Elite Tier */}
+            <div className="p-3 rounded-xl" style={{ background: 'linear-gradient(135deg, rgba(0,217,255,0.15) 0%, rgba(108,99,255,0.15) 100%)', border: '1px solid rgba(0,217,255,0.3)' }}>
+              <div className="text-[#00D9FF] text-xs font-semibold mb-3">💎 ELITE</div>
+              <div className="space-y-2 text-xs">
+                <div className="flex items-start gap-1.5">
+                  <Check className="w-3 h-3 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
+                  <span className="text-white">5 starting spins</span>
                 </div>
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <span className="text-white/80 text-sm">See Who Likes You</span>
-                <div className="flex gap-12">
-                  <Lock className="w-4 h-4 text-white/30" />
-                  <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                <div className="flex items-start gap-1.5">
+                  <div className="text-[#00D9FF] flex-shrink-0">⏰</div>
+                  <span className="text-white">12h cooldown (4x faster)</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <Check className="w-3 h-3 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
+                  <span className="text-white">Spins stack to 5</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <Check className="w-3 h-3 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
+                  <span className="text-white">2x reward multiplier</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <Check className="w-3 h-3 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={3} />
+                  <span className="text-white">+2 bonus monthly</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <button className="text-white/60 text-sm hover:text-white/80 transition-colors">
-            See All Features
-          </button>
+          {/* Additional Elite Features */}
+          <div className="border-t border-white/10 pt-4 space-y-2">
+            <div className="text-white/60 text-xs font-semibold mb-3">MORE ELITE BENEFITS</div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="flex items-center gap-1.5">
+                <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
+                <span className="text-white/80">Exclusive Auras</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
+                <span className="text-white/80">See Who Likes You</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
+                <span className="text-white/80">Priority Placement</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={3} />
+                <span className="text-white/80">Unlimited Rewinds</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Account Actions - Simple List */}
