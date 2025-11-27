@@ -858,7 +858,7 @@ export default function Profile({ user, logout }) {
                   </button>
                 </div>
                 
-                <div className="space-y-3 flex-1 overflow-y-auto" style={{ scrollbarWidth: 'thin', scrollbarColor: '#00D9FF transparent' }}>
+                <div className="space-y-3 flex-1 overflow-y-auto scrollbar-hide-elite" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <div className="flex items-start gap-2">
                     <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                     <div className="flex-1">
