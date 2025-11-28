@@ -625,14 +625,14 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Merge Wheel Promo Card - Similar to "Try Double Date" */}
+        {/* Merge Wheel Promo Card - Dark Background */}
         <button
           onClick={() => setShowConnectionMatrix(true)}
           className="w-full flex items-center gap-4 p-4 mb-4 transition-all hover:bg-white/5"
           style={{
-            backgroundColor: 'rgba(255,255,255,0.05)',
+            backgroundColor: 'rgba(10,10,10,0.6)',
             borderRadius: '16px',
-            border: '1px solid rgba(255,255,255,0.1)'
+            border: '1px solid rgba(255,255,255,0.08)'
           }}
         >
           <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)' }}>
