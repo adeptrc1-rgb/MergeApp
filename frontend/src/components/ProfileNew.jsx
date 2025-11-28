@@ -700,13 +700,8 @@ export default function Profile({ user, logout }) {
               <div className="flex flex-col items-center text-center">
                 {/* Pure P³ text - no background */}
                 <span className="text-2xl font-bold mb-2" style={{ color: '#00D9FF' }}>P³</span>
-                <div className="flex items-center gap-1.5 mb-2">
-                  <span className="text-white font-semibold text-sm">
-                    {pulseBoosts || 0}
-                  </span>
-                  <span className="text-white/80 text-xs">
-                    Exponential boost
-                  </span>
+                <div className="text-white/80 text-xs mb-2">
+                  Exponential boost
                 </div>
                 <button
                   onClick={() => navigate('/store')}
@@ -736,7 +731,7 @@ export default function Profile({ user, logout }) {
               <div className="flex flex-col items-center text-center">
                 {/* Pure icon - no background */}
                 <Sparkles className="w-6 h-6 mb-2" strokeWidth={1.5} style={{ color: '#EC4899' }} />
-                <div className="text-sm font-semibold mb-2" style={{ color: '#EC4899' }}>
+                <div className="text-white/80 text-xs mb-2">
                   Auras
                 </div>
                 <button
