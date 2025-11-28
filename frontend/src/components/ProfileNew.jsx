@@ -649,7 +649,7 @@ export default function Profile({ user, logout }) {
           <ChevronRight className="w-5 h-5 text-white/40" />
         </button>
 
-        {/* Quick Action Cards - Horizontal Scroll (Compact Centered) */}
+        {/* Quick Action Cards - Horizontal Scroll (Aligned) */}
         <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content' }}>
             {/* Super Likes Card */}
@@ -664,7 +664,7 @@ export default function Profile({ user, logout }) {
               <div className="flex flex-col items-center text-center">
                 {/* Pure icon - no background */}
                 <Heart className="w-6 h-6 mb-2" strokeWidth={1.5} fill="none" style={{ color: '#667eea' }} />
-                <div className="flex items-center gap-1.5 mb-2">
+                <div className="flex items-center justify-center gap-1.5 mb-2" style={{ height: '18px' }}>
                   <span className="text-white font-semibold text-sm">
                     {user.super_likes || 0}
                   </span>
@@ -700,7 +700,7 @@ export default function Profile({ user, logout }) {
               <div className="flex flex-col items-center text-center">
                 {/* Pure P³ text - no background */}
                 <span className="text-2xl font-bold mb-2" style={{ color: '#00D9FF' }}>P³</span>
-                <div className="text-white/80 text-xs mb-2">
+                <div className="text-white/80 text-xs mb-2" style={{ height: '18px', display: 'flex', alignItems: 'center' }}>
                   Exponential boost
                 </div>
                 <button
@@ -731,7 +731,7 @@ export default function Profile({ user, logout }) {
               <div className="flex flex-col items-center text-center">
                 {/* Pure icon - no background */}
                 <Sparkles className="w-6 h-6 mb-2" strokeWidth={1.5} style={{ color: '#EC4899' }} />
-                <div className="text-white/80 text-xs mb-2">
+                <div className="text-white/80 text-xs mb-2" style={{ height: '18px', display: 'flex', alignItems: 'center' }}>
                   Auras
                 </div>
                 <button
