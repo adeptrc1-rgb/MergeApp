@@ -748,40 +748,112 @@ export default function Home({ user }) {
           {/* Merge wordmark */}
           <MergeLogo size="sm" color="var(--text-primary)" />
           
-          {/* Pulse³ - Minimalist Text Button */}
+          {/* Pulse³ - Minimalist Text Button with Animation */}
           <button
-            onClick={handleBoost}
+            onClick={handlePulseActivate}
             className="relative focus:outline-none transition-all"
             title="Pulse³ - Exponential profile boost"
             style={{ WebkitTapHighlightColor: 'transparent' }}
+            disabled={pulseBoosts <= 0 && !isPulsing}
           >
-            <div className="relative flex items-center gap-2">
-              {/* Pulse³ Text */}
-              <span 
-                className="text-base font-semibold transition-all"
-                style={{
-                  color: (user.profile_boosts || 0) > 0 ? '#00D9FF' : 'rgba(255,255,255,0.4)',
-                  fontFamily: "'Inter', sans-serif",
-                  letterSpacing: '-0.5px'
-                }}
-              >
-                Pulse³
-              </span>
-              
-              {/* Boost count badge */}
-              {(user.profile_boosts || 0) > 0 && (
-                <div 
-                  className="text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center" 
-                  style={{ 
-                    background: '#00D9FF',
-                    color: '#000',
-                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.5)'
+            <div className="relative flex flex-col items-end gap-0.5">
+              {/* Pulse³ Text with Animation */}
+              <div className="flex items-center gap-2">
+                <span 
+                  className="text-base font-semibold transition-all"
+                  style={{
+                    color: isPulsing ? '#00f2fe' : (pulseBoosts > 0 ? '#00D9FF' : 'rgba(255,255,255,0.4)'),
+                    fontFamily: "'Inter', sans-serif",
+                    letterSpacing: '-0.5px',
+                    animation: isPulsing ? 'pulse 2s ease-in-out infinite' : 'none'
                   }}
                 >
-                  {user.profile_boosts > 9 ? '9+' : user.profile_boosts}
+                  Pulse³
+                </span>
+                
+                {/* Boost count badge */}
+                {pulseBoosts > 0 && !isPulsing && (
+                  <div 
+                    className="text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center" 
+                    style={{ 
+                      background: '#00D9FF',
+                      color: '#000',
+                      boxShadow: '0 0 10px rgba(0, 217, 255, 0.5)'
+                    }}
+                  >
+                    {pulseBoosts}
+                  </div>
+                )}
+              </div>
+              
+              {/* Timer Display */}
+              {isPulsing ? (
+                <div 
+                  className="text-[10px] font-semibold"
+                  style={{ 
+                    color: '#00f2fe',
+                    letterSpacing: '0.3px'
+                  }}
+                >
+                  {formatPulseTime(pulseTimeLeft)}
                 </div>
+              ) : cooldownTime > 0 ? (
+                <div 
+                  className="text-[10px] font-medium"
+                  style={{ 
+                    color: 'rgba(255,255,255,0.4)',
+                    letterSpacing: '0.3px'
+                  }}
+                >
+                  {formatPulseTime(cooldownTime)}
+                </div>
+              ) : null}
+              
+              {/* Triple pulse ring animation when active */}
+              {isPulsing && (
+                <>
+                  <div 
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      animation: 'triplePulseRing1 2s ease-in-out infinite',
+                      border: '2px solid rgba(0, 242, 254, 0.6)',
+                      transform: 'scale(1.5)'
+                    }}
+                  />
+                  <div 
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      animation: 'triplePulseRing2 2s ease-in-out infinite',
+                      border: '2px solid rgba(0, 217, 255, 0.4)',
+                      transform: 'scale(2)'
+                    }}
+                  />
+                  <div 
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      animation: 'triplePulseRing3 2s ease-in-out infinite',
+                      border: '2px solid rgba(102, 126, 234, 0.3)',
+                      transform: 'scale(2.5)'
+                    }}
+                  />
+                </>
               )}
             </div>
+            
+            <style jsx>{`
+              @keyframes triplePulseRing1 {
+                0%, 100% { transform: scale(1.5); opacity: 0.6; }
+                50% { transform: scale(2); opacity: 0; }
+              }
+              @keyframes triplePulseRing2 {
+                0%, 100% { transform: scale(2); opacity: 0.4; }
+                50% { transform: scale(2.5); opacity: 0; }
+              }
+              @keyframes triplePulseRing3 {
+                0%, 100% { transform: scale(2.5); opacity: 0.3; }
+                50% { transform: scale(3); opacity: 0; }
+              }
+            `}</style>
           </button>
         </div>
       </div>
