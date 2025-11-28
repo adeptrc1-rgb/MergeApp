@@ -639,111 +639,123 @@ export default function Profile({ user, logout }) {
           <ChevronRight className="w-5 h-5 text-white/40" />
         </button>
 
-        {/* Quick Action Cards - Horizontal Scroll (Tinder Style) */}
+        {/* Quick Action Cards - Horizontal Scroll (Sophisticated) */}
         <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content' }}>
             {/* Super Likes Card */}
             <div
-              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
+              className="relative flex-shrink-0 rounded-2xl p-5 transition-all"
               style={{
                 width: '160px',
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)'
+                backgroundColor: 'rgba(10,10,10,0.6)',
+                border: '1px solid rgba(255,255,255,0.08)'
               }}
             >
-              <button className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
-                <span className="text-white text-lg">+</span>
-              </button>
-              <div className="mb-3">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #0099CC 100%)' }}>
-                  <Heart className="w-6 h-6 text-white" fill="white" />
+              <div className="mb-4">
+                {/* Minimalist icon */}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(0,217,255,0.1)', border: '1px solid rgba(0,217,255,0.2)' }}>
+                  <Heart className="w-5 h-5 text-white" strokeWidth={1.5} fill="none" />
                 </div>
-                <div className="text-white font-bold text-lg mb-1">
-                  {user.super_likes || 0} Super Likes
+                <div className="text-white font-semibold text-base mb-1">
+                  {user.super_likes || 0}
                 </div>
-                <div className="text-white/60 text-xs mb-3">
+                <div className="text-white/80 text-sm mb-1">
+                  Super Likes
+                </div>
+                <div className="text-white/40 text-xs">
                   Boost your signal
                 </div>
               </div>
               <button
                 onClick={() => navigate('/store')}
-                className="w-full py-2 rounded-full text-xs font-semibold transition-all"
+                className="w-full py-2 rounded-full text-xs font-medium transition-all"
                 style={{
-                  background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
-                  color: 'white'
+                  backgroundColor: 'rgba(0,217,255,0.1)',
+                  border: '1px solid rgba(0,217,255,0.3)',
+                  color: '#00D9FF'
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.15)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.1)'}
               >
-                GET MORE
+                Get More
               </button>
             </div>
 
             {/* Pulse³ Card */}
             <div
-              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
+              className="relative flex-shrink-0 rounded-2xl p-5 transition-all"
               style={{
                 width: '160px',
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)'
+                backgroundColor: 'rgba(10,10,10,0.6)',
+                border: '1px solid rgba(255,255,255,0.08)'
               }}
             >
-              <button className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
-                <span className="text-white text-lg">+</span>
-              </button>
-              <div className="mb-3">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #667eea 100%)' }}>
-                  <span className="text-white font-bold text-xl">P³</span>
+              <div className="mb-4">
+                {/* Minimalist P³ icon */}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(102,126,234,0.1)', border: '1px solid rgba(102,126,234,0.2)' }}>
+                  <span className="text-white font-bold text-sm">P³</span>
                 </div>
-                <div className="text-white font-bold text-lg mb-1">
+                <div className="text-white font-semibold text-base mb-1">
+                  {pulseBoosts || 0}
+                </div>
+                <div className="text-white/80 text-sm mb-1">
                   Pulse³
                 </div>
-                <div className="text-white/60 text-xs mb-3">
+                <div className="text-white/40 text-xs">
                   Exponential boost
                 </div>
               </div>
               <button
                 onClick={() => navigate('/store')}
-                className="w-full py-2 rounded-full text-xs font-semibold transition-all"
+                className="w-full py-2 rounded-full text-xs font-medium transition-all"
                 style={{
-                  background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
-                  color: 'white'
+                  backgroundColor: 'rgba(102,126,234,0.1)',
+                  border: '1px solid rgba(102,126,234,0.3)',
+                  color: '#667eea'
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.15)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.1)'}
               >
-                GET MORE
+                Get More
               </button>
             </div>
 
             {/* Auras/Effects Card */}
             <div
-              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
+              className="relative flex-shrink-0 rounded-2xl p-5 transition-all"
               style={{
                 width: '160px',
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)'
+                backgroundColor: 'rgba(10,10,10,0.6)',
+                border: '1px solid rgba(255,255,255,0.08)'
               }}
             >
-              <button className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center transition-all" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
-                <span className="text-white text-lg">+</span>
-              </button>
-              <div className="mb-3">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #EC4899 0%, #F97316 100%)' }}>
-                  <Sparkles className="w-6 h-6 text-white" />
+              <div className="mb-4">
+                {/* Minimalist icon */}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(236,72,153,0.1)', border: '1px solid rgba(236,72,153,0.2)' }}>
+                  <Sparkles className="w-5 h-5 text-white" strokeWidth={1.5} />
                 </div>
-                <div className="text-white font-bold text-lg mb-1">
+                <div className="text-white font-semibold text-base mb-1">
+                  0
+                </div>
+                <div className="text-white/80 text-sm mb-1">
                   Auras
                 </div>
-                <div className="text-white/60 text-xs mb-3">
+                <div className="text-white/40 text-xs">
                   Signature look
                 </div>
               </div>
               <button
                 onClick={() => navigate('/store')}
-                className="w-full py-2 rounded-full text-xs font-semibold transition-all"
+                className="w-full py-2 rounded-full text-xs font-medium transition-all"
                 style={{
-                  background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)',
-                  color: 'white'
+                  backgroundColor: 'rgba(236,72,153,0.1)',
+                  border: '1px solid rgba(236,72,153,0.3)',
+                  color: '#EC4899'
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(236,72,153,0.15)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(236,72,153,0.1)'}
               >
-                EXPLORE
+                Explore
               </button>
             </div>
           </div>
