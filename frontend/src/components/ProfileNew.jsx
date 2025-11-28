@@ -649,7 +649,7 @@ export default function Profile({ user, logout }) {
           <ChevronRight className="w-5 h-5 text-white/40" />
         </button>
 
-        {/* Quick Action Cards - Horizontal Scroll (Sophisticated) */}
+        {/* Quick Action Cards - Horizontal Scroll (Ultra Minimal) */}
         <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content' }}>
             {/* Super Likes Card */}
@@ -662,9 +662,9 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="mb-4">
-                {/* Minimalist icon - Purple */}
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(102,126,234,0.1)', border: '1px solid rgba(102,126,234,0.2)' }}>
-                  <Heart className="w-5 h-5 text-white" strokeWidth={1.5} fill="none" />
+                {/* Pure icon - no background */}
+                <div className="mb-3 flex justify-start">
+                  <Heart className="w-8 h-8" strokeWidth={1.5} fill="none" style={{ color: '#667eea' }} />
                 </div>
                 <div className="text-white font-semibold text-base mb-1">
                   {user.super_likes || 0}
@@ -678,14 +678,14 @@ export default function Profile({ user, logout }) {
               </div>
               <button
                 onClick={() => navigate('/store')}
-                className="w-full py-2 rounded-full text-xs font-medium transition-all"
+                className="w-full py-2 text-xs font-medium transition-all"
                 style={{
-                  backgroundColor: 'rgba(102,126,234,0.1)',
-                  border: '1px solid rgba(102,126,234,0.3)',
+                  backgroundColor: 'transparent',
+                  border: 'none',
                   color: '#667eea'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.15)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.1)'}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 Get More
               </button>
@@ -701,9 +701,9 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="mb-4">
-                {/* Minimalist P³ icon - Cyan */}
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(0,217,255,0.1)', border: '1px solid rgba(0,217,255,0.2)' }}>
-                  <span className="text-white font-bold text-sm">P³</span>
+                {/* Pure P³ text - no background */}
+                <div className="mb-3 flex justify-start">
+                  <span className="text-3xl font-bold" style={{ color: '#00D9FF' }}>P³</span>
                 </div>
                 <div className="text-white font-semibold text-base mb-1">
                   {pulseBoosts || 0}
@@ -717,14 +717,14 @@ export default function Profile({ user, logout }) {
               </div>
               <button
                 onClick={() => navigate('/store')}
-                className="w-full py-2 rounded-full text-xs font-medium transition-all"
+                className="w-full py-2 text-xs font-medium transition-all"
                 style={{
-                  backgroundColor: 'rgba(0,217,255,0.1)',
-                  border: '1px solid rgba(0,217,255,0.3)',
+                  backgroundColor: 'transparent',
+                  border: 'none',
                   color: '#00D9FF'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.15)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.1)'}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 Get More
               </button>
@@ -740,9 +740,9 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="mb-4">
-                {/* Minimalist icon */}
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(236,72,153,0.1)', border: '1px solid rgba(236,72,153,0.2)' }}>
-                  <Sparkles className="w-5 h-5 text-white" strokeWidth={1.5} />
+                {/* Pure icon - no background */}
+                <div className="mb-3 flex justify-start">
+                  <Sparkles className="w-8 h-8" strokeWidth={1.5} style={{ color: '#EC4899' }} />
                 </div>
                 <div className="text-white font-semibold text-base mb-1">
                   0
@@ -756,14 +756,14 @@ export default function Profile({ user, logout }) {
               </div>
               <button
                 onClick={() => navigate('/store')}
-                className="w-full py-2 rounded-full text-xs font-medium transition-all"
+                className="w-full py-2 text-xs font-medium transition-all"
                 style={{
-                  backgroundColor: 'rgba(236,72,153,0.1)',
-                  border: '1px solid rgba(236,72,153,0.3)',
+                  backgroundColor: 'transparent',
+                  border: 'none',
                   color: '#EC4899'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(236,72,153,0.15)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(236,72,153,0.1)'}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
                 Explore
               </button>
