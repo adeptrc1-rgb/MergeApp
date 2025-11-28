@@ -804,8 +804,8 @@ export default function Profile({ user, logout }) {
                   height: 'calc(100vw - 32px)',
                   maxWidth: '360px',
                   maxHeight: '360px',
-                  background: 'linear-gradient(135deg, #2A2A2A 0%, #3A3A3A 50%, #C0C0C0 100%)',
-                  border: '1px solid rgba(255,255,255,0.2)'
+                  background: 'linear-gradient(180deg, #1A1A1A 0%, #000000 100%)',
+                  border: '1px solid rgba(255,255,255,0.1)'
                 }}
               >
                 <div className="mb-4">
