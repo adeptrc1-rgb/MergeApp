@@ -664,7 +664,7 @@ export default function Profile({ user, logout }) {
               <div className="flex flex-col items-center text-center">
                 {/* Pure icon - no background */}
                 <Heart className="w-6 h-6 mb-2" strokeWidth={1.5} fill="none" style={{ color: '#667eea' }} />
-                <div className="flex items-center justify-center gap-1.5 mb-2" style={{ height: '18px', marginTop: '2px' }}>
+                <div className="flex items-center justify-center gap-1.5 mb-2" style={{ height: '18px', marginTop: '4px' }}>
                   <span className="text-white font-semibold text-sm">
                     {user.super_likes || 0}
                   </span>
