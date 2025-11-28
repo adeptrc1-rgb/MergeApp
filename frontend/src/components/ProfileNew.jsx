@@ -906,36 +906,36 @@ export default function Profile({ user, logout }) {
                 
                 <div className="space-y-3 flex-1 overflow-y-auto scrollbar-hide-elite" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">5 starting spins</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">12-hour cooldown</div>
-                      <div className="text-[#00D9FF] text-xs">4x faster</div>
+                      <div className="text-xs" style={{ color: '#FFD700' }}>4x faster</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">Stack up to 5</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">2x multiplier</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00D9FF] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">+2 bonus monthly</div>
                     </div>
@@ -947,26 +947,26 @@ export default function Profile({ user, logout }) {
                       onClick={() => setShowEliteBenefits(!showEliteBenefits)}
                       className="w-full flex items-center justify-between py-2 transition-colors"
                     >
-                      <span className="text-[#00D9FF] text-xs font-semibold">MORE BENEFITS</span>
-                      <ChevronRight className={`w-4 h-4 text-[#00D9FF] transition-transform ${showEliteBenefits ? 'rotate-90' : ''}`} />
+                      <span className="text-xs font-semibold" style={{ color: '#FFD700' }}>MORE BENEFITS</span>
+                      <ChevronRight className={`w-4 h-4 transition-transform ${showEliteBenefits ? 'rotate-90' : ''}`} style={{ color: '#FFD700' }} />
                     </button>
                     
                     {showEliteBenefits && (
                       <div className="mt-2 space-y-2">
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                           <span className="text-white/80 text-xs">Exclusive Auras</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                           <span className="text-white/80 text-xs">See Who Likes You</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                           <span className="text-white/80 text-xs">Priority Placement</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3 text-[#00D9FF]" strokeWidth={2.5} />
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
                           <span className="text-white/80 text-xs">Unlimited Rewinds</span>
                         </div>
                       </div>
