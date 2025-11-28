@@ -666,28 +666,48 @@ export default function Home({ user }) {
                 }}
               />
               
-              {/* Triple lightning bolt icon - Vertically stacked */}
+              {/* Triple lightning bolt icon - Sophisticated design */}
               <svg 
-                className="w-6 h-6 transition-all relative z-10 group-hover:scale-110"
-                viewBox="0 0 24 24"
+                className="w-7 h-7 transition-all relative z-10 group-hover:scale-110"
+                viewBox="0 0 32 32"
                 fill="none"
                 style={{ 
                   filter: 'drop-shadow(0 0 8px rgba(0, 217, 255, 1)) drop-shadow(0 0 12px rgba(0, 217, 255, 0.6))',
                   animation: 'pulse 2s ease-in-out infinite'
                 }}
               >
-                {/* Triple stacked lightning bolts */}
-                <g transform="translate(0, -2)">
-                  {/* Top bolt */}
-                  <path d="M13 2L10 10h3l-4 8" stroke="#00D9FF" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                </g>
-                <g transform="translate(0, 4)">
-                  {/* Middle bolt - slightly offset */}
-                  <path d="M13 2L10 10h3l-4 8" stroke="#00D9FF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                </g>
-                <g transform="translate(0, 10)">
-                  {/* Bottom bolt */}
-                  <path d="M13 2L10 10h3l-4 8" stroke="#00D9FF" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                {/* Three overlapping lightning bolts forming a unified symbol */}
+                <g>
+                  {/* Left bolt - subtle */}
+                  <path 
+                    d="M10 4L7 14h4l-3 14" 
+                    stroke="#00D9FF" 
+                    strokeWidth="2" 
+                    fill="none"
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    opacity="0.5"
+                  />
+                  {/* Center bolt - prominent */}
+                  <path 
+                    d="M16 2L13 12h4l-3 18" 
+                    stroke="#00D9FF" 
+                    strokeWidth="2.5" 
+                    fill="#00D9FF"
+                    fillOpacity="0.3"
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  />
+                  {/* Right bolt - subtle */}
+                  <path 
+                    d="M22 4L19 14h4l-3 14" 
+                    stroke="#00D9FF" 
+                    strokeWidth="2" 
+                    fill="none"
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    opacity="0.5"
+                  />
                 </g>
               </svg>
               
