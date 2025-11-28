@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './QuantumInfinityWheel.css';
 
 const QuantumInfinityWheel = ({ isOpen, onClose, onRewardClaimed }) => {
-  const [spinning, setSpinning] = useState(false);
+  const [phase, setPhase] = useState('idle'); // idle, forming, looping, bursting, revealing
   const [reward, setReward] = useState(null);
-  const [showExplosion, setShowExplosion] = useState(false);
+  const [particles, setParticles] = useState([]);
 
   const REWARDS = [
     { id: 1, label: '2x Pulse³', color: '#00D9FF', emoji: '⚡', amount: 2 },
@@ -15,27 +15,53 @@ const QuantumInfinityWheel = ({ isOpen, onClose, onRewardClaimed }) => {
     { id: 6, label: '50 Star Coins', color: '#FFA500', emoji: '💰', amount: 50 },
   ];
 
-  const handleSpin = async () => {
-    if (spinning) return;
-    
-    setSpinning(true);
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    
+  // Generate particles when phase changes to forming
+  useEffect(() => {
+    if (phase === 'forming') {
+      const newParticles = Array.from({ length: 60 }, (_, i) => ({
+        id: i,
+        startX: Math.random() * 100,
+        startY: Math.random() * 100,
+        color: REWARDS[i % REWARDS.length].color,
+        delay: Math.random() * 0.5
+      }));
+      setParticles(newParticles);
+    }
+  }, [phase]);
+
+  const handleActivate = async () => {
+    if (phase !== 'idle') return;
+
+    // Phase 1: Particles forming
+    setPhase('forming');
+    await sleep(2000);
+
+    // Phase 2: Looping
+    setPhase('looping');
+    await sleep(3000);
+
+    // Phase 3: Burst
+    setPhase('bursting');
     const selectedReward = REWARDS[Math.floor(Math.random() * REWARDS.length)];
     setReward(selectedReward);
-    setShowExplosion(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    setShowExplosion(false);
-    setSpinning(false);
+    await sleep(500);
+
+    // Phase 4: Reveal
+    setPhase('revealing');
+    await sleep(3000);
+
+    // Reset
+    setPhase('idle');
     setReward(null);
+    setParticles([]);
     onClose();
     
     if (onRewardClaimed) {
       onRewardClaimed(selectedReward);
     }
   };
+
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   const shiftColor = (hex, amount) => {
     const num = parseInt(hex.replace('#', ''), 16);
@@ -50,137 +76,97 @@ const QuantumInfinityWheel = ({ isOpen, onClose, onRewardClaimed }) => {
   return (
     <div className="infinity-overlay" onClick={onClose}>
       <div className="infinity-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close-btn" onClick={onClose}>×</button>
+        <button className="close-x" onClick={onClose}>×</button>
         
-        <h2 className="infinity-header">
-          <span className="infinity-gradient">∞</span> Infinity Wheel
+        <h2 className="infinity-title">
+          <span className="infinity-symbol-title">∞</span> Infinity Wheel
         </h2>
 
-        <div className="infinity-container">
-          <svg className={`infinity-svg ${spinning ? 'spinning' : 'idle'}`} viewBox="0 0 200 100">
-            <defs>
-              <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style={{ stopColor: '#00D9FF' }} />
-                <stop offset="50%" style={{ stopColor: '#667eea' }} />
-                <stop offset="100%" style={{ stopColor: '#00D9FF' }} />
-              </linearGradient>
-              
-              <filter id="infinityGlow">
-                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            
-            <path
-              d="M 35,50 C 35,30 50,30 65,50 C 80,70 95,70 100,50 C 105,30 120,30 135,50 C 150,70 165,70 165,50 C 165,30 150,30 135,50 C 120,70 105,70 100,50 C 95,30 80,30 65,50 C 50,70 35,70 35,50"
-              fill="none"
-              stroke="url(#pathGradient)"
-              strokeWidth="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              filter="url(#infinityGlow)"
-              className="infinity-path"
-            />
+        {/* Main Animation Stage */}
+        <div className="animation-stage">
+          
+          {/* Phase 1 & 3: Particles */}
+          {(phase === 'forming' || phase === 'bursting') && (
+            <div className="particles-layer">
+              {particles.map((particle) => (
+                <div
+                  key={particle.id}
+                  className={`particle-dot ${phase}`}
+                  style={{
+                    '--start-x': `${particle.startX}%`,
+                    '--start-y': `${particle.startY}%`,
+                    '--color': particle.color,
+                    '--delay': `${particle.delay}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
 
-            {REWARDS.map((reward, i) => {
-              const angle = (i / REWARDS.length) * 360;
-              const radians = (angle * Math.PI) / 180;
-              const x = 100 + Math.cos(radians) * 55;
-              const y = 50 + Math.sin(radians) * 30;
-              
-              return (
-                <g key={reward.id} className="reward-segment">
-                  <circle
-                    cx={x}
-                    cy={y}
-                    r="14"
-                    fill={reward.color}
-                    opacity="0.95"
-                    filter="url(#infinityGlow)"
-                  />
-                  <text
-                    x={x}
-                    y={y}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontSize="16"
-                  >
-                    {reward.emoji}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-
-          <div className="floating-symbols">
-            {['∞', 'π', '∫', '∂', '∑', 'Δ'].map((symbol, i) => (
-              <div 
-                key={i}
-                className={`float-symbol ${spinning ? 'orbit' : ''}`}
-                style={{ '--delay': `${i * 0.3}s`, '--index': i }}
-              >
-                {symbol}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {reward && (
-          <>
-            {showExplosion && (
-              <div className="burst-container">
-                {[...Array(40)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="burst-particle"
-                    style={{
-                      '--burst-angle': `${(360 / 40) * i}deg`,
-                      '--burst-delay': `${i * 0.015}s`,
-                      '--burst-color': reward.color
-                    }}
-                  />
-                ))}
-              </div>
-            )}
-
-            <div className="holo-reward-card">
-              <div className="holo-shimmer-effect"></div>
-              <div className="holo-scanlines"></div>
-              <div className="holo-glow-bg" style={{ background: reward.color }}></div>
-              
-              <div className="holo-content">
-                <div className="holo-emoji" style={{ color: reward.color }}>
-                  {reward.emoji}
-                </div>
-                <h3 className="holo-title" style={{
-                  background: `linear-gradient(135deg, ${reward.color}, ${shiftColor(reward.color, 60)})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}>
-                  {reward.label}
-                </h3>
-                <p className="holo-sub">QUANTUM LOCKED</p>
+          {/* Phase 2: Infinity Symbol Looping */}
+          {(phase === 'looping' || phase === 'bursting') && (
+            <div className={`infinity-symbol-container ${phase}`}>
+              <svg viewBox="0 0 200 100" className="infinity-path-svg">
+                <defs>
+                  <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{ stopColor: '#00D9FF', stopOpacity: 1 }} />
+                    <stop offset="50%" style={{ stopColor: '#667eea', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: '#00D9FF', stopOpacity: 1 }} />
+                  </linearGradient>
+                  
+                  <filter id="pathGlow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
                 
-                <div className="holo-badge">
-                  <div className="badge-pulse" style={{ background: reward.color }}></div>
-                  <span style={{ color: reward.color }}>+{reward.amount}</span>
-                </div>
+                {/* Thin pulsating infinity path */}
+                <path
+                  d="M 35,50 C 35,25 55,25 70,50 C 85,75 100,75 100,50 C 100,25 115,25 130,50 C 145,75 165,75 165,50 C 165,25 145,25 130,50 C 115,75 100,75 100,50 C 100,25 85,25 70,50 C 55,75 35,75 35,50"
+                  fill="none"
+                  stroke="url(#glowGrad)"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  filter="url(#pathGlow)"
+                  className="infinity-loop-path"
+                />
+              </svg>
+            </div>
+          )}
+
+          {/* Phase 4: Reward Reveal */}
+          {phase === 'revealing' && reward && (
+            <div className="reward-reveal">
+              <div className="reward-emoji-large" style={{ color: reward.color }}>
+                {reward.emoji}
+              </div>
+              <h3 className="reward-text" style={{
+                background: `linear-gradient(135deg, ${reward.color}, ${shiftColor(reward.color, 60)})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>
+                {reward.label}
+              </h3>
+              <div className="reward-amount" style={{ color: reward.color }}>
+                +{reward.amount}
               </div>
             </div>
-          </>
-        )}
+          )}
+        </div>
 
-        {!spinning && !reward && (
-          <button className="activate-btn" onClick={handleSpin}>
-            <div className="btn-ripple-1"></div>
-            <div className="btn-ripple-2"></div>
-            <div className="btn-ripple-3"></div>
-            <span className="btn-label">ACTIVATE QUANTUM SPIN</span>
+        {/* Activate Button */}
+        {phase === 'idle' && (
+          <button className="spin-activate-btn" onClick={handleActivate}>
+            <div className="btn-pulse"></div>
+            <span>ACTIVATE QUANTUM SPIN</span>
           </button>
         )}
+
+        {/* Phase Debug */}
+        <div className="phase-debug">{phase.toUpperCase()}</div>
       </div>
     </div>
   );
