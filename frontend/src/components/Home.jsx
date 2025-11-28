@@ -56,8 +56,109 @@ export default function Home({ user }) {
   const [userInventory, setUserInventory] = useState(null);
   const [justSwiped, setJustSwiped] = useState(false);
   
-  // Merge Score breakdown modal state
   const [showScoreBreakdown, setShowScoreBreakdown] = useState(false);
+  
+  // Pulse³ state management
+  const [pulseBoosts, setPulseBoosts] = useState(1);
+  const [isPulsing, setIsPulsing] = useState(false);
+  const [pulseTimeLeft, setPulseTimeLeft] = useState(0);
+  const [cooldownTime, setCooldownTime] = useState(0);
+
+  // Load Pulse³ state from localStorage
+  useEffect(() => {
+    const savedState = localStorage.getItem('pulseCubedState');
+    if (savedState) {
+      const { pulseBoosts, isPulsing, pulseTimeLeft, cooldownTime, lastUpdate } = JSON.parse(savedState);
+      const now = Math.floor(Date.now() / 1000);
+      const timePassed = now - lastUpdate;
+
+      if (isPulsing && pulseTimeLeft > 0) {
+        const newPulseTime = Math.max(0, pulseTimeLeft - timePassed);
+        if (newPulseTime > 0) {
+          setIsPulsing(true);
+          setPulseTimeLeft(newPulseTime);
+        } else {
+          setIsPulsing(false);
+          setCooldownTime(Math.max(0, 86400 - timePassed));
+        }
+      } else if (cooldownTime > 0) {
+        const newCooldown = Math.max(0, cooldownTime - timePassed);
+        if (newCooldown > 0) {
+          setCooldownTime(newCooldown);
+        } else {
+          setPulseBoosts(1);
+          setCooldownTime(0);
+        }
+      } else {
+        setPulseBoosts(pulseBoosts || 1);
+      }
+    }
+  }, []);
+
+  // Save Pulse³ state to localStorage
+  useEffect(() => {
+    const state = {
+      pulseBoosts,
+      isPulsing,
+      pulseTimeLeft,
+      cooldownTime,
+      lastUpdate: Math.floor(Date.now() / 1000)
+    };
+    localStorage.setItem('pulseCubedState', JSON.stringify(state));
+  }, [pulseBoosts, isPulsing, pulseTimeLeft, cooldownTime]);
+
+  // Pulse³ countdown timer
+  useEffect(() => {
+    if (!isPulsing || pulseTimeLeft <= 0) return;
+
+    const pulseTimer = setInterval(() => {
+      setPulseTimeLeft(prev => {
+        if (prev <= 1) {
+          setIsPulsing(false);
+          setCooldownTime(86400);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(pulseTimer);
+  }, [isPulsing, pulseTimeLeft]);
+
+  // Cooldown countdown timer
+  useEffect(() => {
+    if (cooldownTime <= 0) return;
+
+    const cooldownTimer = setInterval(() => {
+      setCooldownTime(prev => {
+        if (prev <= 1) {
+          setPulseBoosts(1);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(cooldownTimer);
+  }, [cooldownTime]);
+
+  // Format time display
+  const formatPulseTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    if (hours > 0) return `${hours}h ${minutes}m`;
+    return `${minutes}m`;
+  };
+
+  // Handle Pulse³ activation
+  const handlePulseActivate = () => {
+    if (pulseBoosts <= 0 || isPulsing) return;
+    
+    setIsPulsing(true);
+    setPulseTimeLeft(1800); // 30 minutes
+    setPulseBoosts(0);
+    handleBoost(); // Call existing boost function
+  };
   
   // Unread messages state
   const [unreadCount, setUnreadCount] = useState(0);
