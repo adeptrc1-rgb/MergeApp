@@ -6,7 +6,7 @@ import {
   ChevronRight, Check, Lock, Eye, EyeOff, Heart,
   MessageCircle, RotateCcw, Coins, Clock, Trophy, Flame, Settings, Star, Camera
 } from 'lucide-react';
-import ConnectionMatrix from './ConnectionMatrix';
+import QuantumInfinityWheel from './QuantumInfinityWheel';
 import BottomNav from './BottomNav';
 import MergeLogo from './MergeLogo';
 import EditProfileModal from './EditProfileModal';
