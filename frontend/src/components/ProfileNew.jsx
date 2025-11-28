@@ -860,34 +860,45 @@ export default function Profile({ user, logout }) {
                   height: 'calc(100vw - 32px)',
                   maxWidth: '360px',
                   maxHeight: '360px',
-                  background: 'linear-gradient(135deg, rgba(0,217,255,0.08) 0%, rgba(108,99,255,0.08) 100%)',
-                  border: '1px solid rgba(0,217,255,0.3)',
-                  boxShadow: '0 0 30px rgba(0,217,255,0.15)'
+                  background: 'linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #FFA500 100%)',
+                  border: '1px solid rgba(255, 215, 0, 0.4)',
+                  boxShadow: '0 0 40px rgba(255, 215, 0, 0.3)'
                 }}
               >
-                {/* Subtle top accent line */}
+                {/* Subtle top accent line - Gold */}
                 <div style={{
                   position: 'absolute',
                   top: 0,
                   left: '20px',
                   right: '20px',
                   height: '1px',
-                  background: 'linear-gradient(90deg, transparent, #00D9FF, transparent)'
+                  background: 'linear-gradient(90deg, transparent, #FFD700, transparent)'
                 }} />
 
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-semibold text-xl">Merge Elite</h3>
+                  <h3 
+                    className="font-semibold text-xl"
+                    style={{
+                      background: 'linear-gradient(135deg, #FFF4E6 0%, #FFD700 50%, #FFA500 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}
+                  >
+                    Merge Elite
+                  </h3>
                   <button
                     onClick={handleUpgradeToElite}
                     disabled={upgrading}
                     className="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
                     style={{
-                      backgroundColor: upgrading ? 'rgba(255,255,255,0.5)' : 'white',
-                      color: 'black',
-                      cursor: upgrading ? 'not-allowed' : 'pointer'
+                      backgroundColor: upgrading ? 'rgba(255,215,0,0.3)' : '#000000',
+                      color: '#FFD700',
+                      cursor: upgrading ? 'not-allowed' : 'pointer',
+                      border: '1px solid #FFD700'
                     }}
-                    onMouseEnter={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#00D9FF')}
-                    onMouseLeave={(e) => !upgrading && (e.currentTarget.style.backgroundColor = 'white')}
+                    onMouseEnter={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#1a1a1a')}
+                    onMouseLeave={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#000000')}
                   >
                     {upgrading ? 'Upgrading...' : 'Upgrade'}
                   </button>
