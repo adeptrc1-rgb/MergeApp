@@ -1016,10 +1016,10 @@ export default function Profile({ user, logout }) {
 
       <BottomNav currentTab="profile" navigate={navigate} darkMode={true} />
 
-      <ConnectionMatrix 
+      <QuantumInfinityWheel 
         isOpen={showConnectionMatrix} 
         onClose={() => setShowConnectionMatrix(false)} 
-        onRewardClaimed={handleRewardClaimed} 
+        onRewardClaimed={handleRewardClaimed}
       />
 
       {showEditProfile && (
