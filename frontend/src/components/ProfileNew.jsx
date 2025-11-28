@@ -821,7 +821,7 @@ export default function Profile({ user, logout }) {
                     <div className="w-1 h-1 rounded-full bg-white/60 flex-shrink-0 mt-2"></div>
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">1 spin per 72 hours</div>
-                      <div className="text-white text-xs">Merge Wheel access 2-3 times weekly</div>
+                      <div className="text-white text-xs">Infinity Wheel access 2-3 times weekly</div>
                     </div>
                   </div>
                   
