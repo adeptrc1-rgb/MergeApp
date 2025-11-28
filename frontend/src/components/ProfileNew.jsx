@@ -742,14 +742,10 @@ export default function Profile({ user, logout }) {
                 <div className="mb-3 flex justify-start">
                   <Sparkles className="w-8 h-8" strokeWidth={1.5} style={{ color: '#EC4899' }} />
                 </div>
-                <div className="text-white font-semibold text-base mb-1">
-                  0
-                </div>
-                <div className="text-white/80 text-sm mb-1">
-                  Auras
-                </div>
-                <div className="text-white/40 text-xs">
-                  Signature look
+                <div className="text-center">
+                  <div className="text-base font-semibold mb-1" style={{ color: '#EC4899' }}>
+                    Auras
+                  </div>
                 </div>
               </div>
               <button
@@ -763,7 +759,7 @@ export default function Profile({ user, logout }) {
                 onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
                 onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
-                Explore
+                EXPLORE
               </button>
             </div>
           </div>
