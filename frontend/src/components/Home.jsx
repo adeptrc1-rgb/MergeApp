@@ -666,15 +666,23 @@ export default function Home({ user }) {
                 }}
               />
               
-              <Zap 
-                className="w-6 h-6 transition-all relative z-10 group-hover:scale-110" 
+              {/* Triple lightning bolt icon */}
+              <svg 
+                className="w-6 h-6 transition-all relative z-10 group-hover:scale-110"
+                viewBox="0 0 24 24"
+                fill="#00D9FF"
                 style={{ 
-                  color: '#00D9FF', 
                   filter: 'drop-shadow(0 0 8px rgba(0, 217, 255, 1)) drop-shadow(0 0 12px rgba(0, 217, 255, 0.6))',
                   animation: 'pulse 2s ease-in-out infinite'
-                }} 
-                fill="#00D9FF" 
-              />
+                }}
+              >
+                {/* Left bolt */}
+                <path d="M5 13l5-9v6h2l-5 9v-6z" opacity="0.7" />
+                {/* Center bolt */}
+                <path d="M10 13l5-9v6h2l-5 9v-6z" />
+                {/* Right bolt */}
+                <path d="M15 13l5-9v6h2l-5 9v-6z" opacity="0.7" />
+              </svg>
               
               {/* Boost count badge */}
               {(user.profile_boosts || 0) > 0 && (
