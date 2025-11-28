@@ -804,8 +804,8 @@ export default function Profile({ user, logout }) {
                   height: 'calc(100vw - 32px)',
                   maxWidth: '360px',
                   maxHeight: '360px',
-                  backgroundColor: 'rgba(10,10,10,0.8)',
-                  border: '1px solid rgba(255,255,255,0.1)'
+                  backgroundColor: '#2A2A2A',
+                  border: '1px solid rgba(255,255,255,0.15)'
                 }}
               >
                 <div className="mb-4">
