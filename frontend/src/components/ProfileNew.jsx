@@ -662,8 +662,8 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="mb-4">
-                {/* Minimalist icon */}
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(0,217,255,0.1)', border: '1px solid rgba(0,217,255,0.2)' }}>
+                {/* Minimalist icon - Purple */}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(102,126,234,0.1)', border: '1px solid rgba(102,126,234,0.2)' }}>
                   <Heart className="w-5 h-5 text-white" strokeWidth={1.5} fill="none" />
                 </div>
                 <div className="text-white font-semibold text-base mb-1">
@@ -680,12 +680,12 @@ export default function Profile({ user, logout }) {
                 onClick={() => navigate('/store')}
                 className="w-full py-2 rounded-full text-xs font-medium transition-all"
                 style={{
-                  backgroundColor: 'rgba(0,217,255,0.1)',
-                  border: '1px solid rgba(0,217,255,0.3)',
-                  color: '#00D9FF'
+                  backgroundColor: 'rgba(102,126,234,0.1)',
+                  border: '1px solid rgba(102,126,234,0.3)',
+                  color: '#667eea'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.15)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.1)'}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.15)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.1)'}
               >
                 Get More
               </button>
@@ -701,8 +701,8 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="mb-4">
-                {/* Minimalist P³ icon */}
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(102,126,234,0.1)', border: '1px solid rgba(102,126,234,0.2)' }}>
+                {/* Minimalist P³ icon - Cyan */}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(0,217,255,0.1)', border: '1px solid rgba(0,217,255,0.2)' }}>
                   <span className="text-white font-bold text-sm">P³</span>
                 </div>
                 <div className="text-white font-semibold text-base mb-1">
@@ -719,12 +719,12 @@ export default function Profile({ user, logout }) {
                 onClick={() => navigate('/store')}
                 className="w-full py-2 rounded-full text-xs font-medium transition-all"
                 style={{
-                  backgroundColor: 'rgba(102,126,234,0.1)',
-                  border: '1px solid rgba(102,126,234,0.3)',
-                  color: '#667eea'
+                  backgroundColor: 'rgba(0,217,255,0.1)',
+                  border: '1px solid rgba(0,217,255,0.3)',
+                  color: '#00D9FF'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.15)'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(102,126,234,0.1)'}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.15)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,217,255,0.1)'}
               >
                 Get More
               </button>
