@@ -647,8 +647,41 @@ export default function Home({ user }) {
           {/* Merge wordmark */}
           <MergeLogo size="sm" color="var(--text-primary)" />
           
-          {/* Pulse³ Button - Exponential profile boost */}
-          <PulseCubedHeader onActivate={handleBoost} />
+          {/* Pulse³ - Minimalist Text Button */}
+          <button
+            onClick={handleBoost}
+            className="relative focus:outline-none transition-all"
+            title="Pulse³ - Exponential profile boost"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            <div className="relative flex items-center gap-2">
+              {/* Pulse³ Text */}
+              <span 
+                className="text-base font-semibold transition-all"
+                style={{
+                  color: (user.profile_boosts || 0) > 0 ? '#00D9FF' : 'rgba(255,255,255,0.4)',
+                  fontFamily: "'Inter', sans-serif",
+                  letterSpacing: '-0.5px'
+                }}
+              >
+                Pulse³
+              </span>
+              
+              {/* Boost count badge */}
+              {(user.profile_boosts || 0) > 0 && (
+                <div 
+                  className="text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center" 
+                  style={{ 
+                    background: '#00D9FF',
+                    color: '#000',
+                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.5)'
+                  }}
+                >
+                  {user.profile_boosts > 9 ? '9+' : user.profile_boosts}
+                </div>
+              )}
+            </div>
+          </button>
         </div>
       </div>
 
