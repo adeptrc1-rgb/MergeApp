@@ -743,7 +743,7 @@ export default function Home({ user }) {
       )}
 
       {/* Header - Fixed */}
-      <div className="fixed top-0 left-0 right-0 z-10" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div className="fixed top-0 left-0 right-0" style={{ backgroundColor: 'var(--bg-primary)', zIndex: 150 }}>
         <div className="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between">
           {/* Merge wordmark */}
           <MergeLogo size="sm" color="var(--text-primary)" />
@@ -753,8 +753,7 @@ export default function Home({ user }) {
             onClick={handlePulseActivate}
             className="relative focus:outline-none transition-all"
             title="Pulse³ - Exponential profile boost"
-            style={{ WebkitTapHighlightColor: 'transparent' }}
-            disabled={pulseBoosts <= 0 && !isPulsing}
+            style={{ WebkitTapHighlightColor: 'transparent', zIndex: 10, cursor: pulseBoosts <= 0 && !isPulsing ? 'not-allowed' : 'pointer' }}
           >
             <div className="relative flex flex-col items-end gap-0.5">
               {/* Pulse³ Text with Animation */}
