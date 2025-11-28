@@ -1,12 +1,15 @@
-.infinity-overlay {
+/* Liquid Mathematics Style - Sophisticated & Premium */
+
+.liquid-overlay {
   position: fixed;
   inset: 0;
-  background: #000000;
+  background: rgba(0, 0, 0, 0.96);
+  backdrop-filter: blur(8px);
   z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.4s ease;
+  animation: fadeIn 0.5s ease-out;
 }
 
 @keyframes fadeIn {
@@ -14,389 +17,273 @@
   to { opacity: 1; }
 }
 
-.infinity-modal {
+.liquid-modal {
   position: relative;
-  width: 95%;
-  max-width: 500px;
-  background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 100%);
+  width: 90%;
+  max-width: 420px;
+  background: linear-gradient(135deg, rgba(15, 15, 25, 0.95), rgba(20, 15, 30, 0.95));
   border-radius: 20px;
-  border: 1px solid rgba(0, 217, 255, 0.2);
-  padding: 20px;
-  box-shadow: 0 0 80px rgba(0, 217, 255, 0.25);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  padding: 32px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-.close-x {
+.modal-x {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 32px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 28px;
   cursor: pointer;
-  z-index: 100;
   transition: color 0.3s;
 }
 
-.close-x:hover { color: white; }
+.modal-x:hover { color: rgba(255, 255, 255, 0.8); }
 
-.infinity-title {
+.modal-title {
   text-align: center;
   color: white;
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+  letter-spacing: 0.5px;
 }
 
-.infinity-icon {
-  font-size: 32px;
-  background: linear-gradient(135deg, #00D9FF, #667eea);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.title-symbol {
+  font-size: 28px;
+  font-weight: 300;
+  color: #667eea;
 }
 
-.stage {
+/* Wheel Stage */
+.wheel-stage {
   position: relative;
   width: 100%;
-  height: 400px;
-  background: radial-gradient(circle at center, rgba(0, 217, 255, 0.03), transparent);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-/* PHASE 1: PARTICLES FORMING */
-.particle-layer {
-  position: absolute;
-  inset: 0;
-}
-
-.particle {
-  position: absolute;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: var(--color);
-  box-shadow: 
-    0 0 8px var(--color),
-    0 0 16px var(--color),
-    0 0 24px var(--color);
-  left: var(--start-x);
-  top: var(--start-y);
-}
-
-.particle.forming {
-  animation: convergeToInfinity 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: var(--delay);
-}
-
-@keyframes convergeToInfinity {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(
-      calc(50% - var(--start-x)),
-      calc(50% - var(--start-y))
-    ) scale(0.5);
-    opacity: 0;
-  }
-}
-
-.particle-trail {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: inherit;
-  opacity: 0.4;
-  animation: trailFade 0.8s ease-out infinite;
-}
-
-@keyframes trailFade {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(2.5); opacity: 0; }
-}
-
-/* PHASE 2: OUROBOROS INFINITY LOOP */
-.infinity-loop-stage {
-  position: absolute;
-  inset: 0;
+  height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1200px;
 }
 
-.infinity-loop-stage.looping .infinity-outer {
-  animation: ouroborosRotate 4s linear infinite;
-}
-
-.infinity-loop-stage.looping .infinity-inner {
-  animation: ouroborosRotate 4s linear infinite reverse;
-}
-
-.infinity-loop-stage.looping .infinity-core {
-  animation: ouroborosRotate 3s linear infinite;
-}
-
-.infinity-loop-stage.bursting .infinity-outer,
-.infinity-loop-stage.bursting .infinity-inner,
-.infinity-loop-stage.bursting .infinity-core {
-  animation: explodeInfinity 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-}
-
-/* Ouroboros 3D rotation */
-@keyframes ouroborosRotate {
-  0% { 
-    transform: rotateY(0deg) rotateZ(0deg) scale(1);
-  }
-  50% {
-    transform: rotateY(180deg) rotateZ(180deg) scale(1.05);
-  }
-  100% { 
-    transform: rotateY(360deg) rotateZ(360deg) scale(1);
-  }
-}
-
-@keyframes explodeInfinity {
-  0% { 
-    transform: scale(1) rotateZ(0deg);
-    opacity: 1;
-    filter: blur(0px);
-  }
-  100% { 
-    transform: scale(4) rotateZ(180deg);
-    opacity: 0;
-    filter: blur(20px);
-  }
-}
-
-.infinity-outer,
-.infinity-inner,
-.infinity-core {
-  position: absolute;
-  width: 80%;
-  max-width: 360px;
-  filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.7));
-  transform-style: preserve-3d;
-}
-
-.infinity-inner {
-  width: 60%;
-  max-width: 270px;
-  filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6));
-}
-
-.infinity-core {
-  width: 40%;
-  max-width: 180px;
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
-}
-
-.path-outer,
-.path-inner,
-.path-core {
-  animation: pathPulse 1.8s ease-in-out infinite;
-}
-
-@keyframes pathPulse {
-  0%, 100% { 
-    stroke-width: 3;
-    opacity: 0.85;
-  }
-  50% { 
-    stroke-width: 4.5;
-    opacity: 1;
-  }
-}
-
-/* Traveling lights on path */
-.traveling-light {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #FFFFFF;
+/* Liquid Mathematics Infinity Wheel */
+.infinity-wheel {
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  box-shadow: 0 0 12px #00D9FF, 0 0 24px #00D9FF;
-  animation: travelInfinity 3s linear infinite;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  animation: liquidFlow 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.light-1 { animation-delay: 0s; }
-.light-2 { animation-delay: 1s; }
-.light-3 { animation-delay: 2s; }
-
-@keyframes travelInfinity {
-  0% { left: 20%; top: 50%; opacity: 0; }
-  10% { opacity: 1; }
-  25% { left: 35%; top: 35%; }
-  50% { left: 50%; top: 50%; }
-  75% { left: 65%; top: 65%; }
-  90% { opacity: 1; }
-  100% { left: 80%; top: 50%; opacity: 0; }
-}
-
-/* PHASE 3: BURST */
-.burst-layer {
-  position: absolute;
-  inset: 0;
-}
-
-.burst-particle {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: var(--color);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  box-shadow: 0 0 16px var(--color), 0 0 32px var(--color);
-  animation: explosionBurst 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  animation-delay: var(--delay);
-}
-
-@keyframes explosionBurst {
+@keyframes liquidFlow {
   0% {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(1);
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(8px);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(300px) scale(0);
-    opacity: 0;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
   }
 }
 
-/* PHASE 4: REWARD REVEAL */
-.reward-display {
+/* Gradient overlay for depth */
+.wheel-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
+}
+
+/* Infinity Symbol */
+.infinity-symbol {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
-  animation: rewardEnter 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-  z-index: 100;
+  font-size: 64px;
+  color: white;
+  font-weight: 300;
+  font-family: 'Times New Roman', serif;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes rewardEnter {
+/* Liquid Ripple Effect */
+.liquid-ripple {
+  position: absolute;
+  inset: -20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: rippleExpand 2s ease-out infinite;
+}
+
+@keyframes rippleExpand {
   0% {
-    transform: translate(-50%, -50%) scale(0) rotate(-360deg);
-    opacity: 0;
-    filter: blur(30px);
+    transform: scale(0.8);
+    opacity: 0.6;
   }
-  70% {
-    transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Spinning State */
+.infinity-wheel.spinning {
+  animation: elegantSpin 2.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes elegantSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  }
+  50% {
+    transform: rotate(1080deg) scale(1.05);
+    box-shadow: 0 12px 48px rgba(102, 126, 234, 0.5);
+  }
+  100% {
+    transform: rotate(2160deg) scale(1);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  }
+}
+
+/* Revealing State */
+.infinity-wheel.revealing {
+  animation: liquidDissolve 0.8s ease-out forwards;
+}
+
+@keyframes liquidDissolve {
+  0% {
     opacity: 1;
+    transform: scale(1);
     filter: blur(0px);
   }
   100% {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-    opacity: 1;
-    filter: blur(0px);
+    opacity: 0;
+    transform: scale(1.2);
+    filter: blur(12px);
   }
 }
 
-.reward-bg-glow {
+/* Reward Card - Premium & Minimal */
+.reward-card {
   position: absolute;
-  inset: -60px;
-  border-radius: 50%;
-  opacity: 0.4;
-  filter: blur(60px);
-  z-index: -1;
-  animation: glowExpand 2s ease-in-out infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  padding: 32px 24px;
+  min-width: 240px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: cardReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes glowExpand {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.2); }
+@keyframes cardReveal {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
-.reward-emoji-huge {
-  font-size: 100px;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 40px currentColor);
-  animation: emojiFloat 2s ease-in-out infinite;
-}
-
-@keyframes emojiFloat {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-12px) scale(1.05); }
-}
-
-.reward-name {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  text-shadow: 0 0 30px currentColor;
-}
-
-.reward-value {
-  font-size: 48px;
-  font-weight: 700;
-  text-shadow: 0 0 30px currentColor;
-  animation: valueScale 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
-}
-
-@keyframes valueScale {
-  from { transform: scale(0); }
-  to { transform: scale(1); }
-}
-
-/* Activate Button */
-.activate-button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 16px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  letter-spacing: 1px;
-  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.5);
-  transition: transform 0.2s;
-}
-
-.activate-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.7);
-}
-
-.btn-glow {
+/* Subtle card shine */
+.card-shine {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
-  animation: btnGlowPulse 2s ease-out infinite;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  animation: shine 3s ease-in-out infinite;
 }
 
-@keyframes btnGlowPulse {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(2); opacity: 0; }
+@keyframes shine {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
 
-.activate-button span {
+.reward-info {
   position: relative;
   z-index: 10;
 }
 
-.phase-indicator {
+.reward-label {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.reward-amount {
+  font-size: 40px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+/* Activate Button - Sophisticated */
+.elegant-activate {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.elegant-activate:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+}
+
+.elegant-activate:active {
+  transform: translateY(0);
+}
+
+.btn-liquid {
   position: absolute;
-  bottom: 8px;
-  left: 8px;
-  font-size: 9px;
-  color: rgba(255, 255, 255, 0.2);
-  font-family: monospace;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: liquidShimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes liquidShimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.elegant-activate span {
+  position: relative;
+  z-index: 10;
 }
