@@ -666,11 +666,13 @@ export default function Profile({ user, logout }) {
                 <div className="mb-3 flex justify-start">
                   <Heart className="w-8 h-8" strokeWidth={1.5} fill="none" style={{ color: '#667eea' }} />
                 </div>
-                <div className="text-white font-semibold text-base mb-1">
-                  {user.super_likes || 0}
-                </div>
-                <div className="text-white/80 text-sm mb-1">
-                  Super Likes
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="text-white font-semibold text-base">
+                    {user.super_likes || 0}
+                  </div>
+                  <div className="text-white/80 text-sm">
+                    Super Likes
+                  </div>
                 </div>
               </div>
               <button
@@ -684,7 +686,7 @@ export default function Profile({ user, logout }) {
                 onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
                 onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
-                Get More
+                GET MORE
               </button>
             </div>
 
