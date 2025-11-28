@@ -861,8 +861,8 @@ export default function Profile({ user, logout }) {
                   maxWidth: '360px',
                   maxHeight: '360px',
                   background: 'linear-gradient(180deg, #FFF8DC 0%, #FFE4B5 100%)',
-                  border: '2px solid #FFD700',
-                  boxShadow: '0 4px 20px rgba(255,215,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5)'
+                  border: '1px solid rgba(255,215,0,0.3)',
+                  boxShadow: '0 4px 20px rgba(255,215,0,0.2)'
                 }}
               >
                 {/* Subtle top accent line - Gold */}
