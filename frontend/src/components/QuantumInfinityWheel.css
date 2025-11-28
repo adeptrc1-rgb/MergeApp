@@ -1,14 +1,12 @@
-/* Overlay */
 .infinity-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.97);
-  backdrop-filter: blur(10px);
+  background: #000000;
   z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.4s ease;
 }
 
 @keyframes fadeIn {
@@ -16,40 +14,37 @@
   to { opacity: 1; }
 }
 
-/* Modal */
 .infinity-modal {
   position: relative;
   width: 95%;
-  max-width: 480px;
-  background: linear-gradient(135deg, rgba(5, 5, 20, 0.98), rgba(15, 5, 30, 0.98));
-  border-radius: 24px;
-  border: 1px solid rgba(0, 217, 255, 0.25);
-  padding: 24px;
-  box-shadow: 0 0 60px rgba(0, 217, 255, 0.3);
+  max-width: 500px;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2a 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  padding: 20px;
+  box-shadow: 0 0 80px rgba(0, 217, 255, 0.25);
 }
 
 .close-x {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: transparent;
+  background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 32px;
   cursor: pointer;
   z-index: 100;
   transition: color 0.3s;
 }
 
-.close-x:hover {
-  color: white;
-}
+.close-x:hover { color: white; }
 
 .infinity-title {
   text-align: center;
   color: white;
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -57,155 +52,249 @@
   gap: 10px;
 }
 
-.infinity-symbol-title {
-  font-size: 36px;
+.infinity-icon {
+  font-size: 32px;
   background: linear-gradient(135deg, #00D9FF, #667eea);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: symbolPulse 2s ease-in-out infinite;
 }
 
-@keyframes symbolPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-/* Animation Stage */
-.animation-stage {
+.stage {
   position: relative;
   width: 100%;
-  height: 380px;
-  background: radial-gradient(circle at center, rgba(0, 217, 255, 0.05), transparent 70%);
+  height: 400px;
+  background: radial-gradient(circle at center, rgba(0, 217, 255, 0.03), transparent);
   border-radius: 16px;
   overflow: hidden;
 }
 
-/* PHASE 1 & 3: PARTICLES */
-.particles-layer {
+/* PHASE 1: PARTICLES FORMING */
+.particle-layer {
   position: absolute;
   inset: 0;
 }
 
-.particle-dot {
+.particle {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: var(--size);
+  height: var(--size);
   border-radius: 50%;
   background: var(--color);
-  box-shadow: 0 0 10px var(--color), 0 0 20px var(--color);
+  box-shadow: 
+    0 0 8px var(--color),
+    0 0 16px var(--color),
+    0 0 24px var(--color);
   left: var(--start-x);
   top: var(--start-y);
 }
 
-.particle-dot.forming {
-  animation: particleForm 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+.particle.forming {
+  animation: convergeToInfinity 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   animation-delay: var(--delay);
 }
 
-@keyframes particleForm {
+@keyframes convergeToInfinity {
   0% {
-    transform: translate(0, 0) scale(0);
+    transform: translate(0, 0) scale(1);
     opacity: 0;
   }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(calc(50vw - var(--start-x) - 50%), calc(50vh - var(--start-y) - 50%)) scale(1);
-    opacity: 0.9;
-  }
-}
-
-.particle-dot.bursting {
-  animation: particleBurst 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
-  animation-delay: var(--delay);
-  left: 50%;
-  top: 50%;
-}
-
-@keyframes particleBurst {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
+  20% {
     opacity: 1;
   }
   100% {
     transform: translate(
-      calc(-50% + (var(--start-x) - 50) * 3), 
-      calc(-50% + (var(--start-y) - 50) * 3)
-    ) scale(0);
+      calc(50% - var(--start-x)),
+      calc(50% - var(--start-y))
+    ) scale(0.5);
     opacity: 0;
   }
 }
 
-/* PHASE 2: INFINITY SYMBOL LOOPING */
-.infinity-symbol-container {
+.particle-trail {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.4;
+  animation: trailFade 0.8s ease-out infinite;
+}
+
+@keyframes trailFade {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* PHASE 2: OUROBOROS INFINITY LOOP */
+.infinity-loop-stage {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 1200px;
 }
 
-.infinity-symbol-container.looping .infinity-path-svg {
-  animation: infinityRotate 3s linear infinite;
+.infinity-loop-stage.looping .infinity-outer {
+  animation: ouroborosRotate 4s linear infinite;
 }
 
-.infinity-symbol-container.bursting .infinity-path-svg {
-  animation: infinityExplode 0.5s ease-out forwards;
+.infinity-loop-stage.looping .infinity-inner {
+  animation: ouroborosRotate 4s linear infinite reverse;
 }
 
-@keyframes infinityRotate {
-  from { transform: rotate(0deg) scale(1); }
-  to { transform: rotate(360deg) scale(1); }
+.infinity-loop-stage.looping .infinity-core {
+  animation: ouroborosRotate 3s linear infinite;
 }
 
-@keyframes infinityExplode {
-  0% { transform: scale(1); opacity: 1; filter: blur(0px); }
-  100% { transform: scale(3); opacity: 0; filter: blur(10px); }
+.infinity-loop-stage.bursting .infinity-outer,
+.infinity-loop-stage.bursting .infinity-inner,
+.infinity-loop-stage.bursting .infinity-core {
+  animation: explodeInfinity 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 
-.infinity-path-svg {
-  width: 70%;
-  max-width: 320px;
-  height: auto;
-  filter: drop-shadow(0 0 15px rgba(0, 217, 255, 0.6));
+/* Ouroboros 3D rotation */
+@keyframes ouroborosRotate {
+  0% { 
+    transform: rotateY(0deg) rotateZ(0deg) scale(1);
+  }
+  50% {
+    transform: rotateY(180deg) rotateZ(180deg) scale(1.05);
+  }
+  100% { 
+    transform: rotateY(360deg) rotateZ(360deg) scale(1);
+  }
 }
 
-.infinity-loop-path {
-  animation: pathPulsate 1.5s ease-in-out infinite;
+@keyframes explodeInfinity {
+  0% { 
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% { 
+    transform: scale(4) rotateZ(180deg);
+    opacity: 0;
+    filter: blur(20px);
+  }
 }
 
-@keyframes pathPulsate {
+.infinity-outer,
+.infinity-inner,
+.infinity-core {
+  position: absolute;
+  width: 80%;
+  max-width: 360px;
+  filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.7));
+  transform-style: preserve-3d;
+}
+
+.infinity-inner {
+  width: 60%;
+  max-width: 270px;
+  filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6));
+}
+
+.infinity-core {
+  width: 40%;
+  max-width: 180px;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+}
+
+.path-outer,
+.path-inner,
+.path-core {
+  animation: pathPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pathPulse {
   0%, 100% { 
-    stroke-width: 4; 
-    opacity: 0.9;
-    filter: drop-shadow(0 0 8px currentColor);
+    stroke-width: 3;
+    opacity: 0.85;
   }
   50% { 
-    stroke-width: 5; 
+    stroke-width: 4.5;
     opacity: 1;
-    filter: drop-shadow(0 0 16px currentColor);
+  }
+}
+
+/* Traveling lights on path */
+.traveling-light {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00D9FF, 0 0 24px #00D9FF;
+  animation: travelInfinity 3s linear infinite;
+}
+
+.light-1 { animation-delay: 0s; }
+.light-2 { animation-delay: 1s; }
+.light-3 { animation-delay: 2s; }
+
+@keyframes travelInfinity {
+  0% { left: 20%; top: 50%; opacity: 0; }
+  10% { opacity: 1; }
+  25% { left: 35%; top: 35%; }
+  50% { left: 50%; top: 50%; }
+  75% { left: 65%; top: 65%; }
+  90% { opacity: 1; }
+  100% { left: 80%; top: 50%; opacity: 0; }
+}
+
+/* PHASE 3: BURST */
+.burst-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.burst-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--color);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 0 16px var(--color), 0 0 32px var(--color);
+  animation: explosionBurst 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes explosionBurst {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(300px) scale(0);
+    opacity: 0;
   }
 }
 
 /* PHASE 4: REWARD REVEAL */
-.reward-reveal {
+.reward-display {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  animation: rewardPopIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation: rewardEnter 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  z-index: 100;
 }
 
-@keyframes rewardPopIn {
+@keyframes rewardEnter {
   0% {
-    transform: translate(-50%, -50%) scale(0) rotate(-180deg);
+    transform: translate(-50%, -50%) scale(0) rotate(-360deg);
     opacity: 0;
-    filter: blur(20px);
+    filter: blur(30px);
   }
-  60% {
-    transform: translate(-50%, -50%) scale(1.2) rotate(20deg);
+  70% {
+    transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
     opacity: 1;
     filter: blur(0px);
   }
@@ -216,51 +305,60 @@
   }
 }
 
-.reward-emoji-large {
-  font-size: 80px;
-  margin-bottom: 16px;
-  animation: emojiSpin 1s ease-out;
-  filter: drop-shadow(0 0 30px currentColor);
+.reward-bg-glow {
+  position: absolute;
+  inset: -60px;
+  border-radius: 50%;
+  opacity: 0.4;
+  filter: blur(60px);
+  z-index: -1;
+  animation: glowExpand 2s ease-in-out infinite;
 }
 
-@keyframes emojiSpin {
-  from { transform: rotate(-360deg) scale(0); }
-  to { transform: rotate(0deg) scale(1); }
+@keyframes glowExpand {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.2); }
 }
 
-.reward-text {
-  font-size: 28px;
+.reward-emoji-huge {
+  font-size: 100px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 40px currentColor);
+  animation: emojiFloat 2s ease-in-out infinite;
+}
+
+@keyframes emojiFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.05); }
+}
+
+.reward-name {
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 16px;
-  text-shadow: 0 0 20px currentColor;
-  animation: textSlide 0.8s ease-out 0.2s both;
+  text-shadow: 0 0 30px currentColor;
 }
 
-@keyframes textSlide {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.reward-amount {
-  font-size: 36px;
+.reward-value {
+  font-size: 48px;
   font-weight: 700;
-  animation: amountPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s both;
-  text-shadow: 0 0 20px currentColor;
+  text-shadow: 0 0 30px currentColor;
+  animation: valueScale 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
 }
 
-@keyframes amountPop {
+@keyframes valueScale {
   from { transform: scale(0); }
   to { transform: scale(1); }
 }
 
 /* Activate Button */
-.spin-activate-btn {
+.activate-button {
   width: 100%;
   margin-top: 20px;
   padding: 16px;
   background: linear-gradient(135deg, #667eea, #764ba2);
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   color: white;
   font-size: 15px;
   font-weight: 700;
@@ -268,38 +366,37 @@
   position: relative;
   overflow: hidden;
   letter-spacing: 1px;
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.5);
   transition: transform 0.2s;
 }
 
-.spin-activate-btn:hover {
+.activate-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(102, 126, 234, 0.7);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.7);
 }
 
-.btn-pulse {
+.btn-glow {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
-  animation: btnPulseAnim 2s ease-out infinite;
+  animation: btnGlowPulse 2s ease-out infinite;
 }
 
-@keyframes btnPulseAnim {
+@keyframes btnGlowPulse {
   0% { transform: scale(0); opacity: 1; }
   100% { transform: scale(2); opacity: 0; }
 }
 
-.spin-activate-btn span {
+.activate-button span {
   position: relative;
   z-index: 10;
 }
 
-/* Debug */
-.phase-debug {
+.phase-indicator {
   position: absolute;
   bottom: 8px;
   left: 8px;
   font-size: 9px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.2);
   font-family: monospace;
 }
