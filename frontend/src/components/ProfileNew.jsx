@@ -732,7 +732,7 @@ export default function Profile({ user, logout }) {
               <div className="flex flex-col items-center text-center">
                 {/* Pure icon - no background */}
                 <Sparkles className="w-6 h-6 mb-2" strokeWidth={1.5} style={{ color: '#EC4899' }} />
-                <div className="text-white/80 text-xs mb-2" style={{ height: '18px', display: 'flex', alignItems: 'center' }}>
+                <div className="text-white/80 text-xs mb-2" style={{ height: '18px', display: 'flex', alignItems: 'center', marginTop: '6px' }}>
                   Auras
                 </div>
                 <button
