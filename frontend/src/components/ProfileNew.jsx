@@ -740,8 +740,7 @@ export default function Profile({ user, logout }) {
                   style={{
                     backgroundColor: 'transparent',
                     border: 'none',
-                    color: '#EC4899',
-                    marginTop: '6px'
+                    color: '#EC4899'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
                   onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
