@@ -625,7 +625,7 @@ export default function Profile({ user, logout }) {
           </div>
         </div>
 
-        {/* Merge Wheel Promo Card - Dark Background */}
+        {/* Infinity Wheel Promo Card - Dark Background */}
         <button
           onClick={() => setShowConnectionMatrix(true)}
           className="w-full flex items-center gap-4 p-4 mb-4 transition-all hover:bg-white/5"
@@ -636,11 +636,14 @@ export default function Profile({ user, logout }) {
           }}
         >
           <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%)' }}>
-            <Zap className="w-6 h-6 text-white" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M17.5 12c0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5-2-4.5-4.5-4.5c-1.5 0-2.8.7-3.7 1.8L12 15.5l-6.3-6.2C4.8 8.2 3.5 7.5 2 7.5c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M8.5 12c0-2.5-2-4.5-4.5-4.5M15.5 12c0 2.5 2 4.5 4.5 4.5" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6"/>
+            </svg>
           </div>
           <div className="flex-1 text-left">
             <h3 className="text-white font-semibold text-base mb-0.5">
-              Try Merge Wheel
+              Try Infinity Wheel
             </h3>
             <p className="text-white/60 text-sm">
               {canSpin ? 'Your daily spin is ready.' : 'Spin for rewards and boosts.'}
