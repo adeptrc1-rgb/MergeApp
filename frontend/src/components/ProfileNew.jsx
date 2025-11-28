@@ -649,118 +649,110 @@ export default function Profile({ user, logout }) {
           <ChevronRight className="w-5 h-5 text-white/40" />
         </button>
 
-        {/* Quick Action Cards - Horizontal Scroll (Ultra Minimal) */}
+        {/* Quick Action Cards - Horizontal Scroll (Compact Centered) */}
         <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content' }}>
             {/* Super Likes Card */}
             <div
-              className="relative flex-shrink-0 rounded-2xl p-5 transition-all"
+              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
               style={{
-                width: '160px',
+                width: '140px',
                 backgroundColor: 'rgba(10,10,10,0.6)',
                 border: '1px solid rgba(255,255,255,0.08)'
               }}
             >
-              <div className="mb-4">
+              <div className="flex flex-col items-center text-center">
                 {/* Pure icon - no background */}
-                <div className="mb-3 flex justify-start">
-                  <Heart className="w-8 h-8" strokeWidth={1.5} fill="none" style={{ color: '#667eea' }} />
-                </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="text-white font-semibold text-base">
+                <Heart className="w-6 h-6 mb-2" strokeWidth={1.5} fill="none" style={{ color: '#667eea' }} />
+                <div className="flex items-center gap-1.5 mb-2">
+                  <span className="text-white font-semibold text-sm">
                     {user.super_likes || 0}
-                  </div>
-                  <div className="text-white/80 text-sm">
+                  </span>
+                  <span className="text-white/80 text-xs">
                     Super Likes
-                  </div>
+                  </span>
                 </div>
+                <button
+                  onClick={() => navigate('/store')}
+                  className="w-full py-1.5 text-xs font-medium transition-all"
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    color: '#667eea'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                >
+                  GET MORE
+                </button>
               </div>
-              <button
-                onClick={() => navigate('/store')}
-                className="w-full py-2 text-xs font-medium transition-all"
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  color: '#667eea'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
-                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-              >
-                GET MORE
-              </button>
             </div>
 
             {/* Pulse³ Card */}
             <div
-              className="relative flex-shrink-0 rounded-2xl p-5 transition-all"
+              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
               style={{
-                width: '160px',
+                width: '140px',
                 backgroundColor: 'rgba(10,10,10,0.6)',
                 border: '1px solid rgba(255,255,255,0.08)'
               }}
             >
-              <div className="mb-4">
+              <div className="flex flex-col items-center text-center">
                 {/* Pure P³ text - no background */}
-                <div className="mb-3 flex justify-start">
-                  <span className="text-3xl font-bold" style={{ color: '#00D9FF' }}>P³</span>
-                </div>
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="text-white font-semibold text-base">
+                <span className="text-2xl font-bold mb-2" style={{ color: '#00D9FF' }}>P³</span>
+                <div className="flex items-center gap-1.5 mb-2">
+                  <span className="text-white font-semibold text-sm">
                     {pulseBoosts || 0}
-                  </div>
-                  <div className="text-white/80 text-sm">
+                  </span>
+                  <span className="text-white/80 text-xs">
                     Exponential boost
-                  </div>
+                  </span>
                 </div>
+                <button
+                  onClick={() => navigate('/store')}
+                  className="w-full py-1.5 text-xs font-medium transition-all"
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    color: '#00D9FF'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                >
+                  GET MORE
+                </button>
               </div>
-              <button
-                onClick={() => navigate('/store')}
-                className="w-full py-2 text-xs font-medium transition-all"
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  color: '#00D9FF'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
-                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-              >
-                GET MORE
-              </button>
             </div>
 
             {/* Auras/Effects Card */}
             <div
-              className="relative flex-shrink-0 rounded-2xl p-5 transition-all"
+              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
               style={{
-                width: '160px',
+                width: '140px',
                 backgroundColor: 'rgba(10,10,10,0.6)',
                 border: '1px solid rgba(255,255,255,0.08)'
               }}
             >
-              <div className="mb-4">
+              <div className="flex flex-col items-center text-center">
                 {/* Pure icon - no background */}
-                <div className="mb-3 flex justify-start">
-                  <Sparkles className="w-8 h-8" strokeWidth={1.5} style={{ color: '#EC4899' }} />
+                <Sparkles className="w-6 h-6 mb-2" strokeWidth={1.5} style={{ color: '#EC4899' }} />
+                <div className="text-sm font-semibold mb-2" style={{ color: '#EC4899' }}>
+                  Auras
                 </div>
-                <div className="text-center">
-                  <div className="text-base font-semibold mb-1" style={{ color: '#EC4899' }}>
-                    Auras
-                  </div>
-                </div>
+                <button
+                  onClick={() => navigate('/store')}
+                  className="w-full py-1.5 text-xs font-medium transition-all"
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    color: '#EC4899'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                >
+                  EXPLORE
+                </button>
               </div>
-              <button
-                onClick={() => navigate('/store')}
-                className="w-full py-2 text-xs font-medium transition-all"
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  color: '#EC4899'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
-                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-              >
-                EXPLORE
-              </button>
             </div>
           </div>
         </div>
