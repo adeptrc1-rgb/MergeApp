@@ -649,7 +649,7 @@ export default function Profile({ user, logout }) {
           <ChevronRight className="w-5 h-5 text-white/40" />
         </button>
 
-        {/* Quick Action Cards - Horizontal Scroll (Aligned) */}
+        {/* Quick Action Cards - Horizontal Scroll (Vibrant Gradients) */}
         <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content' }}>
             {/* Super Likes Card */}
@@ -662,10 +662,18 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="flex flex-col items-center text-center">
-                {/* Pure icon - no background */}
-                <Heart className="w-6 h-6 mb-2" strokeWidth={1.5} fill="none" style={{ color: '#667eea' }} />
+                {/* Filled heart with gradient */}
+                <svg width="24" height="24" viewBox="0 0 24 24" className="mb-2">
+                  <defs>
+                    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#A855F7', stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: '#667eea', stopOpacity: 1 }} />
+                    </linearGradient>
+                  </defs>
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="url(#heartGradient)" />
+                </svg>
                 <div className="flex items-center justify-center gap-1.5 mb-2" style={{ height: '18px', marginTop: '6px' }}>
-                  <span className="text-white font-semibold text-sm">
+                  <span className="font-semibold text-sm" style={{ color: '#A855F7' }}>
                     {user.super_likes || 0}
                   </span>
                   <span className="text-white/80 text-xs">
@@ -699,8 +707,18 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="flex flex-col items-center text-center">
-                {/* Pure P³ text - no background */}
-                <span className="text-2xl font-bold mb-2" style={{ color: '#00D9FF' }}>P³</span>
+                {/* P³ with gradient */}
+                <span 
+                  className="text-2xl font-bold mb-2" 
+                  style={{ 
+                    background: 'linear-gradient(135deg, #00D9FF 0%, #667eea 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  P³
+                </span>
                 <div className="text-white/80 text-xs mb-2" style={{ height: '18px', display: 'flex', alignItems: 'center' }}>
                   Exponential boost
                 </div>
@@ -710,7 +728,7 @@ export default function Profile({ user, logout }) {
                   style={{
                     backgroundColor: 'transparent',
                     border: 'none',
-                    color: '#00D9FF',
+                    color: 'rgba(0, 217, 255, 0.7)',
                     marginTop: '2px'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
@@ -731,8 +749,16 @@ export default function Profile({ user, logout }) {
               }}
             >
               <div className="flex flex-col items-center text-center">
-                {/* Pure icon - no background */}
-                <Sparkles className="w-6 h-6 mb-2" strokeWidth={1.5} style={{ color: '#EC4899' }} />
+                {/* Filled sparkles with gradient */}
+                <svg width="24" height="24" viewBox="0 0 24 24" className="mb-2">
+                  <defs>
+                    <linearGradient id="sparklesGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#EC4899', stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: '#F97316', stopOpacity: 1 }} />
+                    </linearGradient>
+                  </defs>
+                  <path d="M12 2l1.09 3.26L16 6.36l-2.91 1.1L12 11l-1.09-3.54L8 6.36l2.91-1.1L12 2zM7 12l.72 2.16L10 15l-2.28.84L7 18l-.72-2.16L4 15l2.28-.84L7 12zM17 12l.72 2.16L20 15l-2.28.84L17 18l-.72-2.16L14 15l2.28-.84L17 12z" fill="url(#sparklesGradient)" />
+                </svg>
                 <div className="text-white/80 text-xs mb-2" style={{ height: '18px', display: 'flex', alignItems: 'center', marginTop: '8px' }}>
                   Auras
                 </div>
@@ -742,7 +768,7 @@ export default function Profile({ user, logout }) {
                   style={{
                     backgroundColor: 'transparent',
                     border: 'none',
-                    color: '#EC4899',
+                    color: 'rgba(236, 72, 153, 0.7)',
                     marginTop: '2px'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
