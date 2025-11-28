@@ -804,51 +804,51 @@ export default function Profile({ user, logout }) {
                   height: 'calc(100vw - 32px)',
                   maxWidth: '360px',
                   maxHeight: '360px',
-                  backgroundColor: '#2A2A2A',
-                  border: '1px solid rgba(255,255,255,0.15)'
+                  background: 'linear-gradient(135deg, #2A2A2A 0%, #3A3A3A 50%, #C0C0C0 100%)',
+                  border: '1px solid rgba(255,255,255,0.2)'
                 }}
               >
                 <div className="mb-4">
                   <h3 className="text-white font-semibold text-xl mb-2">Merge Free</h3>
-                  <p className="text-white/50 text-sm">Basic dating features</p>
+                  <p className="text-white text-sm">Basic dating features</p>
                 </div>
                 
                 <div className="space-y-3 flex-1">
                   <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="w-1 h-1 rounded-full bg-white/60 flex-shrink-0 mt-2"></div>
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">1 spin per 72 hours</div>
-                      <div className="text-white/40 text-xs">Merge Wheel access 2-3 times weekly</div>
+                      <div className="text-white text-xs">Merge Wheel access 2-3 times weekly</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="w-1 h-1 rounded-full bg-white/60 flex-shrink-0 mt-2"></div>
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">Standard rewards</div>
-                      <div className="text-white/40 text-xs">Base prizes only</div>
+                      <div className="text-white text-xs">Base prizes only</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="w-1 h-1 rounded-full bg-white/60 flex-shrink-0 mt-2"></div>
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">No spin stacking</div>
-                      <div className="text-white/40 text-xs">Use it or lose it</div>
+                      <div className="text-white text-xs">Use it or lose it</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-white/40 flex-shrink-0 mt-2"></div>
+                    <div className="w-1 h-1 rounded-full bg-white/60 flex-shrink-0 mt-2"></div>
                     <div className="flex-1">
                       <div className="text-white text-sm font-medium">Basic features</div>
-                      <div className="text-white/40 text-xs">Standard app access</div>
+                      <div className="text-white text-xs">Standard app access</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-auto pt-4 border-t border-white/10">
-                  <div className="text-white/40 text-xs text-center">Swipe for Elite →</div>
+                  <div className="text-white text-xs text-center">Swipe for Elite →</div>
                 </div>
               </div>
 
