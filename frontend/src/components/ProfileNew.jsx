@@ -677,7 +677,7 @@ export default function Profile({ user, logout }) {
               </button>
             </div>
 
-            {/* My Boosts Card */}
+            {/* Pulse³ Card */}
             <div
               className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
               style={{
@@ -690,14 +690,14 @@ export default function Profile({ user, logout }) {
                 <span className="text-white text-lg">+</span>
               </button>
               <div className="mb-3">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #A855F7 0%, #6C63FF 100%)' }}>
-                  <Zap className="w-6 h-6 text-white" fill="white" />
+                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'linear-gradient(135deg, #00D9FF 0%, #667eea 100%)' }}>
+                  <span className="text-white font-bold text-xl">P³</span>
                 </div>
                 <div className="text-white font-bold text-lg mb-1">
-                  My Boosts
+                  Pulse³
                 </div>
                 <div className="text-white/60 text-xs mb-3">
-                  Stay visible
+                  Exponential boost
                 </div>
               </div>
               <button
