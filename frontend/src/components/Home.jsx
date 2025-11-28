@@ -21,7 +21,7 @@ import {
 } from '../utils/particleEffects';
 import { getZodiacTheme, getGradientString } from '../utils/zodiacSeasonThemes';
 import MergeLogo from './MergeLogo';
-import CosmicStarfield from './CosmicStarfield';
+import PulseCubedHeader from './PulseCubedHeader';
 import CompatibilityInsights from './CompatibilityInsights';
 import { updateLogoState } from '../utils/logoStateManager';
 import logoStateManager from '../utils/logoStateManager';
