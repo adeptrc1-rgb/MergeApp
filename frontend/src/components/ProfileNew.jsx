@@ -704,14 +704,13 @@ export default function Profile({ user, logout }) {
                 <div className="mb-3 flex justify-start">
                   <span className="text-3xl font-bold" style={{ color: '#00D9FF' }}>P³</span>
                 </div>
-                <div className="text-white font-semibold text-base mb-1">
-                  {pulseBoosts || 0}
-                </div>
-                <div className="text-white/80 text-sm mb-1">
-                  Pulse³
-                </div>
-                <div className="text-white/40 text-xs">
-                  Exponential boost
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="text-white font-semibold text-base">
+                    {pulseBoosts || 0}
+                  </div>
+                  <div className="text-white/80 text-sm">
+                    Exponential boost
+                  </div>
                 </div>
               </div>
               <button
@@ -725,7 +724,7 @@ export default function Profile({ user, logout }) {
                 onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
                 onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
               >
-                Get More
+                GET MORE
               </button>
             </div>
 
