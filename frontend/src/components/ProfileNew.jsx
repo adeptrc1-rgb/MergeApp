@@ -860,9 +860,9 @@ export default function Profile({ user, logout }) {
                   height: 'calc(100vw - 32px)',
                   maxWidth: '360px',
                   maxHeight: '360px',
-                  background: 'linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #FFA500 100%)',
-                  border: '1px solid rgba(255, 215, 0, 0.4)',
-                  boxShadow: '0 0 40px rgba(255, 215, 0, 0.3)'
+                  background: 'linear-gradient(180deg, #FFF8DC 0%, #FFE4B5 100%)',
+                  border: '1px solid rgba(255,215,0,0.3)',
+                  boxShadow: '0 4px 20px rgba(255,215,0,0.2)'
                 }}
               >
                 {/* Subtle top accent line - Gold */}
@@ -872,19 +872,11 @@ export default function Profile({ user, logout }) {
                   left: '20px',
                   right: '20px',
                   height: '1px',
-                  background: 'linear-gradient(90deg, transparent, #FFD700, transparent)'
+                  background: 'linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent)'
                 }} />
 
                 <div className="flex items-center justify-between mb-4">
-                  <h3 
-                    className="font-semibold text-xl"
-                    style={{
-                      background: 'linear-gradient(135deg, #FFF4E6 0%, #FFD700 50%, #FFA500 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
-                    }}
-                  >
+                  <h3 className="font-semibold text-xl" style={{ color: '#000000' }}>
                     Merge Elite
                   </h3>
                   <button
@@ -892,10 +884,10 @@ export default function Profile({ user, logout }) {
                     disabled={upgrading}
                     className="px-4 py-1.5 rounded-full text-xs font-bold transition-all"
                     style={{
-                      backgroundColor: upgrading ? 'rgba(255,215,0,0.3)' : '#000000',
-                      color: '#FFD700',
+                      backgroundColor: upgrading ? 'rgba(0,0,0,0.3)' : '#000000',
+                      color: '#FFFFFF',
                       cursor: upgrading ? 'not-allowed' : 'pointer',
-                      border: '1px solid #FFD700'
+                      border: 'none'
                     }}
                     onMouseEnter={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#1a1a1a')}
                     onMouseLeave={(e) => !upgrading && (e.currentTarget.style.backgroundColor = '#000000')}
@@ -906,68 +898,68 @@ export default function Profile({ user, logout }) {
                 
                 <div className="space-y-3 flex-1 overflow-y-auto scrollbar-hide-elite" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#000000' }} />
                     <div className="flex-1">
-                      <div className="text-white text-sm font-medium">5 starting spins</div>
+                      <div className="text-sm font-medium" style={{ color: '#000000' }}>5 starting spins</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#000000' }} />
                     <div className="flex-1">
-                      <div className="text-white text-sm font-medium">12-hour cooldown</div>
-                      <div className="text-xs" style={{ color: '#FFD700' }}>4x faster</div>
+                      <div className="text-sm font-medium" style={{ color: '#000000' }}>12-hour cooldown</div>
+                      <div className="text-xs" style={{ color: '#000000', opacity: 0.7 }}>4x faster</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#000000' }} />
                     <div className="flex-1">
-                      <div className="text-white text-sm font-medium">Stack up to 5</div>
+                      <div className="text-sm font-medium" style={{ color: '#000000' }}>Stack up to 5</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#000000' }} />
                     <div className="flex-1">
-                      <div className="text-white text-sm font-medium">2x multiplier</div>
+                      <div className="text-sm font-medium" style={{ color: '#000000' }}>2x multiplier</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#FFA500' }} />
+                    <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" strokeWidth={2.5} style={{ color: '#000000' }} />
                     <div className="flex-1">
-                      <div className="text-white text-sm font-medium">+2 bonus monthly</div>
+                      <div className="text-sm font-medium" style={{ color: '#000000' }}>+2 bonus monthly</div>
                     </div>
                   </div>
 
                   {/* Collapsible Benefits Section */}
-                  <div className="pt-3 border-t border-white/10">
+                  <div className="pt-3 border-t" style={{ borderColor: 'rgba(0,0,0,0.15)' }}>
                     <button
                       onClick={() => setShowEliteBenefits(!showEliteBenefits)}
                       className="w-full flex items-center justify-between py-2 transition-colors"
                     >
-                      <span className="text-xs font-semibold" style={{ color: '#FFD700' }}>MORE BENEFITS</span>
-                      <ChevronRight className={`w-4 h-4 transition-transform ${showEliteBenefits ? 'rotate-90' : ''}`} style={{ color: '#FFD700' }} />
+                      <span className="text-xs font-semibold" style={{ color: '#000000' }}>MORE BENEFITS</span>
+                      <ChevronRight className={`w-4 h-4 transition-transform ${showEliteBenefits ? 'rotate-90' : ''}`} style={{ color: '#000000' }} />
                     </button>
                     
                     {showEliteBenefits && (
                       <div className="mt-2 space-y-2">
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
-                          <span className="text-white/80 text-xs">Exclusive Auras</span>
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#000000' }} />
+                          <span className="text-xs" style={{ color: '#000000' }}>Exclusive Auras</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
-                          <span className="text-white/80 text-xs">See Who Likes You</span>
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#000000' }} />
+                          <span className="text-xs" style={{ color: '#000000' }}>See Who Likes You</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
-                          <span className="text-white/80 text-xs">Priority Placement</span>
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#000000' }} />
+                          <span className="text-xs" style={{ color: '#000000' }}>Priority Placement</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#FFA500' }} />
-                          <span className="text-white/80 text-xs">Unlimited Rewinds</span>
+                          <Check className="w-3 h-3" strokeWidth={2.5} style={{ color: '#000000' }} />
+                          <span className="text-xs" style={{ color: '#000000' }}>Unlimited Rewinds</span>
                         </div>
                       </div>
                     )}
