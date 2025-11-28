@@ -862,7 +862,7 @@ export default function Profile({ user, logout }) {
                   maxHeight: '360px',
                   background: 'linear-gradient(180deg, #FFF8DC 0%, #FFE4B5 100%)',
                   border: '1px solid rgba(255,215,0,0.3)',
-                  boxShadow: '0 4px 20px rgba(255,215,0,0.2)'
+                  boxShadow: '0 0 60px rgba(255, 215, 0, 0.6), 0 8px 30px rgba(255, 215, 0, 0.4)'
                 }}
               >
                 {/* Subtle top accent line - Gold */}
