@@ -666,7 +666,7 @@ export default function Home({ user }) {
                 }}
               />
               
-              {/* Triple lightning bolt icon */}
+              {/* Triple lightning bolt icon - Stacked vertically */}
               <svg 
                 className="w-6 h-6 transition-all relative z-10 group-hover:scale-110"
                 viewBox="0 0 24 24"
@@ -676,12 +676,12 @@ export default function Home({ user }) {
                   animation: 'pulse 2s ease-in-out infinite'
                 }}
               >
-                {/* Left bolt */}
-                <path d="M5 13l5-9v6h2l-5 9v-6z" opacity="0.7" />
-                {/* Center bolt */}
-                <path d="M10 13l5-9v6h2l-5 9v-6z" />
-                {/* Right bolt */}
-                <path d="M15 13l5-9v6h2l-5 9v-6z" opacity="0.7" />
+                {/* Top bolt */}
+                <path d="M11 2l-3 7h4l-3 6" strokeWidth="0.5" stroke="#00D9FF" />
+                {/* Middle bolt */}
+                <path d="M11 8l-3 7h4l-3 6" />
+                {/* Bottom bolt */}
+                <path d="M11 14l-3 7h4l-3 6" strokeWidth="0.5" stroke="#00D9FF" />
               </svg>
               
               {/* Boost count badge */}
