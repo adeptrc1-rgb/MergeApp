@@ -666,22 +666,29 @@ export default function Home({ user }) {
                 }}
               />
               
-              {/* Triple lightning bolt icon - Stacked vertically */}
+              {/* Triple lightning bolt icon - Vertically stacked */}
               <svg 
                 className="w-6 h-6 transition-all relative z-10 group-hover:scale-110"
                 viewBox="0 0 24 24"
-                fill="#00D9FF"
+                fill="none"
                 style={{ 
                   filter: 'drop-shadow(0 0 8px rgba(0, 217, 255, 1)) drop-shadow(0 0 12px rgba(0, 217, 255, 0.6))',
                   animation: 'pulse 2s ease-in-out infinite'
                 }}
               >
-                {/* Top bolt */}
-                <path d="M11 2l-3 7h4l-3 6" strokeWidth="0.5" stroke="#00D9FF" />
-                {/* Middle bolt */}
-                <path d="M11 8l-3 7h4l-3 6" />
-                {/* Bottom bolt */}
-                <path d="M11 14l-3 7h4l-3 6" strokeWidth="0.5" stroke="#00D9FF" />
+                {/* Triple stacked lightning bolts */}
+                <g transform="translate(0, -2)">
+                  {/* Top bolt */}
+                  <path d="M13 2L10 10h3l-4 8" stroke="#00D9FF" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                </g>
+                <g transform="translate(0, 4)">
+                  {/* Middle bolt - slightly offset */}
+                  <path d="M13 2L10 10h3l-4 8" stroke="#00D9FF" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                </g>
+                <g transform="translate(0, 10)">
+                  {/* Bottom bolt */}
+                  <path d="M13 2L10 10h3l-4 8" stroke="#00D9FF" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                </g>
               </svg>
               
               {/* Boost count badge */}
