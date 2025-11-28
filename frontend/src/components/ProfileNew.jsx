@@ -29,6 +29,16 @@ export default function Profile({ user, logout }) {
   const [cooldownProgress, setCooldownProgress] = useState(0);
   const [upgrading, setUpgrading] = useState(false);
   const [showEliteBenefits, setShowEliteBenefits] = useState(false);
+  const [pulseBoosts, setPulseBoosts] = useState(1);
+
+  // Load Pulse³ from localStorage
+  useEffect(() => {
+    const savedState = localStorage.getItem('pulseCubedState');
+    if (savedState) {
+      const { pulseBoosts } = JSON.parse(savedState);
+      setPulseBoosts(pulseBoosts || 1);
+    }
+  }, []);
 
   const handleUpgradeToElite = async () => {
     if (upgrading) return;
