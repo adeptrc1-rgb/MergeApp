@@ -672,9 +672,6 @@ export default function Profile({ user, logout }) {
                 <div className="text-white/80 text-sm mb-1">
                   Super Likes
                 </div>
-                <div className="text-white/40 text-xs">
-                  Boost your signal
-                </div>
               </div>
               <button
                 onClick={() => navigate('/store')}
