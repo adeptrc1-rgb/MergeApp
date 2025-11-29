@@ -742,9 +742,10 @@ export default function Profile({ user, logout }) {
               </div>
             </div>
 
-            {/* Auras/Effects Card */}
-            <div
-              className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
+            {/* Auras/Effects Card - Fully Clickable */}
+            <button
+              onClick={() => navigate('/store?tab=skins')}
+              className="relative flex-shrink-0 rounded-2xl p-4 transition-all cursor-pointer"
               style={{
                 width: '140px',
                 backgroundColor: 'rgba(255,255,255,0.05)',
@@ -765,8 +766,7 @@ export default function Profile({ user, logout }) {
                 <div className="text-white/80 text-xs mb-2" style={{ height: '18px', display: 'flex', alignItems: 'center', marginTop: '8px' }}>
                   Auras
                 </div>
-                <button
-                  onClick={() => navigate('/store?tab=skins')}
+                <div
                   className="w-full py-1.5 text-xs font-medium transition-all"
                   style={{
                     backgroundColor: 'transparent',
@@ -774,13 +774,11 @@ export default function Profile({ user, logout }) {
                     color: 'rgba(236, 72, 153, 0.7)',
                     marginTop: '2px'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
-                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                 >
                   EXPLORE
-                </button>
+                </div>
               </div>
-            </div>
+            </button>
           </div>
         </div>
 
