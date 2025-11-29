@@ -604,15 +604,23 @@ export default function Profile({ user, logout }) {
             {/* Complete Profile Button */}
             <button
               onClick={() => setShowEditProfile(true)}
-              className="w-full py-2.5 rounded-full text-sm font-semibold transition-all"
+              className="py-2 px-4 rounded-full text-xs font-medium transition-all inline-flex items-center gap-1.5"
               style={{
-                backgroundColor: 'white',
-                color: 'black'
+                backgroundColor: 'rgba(255,255,255,0.1)',
+                color: 'white',
+                border: '1px solid rgba(255,255,255,0.15)'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.9)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+              }}
             >
-              ✏️ Complete profile
+              <span style={{ fontSize: '10px' }}>✏️</span>
+              <span>Complete profile</span>
             </button>
           </div>
         </div>
