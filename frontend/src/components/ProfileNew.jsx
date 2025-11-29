@@ -766,7 +766,7 @@ export default function Profile({ user, logout }) {
                   Auras
                 </div>
                 <button
-                  onClick={() => navigate('/store')}
+                  onClick={() => navigate('/store?tab=skins')}
                   className="w-full py-1.5 text-xs font-medium transition-all"
                   style={{
                     backgroundColor: 'transparent',
