@@ -273,6 +273,128 @@ async def test_login(body: LoginBody, response: Response):
 async def auth_me(user: User = Depends(get_current_user)):
     return user.dict()
 
+
+@api_router.post("/auth/facebook/login")
+async def facebook_login(request: Request, response: Response):
+    """
+    Handle Facebook OAuth login
+    Receives Facebook access token from frontend, verifies it, creates/updates user
+    """
+    try:
+        body = await request.json()
+        facebook_access_token = body.get("access_token")
+        
+        if not facebook_access_token:
+            raise HTTPException(status_code=400, detail="Facebook access token required")
+        
+        # Verify Facebook token and get user info
+        async with httpx.AsyncClient() as client:
+            fb_response = await client.get(
+                "https://graph.facebook.com/me",
+                params={
+                    "access_token": facebook_access_token,
+                    "fields": "id,name,email,picture.type(large)"
+                }
+            )
+        
+        if fb_response.status_code != 200:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid Facebook token"
+            )
+        
+        fb_user_data = fb_response.json()
+        facebook_id = fb_user_data.get("id")
+        email = fb_user_data.get("email")
+        name = fb_user_data.get("name", "")
+        picture_url = fb_user_data.get("picture", {}).get("data", {}).get("url")
+        
+        # Check if user exists
+        user_doc = await db.users.find_one({"facebook_id": facebook_id})
+        
+        if user_doc:
+            # Update existing user
+            await db.users.update_one(
+                {"id": user_doc["id"]},
+                {"$set": {
+                    "last_login": now_utc().isoformat(),
+                    "updated_at": now_utc().isoformat()
+                }}
+            )
+            user_id = user_doc["id"]
+        else:
+            # Create new user from Facebook data
+            user_id = str(uuid.uuid4())
+            first_name = name.split()[0] if name else "User"
+            last_name = " ".join(name.split()[1:]) if len(name.split()) > 1 else ""
+            
+            new_user = {
+                "id": user_id,
+                "email": email or f"{facebook_id}@facebook.com",
+                "first_name": first_name,
+                "last_name": last_name,
+                "facebook_id": facebook_id,
+                "photos": [picture_url] if picture_url else [],
+                "birth_date": None,
+                "bio": "",
+                "location": "",
+                "job_title": "",
+                "industry": "",
+                "interests": [],
+                "super_likes": 5,
+                "profile_boosts": 2,
+                "star_coins": 100,
+                "is_premium": False,
+                "show_age": True,
+                "show_distance": True,
+                "discovery_enabled": True,
+                "visibility_mode": "standard",
+                "age_preference_min": 18,
+                "age_preference_max": 99,
+                "max_distance": 50,
+                "created_at": now_utc().isoformat(),
+                "updated_at": now_utc().isoformat(),
+                "last_login": now_utc().isoformat()
+            }
+            
+            await db.users.insert_one(new_user)
+        
+        # Create session
+        session_id = str(uuid.uuid4())
+        session_data = {
+            "session_id": session_id,
+            "user_id": user_id,
+            "created_at": now_utc().isoformat(),
+            "expires_at": (now_utc() + timedelta(days=7)).isoformat()
+        }
+        
+        await db.sessions.insert_one(session_data)
+        
+        # Set session cookie
+        response.set_cookie(
+            key="session_id",
+            value=session_id,
+            httponly=True,
+            max_age=7 * 24 * 60 * 60,
+            secure=False,
+            samesite="lax"
+        )
+        
+        return {
+            "success": True,
+            "message": "Facebook login successful",
+            "user_id": user_id
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Facebook login error: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Facebook authentication failed"
+        )
+
 @api_router.post("/auth/session")
 async def handle_google_session(request: Request, response: Response):
     """Handle Google OAuth session from Emergent Auth"""
