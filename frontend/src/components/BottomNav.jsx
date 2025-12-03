@@ -41,8 +41,8 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         backdropFilter: darkMode ? 'blur(10px)' : 'none',
         WebkitBackdropFilter: darkMode ? 'blur(10px)' : 'none',
         bottom: 0,
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-        paddingTop: '4px',
+        paddingBottom: '0px',
+        marginBottom: 'calc(env(safe-area-inset-bottom, 0px) * -0.5)',
         zIndex: 200
       }}
     >
