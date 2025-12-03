@@ -32,6 +32,7 @@ import Store from './components/Store';
 import TestPage from './components/TestPage';
 import MergeLogo from './components/MergeLogo';
 import LoginApp from './components/LoginApp';
+import FacebookLoginButton from './components/FacebookLoginButton';
 import AdminModeratorPanel from './components/AdminModeratorPanel';
 const AutoTestLogin = React.lazy(() => import('./components/AutoTestLogin'));
 
