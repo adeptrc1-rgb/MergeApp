@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MergeLogo from './MergeLogo';
+import FacebookLoginButton from './FacebookLoginButton';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || ''; 
 const API = `${API_BASE}/api`;
