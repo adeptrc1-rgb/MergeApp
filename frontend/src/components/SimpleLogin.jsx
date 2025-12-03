@@ -243,6 +243,9 @@ export default function SimpleLogin({ onLoginSuccess }) {
 
           {/* Social Login Buttons */}
           <div className="space-y-3">
+            {/* Facebook Login */}
+            <FacebookLoginButton onSuccess={() => window.location.href = '/home'} />
+
             {/* Test Login Button */}
             <button
               onClick={handleTestLogin}
