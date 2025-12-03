@@ -888,8 +888,8 @@ export default function Home({ user }) {
                 border: '1px solid var(--border-subtle)'
               }}
               style={{
-                height: showDropdown ? '80vh' : '76vh',
-                maxHeight: showDropdown ? '800px' : '760px',
+                height: showDropdown ? '78vh' : '70vh',
+                maxHeight: showDropdown ? '800px' : '680px',
                 transform: isDragging 
                   ? `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.1}deg)` 
                   : swipeDirection ? undefined : 'translate(0, 0)',
