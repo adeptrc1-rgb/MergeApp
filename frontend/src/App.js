@@ -384,20 +384,6 @@ function LandingPage() {
               <span>G</span>
               <span>Continue with Google</span>
             </button>
-
-            {/* Apple Login (Placeholder) */}
-            <button
-              disabled
-              className="w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 opacity-50 cursor-not-allowed"
-              style={{
-                backgroundColor: 'var(--bg-elevated)',
-                border: '1px solid var(--border-default)',
-                color: 'var(--text-primary)'
-              }}
-            >
-              <span></span>
-              <span>Continue with Apple</span>
-            </button>
           </div>
 
           {/* Preview Onboarding Button */}
