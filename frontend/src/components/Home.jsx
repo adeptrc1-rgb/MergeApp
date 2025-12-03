@@ -699,7 +699,7 @@ export default function Home({ user }) {
   const compatibility = Math.round(currentMatch.compatibility_score || 75);
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)' }}>
+    <div className="min-h-screen flex flex-col overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 60px)' }}>
       {/* Subtle animated background - single blue accent */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
