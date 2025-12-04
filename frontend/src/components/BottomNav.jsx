@@ -45,7 +45,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         zIndex: 200
       }}
     >
-      <div className="flex items-center justify-between mx-auto" style={{ padding: '2px 24px', height: '46px', maxWidth: '500px' }}>
+      <div className="flex items-center justify-between mx-auto" style={{ padding: '2px 24px', height: '40px', maxWidth: '500px' }}>
         {items.map(({ id, icon: Icon, label, path, isCustom }) => {
           const isActive = currentTab === id;
           return (
