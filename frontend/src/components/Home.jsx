@@ -858,7 +858,7 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center relative overflow-hidden" style={{ zIndex: 100, paddingTop: '50px', paddingBottom: '140px' }}>
+      <div className="flex-1 flex flex-col items-center relative overflow-hidden" style={{ zIndex: 100, paddingTop: '70px', paddingBottom: '140px' }}>
         <div className="w-full relative flex flex-col space-y-2" style={{ zIndex: 100 }}>
           <div 
             className="mx-auto"
