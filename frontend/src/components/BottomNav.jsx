@@ -73,14 +73,14 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                 <Icon 
                   focused={isActive}
                   color={isActive ? '#00D9FF' : '#FFFFFF'}
-                  size={24}
+                  size={18}
                 />
               ) : (
                 <Icon 
                   className="transition-all duration-200" 
                   style={{ 
-                    width: '20px',
-                    height: '20px',
+                    width: '16px',
+                    height: '16px',
                     color: isActive ? '#00D9FF' : '#FFFFFF',
                     strokeWidth: isActive ? 2.5 : 2,
                     fill: isActive ? '#00D9FF' : 'none',
@@ -90,7 +90,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                 />
               )}
               <span 
-                className="text-[9px] font-medium transition-all duration-200"
+                className="text-[8px] font-medium transition-all duration-200"
                 style={{
                   color: isActive ? '#00D9FF' : '#FFFFFF',
                   opacity: isActive ? 1 : 0.6,
