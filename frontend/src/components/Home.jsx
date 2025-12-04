@@ -858,14 +858,16 @@ export default function Home({ user }) {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center md:px-4 md:pb-20 relative overflow-hidden" style={{ zIndex: 100, paddingTop: '42px', paddingBottom: '140px' }}>
-        <div className="w-full max-w-md relative flex flex-col space-y-2" style={{ zIndex: 100 }}>
+      <div className="flex-1 flex flex-col items-center relative overflow-hidden" style={{ zIndex: 100, paddingTop: '42px', paddingBottom: '140px' }}>
+        <div className="w-full relative flex flex-col space-y-2" style={{ zIndex: 100 }}>
           <div 
-            className="w-full md:px-0"
+            className="mx-auto"
             style={{ 
               perspective: '1000px',
-              height: showDropdown ? '78vh' : '70vh',
-              maxHeight: showDropdown ? '800px' : '680px'
+              width: '90vw',
+              maxWidth: '390px',
+              height: '72vh',
+              borderRadius: '12px'
             }}
           >
             <div 
