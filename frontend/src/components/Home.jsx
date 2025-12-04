@@ -743,8 +743,8 @@ export default function Home({ user }) {
       )}
 
       {/* Header - Fixed */}
-      <div className="fixed top-0 left-0 right-0" style={{ backgroundColor: 'var(--bg-primary)', zIndex: 150 }}>
-        <div className="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between">
+      <div className="fixed top-0 left-0 right-0" style={{ backgroundColor: 'var(--bg-primary)', zIndex: 50, height: '50px' }}>
+        <div className="mx-auto px-4 py-3 flex items-center justify-between" style={{ maxWidth: '430px' }}>
           {/* Merge wordmark */}
           <MergeLogo size="sm" color="var(--text-primary)" />
           
