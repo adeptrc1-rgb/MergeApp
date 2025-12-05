@@ -699,14 +699,23 @@ export default function Home({ user }) {
   const compatibility = Math.round(currentMatch.compatibility_score || 75);
 
   return (
-    <div className="flex flex-col" style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', height: '100%', position: 'relative' }}>
-      {/* Subtle animated background - single blue accent */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <>
+      {/* 1. FULL-SCREEN BACKGROUND - Ignores safe areas */}
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        backgroundColor: 'var(--bg-primary)',
+        zIndex: 1
+      }} />
+
+      {/* 2. BACKGROUND BLOBS */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
         <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
       </div>
 
-      {/* Horoscope Modal */}
+      <div className="flex flex-col" style={{ position: 'relative', minHeight: '100vh', zIndex: 10 }}>
+        {/* Horoscope Modal */}
       {showHoroscopeModal && todayHoroscope && (
         <div 
           className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6"
