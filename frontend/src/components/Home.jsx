@@ -896,7 +896,9 @@ export default function Home({ user }) {
               }`}
               style={{
                 backgroundColor: 'var(--surface-default)',
-                border: '1px solid var(--border-subtle)',
+                border: '1px solid var(--border-subtle)'
+              }}
+              style={{
                 width: '90vw',
                 maxWidth: '390px',
                 height: '72vh',
