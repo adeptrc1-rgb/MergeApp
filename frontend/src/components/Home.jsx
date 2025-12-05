@@ -1420,6 +1420,7 @@ export default function Home({ user }) {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
