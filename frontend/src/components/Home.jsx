@@ -700,28 +700,31 @@ export default function Home({ user }) {
 
   return (
     <>
-      {/* 1. FULL-SCREEN BACKGROUND - Ignores safe areas */}
+      {/* 1. FULL-SCREEN BACKGROUND - Extends UNDER home indicator */}
       <div style={{
         position: 'fixed',
-        inset: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '-100px',
         backgroundColor: 'var(--bg-primary)',
         zIndex: 1
       }} />
 
-      {/* 2. BACKGROUND BLOBS - Complete coverage */}
-      <div className="fixed overflow-visible pointer-events-none" style={{ inset: '-100px', zIndex: 2 }}>
+      {/* 2. BLUE GRADIENT - Full bleed, extends under safe areas */}
+      <div className="fixed pointer-events-none" style={{ top: '-100px', left: '-100px', right: '-100px', bottom: '-500px', zIndex: 2, overflow: 'visible' }}>
         {/* Top cyan gradient */}
         <div className="absolute top-0 left-0 w-full h-1/2 rounded-full blur-3xl opacity-8" style={{ backgroundColor: 'var(--accent-primary)', transform: 'scale(2.5)' }}></div>
         {/* Center cyan glow */}
         <div className="absolute top-1/2 left-1/2 w-full h-full rounded-full blur-3xl opacity-6" style={{ backgroundColor: 'var(--accent-primary)', transform: 'translate(-50%, -50%) scale(1.5)' }}></div>
-        {/* Bottom coverage - ABSOLUTE BOTTOM */}
+        {/* Bottom layers - EXTEND UNDER HOME INDICATOR */}
         <div className="absolute rounded-full blur-3xl" style={{ 
           backgroundColor: 'var(--accent-primary)', 
-          bottom: '-200px', 
-          left: '-50%', 
-          width: '200%', 
-          height: '1000px',
-          opacity: 0.1 
+          bottom: 0, 
+          left: '-100%', 
+          width: '300%', 
+          height: '1200px',
+          opacity: 0.12 
         }}></div>
       </div>
 
