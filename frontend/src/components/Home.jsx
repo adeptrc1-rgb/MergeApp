@@ -708,14 +708,14 @@ export default function Home({ user }) {
         zIndex: 1
       }} />
 
-      {/* 2. BACKGROUND BLOBS - Expanded to cover entire screen INCLUDING safe areas */}
-      <div className="fixed overflow-hidden pointer-events-none" style={{ top: 0, left: 0, right: 0, bottom: '-100px', zIndex: 2 }}>
+      {/* 2. BACKGROUND BLOBS - Expanded to cover entire screen INCLUDING bottom safe area */}
+      <div className="fixed overflow-hidden pointer-events-none" style={{ top: 0, left: 0, right: 0, bottom: '-200px', zIndex: 2 }}>
         {/* Top cyan gradient */}
         <div className="absolute top-0 left-0 w-full h-1/2 rounded-full blur-3xl opacity-8" style={{ backgroundColor: 'var(--accent-primary)', transform: 'scale(2)' }}></div>
         {/* Center cyan glow */}
         <div className="absolute top-1/2 left-1/2 w-full h-full rounded-full blur-3xl opacity-6" style={{ backgroundColor: 'var(--accent-primary)', transform: 'translate(-50%, -50%)' }}></div>
-        {/* Bottom cyan gradient - extends beyond viewport */}
-        <div className="absolute bottom-0 right-0 w-full h-1/2 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)', transform: 'scale(2) translateY(50px)' }}></div>
+        {/* Bottom cyan gradient - extends FAR beyond viewport */}
+        <div className="absolute bottom-0 right-0 w-full h-1/2 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)', transform: 'scale(3) translateY(100px)' }}></div>
       </div>
 
       <div className="flex flex-col" style={{ position: 'relative', minHeight: '100vh', zIndex: 10 }}>
