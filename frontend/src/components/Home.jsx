@@ -573,21 +573,33 @@ export default function Home({ user }) {
   const handleUndo = async () => {
     if (swipeHistory.length === 0) return;
     
-    // Trigger REDO animation
-    setAnimationType('redo');
+    const lastSwipe = swipeHistory[swipeHistory.length - 1];
+    
+    // First show current card exiting with glitch
+    setAnimationType('redo-exit');
     setShowScanlines(true);
     
-    setTimeout(() => setShowScanlines(false), 300);
-    setTimeout(() => setAnimationType(null), 500);
+    // Wait for exit animation
+    await new Promise(resolve => setTimeout(resolve, 300));
     
-    const lastSwipe = swipeHistory[swipeHistory.length - 1];
+    // Now go back to previous card
     try {
       await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
       setSwipeHistory(swipeHistory.slice(0, -1));
       setCurrentIndex(Math.max(0, currentIndex - 1));
       setCurrentPhotoIndex(0);
+      
+      // Trigger enter animation for previous card
+      setShowScanlines(false);
+      setAnimationType('redo-enter');
+      
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setAnimationType(null);
+      
     } catch (error) {
       console.error('Error undoing swipe:', error);
+      setAnimationType(null);
+      setShowScanlines(false);
     }
   };
 
