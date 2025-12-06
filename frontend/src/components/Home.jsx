@@ -730,7 +730,7 @@ export default function Home({ user }) {
 
       <div className="flex flex-col" style={{ 
         position: 'relative', 
-        minHeight: 'calc(100vh + env(safe-area-inset-bottom))', 
+        minHeight: 'calc(var(--vh, 1vh) * 100 + env(safe-area-inset-bottom))', 
         paddingBottom: 'env(safe-area-inset-bottom)',
         zIndex: 10 
       }}>
