@@ -728,7 +728,12 @@ export default function Home({ user }) {
         }}></div>
       </div>
 
-      <div className="flex flex-col" style={{ position: 'relative', minHeight: '100vh', zIndex: 10 }}>
+      <div className="flex flex-col" style={{ 
+        position: 'relative', 
+        minHeight: 'calc(100vh + env(safe-area-inset-bottom))', 
+        paddingBottom: 'env(safe-area-inset-bottom)',
+        zIndex: 10 
+      }}>
         {/* Horoscope Modal */}
       {showHoroscopeModal && todayHoroscope && (
         <div 
