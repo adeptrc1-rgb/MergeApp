@@ -58,6 +58,14 @@ export default function Home({ user }) {
   
   const [showScoreBreakdown, setShowScoreBreakdown] = useState(false);
   
+  // Animation states
+  const [animationType, setAnimationType] = useState(null); // 'like', 'dislike', 'superlike', 'redo'
+  const [showGlow, setShowGlow] = useState(false);
+  const [showShine, setShowShine] = useState(false);
+  const [particles, setParticles] = useState([]);
+  const [showCrown, setShowCrown] = useState(false);
+  const [showScanlines, setShowScanlines] = useState(false);
+  
   // Pulse³ state management
   const [pulseBoosts, setPulseBoosts] = useState(1);
   const [isPulsing, setIsPulsing] = useState(false);
