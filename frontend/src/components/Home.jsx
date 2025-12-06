@@ -708,10 +708,14 @@ export default function Home({ user }) {
         zIndex: 1
       }} />
 
-      {/* 2. BACKGROUND BLOBS */}
+      {/* 2. BACKGROUND BLOBS - Expanded to cover entire screen */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)' }}></div>
+        {/* Top cyan gradient */}
+        <div className="absolute top-0 left-0 w-full h-1/2 rounded-full blur-3xl opacity-8" style={{ backgroundColor: 'var(--accent-primary)', transform: 'scale(2)' }}></div>
+        {/* Center cyan glow */}
+        <div className="absolute top-1/2 left-1/2 w-full h-full rounded-full blur-3xl opacity-6" style={{ backgroundColor: 'var(--accent-primary)', transform: 'translate(-50%, -50%)' }}></div>
+        {/* Bottom cyan gradient */}
+        <div className="absolute bottom-0 right-0 w-full h-1/2 rounded-full blur-3xl opacity-5" style={{ backgroundColor: 'var(--accent-primary)', transform: 'scale(2)' }}></div>
       </div>
 
       <div className="flex flex-col" style={{ position: 'relative', minHeight: '100vh', zIndex: 10 }}>
