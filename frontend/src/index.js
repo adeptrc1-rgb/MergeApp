@@ -5,6 +5,23 @@ import "@/styles/zodiacAnimations.css";
 import "@/styles/premiumSkins.css";
 import App from "@/App";
 
+// JS VIEWPORT VARIABLE TECHNIQUE - Fix 100vh issues on mobile
+const setViewportHeight = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  
+  // Also set safe area insets
+  const safeAreaBottom = getComputedStyle(document.documentElement).getPropertyValue('--sab') || '0px';
+  console.log('📐 Viewport height updated:', window.innerHeight, 'px');
+};
+
+// Set on load
+setViewportHeight();
+
+// Update on resize (handles orientation changes)
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', setViewportHeight);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
