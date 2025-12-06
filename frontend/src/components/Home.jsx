@@ -455,17 +455,35 @@ export default function Home({ user }) {
       alert('No super likes remaining!');
       return;
     }
+    
+    // Trigger SUPER LIKE animation
+    setAnimationType('superlike');
+    setShowCrown(true);
+    
+    setTimeout(() => {
+      setShowShine(true);
+    }, 200);
+    
+    // Generate glitter particles
+    const glitterParticles = Array.from({ length: 18 }, (_, i) => ({
+      id: Date.now() + i,
+      type: 'glitter',
+      startX: 40 + Math.random() * 20,
+      startY: -10,
+      drift: (Math.random() - 0.5) * 60,
+      delay: 400 + i * 30
+    }));
+    setParticles(glitterParticles);
+    
+    setTimeout(() => {
+      setShowCrown(false);
+      setShowShine(false);
+      setParticles([]);
+      setAnimationType(null);
+    }, 600);
+    
     setSwipeDirection('up');
     setShowDropdown(false);
-
-    if (cardRef.current) {
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      createStarburstEffect(x, y);
-      createHeartBurst(x, y - 50);
-      createStardustTrail(x, y, 20);
-    }
 
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'superlike', userId: currentMatch.id }]);
     try {
@@ -482,7 +500,7 @@ export default function Home({ user }) {
       setCurrentPhotoIndex(0);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
-    }, 300);
+    }, 600);
   };
 
   const handlePass = async () => {
