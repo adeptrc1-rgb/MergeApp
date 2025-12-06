@@ -997,6 +997,64 @@ export default function Home({ user }) {
                 })())
               }}
             >
+              {/* Animation Overlays */}
+              {showGlow && <div className="like-glow-overlay" />}
+              {showShine && <div className="superlike-shine" />}
+              {showScanlines && <div className="redo-scanlines" />}
+              {showCrown && (
+                <div className="superlike-crown" style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
+                  ⭐
+                </div>
+              )}
+              
+              {/* Particle System */}
+              {particles.length > 0 && (
+                <div className="particle-container">
+                  {particles.map((p) => {
+                    if (p.type === 'like') {
+                      return (
+                        <div
+                          key={p.id}
+                          className="like-particle"
+                          style={{
+                            '--particle-x': `${p.x}px`,
+                            '--particle-delay': `${p.delay}ms`,
+                            left: '50%',
+                            top: '50%'
+                          }}
+                        />
+                      );
+                    } else if (p.type === 'dust') {
+                      return (
+                        <div
+                          key={p.id}
+                          className="dust-particle"
+                          style={{
+                            '--dust-angle': `${p.angle}deg`,
+                            '--dust-distance': `${p.distance}px`,
+                            '--dust-delay': `${p.delay}ms`
+                          }}
+                        />
+                      );
+                    } else if (p.type === 'glitter') {
+                      return (
+                        <div
+                          key={p.id}
+                          className="glitter-particle"
+                          style={{
+                            '--glitter-start-x': `${p.startX}%`,
+                            '--glitter-start-y': `${p.startY}%`,
+                            '--glitter-drift': `${p.drift}px`,
+                            '--glitter-delay': `${p.delay}ms`
+                          }}
+                        />
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              )}
+
               {/* Swipe Overlay Labels */}
               {isDragging && getSwipeLabel().show && (
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
