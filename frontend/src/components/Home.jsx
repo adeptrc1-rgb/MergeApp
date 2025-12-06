@@ -964,6 +964,10 @@ export default function Home({ user }) {
               onTouchMove={!showDropdown ? handleDragMove : undefined}
               onTouchEnd={!showDropdown ? handleDragEnd : undefined}
               className={`relative rounded-2xl overflow-hidden ${showDropdown ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'} w-full transition-all duration-500 ${
+                animationType === 'like' ? 'like-exit-card' :
+                animationType === 'dislike' ? 'dislike-exit-card' :
+                animationType === 'superlike' ? 'superlike-exit-card' :
+                animationType === 'redo' ? 'redo-glitch redo-exit-card' :
                 swipeDirection === 'right' ? 'translate-x-full rotate-12' :
                 swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
                 swipeDirection === 'up' ? '-translate-y-full scale-110' :
