@@ -708,15 +708,21 @@ export default function Home({ user }) {
         zIndex: 1
       }} />
 
-      {/* 2. BACKGROUND BLOBS - Full coverage including all safe areas */}
-      <div className="fixed overflow-hidden pointer-events-none" style={{ top: '-50px', left: 0, right: 0, bottom: '-300px', zIndex: 2 }}>
+      {/* 2. BACKGROUND BLOBS - Complete coverage */}
+      <div className="fixed overflow-visible pointer-events-none" style={{ inset: '-100px', zIndex: 2 }}>
         {/* Top cyan gradient */}
         <div className="absolute top-0 left-0 w-full h-1/2 rounded-full blur-3xl opacity-8" style={{ backgroundColor: 'var(--accent-primary)', transform: 'scale(2.5)' }}></div>
         {/* Center cyan glow */}
         <div className="absolute top-1/2 left-1/2 w-full h-full rounded-full blur-3xl opacity-6" style={{ backgroundColor: 'var(--accent-primary)', transform: 'translate(-50%, -50%) scale(1.5)' }}></div>
-        {/* Bottom cyan gradient - MASSIVE extension */}
-        <div className="absolute w-full rounded-full blur-3xl opacity-10" style={{ backgroundColor: 'var(--accent-primary)', bottom: '-100px', left: '-20%', width: '140%', height: '800px' }}></div>
-        <div className="absolute w-full rounded-full blur-3xl opacity-8" style={{ backgroundColor: 'var(--accent-primary)', bottom: '-150px', left: '-30%', width: '160%', height: '600px' }}></div>
+        {/* Bottom coverage - ABSOLUTE BOTTOM */}
+        <div className="absolute rounded-full blur-3xl" style={{ 
+          backgroundColor: 'var(--accent-primary)', 
+          bottom: '-200px', 
+          left: '-50%', 
+          width: '200%', 
+          height: '1000px',
+          opacity: 0.1 
+        }}></div>
       </div>
 
       <div className="flex flex-col" style={{ position: 'relative', minHeight: '100vh', zIndex: 10 }}>
