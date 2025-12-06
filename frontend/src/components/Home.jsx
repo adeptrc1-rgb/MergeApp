@@ -1280,9 +1280,6 @@ export default function Home({ user }) {
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <BottomNav currentTab="home" navigate={navigate} />
-
       {/* Merge Score Breakdown Modal */}
       {showScoreBreakdown && currentMatch && (
         <div 
