@@ -572,6 +572,14 @@ export default function Home({ user }) {
 
   const handleUndo = async () => {
     if (swipeHistory.length === 0) return;
+    
+    // Trigger REDO animation
+    setAnimationType('redo');
+    setShowScanlines(true);
+    
+    setTimeout(() => setShowScanlines(false), 300);
+    setTimeout(() => setAnimationType(null), 500);
+    
     const lastSwipe = swipeHistory[swipeHistory.length - 1];
     try {
       await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
