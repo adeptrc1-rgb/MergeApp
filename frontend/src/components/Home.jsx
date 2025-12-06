@@ -395,6 +395,26 @@ export default function Home({ user }) {
 
   const handleLike = async () => {
     if (!currentMatch) return;
+    
+    // Trigger LIKE animation
+    setAnimationType('like');
+    setShowGlow(true);
+    
+    // Generate like particles
+    const likeParticles = Array.from({ length: 6 }, (_, i) => ({
+      id: Date.now() + i,
+      type: 'like',
+      x: (Math.random() - 0.5) * 50,
+      delay: i * 50
+    }));
+    setParticles(likeParticles);
+    
+    setTimeout(() => setShowGlow(false), 150);
+    setTimeout(() => {
+      setParticles([]);
+      setAnimationType(null);
+    }, 450);
+    
     setSwipeDirection('right');
     setShowDropdown(false);
 
@@ -404,21 +424,11 @@ export default function Home({ user }) {
       updateLogoState('highMatch');
     }
 
-    if (cardRef.current) {
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = rect.right - 50;
-      const y = rect.top + rect.height / 2;
-      createStarburstEffect(x, y);
-      createSparkleTrail(x, y);
-      createStardustTrail(x, y, 10);
-    }
-
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'like', userId: currentMatch.id }]);
     try {
       await axios.post(`${API}/users/like/${currentMatch.id}`);
       const matchResponse = await axios.get(`${API}/users/check-match/${currentMatch.id}`);
       if (matchResponse.data.is_match) {
-        // Trigger new match logo state
         updateLogoState('newMatch');
         createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
         setTimeout(() => {
