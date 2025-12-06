@@ -487,15 +487,27 @@ export default function Home({ user }) {
 
   const handlePass = async () => {
     if (!currentMatch) return;
+    
+    // Trigger DISLIKE animation
+    setAnimationType('dislike');
+    
+    // Generate dust particles
+    const dustParticles = Array.from({ length: 10 }, (_, i) => ({
+      id: Date.now() + i,
+      type: 'dust',
+      angle: (360 / 10) * i,
+      distance: 100 + Math.random() * 100,
+      delay: 150 + i * 15
+    }));
+    setParticles(dustParticles);
+    
+    setTimeout(() => {
+      setParticles([]);
+      setAnimationType(null);
+    }, 400);
+    
     setSwipeDirection('left');
     setShowDropdown(false);
-
-    if (cardRef.current) {
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = rect.left + 50;
-      const y = rect.top + rect.height / 2;
-      createShootingStar(x, y, 'left');
-    }
 
     setSwipeHistory([...swipeHistory, { index: currentIndex, action: 'pass', userId: currentMatch.id }]);
     try {
@@ -511,7 +523,7 @@ export default function Home({ user }) {
       setCurrentPhotoIndex(0);
       setShowDropdown(false);
       setTimeout(() => setJustSwiped(false), 1500);
-    }, 300);
+    }, 400);
   };
 
   const handleBoost = async () => {
