@@ -252,15 +252,15 @@
 
 @keyframes redoCardEnter {
   0% {
-    transform: scale(0.9) translateX(-50px);
+    transform: translateX(150%) rotate(15deg) scale(0.9);
     opacity: 0;
   }
   70% {
-    transform: scale(1.02);
+    transform: translateX(0) rotate(0deg) scale(1.02);
     opacity: 1;
   }
   100% {
-    transform: scale(1) translateX(0);
+    transform: translateX(0) rotate(0deg) scale(1);
     opacity: 1;
   }
 }
