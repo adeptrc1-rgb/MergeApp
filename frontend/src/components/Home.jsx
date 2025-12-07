@@ -575,17 +575,17 @@ export default function Home({ user }) {
     
     const lastSwipe = swipeHistory[swipeHistory.length - 1];
     
-    // Call backend API to remove swipe
     try {
+      // Call backend API to remove swipe
       await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
       
-      // Update state to show previous card
+      // Trigger redo-enter animation FIRST
+      setAnimationType('redo-enter');
+      
+      // Then update state to show previous card (this will re-render with animation)
       setSwipeHistory(swipeHistory.slice(0, -1));
       setCurrentIndex(Math.max(0, currentIndex - 1));
       setCurrentPhotoIndex(0);
-      
-      // Trigger redo-enter animation (card slides in from right)
-      setAnimationType('redo-enter');
       
       // Wait for animation to complete (600ms)
       await new Promise(resolve => setTimeout(resolve, 600));
