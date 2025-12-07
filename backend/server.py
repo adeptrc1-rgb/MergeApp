@@ -1195,6 +1195,50 @@ async def get_matches(user: User = Depends(get_current_user)):
         return []
 
 
+@api_router.delete("/users/undo-swipe/{target_user_id}")
+async def undo_swipe(target_user_id: str, user: User = Depends(get_current_user)):
+    """
+    Undo a swipe action - removes the target user from liked/disliked/super_liked arrays.
+    Also cleans up reciprocal arrays and deletes match records if they existed.
+    """
+    try:
+        # Remove target_user_id from current user's swipe arrays
+        await db.users.update_one(
+            {"id": user.id},
+            {
+                "$pull": {
+                    "liked_users": target_user_id,
+                    "disliked_users": target_user_id,
+                    "super_liked_users": target_user_id
+                }
+            }
+        )
+        
+        # Remove current user from target user's reciprocal arrays
+        await db.users.update_one(
+            {"id": target_user_id},
+            {
+                "$pull": {
+                    "liked_by": user.id,
+                    "super_liked_by": user.id
+                }
+            }
+        )
+        
+        # Delete match record if it existed
+        await db.matches.delete_many({
+            "$or": [
+                {"user1_id": user.id, "user2_id": target_user_id},
+                {"user1_id": target_user_id, "user2_id": user.id}
+            ]
+        })
+        
+        return {"message": "Swipe undone successfully"}
+    except Exception as e:
+        print(f"Error undoing swipe: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to undo swipe: {str(e)}")
+
+
 def calculate_compatibility_bonus(user_a: dict, user_b: dict) -> float:
     """Calculate structured compatibility bonuses based on profile signals.
 
