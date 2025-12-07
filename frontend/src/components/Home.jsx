@@ -579,23 +579,26 @@ export default function Home({ user }) {
       // Call backend API to remove swipe
       await axios.delete(`${API}/users/undo-swipe/${lastSwipe.userId}`);
       
-      // Trigger redo-enter animation FIRST
+      // Trigger VHS glitch + scanlines + redo-enter animation
       setAnimationType('redo-enter');
+      setShowScanlines(true);
       
-      // Then update state to show previous card (this will re-render with animation)
+      // Update state to show previous card (this will re-render with animation)
       setSwipeHistory(swipeHistory.slice(0, -1));
       setCurrentIndex(Math.max(0, currentIndex - 1));
       setCurrentPhotoIndex(0);
       
-      // Wait for animation to complete (600ms)
-      await new Promise(resolve => setTimeout(resolve, 600));
+      // Wait for animation to complete (500ms VHS effect)
+      await new Promise(resolve => setTimeout(resolve, 500));
       
       // Clear animation state
       setAnimationType(null);
+      setShowScanlines(false);
       
     } catch (error) {
       console.error('Error undoing swipe:', error);
       setAnimationType(null);
+      setShowScanlines(false);
     }
   };
 
