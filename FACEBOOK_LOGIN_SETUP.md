@@ -31,7 +31,7 @@ Facebook OAuth login has been integrated into your Merge dating app. Follow thes
 2. Add these URLs to **"Valid OAuth Redirect URIs"**:
    ```
    http://localhost:3000
-   https://merge-datingapp.preview.emergentagent.com
+   https://merge-elite-app.preview.emergentagent.com
    ```
 
 ### **Add App Domains:**

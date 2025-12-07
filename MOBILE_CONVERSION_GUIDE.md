@@ -540,7 +540,7 @@ const styles = StyleSheet.create({
 
 **Environment Variables (.env):**
 ```
-API_BASE_URL=https://merge-datingapp.preview.emergentagent.com/api
+API_BASE_URL=https://merge-elite-app.preview.emergentagent.com/api
 ```
 
 **Axios Setup:**
@@ -670,6 +670,6 @@ export default api;
 
 ---
 
-**Backend URL:** `https://merge-datingapp.preview.emergentagent.com`  
+**Backend URL:** `https://merge-elite-app.preview.emergentagent.com`  
 **Current Web App:** Fully functional and tested  
 **Mobile Port:** Ready to begin with Mobile Agent
