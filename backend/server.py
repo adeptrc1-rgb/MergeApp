@@ -1195,6 +1195,121 @@ async def get_matches(user: User = Depends(get_current_user)):
         return []
 
 
+@api_router.post("/users/like/{target_user_id}")
+async def like_user(target_user_id: str, user: User = Depends(get_current_user)):
+    """Like another user"""
+    try:
+        # Add to current user's liked_users
+        await db.users.update_one(
+            {"id": user.id},
+            {"$addToSet": {"liked_users": target_user_id}}
+        )
+        
+        # Add to target user's liked_by
+        await db.users.update_one(
+            {"id": target_user_id},
+            {"$addToSet": {"liked_by": user.id}}
+        )
+        
+        return {"message": "User liked successfully"}
+    except Exception as e:
+        print(f"Error liking user: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to like user: {str(e)}")
+
+
+@api_router.post("/users/pass/{target_user_id}")
+async def pass_user(target_user_id: str, user: User = Depends(get_current_user)):
+    """Pass on another user"""
+    try:
+        # Add to current user's disliked_users
+        await db.users.update_one(
+            {"id": user.id},
+            {"$addToSet": {"disliked_users": target_user_id}}
+        )
+        
+        return {"message": "User passed successfully"}
+    except Exception as e:
+        print(f"Error passing user: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to pass user: {str(e)}")
+
+
+@api_router.post("/users/super-like/{target_user_id}")
+async def super_like_user(target_user_id: str, user: User = Depends(get_current_user)):
+    """Super like another user"""
+    try:
+        # Check if user has super likes remaining
+        user_doc = await db.users.find_one({"id": user.id}, {"_id": 0})
+        if not user_doc or user_doc.get("super_likes", 0) <= 0:
+            raise HTTPException(status_code=400, detail="No super likes remaining")
+        
+        # Add to current user's super_liked_users and decrement counter
+        await db.users.update_one(
+            {"id": user.id},
+            {
+                "$addToSet": {"super_liked_users": target_user_id},
+                "$inc": {"super_likes": -1}
+            }
+        )
+        
+        # Add to target user's super_liked_by
+        await db.users.update_one(
+            {"id": target_user_id},
+            {"$addToSet": {"super_liked_by": user.id}}
+        )
+        
+        return {"message": "User super liked successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error super liking user: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to super like user: {str(e)}")
+
+
+@api_router.get("/users/check-match/{target_user_id}")
+async def check_match(target_user_id: str, user: User = Depends(get_current_user)):
+    """Check if a mutual like creates a match"""
+    try:
+        # Check if both users have liked each other
+        current_user_doc = await db.users.find_one({"id": user.id}, {"_id": 0})
+        target_user_doc = await db.users.find_one({"id": target_user_id}, {"_id": 0})
+        
+        if not current_user_doc or not target_user_doc:
+            return {"is_match": False}
+        
+        # Check if current user liked target AND target liked current
+        current_liked_target = target_user_id in current_user_doc.get("liked_users", [])
+        target_liked_current = user.id in target_user_doc.get("liked_users", [])
+        
+        if current_liked_target and target_liked_current:
+            # Create match if doesn't exist
+            existing_match = await db.matches.find_one({
+                "$or": [
+                    {"user1_id": user.id, "user2_id": target_user_id},
+                    {"user1_id": target_user_id, "user2_id": user.id}
+                ]
+            })
+            
+            if not existing_match:
+                # Calculate compatibility
+                compatibility = calculate_pair_compatibility(current_user_doc, target_user_doc)
+                
+                match = {
+                    "id": str(uuid.uuid4()),
+                    "user1_id": user.id,
+                    "user2_id": target_user_id,
+                    "matched_at": now_utc().isoformat(),
+                    "compatibility_score": round(compatibility)
+                }
+                await db.matches.insert_one(match)
+            
+            return {"is_match": True}
+        
+        return {"is_match": False}
+    except Exception as e:
+        print(f"Error checking match: {e}")
+        return {"is_match": False}
+
+
 @api_router.delete("/users/undo-swipe/{target_user_id}")
 async def undo_swipe(target_user_id: str, user: User = Depends(get_current_user)):
     """
