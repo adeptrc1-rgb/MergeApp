@@ -291,8 +291,7 @@
 }
 
 .redo-enter-card {
-  animation: redoCardEnter 500ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: 200ms;
+  animation: redoCardEnter 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* Particle containers */
