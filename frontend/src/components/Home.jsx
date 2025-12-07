@@ -979,7 +979,7 @@ export default function Home({ user }) {
                 animationType === 'dislike' ? 'dislike-exit-card' :
                 animationType === 'superlike' ? 'superlike-exit-card' :
                 animationType === 'redo-exit' ? 'redo-glitch redo-exit-card' :
-                animationType === 'redo-enter' ? 'redo-enter-card' :
+                animationType === 'redo-enter' ? 'redo-glitch redo-enter-card' :
                 swipeDirection === 'right' ? 'translate-x-full rotate-12' :
                 swipeDirection === 'left' ? '-translate-x-full -rotate-12' :
                 swipeDirection === 'up' ? '-translate-y-full scale-110' :
