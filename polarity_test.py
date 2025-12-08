@@ -6,7 +6,7 @@ import requests
 import json
 
 def test_polarity_bonus():
-    base_url = "https://merge-elite-app.preview.emergentagent.com/api"
+    base_url = "https://nav-safe-area-fix.preview.emergentagent.com/api"
     
     # Step 1: Login
     print("🔐 Logging in...")

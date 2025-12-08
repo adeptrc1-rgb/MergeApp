@@ -15,7 +15,7 @@ from datetime import datetime
 import time
 
 class ProfileEditingTester:
-    def __init__(self, base_url="https://merge-elite-app.preview.emergentagent.com"):
+    def __init__(self, base_url="https://nav-safe-area-fix.preview.emergentagent.com"):
         self.base_url = base_url
         self.api_url = f"{base_url}/api"
         self.session_cookies = None
@@ -828,7 +828,7 @@ def main():
     if len(sys.argv) > 1:
         base_url = sys.argv[1]
     else:
-        base_url = "https://merge-elite-app.preview.emergentagent.com"
+        base_url = "https://nav-safe-area-fix.preview.emergentagent.com"
     
     tester = ProfileEditingTester(base_url)
     return tester.run_profile_editing_tests()
