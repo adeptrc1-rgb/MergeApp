@@ -49,8 +49,8 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         bottom: 0,
-        paddingTop: '8px',
-        paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 0px))',
+        paddingTop: '4px',
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         borderTop: darkMode 
           ? '1px solid rgba(255, 255, 255, 0.1)' 
           : '1px solid rgba(0, 0, 0, 0.1)',
