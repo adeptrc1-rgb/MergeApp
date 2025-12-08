@@ -784,7 +784,9 @@ export default function Profile({ user, logout }) {
                 border: '1px solid rgba(255,255,255,0.1)',
                 cursor: 'pointer',
                 WebkitTapHighlightColor: 'transparent',
-                touchAction: 'manipulation'
+                touchAction: 'manipulation',
+                position: 'relative',
+                zIndex: 10
               }}
               onTouchStart={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
