@@ -659,8 +659,8 @@ export default function Profile({ user, logout }) {
         </button>
 
         {/* Quick Action Cards - Horizontal Scroll (Vibrant Gradients) */}
-        <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content' }}>
+        <div className="mb-4 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', touchAction: 'pan-x' }}>
+          <div className="flex gap-3 pb-2" style={{ minWidth: 'fit-content', touchAction: 'auto' }}>
             {/* Super Likes Card */}
             <div
               className="relative flex-shrink-0 rounded-2xl p-4 transition-all"
