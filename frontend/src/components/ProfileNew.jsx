@@ -220,11 +220,11 @@ export default function Profile({ user, logout }) {
         top: 0,
         left: 0,
         right: 0,
-        bottom: '70px',
+        bottom: '0px',
         backgroundColor: 'var(--bg-primary)',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
-        paddingBottom: '20px',
+        paddingBottom: '100px',
         zIndex: 1
       }}
     >
