@@ -69,11 +69,11 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                 console.log(`[BottomNav] Navigating to: ${path} (from tab: ${id})`);
                 navigate(path);
               }}
-              className="flex flex-col items-center justify-center gap-1 transition-all duration-300 ease-out"
+              className="flex flex-col items-center justify-end gap-0.5 transition-all duration-300 ease-out"
               style={{
                 minWidth: '64px',
-                minHeight: '56px',
-                padding: '8px 10px',
+                minHeight: '52px',
+                padding: '4px 10px 6px 10px',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation',
