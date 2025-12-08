@@ -53,12 +53,23 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
           return (
             <button
               key={id}
-              onClick={() => navigate(path)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigate(path);
+              }}
               className="flex flex-col items-center justify-center gap-0.5 transition-all duration-200 ease-out"
               style={{
-                minWidth: '52px',
-                padding: '4px 6px',
-                transition: 'all 0.2s ease'
+                minWidth: '56px',
+                minHeight: '44px',
+                padding: '6px 8px',
+                transition: 'all 0.2s ease',
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+                cursor: 'pointer',
+                background: 'transparent',
+                border: 'none',
+                position: 'relative'
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
@@ -69,6 +80,13 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                 if (!isActive) {
                   e.currentTarget.style.transform = 'scale(1)';
                 }
+              }}
+              onTouchStart={(e) => {
+                // Ensure touch events work
+                e.currentTarget.style.opacity = '0.7';
+              }}
+              onTouchEnd={(e) => {
+                e.currentTarget.style.opacity = '1';
               }}
             >
               {isCustom ? (
