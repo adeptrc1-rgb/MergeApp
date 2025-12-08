@@ -219,12 +219,13 @@ export default function Profile({ user, logout }) {
         top: 0,
         left: 0,
         right: 0,
-        bottom: '0px',
+        bottom: 'calc(72px + env(safe-area-inset-bottom, 0px))',
         backgroundColor: 'var(--bg-primary)',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
-        paddingBottom: 'calc(80px + env(safe-area-inset-bottom, 0px))',
-        zIndex: 1
+        paddingBottom: '20px',
+        zIndex: 1,
+        pointerEvents: 'auto'
       }}
     >
       {/* Subtle animated background - matching Explore tab */}
