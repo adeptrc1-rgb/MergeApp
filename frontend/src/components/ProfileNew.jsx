@@ -224,7 +224,7 @@ export default function Profile({ user, logout }) {
         backgroundColor: 'var(--bg-primary)',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
-        paddingBottom: '100px',
+        paddingBottom: 'calc(80px + env(safe-area-inset-bottom, 0px))',
         zIndex: 1
       }}
     >
