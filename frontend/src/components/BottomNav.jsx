@@ -43,23 +43,18 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        background: darkMode 
-          ? 'rgba(0, 0, 0, 0.95)'
-          : 'rgba(255, 255, 255, 0.95)',
+        background: 'rgba(0, 0, 0, 0.95)',
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         bottom: 0,
-        paddingTop: '8px',
-        paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 24px)',
-        borderTop: darkMode 
-          ? '1px solid rgba(255, 255, 255, 0.1)' 
-          : '1px solid rgba(0, 0, 0, 0.1)',
+        paddingTop: '6px',
+        paddingBottom: 'max(env(safe-area-inset-bottom), 34px)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
         zIndex: 9999,
         pointerEvents: 'auto',
         touchAction: 'manipulation',
         isolation: 'isolate',
-        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)',
-        minHeight: 'max(calc(68px + env(safe-area-inset-bottom, 0px)), 92px)'
+        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)'
       }}
     >
       <div className="flex items-center justify-between mx-auto" style={{ padding: '0 16px', maxWidth: '500px', minHeight: '60px' }}>
