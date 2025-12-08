@@ -1,0 +1,384 @@
+/* SWIPE CARD ANIMATIONS */
+
+/* 1. LIKE ANIMATION - Enveloping Glow + Arc */
+@keyframes likeGlowPulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes likeArcExit {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(120px, -60px) rotate(4deg) scale(0.98);
+  }
+  100% {
+    transform: translate(calc(100vw + 400px), -40px) rotate(8deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.like-glow-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--accent-primary, #00D9FF) 0%, transparent 70%);
+  opacity: 0.2;
+  animation: likeGlowPulse 150ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.like-exit-card {
+  animation: likeArcExit 450ms cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+/* Like particles */
+@keyframes likeParticleFloat {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--particle-x), -100px) scale(1);
+    opacity: 0;
+  }
+}
+
+.like-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-primary, #00D9FF);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-primary, #00D9FF);
+  animation: likeParticleFloat 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--particle-delay, 0ms);
+}
+
+/* 2. DISLIKE ANIMATION - Dust Cloud Sink */
+@keyframes dislikeLinearExit {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-100vw - 400px), 0) scale(0.85);
+    opacity: 0.3;
+  }
+}
+
+.dislike-exit-card {
+  animation: dislikeLinearExit 400ms linear forwards;
+}
+
+/* Dust particles */
+@keyframes dustParticleExpand {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--dust-angle)) translateX(0) scale(0);
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--dust-angle)) translateX(var(--dust-distance)) scale(0.3);
+    opacity: 0;
+  }
+}
+
+.dust-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  animation: dustParticleExpand 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--dust-delay, 0ms);
+}
+
+/* 3. SUPER LIKE ANIMATION - Crown Burst */
+@keyframes crownDeliver {
+  0% {
+    transform: scale(0) translateY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) translateY(-30px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(-60px);
+    opacity: 1;
+  }
+}
+
+@keyframes cardRadialShine {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes superlikeAscend {
+  0% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.05) translateY(-20px) rotate(-2deg);
+  }
+  100% {
+    transform: scale(0.9) translateY(calc(-100vh - 200px)) rotate(-5deg);
+    opacity: 0;
+  }
+}
+
+.superlike-crown {
+  position: absolute;
+  font-size: 48px;
+  z-index: 100;
+  animation: crownDeliver 250ms cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards;
+}
+
+.superlike-shine {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 215, 0, 0.6) 0%, transparent 60%);
+  animation: cardRadialShine 400ms ease-out forwards;
+  animation-delay: 200ms;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.superlike-exit-card {
+  animation: superlikeAscend 600ms cubic-bezier(0.32, 0, 0.67, 0) forwards;
+}
+
+/* Glitter particles */
+@keyframes glitterRain {
+  0% {
+    transform: translateY(0) translateX(0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(400px) translateX(var(--glitter-drift)) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.glitter-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  border-radius: 50%;
+  box-shadow: 0 0 8px #FFD700;
+  animation: glitterRain 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--glitter-delay, 0ms);
+  top: var(--glitter-start-y);
+  left: var(--glitter-start-x);
+}
+
+/* 4. REDO ANIMATION - Time Rewind VHS Glitch */
+
+/* RGB Split Effect */
+@keyframes rgbSplit {
+  0% {
+    text-shadow: none;
+    filter: none;
+  }
+  25% {
+    text-shadow: 
+      -2px 0 0 rgba(255, 0, 0, 0.7),
+      2px 0 0 rgba(0, 255, 255, 0.7);
+    filter: hue-rotate(90deg) contrast(1.2);
+  }
+  50% {
+    text-shadow: 
+      -3px 0 0 rgba(255, 0, 0, 0.9),
+      3px 0 0 rgba(0, 255, 255, 0.9);
+    filter: hue-rotate(-90deg) contrast(1.3);
+  }
+  75% {
+    text-shadow: 
+      -2px 0 0 rgba(255, 0, 0, 0.7),
+      2px 0 0 rgba(0, 255, 255, 0.7);
+    filter: hue-rotate(45deg) contrast(1.2);
+  }
+  100% {
+    text-shadow: none;
+    filter: none;
+  }
+}
+
+/* VHS Glitch Distortion */
+@keyframes vhsGlitch {
+  0%, 100% {
+    transform: translate(0, 0) skew(0deg);
+    filter: none;
+  }
+  10% {
+    transform: translate(3px, 0) skew(0.5deg);
+    filter: hue-rotate(90deg) saturate(1.5);
+  }
+  20% {
+    transform: translate(-3px, 2px) skew(-0.5deg);
+    filter: hue-rotate(-90deg) contrast(1.3);
+  }
+  30% {
+    transform: translate(2px, -1px) skew(0.3deg);
+    filter: brightness(1.3) saturate(1.2);
+  }
+  40% {
+    transform: translate(-2px, 1px) skew(-0.3deg);
+    filter: hue-rotate(180deg);
+  }
+  50% {
+    transform: translate(0, 0) skew(0deg);
+    filter: contrast(1.5);
+  }
+  60% {
+    transform: translate(1px, -2px) skew(0.2deg);
+    filter: brightness(0.8);
+  }
+  70% {
+    transform: translate(-1px, 0) skew(-0.2deg);
+    filter: saturate(2);
+  }
+  80% {
+    transform: translate(2px, 1px) skew(0.4deg);
+    filter: hue-rotate(-45deg);
+  }
+  90% {
+    transform: translate(0, 0) skew(0deg);
+    filter: contrast(1.2);
+  }
+}
+
+/* Scan Line Flash */
+@keyframes scanlineFlash {
+  0%, 100% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  75% {
+    opacity: 0.2;
+  }
+}
+
+/* Card Re-entry with Overshoot */
+@keyframes redoCardEnter {
+  0% {
+    transform: translateX(150%) rotate(15deg) scale(0.85);
+    opacity: 0;
+    filter: brightness(0.8) contrast(1.2);
+  }
+  40% {
+    transform: translateX(0) rotate(0deg) scale(1.08);
+    opacity: 1;
+    filter: brightness(1.1) contrast(1.1);
+  }
+  60% {
+    transform: translateX(0) rotate(0deg) scale(0.98);
+    opacity: 1;
+    filter: brightness(1.05) contrast(1.05);
+  }
+  80% {
+    transform: translateX(0) rotate(0deg) scale(1.02);
+    opacity: 1;
+    filter: brightness(1.02);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg) scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* VHS Glitch Overlay */
+.redo-glitch {
+  animation: vhsGlitch 250ms steps(8) forwards;
+  position: relative;
+}
+
+/* RGB Split on Content */
+.redo-glitch::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, 
+      rgba(255, 0, 0, 0.1) 0%, 
+      transparent 10%, 
+      transparent 90%, 
+      rgba(0, 255, 255, 0.1) 100%
+    );
+  animation: rgbSplit 250ms ease-in-out forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Scan Lines VHS Effect */
+.redo-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 255, 0.15) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(255, 0, 255, 0.1) 3px,
+    transparent 4px,
+    transparent 6px
+  );
+  animation: scanlineFlash 500ms ease-in-out forwards;
+  pointer-events: none;
+  z-index: 10;
+  mix-blend-mode: overlay;
+}
+
+/* Card Entry Animation */
+.redo-enter-card {
+  animation: redoCardEnter 500ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Particle containers */
+.particle-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: visible;
+}

@@ -1,0 +1,260 @@
+/**
+ * Swipe Button Animations
+ * Tiered interaction system with neutral defaults
+ */
+
+/* Base Button Styles - All buttons same neutral appearance */
+.swipe-button {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+}
+
+.swipe-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.swipe-button:not(:disabled):active {
+  transform: scale(0.95);
+}
+
+/* Tier 1: Utility Button (Undo) - Subtle */
+.swipe-button.undo:not(:disabled):hover {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  transform: scale(1.1);
+}
+
+.swipe-button.undo:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.6));
+  stroke-width: 2;
+}
+
+.swipe-button.undo:not(:disabled):active {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+}
+
+/* Tier 2: Pass Button - Soft negative */
+.swipe-button.pass:not(:disabled):hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
+}
+
+.swipe-button.pass:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.6));
+  stroke-width: 2;
+}
+
+.swipe-button.pass:not(:disabled):active {
+  animation: pulse-red 0.3s ease-out;
+}
+
+@keyframes pulse-red {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
+  }
+}
+
+/* Tier 2: Like Button - Positive action */
+.swipe-button.like:not(:disabled):hover {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.4);
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+  transform: scale(1.1);
+}
+
+.swipe-button.like:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.6));
+  stroke-width: 2;
+}
+
+.swipe-button.like:not(:disabled):active .icon-heart {
+  animation: heart-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Special: High Compatibility Pulse */
+.swipe-button.like.high-compatibility:not(:disabled) {
+  animation: compatibility-pulse 2s ease-in-out infinite;
+}
+
+@keyframes compatibility-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+  }
+}
+
+/* Tier 3: Super Like - Premium intelligent */
+.swipe-button.super:not(:disabled):hover {
+  background: rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 
+    0 0 30px rgba(37, 99, 235, 0.4),
+    0 0 60px rgba(37, 99, 235, 0.3);
+  transform: scale(1.1);
+  animation: super-glow 1.5s ease-in-out infinite;
+}
+
+.swipe-button.super:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.8));
+  stroke-width: 2;
+}
+
+@keyframes super-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(37, 99, 235, 0.4),
+      0 0 60px rgba(37, 99, 235, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(37, 99, 235, 0.6),
+      0 0 80px rgba(37, 99, 235, 0.5);
+  }
+}
+
+.swipe-button.super:not(:disabled):active .icon-star {
+  animation: star-burst 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes star-burst {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.4) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* Special: Low Compatibility Dimmed */
+.swipe-button.super.low-compatibility {
+  opacity: 0.5;
+}
+
+.swipe-button.super.low-compatibility:hover {
+  opacity: 0.7;
+}
+
+/* Tier 2: Message Button - Action */
+.swipe-button.message:not(:disabled):hover {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.4);
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.3);
+  transform: scale(1.1);
+}
+
+.swipe-button.message:not(:disabled):active .icon-message {
+  animation: message-wave 0.5s ease-out;
+}
+
+@keyframes message-wave {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2) translateX(-2px);
+  }
+  75% {
+    transform: scale(1.2) translateX(2px);
+  }
+}
+
+/* Tier 2: Boost Button - Power action */
+.swipe-button.boost:not(:disabled):hover {
+  background: rgba(234, 179, 8, 0.15);
+  border-color: rgba(234, 179, 8, 0.4);
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.3);
+  transform: scale(1.1);
+}
+
+.swipe-button.boost:not(:disabled):hover svg {
+  filter: drop-shadow(0 0 4px rgba(234, 179, 8, 0.6));
+  stroke-width: 2;
+}
+
+.swipe-button.boost:not(:disabled):active .icon-boost {
+  animation: boost-flash 0.4s ease-out;
+}
+
+@keyframes boost-flash {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.3);
+    filter: brightness(1.5) drop-shadow(0 0 8px rgba(234, 179, 8, 0.8));
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* After swipe: Encourage next action */
+.swipe-buttons-container.after-swipe .swipe-button:not(:disabled) {
+  animation: encourage-pulse 1.5s ease-in-out 1;
+}
+
+@keyframes encourage-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Accessibility: Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .swipe-button,
+  .swipe-button * {
+    animation: none !important;
+    transition: opacity 0.2s ease, background 0.2s ease !important;
+  }
+  
+  .swipe-button:hover {
+    transform: none !important;
+  }
+  
+  .swipe-button:active {
+    transform: none !important;
+  }
+}
+
+/* Mobile touch feedback */
+@media (hover: none) and (pointer: coarse) {
+  .swipe-button:not(:disabled):active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
+  }
+}

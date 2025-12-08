@@ -1,0 +1,33 @@
+{
+  "short_name": "Merge",
+  "name": "Merge - AI Dating App",
+  "description": "Sophisticated dating app with AI-powered compatibility matching",
+  "icons": [
+    {
+      "src": "https://customer-assets.emergentagent.com/job_datapp-overhaul/artifacts/5arika4k_1b67058b-c8b7-4c56-94c3-dbae55e7728c.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://customer-assets.emergentagent.com/job_datapp-overhaul/artifacts/5arika4k_1b67058b-c8b7-4c56-94c3-dbae55e7728c.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#00D9FF",
+  "background_color": "#000000",
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["lifestyle", "social"],
+  "screenshots": [
+    {
+      "src": "https://customer-assets.emergentagent.com/job_datapp-overhaul/artifacts/5arika4k_1b67058b-c8b7-4c56-94c3-dbae55e7728c.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ]
+}

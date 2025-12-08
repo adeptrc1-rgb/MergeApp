@@ -1,0 +1,145 @@
+/* 
+ * Merge Dating App - Global Theme
+ * Sophisticated black/silver/white palette with blue accent
+ * Inspired by modern dating apps like Hinge and Bumble
+ */
+
+:root {
+  /* ========================================
+     BACKGROUNDS
+     ======================================== */
+  --bg-primary: #0A0A0A;        /* Pure dark black - main app background */
+  --bg-secondary: #171717;      /* Dark charcoal - cards, modals */
+  --bg-tertiary: #1F1F1F;       /* Slightly lighter - hover states, nested cards */
+  --bg-elevated: #262626;       /* Elevated surfaces */
+  
+  /* ========================================
+     SURFACES & OVERLAYS
+     ======================================== */
+  --surface-default: #171717;
+  --surface-hover: #1F1F1F;
+  --surface-active: #262626;
+  --surface-glass: rgba(23, 23, 23, 0.8);  /* Glassmorphism */
+  --overlay-dark: rgba(0, 0, 0, 0.8);
+  --overlay-darker: rgba(0, 0, 0, 0.95);
+  
+  /* ========================================
+     BORDERS
+     ======================================== */
+  --border-subtle: #262626;     /* Very subtle borders */
+  --border-default: #404040;    /* Default border color */
+  --border-strong: #525252;     /* Stronger borders for emphasis */
+  --border-accent: #3B82F6;     /* Accent color borders */
+  
+  /* ========================================
+     TEXT COLORS
+     ======================================== */
+  --text-primary: #FAFAFA;      /* Off-white - primary text */
+  --text-secondary: #A3A3A3;    /* Medium gray - secondary text */
+  --text-tertiary: #737373;     /* Darker gray - tertiary text */
+  --text-muted: #525252;        /* Very muted text */
+  --text-accent: #3B82F6;       /* Accent color text */
+  
+  /* ========================================
+     ACCENT COLORS (Single Blue)
+     ======================================== */
+  --accent-primary: #3B82F6;    /* Main blue accent */
+  --accent-hover: #2563EB;      /* Darker blue for hover */
+  --accent-light: #60A5FA;      /* Lighter blue for highlights */
+  --accent-subtle: rgba(59, 130, 246, 0.1);  /* Subtle accent bg */
+  --accent-glow: rgba(59, 130, 246, 0.3);    /* Glow effect */
+  
+  /* ========================================
+     STATUS COLORS
+     ======================================== */
+  --success: #10B981;           /* Green for success states */
+  --error: #EF4444;             /* Red for errors */
+  --warning: #F59E0B;           /* Amber for warnings */
+  
+  /* ========================================
+     GRADIENTS
+     ======================================== */
+  --gradient-accent: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+  --gradient-surface: linear-gradient(to bottom, #171717, #0A0A0A);
+  --gradient-overlay: linear-gradient(to top, #0A0A0A, rgba(10, 10, 10, 0.95), transparent);
+  
+  /* ========================================
+     SHADOWS
+     ======================================== */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 0 20px rgba(59, 130, 246, 0.3);
+  --shadow-accent-strong: 0 0 30px rgba(59, 130, 246, 0.5);
+  
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  
+  /* ========================================
+     BLUR EFFECTS
+     ======================================== */
+  --blur-sm: blur(8px);
+  --blur-md: blur(16px);
+  --blur-lg: blur(24px);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.theme-bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.theme-bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.theme-surface {
+  background-color: var(--surface-default);
+}
+
+.theme-surface-hover:hover {
+  background-color: var(--surface-hover);
+}
+
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-accent {
+  color: var(--accent-primary);
+}
+
+.theme-border {
+  border-color: var(--border-default);
+}
+
+.theme-accent-button {
+  background-color: var(--accent-primary);
+  color: white;
+  transition: all var(--transition-normal);
+}
+
+.theme-accent-button:hover {
+  background-color: var(--accent-hover);
+  box-shadow: var(--shadow-accent);
+}
+
+.theme-glass {
+  background: var(--surface-glass);
+  backdrop-filter: var(--blur-md);
+  border: 1px solid var(--border-subtle);
+}

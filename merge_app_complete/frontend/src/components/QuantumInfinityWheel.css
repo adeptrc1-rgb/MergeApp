@@ -1,0 +1,289 @@
+/* Liquid Mathematics Style - Sophisticated & Premium */
+
+.liquid-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.96);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.liquid-modal {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  background: linear-gradient(135deg, rgba(15, 15, 25, 0.95), rgba(20, 15, 30, 0.95));
+  border-radius: 20px;
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  padding: 32px 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-x {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 28px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.modal-x:hover { color: rgba(255, 255, 255, 0.8); }
+
+.modal-title {
+  text-align: center;
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+}
+
+.title-symbol {
+  font-size: 28px;
+  font-weight: 300;
+  color: #667eea;
+}
+
+/* Wheel Stage */
+.wheel-stage {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Liquid Mathematics Infinity Wheel */
+.infinity-wheel {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  animation: liquidFlow 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes liquidFlow {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Gradient overlay for depth */
+.wheel-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
+}
+
+/* Infinity Symbol */
+.infinity-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 64px;
+  color: white;
+  font-weight: 300;
+  font-family: 'Times New Roman', serif;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Liquid Ripple Effect */
+.liquid-ripple {
+  position: absolute;
+  inset: -20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: rippleExpand 2s ease-out infinite;
+}
+
+@keyframes rippleExpand {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* Spinning State */
+.infinity-wheel.spinning {
+  animation: elegantSpin 2.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes elegantSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  }
+  50% {
+    transform: rotate(1080deg) scale(1.05);
+    box-shadow: 0 12px 48px rgba(102, 126, 234, 0.5);
+  }
+  100% {
+    transform: rotate(2160deg) scale(1);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  }
+}
+
+/* Revealing State */
+.infinity-wheel.revealing {
+  animation: liquidDissolve 0.8s ease-out forwards;
+}
+
+@keyframes liquidDissolve {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+    filter: blur(12px);
+  }
+}
+
+/* Reward Card - Premium & Minimal */
+.reward-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 16px;
+  padding: 32px 24px;
+  min-width: 240px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: cardReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes cardReveal {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Subtle card shine */
+.card-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.reward-info {
+  position: relative;
+  z-index: 10;
+}
+
+.reward-label {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.reward-amount {
+  font-size: 40px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+/* Activate Button - Sophisticated */
+.elegant-activate {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.elegant-activate:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+}
+
+.elegant-activate:active {
+  transform: translateY(0);
+}
+
+.btn-liquid {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: liquidShimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes liquidShimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.elegant-activate span {
+  position: relative;
+  z-index: 10;
+}
