@@ -313,3 +313,7 @@ merge_app_complete/frontend/node_modules/.cache/default-development/12.pack
 merge_app_complete/frontend/node_modules/.cache/default-development/0.pack
 merge_app_complete.zip
 frontend/public/downloads/merge_app_complete.zip
+-e 
+# Environment files
+*.env
+*.env.*
