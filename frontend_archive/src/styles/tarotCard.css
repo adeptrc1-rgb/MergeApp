@@ -1,0 +1,180 @@
+/* Tarot Card Animations */
+
+/* Card Float */
+@keyframes card-float {
+  0%, 100% {
+    transform: translateY(0px) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateY(0deg);
+  }
+}
+
+/* Nebula Float Background */
+@keyframes nebula-float {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.5;
+  }
+}
+
+/* Particle Burst Variations */
+@keyframes particle-burst-0 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(60px, -60px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-60px, -60px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(60px, 60px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-burst-3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-60px, 60px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Spark Flash */
+@keyframes spark-flash {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--rotation, 0deg)) translateX(-50%) scaleX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(var(--rotation, 0deg)) translateX(0) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--rotation, 0deg)) translateX(50%) scaleX(0);
+  }
+}
+
+/* Slow Spin for Zodiac Wheel */
+@keyframes slow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Twinkle Effect */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: rotate(var(--rotation, 0deg)) translateY(-60px) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(var(--rotation, 0deg)) translateY(-60px) scale(1.2);
+  }
+}
+
+/* Border Glow Pulse */
+@keyframes border-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--glow-color, #a78bfa)80, inset 0 0 20px var(--glow-color, #a78bfa)40;
+  }
+  50% {
+    box-shadow: 0 0 40px var(--glow-color, #a78bfa), inset 0 0 30px var(--glow-color, #a78bfa)60;
+  }
+}
+
+/* Icon Pulse */
+@keyframes icon-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 40px var(--glow-color, #a78bfa)60;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 60px var(--glow-color, #a78bfa)80;
+  }
+}
+
+/* Orbit Animation for Stars */
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+/* Ray Rotation */
+@keyframes ray-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade Pulse for Instructions */
+@keyframes fade-pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Fade In */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer for Card Back */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}

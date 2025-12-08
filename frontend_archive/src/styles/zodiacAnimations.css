@@ -1,0 +1,256 @@
+/**
+ * Zodiac Season Background Animations
+ * Subtle, continuous animations for each zodiac motion type
+ */
+
+/* Aries - Breathing */
+@keyframes zodiac-breathing {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
+}
+
+/* Taurus - Pulse */
+@keyframes zodiac-pulse {
+  0%, 100% {
+    opacity: 0.25;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.32;
+    filter: brightness(1.15);
+  }
+}
+
+/* Gemini - Horizontal Flicker */
+@keyframes zodiac-flicker {
+  0%, 100% {
+    opacity: 0.25;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 0.30;
+    background-position: 100% 50%;
+  }
+}
+
+/* Cancer - Ripple */
+@keyframes zodiac-ripple {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1) translateY(0);
+  }
+  33% {
+    opacity: 0.28;
+    transform: scale(1.02) translateY(-2px);
+  }
+  66% {
+    opacity: 0.30;
+    transform: scale(1.03) translateY(-4px);
+  }
+}
+
+/* Leo - Radiant Flare */
+@keyframes zodiac-flare {
+  0%, 100% {
+    opacity: 0.28;
+    filter: brightness(1) blur(0px);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.38;
+    filter: brightness(1.3) blur(1px);
+    transform: scale(1.08);
+  }
+}
+
+/* Virgo - Gradient Sweep */
+@keyframes zodiac-sweep {
+  0% {
+    background-position: 0% 50%;
+    opacity: 0.25;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.30;
+  }
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.25;
+  }
+}
+
+/* Libra - Mirror Fade */
+@keyframes zodiac-mirror-fade {
+  0%, 100% {
+    opacity: 0.25;
+    filter: brightness(1);
+  }
+  25% {
+    opacity: 0.28;
+    filter: brightness(1.1);
+  }
+  50% {
+    opacity: 0.30;
+    filter: brightness(1.15);
+  }
+  75% {
+    opacity: 0.28;
+    filter: brightness(1.1);
+  }
+}
+
+/* Scorpio - Pulsation */
+@keyframes zodiac-pulsation {
+  0%, 100% {
+    opacity: 0.26;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.34;
+    transform: scale(1.04);
+    filter: brightness(1.2);
+  }
+}
+
+/* Sagittarius - Shooting Star Streak */
+@keyframes zodiac-streak {
+  0%, 100% {
+    opacity: 0.27;
+    background-position: -100% 0%;
+  }
+  50% {
+    opacity: 0.33;
+    background-position: 200% 100%;
+  }
+}
+
+/* Capricorn - Shimmer */
+@keyframes zodiac-shimmer {
+  0% {
+    opacity: 0.24;
+    background-position: 0% 0%;
+  }
+  50% {
+    opacity: 0.30;
+    background-position: 100% 100%;
+  }
+  100% {
+    opacity: 0.24;
+    background-position: 0% 0%;
+  }
+}
+
+/* Aquarius - Orbital */
+@keyframes zodiac-orbital {
+  0%, 100% {
+    opacity: 0.26;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.32;
+    transform: rotate(180deg) scale(1.05);
+  }
+}
+
+/* Pisces - Fluid Drift */
+@keyframes zodiac-drift {
+  0%, 100% {
+    opacity: 0.25;
+    transform: translateX(0) translateY(0);
+  }
+  33% {
+    opacity: 0.28;
+    transform: translateX(3px) translateY(-3px);
+  }
+  66% {
+    opacity: 0.30;
+    transform: translateX(-3px) translateY(3px);
+  }
+}
+
+/* Base class for zodiac backgrounds */
+.zodiac-season-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background-size: 200% 200%;
+  will-change: opacity, transform;
+}
+
+/* Motion type classes */
+.zodiac-motion-breathing {
+  animation: zodiac-breathing var(--zodiac-duration, 8s) ease-in-out infinite;
+}
+
+.zodiac-motion-pulse {
+  animation: zodiac-pulse var(--zodiac-duration, 10s) ease-in-out infinite;
+}
+
+.zodiac-motion-flicker {
+  animation: zodiac-flicker var(--zodiac-duration, 9s) ease-in-out infinite;
+}
+
+.zodiac-motion-ripple {
+  animation: zodiac-ripple var(--zodiac-duration, 10s) ease-in-out infinite;
+}
+
+.zodiac-motion-flare {
+  animation: zodiac-flare var(--zodiac-duration, 9s) ease-in-out infinite;
+}
+
+.zodiac-motion-sweep {
+  animation: zodiac-sweep var(--zodiac-duration, 12s) ease-in-out infinite;
+}
+
+.zodiac-motion-mirror-fade {
+  animation: zodiac-mirror-fade var(--zodiac-duration, 10s) ease-in-out infinite;
+}
+
+.zodiac-motion-pulsation {
+  animation: zodiac-pulsation var(--zodiac-duration, 8s) ease-in-out infinite;
+}
+
+.zodiac-motion-streak {
+  animation: zodiac-streak var(--zodiac-duration, 12s) ease-in-out infinite;
+}
+
+.zodiac-motion-shimmer {
+  animation: zodiac-shimmer var(--zodiac-duration, 11s) ease-in-out infinite;
+}
+
+.zodiac-motion-orbital {
+  animation: zodiac-orbital var(--zodiac-duration, 13s) ease-in-out infinite;
+}
+
+.zodiac-motion-drift {
+  animation: zodiac-drift var(--zodiac-duration, 11s) ease-in-out infinite;
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .zodiac-season-bg,
+  .zodiac-motion-breathing,
+  .zodiac-motion-pulse,
+  .zodiac-motion-flicker,
+  .zodiac-motion-ripple,
+  .zodiac-motion-flare,
+  .zodiac-motion-sweep,
+  .zodiac-motion-mirror-fade,
+  .zodiac-motion-pulsation,
+  .zodiac-motion-streak,
+  .zodiac-motion-shimmer,
+  .zodiac-motion-orbital,
+  .zodiac-motion-drift {
+    animation: none !important;
+    opacity: 0.25 !important;
+  }
+}

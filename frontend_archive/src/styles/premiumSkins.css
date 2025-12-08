@@ -1,0 +1,394 @@
+/**
+ * Premium Skin Animations
+ * Advanced animations for Galaxy, Pastel, Zodiac, and Neon themes
+ */
+
+/* Galaxy Theme Animations */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes float-sparkle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Pastel Theme Animations */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10px, -15px);
+  }
+  50% {
+    transform: translate(-5px, -25px);
+  }
+  75% {
+    transform: translate(5px, -15px);
+  }
+}
+
+/* Zodiac Theme Animations */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.25;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Neon Theme Animations */
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 
+      inset 0 0 20px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
+  50% {
+    box-shadow: 
+      inset 0 0 30px currentColor,
+      0 0 30px currentColor,
+      0 0 60px currentColor;
+  }
+}
+
+@keyframes neon-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+/* Apply animations */
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-float-sparkle {
+  animation: float-sparkle 4s ease-in-out infinite;
+}
+
+.animate-float-gentle {
+  animation: float-gentle 10s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 15s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.animate-neon-glow {
+  animation: neon-glow 3s ease-in-out infinite;
+}
+
+.animate-scan-line {
+  animation: scan-line 3s linear infinite;
+}
+
+/* Text Animations */
+@keyframes text-glow {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes text-gradient {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes text-neon {
+  0%, 100% {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+  }
+}
+
+/* Apply text animations */
+.animate-text-glow {
+  animation: text-glow 3s ease-in-out infinite;
+}
+
+.animate-text-gradient {
+  animation: text-gradient 4s linear infinite;
+}
+
+.animate-text-shimmer {
+  animation: text-shimmer 5s linear infinite;
+}
+
+.animate-text-neon {
+  animation: text-neon 2s ease-in-out infinite;
+}
+
+/* Light Effect Animations (external glows) - NO FILTERS */
+@keyframes aurora-shimmer {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes cosmic-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes flame-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes moonbeam-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes starfield-twinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Rainbow gradient animation (Pride Theme) */
+@keyframes rainbow-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-text-rainbow {
+  animation: rainbow-gradient 3s ease infinite;
+}
+
+/* Autism Strobe Effect - Cycles through autism awareness colors */
+@keyframes autism-strobe {
+  0%, 25% {
+    box-shadow: 
+      0 0 40px #0066cc,
+      0 0 60px #0066cc,
+      0 0 90px #0066cc,
+      0 0 120px #0066cc80;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  25.01%, 50% {
+    box-shadow: 
+      0 0 40px #ffd700,
+      0 0 60px #ffd700,
+      0 0 90px #ffd700,
+      0 0 120px #ffd70080;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  50.01%, 75% {
+    box-shadow: 
+      0 0 40px #22c55e,
+      0 0 60px #22c55e,
+      0 0 90px #22c55e,
+      0 0 120px #22c55e80;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  75.01%, 100% {
+    box-shadow: 
+      0 0 40px #ef4444,
+      0 0 60px #ef4444,
+      0 0 90px #ef4444,
+      0 0 120px #ef444480;
+    filter: saturate(1.5) brightness(1.1);
+  }
+}
+
+/* Autism text gradient animation */
+@keyframes autism-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-text-autism {
+  animation: autism-gradient 3s ease infinite;
+}
+
+/* Pride Strobe Effect - Cycles through pride colors */
+@keyframes pride-strobe {
+  0%, 16.66% {
+    box-shadow: 
+      0 0 40px #e40303,
+      0 0 60px #e40303,
+      0 0 90px #e40303,
+      0 0 120px #e4030380;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  16.67%, 33.33% {
+    box-shadow: 
+      0 0 40px #ff8c00,
+      0 0 60px #ff8c00,
+      0 0 90px #ff8c00,
+      0 0 120px #ff8c0080;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  33.34%, 50% {
+    box-shadow: 
+      0 0 40px #ffed00,
+      0 0 60px #ffed00,
+      0 0 90px #ffed00,
+      0 0 120px #ffed0080;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  50.01%, 66.66% {
+    box-shadow: 
+      0 0 40px #008026,
+      0 0 60px #008026,
+      0 0 90px #008026,
+      0 0 120px #00802680;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  66.67%, 83.33% {
+    box-shadow: 
+      0 0 40px #24408e,
+      0 0 60px #24408e,
+      0 0 90px #24408e,
+      0 0 120px #24408e80;
+    filter: saturate(1.5) brightness(1.1);
+  }
+  83.34%, 100% {
+    box-shadow: 
+      0 0 40px #732982,
+      0 0 60px #732982,
+      0 0 90px #732982,
+      0 0 120px #73298280;
+    filter: saturate(1.5) brightness(1.1);
+  }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-twinkle,
+  .animate-float-sparkle,
+  .animate-float-gentle,
+  .animate-float-slow,
+  .animate-pulse-glow,
+  .animate-neon-pulse,
+  .animate-neon-glow,
+  .animate-scan-line,
+  .animate-text-glow,
+  .animate-text-gradient,
+  .animate-text-shimmer,
+  .animate-text-neon,
+  .animate-text-rainbow,
+  .animate-text-autism {
+    animation: none !important;
+  }
+  
+  [style*="aurora-shimmer"],
+  [style*="cosmic-pulse"],
+  [style*="flame-flicker"],
+  [style*="moonbeam-pulse"],
+  [style*="starfield-twinkle"] {
+    animation: none !important;
+  }
+}
