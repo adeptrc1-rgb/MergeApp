@@ -70,7 +70,8 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                 cursor: 'pointer',
                 background: 'transparent',
                 border: 'none',
-                position: 'relative'
+                position: 'relative',
+                zIndex: 10000
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
