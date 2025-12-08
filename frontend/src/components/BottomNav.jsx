@@ -47,7 +47,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         bottom: 0,
-        paddingTop: '6px',
+        paddingTop: '2px',
         paddingBottom: 'max(env(safe-area-inset-bottom), 34px)',
         borderTop: '1px solid rgba(255, 255, 255, 0.1)',
         zIndex: 9999,
@@ -57,7 +57,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)'
       }}
     >
-      <div className="flex items-center justify-between mx-auto" style={{ padding: '0 16px', maxWidth: '500px', minHeight: '60px' }}>
+      <div className="flex items-end justify-between mx-auto" style={{ padding: '0 16px', paddingBottom: '4px', maxWidth: '500px' }}>
         {items.map(({ id, icon: Icon, label, path, isCustom }) => {
           const isActive = currentTab === id;
           return (
