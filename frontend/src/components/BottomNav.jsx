@@ -96,6 +96,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                   focused={isActive}
                   color={isActive ? '#00D9FF' : '#FFFFFF'}
                   size={18}
+                  style={{ pointerEvents: 'none' }}
                 />
               ) : (
                 <Icon 
@@ -107,7 +108,8 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                     strokeWidth: isActive ? 2.5 : 2,
                     fill: isActive ? '#00D9FF' : 'none',
                     transition: 'all 0.2s ease',
-                    filter: isActive ? 'drop-shadow(0 0 6px rgba(0, 217, 255, 0.5))' : 'none'
+                    filter: isActive ? 'drop-shadow(0 0 6px rgba(0, 217, 255, 0.5))' : 'none',
+                    pointerEvents: 'none'
                   }} 
                 />
               )}
@@ -116,7 +118,8 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
                 style={{
                   color: isActive ? '#00D9FF' : '#FFFFFF',
                   opacity: isActive ? 1 : 0.6,
-                  letterSpacing: '0.2px'
+                  letterSpacing: '0.2px',
+                  pointerEvents: 'none'
                 }}
               >
                 {label}
