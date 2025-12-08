@@ -50,7 +50,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         bottom: 0,
         paddingTop: '8px',
-        paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 20px))',
+        paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 24px)',
         borderTop: darkMode 
           ? '1px solid rgba(255, 255, 255, 0.1)' 
           : '1px solid rgba(0, 0, 0, 0.1)',
@@ -59,7 +59,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         touchAction: 'manipulation',
         isolation: 'isolate',
         boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)',
-        minHeight: 'calc(72px + env(safe-area-inset-bottom, 20px))'
+        minHeight: 'max(calc(68px + env(safe-area-inset-bottom, 0px)), 92px)'
       }}
     >
       <div className="flex items-center justify-between mx-auto" style={{ padding: '0 16px', maxWidth: '500px', minHeight: '60px' }}>
