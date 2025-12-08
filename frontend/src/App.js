@@ -1344,12 +1344,20 @@ function ConnectionsWrapper() {
 
 function ProfileWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Profile user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <Profile user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function StoreWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Store user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <Store user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function SettingsWrapper() {
