@@ -741,16 +741,25 @@ export default function Profile({ user, logout }) {
                   Exponential boost
                 </div>
                 <button
-                  onClick={() => navigate('/store')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigate('/store');
+                  }}
                   className="w-full py-1.5 text-xs font-medium transition-all"
                   style={{
                     backgroundColor: 'transparent',
                     border: 'none',
                     color: 'rgba(0, 217, 255, 0.7)',
-                    marginTop: '2px'
+                    marginTop: '2px',
+                    cursor: 'pointer',
+                    WebkitTapHighlightColor: 'transparent',
+                    touchAction: 'manipulation'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
                   onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                  onTouchStart={(e) => e.currentTarget.style.opacity = '0.7'}
+                  onTouchEnd={(e) => e.currentTarget.style.opacity = '1'}
                 >
                   GET MORE
                 </button>
