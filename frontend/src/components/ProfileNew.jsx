@@ -768,12 +768,25 @@ export default function Profile({ user, logout }) {
 
             {/* Auras/Effects Card - Fully Clickable */}
             <button
-              onClick={() => navigate('/store?tab=skins')}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                navigate('/store?tab=skins');
+              }}
               className="relative flex-shrink-0 rounded-2xl p-4 transition-all cursor-pointer"
               style={{
                 width: '140px',
                 backgroundColor: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)'
+                border: '1px solid rgba(255,255,255,0.1)',
+                cursor: 'pointer',
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation'
+              }}
+              onTouchStart={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)';
+              }}
+              onTouchEnd={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
               }}
             >
               <div className="flex flex-col items-center text-center">
