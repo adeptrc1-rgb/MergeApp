@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Heart, X, Star, Sparkles, Users, Home as HomeIcon, RotateCcw, XCircle, ChevronDown, ChevronUp, Music, MessageCircle, Zap } from 'lucide-react';
 import ConstellationIcon from './ConstellationIcon';
-import BottomNav from './BottomNav';
 import PremiumSkinRenderer from './PremiumSkinRenderer';
 import VibePlayer from './VibePlayer';
 import AnimatedProfileText from './AnimatedProfileText';
