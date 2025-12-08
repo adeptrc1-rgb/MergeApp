@@ -1,6 +1,6 @@
 /* Service Worker for Merge Dating App PWA */
 
-const CACHE_NAME = 'merge-dating-v1';
+const CACHE_NAME = 'merge-dating-v2-profile-fix';
 const urlsToCache = [
   '/',
   '/static/css/main.css',
