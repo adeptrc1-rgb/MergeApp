@@ -756,8 +756,6 @@ export default function Home({ user }) {
             </button>
           </div>
         </div>
-
-        <BottomNav currentTab="home" navigate={navigate} />
       </div>
     );
   }
