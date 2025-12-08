@@ -42,9 +42,10 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         WebkitBackdropFilter: darkMode ? 'blur(10px)' : 'none',
         bottom: 0,
         paddingBottom: '0px',
-        zIndex: 999,
+        zIndex: 9999,
         pointerEvents: 'auto',
-        touchAction: 'manipulation'
+        touchAction: 'manipulation',
+        isolation: 'isolate'
       }}
     >
       <div className="flex items-center justify-between mx-auto" style={{ padding: '2px 24px', height: '44px', maxWidth: '500px' }}>
