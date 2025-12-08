@@ -220,11 +220,12 @@ export default function Profile({ user, logout }) {
         top: 0,
         left: 0,
         right: 0,
-        bottom: '60px',
+        bottom: '70px',
         backgroundColor: 'var(--bg-primary)',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
-        paddingBottom: '20px'
+        paddingBottom: '20px',
+        zIndex: 1
       }}
     >
       {/* Subtle animated background - matching Explore tab */}
