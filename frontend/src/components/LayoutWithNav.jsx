@@ -18,10 +18,9 @@ const LayoutWithNav = ({ children }) => {
     return 'home';
   };
   
-  // Determine if dark mode should be used
+  // Determine if dark mode should be used - ALWAYS use dark mode for consistency
   const useDarkMode = () => {
-    const path = location.pathname;
-    return path === '/profile' || path === '/discover' || path === '/likes' || path === '/messages';
+    return true;
   };
   
   return (
