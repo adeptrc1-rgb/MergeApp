@@ -7,7 +7,6 @@ import {
   MessageCircle, RotateCcw, Coins, Clock, Trophy, Flame, Settings, Star, Camera
 } from 'lucide-react';
 import QuantumInfinityWheel from './QuantumInfinityWheel';
-import BottomNav from './BottomNav';
 import MergeLogo from './MergeLogo';
 import EditProfileModal from './EditProfileModal';
 
