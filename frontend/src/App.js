@@ -1308,17 +1308,29 @@ function DiscoverWrapper() {
 
 function HomeWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Home user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <Home user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function MessagesWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Messages user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <Messages user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function LikesWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Likes user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <Likes user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function ConnectionsWrapper() {
