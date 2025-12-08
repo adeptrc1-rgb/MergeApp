@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ShoppingBag, Sparkles, Star, Check, Lock, Zap, Flame } from 'lucide-react';
-import BottomNav from './BottomNav';
 import MergeLogo from './MergeLogo';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -366,7 +365,6 @@ export default function Store({ user }) {
       </div>
 
       {/* Bottom Navigation */}
-      <BottomNav currentTab="store" navigate={navigate} />
 
       <style>{`
         @keyframes pulse {

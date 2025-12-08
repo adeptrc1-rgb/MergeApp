@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Heart, Sparkles, MapPin, Briefcase } from 'lucide-react';
-import BottomNav from './BottomNav';
 import MergeLogo from './MergeLogo';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
@@ -216,7 +215,6 @@ export default function Likes({ user }) {
         </div>
       </div>
 
-      <BottomNav currentTab="likes" navigate={navigate} darkMode={true} />
     </div>
   );
 }

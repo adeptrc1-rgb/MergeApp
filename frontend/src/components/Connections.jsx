@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Heart, MessageCircle, Star, MapPin, Sparkles, Users, Home, Zap, Timer, RefreshCw } from 'lucide-react';
-import BottomNav from './BottomNav';
 
 const API_BASE = process.env.REACT_APP_BACKEND_URL || '';
 const API = `${API_BASE}/api`;
@@ -232,7 +231,6 @@ export default function Connections({ user }) {
       </div>
 
       {/* Bottom Navigation */}
-      <BottomNav currentTab="connections" navigate={navigate} />
 
       <style>{`@keyframes pulseTwinkle { 0%,100% { opacity: .7 } 50% { opacity: .2 } }`}</style>
     </div>
