@@ -215,11 +215,12 @@ export default function Profile({ user, logout }) {
 
   return (
     <div 
-      className="fixed inset-0 overflow-y-auto pb-24" 
+      className="fixed inset-0 overflow-y-auto" 
       style={{ 
         backgroundColor: 'var(--bg-primary)',
         scrollbarWidth: 'none',
-        msOverflowStyle: 'none'
+        msOverflowStyle: 'none',
+        paddingBottom: '80px'
       }}
     >
       {/* Subtle animated background - matching Explore tab */}
