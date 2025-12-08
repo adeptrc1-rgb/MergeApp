@@ -219,11 +219,11 @@ export default function Profile({ user, logout }) {
         top: 0,
         left: 0,
         right: 0,
-        bottom: 'calc(72px + env(safe-area-inset-bottom, 0px))',
+        bottom: 0,
         backgroundColor: 'var(--bg-primary)',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
-        paddingBottom: '20px',
+        paddingBottom: 'calc(76px + env(safe-area-inset-bottom, 0px))',
         zIndex: 1,
         pointerEvents: 'auto'
       }}
