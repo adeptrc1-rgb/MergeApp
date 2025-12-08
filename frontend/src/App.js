@@ -1298,12 +1298,20 @@ function EnhancedDashboardWrapper() {
 
 function AstroChatWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <AstroChat user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <AstroChat user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function DiscoverWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Discover user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <Discover user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function HomeWrapper() {
