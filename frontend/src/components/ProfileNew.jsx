@@ -1055,8 +1055,6 @@ export default function Profile({ user, logout }) {
         </div>
       </div>
 
-      <BottomNav currentTab="profile" navigate={navigate} darkMode={true} />
-
       <QuantumInfinityWheel 
         isOpen={showConnectionMatrix} 
         onClose={() => setShowConnectionMatrix(false)} 
