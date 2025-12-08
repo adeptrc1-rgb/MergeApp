@@ -690,16 +690,25 @@ export default function Profile({ user, logout }) {
                   </span>
                 </div>
                 <button
-                  onClick={() => navigate('/store')}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navigate('/store');
+                  }}
                   className="w-full py-1.5 text-xs font-medium transition-all"
                   style={{
                     backgroundColor: 'transparent',
                     border: 'none',
                     color: '#667eea',
-                    marginTop: '2px'
+                    marginTop: '2px',
+                    cursor: 'pointer',
+                    WebkitTapHighlightColor: 'transparent',
+                    touchAction: 'manipulation'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
                   onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                  onTouchStart={(e) => e.currentTarget.style.opacity = '0.7'}
+                  onTouchEnd={(e) => e.currentTarget.style.opacity = '1'}
                 >
                   GET MORE
                 </button>
