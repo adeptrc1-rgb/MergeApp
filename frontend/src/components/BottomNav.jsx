@@ -44,13 +44,13 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
         background: darkMode 
-          ? 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.95) 100%)'
-          : 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 100%)',
+          ? 'rgba(0, 0, 0, 0.95)'
+          : 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(20px) saturate(180%)',
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         bottom: 0,
-        paddingTop: '4px',
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        paddingTop: '8px',
+        paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 20px))',
         borderTop: darkMode 
           ? '1px solid rgba(255, 255, 255, 0.1)' 
           : '1px solid rgba(0, 0, 0, 0.1)',
@@ -58,10 +58,11 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         pointerEvents: 'auto',
         touchAction: 'manipulation',
         isolation: 'isolate',
-        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)'
+        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)',
+        minHeight: 'calc(72px + env(safe-area-inset-bottom, 20px))'
       }}
     >
-      <div className="flex items-center justify-between mx-auto" style={{ padding: '0 16px', maxWidth: '500px' }}>
+      <div className="flex items-center justify-between mx-auto" style={{ padding: '0 16px', maxWidth: '500px', minHeight: '60px' }}>
         {items.map(({ id, icon: Icon, label, path, isCustom }) => {
           const isActive = currentTab === id;
           return (
