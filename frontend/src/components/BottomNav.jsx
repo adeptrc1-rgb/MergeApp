@@ -1,26 +1,32 @@
 import React from 'react';
-import { TrendingUp, Heart, Send, User } from 'lucide-react';
+import { TrendingUp, Heart, Send, User, Home } from 'lucide-react';
 
-// Custom Merge Logo Icon Component - Using actual logo image
-const MergeLogoIcon = ({ focused, color, size = 24 }) => {
+// Custom Merge Logo Icon Component - Simplified for better performance
+const MergeLogoIcon = ({ focused, size = 22 }) => {
   return (
-    <img 
-      src="https://customer-assets.emergentagent.com/job_datapp-overhaul/artifacts/5arika4k_1b67058b-c8b7-4c56-94c3-dbae55e7728c.png"
-      alt="Merge"
-      style={{
-        width: size,
-        height: size,
-        objectFit: 'contain',
-        filter: focused 
-          ? 'brightness(0) saturate(100%) invert(71%) sepia(73%) saturate(2234%) hue-rotate(166deg) brightness(102%) contrast(101%) drop-shadow(0 0 0.5px #00D9FF)' // Cyan filter with slight thickness
-          : 'brightness(0) invert(1) drop-shadow(0 0 0.3px #FFFFFF)', // White filter with slight thickness
-        transition: 'all 0.2s ease'
-      }}
-    />
+    <div style={{ 
+      width: size, 
+      height: size,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      pointerEvents: 'none'
+    }}>
+      <Home 
+        style={{
+          width: size,
+          height: size,
+          color: focused ? '#00D9FF' : '#FFFFFF',
+          strokeWidth: focused ? 2.5 : 2,
+          filter: focused ? 'drop-shadow(0 0 8px rgba(0, 217, 255, 0.6))' : 'none',
+          transition: 'all 0.2s ease'
+        }}
+      />
+    </div>
   );
 };
 
-// Shared Bottom Navigation - Premium 5-Tab Layout
+// Redesigned Bottom Navigation - Optimized for Profile Tab
 export default function BottomNav({ currentTab, navigate, darkMode = false }) {
   const items = [
     { id: 'home', icon: MergeLogoIcon, label: 'Explore', path: '/home', isCustom: true },
@@ -37,18 +43,25 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         WebkitTapHighlightColor: 'transparent', 
         WebkitTouchCallout: 'none', 
         userSelect: 'none',
-        background: darkMode ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
-        backdropFilter: darkMode ? 'blur(10px)' : 'none',
-        WebkitBackdropFilter: darkMode ? 'blur(10px)' : 'none',
+        background: darkMode 
+          ? 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.95) 100%)'
+          : 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 100%)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
         bottom: 0,
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        paddingTop: '8px',
+        paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 0px))',
+        borderTop: darkMode 
+          ? '1px solid rgba(255, 255, 255, 0.1)' 
+          : '1px solid rgba(0, 0, 0, 0.1)',
         zIndex: 9999,
         pointerEvents: 'auto',
         touchAction: 'manipulation',
-        isolation: 'isolate'
+        isolation: 'isolate',
+        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.15)'
       }}
     >
-      <div className="flex items-center justify-between mx-auto" style={{ padding: '2px 24px', height: '44px', maxWidth: '500px' }}>
+      <div className="flex items-center justify-between mx-auto" style={{ padding: '0 16px', maxWidth: '500px' }}>
         {items.map(({ id, icon: Icon, label, path, isCustom }) => {
           const isActive = currentTab === id;
           return (
