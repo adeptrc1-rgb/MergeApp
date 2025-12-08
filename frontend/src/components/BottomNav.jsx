@@ -70,6 +70,7 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log(`[BottomNav] Navigating to: ${path} (from tab: ${id})`);
                 navigate(path);
               }}
               className="flex flex-col items-center justify-center gap-1 transition-all duration-300 ease-out"
