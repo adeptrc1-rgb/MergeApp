@@ -42,10 +42,12 @@ export default function BottomNav({ currentTab, navigate, darkMode = false }) {
         WebkitBackdropFilter: darkMode ? 'blur(10px)' : 'none',
         bottom: 0,
         paddingBottom: '0px',
-        zIndex: 200
+        zIndex: 999,
+        pointerEvents: 'auto',
+        touchAction: 'manipulation'
       }}
     >
-      <div className="flex items-center justify-between mx-auto" style={{ padding: '2px 24px', height: '40px', maxWidth: '500px' }}>
+      <div className="flex items-center justify-between mx-auto" style={{ padding: '2px 24px', height: '44px', maxWidth: '500px' }}>
         {items.map(({ id, icon: Icon, label, path, isCustom }) => {
           const isActive = currentTab === id;
           return (
