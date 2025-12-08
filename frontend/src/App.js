@@ -1335,7 +1335,11 @@ function LikesWrapper() {
 
 function ConnectionsWrapper() {
   const { user, logout } = React.useContext(AuthContext);
-  return <Connections user={user} logout={logout} />;
+  return (
+    <LayoutWithNav>
+      <Connections user={user} logout={logout} />
+    </LayoutWithNav>
+  );
 }
 
 function ProfileWrapper() {
